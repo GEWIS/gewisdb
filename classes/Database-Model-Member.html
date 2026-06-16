@@ -383,7 +383,7 @@
     <span>
                         &nbsp;: <abbr title="\DateTime">DateTime</abbr>            </span>
 </dt>
-<dd>Last changed date of membership.</dd>
+<dd>Last changed date of member.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/Database-Model-Member.html#property_deleted">$deleted</a>
@@ -402,26 +402,11 @@ when deleting a member and cannot be altered via the interface.</dd>
 <dd>Member&#039;s email address.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a class="" href="classes/Database-Model-Member.html#property_expiration">$expiration</a>
-    <span>
-                        &nbsp;: <abbr title="\DateTime">DateTime</abbr>            </span>
-</dt>
-<dd>The date on which the membership of the member is set to expire and will therefore have to be renewed, which
-happens either automatically or has to be done manually, as set forth in the bylaws and internal regulations.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/Database-Model-Member.html#property_firstName">$firstName</a>
     <span>
                         &nbsp;: string            </span>
 </dt>
 <dd>First name.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a class="" href="classes/Database-Model-Member.html#property_generation">$generation</a>
-    <span>
-                        &nbsp;: int            </span>
-</dt>
-<dd>Generation.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/Database-Model-Member.html#property_hidden">$hidden</a>
@@ -443,14 +428,6 @@ happens either automatically or has to be done manually, as set forth in the byl
                         &nbsp;: <abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-SubDecision-Installation.html"><abbr title="\Database\Model\SubDecision\Installation">Installation</abbr></a>&gt;            </span>
 </dt>
 <dd>Installations of this member.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a class="" href="classes/Database-Model-Member.html#property_isStudying">$isStudying</a>
-    <span>
-                        &nbsp;: bool            </span>
-</dt>
-<dd>Keeps track of whether a student is still studying (either at the Department of Mathematics and Computer Science,
-the TU/e in general, or another institution).</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/Database-Model-Member.html#property_lastCheckedOn">$lastCheckedOn</a>
@@ -481,13 +458,11 @@ the TU/e in general, or another institution).</dd>
 <dd>Memberships of mailing lists.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a class="" href="classes/Database-Model-Member.html#property_membershipEndsOn">$membershipEndsOn</a>
+    <a class="" href="classes/Database-Model-Member.html#property_memberships">$memberships</a>
     <span>
-                        &nbsp;: <abbr title="\DateTime">DateTime</abbr>|null            </span>
+                        &nbsp;: <abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-Membership.html"><abbr title="\Database\Model\Membership">Membership</abbr></a>&gt;            </span>
 </dt>
-<dd>Date when the real membership (&quot;ordinary&quot;, &quot;external&quot; or &quot;honorary&quot;) of the member will have ended, i.e., from
-this date onwards they are &quot;graduate&quot;. If `null`, the expiration is rolling and will be silently renewed if the
-member still meets the requirements as set forth in the bylaws and internal regulations.</dd>
+<dd>Memberships of this member</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/Database-Model-Member.html#property_middleName">$middleName</a>
@@ -495,13 +470,6 @@ member still meets the requirements as set forth in the bylaws and internal regu
                         &nbsp;: string            </span>
 </dt>
 <dd>Middle name.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a class="" href="classes/Database-Model-Member.html#property_paid">$paid</a>
-    <span>
-                        &nbsp;: int            </span>
-</dt>
-<dd>How much the member has paid for membership. 0 by default.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/Database-Model-Member.html#property_renewalLinks">$renewalLinks</a>
@@ -530,13 +498,6 @@ member still meets the requirements as set forth in the bylaws and internal regu
                         &nbsp;: string|null            </span>
 </dt>
 <dd>TU/e username.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a class="" href="classes/Database-Model-Member.html#property_type">$type</a>
-    <span>
-                        &nbsp;: <a href="classes/Application-Model-Enums-MembershipTypes.html"><abbr title="\Application\Model\Enums\MembershipTypes">MembershipTypes</abbr></a>            </span>
-</dt>
-<dd>Member type.</dd>
 
     </dl>
 
@@ -581,6 +542,13 @@ member still meets the requirements as set forth in the bylaws and internal regu
 <dd>Add multiple mailing lists.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Database-Model-Member.html#method_addMembership">addMembership()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Add a membership to this member.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-Member.html#method_getAddresses">getAddresses()</a>
     <span>
                                 &nbsp;: <abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-Address.html"><abbr title="\Database\Model\Address">Address</abbr></a>&gt;    </span>
@@ -612,7 +580,21 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <span>
                                 &nbsp;: <abbr title="\DateTime">DateTime</abbr>    </span>
 </dt>
-<dd>Get the date of the last membership change.</dd>
+<dd>Get the date of the last member change.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Database-Model-Member.html#method_getCurrentMembership">getCurrentMembership()</a>
+    <span>
+                                &nbsp;: <a href="classes/Database-Model-Membership.html"><abbr title="\Database\Model\Membership">Membership</abbr></a>|null    </span>
+</dt>
+<dd>Get the current membership of this member, or null if none.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Database-Model-Member.html#method_getCurrentOrLastMembership">getCurrentOrLastMembership()</a>
+    <span>
+                                &nbsp;: <a href="classes/Database-Model-Membership.html"><abbr title="\Database\Model\Membership">Membership</abbr></a>|null    </span>
+</dt>
+<dd>Get the current membership of this member, or the last if expired.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-Member.html#method_getDeleted">getDeleted()</a>
@@ -661,7 +643,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <span>
                                 &nbsp;: int    </span>
 </dt>
-<dd>Get the generation.</dd>
+<dd>Get the generation of the member.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-Member.html#method_getHidden">getHidden()</a>
@@ -685,18 +667,18 @@ member still meets the requirements as set forth in the bylaws and internal regu
 <dd>Get the installations.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Model-Member.html#method_getIsStudying">getIsStudying()</a>
-    <span>
-                                &nbsp;: bool    </span>
-</dt>
-<dd>Get whether the member is still studying.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-Member.html#method_getLastCheckedOn">getLastCheckedOn()</a>
     <span>
                                 &nbsp;: <abbr title="\DateTime">DateTime</abbr>|null    </span>
 </dt>
 <dd>Get the date of when the membership status was last checked.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Database-Model-Member.html#method_getLastMembership">getLastMembership()</a>
+    <span>
+                                &nbsp;: <a href="classes/Database-Model-Membership.html"><abbr title="\Database\Model\Membership">Membership</abbr></a>|null    </span>
+</dt>
+<dd>Get the last (potentially expired, potentially future) membership</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-Member.html#method_getLastName">getLastName()</a>
@@ -722,9 +704,16 @@ member still meets the requirements as set forth in the bylaws and internal regu
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-Member.html#method_getMembershipEndsOn">getMembershipEndsOn()</a>
     <span>
-                                &nbsp;: <abbr title="\DateTime">DateTime</abbr>|null    </span>
+                                &nbsp;: <abbr title="\DateTime">DateTime</abbr>    </span>
 </dt>
 <dd>Get the date on which the membership of the member will have ended (i.e., they have become &quot;graduate&quot;).</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Database-Model-Member.html#method_getMemberships">getMemberships()</a>
+    <span>
+                                &nbsp;: <abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-Membership.html"><abbr title="\Database\Model\Membership">Membership</abbr></a>&gt;    </span>
+</dt>
+<dd>Get the memberships of this member.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-Member.html#method_getMiddleName">getMiddleName()</a>
@@ -732,13 +721,6 @@ member still meets the requirements as set forth in the bylaws and internal regu
                                 &nbsp;: string    </span>
 </dt>
 <dd>Get the member&#039;s middle name.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Model-Member.html#method_getPaid">getPaid()</a>
-    <span>
-                                &nbsp;: int    </span>
-</dt>
-<dd>Get how much has been paid.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-Member.html#method_getRenewalLinks">getRenewalLinks()</a>
@@ -769,13 +751,6 @@ member still meets the requirements as set forth in the bylaws and internal regu
 <dd>Get the TU/e username.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Model-Member.html#method_getType">getType()</a>
-    <span>
-                                &nbsp;: <a href="classes/Application-Model-Enums-MembershipTypes.html"><abbr title="\Application\Model\Enums\MembershipTypes">MembershipTypes</abbr></a>    </span>
-</dt>
-<dd>Get the member type.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-Member.html#method_hasActiveRenewalLink">hasActiveRenewalLink()</a>
     <span>
                                 &nbsp;: bool    </span>
@@ -799,7 +774,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd>Set the date of the last membership change.</dd>
+<dd>Set the date of the last member change.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-Member.html#method_setDeleted">setDeleted()</a>
@@ -816,25 +791,11 @@ member still meets the requirements as set forth in the bylaws and internal regu
 <dd>Set the member&#039;s email address.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Model-Member.html#method_setExpiration">setExpiration()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-<dd>Set the expiration date.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-Member.html#method_setFirstName">setFirstName()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
 <dd>Set the member&#039;s first name.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Model-Member.html#method_setGeneration">setGeneration()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-<dd>Set the generation.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-Member.html#method_setHidden">setHidden()</a>
@@ -858,13 +819,6 @@ member still meets the requirements as set forth in the bylaws and internal regu
 <dd>Set the member&#039;s initials.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Model-Member.html#method_setIsStudying">setIsStudying()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-<dd>Set whether the member is still studying.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-Member.html#method_setLastCheckedOn">setLastCheckedOn()</a>
     <span>
                                 &nbsp;: void    </span>
@@ -886,25 +840,11 @@ member still meets the requirements as set forth in the bylaws and internal regu
 <dd>Set the lidnr.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Model-Member.html#method_setMembershipEndsOn">setMembershipEndsOn()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-<dd>Set the date on which the membership of the member will have ended (i.e., they have become &quot;graduate&quot;).</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-Member.html#method_setMiddleName">setMiddleName()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
 <dd>Set the member&#039;s middle name.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Model-Member.html#method_setPaid">setPaid()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-<dd>Set how much has been paid.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-Member.html#method_setStudentAddress">setStudentAddress()</a>
@@ -935,18 +875,25 @@ member still meets the requirements as set forth in the bylaws and internal regu
 <dd>Set the TU/e username.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Model-Member.html#method_setType">setType()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-<dd>Set the member type.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-Member.html#method_toArray">toArray()</a>
     <span>
                                 &nbsp;: array{lidnr: int, email: ?string, fullName: string, lastName: string, middleName: string, initials: string, firstName: string, generation: int, hidden: bool, deleted: bool, expiration: string, authenticationKey: ?string}    </span>
 </dt>
 <dd>Convert most relevant items to array.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Database-Model-Member.html#method_unsetMemberships">unsetMemberships()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Delete all memberships of this member.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/Database-Model-Member.html#method_computeMembershipEndDate">computeMembershipEndDate()</a>
+    <span>
+                                &nbsp;: <abbr title="\DateTime">DateTime</abbr>|null    </span>
+</dt>
+<dd>Compute the date of end of membership, or null if none</dd>
 
     </dl>
 
@@ -978,7 +925,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">195</span>
+    <span class="phpdocumentor-element-found-in__line">149</span>
 
     </aside>
 
@@ -1036,7 +983,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">242</span>
+    <span class="phpdocumentor-element-found-in__line">196</span>
 
     </aside>
 
@@ -1094,7 +1041,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">252</span>
+    <span class="phpdocumentor-element-found-in__line">206</span>
 
     </aside>
 
@@ -1149,7 +1096,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">160</span>
+    <span class="phpdocumentor-element-found-in__line">120</span>
 
     </aside>
 
@@ -1201,11 +1148,11 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">120</span>
+    <span class="phpdocumentor-element-found-in__line">92</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Last changed date of membership.</p>
+        <p class="phpdocumentor-summary">Last changed date of member.</p>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -1253,7 +1200,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">265</span>
+    <span class="phpdocumentor-element-found-in__line">219</span>
 
     </aside>
 
@@ -1357,59 +1304,6 @@ when deleting a member and cannot be altered via the interface.</p>
             -private
                                                                     "
 >
-    <h4 class="phpdocumentor-element__name" id="property_expiration">
-        $expiration
-        <a href="classes/Database-Model-Member.html#property_expiration" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">145</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">The date on which the membership of the member is set to expire and will therefore have to be renewed, which
-happens either automatically or has to be done manually, as set forth in the bylaws and internal regulations.</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">private</span>
-            <span class="phpdocumentor-signature__type"><abbr title="\DateTime">DateTime</abbr></span>
-    <span class="phpdocumentor-signature__name">$expiration</span>
-    </code>
-
-    
-    
-    
-
-        
-            <section class="phpdocumentor-attributes">
-            <h5 class="phpdocumentor-elements__header" id="property_expiration_attributes">
-                Attributes <a href="classes/Database-Model-Member.html#property_expiration_attributes" class="headerlink"><i class="fas fa-link"></i></a>
-
-            </h5>
-                            <dl class="phpdocumentor-argument-list">
-    <dt class="phpdocumentor-argument-list__entry">
-        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
-    </dt>
-        <dd class="phpdocumentor-argument-list__entry">
-        $type: &#039;date&#039;
-    </dd>
-    </dl>
-                    </section>
-        
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                                    "
->
     <h4 class="phpdocumentor-element__name" id="property_firstName">
         $firstName
         <a href="classes/Database-Model-Member.html#property_firstName" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1462,61 +1356,6 @@ happens either automatically or has to be done manually, as set forth in the byl
             -private
                                                                     "
 >
-    <h4 class="phpdocumentor-element__name" id="property_generation">
-        $generation
-        <a href="classes/Database-Model-Member.html#property_generation" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">78</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Generation.</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">private</span>
-            <span class="phpdocumentor-signature__type">int</span>
-    <span class="phpdocumentor-signature__name">$generation</span>
-    </code>
-
-        <section class="phpdocumentor-description"><p>This is the year that this member became a GEWIS member. This is not
-a academic year, but rather a calendar year.</p>
-</section>
-
-    
-    
-
-        
-            <section class="phpdocumentor-attributes">
-            <h5 class="phpdocumentor-elements__header" id="property_generation_attributes">
-                Attributes <a href="classes/Database-Model-Member.html#property_generation_attributes" class="headerlink"><i class="fas fa-link"></i></a>
-
-            </h5>
-                            <dl class="phpdocumentor-argument-list">
-    <dt class="phpdocumentor-argument-list__entry">
-        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
-    </dt>
-        <dd class="phpdocumentor-argument-list__entry">
-        $type: &#039;integer&#039;
-    </dd>
-    </dl>
-                    </section>
-        
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                                    "
->
     <h4 class="phpdocumentor-element__name" id="property_hidden">
         $hidden
         <a href="classes/Database-Model-Member.html#property_hidden" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1527,7 +1366,7 @@ a academic year, but rather a calendar year.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">184</span>
+    <span class="phpdocumentor-element-found-in__line">138</span>
 
     </aside>
 
@@ -1637,7 +1476,7 @@ deleted members and members that are deceased but whose profile should be kept.<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">207</span>
+    <span class="phpdocumentor-element-found-in__line">161</span>
 
     </aside>
 
@@ -1682,59 +1521,6 @@ deleted members and members that are deceased but whose profile should be kept.<
             -private
                                                                     "
 >
-    <h4 class="phpdocumentor-element__name" id="property_isStudying">
-        $isStudying
-        <a href="classes/Database-Model-Member.html#property_isStudying" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">127</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Keeps track of whether a student is still studying (either at the Department of Mathematics and Computer Science,
-the TU/e in general, or another institution).</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">private</span>
-            <span class="phpdocumentor-signature__type">bool</span>
-    <span class="phpdocumentor-signature__name">$isStudying</span>
-    </code>
-
-    
-    
-    
-
-        
-            <section class="phpdocumentor-attributes">
-            <h5 class="phpdocumentor-elements__header" id="property_isStudying_attributes">
-                Attributes <a href="classes/Database-Model-Member.html#property_isStudying_attributes" class="headerlink"><i class="fas fa-link"></i></a>
-
-            </h5>
-                            <dl class="phpdocumentor-argument-list">
-    <dt class="phpdocumentor-argument-list__entry">
-        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
-    </dt>
-        <dd class="phpdocumentor-argument-list__entry">
-        $type: &#039;boolean&#039;
-    </dd>
-    </dl>
-                    </section>
-        
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                                    "
->
     <h4 class="phpdocumentor-element__name" id="property_lastCheckedOn">
         $lastCheckedOn
         <a href="classes/Database-Model-Member.html#property_lastCheckedOn" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1745,7 +1531,7 @@ the TU/e in general, or another institution).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">151</span>
+    <span class="phpdocumentor-element-found-in__line">111</span>
 
     </aside>
 
@@ -1917,7 +1703,7 @@ the TU/e in general, or another institution).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">218</span>
+    <span class="phpdocumentor-element-found-in__line">172</span>
 
     </aside>
 
@@ -1965,9 +1751,9 @@ the TU/e in general, or another institution).</p>
             -private
                                                                     "
 >
-    <h4 class="phpdocumentor-element__name" id="property_membershipEndsOn">
-        $membershipEndsOn
-        <a href="classes/Database-Model-Member.html#property_membershipEndsOn" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_memberships">
+        $memberships
+        <a href="classes/Database-Model-Member.html#property_memberships" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                                             </span>
@@ -1975,20 +1761,18 @@ the TU/e in general, or another institution).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">135</span>
+    <span class="phpdocumentor-element-found-in__line">100</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Date when the real membership (&quot;ordinary&quot;, &quot;external&quot; or &quot;honorary&quot;) of the member will have ended, i.e., from
-this date onwards they are &quot;graduate&quot;. If `null`, the expiration is rolling and will be silently renewed if the
-member still meets the requirements as set forth in the bylaws and internal regulations.</p>
+        <p class="phpdocumentor-summary">Memberships of this member</p>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">private</span>
-            <span class="phpdocumentor-signature__type"><abbr title="\DateTime">DateTime</abbr>|null</span>
-    <span class="phpdocumentor-signature__name">$membershipEndsOn</span>
-     = <span class="phpdocumentor-signature__default-value">null</span></code>
+            <span class="phpdocumentor-signature__type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-Membership.html"><abbr title="\Database\Model\Membership">Membership</abbr></a>&gt;</span>
+    <span class="phpdocumentor-signature__name">$memberships</span>
+    </code>
 
     
     
@@ -1996,19 +1780,30 @@ member still meets the requirements as set forth in the bylaws and internal regu
 
         
             <section class="phpdocumentor-attributes">
-            <h5 class="phpdocumentor-elements__header" id="property_membershipEndsOn_attributes">
-                Attributes <a href="classes/Database-Model-Member.html#property_membershipEndsOn_attributes" class="headerlink"><i class="fas fa-link"></i></a>
+            <h5 class="phpdocumentor-elements__header" id="property_memberships_attributes">
+                Attributes <a href="classes/Database-Model-Member.html#property_memberships_attributes" class="headerlink"><i class="fas fa-link"></i></a>
 
             </h5>
                             <dl class="phpdocumentor-argument-list">
     <dt class="phpdocumentor-argument-list__entry">
-        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+        #[<abbr title="\Doctrine\ORM\Mapping\OneToMany">OneToMany</abbr>]
     </dt>
         <dd class="phpdocumentor-argument-list__entry">
-        $type: &#039;date&#039;
+        $targetEntity: \Database\Model\Membership::class
     </dd>
         <dd class="phpdocumentor-argument-list__entry">
-        $nullable: true
+        $mappedBy: &#039;member&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $cascade: [&#039;persist&#039;, &#039;remove&#039;]
+    </dd>
+    </dl>
+                            <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\OrderBy">OrderBy</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        [&#039;startDate&#039; =&gt; &#039;ASC&#039;]
     </dd>
     </dl>
                     </section>
@@ -2074,58 +1869,6 @@ member still meets the requirements as set forth in the bylaws and internal regu
             -private
                                                                     "
 >
-    <h4 class="phpdocumentor-element__name" id="property_paid">
-        $paid
-        <a href="classes/Database-Model-Member.html#property_paid" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">166</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">How much the member has paid for membership. 0 by default.</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">private</span>
-            <span class="phpdocumentor-signature__type">int</span>
-    <span class="phpdocumentor-signature__name">$paid</span>
-     = <span class="phpdocumentor-signature__default-value">0</span></code>
-
-    
-    
-    
-
-        
-            <section class="phpdocumentor-attributes">
-            <h5 class="phpdocumentor-elements__header" id="property_paid_attributes">
-                Attributes <a href="classes/Database-Model-Member.html#property_paid_attributes" class="headerlink"><i class="fas fa-link"></i></a>
-
-            </h5>
-                            <dl class="phpdocumentor-argument-list">
-    <dt class="phpdocumentor-argument-list__entry">
-        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
-    </dt>
-        <dd class="phpdocumentor-argument-list__entry">
-        $type: &#039;integer&#039;
-    </dd>
-    </dl>
-                    </section>
-        
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                                    "
->
     <h4 class="phpdocumentor-element__name" id="property_renewalLinks">
         $renewalLinks
         <a href="classes/Database-Model-Member.html#property_renewalLinks" class="headerlink"><i class="fas fa-link"></i></a>
@@ -2136,7 +1879,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">230</span>
+    <span class="phpdocumentor-element-found-in__line">184</span>
 
     </aside>
 
@@ -2194,7 +1937,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">93</span>
+    <span class="phpdocumentor-element-found-in__line">84</span>
 
     </aside>
 
@@ -2246,7 +1989,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">172</span>
+    <span class="phpdocumentor-element-found-in__line">126</span>
 
     </aside>
 
@@ -2301,7 +2044,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">84</span>
+    <span class="phpdocumentor-element-found-in__line">75</span>
 
     </aside>
 
@@ -2339,68 +2082,6 @@ member still meets the requirements as set forth in the bylaws and internal regu
         
 
 </article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                                    "
->
-    <h4 class="phpdocumentor-element__name" id="property_type">
-        $type
-        <a href="classes/Database-Model-Member.html#property_type" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">112</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Member type.</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">private</span>
-            <span class="phpdocumentor-signature__type"><a href="classes/Application-Model-Enums-MembershipTypes.html"><abbr title="\Application\Model\Enums\MembershipTypes">MembershipTypes</abbr></a></span>
-    <span class="phpdocumentor-signature__name">$type</span>
-    </code>
-
-        <section class="phpdocumentor-description"><p>This can be one of the following, as defined by the GEWIS statuten:</p>
-<ul>
-<li>ordinary</li>
-<li>external</li>
-<li>graduate</li>
-<li>honorary</li>
-</ul>
-<p>You can find the GEWIS statuten here: https://gewis.nl/association/regulations/articles-of-association.</p>
-<p>See artikel 7.</p>
-</section>
-
-    
-    
-
-        
-            <section class="phpdocumentor-attributes">
-            <h5 class="phpdocumentor-elements__header" id="property_type_attributes">
-                Attributes <a href="classes/Database-Model-Member.html#property_type_attributes" class="headerlink"><i class="fas fa-link"></i></a>
-
-            </h5>
-                            <dl class="phpdocumentor-argument-list">
-    <dt class="phpdocumentor-argument-list__entry">
-        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
-    </dt>
-        <dd class="phpdocumentor-argument-list__entry">
-        $enumType: \Application\Model\Enums\MembershipTypes::class
-    </dd>
-    </dl>
-                    </section>
-        
-
-</article>
             </section>
 
             <section class="phpdocumentor-methods">
@@ -2423,7 +2104,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">271</span>
+    <span class="phpdocumentor-element-found-in__line">225</span>
 
     </aside>
 
@@ -2457,7 +2138,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">766</span>
+    <span class="phpdocumentor-element-found-in__line">754</span>
 
     </aside>
 
@@ -2502,7 +2183,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">756</span>
+    <span class="phpdocumentor-element-found-in__line">744</span>
 
     </aside>
 
@@ -2547,7 +2228,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">785</span>
+    <span class="phpdocumentor-element-found-in__line">773</span>
 
     </aside>
 
@@ -2592,7 +2273,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">800</span>
+    <span class="phpdocumentor-element-found-in__line">788</span>
 
     </aside>
 
@@ -2629,6 +2310,51 @@ member still meets the requirements as set forth in the bylaws and internal regu
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_addMembership">
+        addMembership()
+        <a href="classes/Database-Model-Member.html#method_addMembership" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">542</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Add a membership to this member.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">addMembership</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Model-Membership.html"><abbr title="\Database\Model\Membership">Membership</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$membership</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$membership</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Database-Model-Membership.html"><abbr title="\Database\Model\Membership">Membership</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getAddresses">
         getAddresses()
         <a href="classes/Database-Model-Member.html#method_getAddresses" class="headerlink"><i class="fas fa-link"></i></a>
@@ -2637,7 +2363,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">746</span>
+    <span class="phpdocumentor-element-found-in__line">734</span>
 
     </aside>
 
@@ -2676,7 +2402,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">674</span>
+    <span class="phpdocumentor-element-found-in__line">662</span>
 
     </aside>
 
@@ -2715,7 +2441,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">679</span>
+    <span class="phpdocumentor-element-found-in__line">667</span>
 
     </aside>
 
@@ -2753,7 +2479,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">530</span>
+    <span class="phpdocumentor-element-found-in__line">466</span>
 
     </aside>
 
@@ -2792,11 +2518,11 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">550</span>
+    <span class="phpdocumentor-element-found-in__line">486</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Get the date of the last membership change.</p>
+        <p class="phpdocumentor-summary">Get the date of the last member change.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -2823,6 +2549,84 @@ member still meets the requirements as set forth in the bylaws and internal regu
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getCurrentMembership">
+        getCurrentMembership()
+        <a href="classes/Database-Model-Member.html#method_getCurrentMembership" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">566</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Get the current membership of this member, or null if none.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getCurrentMembership</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Membership.html"><abbr title="\Database\Model\Membership">Membership</abbr></a>|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Membership.html"><abbr title="\Database\Model\Membership">Membership</abbr></a>|null</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getCurrentOrLastMembership">
+        getCurrentOrLastMembership()
+        <a href="classes/Database-Model-Member.html#method_getCurrentOrLastMembership" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">580</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Get the current membership of this member, or the last if expired.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getCurrentOrLastMembership</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Membership.html"><abbr title="\Database\Model\Membership">Membership</abbr></a>|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Membership.html"><abbr title="\Database\Model\Membership">Membership</abbr></a>|null</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getDeleted">
         getDeleted()
         <a href="classes/Database-Model-Member.html#method_getDeleted" class="headerlink"><i class="fas fa-link"></i></a>
@@ -2831,7 +2635,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">692</span>
+    <span class="phpdocumentor-element-found-in__line">680</span>
 
     </aside>
 
@@ -2870,7 +2674,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">289</span>
+    <span class="phpdocumentor-element-found-in__line">244</span>
 
     </aside>
 
@@ -2909,7 +2713,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">297</span>
+    <span class="phpdocumentor-element-found-in__line">252</span>
 
     </aside>
 
@@ -2948,7 +2752,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">514</span>
+    <span class="phpdocumentor-element-found-in__line">458</span>
 
     </aside>
 
@@ -2987,7 +2791,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">341</span>
+    <span class="phpdocumentor-element-found-in__line">296</span>
 
     </aside>
 
@@ -3026,7 +2830,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">435</span>
+    <span class="phpdocumentor-element-found-in__line">390</span>
 
     </aside>
 
@@ -3065,11 +2869,11 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">450</span>
+    <span class="phpdocumentor-element-found-in__line">405</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Get the generation.</p>
+        <p class="phpdocumentor-summary">Get the generation of the member.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -3104,7 +2908,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">646</span>
+    <span class="phpdocumentor-element-found-in__line">634</span>
 
     </aside>
 
@@ -3143,7 +2947,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">333</span>
+    <span class="phpdocumentor-element-found-in__line">288</span>
 
     </aside>
 
@@ -3182,7 +2986,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">664</span>
+    <span class="phpdocumentor-element-found-in__line">652</span>
 
     </aside>
 
@@ -3213,45 +3017,6 @@ member still meets the requirements as set forth in the bylaws and internal regu
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getIsStudying">
-        getIsStudying()
-        <a href="classes/Database-Model-Member.html#method_getIsStudying" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">566</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Get whether the member is still studying.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getIsStudying</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-    
-
-        
-    
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">bool</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_getLastCheckedOn">
         getLastCheckedOn()
         <a href="classes/Database-Model-Member.html#method_getLastCheckedOn" class="headerlink"><i class="fas fa-link"></i></a>
@@ -3260,7 +3025,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">598</span>
+    <span class="phpdocumentor-element-found-in__line">602</span>
 
     </aside>
 
@@ -3291,6 +3056,45 @@ member still meets the requirements as set forth in the bylaws and internal regu
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getLastMembership">
+        getLastMembership()
+        <a href="classes/Database-Model-Member.html#method_getLastMembership" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">592</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Get the last (potentially expired, potentially future) membership</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getLastMembership</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Membership.html"><abbr title="\Database\Model\Membership">Membership</abbr></a>|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Membership.html"><abbr title="\Database\Model\Membership">Membership</abbr></a>|null</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getLastName">
         getLastName()
         <a href="classes/Database-Model-Member.html#method_getLastName" class="headerlink"><i class="fas fa-link"></i></a>
@@ -3299,7 +3103,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">317</span>
+    <span class="phpdocumentor-element-found-in__line">272</span>
 
     </aside>
 
@@ -3338,7 +3142,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">281</span>
+    <span class="phpdocumentor-element-found-in__line">236</span>
 
     </aside>
 
@@ -3377,7 +3181,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">777</span>
+    <span class="phpdocumentor-element-found-in__line">765</span>
 
     </aside>
 
@@ -3416,7 +3220,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">582</span>
+    <span class="phpdocumentor-element-found-in__line">502</span>
 
     </aside>
 
@@ -3424,7 +3228,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getMembershipEndsOn</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr>|null</span></code>
+                    <span class="phpdocumentor-signature__name">getMembershipEndsOn</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -3437,7 +3241,46 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr>|null</span>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getMemberships">
+        getMemberships()
+        <a href="classes/Database-Model-Member.html#method_getMemberships" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">534</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Get the memberships of this member.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getMemberships</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-Membership.html"><abbr title="\Database\Model\Membership">Membership</abbr></a>&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-Membership.html"><abbr title="\Database\Model\Membership">Membership</abbr></a>&gt;</span>
             </section>
 
 </article>
@@ -3455,7 +3298,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">325</span>
+    <span class="phpdocumentor-element-found-in__line">280</span>
 
     </aside>
 
@@ -3486,45 +3329,6 @@ member still meets the requirements as set forth in the bylaws and internal regu
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getPaid">
-        getPaid()
-        <a href="classes/Database-Model-Member.html#method_getPaid" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">614</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Get how much has been paid.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getPaid</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-    
-
-        
-    
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">int</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_getRenewalLinks">
         getRenewalLinks()
         <a href="classes/Database-Model-Member.html#method_getRenewalLinks" class="headerlink"><i class="fas fa-link"></i></a>
@@ -3533,7 +3337,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">828</span>
+    <span class="phpdocumentor-element-found-in__line">816</span>
 
     </aside>
 
@@ -3572,7 +3376,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">482</span>
+    <span class="phpdocumentor-element-found-in__line">442</span>
 
     </aside>
 
@@ -3611,7 +3415,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">630</span>
+    <span class="phpdocumentor-element-found-in__line">618</span>
 
     </aside>
 
@@ -3650,7 +3454,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">466</span>
+    <span class="phpdocumentor-element-found-in__line">426</span>
 
     </aside>
 
@@ -3681,45 +3485,6 @@ member still meets the requirements as set forth in the bylaws and internal regu
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getType">
-        getType()
-        <a href="classes/Database-Model-Member.html#method_getType" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">498</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Get the member type.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getType</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Application-Model-Enums-MembershipTypes.html"><abbr title="\Application\Model\Enums\MembershipTypes">MembershipTypes</abbr></a></span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-    
-
-        
-    
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><a href="classes/Application-Model-Enums-MembershipTypes.html"><abbr title="\Application\Model\Enums\MembershipTypes">MembershipTypes</abbr></a></span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_hasActiveRenewalLink">
         hasActiveRenewalLink()
         <a href="classes/Database-Model-Member.html#method_hasActiveRenewalLink" class="headerlink"><i class="fas fa-link"></i></a>
@@ -3728,7 +3493,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">833</span>
+    <span class="phpdocumentor-element-found-in__line">821</span>
 
     </aside>
 
@@ -3766,7 +3531,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">684</span>
+    <span class="phpdocumentor-element-found-in__line">672</span>
 
     </aside>
 
@@ -3810,7 +3575,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">538</span>
+    <span class="phpdocumentor-element-found-in__line">474</span>
 
     </aside>
 
@@ -3855,11 +3620,11 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">558</span>
+    <span class="phpdocumentor-element-found-in__line">494</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Set the date of the last membership change.</p>
+        <p class="phpdocumentor-summary">Set the date of the last member change.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -3900,7 +3665,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">700</span>
+    <span class="phpdocumentor-element-found-in__line">688</span>
 
     </aside>
 
@@ -3945,7 +3710,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">357</span>
+    <span class="phpdocumentor-element-found-in__line">312</span>
 
     </aside>
 
@@ -3982,51 +3747,6 @@ member still meets the requirements as set forth in the bylaws and internal regu
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_setExpiration">
-        setExpiration()
-        <a href="classes/Database-Model-Member.html#method_setExpiration" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">522</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Set the expiration date.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setExpiration</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><abbr title="\DateTime">DateTime</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$expiration</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-argument-list__argument__name">$expiration</span>
-                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\DateTime">DateTime</abbr></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-        
-    
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_setFirstName">
         setFirstName()
         <a href="classes/Database-Model-Member.html#method_setFirstName" class="headerlink"><i class="fas fa-link"></i></a>
@@ -4035,7 +3755,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">427</span>
+    <span class="phpdocumentor-element-found-in__line">382</span>
 
     </aside>
 
@@ -4072,51 +3792,6 @@ member still meets the requirements as set forth in the bylaws and internal regu
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_setGeneration">
-        setGeneration()
-        <a href="classes/Database-Model-Member.html#method_setGeneration" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">458</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Set the generation.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setGeneration</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$generation</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-argument-list__argument__name">$generation</span>
-                : <span class="phpdocumentor-argument-list__argument__type">int</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-        
-    
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_setHidden">
         setHidden()
         <a href="classes/Database-Model-Member.html#method_setHidden" class="headerlink"><i class="fas fa-link"></i></a>
@@ -4125,7 +3800,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">654</span>
+    <span class="phpdocumentor-element-found-in__line">642</span>
 
     </aside>
 
@@ -4170,7 +3845,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">810</span>
+    <span class="phpdocumentor-element-found-in__line">798</span>
 
     </aside>
 
@@ -4215,7 +3890,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">419</span>
+    <span class="phpdocumentor-element-found-in__line">374</span>
 
     </aside>
 
@@ -4252,51 +3927,6 @@ member still meets the requirements as set forth in the bylaws and internal regu
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_setIsStudying">
-        setIsStudying()
-        <a href="classes/Database-Model-Member.html#method_setIsStudying" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">574</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Set whether the member is still studying.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setIsStudying</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$isStudying</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-argument-list__argument__name">$isStudying</span>
-                : <span class="phpdocumentor-argument-list__argument__type">bool</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-        
-    
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_setLastCheckedOn">
         setLastCheckedOn()
         <a href="classes/Database-Model-Member.html#method_setLastCheckedOn" class="headerlink"><i class="fas fa-link"></i></a>
@@ -4305,7 +3935,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">606</span>
+    <span class="phpdocumentor-element-found-in__line">610</span>
 
     </aside>
 
@@ -4350,7 +3980,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">403</span>
+    <span class="phpdocumentor-element-found-in__line">358</span>
 
     </aside>
 
@@ -4395,7 +4025,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">349</span>
+    <span class="phpdocumentor-element-found-in__line">304</span>
 
     </aside>
 
@@ -4432,51 +4062,6 @@ member still meets the requirements as set forth in the bylaws and internal regu
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_setMembershipEndsOn">
-        setMembershipEndsOn()
-        <a href="classes/Database-Model-Member.html#method_setMembershipEndsOn" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">590</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Set the date on which the membership of the member will have ended (i.e., they have become &quot;graduate&quot;).</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setMembershipEndsOn</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><abbr title="\DateTime">DateTime</abbr>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$membershipEndsOn</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-argument-list__argument__name">$membershipEndsOn</span>
-                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\DateTime">DateTime</abbr>|null</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-        
-    
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_setMiddleName">
         setMiddleName()
         <a href="classes/Database-Model-Member.html#method_setMiddleName" class="headerlink"><i class="fas fa-link"></i></a>
@@ -4485,7 +4070,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">411</span>
+    <span class="phpdocumentor-element-found-in__line">366</span>
 
     </aside>
 
@@ -4522,51 +4107,6 @@ member still meets the requirements as set forth in the bylaws and internal regu
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_setPaid">
-        setPaid()
-        <a href="classes/Database-Model-Member.html#method_setPaid" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">622</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Set how much has been paid.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setPaid</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$paid</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-argument-list__argument__name">$paid</span>
-                : <span class="phpdocumentor-argument-list__argument__type">int</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-        
-    
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_setStudentAddress">
         setStudentAddress()
         <a href="classes/Database-Model-Member.html#method_setStudentAddress" class="headerlink"><i class="fas fa-link"></i></a>
@@ -4575,7 +4115,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">818</span>
+    <span class="phpdocumentor-element-found-in__line">806</span>
 
     </aside>
 
@@ -4620,7 +4160,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">490</span>
+    <span class="phpdocumentor-element-found-in__line">450</span>
 
     </aside>
 
@@ -4665,7 +4205,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">638</span>
+    <span class="phpdocumentor-element-found-in__line">626</span>
 
     </aside>
 
@@ -4710,7 +4250,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">474</span>
+    <span class="phpdocumentor-element-found-in__line">434</span>
 
     </aside>
 
@@ -4747,51 +4287,6 @@ member still meets the requirements as set forth in the bylaws and internal regu
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_setType">
-        setType()
-        <a href="classes/Database-Model-Member.html#method_setType" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">506</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Set the member type.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setType</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Application-Model-Enums-MembershipTypes.html"><abbr title="\Application\Model\Enums\MembershipTypes">MembershipTypes</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$type</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-argument-list__argument__name">$type</span>
-                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Application-Model-Enums-MembershipTypes.html"><abbr title="\Application\Model\Enums\MembershipTypes">MembershipTypes</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-        
-    
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_toArray">
         toArray()
         <a href="classes/Database-Model-Member.html#method_toArray" class="headerlink"><i class="fas fa-link"></i></a>
@@ -4800,7 +4295,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">723</span>
+    <span class="phpdocumentor-element-found-in__line">711</span>
 
     </aside>
 
@@ -4822,6 +4317,93 @@ member still meets the requirements as set forth in the bylaws and internal regu
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">array{lidnr: int, email: ?string, fullName: string, lastName: string, middleName: string, initials: string, firstName: string, generation: int, hidden: bool, deleted: bool, expiration: string, authenticationKey: ?string}</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_unsetMemberships">
+        unsetMemberships()
+        <a href="classes/Database-Model-Member.html#method_unsetMemberships" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">556</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Delete all memberships of this member.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">unsetMemberships</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>This is only used in the case of clearing/deleting a member.
+In all other cases, the membership should be updated.</p>
+</section>
+
+    
+    
+
+        
+    
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_computeMembershipEndDate">
+        computeMembershipEndDate()
+        <a href="classes/Database-Model-Member.html#method_computeMembershipEndDate" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">510</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Compute the date of end of membership, or null if none</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">computeMembershipEndDate</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$formalMemberOnly</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr>|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$formalMemberOnly</span>
+                : <span class="phpdocumentor-argument-list__argument__type">bool</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr>|null</span>
             </section>
 
 </article>
@@ -4854,25 +4436,20 @@ member still meets the requirements as set forth in the bylaws and internal regu
                                                     <li class=""><a href="classes/Database-Model-Member.html#property_changedOn">$changedOn</a></li>
                                                     <li class=""><a href="classes/Database-Model-Member.html#property_deleted">$deleted</a></li>
                                                     <li class=""><a href="classes/Database-Model-Member.html#property_email">$email</a></li>
-                                                    <li class=""><a href="classes/Database-Model-Member.html#property_expiration">$expiration</a></li>
                                                     <li class=""><a href="classes/Database-Model-Member.html#property_firstName">$firstName</a></li>
-                                                    <li class=""><a href="classes/Database-Model-Member.html#property_generation">$generation</a></li>
                                                     <li class=""><a href="classes/Database-Model-Member.html#property_hidden">$hidden</a></li>
                                                     <li class=""><a href="classes/Database-Model-Member.html#property_initials">$initials</a></li>
                                                     <li class=""><a href="classes/Database-Model-Member.html#property_installations">$installations</a></li>
-                                                    <li class=""><a href="classes/Database-Model-Member.html#property_isStudying">$isStudying</a></li>
                                                     <li class=""><a href="classes/Database-Model-Member.html#property_lastCheckedOn">$lastCheckedOn</a></li>
                                                     <li class=""><a href="classes/Database-Model-Member.html#property_lastName">$lastName</a></li>
                                                     <li class=""><a href="classes/Database-Model-Member.html#property_lidnr">$lidnr</a></li>
                                                     <li class=""><a href="classes/Database-Model-Member.html#property_mailingListMemberships">$mailingListMemberships</a></li>
-                                                    <li class=""><a href="classes/Database-Model-Member.html#property_membershipEndsOn">$membershipEndsOn</a></li>
+                                                    <li class=""><a href="classes/Database-Model-Member.html#property_memberships">$memberships</a></li>
                                                     <li class=""><a href="classes/Database-Model-Member.html#property_middleName">$middleName</a></li>
-                                                    <li class=""><a href="classes/Database-Model-Member.html#property_paid">$paid</a></li>
                                                     <li class=""><a href="classes/Database-Model-Member.html#property_renewalLinks">$renewalLinks</a></li>
                                                     <li class=""><a href="classes/Database-Model-Member.html#property_study">$study</a></li>
                                                     <li class=""><a href="classes/Database-Model-Member.html#property_supremum">$supremum</a></li>
                                                     <li class=""><a href="classes/Database-Model-Member.html#property_tueUsername">$tueUsername</a></li>
-                                                    <li class=""><a href="classes/Database-Model-Member.html#property_type">$type</a></li>
                                             </ul>
                 </li>
             
@@ -4884,11 +4461,14 @@ member still meets the requirements as set forth in the bylaws and internal regu
                                             <li class=""><a href="classes/Database-Model-Member.html#method_addAddresses">addAddresses()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_addList">addList()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_addLists">addLists()</a></li>
+                                            <li class=""><a href="classes/Database-Model-Member.html#method_addMembership">addMembership()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getAddresses">getAddresses()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getAuditEntries">getAuditEntries()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getAuthenticationKey">getAuthenticationKey()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getBirth">getBirth()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getChangedOn">getChangedOn()</a></li>
+                                            <li class=""><a href="classes/Database-Model-Member.html#method_getCurrentMembership">getCurrentMembership()</a></li>
+                                            <li class=""><a href="classes/Database-Model-Member.html#method_getCurrentOrLastMembership">getCurrentOrLastMembership()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getDeleted">getDeleted()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getEmail">getEmail()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getEmailRecipient">getEmailRecipient()</a></li>
@@ -4899,44 +4479,39 @@ member still meets the requirements as set forth in the bylaws and internal regu
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getHidden">getHidden()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getInitials">getInitials()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getInstallations">getInstallations()</a></li>
-                                            <li class=""><a href="classes/Database-Model-Member.html#method_getIsStudying">getIsStudying()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getLastCheckedOn">getLastCheckedOn()</a></li>
+                                            <li class=""><a href="classes/Database-Model-Member.html#method_getLastMembership">getLastMembership()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getLastName">getLastName()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getLidnr">getLidnr()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getMailingListMemberships">getMailingListMemberships()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getMembershipEndsOn">getMembershipEndsOn()</a></li>
+                                            <li class=""><a href="classes/Database-Model-Member.html#method_getMemberships">getMemberships()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getMiddleName">getMiddleName()</a></li>
-                                            <li class=""><a href="classes/Database-Model-Member.html#method_getPaid">getPaid()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getRenewalLinks">getRenewalLinks()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getStudy">getStudy()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getSupremum">getSupremum()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getTueUsername">getTueUsername()</a></li>
-                                            <li class=""><a href="classes/Database-Model-Member.html#method_getType">getType()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_hasActiveRenewalLink">hasActiveRenewalLink()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_setAuthenticationKey">setAuthenticationKey()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_setBirth">setBirth()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_setChangedOn">setChangedOn()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_setDeleted">setDeleted()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_setEmail">setEmail()</a></li>
-                                            <li class=""><a href="classes/Database-Model-Member.html#method_setExpiration">setExpiration()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_setFirstName">setFirstName()</a></li>
-                                            <li class=""><a href="classes/Database-Model-Member.html#method_setGeneration">setGeneration()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_setHidden">setHidden()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_setHomeAddress">setHomeAddress()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_setInitials">setInitials()</a></li>
-                                            <li class=""><a href="classes/Database-Model-Member.html#method_setIsStudying">setIsStudying()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_setLastCheckedOn">setLastCheckedOn()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_setLastName">setLastName()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_setLidnr">setLidnr()</a></li>
-                                            <li class=""><a href="classes/Database-Model-Member.html#method_setMembershipEndsOn">setMembershipEndsOn()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_setMiddleName">setMiddleName()</a></li>
-                                            <li class=""><a href="classes/Database-Model-Member.html#method_setPaid">setPaid()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_setStudentAddress">setStudentAddress()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_setStudy">setStudy()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_setSupremum">setSupremum()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_setTueUsername">setTueUsername()</a></li>
-                                            <li class=""><a href="classes/Database-Model-Member.html#method_setType">setType()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_toArray">toArray()</a></li>
+                                            <li class=""><a href="classes/Database-Model-Member.html#method_unsetMemberships">unsetMemberships()</a></li>
+                                            <li class=""><a href="classes/Database-Model-Member.html#method_computeMembershipEndDate">computeMembershipEndDate()</a></li>
                                     </ul>
             </li>
                     </ul>

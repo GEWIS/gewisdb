@@ -307,7 +307,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Mapper/Member.php"><a href="files/module-checker-src-mapper-member.html"><abbr title="module/Checker/src/Mapper/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">14</span>
+    <span class="phpdocumentor-element-found-in__line">18</span>
 
     </aside>
 
@@ -361,13 +361,6 @@
 <dd>Constructor</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Checker-Mapper-Member.html#method_getEndingMembershipsWithNormalTypes">getEndingMembershipsWithNormalTypes()</a>
-    <span>
-                                &nbsp;: array&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;    </span>
-</dt>
-<dd>Get a list of members whose membership has an end date, but who are not yet &quot;graduate&quot;.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Checker-Mapper-Member.html#method_getExpiredOrHiddenMembersWithAuthenticationKey">getExpiredOrHiddenMembersWithAuthenticationKey()</a>
     <span>
                                 &nbsp;: array&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;    </span>
@@ -383,13 +376,6 @@
 The check for hidden is required because hidden members may also expire but should not be emailed</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Checker-Mapper-Member.html#method_getExpiringMembershipsWithNormalTypes">getExpiringMembershipsWithNormalTypes()</a>
-    <span>
-                                &nbsp;: array&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;    </span>
-</dt>
-<dd>Get a list of members whose membership is set to expire, but should automatically be renewed.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Checker-Mapper-Member.html#method_persist">persist()</a>
     <span>
                                 &nbsp;: void    </span>
@@ -401,6 +387,13 @@ The check for hidden is required because hidden members may also expire but shou
     <span>
                                 &nbsp;: <abbr title="\DateTime">DateTime</abbr>    </span>
 </dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/Checker-Mapper-Member.html#method_lastMembershipQuery">lastMembershipQuery()</a>
+    <span>
+                                &nbsp;: <abbr title="\Doctrine\ORM\QueryBuilder">QueryBuilder</abbr>    </span>
+</dt>
+<dd>This helper query is used for multiple queries to get the LAST membership of a member.</dd>
 
     </dl>
 
@@ -432,7 +425,7 @@ The check for hidden is required because hidden members may also expire but shou
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Mapper/Member.php"><a href="files/module-checker-src-mapper-member.html"><abbr title="module/Checker/src/Mapper/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">21</span>
+    <span class="phpdocumentor-element-found-in__line">25</span>
 
     </aside>
 
@@ -474,7 +467,7 @@ The check for hidden is required because hidden members may also expire but shou
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Mapper/Member.php"><a href="files/module-checker-src-mapper-member.html"><abbr title="module/Checker/src/Mapper/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">21</span>
+    <span class="phpdocumentor-element-found-in__line">25</span>
 
     </aside>
 
@@ -513,45 +506,6 @@ The check for hidden is required because hidden members may also expire but shou
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getEndingMembershipsWithNormalTypes">
-        getEndingMembershipsWithNormalTypes()
-        <a href="classes/Checker-Mapper-Member.html#method_getEndingMembershipsWithNormalTypes" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Mapper/Member.php"><a href="files/module-checker-src-mapper-member.html"><abbr title="module/Checker/src/Mapper/Member.php">Member.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">30</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Get a list of members whose membership has an end date, but who are not yet &quot;graduate&quot;.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getEndingMembershipsWithNormalTypes</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-    
-
-        
-    
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_getExpiredOrHiddenMembersWithAuthenticationKey">
         getExpiredOrHiddenMembersWithAuthenticationKey()
         <a href="classes/Checker-Mapper-Member.html#method_getExpiredOrHiddenMembersWithAuthenticationKey" class="headerlink"><i class="fas fa-link"></i></a>
@@ -560,7 +514,7 @@ The check for hidden is required because hidden members may also expire but shou
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Mapper/Member.php"><a href="files/module-checker-src-mapper-member.html"><abbr title="module/Checker/src/Mapper/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">70</span>
+    <span class="phpdocumentor-element-found-in__line">34</span>
 
     </aside>
 
@@ -599,7 +553,7 @@ The check for hidden is required because hidden members may also expire but shou
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Mapper/Member.php"><a href="files/module-checker-src-mapper-member.html"><abbr title="module/Checker/src/Mapper/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">89</span>
+    <span class="phpdocumentor-element-found-in__line">55</span>
 
     </aside>
 
@@ -650,45 +604,6 @@ The check for hidden is required because hidden members may also expire but shou
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getExpiringMembershipsWithNormalTypes">
-        getExpiringMembershipsWithNormalTypes()
-        <a href="classes/Checker-Mapper-Member.html#method_getExpiringMembershipsWithNormalTypes" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Mapper/Member.php"><a href="files/module-checker-src-mapper-member.html"><abbr title="module/Checker/src/Mapper/Member.php">Member.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">50</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Get a list of members whose membership is set to expire, but should automatically be renewed.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getExpiringMembershipsWithNormalTypes</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-    
-
-        
-    
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_persist">
         persist()
         <a href="classes/Checker-Mapper-Member.html#method_persist" class="headerlink"><i class="fas fa-link"></i></a>
@@ -697,7 +612,7 @@ The check for hidden is required because hidden members may also expire but shou
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Mapper/Member.php"><a href="files/module-checker-src-mapper-member.html"><abbr title="module/Checker/src/Mapper/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">142</span>
+    <span class="phpdocumentor-element-found-in__line">126</span>
 
     </aside>
 
@@ -744,7 +659,7 @@ The check for hidden is required because hidden members may also expire but shou
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Mapper/Member.php"><a href="files/module-checker-src-mapper-member.html"><abbr title="module/Checker/src/Mapper/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">121</span>
+    <span class="phpdocumentor-element-found-in__line">105</span>
 
     </aside>
 
@@ -765,6 +680,58 @@ The check for hidden is required because hidden members may also expire but shou
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_lastMembershipQuery">
+        lastMembershipQuery()
+        <a href="classes/Checker-Mapper-Member.html#method_lastMembershipQuery" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Mapper/Member.php"><a href="files/module-checker-src-mapper-member.html"><abbr title="module/Checker/src/Mapper/Member.php">Member.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">95</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">This helper query is used for multiple queries to get the LAST membership of a member.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">lastMembershipQuery</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$memberAlias</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">'m'</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\ORM\QueryBuilder">QueryBuilder</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>This is not necessarily the current membership.
+We use the startDate because it is guaranteed to be unique in combination with member.lidnr.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$memberAlias</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">'m'</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\ORM\QueryBuilder">QueryBuilder</abbr></span>
             </section>
 
 </article>
@@ -798,12 +765,11 @@ The check for hidden is required because hidden members may also expire but shou
             <li>
                 <ul class="phpdocumentor-list -clean">
                                             <li class=""><a href="classes/Checker-Mapper-Member.html#method___construct">__construct()</a></li>
-                                            <li class=""><a href="classes/Checker-Mapper-Member.html#method_getEndingMembershipsWithNormalTypes">getEndingMembershipsWithNormalTypes()</a></li>
                                             <li class=""><a href="classes/Checker-Mapper-Member.html#method_getExpiredOrHiddenMembersWithAuthenticationKey">getExpiredOrHiddenMembersWithAuthenticationKey()</a></li>
                                             <li class=""><a href="classes/Checker-Mapper-Member.html#method_getExpiringGraduates">getExpiringGraduates()</a></li>
-                                            <li class=""><a href="classes/Checker-Mapper-Member.html#method_getExpiringMembershipsWithNormalTypes">getExpiringMembershipsWithNormalTypes()</a></li>
                                             <li class=""><a href="classes/Checker-Mapper-Member.html#method_persist">persist()</a></li>
                                             <li class=""><a href="classes/Checker-Mapper-Member.html#method_getEndOfCurrentAssociationYear">getEndOfCurrentAssociationYear()</a></li>
+                                            <li class=""><a href="classes/Checker-Mapper-Member.html#method_lastMembershipQuery">lastMembershipQuery()</a></li>
                                     </ul>
             </li>
                     </ul>

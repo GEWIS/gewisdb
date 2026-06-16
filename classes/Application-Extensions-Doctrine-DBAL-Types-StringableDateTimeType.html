@@ -280,16 +280,19 @@
             <div class="phpdocumentor-column -nine phpdocumentor-content">
                                 <section>
                                         <ul class="phpdocumentor-breadcrumbs">
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/checker.html">Checker</a></li>
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/checker-command.html">Command</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/application.html">Application</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/application-extensions.html">Extensions</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/application-extensions-doctrine.html">Doctrine</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/application-extensions-doctrine-dbal.html">DBAL</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/application-extensions-doctrine-dbal-types.html">Types</a></li>
     </ul>
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    CheckMembershipTypeCommand
+    StringableDateTimeType
 
         <span class="phpdocumentor-element__extends">
-        extends <a href="classes/Checker-Command-AbstractCheckerCommand.html"><abbr title="\Checker\Command\AbstractCheckerCommand">AbstractCheckerCommand</abbr></a>
+        extends <abbr title="\Doctrine\DBAL\Types\DateTimeType">DateTimeType</abbr>
     </span>
     
             <div class="phpdocumentor-element__package">
@@ -308,9 +311,9 @@
 </div>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Command/CheckMembershipTypeCommand.php"><a href="files/module-checker-src-command-checkmembershiptypecommand.html"><abbr title="module/Checker/src/Command/CheckMembershipTypeCommand.php">CheckMembershipTypeCommand.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/Extensions/Doctrine/DBAL/Types/StringableDateTimeType.php"><a href="files/module-application-src-extensions-doctrine-dbal-types-stringabledatetimetype.html"><abbr title="module/Application/src/Extensions/Doctrine/DBAL/Types/StringableDateTimeType.php">StringableDateTimeType.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">13</span>
+    <span class="phpdocumentor-element-found-in__line">16</span>
 
     </aside>
 
@@ -320,27 +323,10 @@
 
 
     
-            <section class="phpdocumentor-attributes">
-            <h5 class="phpdocumentor-elements__header" id="attributes">
-                Attributes <a href="classes/Checker-Command-CheckMembershipTypeCommand.html#attributes" class="headerlink"><i class="fas fa-link"></i></a>
-
-            </h5>
-                            <dl class="phpdocumentor-argument-list">
-    <dt class="phpdocumentor-argument-list__entry">
-        #[<abbr title="\Symfony\Component\Console\Attribute\AsCommand">AsCommand</abbr>]
-    </dt>
-        <dd class="phpdocumentor-argument-list__entry">
-        $name: &#039;check:membership:type&#039;
-    </dd>
-        <dd class="phpdocumentor-argument-list__entry">
-        $description: &#039;Check and update membership types when necessary.&#039;
-    </dd>
-    </dl>
-                    </section>
     
 <h3 id="toc">
     Table of Contents
-    <a href="classes/Checker-Command-CheckMembershipTypeCommand.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Application-Extensions-Doctrine-DBAL-Types-StringableDateTimeType.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h3>
 
@@ -355,26 +341,27 @@
 
 <h4 id="toc-methods">
     Methods
-    <a href="classes/Checker-Command-CheckMembershipTypeCommand.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Application-Extensions-Doctrine-DBAL-Types-StringableDateTimeType.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Checker-Command-AbstractCheckerCommand.html#method___construct">__construct()</a>
+    <a class="" href="classes/Application-Extensions-Doctrine-DBAL-Types-StringableDateTimeType.html#method_convertToPHPValue">convertToPHPValue()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: <abbr title="(\Application\Extensions\Doctrine\DBAL\Types\T is null ? null : \Application\Extensions\Types\StringableDateTime)">StringableDateTime)</abbr>    </span>
+</dt>
+<dd>{@inheritDoc}</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Application-Extensions-Doctrine-DBAL-Types-StringableDateTimeType.html#method_getName">getName()</a>
+    <span>
+                                &nbsp;: string    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Checker-Command-AbstractCheckerCommand.html#method_getCheckerService">getCheckerService()</a>
+    <a class="" href="classes/Application-Extensions-Doctrine-DBAL-Types-StringableDateTimeType.html#method_requiresSQLCommentHint">requiresSQLCommentHint()</a>
     <span>
-                                &nbsp;: <a href="classes/Checker-Service-Checker.html"><abbr title="\Checker\Service\Checker">Checker</abbr></a>    </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
-    <a class="" href="classes/Checker-Command-CheckMembershipTypeCommand.html#method_execute">execute()</a>
-    <span>
-                                &nbsp;: int    </span>
+                                &nbsp;: true    </span>
 </dt>
 
     </dl>
@@ -388,7 +375,7 @@
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Checker-Command-CheckMembershipTypeCommand.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Application-Extensions-Doctrine-DBAL-Types-StringableDateTimeType.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
                     <article
@@ -397,22 +384,23 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method___construct">
-        __construct()
-        <a href="classes/Checker-Command-AbstractCheckerCommand.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_convertToPHPValue">
+        convertToPHPValue()
+        <a href="classes/Application-Extensions-Doctrine-DBAL-Types-StringableDateTimeType.html#method_convertToPHPValue" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Command/AbstractCheckerCommand.php"><a href="files/module-checker-src-command-abstractcheckercommand.html"><abbr title="module/Checker/src/Command/AbstractCheckerCommand.php">AbstractCheckerCommand.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/Extensions/Doctrine/DBAL/Types/StringableDateTimeType.php"><a href="files/module-application-src-extensions-doctrine-dbal-types-stringabledatetimetype.html"><abbr title="module/Application/src/Extensions/Doctrine/DBAL/Types/StringableDateTimeType.php">StringableDateTimeType.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">12</span>
+    <span class="phpdocumentor-element-found-in__line">27</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">{@inheritDoc}</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Checker-Service-Checker.html"><abbr title="\Checker\Service\Checker">Checker</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$checkerService</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">convertToPHPValue</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><abbr title="\Application\Extensions\Doctrine\DBAL\Types\T">T</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$value</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><abbr title="\Doctrine\DBAL\Platforms\AbstractPlatform">AbstractPlatform</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$platform</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="(\Application\Extensions\Doctrine\DBAL\Types\T is null ? null : \Application\Extensions\Types\StringableDateTime)">StringableDateTime)</abbr></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -421,8 +409,15 @@
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-argument-list__argument__name">$checkerService</span>
-                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Checker-Service-Checker.html"><abbr title="\Checker\Service\Checker">Checker</abbr></a></span>
+                <span class="phpdocumentor-argument-list__argument__name">$value</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\Application\Extensions\Doctrine\DBAL\Types\T">T</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$platform</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\Doctrine\DBAL\Platforms\AbstractPlatform">AbstractPlatform</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -430,100 +425,24 @@
             </dl>
 
     
+    <h5 class="phpdocumentor-tag-list__heading" id="method_convertToPHPValue_tags">
+        Tags
+        <a href="classes/Application-Extensions-Doctrine-DBAL-Types-StringableDateTimeType.html#method_convertToPHPValue_tags" class="headerlink"><i class="fas fa-link"></i></a>
 
-        
-    
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getCheckerService">
-        getCheckerService()
-        <a href="classes/Checker-Command-AbstractCheckerCommand.html#method_getCheckerService" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Command/AbstractCheckerCommand.php"><a href="files/module-checker-src-command-abstractcheckercommand.html"><abbr title="module/Checker/src/Command/AbstractCheckerCommand.php">AbstractCheckerCommand.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">17</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getCheckerService</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Checker-Service-Checker.html"><abbr title="\Checker\Service\Checker">Checker</abbr></a></span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-    
-
-        
-    
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><a href="classes/Checker-Service-Checker.html"><abbr title="\Checker\Service\Checker">Checker</abbr></a></span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -protected
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_execute">
-        execute()
-        <a href="classes/Checker-Command-CheckMembershipTypeCommand.html#method_execute" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Command/CheckMembershipTypeCommand.php"><a href="files/module-checker-src-command-checkmembershiptypecommand.html"><abbr title="module/Checker/src/Command/CheckMembershipTypeCommand.php">CheckMembershipTypeCommand.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">19</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-                    <span class="phpdocumentor-signature__name">execute</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><abbr title="\Symfony\Component\Console\Input\InputInterface">InputInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$input</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><abbr title="\Symfony\Component\Console\Output\OutputInterface">OutputInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$output</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-argument-list__argument__name">$input</span>
-                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\Symfony\Component\Console\Input\InputInterface">InputInterface</abbr></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-argument-list__argument__name">$output</span>
-                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\Symfony\Component\Console\Output\OutputInterface">OutputInterface</abbr></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">template</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                                                                                        
+                                    </dd>
+                        </dl>
 
         
             <section class="phpdocumentor-attributes">
-            <h5 class="phpdocumentor-elements__header" id="method_execute_attributes">
-                Attributes <a href="classes/Checker-Command-CheckMembershipTypeCommand.html#method_execute_attributes" class="headerlink"><i class="fas fa-link"></i></a>
+            <h5 class="phpdocumentor-elements__header" id="method_convertToPHPValue_attributes">
+                Attributes <a href="classes/Application-Extensions-Doctrine-DBAL-Types-StringableDateTimeType.html#method_convertToPHPValue_attributes" class="headerlink"><i class="fas fa-link"></i></a>
 
             </h5>
                             <dl class="phpdocumentor-argument-list">
@@ -535,7 +454,115 @@
     
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">int</span>
+        <span class="phpdocumentor-signature__response_type"><abbr title="(\Application\Extensions\Doctrine\DBAL\Types\T is null ? null : \Application\Extensions\Types\StringableDateTime)">StringableDateTime)</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getName">
+        getName()
+        <a href="classes/Application-Extensions-Doctrine-DBAL-Types-StringableDateTimeType.html#method_getName" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/Extensions/Doctrine/DBAL/Types/StringableDateTimeType.php"><a href="files/module-application-src-extensions-doctrine-dbal-types-stringabledatetimetype.html"><abbr title="module/Application/src/Extensions/Doctrine/DBAL/Types/StringableDateTimeType.php">StringableDateTimeType.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">50</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getName</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+        
+            <section class="phpdocumentor-attributes">
+            <h5 class="phpdocumentor-elements__header" id="method_getName_attributes">
+                Attributes <a href="classes/Application-Extensions-Doctrine-DBAL-Types-StringableDateTimeType.html#method_getName_attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+            </h5>
+                            <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Override">Override</abbr>]
+    </dt>
+    </dl>
+                    </section>
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_requiresSQLCommentHint">
+        requiresSQLCommentHint()
+        <a href="classes/Application-Extensions-Doctrine-DBAL-Types-StringableDateTimeType.html#method_requiresSQLCommentHint" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/Extensions/Doctrine/DBAL/Types/StringableDateTimeType.php"><a href="files/module-application-src-extensions-doctrine-dbal-types-stringabledatetimetype.html"><abbr title="module/Application/src/Extensions/Doctrine/DBAL/Types/StringableDateTimeType.php">StringableDateTimeType.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">44</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">requiresSQLCommentHint</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><abbr title="\Doctrine\DBAL\Platforms\AbstractPlatform">AbstractPlatform</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$platform</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">true</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$platform</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\Doctrine\DBAL\Platforms\AbstractPlatform">AbstractPlatform</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+            <section class="phpdocumentor-attributes">
+            <h5 class="phpdocumentor-elements__header" id="method_requiresSQLCommentHint_attributes">
+                Attributes <a href="classes/Application-Extensions-Doctrine-DBAL-Types-StringableDateTimeType.html#method_requiresSQLCommentHint_attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+            </h5>
+                            <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Override">Override</abbr>]
+    </dt>
+    </dl>
+                    </section>
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">true</span>
             </section>
 
 </article>
@@ -553,7 +580,7 @@
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                                                                <li><a href="classes/Checker-Command-CheckMembershipTypeCommand.html#toc-methods">Methods</a></li>
+                                                                                <li><a href="classes/Application-Extensions-Doctrine-DBAL-Types-StringableDateTimeType.html#toc-methods">Methods</a></li>
                                     </ul>
             </li>
             
@@ -561,9 +588,9 @@
                         <li class="phpdocumentor-on-this-page-section__title">Methods</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                            <li class=""><a href="classes/Checker-Command-AbstractCheckerCommand.html#method___construct">__construct()</a></li>
-                                            <li class=""><a href="classes/Checker-Command-AbstractCheckerCommand.html#method_getCheckerService">getCheckerService()</a></li>
-                                            <li class=""><a href="classes/Checker-Command-CheckMembershipTypeCommand.html#method_execute">execute()</a></li>
+                                            <li class=""><a href="classes/Application-Extensions-Doctrine-DBAL-Types-StringableDateTimeType.html#method_convertToPHPValue">convertToPHPValue()</a></li>
+                                            <li class=""><a href="classes/Application-Extensions-Doctrine-DBAL-Types-StringableDateTimeType.html#method_getName">getName()</a></li>
+                                            <li class=""><a href="classes/Application-Extensions-Doctrine-DBAL-Types-StringableDateTimeType.html#method_requiresSQLCommentHint">requiresSQLCommentHint()</a></li>
                                     </ul>
             </li>
                     </ul>
@@ -583,7 +610,7 @@
     </section>
 </section>
         </div>
-        <a href="classes/Checker-Command-CheckMembershipTypeCommand.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Application-Extensions-Doctrine-DBAL-Types-StringableDateTimeType.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

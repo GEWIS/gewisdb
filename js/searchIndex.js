@@ -56,6 +56,26 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Application-Controller-IndexController.html#method_langAction"
         },                {
+            "fqsen": "\\Application\\Extensions\\Doctrine\\DBAL\\Types\\StringableDateTimeType",
+            "name": "StringableDateTimeType",
+            "summary": "",
+            "url": "classes/Application-Extensions-Doctrine-DBAL-Types-StringableDateTimeType.html"
+        },                {
+            "fqsen": "\\Application\\Extensions\\Doctrine\\DBAL\\Types\\StringableDateTimeType\u003A\u003AconvertToPHPValue\u0028\u0029",
+            "name": "convertToPHPValue",
+            "summary": "\u007B\u0040inheritDoc\u007D",
+            "url": "classes/Application-Extensions-Doctrine-DBAL-Types-StringableDateTimeType.html#method_convertToPHPValue"
+        },                {
+            "fqsen": "\\Application\\Extensions\\Doctrine\\DBAL\\Types\\StringableDateTimeType\u003A\u003ArequiresSQLCommentHint\u0028\u0029",
+            "name": "requiresSQLCommentHint",
+            "summary": "",
+            "url": "classes/Application-Extensions-Doctrine-DBAL-Types-StringableDateTimeType.html#method_requiresSQLCommentHint"
+        },                {
+            "fqsen": "\\Application\\Extensions\\Doctrine\\DBAL\\Types\\StringableDateTimeType\u003A\u003AgetName\u0028\u0029",
+            "name": "getName",
+            "summary": "",
+            "url": "classes/Application-Extensions-Doctrine-DBAL-Types-StringableDateTimeType.html#method_getName"
+        },                {
             "fqsen": "\\Application\\Extensions\\Doctrine\\Middleware\\Driver",
             "name": "Driver",
             "summary": "",
@@ -110,6 +130,26 @@ Search.appendIndex(
             "name": "yearExpression",
             "summary": "",
             "url": "classes/Application-Extensions-Doctrine-Year.html#property_yearExpression"
+        },                {
+            "fqsen": "\\Application\\Extensions\\Types\\StringableDateTime",
+            "name": "StringableDateTime",
+            "summary": "",
+            "url": "classes/Application-Extensions-Types-StringableDateTime.html"
+        },                {
+            "fqsen": "\\Application\\Extensions\\Types\\StringableDateTime\u003A\u003A__toString\u0028\u0029",
+            "name": "__toString",
+            "summary": "",
+            "url": "classes/Application-Extensions-Types-StringableDateTime.html#method___toString"
+        },                {
+            "fqsen": "\\Application\\Extensions\\Types\\StringableDateTime\u003A\u003AtoDateTime\u0028\u0029",
+            "name": "toDateTime",
+            "summary": "",
+            "url": "classes/Application-Extensions-Types-StringableDateTime.html#method_toDateTime"
+        },                {
+            "fqsen": "\\Application\\Extensions\\Types\\StringableDateTime\u003A\u003AfromDateTime\u0028\u0029",
+            "name": "fromDateTime",
+            "summary": "",
+            "url": "classes/Application-Extensions-Types-StringableDateTime.html#method_fromDateTime"
         },                {
             "fqsen": "\\Application\\Mapper\\ConfigItem",
             "name": "ConfigItem",
@@ -333,13 +373,18 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Application\\Model\\Enums\\MembershipTypes",
             "name": "MembershipTypes",
-            "summary": "Enum\u0020for\u0020the\u0020different\u0020membership\u0020types\u0020as\u0020defined\u0020in\u0020the\u0020bylaws\u0020of\u0020the\u0020association.",
+            "summary": "Enum\u0020for\u0020the\u0020different\u0020membership\u0020types\u0020as\u0020defined\u0020in\u0020the\u0020articles\u0020of\u0020association.",
             "url": "classes/Application-Model-Enums-MembershipTypes.html"
         },                {
             "fqsen": "\\Application\\Model\\Enums\\MembershipTypes\u003A\u003AgetName\u0028\u0029",
             "name": "getName",
             "summary": "",
             "url": "classes/Application-Model-Enums-MembershipTypes.html#method_getName"
+        },                {
+            "fqsen": "\\Application\\Model\\Enums\\MembershipTypes\u003A\u003AisFormalMember\u0028\u0029",
+            "name": "isFormalMember",
+            "summary": "Whether\u0020this\u0020is\u0020a\u0020membership\u0020type\u0020that\u0020is\u0020a\u0020formal\u0020member\u0020of\u0020the\u0020association.",
+            "url": "classes/Application-Model-Enums-MembershipTypes.html#method_isFormalMember"
         },                {
             "fqsen": "\\Application\\Model\\Enums\\MembershipTypes\u003A\u003AOrdinary",
             "name": "Ordinary",
@@ -2116,16 +2161,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Checker-Command-CheckDischargesCommand.html#method_execute"
         },                {
-            "fqsen": "\\Checker\\Command\\CheckMembershipExpirationCommand",
-            "name": "CheckMembershipExpirationCommand",
-            "summary": "",
-            "url": "classes/Checker-Command-CheckMembershipExpirationCommand.html"
-        },                {
-            "fqsen": "\\Checker\\Command\\CheckMembershipExpirationCommand\u003A\u003Aexecute\u0028\u0029",
-            "name": "execute",
-            "summary": "",
-            "url": "classes/Checker-Command-CheckMembershipExpirationCommand.html#method_execute"
-        },                {
             "fqsen": "\\Checker\\Command\\CheckMembershipGraduateRenewalCommand",
             "name": "CheckMembershipGraduateRenewalCommand",
             "summary": "",
@@ -2150,16 +2185,6 @@ Search.appendIndex(
             "name": "renewalService",
             "summary": "",
             "url": "classes/Checker-Command-CheckMembershipGraduateRenewalCommand.html#property_renewalService"
-        },                {
-            "fqsen": "\\Checker\\Command\\CheckMembershipTypeCommand",
-            "name": "CheckMembershipTypeCommand",
-            "summary": "",
-            "url": "classes/Checker-Command-CheckMembershipTypeCommand.html"
-        },                {
-            "fqsen": "\\Checker\\Command\\CheckMembershipTypeCommand\u003A\u003Aexecute\u0028\u0029",
-            "name": "execute",
-            "summary": "",
-            "url": "classes/Checker-Command-CheckMembershipTypeCommand.html#method_execute"
         },                {
             "fqsen": "\\Checker\\Command\\Factory\\AbstractCheckerCommandFactory",
             "name": "AbstractCheckerCommandFactory",
@@ -2301,16 +2326,6 @@ Search.appendIndex(
             "summary": "Constructor",
             "url": "classes/Checker-Mapper-Member.html#method___construct"
         },                {
-            "fqsen": "\\Checker\\Mapper\\Member\u003A\u003AgetEndingMembershipsWithNormalTypes\u0028\u0029",
-            "name": "getEndingMembershipsWithNormalTypes",
-            "summary": "Get\u0020a\u0020list\u0020of\u0020members\u0020whose\u0020membership\u0020has\u0020an\u0020end\u0020date,\u0020but\u0020who\u0020are\u0020not\u0020yet\u0020\u0022graduate\u0022.",
-            "url": "classes/Checker-Mapper-Member.html#method_getEndingMembershipsWithNormalTypes"
-        },                {
-            "fqsen": "\\Checker\\Mapper\\Member\u003A\u003AgetExpiringMembershipsWithNormalTypes\u0028\u0029",
-            "name": "getExpiringMembershipsWithNormalTypes",
-            "summary": "Get\u0020a\u0020list\u0020of\u0020members\u0020whose\u0020membership\u0020is\u0020set\u0020to\u0020expire,\u0020but\u0020should\u0020automatically\u0020be\u0020renewed.",
-            "url": "classes/Checker-Mapper-Member.html#method_getExpiringMembershipsWithNormalTypes"
-        },                {
             "fqsen": "\\Checker\\Mapper\\Member\u003A\u003AgetExpiredOrHiddenMembersWithAuthenticationKey\u0028\u0029",
             "name": "getExpiredOrHiddenMembersWithAuthenticationKey",
             "summary": "Get\u0020a\u0020list\u0020of\u0020members\u0020who\u0020are\u0020hidden\u0020or\u0020whose\u0020membership\u0020has\u0020expired.",
@@ -2320,6 +2335,11 @@ Search.appendIndex(
             "name": "getExpiringGraduates",
             "summary": "Get\u0020all\u0020expiring\u0020graduates\u0020for\u0020which\u0020no\u0020renewal\u0020link\u0020exists\nThe\u0020check\u0020for\u0020hidden\u0020is\u0020required\u0020because\u0020hidden\u0020members\u0020may\u0020also\u0020expire\u0020but\u0020should\u0020not\u0020be\u0020emailed",
             "url": "classes/Checker-Mapper-Member.html#method_getExpiringGraduates"
+        },                {
+            "fqsen": "\\Checker\\Mapper\\Member\u003A\u003AlastMembershipQuery\u0028\u0029",
+            "name": "lastMembershipQuery",
+            "summary": "This\u0020helper\u0020query\u0020is\u0020used\u0020for\u0020multiple\u0020queries\u0020to\u0020get\u0020the\u0020LAST\u0020membership\u0020of\u0020a\u0020member.",
+            "url": "classes/Checker-Mapper-Member.html#method_lastMembershipQuery"
         },                {
             "fqsen": "\\Checker\\Mapper\\Member\u003A\u003AgetEndOfCurrentAssociationYear\u0028\u0029",
             "name": "getEndOfCurrentAssociationYear",
@@ -2756,16 +2776,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Checker-Service-Checker.html#method_checkKeyWithdrawalTime"
         },                {
-            "fqsen": "\\Checker\\Service\\Checker\u003A\u003AcheckProperMembershipType\u0028\u0029",
-            "name": "checkProperMembershipType",
-            "summary": "Makes\u0020sure\u0020that\u0020members\u0020whose\u0020membership\u0020has\u0020end\u0020date\u0020are\u0020actually\u0020converted\u0020to\u0020\u0022graduate\u0022\u0020when\u0020their\u0020membership\nhas\u0020ended.",
-            "url": "classes/Checker-Service-Checker.html#method_checkProperMembershipType"
-        },                {
-            "fqsen": "\\Checker\\Service\\Checker\u003A\u003AcheckNormalExpiration\u0028\u0029",
-            "name": "checkNormalExpiration",
-            "summary": "Make\u0020sure\u0020that\u0020ordinary\u0020members\u0020have\u0020their\u0020membership\u0020expiration\u0020automatically\u0020extended\u0020if\u0020they\u0020are\u0020eligible.",
-            "url": "classes/Checker-Service-Checker.html#method_checkNormalExpiration"
-        },                {
             "fqsen": "\\Checker\\Service\\Checker\u003A\u003AcheckAuthenticationKeys\u0028\u0029",
             "name": "checkAuthenticationKeys",
             "summary": "Make\u0020sure\u0020that\u0020members\u0020who\u0020are\u0020hidden\u0020or\u0020whose\u0020membership\u0020has\u0020expired\u0020do\u0020not\u0020have\u0020an\u0020authentication\u0020key.",
@@ -2975,16 +2985,6 @@ Search.appendIndex(
             "name": "__construct",
             "summary": "",
             "url": "classes/Checker-Service-Member.html#method___construct"
-        },                {
-            "fqsen": "\\Checker\\Service\\Member\u003A\u003AgetEndingMembershipsWithNormalTypes\u0028\u0029",
-            "name": "getEndingMembershipsWithNormalTypes",
-            "summary": "Get\u0020members\u0020who\u0020may\u0020require\u0020an\u0020adjustment\u0020to\u0020their\u0020membership\u0020type\u0020\u0028based\u0020on\u0020whether\u0020their\u0020membership\u0020has\u0020ended\u0029.",
-            "url": "classes/Checker-Service-Member.html#method_getEndingMembershipsWithNormalTypes"
-        },                {
-            "fqsen": "\\Checker\\Service\\Member\u003A\u003AgetExpiringMembershipsWithNormalTypes\u0028\u0029",
-            "name": "getExpiringMembershipsWithNormalTypes",
-            "summary": "Get\u0020members\u0020who\u0020require\u0020an\u0020adjustment\u0020to\u0020just\u0020their\u0020membership\u0020expiration.",
-            "url": "classes/Checker-Service-Member.html#method_getExpiringMembershipsWithNormalTypes"
         },                {
             "fqsen": "\\Checker\\Service\\Member\u003A\u003AgetExpiredOrHiddenMembersWithAuthenticationKey\u0028\u0029",
             "name": "getExpiredOrHiddenMembersWithAuthenticationKey",
@@ -3530,6 +3530,26 @@ Search.appendIndex(
             "name": "down",
             "summary": "",
             "url": "classes/Database-Migrations-Version20260601191545.html#method_down"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20260613120619",
+            "name": "Version20260613120619",
+            "summary": "phpcs\u003Adisable\u0020Generic.Files.LineLength.TooLong\nphpcs\u003Adisable\u0020SlevomatCodingStandard.Functions.RequireMultiLineCall.RequiredMultiLineCall",
+            "url": "classes/Database-Migrations-Version20260613120619.html"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20260613120619\u003A\u003AgetDescription\u0028\u0029",
+            "name": "getDescription",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20260613120619.html#method_getDescription"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20260613120619\u003A\u003Aup\u0028\u0029",
+            "name": "up",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20260613120619.html#method_up"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20260613120619\u003A\u003Adown\u0028\u0029",
+            "name": "down",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20260613120619.html#method_down"
         },                {
             "fqsen": "\\Database\\Command\\DeleteExpiredMembersCommand",
             "name": "DeleteExpiredMembersCommand",
@@ -5101,10 +5121,25 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Form-MemberType.html#method___construct"
         },                {
+            "fqsen": "\\Database\\Form\\MemberType\u003A\u003AgetMembership\u0028\u0029",
+            "name": "getMembership",
+            "summary": "",
+            "url": "classes/Database-Form-MemberType.html#method_getMembership"
+        },                {
+            "fqsen": "\\Database\\Form\\MemberType\u003A\u003AsetMembership\u0028\u0029",
+            "name": "setMembership",
+            "summary": "Function\u0020to\u0020limit\u0020the\u0020start\u0020and\u0020end\u0020date\u0020of\u0020the\u0020change\u0020date.",
+            "url": "classes/Database-Form-MemberType.html#method_setMembership"
+        },                {
             "fqsen": "\\Database\\Form\\MemberType\u003A\u003AgetInputFilterSpecification\u0028\u0029",
             "name": "getInputFilterSpecification",
             "summary": "Specification\u0020of\u0020input\u0020filter.",
             "url": "classes/Database-Form-MemberType.html#method_getInputFilterSpecification"
+        },                {
+            "fqsen": "\\Database\\Form\\MemberType\u003A\u003A\u0024membership",
+            "name": "membership",
+            "summary": "",
+            "url": "classes/Database-Form-MemberType.html#property_membership"
         },                {
             "fqsen": "\\Database\\Form\\MemberType\u003A\u003A\u0024translator",
             "name": "translator",
@@ -6086,10 +6121,10 @@ Search.appendIndex(
             "summary": "Count\u0020the\u0020members\u0020who\u0020still\u0020have\u0020an\u0020active\u0020membership\u0020\u0028and\u0020graduate\u0020status\u0020if\u0020\u0060includeGraduates\u0060\u0029,\u0020this\u0020means\nthat\u0020are\u0020not\u0020deleted\u0020and\u0020their\u0020\u0060expiration\u0060\u0020is\u0020later\u0020than\u0020now.",
             "url": "classes/Database-Mapper-Member.html#method_countMembers"
         },                {
-            "fqsen": "\\Database\\Mapper\\Member\u003A\u003AcountGraduates\u0028\u0029",
-            "name": "countGraduates",
-            "summary": "",
-            "url": "classes/Database-Mapper-Member.html#method_countGraduates"
+            "fqsen": "\\Database\\Mapper\\Member\u003A\u003AgetMembershipSubquery\u0028\u0029",
+            "name": "getMembershipSubquery",
+            "summary": "Returns\u0020a\u0020subquery\u0020containing\u0020IDENTIY\u0028m\u0029\u0020of\u0020all\u0020members\u0020that\u0020have\u0020a\u0020membership\u0020\u0028with\u0020optional\u0020constraints\u0029.",
+            "url": "classes/Database-Mapper-Member.html#method_getMembershipSubquery"
         },                {
             "fqsen": "\\Database\\Mapper\\Member\u003A\u003Apersist\u0028\u0029",
             "name": "persist",
@@ -8183,13 +8218,8 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Database\\Model\\Member\u003A\u003AgetGeneration\u0028\u0029",
             "name": "getGeneration",
-            "summary": "Get\u0020the\u0020generation.",
+            "summary": "Get\u0020the\u0020generation\u0020of\u0020the\u0020member.",
             "url": "classes/Database-Model-Member.html#method_getGeneration"
-        },                {
-            "fqsen": "\\Database\\Model\\Member\u003A\u003AsetGeneration\u0028\u0029",
-            "name": "setGeneration",
-            "summary": "Set\u0020the\u0020generation.",
-            "url": "classes/Database-Model-Member.html#method_setGeneration"
         },                {
             "fqsen": "\\Database\\Model\\Member\u003A\u003AgetTueUsername\u0028\u0029",
             "name": "getTueUsername",
@@ -8211,25 +8241,10 @@ Search.appendIndex(
             "summary": "Set\u0020the\u0020study.",
             "url": "classes/Database-Model-Member.html#method_setStudy"
         },                {
-            "fqsen": "\\Database\\Model\\Member\u003A\u003AgetType\u0028\u0029",
-            "name": "getType",
-            "summary": "Get\u0020the\u0020member\u0020type.",
-            "url": "classes/Database-Model-Member.html#method_getType"
-        },                {
-            "fqsen": "\\Database\\Model\\Member\u003A\u003AsetType\u0028\u0029",
-            "name": "setType",
-            "summary": "Set\u0020the\u0020member\u0020type.",
-            "url": "classes/Database-Model-Member.html#method_setType"
-        },                {
             "fqsen": "\\Database\\Model\\Member\u003A\u003AgetExpiration\u0028\u0029",
             "name": "getExpiration",
             "summary": "Get\u0020the\u0020expiration\u0020date.",
             "url": "classes/Database-Model-Member.html#method_getExpiration"
-        },                {
-            "fqsen": "\\Database\\Model\\Member\u003A\u003AsetExpiration\u0028\u0029",
-            "name": "setExpiration",
-            "summary": "Set\u0020the\u0020expiration\u0020date.",
-            "url": "classes/Database-Model-Member.html#method_setExpiration"
         },                {
             "fqsen": "\\Database\\Model\\Member\u003A\u003AgetBirth\u0028\u0029",
             "name": "getBirth",
@@ -8243,33 +8258,53 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Database\\Model\\Member\u003A\u003AgetChangedOn\u0028\u0029",
             "name": "getChangedOn",
-            "summary": "Get\u0020the\u0020date\u0020of\u0020the\u0020last\u0020membership\u0020change.",
+            "summary": "Get\u0020the\u0020date\u0020of\u0020the\u0020last\u0020member\u0020change.",
             "url": "classes/Database-Model-Member.html#method_getChangedOn"
         },                {
             "fqsen": "\\Database\\Model\\Member\u003A\u003AsetChangedOn\u0028\u0029",
             "name": "setChangedOn",
-            "summary": "Set\u0020the\u0020date\u0020of\u0020the\u0020last\u0020membership\u0020change.",
+            "summary": "Set\u0020the\u0020date\u0020of\u0020the\u0020last\u0020member\u0020change.",
             "url": "classes/Database-Model-Member.html#method_setChangedOn"
-        },                {
-            "fqsen": "\\Database\\Model\\Member\u003A\u003AgetIsStudying\u0028\u0029",
-            "name": "getIsStudying",
-            "summary": "Get\u0020whether\u0020the\u0020member\u0020is\u0020still\u0020studying.",
-            "url": "classes/Database-Model-Member.html#method_getIsStudying"
-        },                {
-            "fqsen": "\\Database\\Model\\Member\u003A\u003AsetIsStudying\u0028\u0029",
-            "name": "setIsStudying",
-            "summary": "Set\u0020whether\u0020the\u0020member\u0020is\u0020still\u0020studying.",
-            "url": "classes/Database-Model-Member.html#method_setIsStudying"
         },                {
             "fqsen": "\\Database\\Model\\Member\u003A\u003AgetMembershipEndsOn\u0028\u0029",
             "name": "getMembershipEndsOn",
             "summary": "Get\u0020the\u0020date\u0020on\u0020which\u0020the\u0020membership\u0020of\u0020the\u0020member\u0020will\u0020have\u0020ended\u0020\u0028i.e.,\u0020they\u0020have\u0020become\u0020\u0022graduate\u0022\u0029.",
             "url": "classes/Database-Model-Member.html#method_getMembershipEndsOn"
         },                {
-            "fqsen": "\\Database\\Model\\Member\u003A\u003AsetMembershipEndsOn\u0028\u0029",
-            "name": "setMembershipEndsOn",
-            "summary": "Set\u0020the\u0020date\u0020on\u0020which\u0020the\u0020membership\u0020of\u0020the\u0020member\u0020will\u0020have\u0020ended\u0020\u0028i.e.,\u0020they\u0020have\u0020become\u0020\u0022graduate\u0022\u0029.",
-            "url": "classes/Database-Model-Member.html#method_setMembershipEndsOn"
+            "fqsen": "\\Database\\Model\\Member\u003A\u003AcomputeMembershipEndDate\u0028\u0029",
+            "name": "computeMembershipEndDate",
+            "summary": "Compute\u0020the\u0020date\u0020of\u0020end\u0020of\u0020membership,\u0020or\u0020null\u0020if\u0020none",
+            "url": "classes/Database-Model-Member.html#method_computeMembershipEndDate"
+        },                {
+            "fqsen": "\\Database\\Model\\Member\u003A\u003AgetMemberships\u0028\u0029",
+            "name": "getMemberships",
+            "summary": "Get\u0020the\u0020memberships\u0020of\u0020this\u0020member.",
+            "url": "classes/Database-Model-Member.html#method_getMemberships"
+        },                {
+            "fqsen": "\\Database\\Model\\Member\u003A\u003AaddMembership\u0028\u0029",
+            "name": "addMembership",
+            "summary": "Add\u0020a\u0020membership\u0020to\u0020this\u0020member.",
+            "url": "classes/Database-Model-Member.html#method_addMembership"
+        },                {
+            "fqsen": "\\Database\\Model\\Member\u003A\u003AunsetMemberships\u0028\u0029",
+            "name": "unsetMemberships",
+            "summary": "Delete\u0020all\u0020memberships\u0020of\u0020this\u0020member.",
+            "url": "classes/Database-Model-Member.html#method_unsetMemberships"
+        },                {
+            "fqsen": "\\Database\\Model\\Member\u003A\u003AgetCurrentMembership\u0028\u0029",
+            "name": "getCurrentMembership",
+            "summary": "Get\u0020the\u0020current\u0020membership\u0020of\u0020this\u0020member,\u0020or\u0020null\u0020if\u0020none.",
+            "url": "classes/Database-Model-Member.html#method_getCurrentMembership"
+        },                {
+            "fqsen": "\\Database\\Model\\Member\u003A\u003AgetCurrentOrLastMembership\u0028\u0029",
+            "name": "getCurrentOrLastMembership",
+            "summary": "Get\u0020the\u0020current\u0020membership\u0020of\u0020this\u0020member,\u0020or\u0020the\u0020last\u0020if\u0020expired.",
+            "url": "classes/Database-Model-Member.html#method_getCurrentOrLastMembership"
+        },                {
+            "fqsen": "\\Database\\Model\\Member\u003A\u003AgetLastMembership\u0028\u0029",
+            "name": "getLastMembership",
+            "summary": "Get\u0020the\u0020last\u0020\u0028potentially\u0020expired,\u0020potentially\u0020future\u0029\u0020membership",
+            "url": "classes/Database-Model-Member.html#method_getLastMembership"
         },                {
             "fqsen": "\\Database\\Model\\Member\u003A\u003AgetLastCheckedOn\u0028\u0029",
             "name": "getLastCheckedOn",
@@ -8280,16 +8315,6 @@ Search.appendIndex(
             "name": "setLastCheckedOn",
             "summary": "Set\u0020the\u0020date\u0020of\u0020when\u0020the\u0020membership\u0020status\u0020was\u0020last\u0020checked.",
             "url": "classes/Database-Model-Member.html#method_setLastCheckedOn"
-        },                {
-            "fqsen": "\\Database\\Model\\Member\u003A\u003AgetPaid\u0028\u0029",
-            "name": "getPaid",
-            "summary": "Get\u0020how\u0020much\u0020has\u0020been\u0020paid.",
-            "url": "classes/Database-Model-Member.html#method_getPaid"
-        },                {
-            "fqsen": "\\Database\\Model\\Member\u003A\u003AsetPaid\u0028\u0029",
-            "name": "setPaid",
-            "summary": "Set\u0020how\u0020much\u0020has\u0020been\u0020paid.",
-            "url": "classes/Database-Model-Member.html#method_setPaid"
         },                {
             "fqsen": "\\Database\\Model\\Member\u003A\u003AgetSupremum\u0028\u0029",
             "name": "getSupremum",
@@ -8426,11 +8451,6 @@ Search.appendIndex(
             "summary": "First\u0020name.",
             "url": "classes/Database-Model-Member.html#property_firstName"
         },                {
-            "fqsen": "\\Database\\Model\\Member\u003A\u003A\u0024generation",
-            "name": "generation",
-            "summary": "Generation.",
-            "url": "classes/Database-Model-Member.html#property_generation"
-        },                {
             "fqsen": "\\Database\\Model\\Member\u003A\u003A\u0024tueUsername",
             "name": "tueUsername",
             "summary": "TU\/e\u0020username.",
@@ -8441,30 +8461,15 @@ Search.appendIndex(
             "summary": "Study\u0020of\u0020the\u0020member.",
             "url": "classes/Database-Model-Member.html#property_study"
         },                {
-            "fqsen": "\\Database\\Model\\Member\u003A\u003A\u0024type",
-            "name": "type",
-            "summary": "Member\u0020type.",
-            "url": "classes/Database-Model-Member.html#property_type"
-        },                {
             "fqsen": "\\Database\\Model\\Member\u003A\u003A\u0024changedOn",
             "name": "changedOn",
-            "summary": "Last\u0020changed\u0020date\u0020of\u0020membership.",
+            "summary": "Last\u0020changed\u0020date\u0020of\u0020member.",
             "url": "classes/Database-Model-Member.html#property_changedOn"
         },                {
-            "fqsen": "\\Database\\Model\\Member\u003A\u003A\u0024isStudying",
-            "name": "isStudying",
-            "summary": "Keeps\u0020track\u0020of\u0020whether\u0020a\u0020student\u0020is\u0020still\u0020studying\u0020\u0028either\u0020at\u0020the\u0020Department\u0020of\u0020Mathematics\u0020and\u0020Computer\u0020Science,\nthe\u0020TU\/e\u0020in\u0020general,\u0020or\u0020another\u0020institution\u0029.",
-            "url": "classes/Database-Model-Member.html#property_isStudying"
-        },                {
-            "fqsen": "\\Database\\Model\\Member\u003A\u003A\u0024membershipEndsOn",
-            "name": "membershipEndsOn",
-            "summary": "Date\u0020when\u0020the\u0020real\u0020membership\u0020\u0028\u0022ordinary\u0022,\u0020\u0022external\u0022\u0020or\u0020\u0022honorary\u0022\u0029\u0020of\u0020the\u0020member\u0020will\u0020have\u0020ended,\u0020i.e.,\u0020from\nthis\u0020date\u0020onwards\u0020they\u0020are\u0020\u0022graduate\u0022.\u0020If\u0020\u0060null\u0060,\u0020the\u0020expiration\u0020is\u0020rolling\u0020and\u0020will\u0020be\u0020silently\u0020renewed\u0020if\u0020the\nmember\u0020still\u0020meets\u0020the\u0020requirements\u0020as\u0020set\u0020forth\u0020in\u0020the\u0020bylaws\u0020and\u0020internal\u0020regulations.",
-            "url": "classes/Database-Model-Member.html#property_membershipEndsOn"
-        },                {
-            "fqsen": "\\Database\\Model\\Member\u003A\u003A\u0024expiration",
-            "name": "expiration",
-            "summary": "The\u0020date\u0020on\u0020which\u0020the\u0020membership\u0020of\u0020the\u0020member\u0020is\u0020set\u0020to\u0020expire\u0020and\u0020will\u0020therefore\u0020have\u0020to\u0020be\u0020renewed,\u0020which\nhappens\u0020either\u0020automatically\u0020or\u0020has\u0020to\u0020be\u0020done\u0020manually,\u0020as\u0020set\u0020forth\u0020in\u0020the\u0020bylaws\u0020and\u0020internal\u0020regulations.",
-            "url": "classes/Database-Model-Member.html#property_expiration"
+            "fqsen": "\\Database\\Model\\Member\u003A\u003A\u0024memberships",
+            "name": "memberships",
+            "summary": "Memberships\u0020of\u0020this\u0020member",
+            "url": "classes/Database-Model-Member.html#property_memberships"
         },                {
             "fqsen": "\\Database\\Model\\Member\u003A\u003A\u0024lastCheckedOn",
             "name": "lastCheckedOn",
@@ -8475,11 +8480,6 @@ Search.appendIndex(
             "name": "birth",
             "summary": "Member\u0020birthdate.",
             "url": "classes/Database-Model-Member.html#property_birth"
-        },                {
-            "fqsen": "\\Database\\Model\\Member\u003A\u003A\u0024paid",
-            "name": "paid",
-            "summary": "How\u0020much\u0020the\u0020member\u0020has\u0020paid\u0020for\u0020membership.\u00200\u0020by\u0020default.",
-            "url": "classes/Database-Model-Member.html#property_paid"
         },                {
             "fqsen": "\\Database\\Model\\Member\u003A\u003A\u0024supremum",
             "name": "supremum",
@@ -8525,6 +8525,86 @@ Search.appendIndex(
             "name": "deleted",
             "summary": "Determines\u0020if\u0020a\u0020member\u0020is\u0020deleted.\u0020A\u0020deleted\u0020member\u0020is\u0020a\u0020member\u0020whose\u0020basic\u0020info\u0020needs\u0020to\u0020be\u0020retained\u0020to\u0020ensure\nthat\u0020all\u0020decisions\u0020that\u0020mention\u0020this\u0020member\u0020can\u0020be\u0020kept\u0020\u0028i.e.,\u0020administrative\u0020purposes\u0029.\u0020This\u0020value\u0020is\u0020only\u0020set\nwhen\u0020deleting\u0020a\u0020member\u0020and\u0020cannot\u0020be\u0020altered\u0020via\u0020the\u0020interface.",
             "url": "classes/Database-Model-Member.html#property_deleted"
+        },                {
+            "fqsen": "\\Database\\Model\\Membership",
+            "name": "Membership",
+            "summary": "Representing\u0020one\u0020membership\u0020\u0028typically\u00201\u0020year\u0029",
+            "url": "classes/Database-Model-Membership.html"
+        },                {
+            "fqsen": "\\Database\\Model\\Membership\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Database-Model-Membership.html#method___construct"
+        },                {
+            "fqsen": "\\Database\\Model\\Membership\u003A\u003AgetMember\u0028\u0029",
+            "name": "getMember",
+            "summary": "Member\u0020associated\u0020with\u0020this\u0020membership\u0020\u0028immutable\u0029.",
+            "url": "classes/Database-Model-Membership.html#method_getMember"
+        },                {
+            "fqsen": "\\Database\\Model\\Membership\u003A\u003AgetStartDate\u0028\u0029",
+            "name": "getStartDate",
+            "summary": "Start\u0020date\u0020of\u0020this\u0020membership\u0020\u0028immutable\u0029.",
+            "url": "classes/Database-Model-Membership.html#method_getStartDate"
+        },                {
+            "fqsen": "\\Database\\Model\\Membership\u003A\u003AgetEndDate\u0028\u0029",
+            "name": "getEndDate",
+            "summary": "End\u0020date\u0020of\u0020this\u0020membership.",
+            "url": "classes/Database-Model-Membership.html#method_getEndDate"
+        },                {
+            "fqsen": "\\Database\\Model\\Membership\u003A\u003AsetEndDate\u0028\u0029",
+            "name": "setEndDate",
+            "summary": "",
+            "url": "classes/Database-Model-Membership.html#method_setEndDate"
+        },                {
+            "fqsen": "\\Database\\Model\\Membership\u003A\u003AgetType\u0028\u0029",
+            "name": "getType",
+            "summary": "Type\u0020of\u0020this\u0020membership,\u0020see\u0020MembershipTypes\u0020enum\u0020for\u0020possible\u0020values.",
+            "url": "classes/Database-Model-Membership.html#method_getType"
+        },                {
+            "fqsen": "\\Database\\Model\\Membership\u003A\u003AsetType\u0028\u0029",
+            "name": "setType",
+            "summary": "",
+            "url": "classes/Database-Model-Membership.html#method_setType"
+        },                {
+            "fqsen": "\\Database\\Model\\Membership\u003A\u003AgetPaid\u0028\u0029",
+            "name": "getPaid",
+            "summary": "How\u0020much\u0020the\u0020member\u0020has\u0020paid\u0020for\u0020membership.",
+            "url": "classes/Database-Model-Membership.html#method_getPaid"
+        },                {
+            "fqsen": "\\Database\\Model\\Membership\u003A\u003AsetPaid\u0028\u0029",
+            "name": "setPaid",
+            "summary": "",
+            "url": "classes/Database-Model-Membership.html#method_setPaid"
+        },                {
+            "fqsen": "\\Database\\Model\\Membership\u003A\u003AisCurrent\u0028\u0029",
+            "name": "isCurrent",
+            "summary": "Check\u0020if\u0020the\u0020membership\u0020is\u0020currently\u0020active\u0020\u0028i.e.\u0020the\u0020current\u0020date\u0020is\u0020between\u0020the\u0020start\u0020and\u0020end\u0020date\u0029.",
+            "url": "classes/Database-Model-Membership.html#method_isCurrent"
+        },                {
+            "fqsen": "\\Database\\Model\\Membership\u003A\u003A\u0024member",
+            "name": "member",
+            "summary": "The\u0020member\u0020this\u0020membership\u0020belongs\u0020to.",
+            "url": "classes/Database-Model-Membership.html#property_member"
+        },                {
+            "fqsen": "\\Database\\Model\\Membership\u003A\u003A\u0024startDate",
+            "name": "startDate",
+            "summary": "The\u0020start\u0020date\u0020of\u0020the\u0020membership.",
+            "url": "classes/Database-Model-Membership.html#property_startDate"
+        },                {
+            "fqsen": "\\Database\\Model\\Membership\u003A\u003A\u0024endDate",
+            "name": "endDate",
+            "summary": "The\u0020end\u0020date\u0020of\u0020the\u0020membership.",
+            "url": "classes/Database-Model-Membership.html#property_endDate"
+        },                {
+            "fqsen": "\\Database\\Model\\Membership\u003A\u003A\u0024paid",
+            "name": "paid",
+            "summary": "How\u0020much\u0020the\u0020member\u0020has\u0020paid\u0020for\u0020membership.\u00200\u0020by\u0020default.",
+            "url": "classes/Database-Model-Membership.html#property_paid"
+        },                {
+            "fqsen": "\\Database\\Model\\Membership\u003A\u003A\u0024type",
+            "name": "type",
+            "summary": "\u0027Member\u0027\u0020type.",
+            "url": "classes/Database-Model-Membership.html#property_type"
         },                {
             "fqsen": "\\Database\\Model\\MemberUpdate",
             "name": "MemberUpdate",
@@ -11228,12 +11308,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003Amembership\u0028\u0029",
             "name": "membership",
-            "summary": "Edit\u0020membership.",
+            "summary": "Edit\u0020membership\u0020by\u0020secretary.",
             "url": "classes/Database-Service-Member.html#method_membership"
         },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003Aexpiration\u0028\u0029",
             "name": "expiration",
-            "summary": "",
+            "summary": "Extend\u0020the\u0020duration\u0020of\u0020the\u0020membership.",
             "url": "classes/Database-Service-Member.html#method_expiration"
         },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003AeditAddress\u0028\u0029",
@@ -11388,7 +11468,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003ArenewMember\u0028\u0029",
             "name": "renewMember",
-            "summary": "Renew\u0020a\u0020member,\u0020assumes\u0020that\u0020the\u0020expiry\u0020date\u0020has\u0020already\u0020been\u0020set",
+            "summary": "Renew\u0020a\u0020member\u0020\u0028with\u0020existing\u0020membership\u0020type\u0029.",
             "url": "classes/Database-Service-Member.html#method_renewMember"
         },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003AgetFileStorageService\u0028\u0029",
@@ -11748,7 +11828,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\DatabaseTest\\Seeder\\MemberFixture",
             "name": "MemberFixture",
-            "summary": "",
+            "summary": "phpcs\u003Adisable\u0020Generic.WhiteSpace.ScopeIndent.IncorrectExact",
             "url": "classes/DatabaseTest-Seeder-MemberFixture.html"
         },                {
             "fqsen": "\\DatabaseTest\\Seeder\\MemberFixture\u003A\u003Aload\u0028\u0029",
@@ -11935,6 +12015,26 @@ Search.appendIndex(
             "name": "down",
             "summary": "",
             "url": "classes/Report-Migrations-Version20260504104136.html#method_down"
+        },                {
+            "fqsen": "\\Report\\Migrations\\Version20260613095524",
+            "name": "Version20260613095524",
+            "summary": "",
+            "url": "classes/Report-Migrations-Version20260613095524.html"
+        },                {
+            "fqsen": "\\Report\\Migrations\\Version20260613095524\u003A\u003AgetDescription\u0028\u0029",
+            "name": "getDescription",
+            "summary": "",
+            "url": "classes/Report-Migrations-Version20260613095524.html#method_getDescription"
+        },                {
+            "fqsen": "\\Report\\Migrations\\Version20260613095524\u003A\u003Aup\u0028\u0029",
+            "name": "up",
+            "summary": "",
+            "url": "classes/Report-Migrations-Version20260613095524.html#method_up"
+        },                {
+            "fqsen": "\\Report\\Migrations\\Version20260613095524\u003A\u003Adown\u0028\u0029",
+            "name": "down",
+            "summary": "",
+            "url": "classes/Report-Migrations-Version20260613095524.html#method_down"
         },                {
             "fqsen": "\\Report\\Command\\Factory\\GenerateFullCommandFactory",
             "name": "GenerateFullCommandFactory",
@@ -12938,7 +13038,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Report\\Model\\Member\u003A\u003AgetType\u0028\u0029",
             "name": "getType",
-            "summary": "Get\u0020the\u0020member\u0020type.",
+            "summary": "Get\u0020the\u0020current\u0020member\u0020type.",
             "url": "classes/Report-Model-Member.html#method_getType"
         },                {
             "fqsen": "\\Report\\Model\\Member\u003A\u003AsetType\u0028\u0029",
@@ -12985,16 +13085,6 @@ Search.appendIndex(
             "name": "setMembershipEndsOn",
             "summary": "Set\u0020the\u0020date\u0020on\u0020which\u0020the\u0020membership\u0020of\u0020the\u0020member\u0020will\u0020have\u0020ended\u0020\u0028i.e.,\u0020they\u0020have\u0020become\u0020\u0022graduate\u0022\u0029.",
             "url": "classes/Report-Model-Member.html#method_setMembershipEndsOn"
-        },                {
-            "fqsen": "\\Report\\Model\\Member\u003A\u003AgetPaid\u0028\u0029",
-            "name": "getPaid",
-            "summary": "Get\u0020how\u0020much\u0020has\u0020been\u0020paid.",
-            "url": "classes/Report-Model-Member.html#method_getPaid"
-        },                {
-            "fqsen": "\\Report\\Model\\Member\u003A\u003AsetPaid\u0028\u0029",
-            "name": "setPaid",
-            "summary": "Set\u0020how\u0020much\u0020has\u0020been\u0020paid.",
-            "url": "classes/Report-Model-Member.html#method_setPaid"
         },                {
             "fqsen": "\\Report\\Model\\Member\u003A\u003AgetSupremum\u0028\u0029",
             "name": "getSupremum",
@@ -13175,11 +13265,6 @@ Search.appendIndex(
             "name": "expiration",
             "summary": "The\u0020date\u0020on\u0020which\u0020the\u0020membership\u0020of\u0020the\u0020member\u0020is\u0020set\u0020to\u0020expire\u0020and\u0020will\u0020therefore\u0020have\u0020to\u0020be\u0020renewed,\u0020which\nhappens\u0020either\u0020automatically\u0020or\u0020has\u0020to\u0020be\u0020done\u0020manually,\u0020as\u0020set\u0020forth\u0020in\u0020the\u0020bylaws\u0020and\u0020internal\u0020regulations.",
             "url": "classes/Report-Model-Member.html#property_expiration"
-        },                {
-            "fqsen": "\\Report\\Model\\Member\u003A\u003A\u0024paid",
-            "name": "paid",
-            "summary": "How\u0020much\u0020the\u0020member\u0020has\u0020paid\u0020for\u0020membership.\u00200\u0020by\u0020default.",
-            "url": "classes/Report-Model-Member.html#property_paid"
         },                {
             "fqsen": "\\Report\\Model\\Member\u003A\u003A\u0024supremum",
             "name": "supremum",
@@ -15706,6 +15791,16 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/application-controller.html"
         },                {
+            "fqsen": "\\Application\\Extensions\\Doctrine\\DBAL\\Types",
+            "name": "Types",
+            "summary": "",
+            "url": "namespaces/application-extensions-doctrine-dbal-types.html"
+        },                {
+            "fqsen": "\\Application\\Extensions\\Doctrine\\DBAL",
+            "name": "DBAL",
+            "summary": "",
+            "url": "namespaces/application-extensions-doctrine-dbal.html"
+        },                {
             "fqsen": "\\Application\\Extensions\\Doctrine\\Middleware",
             "name": "Middleware",
             "summary": "",
@@ -15720,6 +15815,11 @@ Search.appendIndex(
             "name": "Extensions",
             "summary": "",
             "url": "namespaces/application-extensions.html"
+        },                {
+            "fqsen": "\\Application\\Extensions\\Types",
+            "name": "Types",
+            "summary": "",
+            "url": "namespaces/application-extensions-types.html"
         },                {
             "fqsen": "\\Application\\Mapper",
             "name": "Mapper",
