@@ -1,0 +1,50 @@
+name: Check if migrations are up to date
+
+# This job should run whenever a model is updated
+# it checks whether all migrations are included in the PR
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+    paths:
+      - '**/Model/**/*.php'
+      - '**/migrations/*.php'
+
+jobs:
+  migration_seed:
+    name: Check migrations and seed
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout head branch
+        uses: actions/checkout@v4
+
+      - name: Copy .env
+        run: cp .env.dist .env
+
+      - name: build head
+        run: docker buildx bake --file docker-compose.github.yml --file docker-compose.override.yml --file docker-compose.yml
+
+      - name: run head
+        run: docker compose --file docker-compose.github.yml --file docker-compose.override.yml --file docker-compose.yml up -d --build --quiet-pull
+
+      - name: migrate head
+        run: make migrate
+
+      - name: create migrations
+        run: make migration-diff
+
+      - name: check if new migrations are created
+        run: |
+          if [ -n "$(git status --porcelain | grep 'migrations/')" ]; then
+            echo "New migrations detected. Please include them in your PR."
+            git status --porcelain | grep 'migrations/'
+            exit 1
+          else
+            echo "No new migrations detected. All migrations are up to date."
+          fi
+
+      - name: stop
+        run: docker compose down
