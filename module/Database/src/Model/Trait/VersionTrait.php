@@ -15,6 +15,6 @@ trait VersionTrait
      * "Version numbers [should] be preferred as they can not potentially conflict in a highly concurrent environment"
      */
     #[Version()]
-    #[Column(type: 'integer')]
+    #[Column(type: 'integer', options: ['default' => 1000])]
     private int $version;
 }
