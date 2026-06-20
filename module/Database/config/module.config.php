@@ -385,6 +385,16 @@ return [
                             ],
                         ],
                     ],
+                    'attention-needed' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/attention-needed',
+                            'defaults' => [
+                                'action' => 'attentionNeeded',
+                            ],
+                        ],
+                        'may_terminate' => true,
+                    ],
                     'subscribe' => [
                         'type' => Literal::class,
                         'options' => [
