@@ -401,8 +401,8 @@ class Member
             // queries and we don't expect any future decisions to be in the database.
             $sqA = OrganMapper::getIsActiveWithinSubQuery(
                 qb: $qb,
-                activeBefore: (new DateTime())->modify('-1 days'),
-                activeAfter:(new DateTime())->modify('+1 days'),
+                activeBefore: new DateTime(),
+                activeAfter: new DateTime(),
                 inActiveIsActive: $inActiveIsActive,
             );
 

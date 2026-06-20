@@ -242,8 +242,8 @@ class Organ
      *
      * Has manual joins because of limitations with composite primary keys and doctrine.
      *
-     * @param bool         $includeInactiveMembers Whether to include members that are inactive organ members.
-     * @param QueryBuilder $qb                     The qb to use. Parameters will be set on this query builder.
+     * @param bool         $inActiveIsActive Whether to include members that are inactive organ members.
+     * @param QueryBuilder $qb               The qb to use. Parameters will be set on this query builder.
      *
      * @return QueryBuilder A sub query builder that selects all member IDs that were active within the given timeframe.
      */
@@ -274,7 +274,7 @@ class Organ
             );
 
         // Where the installation is before the activeBefore date
-        $sq->andWhere($sq->expr()->lt($installAlias . 'Meeting.date', ':' . $parameterPrefix . 'ActiveBefore'));
+        $sq->andWhere($sq->expr()->lte($installAlias . 'Meeting.date', ':' . $parameterPrefix . 'ActiveBefore'));
         $qb->setParameter(':' . $parameterPrefix . 'ActiveBefore', $activeBefore);
 
         // And the installation was never annulled
@@ -302,7 +302,7 @@ class Organ
             $dischargeAlias . 'Annulment',
         )->andWhere($sq->expr()->orX(
             $sq->expr()->isNull($dischargeAlias . 'Meeting.date'),
-            $sq->expr()->gt($dischargeAlias . 'Meeting.date', ':' . $parameterPrefix . 'ActiveAfter'),
+            $sq->expr()->gte($dischargeAlias . 'Meeting.date', ':' . $parameterPrefix . 'ActiveAfter'),
             $sq->expr()->isNotNull($dischargeAlias . 'Annulment.sequence'),
         ));
         $qb->setParameter(':' . $parameterPrefix . 'ActiveAfter', $activeAfter);

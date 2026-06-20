@@ -12,8 +12,7 @@ use function sprintf;
 use function ucfirst;
 
 /**
- * Enum with board functions
- * The values are in Dutch, because decisions are made in Dutch and thus this value is guaranteed to not change
+ * Enum describing why a member/membership requires attention in the overview.
  */
 enum AttentionReasons: string
 {

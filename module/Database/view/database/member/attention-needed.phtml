@@ -49,7 +49,10 @@ $translator = $this->plugin('translate')->getTranslator();
                     echo ' <a target="_blank" href="' . $this->url('member/show/edit', ['id' => $member->getLidNr()]) . '" class="btn btn-sm btn-primary">' . $this->translate('Edit') . '</a>';
                 }
                 echo '</td>';
-                echo '</tr><tr>';
+                echo '</tr>';
+                if ($reason !== end($reasons[$member->getLidNr()])) {
+                    echo '<tr>';
+                }
             }
         }
         ?>

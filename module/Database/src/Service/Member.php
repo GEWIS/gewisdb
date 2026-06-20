@@ -1182,8 +1182,10 @@ class Member
         $combined = [];
 
         $combined[AttentionReasons::MissingEmail->value] = $this->getMemberMapper()->findAttentionWithoutEmail();
-        $combined[AttentionReasons::MissingStudentIdOrdinary->value] = $this->getMemberMapper()->findAttentionWithoutStudentId();
-        $combined[AttentionReasons::ExpiringExternalNonActive->value] = $this->getMemberMapper()->findAttentionExpiring(
+        $combined[AttentionReasons::MissingStudentIdOrdinary->value] =
+        $this->getMemberMapper()->findAttentionWithoutStudentId();
+        $combined[AttentionReasons::ExpiringExternalNonActive->value] =
+        $this->getMemberMapper()->findAttentionExpiring(
             includeActive: false,
             includeNonActive: true,
             specificType: MembershipTypes::External,
@@ -1207,7 +1209,8 @@ class Member
             specificType: MembershipTypes::Ordinary,
             expiresWithinDays: $days,
         );
-        $combined[AttentionReasons::ExpiringGraduateActiveInactive->value] = $this->getMemberMapper()->findAttentionExpiring(
+        $combined[AttentionReasons::ExpiringGraduateActiveInactive->value] =
+        $this->getMemberMapper()->findAttentionExpiring(
             includeActive: true,
             includeNonActive: false,
             inActiveIsActive: true,
