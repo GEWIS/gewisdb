@@ -1,3 +1,9 @@
+## [v4.6.1](https://github.com/GEWIS/gewisdb/tree/v4.6.1) (2026-06-20)
+* Switch to PHP 8.4
+* Upgrade dependencies
+* Introduce audit entries for mailing list changes
+* Allow for storing future memberships: membership information is now stored in `membership` entity
+
 ## [v4.6.0](https://github.com/GEWIS/gewisdb/tree/v4.6.0) (2026-06-01)
 * Allow for founding organs with members that have >1 function on foundation
 * Introduces Listmonk mailing list sync functionality (to replace Mailman)
