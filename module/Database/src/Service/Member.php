@@ -664,63 +664,12 @@ class Member
 
         $data = $form->getData();
 
-        // update changed on date
-        $date = new DateTime();
-        $date->setTime(0, 0);
-        $member->setChangedOn($date);
-
-        // Record a renewal audit entry
-        $renewalAudit = new AuditRenewalModel();
-        $renewalAudit->setOldExpiration($member->getExpiration());
-
-        // We always deal with the last membership
-        $lastMembership = $member->getLastMembership();
-
-        // We assume that there is a membership (always the case for non-cleared members)
-        assert($lastMembership instanceof MembershipModel);
-
-        // Start date
-        if (null === $data['changeDate']) {
-            $changeDate = new DateTime();
-        } else {
-            $changeDate = new DateTime($data['changeDate']);
-        }
-
-        $newType = MembershipTypes::from($data['type']);
-
-        // We always change at the start of a day
-        $changeDate->setTime(0, 0);
-
-        // We will never alter anything before the start of the last membership
-        if ($changeDate < $lastMembership->getStartDate()) {
-            $changeDate = $lastMembership->getStartDate();
-        }
-
-        // or after the end date of the last membership
-        if ($changeDate > $lastMembership->getEndDate()) {
-            $changeDate = $lastMembership->getEndDate();
-        }
-
-        if ($changeDate->getTimestamp() === $lastMembership->getStartDate()->getTimestamp()) {
-            $lastMembership->setType($newType);
-        } else {
-            $lastMembership->setEndDate($changeDate);
-            $newMembership = new MembershipModel(
-                member: $member,
-                type: $newType,
-                startDate: $changeDate,
-                endDate: null,
-            );
-            $member->addMembership($newMembership);
-        }
-
-        $renewalAudit->setNewExpiration($member->getExpiration());
-        $renewalAudit->setUser($this->userService->getIdentity());
-        $this->addAuditEntry($member, $renewalAudit);
-
-        $this->getMemberMapper()->persist($member);
-
-        return $member;
+        return $this->applyMembershipChange(
+            $member,
+            MembershipTypes::from($data['type']),
+            null === $data['changeDate'] ? null : new DateTime($data['changeDate']),
+        );
+    }
     }
 
     /**
@@ -1119,6 +1068,94 @@ class Member
         $form->setMembership($member->getLastMembership());
 
         return $form;
+    }
+
+    /**
+     * @return array{
+     *     currentType: MembershipTypes,
+     *     oldExpiration: DateTime,
+     *     newExpiration: DateTime,
+     *     changeDate: DateTime,
+     *     lastMembership: MembershipModel,
+     * }
+     */
+    private function resolveMembershipChange(
+        MemberModel $member,
+        MembershipTypes $newType,
+        ?DateTime $changeDate = null,
+    ): array {
+        $currentMembership = $member->getCurrentOrLastMembership();
+
+        if (null === $currentMembership) {
+            throw new RuntimeException('Unable to change membership type without a membership.');
+        }
+
+        if (MembershipTypes::Honorary === $currentMembership->getType()) {
+            throw new RuntimeException('Unable to change membership type of honorary member.');
+        }
+
+        $lastMembership = $member->getLastMembership();
+        assert($lastMembership instanceof MembershipModel);
+
+        $effectiveChangeDate = null === $changeDate ? new DateTime() : clone $changeDate;
+        $effectiveChangeDate->setTime(0, 0);
+
+        if ($effectiveChangeDate < $lastMembership->getStartDate()) {
+            $effectiveChangeDate = clone $lastMembership->getStartDate();
+        }
+
+        if ($effectiveChangeDate > $lastMembership->getEndDate()) {
+            $effectiveChangeDate = clone $lastMembership->getEndDate();
+        }
+
+        $newExpiration = $effectiveChangeDate->getTimestamp() === $lastMembership->getStartDate()->getTimestamp()
+            ? clone $lastMembership->getEndDate()
+            : (new MembershipModel($member, $newType, clone $effectiveChangeDate))->getEndDate();
+
+        return [
+            'currentType' => $lastMembership->getType(),
+            'oldExpiration' => clone $member->getExpiration(),
+            'newExpiration' => $newExpiration,
+            'changeDate' => $effectiveChangeDate,
+            'lastMembership' => $lastMembership,
+        ];
+    }
+
+    private function applyMembershipChange(
+        MemberModel $member,
+        MembershipTypes $newType,
+        ?DateTime $changeDate = null,
+    ): MemberModel {
+        $resolvedChange = $this->resolveMembershipChange($member, $newType, $changeDate);
+
+        $date = new DateTime();
+        $date->setTime(0, 0);
+        $member->setChangedOn($date);
+
+        $renewalAudit = new AuditRenewalModel();
+        $renewalAudit->setOldExpiration($resolvedChange['oldExpiration']);
+
+        $lastMembership = $resolvedChange['lastMembership'];
+        $effectiveChangeDate = $resolvedChange['changeDate'];
+
+        if ($effectiveChangeDate->getTimestamp() === $lastMembership->getStartDate()->getTimestamp()) {
+            $lastMembership->setType($newType);
+        } else {
+            $lastMembership->setEndDate(clone $effectiveChangeDate);
+            $member->addMembership(new MembershipModel(
+                member: $member,
+                type: $newType,
+                startDate: clone $effectiveChangeDate,
+                endDate: null,
+            ));
+        }
+
+        $renewalAudit->setNewExpiration($resolvedChange['newExpiration']);
+        $renewalAudit->setUser($this->userService->getIdentity());
+        $this->addAuditEntry($member, $renewalAudit);
+        $this->getMemberMapper()->persist($member);
+
+        return $member;
     }
 
     /**
