@@ -212,6 +212,15 @@ return [
                 ],
                 'may_terminate' => true,
                 'child_routes' => [
+                    'bulk-renewal' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/bulk-renewal',
+                            'defaults' => [
+                                'action' => 'bulkRenewal',
+                            ],
+                        ],
+                    ],
                     'show' => [
                         'type' => Segment::class,
                         'options' => [

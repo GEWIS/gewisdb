@@ -1,0 +1,149 @@
+<?php
+
+declare(strict_types=1);
+
+use Application\View\HelperTrait;
+use Database\Form\BulkMemberRenewal as BulkMemberRenewalForm;
+use Database\Model\Enums\MembershipTypes;
+use Database\Model\Member as MemberModel;
+use Laminas\I18n\Translator\TranslatorInterface;
+use Laminas\View\Renderer\PhpRenderer;
+
+/**
+ * @var PhpRenderer|HelperTrait $this
+ * @var BulkMemberRenewalForm $form
+ * @var array{memberIds: string, membershipType: string} $formData
+ * @var array{
+ *     memberIds: string,
+ *     membershipType: MembershipTypes,
+ *     rows: array<int, array{
+ *         memberId: int,
+ *         member: ?MemberModel,
+ *         currentExpiration: ?string,
+ *         newExpiration: ?string,
+ *         valid: bool,
+ *         message: string,
+ *         executed: bool,
+ *     }>,
+ *     validCount: int,
+ *     invalidCount: int,
+ * } $preview
+ * @var array|null $result
+ * @var TranslatorInterface $translator
+ */
+
+$translator = $this->plugin('translate')->getTranslator();
+?>
+<h1><?= $this->translate('Bulk renew memberships') ?></h1>
+<p><?= $this->translate('Enter one or more GEWIS membership numbers, choose the target membership type, and <strong>review the preview</strong> before confirming the renewal.') ?></p>
+<p><?= $this->translate('Use cases:') ?></p>
+<ul>
+    <li><?= $this->translate('Annual renewal of studying members. New type is ordinary.') ?></li>
+    <li><?= $this->translate('Annual renewal of active non-studying ordinary/external members. New type is external.') ?></li>
+    <li><?= $this->translate('Annual bulk conversion of non-active non-studying ordinary/external members. New type is graduate.') ?></li>
+</ul>
+<p><?= $this->translate('Tip: perform these changes in this order before July 1st of each association year. This form will prevent you from renewing the membership twice.') ?></p>
+<p><?= $this->translate('Note: all changes will take effect at the end of the current membership of a member. Do you want to make changes now or in the past? Go to the individual member profile.') ?></p>
+
+<?php
+$form->prepare();
+$form->setAttribute('action', $this->url('member/bulk-renewal'));
+$form->setAttribute('method', 'post');
+$form->setAttribute('role', 'form');
+?>
+<?= $this->form()->openTag($form) ?>
+    <?php 
+    $element = $form->get('memberIds');
+    $element->setAttribute('class', 'form-control');
+    $element->setAttribute('rows', '8');
+    $element->setAttribute('placeholder', $this->translate('One membership number per line, or separated by spaces or commas'));
+    ?>
+    <div class="form-group">
+        <label for="memberIds"><?= $element->getLabel() ?></label>
+        <?= $this->formTextarea($element) ?>
+        <?= $this->formElementErrors($element) ?>
+    </div>
+
+    <?php
+    $element = $form->get('membershipType');
+    $element->setAttribute('placeholder', $element->getLabel());
+    ?>
+    <div class="form-group<?= $this->bootstrapElementError($element) ?>">
+        <label for="<?= $element->getName() ?>" class="control-label col-sm-2"><?= $element->getLabel() ?></label>
+        <div class="col-sm-10">
+            <?php foreach ($element->getValueOptions() as $option => $text): ?>
+                <div class="radio">
+                    <label>
+                    <input type="radio" name="<?= $element->getName() ?>" id="<?= $element->getName() ?>" value="<?= $option ?>" <?= $element->getValue() == $option ? 'checked' : '' ?>>
+                        <?= $text ?>
+                    </label>
+                </div>
+            <?php endforeach ?>
+        <?= $this->formElementErrors($element) ?>
+        </div>
+    </div>
+
+    <?php
+    $submit = $form->get('submit');
+    $submit->setLabel($submit->getValue());
+    $submit->setAttribute('class', 'btn btn-primary');
+    ?>
+    <?= $this->formButton($submit) ?>
+    <a href="<?= $this->url('member') ?>" class="btn btn-default"><?= $this->translate('Cancel') ?></a>
+<?= $this->form()->closeTag() ?>
+
+<?php if (null !== $preview): ?>
+    <hr>
+
+    <?php if (null !== $result): ?>
+        <div class="alert alert-success"><?= sprintf($this->translate('Confirmed %d membership renewal(s).'), $result['executedCount']) ?></div>
+    <?php endif; ?>
+
+    <?php if ([] !== $preview['rows']): ?>
+        <p><?= sprintf($this->translate('Previewing %1$d valid change(s) and %2$d issue(s).'), $preview['validCount'], $preview['invalidCount']) ?></p>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th><?= $this->translate('Membership number') ?></th>
+                    <th><?= $this->translate('Name') ?></th>
+                    <th><?= $this->translate('Last type') ?></th>
+                    <th><?= $this->translate('New type') ?></th>
+                    <th><?= $this->translate('Current expiration') ?></th>
+                    <th><?= $this->translate('New expiration') ?></th>
+                    <th><?= $this->translate('Status') ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($preview['rows'] as $row): ?>
+                    <tr class="<?= $row['executed'] ? 'success' : ($row['valid'] ? '' : 'danger') ?>">
+                        <td><?= null === $row['memberId'] ? $this->translate('n/a') : $this->escapeHtml((string) $row['memberId']) ?></td>
+                        <td><?= $this->escapeHtml($row['member']?->getFullName() ?? $this->translate('n/a')) ?></td>
+                        <td><?= $this->escapeHtml($row['member']?->getLastMembership()?->getType()->getName($translator) ?? $this->translate('n/a')) ?></td>
+                        <td><?= $this->escapeHtml(
+                            null !== $preview['membershipType'] &&
+                            null !== $row['member'] ?
+                            $preview['membershipType']->getName($translator) :
+                            $this->translate('n/a'),
+                            ) ?>
+                        </td>
+                        <td><?= $this->escapeHtml($row['currentExpiration'] ?? $this->translate('n/a')) ?></td>
+                        <td><?= $this->escapeHtml($row['newExpiration'] ?? $this->translate('n/a')) ?></td>
+                        <td><?= $this->escapeHtml($row['message']) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+
+        <?php if (null === $result && 0 < $preview['validCount']): ?>
+            <form method="post" action="<?= $this->url('member/bulk-renewal') ?>" role="form">
+                <input type="hidden" name="memberIds" value="<?= $this->escapeHtmlAttr(implode(' ', $preview['memberIds'])) ?>">
+                <input type="hidden" name="membershipType" value="<?= $this->escapeHtmlAttr($preview['membershipType']->value) ?>">
+                <input type="hidden" name="intent" value="confirm">
+                <button type="submit" class="btn btn-success">
+                    <?= $this->translate('Confirm renewal') ?>
+                </button>
+            </form>
+        <?php endif; ?>
+    <?php endif; ?>
+<?php endif; ?>

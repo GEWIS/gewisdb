@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-20 14:15+0000\n"
+"POT-Creation-Date: 2026-06-21 15:01+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -252,6 +252,23 @@ msgstr ""
 "received your registration and sent you an e-mail containing a link that "
 "allows you to restart the checkout process at a later time."
 
+msgid ""
+"Annual bulk conversion of non-active non-studying ordinary/external members. "
+"New type is graduate."
+msgstr ""
+"Annual bulk conversion of non-active non-studying ordinary/external members. "
+"New type is graduate."
+
+msgid ""
+"Annual renewal of active non-studying ordinary/external members. New type is "
+"external."
+msgstr ""
+"Annual renewal of active non-studying ordinary/external members. New type is "
+"external."
+
+msgid "Annual renewal of studying members. New type is ordinary."
+msgstr "Annual renewal of studying members. New type is ordinary."
+
 msgid "Annul Decision"
 msgstr "Annul Decision"
 
@@ -414,11 +431,17 @@ msgstr "Budget"
 msgid "Budget/Statement"
 msgstr "Budget/Statement"
 
+msgid "Bulk renew memberships"
+msgstr "Bulk renew memberships"
+
 msgid "CM (Chair's Meeting)"
 msgstr "CM (Chair's Meeting)"
 
 msgid "CSV"
 msgstr "CSV"
+
+msgid "Cancel"
+msgstr "Cancel"
 
 msgid "Cancelled"
 msgstr "Cancelled"
@@ -524,6 +547,13 @@ msgstr "Committee"
 msgid "Confirm Changes"
 msgstr "Confirm Changes"
 
+msgid "Confirm renewal"
+msgstr "Confirm renewal"
+
+#, php-format
+msgid "Confirmed %d membership renewal(s)."
+msgstr "Confirmed %d membership renewal(s)."
+
 msgid "Controller"
 msgstr "Controller"
 
@@ -579,6 +609,9 @@ msgstr "Current Mailing Lists"
 
 msgid "Current Members"
 msgstr "Current Members"
+
+msgid "Current expiration"
+msgstr "Current expiration"
 
 #, php-format
 msgid ""
@@ -751,6 +784,13 @@ msgid ""
 msgstr ""
 "Enter changes chronologically. Example: after entering a change on %s, it is "
 "not possible to enter a change for %s."
+
+msgid ""
+"Enter one or more GEWIS membership numbers, choose the target membership "
+"type, and <strong>review the preview</strong> before confirming the renewal."
+msgstr ""
+"Enter one or more GEWIS membership numbers, choose the target membership "
+"type, and <strong>review the preview</strong> before confirming the renewal."
 
 msgid "Execute"
 msgstr "Execute"
@@ -1055,6 +1095,9 @@ msgstr "Last fetch of available Listmonk lists was %s."
 msgid "Last fetch of available mailman lists was %s."
 msgstr "Last fetch of available mailman lists was %s."
 
+msgid "Last type"
+msgstr "Last type"
+
 msgid "Leave note"
 msgstr "Leave note"
 
@@ -1168,6 +1211,15 @@ msgstr "Member %s cannot be deleted."
 msgid "Member Number"
 msgstr "Member Number"
 
+msgid "Member already has a future membership."
+msgstr "Member already has a future membership."
+
+msgid "Member is deleted."
+msgstr "Member is deleted."
+
+msgid "Member not found."
+msgstr "Member not found."
+
 msgid "Members"
 msgstr "Members"
 
@@ -1185,6 +1237,9 @@ msgstr "Membership Type (today)"
 
 msgid "Membership number"
 msgstr "Membership number"
+
+msgid "Membership numbers"
+msgstr "Membership numbers"
 
 msgid "Membership of Committees and Fraternities"
 msgstr "Membership of Committees and Fraternities"
@@ -1234,6 +1289,12 @@ msgstr "Name"
 msgid "Name (Sync)"
 msgstr "Name (Sync)"
 
+msgid "New expiration"
+msgstr "New expiration"
+
+msgid "New type"
+msgstr "New type"
+
 msgid "No"
 msgstr "No"
 
@@ -1265,6 +1326,15 @@ msgid "Note"
 msgstr "Note"
 
 msgid ""
+"Note: all changes will take effect at the end of the current membership of a "
+"member. Do you want to make changes now or in the past? Go to the individual "
+"member profile."
+msgstr ""
+"Note: all changes will take effect at the end of the current membership of a "
+"member. Do you want to make changes now or in the past? Go to the individual "
+"member profile."
+
+msgid ""
 "Note: if you updated your email address, you have to sign in to the GEWIS "
 "website using your new email address once this change has been processed."
 msgstr ""
@@ -1279,6 +1349,9 @@ msgstr "Oh snap!"
 
 msgid "On Form"
 msgstr "On Form"
+
+msgid "One membership number per line, or separated by spaces or commas"
+msgstr "One membership number per line, or separated by spaces or commas"
 
 msgid "Opperhoofd"
 msgstr "Opperhoofd"
@@ -1415,6 +1488,13 @@ msgstr "Pre-master Information Security Technology"
 msgid "Pre-master Programs"
 msgstr "Pre-master Programs"
 
+msgid "Preview changes"
+msgstr "Preview changes"
+
+#, php-format
+msgid "Previewing %1$d valid change(s) and %2$d issue(s)."
+msgstr "Previewing %1$d valid change(s) and %2$d issue(s)."
+
 msgid "Previous exceptions"
 msgstr "Previous exceptions"
 
@@ -1438,6 +1518,9 @@ msgstr "Query"
 
 msgid "Query Result"
 msgstr "Query Result"
+
+msgid "Ready to renew."
+msgstr "Ready to renew."
 
 msgid "Reappoint"
 msgstr "Reappoint"
@@ -1486,6 +1569,9 @@ msgstr "Renew/Type"
 
 msgid "Renewal"
 msgstr "Renewal"
+
+msgid "Renewed."
+msgstr "Renewed."
 
 msgid "Result"
 msgstr "Result"
@@ -1789,6 +1875,13 @@ msgstr ""
 "This renewal link could not be found. Perhaps it has been used before or has "
 "expired."
 
+msgid ""
+"Tip: perform these changes in this order before July 1st of each association "
+"year. This form will prevent you from renewing the membership twice."
+msgstr ""
+"Tip: perform these changes in this order before July 1st of each association "
+"year. This form will prevent you from renewing the membership twice."
+
 msgid "To pay the membership fee you must accept Stripe's privacy policy."
 msgstr "To pay the membership fee you must accept Stripe's privacy policy."
 
@@ -1810,6 +1903,9 @@ msgstr "Unable to check refund status"
 msgid "Unable to create refund"
 msgstr "Unable to create refund"
 
+msgid "Unable to renew deleted member."
+msgstr "Unable to renew deleted member."
+
 msgid "Unknown"
 msgstr "Unknown"
 
@@ -1828,6 +1924,9 @@ msgstr "Update API principal"
 
 msgid "Update Address"
 msgstr "Update Address"
+
+msgid "Use cases:"
+msgstr "Use cases:"
 
 msgid "Username"
 msgstr "Username"

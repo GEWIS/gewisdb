@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-20 14:15+0000\n"
+"POT-Creation-Date: 2026-06-21 15:01+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -254,6 +254,23 @@ msgstr ""
 "een link waarmee je het betalingsproces op een later tijdstip opnieuw kunt "
 "starten."
 
+msgid ""
+"Annual bulk conversion of non-active non-studying ordinary/external members. "
+"New type is graduate."
+msgstr ""
+"Jaarlijkse bulk-omzetting van niet-actieve niet-studerende gewone/externe "
+"leden. Nieuw type is afgestudeerde."
+
+msgid ""
+"Annual renewal of active non-studying ordinary/external members. New type is "
+"external."
+msgstr ""
+"Jaarlijkse verlenging van actieve niet-studerende gewone/externe leden. "
+"Nieuwe type is extern."
+
+msgid "Annual renewal of studying members. New type is ordinary."
+msgstr "Jaarlijkse verlenging van studerende leden. Nieuwe type is gewoon."
+
 msgid "Annul Decision"
 msgstr "Vernietig Besluit"
 
@@ -414,11 +431,17 @@ msgstr "Begroting"
 msgid "Budget/Statement"
 msgstr "Begroting/Afrekening"
 
+msgid "Bulk renew memberships"
+msgstr "Bulk-verlenging lidmaatschap"
+
 msgid "CM (Chair's Meeting)"
 msgstr "VV (voorzittersvergadering)"
 
 msgid "CSV"
 msgstr "CSV"
+
+msgid "Cancel"
+msgstr "Annuleer"
 
 msgid "Cancelled"
 msgstr "Afgebroken"
@@ -526,6 +549,13 @@ msgstr "Commissie"
 msgid "Confirm Changes"
 msgstr "Wijzigingen bevestigen"
 
+msgid "Confirm renewal"
+msgstr "Bevestig verlengen"
+
+#, php-format
+msgid "Confirmed %d membership renewal(s)."
+msgstr "%d lidmaatschapsverlengingen bevestigd."
+
 msgid "Controller"
 msgstr "Controller"
 
@@ -581,6 +611,9 @@ msgstr "Huidige mailinglijsten"
 
 msgid "Current Members"
 msgstr "Huidige leden"
+
+msgid "Current expiration"
+msgstr "Huidige afloopdatum"
 
 #, php-format
 msgid ""
@@ -756,6 +789,14 @@ msgstr ""
 "Wijzigingen moeten in chronologische volgorde worden ingevoerd. Het is "
 "bijvoorbeeld niet mogelijk om een wijziging in te voeren voor %s nadat een "
 "andere wijziging in is gegaan per %s."
+
+msgid ""
+"Enter one or more GEWIS membership numbers, choose the target membership "
+"type, and <strong>review the preview</strong> before confirming the renewal."
+msgstr ""
+"Voer één of meerdere GEWIS-lidmaatschapsnummers in, kies het gewenste type "
+"en <strong>controleer het voorbeeld</strong> voorafgaand aan het bevestigen "
+"van de verlenging."
 
 msgid "Execute"
 msgstr "Uitvoeren"
@@ -1064,6 +1105,9 @@ msgstr "Beschikbare Listmonk lijsten voor het laatst om %s opgehaald."
 msgid "Last fetch of available mailman lists was %s."
 msgstr "Beschikbare Mailman lijsten voor het laatst om %s opgehaald."
 
+msgid "Last type"
+msgstr "Laatste lidmaatschapstype"
+
 msgid "Leave note"
 msgstr "Voeg notitie toe"
 
@@ -1177,6 +1221,15 @@ msgstr "Lid %s kan niet worden verwijderd."
 msgid "Member Number"
 msgstr "Lidmaatschapsnummer"
 
+msgid "Member already has a future membership."
+msgstr "Lid heeft al een toekomstig lidmaatschap."
+
+msgid "Member is deleted."
+msgstr "Lid is verwijderd."
+
+msgid "Member not found."
+msgstr "Lid niet gevonden."
+
 msgid "Members"
 msgstr "Leden"
 
@@ -1194,6 +1247,9 @@ msgstr "Lidmaatschapstype (huidig)"
 
 msgid "Membership number"
 msgstr "Lidmaatschapsnummer"
+
+msgid "Membership numbers"
+msgstr "Lidmaatschapsnummers"
 
 msgid "Membership of Committees and Fraternities"
 msgstr "Lidmaatschap van commissies en disputen"
@@ -1243,6 +1299,12 @@ msgstr "Naam"
 msgid "Name (Sync)"
 msgstr "Naam (Sync)"
 
+msgid "New expiration"
+msgstr "Nieuwe afloopdatum"
+
+msgid "New type"
+msgstr "Nieuwe type"
+
 msgid "No"
 msgstr "Nee"
 
@@ -1274,6 +1336,15 @@ msgid "Note"
 msgstr "Notitie"
 
 msgid ""
+"Note: all changes will take effect at the end of the current membership of a "
+"member. Do you want to make changes now or in the past? Go to the individual "
+"member profile."
+msgstr ""
+"Nota bene: alle wijzigingen gaan in op de huidige afloopdatum van het "
+"lidmaatschap. Om wijzigingen direct of in het verleden in te laten gaan, "
+"open het individuele lid."
+
+msgid ""
 "Note: if you updated your email address, you have to sign in to the GEWIS "
 "website using your new email address once this change has been processed."
 msgstr ""
@@ -1288,6 +1359,10 @@ msgstr "Oh nee!"
 
 msgid "On Form"
 msgstr "Op inschrijfformulier"
+
+msgid "One membership number per line, or separated by spaces or commas"
+msgstr ""
+"Eén lidmaatschapsnummer per regel, of gescheiden middels spaties of kommas"
 
 msgid "Opperhoofd"
 msgstr "Opperhoofd"
@@ -1424,6 +1499,13 @@ msgstr "Pre-master Information Security Technology"
 msgid "Pre-master Programs"
 msgstr "Schakelprogramma's"
 
+msgid "Preview changes"
+msgstr "Bekijk voorbeeld"
+
+#, php-format
+msgid "Previewing %1$d valid change(s) and %2$d issue(s)."
+msgstr "%1$d geldige wijzigingen en %2$d problemen voorgesteld."
+
 msgid "Previous exceptions"
 msgstr "Previous exceptions"
 
@@ -1447,6 +1529,9 @@ msgstr "Query"
 
 msgid "Query Result"
 msgstr "Queryresultaat"
+
+msgid "Ready to renew."
+msgstr "Klaar om te verlengen."
 
 msgid "Reappoint"
 msgstr "Herbenoemen"
@@ -1495,6 +1580,9 @@ msgstr "Verleng/Type"
 
 msgid "Renewal"
 msgstr "Verlenging"
+
+msgid "Renewed."
+msgstr "Verlengd."
 
 msgid "Result"
 msgstr "Resultaat"
@@ -1806,6 +1894,14 @@ msgstr ""
 "Deze verlengingslink kon niet gevonden worden. Wellicht is deze eerder "
 "gebruikt of reeds verlopen."
 
+msgid ""
+"Tip: perform these changes in this order before July 1st of each association "
+"year. This form will prevent you from renewing the membership twice."
+msgstr ""
+"Tip: voer de wijzigingen in bovenstaande volgorde uit voor 1 juli van elk "
+"verenigingsjaar. Dit formulier voorkomt dat je het lidmaatschap twee keer "
+"verlengt."
+
 msgid "To pay the membership fee you must accept Stripe's privacy policy."
 msgstr ""
 "Om de lidmaatschapsbijdrage te betalen, moet je het privacybeleid van Stripe "
@@ -1829,6 +1925,9 @@ msgstr "Kan terugbetalingsstatus niet controleren"
 msgid "Unable to create refund"
 msgstr "Unable to create refund"
 
+msgid "Unable to renew deleted member."
+msgstr "Kan lidmaatschap van verwijderd lid niet vernieuwen."
+
 msgid "Unknown"
 msgstr "Onbekend"
 
@@ -1847,6 +1946,9 @@ msgstr "API-gebruiker bijwerken"
 
 msgid "Update Address"
 msgstr "Adres bijwerken"
+
+msgid "Use cases:"
+msgstr "Wanneer gebruik je dit:"
 
 msgid "Username"
 msgstr "Gebruikersnaam"
