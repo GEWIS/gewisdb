@@ -11,6 +11,7 @@ use Checker\Service\Checker as CheckerService;
 use Checker\Service\Renewal as RenewalService;
 use Database\Form\Address as AddressForm;
 use Database\Form\AuditEntry\AuditNote as AuditNoteForm;
+use Database\Form\BulkMemberRenewal as BulkMemberRenewalForm;
 use Database\Form\DeleteAddress as DeleteAddressForm;
 use Database\Form\Member as MemberForm;
 use Database\Form\MemberApprove as MemberApproveForm;
@@ -80,6 +81,7 @@ class Member
         private readonly Translator $translator,
         private readonly AddressForm $addressForm,
         private readonly AuditNoteForm $auditNoteForm,
+        private readonly BulkMemberRenewalForm $bulkMemberRenewalForm,
         private readonly DeleteAddressForm $deleteAddressForm,
         private readonly MemberApproveForm $memberApproveForm,
         private readonly MemberForm $memberForm,
@@ -670,6 +672,225 @@ class Member
             null === $data['changeDate'] ? null : new DateTime($data['changeDate']),
         );
     }
+
+    /**
+     * @return array<string, string>
+     */
+    public function getBulkRenewalTypeOptions(): array
+    {
+        $options = [];
+
+        foreach (MembershipTypes::cases() as $membershipType) {
+            $options[$membershipType->value] = $membershipType->getName($this->translator);
+        }
+
+        return $options;
+    }
+
+    /**
+     * @return array{
+     *     memberIds: int[],
+     *     membershipType: ?MembershipTypes,
+     *     rows: array<int, array{
+     *         memberId: int,
+     *         member: ?MemberModel,
+     *         currentExpiration: ?string,
+     *         newExpiration: ?string,
+     *         valid: bool,
+     *         message: string,
+     *         executed: false,
+     *     }>,
+     *     validCount: int,
+     *     invalidCount: int,
+     * }
+     */
+    public function buildBulkRenewalPreview(
+        string $memberIds,
+        string $membershipType,
+    ): array {
+        $form = $this->getBulkMemberRenewalForm();
+        $form->setData([
+            'memberIds' => $memberIds,
+            'membershipType' => $membershipType,
+        ]);
+        $form->isValid();
+
+        $rows = [];
+        $validCount = 0;
+        $invalidCount = 0;
+        $selectedType = MembershipTypes::tryFrom($membershipType);
+
+        $now = new DateTime();
+
+        $memberIds = $form->getParsedMemberIds();
+
+        if (null !== $selectedType) {
+            foreach ($memberIds as $memberId) {
+                $member = $this->getMember($memberId);
+
+                if (null === $member) {
+                    $rows[] = [
+                        'memberId' => $memberId,
+                        'member' => null,
+                        'currentExpiration' => null,
+                        'newExpiration' => null,
+                        'valid' => false,
+                        'message' => $this->translator->translate('Member not found.'),
+                        'executed' => false,
+                    ];
+                    $invalidCount++;
+
+                    continue;
+                }
+
+                if ($member->getDeleted()) {
+                    $rows[] = [
+                        'memberId' => $memberId,
+                        'member' => $member,
+                        'currentExpiration' => $member->getExpiration()->format('Y-m-d'),
+                        'newExpiration' => null,
+                        'valid' => false,
+                        'message' => $this->translator->translate('Member is deleted.'),
+                        'executed' => false,
+                    ];
+                    $invalidCount++;
+
+                    continue;
+                }
+
+                // We allow renewing memberships that have not started yet in resolveMembershipChange
+                // but we don't allow renewal in bulk
+                if ($member->getLastMembership()->getStartDate() > $now) {
+                    $rows[] = [
+                        'memberId' => $memberId,
+                        'member' => $member,
+                        'currentExpiration' => $member->getExpiration()->format('Y-m-d'),
+                        'newExpiration' => null,
+                        'valid' => false,
+                        'message' => $this->translator->translate('Member already has a future membership.'),
+                        'executed' => false,
+                    ];
+                    $invalidCount++;
+
+                    continue;
+                }
+
+                try {
+                    $lastMembership = $member->getLastMembership();
+                    assert($lastMembership instanceof MembershipModel);
+                    $resolvedChange = $this->resolveMembershipChange(
+                        $member,
+                        $selectedType,
+                        clone $lastMembership->getEndDate(),
+                    );
+
+                    $rows[] = [
+                        'memberId' => $memberId,
+                        'member' => $member,
+                        'currentExpiration' => $resolvedChange['oldExpiration']->format('Y-m-d'),
+                        'newExpiration' => $resolvedChange['newExpiration']->format('Y-m-d'),
+                        'valid' => true,
+                        'message' => $this->translator->translate('Ready to renew.'),
+                        'executed' => false,
+                    ];
+                    $validCount++;
+                } catch (RuntimeException $exception) {
+                    $rows[] = [
+                        'memberId' => $memberId,
+                        'member' => $member,
+                        'currentExpiration' => $member->getExpiration()->format('Y-m-d'),
+                        'newExpiration' => null,
+                        'valid' => false,
+                        'message' => $exception->getMessage(),
+                        'executed' => false,
+                    ];
+                    $invalidCount++;
+                }
+            }
+        }
+
+        return [
+            'memberIds' => $memberIds,
+            'membershipType' => $selectedType,
+            'rows' => $rows,
+            'validCount' => $validCount,
+            'invalidCount' => $invalidCount,
+        ];
+    }
+
+    /**
+     * @return array{
+     *     preview: array{
+     *         memberIds: int[],
+     *         membershipType: ?MembershipTypes,
+     *         rows: array<int, array{
+     *             memberId: int,
+     *             member: ?MemberModel,
+     *             currentExpiration: ?string,
+     *             newExpiration: ?string,
+     *             valid: bool,
+     *             message: string,
+     *             executed: bool,
+     *         }>,
+     *         validCount: int,
+     *         invalidCount: int,
+     *     },
+     *     executedCount: int,
+     * }
+     */
+    public function executeBulkRenewal(
+        string $memberIds,
+        string $membershipType,
+    ): array {
+        $preview = $this->buildBulkRenewalPreview($memberIds, $membershipType);
+        $selectedType = $preview['membershipType'];
+        $executedCount = 0;
+
+        if (null === $selectedType) {
+            return [
+                'preview' => $preview,
+                'executedCount' => $executedCount,
+            ];
+        }
+
+        foreach ($preview['rows'] as $index => $row) {
+            if (!$row['valid'] || null === $row['member']) {
+                continue;
+            }
+
+            if (null === $row['member'] || $row['member']->getDeleted()) {
+                $preview['rows'][$index]['valid'] = false;
+                $preview['rows'][$index]['message'] = $this->translator->translate(
+                    'Unable to renew deleted member.',
+                );
+
+                continue;
+            }
+
+            try {
+                $lastMembership = $row['member']->getLastMembership();
+                assert($lastMembership instanceof MembershipModel);
+
+                $row['member'] = $this->applyMembershipChange(
+                    $row['member'],
+                    $selectedType,
+                    clone $lastMembership->getEndDate(),
+                );
+
+                $preview['rows'][$index]['executed'] = true;
+                $preview['rows'][$index]['message'] = $this->translator->translate('Renewed.');
+                $preview['rows'][$index]['member'] = $row['member'];
+                $executedCount++;
+            } catch (RuntimeException $exception) {
+                $preview['rows'][$index]['valid'] = false;
+                $preview['rows'][$index]['message'] = $exception->getMessage();
+            }
+        }
+
+        return [
+            'preview' => $preview,
+            'executedCount' => $executedCount,
+        ];
     }
 
     /**
@@ -1068,6 +1289,11 @@ class Member
         $form->setMembership($member->getLastMembership());
 
         return $form;
+    }
+
+    public function getBulkMemberRenewalForm(): BulkMemberRenewalForm
+    {
+        return $this->bulkMemberRenewalForm;
     }
 
     /**

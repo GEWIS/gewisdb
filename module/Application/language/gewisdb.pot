@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GEWISdb v4.5.2-23-g5ce8e32b\n"
+"Project-Id-Version: GEWISdb v4.5.2-26-gc8abd2f8-dirty\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-20 14:15+0000\n"
+"POT-Creation-Date: 2026-06-21 15:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -236,6 +236,19 @@ msgid ""
 "allows you to restart the checkout process at a later time."
 msgstr ""
 
+msgid ""
+"Annual bulk conversion of non-active non-studying ordinary/external members. "
+"New type is graduate."
+msgstr ""
+
+msgid ""
+"Annual renewal of active non-studying ordinary/external members. New type is "
+"external."
+msgstr ""
+
+msgid "Annual renewal of studying members. New type is ordinary."
+msgstr ""
+
 msgid "Annul Decision"
 msgstr ""
 
@@ -380,10 +393,16 @@ msgstr ""
 msgid "Budget/Statement"
 msgstr ""
 
+msgid "Bulk renew memberships"
+msgstr ""
+
 msgid "CM (Chair's Meeting)"
 msgstr ""
 
 msgid "CSV"
+msgstr ""
+
+msgid "Cancel"
 msgstr ""
 
 msgid "Cancelled"
@@ -488,6 +507,13 @@ msgstr ""
 msgid "Confirm Changes"
 msgstr ""
 
+msgid "Confirm renewal"
+msgstr ""
+
+#, php-format
+msgid "Confirmed %d membership renewal(s)."
+msgstr ""
+
 msgid "Controller"
 msgstr ""
 
@@ -542,6 +568,9 @@ msgid "Current Mailing Lists"
 msgstr ""
 
 msgid "Current Members"
+msgstr ""
+
+msgid "Current expiration"
 msgstr ""
 
 #, php-format
@@ -700,6 +729,11 @@ msgstr ""
 msgid ""
 "Enter changes chronologically. Example: after entering a change on %s, it is "
 "not possible to enter a change for %s."
+msgstr ""
+
+msgid ""
+"Enter one or more GEWIS membership numbers, choose the target membership "
+"type, and <strong>review the preview</strong> before confirming the renewal."
 msgstr ""
 
 msgid "Execute"
@@ -973,6 +1007,9 @@ msgstr ""
 msgid "Last fetch of available mailman lists was %s."
 msgstr ""
 
+msgid "Last type"
+msgstr ""
+
 msgid "Leave note"
 msgstr ""
 
@@ -1086,6 +1123,15 @@ msgstr ""
 msgid "Member Number"
 msgstr ""
 
+msgid "Member already has a future membership."
+msgstr ""
+
+msgid "Member is deleted."
+msgstr ""
+
+msgid "Member not found."
+msgstr ""
+
 msgid "Members"
 msgstr ""
 
@@ -1102,6 +1148,9 @@ msgid "Membership Type (today)"
 msgstr ""
 
 msgid "Membership number"
+msgstr ""
+
+msgid "Membership numbers"
 msgstr ""
 
 msgid "Membership of Committees and Fraternities"
@@ -1152,6 +1201,12 @@ msgstr ""
 msgid "Name (Sync)"
 msgstr ""
 
+msgid "New expiration"
+msgstr ""
+
+msgid "New type"
+msgstr ""
+
 msgid "No"
 msgstr ""
 
@@ -1183,6 +1238,12 @@ msgid "Note"
 msgstr ""
 
 msgid ""
+"Note: all changes will take effect at the end of the current membership of a "
+"member. Do you want to make changes now or in the past? Go to the individual "
+"member profile."
+msgstr ""
+
+msgid ""
 "Note: if you updated your email address, you have to sign in to the GEWIS "
 "website using your new email address once this change has been processed."
 msgstr ""
@@ -1194,6 +1255,9 @@ msgid "Oh snap!"
 msgstr ""
 
 msgid "On Form"
+msgstr ""
+
+msgid "One membership number per line, or separated by spaces or commas"
 msgstr ""
 
 msgid "Opperhoofd"
@@ -1321,6 +1385,13 @@ msgstr ""
 msgid "Pre-master Programs"
 msgstr ""
 
+msgid "Preview changes"
+msgstr ""
+
+#, php-format
+msgid "Previewing %1$d valid change(s) and %2$d issue(s)."
+msgstr ""
+
 msgid "Previous exceptions"
 msgstr ""
 
@@ -1343,6 +1414,9 @@ msgid "Query"
 msgstr ""
 
 msgid "Query Result"
+msgstr ""
+
+msgid "Ready to renew."
 msgstr ""
 
 msgid "Reappoint"
@@ -1391,6 +1465,9 @@ msgid "Renew/Type"
 msgstr ""
 
 msgid "Renewal"
+msgstr ""
+
+msgid "Renewed."
 msgstr ""
 
 msgid "Result"
@@ -1660,6 +1737,11 @@ msgid ""
 "expired."
 msgstr ""
 
+msgid ""
+"Tip: perform these changes in this order before July 1st of each association "
+"year. This form will prevent you from renewing the membership twice."
+msgstr ""
+
 msgid "To pay the membership fee you must accept Stripe's privacy policy."
 msgstr ""
 
@@ -1681,6 +1763,9 @@ msgstr ""
 msgid "Unable to create refund"
 msgstr ""
 
+msgid "Unable to renew deleted member."
+msgstr ""
+
 msgid "Unknown"
 msgstr ""
 
@@ -1698,6 +1783,9 @@ msgid "Update API principal"
 msgstr ""
 
 msgid "Update Address"
+msgstr ""
+
+msgid "Use cases:"
 msgstr ""
 
 msgid "Username"

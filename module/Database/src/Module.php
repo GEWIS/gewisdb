@@ -24,6 +24,7 @@ use Database\Form\Board\Discharge as BoardDischargeForm;
 use Database\Form\Board\Install as BoardInstallForm;
 use Database\Form\Board\Release as BoardReleaseForm;
 use Database\Form\Budget as BudgetForm;
+use Database\Form\BulkMemberRenewal as BulkMemberRenewalForm;
 use Database\Form\CreateMeeting as CreateMeetingForm;
 use Database\Form\DeleteAddress as DeleteAddressForm;
 use Database\Form\DeleteDecision as DeleteDecisionForm;
@@ -54,6 +55,7 @@ use Database\Form\Other as OtherForm;
 use Database\Form\Query as QueryForm;
 use Database\Form\QueryExport as QueryExportForm;
 use Database\Form\QuerySave as QuerySaveForm;
+use Database\Form\Validator\BulkMemberIds as BulkMemberIdsValidator;
 use Database\Hydrator\Abolish as AbolishHydrator;
 use Database\Hydrator\Annulment as AnnulmentHydrator;
 use Database\Hydrator\AuditEntry as AuditEntryHydrator;
@@ -172,6 +174,7 @@ class Module
                 BoardReleaseHydrator::class => BoardReleaseHydrator::class,
                 KeyGrantHydrator::class => KeyGrantHydrator::class,
                 KeyWithdrawHydrator::class => KeyWithdrawHydrator::class,
+                BulkMemberIdsValidator::class => BulkMemberIdsValidator::class,
             ],
             'factories' => [
                 DeleteExpiredMembersCommand::class => DeleteExpiredMembersCommandFactory::class,
@@ -206,6 +209,12 @@ class Module
                     $form = new AuditNoteForm($container->get(MvcTranslator::class));
                     $form->setHydrator(new AuditEntryHydrator());
                     $form->setObject(new AuditNoteModel());
+
+                    return $form;
+                },
+                BulkMemberRenewalForm::class => static function (ContainerInterface $container) {
+                    $form = new BulkMemberRenewalForm($container->get(MvcTranslator::class));
+                    $form->setHydrator($container->get('database_hydrator_default'));
 
                     return $form;
                 },

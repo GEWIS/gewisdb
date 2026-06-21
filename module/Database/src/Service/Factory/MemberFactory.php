@@ -9,6 +9,7 @@ use Checker\Service\Checker as CheckerService;
 use Checker\Service\Renewal as RenewalService;
 use Database\Form\Address as AddressForm;
 use Database\Form\AuditEntry\AuditNote as AuditNoteForm;
+use Database\Form\BulkMemberRenewal as BulkMemberRenewalForm;
 use Database\Form\DeleteAddress as DeleteAddressForm;
 use Database\Form\Member as MemberForm;
 use Database\Form\MemberApprove as MemberApproveForm;
@@ -51,6 +52,8 @@ class MemberFactory implements FactoryInterface
         $addressForm = $container->get(AddressForm::class);
         /** @var AuditNoteForm $auditNoteForm */
         $auditNoteForm = $container->get(AuditNoteForm::class);
+        /** @var BulkMemberRenewalForm $bulkMemberRenewalForm */
+        $bulkMemberRenewalForm = $container->get(BulkMemberRenewalForm::class);
         /** @var DeleteAddressForm $deleteAddressForm */
         $deleteAddressForm = $container->get(DeleteAddressForm::class);
         /** @var MemberApproveForm $memberApproveForm */
@@ -102,6 +105,7 @@ class MemberFactory implements FactoryInterface
             $translator,
             $addressForm,
             $auditNoteForm,
+            $bulkMemberRenewalForm,
             $deleteAddressForm,
             $memberApproveForm,
             $memberForm,
