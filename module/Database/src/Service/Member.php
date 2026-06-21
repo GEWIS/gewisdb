@@ -63,6 +63,8 @@ use function array_diff;
 use function array_intersect;
 use function array_key_exists;
 use function array_merge;
+use function array_unique;
+use function array_values;
 use function assert;
 use function bin2hex;
 use function count;
@@ -1150,9 +1152,9 @@ class Member
      */
     public function getFrontpageData(): array
     {
-        $totalInclExpired = $this->getMemberMapper()->countMembers(true, true, true);
-        $totalExclExpired = $this->getMemberMapper()->countMembers(true, true, false);
-        $nongraduatesExclExpired = $this->getMemberMapper()->countMembers(false, true, false);
+        $totalInclExpired = $this->getMemberMapper()->countMembers(true, false, true);
+        $totalExclExpired = $this->getMemberMapper()->countMembers(true, false, false);
+        $nongraduatesExclExpired = $this->getMemberMapper()->countMembers(false, false, false);
 
         return [
             'members' => $nongraduatesExclExpired,
@@ -1434,12 +1436,20 @@ class Member
      *     days: int,
      *     members: MemberModel[],
      *     reasons: array<int, AttentionReasons[]>,
+     *     bulkRenewalShortcuts: array{
+     *         expiringActive: int[],
+     *         expiringNonActive: int[],
+     *     },
      * }
      */
     public function getMembersRequiringAttention(int $days = 30): array
     {
         $members = [];
         $reasons = [];
+        $bulkRenewalShortcuts = [
+            'expiringActive' => [],
+            'expiringNonActive' => [],
+        ];
 
         /** @var array<value-of<AttentionReasons>, MemberModel[]> $combined */
         $combined = [];
@@ -1482,6 +1492,18 @@ class Member
         );
 
         foreach (AttentionReasons::cases() as $reason) {
+            if ($reason->includeBulkActiveMemberRenewal()) {
+                foreach ($combined[$reason->value] ?? [] as $member) {
+                    $bulkRenewalShortcuts['expiringActive'][] = $member->getLidnr();
+                }
+            }
+
+            if ($reason->includeBulkGraduateConversion()) {
+                foreach ($combined[$reason->value] ?? [] as $member) {
+                    $bulkRenewalShortcuts['expiringNonActive'][] = $member->getLidnr();
+                }
+            }
+
             foreach ($combined[$reason->value] ?? [] as $member) {
                 if (!array_key_exists($member->getLidnr(), $reasons)) {
                     $members[] = $member;
@@ -1497,7 +1519,19 @@ class Member
                 + ($a->getFirstName() <=> $b->getFirstName());
         });
 
-        return ['days' => $days, 'members' => $members, 'reasons' => $reasons];
+        $bulkRenewalShortcuts['expiringActive'] = array_values(
+            array_unique($bulkRenewalShortcuts['expiringActive']),
+        );
+        $bulkRenewalShortcuts['expiringNonActive'] = array_values(
+            array_unique($bulkRenewalShortcuts['expiringNonActive']),
+        );
+
+        return [
+            'days' => $days,
+            'members' => $members,
+            'reasons' => $reasons,
+            'bulkRenewalShortcuts' => $bulkRenewalShortcuts,
+        ];
     }
 
     /**

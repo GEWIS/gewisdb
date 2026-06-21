@@ -365,6 +365,11 @@ input[type="checkbox"] {
     transition: background 200ms,box-shadow 200ms,border 200ms;
 }
 
+.btn-primary[disabled] {
+    background-color: #9b394b;
+    border-color: #9b394b;
+}
+
 .btn-primary:focus,
 .btn-primary.focus,
 .btn-primary:hover {

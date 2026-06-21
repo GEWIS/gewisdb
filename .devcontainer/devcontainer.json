@@ -67,7 +67,8 @@
 		9725,
 		8080,
 		8021,
-		8025
+		8025,
+		8022
 	],
 	"portsAttributes": {
 		"9725": {
@@ -87,6 +88,11 @@
 		},
 		"8025": {
 			"label": "mailhog",
+			"onAutoForward": "silent",
+			"protocol": "http"
+		},
+		"8022": {
+			"label": "Listmonk admin interface",
 			"onAutoForward": "silent",
 			"protocol": "http"
 		}

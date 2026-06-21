@@ -396,6 +396,12 @@ msgstr ""
 msgid "Bulk renew memberships"
 msgstr ""
 
+msgid ""
+"Bulk renewal is available for expiring active members and bulk conversion to "
+"graduate available for expiring non-active members. Do this <strong>after</"
+"strong> studying members have been renewed."
+msgstr ""
+
 msgid "CM (Chair's Meeting)"
 msgstr ""
 
@@ -515,6 +521,9 @@ msgid "Confirmed %d membership renewal(s)."
 msgstr ""
 
 msgid "Controller"
+msgstr ""
+
+msgid "Convert expiring non-active members to graduate"
 msgstr ""
 
 msgid "Copy Decision"
@@ -1456,6 +1465,9 @@ msgid "Remove Prospective Member"
 msgstr ""
 
 msgid "Renew"
+msgstr ""
+
+msgid "Renew expiring active members"
 msgstr ""
 
 msgid "Renew until"

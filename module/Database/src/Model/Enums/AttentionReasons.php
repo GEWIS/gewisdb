@@ -207,4 +207,22 @@ enum AttentionReasons: string
             default => false,
         };
     }
+
+    public function includeBulkGraduateConversion(): bool
+    {
+        return match ($this) {
+            self::ExpiringOrdinaryNonActive,
+            self::ExpiringExternalNonActive => true,
+            default => false,
+        };
+    }
+
+    public function includeBulkActiveMemberRenewal(): bool
+    {
+        return match ($this) {
+            self::ExpiringOrdinaryActive,
+            self::ExpiringExternalActive => true,
+            default => false,
+        };
+    }
 }
