@@ -434,6 +434,15 @@ msgstr "Begroting/Afrekening"
 msgid "Bulk renew memberships"
 msgstr "Bulk-verlenging lidmaatschap"
 
+msgid ""
+"Bulk renewal is available for expiring active members and bulk conversion to "
+"graduate available for expiring non-active members. Do this <strong>after</"
+"strong> studying members have been renewed."
+msgstr ""
+"Bulk-verlenging is beschikbaar voor verlopende actieve leden en bulk-"
+"omzetting naar afgestudeerde voor de rest. Doe dit <strong>nadat</strong> "
+"studerende leden zijn verlengd."
+
 msgid "CM (Chair's Meeting)"
 msgstr "VV (voorzittersvergadering)"
 
@@ -558,6 +567,9 @@ msgstr "%d lidmaatschapsverlengingen bevestigd."
 
 msgid "Controller"
 msgstr "Controller"
+
+msgid "Convert expiring non-active members to graduate"
+msgstr "Zet niet-actieve verlopende leden om naar afgestudeerde."
 
 msgid "Copy Decision"
 msgstr "Besluit kopiëren"
@@ -1571,6 +1583,9 @@ msgstr "Verwijder toekomstig lid"
 
 msgid "Renew"
 msgstr "Verleng"
+
+msgid "Renew expiring active members"
+msgstr "Verleng actieve leden"
 
 msgid "Renew until"
 msgstr "Verleng tot en met"
