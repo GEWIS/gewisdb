@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-16 17:16+0000\n"
+"POT-Creation-Date: 2026-06-21 15:01+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -65,6 +65,14 @@ msgid "%d pending mailing list unsubscriptions"
 msgstr "%d geplande maillijst-afmeldingen"
 
 #, php-format
+msgid "%s %s member expiring soon"
+msgstr "%s %s lid verloopt binnenkort"
+
+#, php-format
+msgid "%s OR %s"
+msgstr "%s OF %s"
+
+#, php-format
 msgid "%s has been added to %s"
 msgstr "%s toegevoegd aan %s"
 
@@ -76,6 +84,9 @@ msgstr ""
 #, php-format
 msgid "(Annulled by decision %s %d.%d.%d)"
 msgstr "(Vernietigd door besluit %s %d.%d.%d)"
+
+msgid "(bulk) renew as ordinary"
+msgstr "(bulk-)verleng als gewoon"
 
 #, php-format
 msgid ""
@@ -243,6 +254,23 @@ msgstr ""
 "een link waarmee je het betalingsproces op een later tijdstip opnieuw kunt "
 "starten."
 
+msgid ""
+"Annual bulk conversion of non-active non-studying ordinary/external members. "
+"New type is graduate."
+msgstr ""
+"Jaarlijkse bulk-omzetting van niet-actieve niet-studerende gewone/externe "
+"leden. Nieuw type is afgestudeerde."
+
+msgid ""
+"Annual renewal of active non-studying ordinary/external members. New type is "
+"external."
+msgstr ""
+"Jaarlijkse verlenging van actieve niet-studerende gewone/externe leden. "
+"Nieuwe type is extern."
+
+msgid "Annual renewal of studying members. New type is ordinary."
+msgstr "Jaarlijkse verlenging van studerende leden. Nieuwe type is gewoon."
+
 msgid "Annul Decision"
 msgstr "Vernietig Besluit"
 
@@ -403,11 +431,26 @@ msgstr "Begroting"
 msgid "Budget/Statement"
 msgstr "Begroting/Afrekening"
 
+msgid "Bulk renew memberships"
+msgstr "Bulk-verlenging lidmaatschap"
+
+msgid ""
+"Bulk renewal is available for expiring active members and bulk conversion to "
+"graduate available for expiring non-active members. Do this <strong>after</"
+"strong> studying members have been renewed."
+msgstr ""
+"Bulk-verlenging is beschikbaar voor verlopende actieve leden en bulk-"
+"omzetting naar afgestudeerde voor de rest. Doe dit <strong>nadat</strong> "
+"studerende leden zijn verlengd."
+
 msgid "CM (Chair's Meeting)"
 msgstr "VV (voorzittersvergadering)"
 
 msgid "CSV"
 msgstr "CSV"
+
+msgid "Cancel"
+msgstr "Annuleer"
 
 msgid "Cancelled"
 msgstr "Afgebroken"
@@ -515,8 +558,18 @@ msgstr "Commissie"
 msgid "Confirm Changes"
 msgstr "Wijzigingen bevestigen"
 
+msgid "Confirm renewal"
+msgstr "Bevestig verlengen"
+
+#, php-format
+msgid "Confirmed %d membership renewal(s)."
+msgstr "%d lidmaatschapsverlengingen bevestigd."
+
 msgid "Controller"
 msgstr "Controller"
+
+msgid "Convert expiring non-active members to graduate"
+msgstr "Zet niet-actieve verlopende leden om naar afgestudeerde."
 
 msgid "Copy Decision"
 msgstr "Besluit kopiëren"
@@ -570,6 +623,9 @@ msgstr "Huidige mailinglijsten"
 
 msgid "Current Members"
 msgstr "Huidige leden"
+
+msgid "Current expiration"
+msgstr "Huidige afloopdatum"
 
 #, php-format
 msgid ""
@@ -745,6 +801,14 @@ msgstr ""
 "Wijzigingen moeten in chronologische volgorde worden ingevoerd. Het is "
 "bijvoorbeeld niet mogelijk om een wijziging in te voeren voor %s nadat een "
 "andere wijziging in is gegaan per %s."
+
+msgid ""
+"Enter one or more GEWIS membership numbers, choose the target membership "
+"type, and <strong>review the preview</strong> before confirming the renewal."
+msgstr ""
+"Voer één of meerdere GEWIS-lidmaatschapsnummers in, kies het gewenste type "
+"en <strong>controleer het voorbeeld</strong> voorafgaand aan het bevestigen "
+"van de verlenging."
 
 msgid "Execute"
 msgstr "Uitvoeren"
@@ -1053,6 +1117,9 @@ msgstr "Beschikbare Listmonk lijsten voor het laatst om %s opgehaald."
 msgid "Last fetch of available mailman lists was %s."
 msgstr "Beschikbare Mailman lijsten voor het laatst om %s opgehaald."
 
+msgid "Last type"
+msgstr "Laatste lidmaatschapstype"
+
 msgid "Leave note"
 msgstr "Voeg notitie toe"
 
@@ -1166,8 +1233,20 @@ msgstr "Lid %s kan niet worden verwijderd."
 msgid "Member Number"
 msgstr "Lidmaatschapsnummer"
 
+msgid "Member already has a future membership."
+msgstr "Lid heeft al een toekomstig lidmaatschap."
+
+msgid "Member is deleted."
+msgstr "Lid is verwijderd."
+
+msgid "Member not found."
+msgstr "Lid niet gevonden."
+
 msgid "Members"
 msgstr "Leden"
+
+msgid "Members requiring attention"
+msgstr "Lidmaatschappen die aandacht vereisen"
 
 msgid "Membership Ends On (Expires On)"
 msgstr "Lidmaatschap eindigt op (verloopt op)"
@@ -1177,6 +1256,12 @@ msgstr "Lidmaatschapstype"
 
 msgid "Membership Type (today)"
 msgstr "Lidmaatschapstype (huidig)"
+
+msgid "Membership number"
+msgstr "Lidmaatschapsnummer"
+
+msgid "Membership numbers"
+msgstr "Lidmaatschapsnummers"
 
 msgid "Membership of Committees and Fraternities"
 msgstr "Lidmaatschap van commissies en disputen"
@@ -1226,6 +1311,12 @@ msgstr "Naam"
 msgid "Name (Sync)"
 msgstr "Naam (Sync)"
 
+msgid "New expiration"
+msgstr "Nieuwe afloopdatum"
+
+msgid "New type"
+msgstr "Nieuwe type"
+
 msgid "No"
 msgstr "Nee"
 
@@ -1235,8 +1326,14 @@ msgstr "Er zijn geen afrekensessies geregistreerd."
 msgid "No Exception available"
 msgstr "Geen exceptie beschikbaar"
 
+msgid "No action recommended"
+msgstr "Geen actie aanbevolen"
+
 msgid "No category"
 msgstr "Zonder categorie"
+
+msgid "No email address"
+msgstr "Geen e-mailadres"
 
 msgid "No mailing list subscriptions."
 msgstr "Geen aanmeldingen voor mailinglijsten."
@@ -1249,6 +1346,15 @@ msgstr "Niet-studerend"
 
 msgid "Note"
 msgstr "Notitie"
+
+msgid ""
+"Note: all changes will take effect at the end of the current membership of a "
+"member. Do you want to make changes now or in the past? Go to the individual "
+"member profile."
+msgstr ""
+"Nota bene: alle wijzigingen gaan in op de huidige afloopdatum van het "
+"lidmaatschap. Om wijzigingen direct of in het verleden in te laten gaan, "
+"open het individuele lid."
 
 msgid ""
 "Note: if you updated your email address, you have to sign in to the GEWIS "
@@ -1266,6 +1372,10 @@ msgstr "Oh nee!"
 msgid "On Form"
 msgstr "Op inschrijfformulier"
 
+msgid "One membership number per line, or separated by spaces or commas"
+msgstr ""
+"Eén lidmaatschapsnummer per regel, of gescheiden middels spaties of kommas"
+
 msgid "Opperhoofd"
 msgstr "Opperhoofd"
 
@@ -1274,6 +1384,9 @@ msgstr "Gewoon"
 
 msgid "Ordinary - Enrolled at the department of M&CS"
 msgstr "Gewoon - Ingeschreven bij de faculteit M&CS"
+
+msgid "Ordinary member without student ID"
+msgstr "Gewoon lid zonder studentnummer"
 
 msgid "Organ"
 msgstr "Orgaan"
@@ -1398,6 +1511,13 @@ msgstr "Pre-master Information Security Technology"
 msgid "Pre-master Programs"
 msgstr "Schakelprogramma's"
 
+msgid "Preview changes"
+msgstr "Bekijk voorbeeld"
+
+#, php-format
+msgid "Previewing %1$d valid change(s) and %2$d issue(s)."
+msgstr "%1$d geldige wijzigingen en %2$d problemen voorgesteld."
+
 msgid "Previous exceptions"
 msgstr "Previous exceptions"
 
@@ -1422,6 +1542,9 @@ msgstr "Query"
 msgid "Query Result"
 msgstr "Queryresultaat"
 
+msgid "Ready to renew."
+msgstr "Klaar om te verlengen."
+
 msgid "Reappoint"
 msgstr "Herbenoemen"
 
@@ -1431,7 +1554,13 @@ msgstr "Lid herbenoemen"
 msgid "Reappointments"
 msgstr "Herbenoemingen"
 
+msgid "Reason(s)"
+msgstr "Reden(en)"
+
 msgid "Register Member"
+msgstr "Lid inschrijven"
+
+msgid "Register member"
 msgstr "Lid inschrijven"
 
 msgid "Registration"
@@ -1455,11 +1584,20 @@ msgstr "Verwijder toekomstig lid"
 msgid "Renew"
 msgstr "Verleng"
 
+msgid "Renew expiring active members"
+msgstr "Verleng actieve leden"
+
 msgid "Renew until"
 msgstr "Verleng tot en met"
 
+msgid "Renew/Type"
+msgstr "Verleng/Type"
+
 msgid "Renewal"
 msgstr "Verlenging"
+
+msgid "Renewed."
+msgstr "Verlengd."
 
 msgid "Result"
 msgstr "Resultaat"
@@ -1648,6 +1786,14 @@ msgstr ""
 msgid "The entities that you can use:"
 msgstr "De entiteiten die je kunt gebruiken:"
 
+#, php-format
+msgid ""
+"The following members require attention because their membership will expire "
+"within the next %d days or they are missing required information."
+msgstr ""
+"De volgende leden vereisen aandacht omdat hun lidmaatschap verloopt in de "
+"komende %d dagen of ze vereiste informatie missen."
+
 msgid "The organ to be abolished includes the following members:"
 msgstr "Het op te heffen orgaan heeft de volgende leden:"
 
@@ -1763,6 +1909,14 @@ msgstr ""
 "Deze verlengingslink kon niet gevonden worden. Wellicht is deze eerder "
 "gebruikt of reeds verlopen."
 
+msgid ""
+"Tip: perform these changes in this order before July 1st of each association "
+"year. This form will prevent you from renewing the membership twice."
+msgstr ""
+"Tip: voer de wijzigingen in bovenstaande volgorde uit voor 1 juli van elk "
+"verenigingsjaar. Dit formulier voorkomt dat je het lidmaatschap twee keer "
+"verlengt."
+
 msgid "To pay the membership fee you must accept Stripe's privacy policy."
 msgstr ""
 "Om de lidmaatschapsbijdrage te betalen, moet je het privacybeleid van Stripe "
@@ -1777,14 +1931,23 @@ msgstr "Token"
 msgid "Type"
 msgstr "Type"
 
+msgid "Typical action"
+msgstr "Gebruikelijke actie"
+
 msgid "Unable to check refund status"
 msgstr "Kan terugbetalingsstatus niet controleren"
 
 msgid "Unable to create refund"
 msgstr "Unable to create refund"
 
+msgid "Unable to renew deleted member."
+msgstr "Kan lidmaatschap van verwijderd lid niet vernieuwen."
+
 msgid "Unknown"
 msgstr "Onbekend"
+
+msgid "Unknown reason"
+msgstr "Reden onbekend"
 
 #, php-format
 msgid "Update %s of %s"
@@ -1798,6 +1961,9 @@ msgstr "API-gebruiker bijwerken"
 
 msgid "Update Address"
 msgstr "Adres bijwerken"
+
+msgid "Use cases:"
+msgstr "Wanneer gebruik je dit:"
 
 msgid "Username"
 msgstr "Gebruikersnaam"
@@ -1817,7 +1983,10 @@ msgstr "Vice-Voorzitter"
 msgid "View"
 msgstr "Toon"
 
-msgid "View Update Requests"
+msgid "View members needing attention"
+msgstr "Geef leden die aandacht vereisen weer"
+
+msgid "View update requests"
 msgstr "Update-aanvragen bekijken"
 
 msgid "Virt"
@@ -1992,6 +2161,12 @@ msgstr ""
 msgid "Your TU/e-username should look like sYYxxxx or YYYYxxxx."
 msgstr "Jouw TU/e-gebruikersnaam moet lijken op sYYxxxx of YYYYxxxx."
 
+msgid "active"
+msgstr "actief"
+
+msgid "active/inactive"
+msgstr "actief/inactief"
+
 msgid "afgekeurd"
 msgstr "afgekeurd"
 
@@ -2008,14 +2183,32 @@ msgstr "wijzig %s"
 msgid "commissiereglement"
 msgstr "commissiereglement"
 
+msgid "complete missing profile information"
+msgstr "vul missende profielinformatie aan"
+
+msgid "contact to renew graduate status"
+msgstr "neem contact om afgestudeerde-status te verlengen"
+
+msgid "convert to graduate"
+msgstr "zet om naar afgestudeerde"
+
+msgid "discharge from organ(s)"
+msgstr "dechargeer commissielid"
+
 msgid "dispuutsreglement"
 msgstr "dispuutsreglement"
 
 msgid "email address change pending"
 msgstr "e-mailadreswijziging gepland"
 
+msgid "external"
+msgstr "extern"
+
 msgid "goedgekeurd"
 msgstr "goedgekeurd"
+
+msgid "graduate"
+msgstr "afgestudeerde"
 
 msgid "https://gewis.nl/association/regulations"
 msgstr "https://gewis.nl/nl/vereniging/reglementen"
@@ -2041,17 +2234,32 @@ msgstr "n.v.t."
 msgid "never"
 msgstr "nooit"
 
+msgid "non-active"
+msgstr "niet-actief"
+
 msgid "onbekend"
 msgstr "onbekend"
 
 msgid "optional"
 msgstr "optioneel"
 
+msgid "ordinary"
+msgstr "gewoon"
+
 msgid "our payment provider"
 msgstr "onze betalingsprovider"
 
+msgid "proof of (non-TU/e) study OR board decision => renew"
+msgstr "bewijs van (niet-TU/e-)studie OF bestuursbesluit => verleng"
+
 msgid "reads as follows:"
 msgstr "luidt als volgt:"
+
+msgid "renew in appropriate type (ordinary or external)"
+msgstr "verleng als gewoon of extern lid"
+
+msgid "renew membership as external"
+msgstr "verleng lidmaatschap als extern"
 
 #, php-format
 msgid "resolves to %s"

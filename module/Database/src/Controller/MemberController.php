@@ -51,6 +51,64 @@ class MemberController extends AbstractActionController
     }
 
     /**
+     * Attention needed action.
+     */
+    public function attentionNeededAction(): ViewModel
+    {
+        return new ViewModel($this->memberService->getMembersRequiringAttention(30));
+    }
+
+    /**
+     * Bulk renewal flow.
+     * Consists of 2 pages: 1 asking for input and a second for confirmation.
+     */
+    public function bulkRenewalAction(): ViewModel
+    {
+        $form = $this->memberService->getBulkMemberRenewalForm();
+        $formData = [
+            'memberIds' => '',
+            'membershipType' => '',
+        ];
+        $preview = null;
+        $result = null;
+
+        if ($this->getRequest()->isPost()) {
+            $form->setData($this->getRequest()->getPost()->toArray());
+            $isValid = $form->isValid();
+            $formData = $form->getData();
+
+            if (!$isValid) {
+                return new ViewModel([
+                    'form' => $form,
+                    'formData' => $formData,
+                    'preview' => null,
+                    'result' => null,
+                ]);
+            }
+
+            if ('confirm' === $this->getRequest()->getPost('intent')) {
+                $result = $this->memberService->executeBulkRenewal(
+                    $formData['memberIds'],
+                    $formData['membershipType'],
+                );
+                $preview = $result['preview'];
+            } else {
+                $preview = $this->memberService->buildBulkRenewalPreview(
+                    $formData['memberIds'],
+                    $formData['membershipType'],
+                );
+            }
+        }
+
+        return new ViewModel([
+            'form' => $form,
+            'formData' => $formData,
+            'preview' => $preview,
+            'result' => $result,
+        ]);
+    }
+
+    /**
      * Subscribe action.
      */
     public function subscribeAction(): HttpResponse|ViewModel

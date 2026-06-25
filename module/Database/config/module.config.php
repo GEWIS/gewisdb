@@ -212,6 +212,15 @@ return [
                 ],
                 'may_terminate' => true,
                 'child_routes' => [
+                    'bulk-renewal' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/bulk-renewal',
+                            'defaults' => [
+                                'action' => 'bulkRenewal',
+                            ],
+                        ],
+                    ],
                     'show' => [
                         'type' => Segment::class,
                         'options' => [
@@ -384,6 +393,16 @@ return [
                                 'auth_type' => AuthenticationListener::AUTH_NONE,
                             ],
                         ],
+                    ],
+                    'attention-needed' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/attention-needed',
+                            'defaults' => [
+                                'action' => 'attentionNeeded',
+                            ],
+                        ],
+                        'may_terminate' => true,
                     ],
                     'subscribe' => [
                         'type' => Literal::class,

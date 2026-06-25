@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GEWISdb v4.6.0-6-gdf0de513\n"
+"Project-Id-Version: GEWISdb v4.5.2-26-gc8abd2f8-dirty\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-16 17:16+0000\n"
+"POT-Creation-Date: 2026-06-21 15:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -68,6 +68,14 @@ msgid "%d pending mailing list unsubscriptions"
 msgstr ""
 
 #, php-format
+msgid "%s %s member expiring soon"
+msgstr ""
+
+#, php-format
+msgid "%s OR %s"
+msgstr ""
+
+#, php-format
 msgid "%s has been added to %s"
 msgstr ""
 
@@ -77,6 +85,9 @@ msgstr ""
 
 #, php-format
 msgid "(Annulled by decision %s %d.%d.%d)"
+msgstr ""
+
+msgid "(bulk) renew as ordinary"
 msgstr ""
 
 #, php-format
@@ -225,6 +236,19 @@ msgid ""
 "allows you to restart the checkout process at a later time."
 msgstr ""
 
+msgid ""
+"Annual bulk conversion of non-active non-studying ordinary/external members. "
+"New type is graduate."
+msgstr ""
+
+msgid ""
+"Annual renewal of active non-studying ordinary/external members. New type is "
+"external."
+msgstr ""
+
+msgid "Annual renewal of studying members. New type is ordinary."
+msgstr ""
+
 msgid "Annul Decision"
 msgstr ""
 
@@ -369,10 +393,22 @@ msgstr ""
 msgid "Budget/Statement"
 msgstr ""
 
+msgid "Bulk renew memberships"
+msgstr ""
+
+msgid ""
+"Bulk renewal is available for expiring active members and bulk conversion to "
+"graduate available for expiring non-active members. Do this <strong>after</"
+"strong> studying members have been renewed."
+msgstr ""
+
 msgid "CM (Chair's Meeting)"
 msgstr ""
 
 msgid "CSV"
+msgstr ""
+
+msgid "Cancel"
 msgstr ""
 
 msgid "Cancelled"
@@ -477,7 +513,17 @@ msgstr ""
 msgid "Confirm Changes"
 msgstr ""
 
+msgid "Confirm renewal"
+msgstr ""
+
+#, php-format
+msgid "Confirmed %d membership renewal(s)."
+msgstr ""
+
 msgid "Controller"
+msgstr ""
+
+msgid "Convert expiring non-active members to graduate"
 msgstr ""
 
 msgid "Copy Decision"
@@ -531,6 +577,9 @@ msgid "Current Mailing Lists"
 msgstr ""
 
 msgid "Current Members"
+msgstr ""
+
+msgid "Current expiration"
 msgstr ""
 
 #, php-format
@@ -689,6 +738,11 @@ msgstr ""
 msgid ""
 "Enter changes chronologically. Example: after entering a change on %s, it is "
 "not possible to enter a change for %s."
+msgstr ""
+
+msgid ""
+"Enter one or more GEWIS membership numbers, choose the target membership "
+"type, and <strong>review the preview</strong> before confirming the renewal."
 msgstr ""
 
 msgid "Execute"
@@ -962,6 +1016,9 @@ msgstr ""
 msgid "Last fetch of available mailman lists was %s."
 msgstr ""
 
+msgid "Last type"
+msgstr ""
+
 msgid "Leave note"
 msgstr ""
 
@@ -1075,7 +1132,19 @@ msgstr ""
 msgid "Member Number"
 msgstr ""
 
+msgid "Member already has a future membership."
+msgstr ""
+
+msgid "Member is deleted."
+msgstr ""
+
+msgid "Member not found."
+msgstr ""
+
 msgid "Members"
+msgstr ""
+
+msgid "Members requiring attention"
 msgstr ""
 
 msgid "Membership Ends On (Expires On)"
@@ -1085,6 +1154,12 @@ msgid "Membership Type"
 msgstr ""
 
 msgid "Membership Type (today)"
+msgstr ""
+
+msgid "Membership number"
+msgstr ""
+
+msgid "Membership numbers"
 msgstr ""
 
 msgid "Membership of Committees and Fraternities"
@@ -1135,6 +1210,12 @@ msgstr ""
 msgid "Name (Sync)"
 msgstr ""
 
+msgid "New expiration"
+msgstr ""
+
+msgid "New type"
+msgstr ""
+
 msgid "No"
 msgstr ""
 
@@ -1144,7 +1225,13 @@ msgstr ""
 msgid "No Exception available"
 msgstr ""
 
+msgid "No action recommended"
+msgstr ""
+
 msgid "No category"
+msgstr ""
+
+msgid "No email address"
 msgstr ""
 
 msgid "No mailing list subscriptions."
@@ -1157,6 +1244,12 @@ msgid "Not studying"
 msgstr ""
 
 msgid "Note"
+msgstr ""
+
+msgid ""
+"Note: all changes will take effect at the end of the current membership of a "
+"member. Do you want to make changes now or in the past? Go to the individual "
+"member profile."
 msgstr ""
 
 msgid ""
@@ -1173,6 +1266,9 @@ msgstr ""
 msgid "On Form"
 msgstr ""
 
+msgid "One membership number per line, or separated by spaces or commas"
+msgstr ""
+
 msgid "Opperhoofd"
 msgstr ""
 
@@ -1180,6 +1276,9 @@ msgid "Ordinary"
 msgstr ""
 
 msgid "Ordinary - Enrolled at the department of M&CS"
+msgstr ""
+
+msgid "Ordinary member without student ID"
 msgstr ""
 
 msgid "Organ"
@@ -1295,6 +1394,13 @@ msgstr ""
 msgid "Pre-master Programs"
 msgstr ""
 
+msgid "Preview changes"
+msgstr ""
+
+#, php-format
+msgid "Previewing %1$d valid change(s) and %2$d issue(s)."
+msgstr ""
+
 msgid "Previous exceptions"
 msgstr ""
 
@@ -1319,6 +1425,9 @@ msgstr ""
 msgid "Query Result"
 msgstr ""
 
+msgid "Ready to renew."
+msgstr ""
+
 msgid "Reappoint"
 msgstr ""
 
@@ -1328,7 +1437,13 @@ msgstr ""
 msgid "Reappointments"
 msgstr ""
 
+msgid "Reason(s)"
+msgstr ""
+
 msgid "Register Member"
+msgstr ""
+
+msgid "Register member"
 msgstr ""
 
 msgid "Registration"
@@ -1352,10 +1467,19 @@ msgstr ""
 msgid "Renew"
 msgstr ""
 
+msgid "Renew expiring active members"
+msgstr ""
+
 msgid "Renew until"
 msgstr ""
 
+msgid "Renew/Type"
+msgstr ""
+
 msgid "Renewal"
+msgstr ""
+
+msgid "Renewed."
 msgstr ""
 
 msgid "Result"
@@ -1524,6 +1648,12 @@ msgstr ""
 msgid "The entities that you can use:"
 msgstr ""
 
+#, php-format
+msgid ""
+"The following members require attention because their membership will expire "
+"within the next %d days or they are missing required information."
+msgstr ""
+
 msgid "The organ to be abolished includes the following members:"
 msgstr ""
 
@@ -1619,6 +1749,11 @@ msgid ""
 "expired."
 msgstr ""
 
+msgid ""
+"Tip: perform these changes in this order before July 1st of each association "
+"year. This form will prevent you from renewing the membership twice."
+msgstr ""
+
 msgid "To pay the membership fee you must accept Stripe's privacy policy."
 msgstr ""
 
@@ -1631,13 +1766,22 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
+msgid "Typical action"
+msgstr ""
+
 msgid "Unable to check refund status"
 msgstr ""
 
 msgid "Unable to create refund"
 msgstr ""
 
+msgid "Unable to renew deleted member."
+msgstr ""
+
 msgid "Unknown"
+msgstr ""
+
+msgid "Unknown reason"
 msgstr ""
 
 #, php-format
@@ -1651,6 +1795,9 @@ msgid "Update API principal"
 msgstr ""
 
 msgid "Update Address"
+msgstr ""
+
+msgid "Use cases:"
 msgstr ""
 
 msgid "Username"
@@ -1671,7 +1818,10 @@ msgstr ""
 msgid "View"
 msgstr ""
 
-msgid "View Update Requests"
+msgid "View members needing attention"
+msgstr ""
+
+msgid "View update requests"
 msgstr ""
 
 msgid "Virt"
@@ -1803,6 +1953,12 @@ msgstr ""
 msgid "Your TU/e-username should look like sYYxxxx or YYYYxxxx."
 msgstr ""
 
+msgid "active"
+msgstr ""
+
+msgid "active/inactive"
+msgstr ""
+
 msgid "afgekeurd"
 msgstr ""
 
@@ -1819,13 +1975,31 @@ msgstr ""
 msgid "commissiereglement"
 msgstr ""
 
+msgid "complete missing profile information"
+msgstr ""
+
+msgid "contact to renew graduate status"
+msgstr ""
+
+msgid "convert to graduate"
+msgstr ""
+
+msgid "discharge from organ(s)"
+msgstr ""
+
 msgid "dispuutsreglement"
 msgstr ""
 
 msgid "email address change pending"
 msgstr ""
 
+msgid "external"
+msgstr ""
+
 msgid "goedgekeurd"
+msgstr ""
+
+msgid "graduate"
 msgstr ""
 
 msgid "https://gewis.nl/association/regulations"
@@ -1852,16 +2026,31 @@ msgstr ""
 msgid "never"
 msgstr ""
 
+msgid "non-active"
+msgstr ""
+
 msgid "onbekend"
 msgstr ""
 
 msgid "optional"
 msgstr ""
 
+msgid "ordinary"
+msgstr ""
+
 msgid "our payment provider"
 msgstr ""
 
+msgid "proof of (non-TU/e) study OR board decision => renew"
+msgstr ""
+
 msgid "reads as follows:"
+msgstr ""
+
+msgid "renew in appropriate type (ordinary or external)"
+msgstr ""
+
+msgid "renew membership as external"
 msgstr ""
 
 #, php-format

@@ -11,6 +11,7 @@ use Checker\Service\Checker as CheckerService;
 use Checker\Service\Renewal as RenewalService;
 use Database\Form\Address as AddressForm;
 use Database\Form\AuditEntry\AuditNote as AuditNoteForm;
+use Database\Form\BulkMemberRenewal as BulkMemberRenewalForm;
 use Database\Form\DeleteAddress as DeleteAddressForm;
 use Database\Form\Member as MemberForm;
 use Database\Form\MemberApprove as MemberApproveForm;
@@ -31,6 +32,7 @@ use Database\Model\AuditEntry as AuditEntryModel;
 use Database\Model\AuditMailingListMembership;
 use Database\Model\AuditNote as AuditNoteModel;
 use Database\Model\AuditRenewal as AuditRenewalModel;
+use Database\Model\Enums\AttentionReasons;
 use Database\Model\Enums\MailingListMemberAction;
 use Database\Model\Enums\MailingListMemberOrigin;
 use Database\Model\Enums\Studies;
@@ -59,7 +61,10 @@ use User\Service\UserService;
 
 use function array_diff;
 use function array_intersect;
+use function array_key_exists;
 use function array_merge;
+use function array_unique;
+use function array_values;
 use function assert;
 use function bin2hex;
 use function count;
@@ -67,6 +72,7 @@ use function date;
 use function in_array;
 use function mb_encode_mimeheader;
 use function random_bytes;
+use function usort;
 
 class Member
 {
@@ -77,6 +83,7 @@ class Member
         private readonly Translator $translator,
         private readonly AddressForm $addressForm,
         private readonly AuditNoteForm $auditNoteForm,
+        private readonly BulkMemberRenewalForm $bulkMemberRenewalForm,
         private readonly DeleteAddressForm $deleteAddressForm,
         private readonly MemberApproveForm $memberApproveForm,
         private readonly MemberForm $memberForm,
@@ -661,63 +668,231 @@ class Member
 
         $data = $form->getData();
 
-        // update changed on date
-        $date = new DateTime();
-        $date->setTime(0, 0);
-        $member->setChangedOn($date);
+        return $this->applyMembershipChange(
+            $member,
+            MembershipTypes::from($data['type']),
+            null === $data['changeDate'] ? null : new DateTime($data['changeDate']),
+        );
+    }
 
-        // Record a renewal audit entry
-        $renewalAudit = new AuditRenewalModel();
-        $renewalAudit->setOldExpiration($member->getExpiration());
+    /**
+     * @return array<string, string>
+     */
+    public function getBulkRenewalTypeOptions(): array
+    {
+        $options = [];
 
-        // We always deal with the last membership
-        $lastMembership = $member->getLastMembership();
-
-        // We assume that there is a membership (always the case for non-cleared members)
-        assert($lastMembership instanceof MembershipModel);
-
-        // Start date
-        if (null === $data['changeDate']) {
-            $changeDate = new DateTime();
-        } else {
-            $changeDate = new DateTime($data['changeDate']);
+        foreach (MembershipTypes::cases() as $membershipType) {
+            $options[$membershipType->value] = $membershipType->getName($this->translator);
         }
 
-        $newType = MembershipTypes::from($data['type']);
+        return $options;
+    }
 
-        // We always change at the start of a day
-        $changeDate->setTime(0, 0);
+    /**
+     * @return array{
+     *     memberIds: int[],
+     *     membershipType: ?MembershipTypes,
+     *     rows: array<int, array{
+     *         memberId: int,
+     *         member: ?MemberModel,
+     *         currentExpiration: ?string,
+     *         newExpiration: ?string,
+     *         valid: bool,
+     *         message: string,
+     *         executed: false,
+     *     }>,
+     *     validCount: int,
+     *     invalidCount: int,
+     * }
+     */
+    public function buildBulkRenewalPreview(
+        string $memberIds,
+        string $membershipType,
+    ): array {
+        $form = $this->getBulkMemberRenewalForm();
+        $form->setData([
+            'memberIds' => $memberIds,
+            'membershipType' => $membershipType,
+        ]);
+        $form->isValid();
 
-        // We will never alter anything before the start of the last membership
-        if ($changeDate < $lastMembership->getStartDate()) {
-            $changeDate = $lastMembership->getStartDate();
+        $rows = [];
+        $validCount = 0;
+        $invalidCount = 0;
+        $selectedType = MembershipTypes::tryFrom($membershipType);
+
+        $now = new DateTime();
+
+        $memberIds = $form->getParsedMemberIds();
+
+        if (null !== $selectedType) {
+            foreach ($memberIds as $memberId) {
+                $member = $this->getMember($memberId);
+
+                if (null === $member) {
+                    $rows[] = [
+                        'memberId' => $memberId,
+                        'member' => null,
+                        'currentExpiration' => null,
+                        'newExpiration' => null,
+                        'valid' => false,
+                        'message' => $this->translator->translate('Member not found.'),
+                        'executed' => false,
+                    ];
+                    $invalidCount++;
+
+                    continue;
+                }
+
+                if ($member->getDeleted()) {
+                    $rows[] = [
+                        'memberId' => $memberId,
+                        'member' => $member,
+                        'currentExpiration' => $member->getExpiration()->format('Y-m-d'),
+                        'newExpiration' => null,
+                        'valid' => false,
+                        'message' => $this->translator->translate('Member is deleted.'),
+                        'executed' => false,
+                    ];
+                    $invalidCount++;
+
+                    continue;
+                }
+
+                // We allow renewing memberships that have not started yet in resolveMembershipChange
+                // but we don't allow renewal in bulk
+                if ($member->getLastMembership()->getStartDate() > $now) {
+                    $rows[] = [
+                        'memberId' => $memberId,
+                        'member' => $member,
+                        'currentExpiration' => $member->getExpiration()->format('Y-m-d'),
+                        'newExpiration' => null,
+                        'valid' => false,
+                        'message' => $this->translator->translate('Member already has a future membership.'),
+                        'executed' => false,
+                    ];
+                    $invalidCount++;
+
+                    continue;
+                }
+
+                try {
+                    $lastMembership = $member->getLastMembership();
+                    assert($lastMembership instanceof MembershipModel);
+                    $resolvedChange = $this->resolveMembershipChange(
+                        $member,
+                        $selectedType,
+                        clone $lastMembership->getEndDate(),
+                    );
+
+                    $rows[] = [
+                        'memberId' => $memberId,
+                        'member' => $member,
+                        'currentExpiration' => $resolvedChange['oldExpiration']->format('Y-m-d'),
+                        'newExpiration' => $resolvedChange['newExpiration']->format('Y-m-d'),
+                        'valid' => true,
+                        'message' => $this->translator->translate('Ready to renew.'),
+                        'executed' => false,
+                    ];
+                    $validCount++;
+                } catch (RuntimeException $exception) {
+                    $rows[] = [
+                        'memberId' => $memberId,
+                        'member' => $member,
+                        'currentExpiration' => $member->getExpiration()->format('Y-m-d'),
+                        'newExpiration' => null,
+                        'valid' => false,
+                        'message' => $exception->getMessage(),
+                        'executed' => false,
+                    ];
+                    $invalidCount++;
+                }
+            }
         }
 
-        // or after the end date of the last membership
-        if ($changeDate > $lastMembership->getEndDate()) {
-            $changeDate = $lastMembership->getEndDate();
+        return [
+            'memberIds' => $memberIds,
+            'membershipType' => $selectedType,
+            'rows' => $rows,
+            'validCount' => $validCount,
+            'invalidCount' => $invalidCount,
+        ];
+    }
+
+    /**
+     * @return array{
+     *     preview: array{
+     *         memberIds: int[],
+     *         membershipType: ?MembershipTypes,
+     *         rows: array<int, array{
+     *             memberId: int,
+     *             member: ?MemberModel,
+     *             currentExpiration: ?string,
+     *             newExpiration: ?string,
+     *             valid: bool,
+     *             message: string,
+     *             executed: bool,
+     *         }>,
+     *         validCount: int,
+     *         invalidCount: int,
+     *     },
+     *     executedCount: int,
+     * }
+     */
+    public function executeBulkRenewal(
+        string $memberIds,
+        string $membershipType,
+    ): array {
+        $preview = $this->buildBulkRenewalPreview($memberIds, $membershipType);
+        $selectedType = $preview['membershipType'];
+        $executedCount = 0;
+
+        if (null === $selectedType) {
+            return [
+                'preview' => $preview,
+                'executedCount' => $executedCount,
+            ];
         }
 
-        if ($changeDate->getTimestamp() === $lastMembership->getStartDate()->getTimestamp()) {
-            $lastMembership->setType($newType);
-        } else {
-            $lastMembership->setEndDate($changeDate);
-            $newMembership = new MembershipModel(
-                member: $member,
-                type: $newType,
-                startDate: $changeDate,
-                endDate: null,
-            );
-            $member->addMembership($newMembership);
+        foreach ($preview['rows'] as $index => $row) {
+            if (!$row['valid'] || null === $row['member']) {
+                continue;
+            }
+
+            if (null === $row['member'] || $row['member']->getDeleted()) {
+                $preview['rows'][$index]['valid'] = false;
+                $preview['rows'][$index]['message'] = $this->translator->translate(
+                    'Unable to renew deleted member.',
+                );
+
+                continue;
+            }
+
+            try {
+                $lastMembership = $row['member']->getLastMembership();
+                assert($lastMembership instanceof MembershipModel);
+
+                $row['member'] = $this->applyMembershipChange(
+                    $row['member'],
+                    $selectedType,
+                    clone $lastMembership->getEndDate(),
+                );
+
+                $preview['rows'][$index]['executed'] = true;
+                $preview['rows'][$index]['message'] = $this->translator->translate('Renewed.');
+                $preview['rows'][$index]['member'] = $row['member'];
+                $executedCount++;
+            } catch (RuntimeException $exception) {
+                $preview['rows'][$index]['valid'] = false;
+                $preview['rows'][$index]['message'] = $exception->getMessage();
+            }
         }
 
-        $renewalAudit->setNewExpiration($member->getExpiration());
-        $renewalAudit->setUser($this->userService->getIdentity());
-        $this->addAuditEntry($member, $renewalAudit);
-
-        $this->getMemberMapper()->persist($member);
-
-        return $member;
+        return [
+            'preview' => $preview,
+            'executedCount' => $executedCount,
+        ];
     }
 
     /**
@@ -977,9 +1152,9 @@ class Member
      */
     public function getFrontpageData(): array
     {
-        $totalInclExpired = $this->getMemberMapper()->countMembers(true, true, true);
-        $totalExclExpired = $this->getMemberMapper()->countMembers(true, true, false);
-        $nongraduatesExclExpired = $this->getMemberMapper()->countMembers(false, true, false);
+        $totalInclExpired = $this->getMemberMapper()->countMembers(true, false, true);
+        $totalExclExpired = $this->getMemberMapper()->countMembers(true, false, false);
+        $nongraduatesExclExpired = $this->getMemberMapper()->countMembers(false, false, false);
 
         return [
             'members' => $nongraduatesExclExpired,
@@ -1118,6 +1293,99 @@ class Member
         return $form;
     }
 
+    public function getBulkMemberRenewalForm(): BulkMemberRenewalForm
+    {
+        return $this->bulkMemberRenewalForm;
+    }
+
+    /**
+     * @return array{
+     *     currentType: MembershipTypes,
+     *     oldExpiration: DateTime,
+     *     newExpiration: DateTime,
+     *     changeDate: DateTime,
+     *     lastMembership: MembershipModel,
+     * }
+     */
+    private function resolveMembershipChange(
+        MemberModel $member,
+        MembershipTypes $newType,
+        ?DateTime $changeDate = null,
+    ): array {
+        $currentMembership = $member->getCurrentOrLastMembership();
+
+        if (null === $currentMembership) {
+            throw new RuntimeException('Unable to change membership type without a membership.');
+        }
+
+        if (MembershipTypes::Honorary === $currentMembership->getType()) {
+            throw new RuntimeException('Unable to change membership type of honorary member.');
+        }
+
+        $lastMembership = $member->getLastMembership();
+        assert($lastMembership instanceof MembershipModel);
+
+        $effectiveChangeDate = null === $changeDate ? new DateTime() : clone $changeDate;
+        $effectiveChangeDate->setTime(0, 0);
+
+        if ($effectiveChangeDate < $lastMembership->getStartDate()) {
+            $effectiveChangeDate = clone $lastMembership->getStartDate();
+        }
+
+        if ($effectiveChangeDate > $lastMembership->getEndDate()) {
+            $effectiveChangeDate = clone $lastMembership->getEndDate();
+        }
+
+        $newExpiration = $effectiveChangeDate->getTimestamp() === $lastMembership->getStartDate()->getTimestamp()
+            ? clone $lastMembership->getEndDate()
+            : (new MembershipModel($member, $newType, clone $effectiveChangeDate))->getEndDate();
+
+        return [
+            'currentType' => $lastMembership->getType(),
+            'oldExpiration' => clone $member->getExpiration(),
+            'newExpiration' => $newExpiration,
+            'changeDate' => $effectiveChangeDate,
+            'lastMembership' => $lastMembership,
+        ];
+    }
+
+    private function applyMembershipChange(
+        MemberModel $member,
+        MembershipTypes $newType,
+        ?DateTime $changeDate = null,
+    ): MemberModel {
+        $resolvedChange = $this->resolveMembershipChange($member, $newType, $changeDate);
+
+        $date = new DateTime();
+        $date->setTime(0, 0);
+        $member->setChangedOn($date);
+
+        $renewalAudit = new AuditRenewalModel();
+        $renewalAudit->setOldExpiration($resolvedChange['oldExpiration']);
+
+        $lastMembership = $resolvedChange['lastMembership'];
+        $effectiveChangeDate = $resolvedChange['changeDate'];
+
+        if ($effectiveChangeDate->getTimestamp() === $lastMembership->getStartDate()->getTimestamp()) {
+            $lastMembership->setType($newType);
+        } else {
+            $lastMembership->setEndDate(clone $effectiveChangeDate);
+            $member->addMembership(new MembershipModel(
+                member: $member,
+                type: $newType,
+                startDate: clone $effectiveChangeDate,
+                endDate: null,
+            ));
+        }
+
+        $renewalAudit->setNewExpiration($resolvedChange['newExpiration']);
+        $renewalAudit->setUser($this->userService->getIdentity());
+        $this->addAuditEntry($member, $renewalAudit);
+        $this->getMemberMapper()->persist($member);
+
+        return $member;
+    }
+
     /**
      * Get the list edit form.
      *
@@ -1159,6 +1427,111 @@ class Member
         $form->bind($address);
 
         return $form;
+    }
+
+    /**
+     * Get the members requiring attention
+     *
+     * @return array{
+     *     days: int,
+     *     members: MemberModel[],
+     *     reasons: array<int, AttentionReasons[]>,
+     *     bulkRenewalShortcuts: array{
+     *         expiringActive: int[],
+     *         expiringNonActive: int[],
+     *     },
+     * }
+     */
+    public function getMembersRequiringAttention(int $days = 30): array
+    {
+        $members = [];
+        $reasons = [];
+        $bulkRenewalShortcuts = [
+            'expiringActive' => [],
+            'expiringNonActive' => [],
+        ];
+
+        /** @var array<value-of<AttentionReasons>, MemberModel[]> $combined */
+        $combined = [];
+
+        $combined[AttentionReasons::MissingEmail->value] = $this->getMemberMapper()->findAttentionWithoutEmail();
+        $combined[AttentionReasons::MissingStudentIdOrdinary->value] =
+        $this->getMemberMapper()->findAttentionWithoutStudentId();
+        $combined[AttentionReasons::ExpiringExternalNonActive->value] =
+        $this->getMemberMapper()->findAttentionExpiring(
+            includeActive: false,
+            includeNonActive: true,
+            specificType: MembershipTypes::External,
+            expiresWithinDays: $days,
+        );
+        $combined[AttentionReasons::ExpiringExternalActive->value] = $this->getMemberMapper()->findAttentionExpiring(
+            includeActive: true,
+            includeNonActive: false,
+            specificType: MembershipTypes::External,
+            expiresWithinDays: $days,
+        );
+        $combined[AttentionReasons::ExpiringOrdinaryActive->value] = $this->getMemberMapper()->findAttentionExpiring(
+            includeActive: true,
+            includeNonActive: false,
+            specificType: MembershipTypes::Ordinary,
+            expiresWithinDays: $days,
+        );
+        $combined[AttentionReasons::ExpiringOrdinaryNonActive->value] = $this->getMemberMapper()->findAttentionExpiring(
+            includeActive: false,
+            includeNonActive: true,
+            specificType: MembershipTypes::Ordinary,
+            expiresWithinDays: $days,
+        );
+        $combined[AttentionReasons::ExpiringGraduateActiveInactive->value] =
+        $this->getMemberMapper()->findAttentionExpiring(
+            includeActive: true,
+            includeNonActive: false,
+            inActiveIsActive: true,
+            specificType: MembershipTypes::Graduate,
+            expiresWithinDays: $days,
+        );
+
+        foreach (AttentionReasons::cases() as $reason) {
+            if ($reason->includeBulkActiveMemberRenewal()) {
+                foreach ($combined[$reason->value] ?? [] as $member) {
+                    $bulkRenewalShortcuts['expiringActive'][] = $member->getLidnr();
+                }
+            }
+
+            if ($reason->includeBulkGraduateConversion()) {
+                foreach ($combined[$reason->value] ?? [] as $member) {
+                    $bulkRenewalShortcuts['expiringNonActive'][] = $member->getLidnr();
+                }
+            }
+
+            foreach ($combined[$reason->value] ?? [] as $member) {
+                if (!array_key_exists($member->getLidnr(), $reasons)) {
+                    $members[] = $member;
+                }
+
+                $reasons[$member->getLidnr()][] = $reason;
+            }
+        }
+
+        usort($members, static function (MemberModel $a, MemberModel $b) {
+            return ($a->getExpiration() <=> $b->getExpiration()) * 10
+                + ($a->getLastName() <=> $b->getLastName()) * 2
+                + ($a->getFirstName() <=> $b->getFirstName());
+        });
+
+        $bulkRenewalShortcuts['expiringActive'] = array_values(
+            array_unique($bulkRenewalShortcuts['expiringActive']),
+        );
+        $bulkRenewalShortcuts['expiringNonActive'] = array_values(
+            array_unique($bulkRenewalShortcuts['expiringNonActive']),
+        );
+
+        return [
+            'days' => $days,
+            'members' => $members,
+            'reasons' => $reasons,
+            'bulkRenewalShortcuts' => $bulkRenewalShortcuts,
+        ];
     }
 
     /**
