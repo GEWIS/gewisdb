@@ -36,7 +36,7 @@ $translator = $this->plugin('translate')->getTranslator();
         foreach ($members as $member) {
             echo '<tr>';
             echo '<td rowspan="' . count($reasons[$member->getLidNr()]) . '"><a href="' . $this->url('member/show', ['id' => $member->getLidNr()]) . '">' . $member->getLidNr() . '</a></td>';
-            echo '<td rowspan="' . count($reasons[$member->getLidNr()]) . '"><a href="' . $this->url('member/show', ['id' => $member->getLidNr()]) . '">' . $member->getFullName() . '</a></td>';
+            echo '<td rowspan="' . count($reasons[$member->getLidNr()]) . '"><a href="' . $this->url('member/show', ['id' => $member->getLidNr()]) . '">' . $this->escapeHtml($member->getFullName()) . '</a></td>';
             echo '<td rowspan="' . count($reasons[$member->getLidNr()]) . '">' . $member->getExpiration()->format('Y-m-d') . '</td>';
             foreach ($reasons[$member->getLidNr()] as $reason) {
                 echo '<td>' . $reason->getLabel($translator) . '</td>';
