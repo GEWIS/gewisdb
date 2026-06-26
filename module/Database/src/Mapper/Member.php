@@ -293,14 +293,14 @@ class Member
     /**
      * Find members without an email address.
      *
-     * @param int      $maxExpiredDays Max number of days member can have been expired
-     * @param int|null $expiresWithin  Max number of days member can expire within
+     * @param int      $maxExpiredDays    Max number of days member can have been expired
+     * @param int|null $expiresWithinDays Max number of days member can expire within
      *
      * @return MemberModel[]
      */
     public function findAttentionWithoutEmail(
         int $maxExpiredDays = 90,
-        ?int $expiresWithin = null,
+        ?int $expiresWithinDays = null,
     ): array {
         $qb = $this->getRepository()->createQueryBuilder('m');
         $qb->where('m.deleted = False')
@@ -308,8 +308,10 @@ class Member
 
         $sq = self::getDatedMembershipSubquery(
             $qb,
-            endsAfter: (new DateTime())->modify('-' . $maxExpiredDays . ' days'),
-            endsBefore: null === $expiresWithin ? null : (new DateTime())->modify('+' . $expiresWithin . ' days'),
+            endsAfter: new DateTime()->modify('-' . $maxExpiredDays . ' days'),
+            endsBefore: null === $expiresWithinDays
+                ? null
+                : new DateTime()->modify('+' . $expiresWithinDays . ' days'),
         );
 
         $qb->andWhere(
@@ -325,14 +327,14 @@ class Member
     /**
      * Find ordinary members without a student ID.
      *
-     * @param int      $maxExpiredDays Max number of days member can have been expired
-     * @param int|null $expiresWithin  Max number of days member can expire within
+     * @param int      $maxExpiredDays    Max number of days member can have been expired
+     * @param int|null $expiresWithinDays Max number of days member can expire within
      *
      * @return MemberModel[]
      */
     public function findAttentionWithoutStudentId(
         int $maxExpiredDays = 90,
-        ?int $expiresWithin = null,
+        ?int $expiresWithinDays = null,
     ): array {
         $qb = $this->getRepository()->createQueryBuilder('m');
         $qb->where('m.deleted = False')
@@ -340,8 +342,10 @@ class Member
 
         $sq = self::getDatedMembershipSubquery(
             $qb,
-            endsAfter: (new DateTime())->modify('-' . $maxExpiredDays . ' days'),
-            endsBefore: null === $expiresWithin ? null : (new DateTime())->modify('+' . $expiresWithin . ' days'),
+            endsAfter: new DateTime()->modify('-' . $maxExpiredDays . ' days'),
+            endsBefore: null === $expiresWithinDays
+                ? null
+                : new DateTime()->modify('+' . $expiresWithinDays . ' days'),
             specificType: MembershipTypes::Ordinary,
         );
 
@@ -358,9 +362,9 @@ class Member
     /**
      * Find members who are expiring soon (active or nonactive) (of a specific type, if specified).
      *
-     * @param int      $maxExpiredDays   Max number of days member can have been expired
-     * @param int|null $expiresWithin    Max number of days member can expire within
-     * @param bool     $inActiveIsActive Also includes inactive organ members.
+     * @param int      $maxExpiredDays    Max number of days member can have been expired
+     * @param int|null $expiresWithinDays Max number of days member can expire within
+     * @param bool     $inActiveIsActive  Also includes inactive organ members.
      *
      * @return MemberModel[]
      */
@@ -377,10 +381,10 @@ class Member
 
         $sqM = self::getDatedMembershipSubquery(
             $qb,
-            endsAfter: (new DateTime())->modify('-' . $maxExpiredDays . ' days'),
+            endsAfter: new DateTime()->modify('-' . $maxExpiredDays . ' days'),
             endsBefore: null === $expiresWithinDays
                 ? null
-                : (new DateTime())->modify('+' . $expiresWithinDays . ' days'),
+                : new DateTime()->modify('+' . $expiresWithinDays . ' days'),
             specificType: $specificType,
         );
 
