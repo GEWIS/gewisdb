@@ -1,8 +1,10 @@
 name: Check migrations and seed
 
-# This job should run whenever a migration is updated
-# it should check whether the migration + seed still works as well as
-# check whether the pull request message mentions the migration
+# Runs whenever an entity, migration, or seeder changes. On a slim web + database stack it:
+#  - applies the migrations + seed from the base branch up to the head branch (and back down again), and
+#  - verifies every entity change has a matching migration committed (i.e. no schema drift).
+# Mailman and Listmonk are sync-based and not needed to exercise migrations or seeders, so only the web +
+# database containers are started.
 on:
   pull_request:
     types:
@@ -10,8 +12,17 @@ on:
       - synchronize
       - reopened
     paths:
+      - '**/Model/**/*.php'
       - '**/migrations/*.php'
       - '**/test/Seeder/*.php'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # Shared compose file set for the docker compose invocations below.
+  COMPOSE_FILES: --file docker-compose.github.yml --file docker-compose.override.yml --file docker-compose.yml
 
 jobs:
   migration_seed:
@@ -20,8 +31,8 @@ jobs:
 
     steps:
       - name: Echo
-        run: echo "This job should only run in if migrations or fixtures are updated"
-      
+        run: echo "This job should only run if entities, migrations, or fixtures are updated"
+
       - name: Checkout base branch
         uses: actions/checkout@v4
         with:
@@ -33,11 +44,10 @@ jobs:
       - name: setup docker buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: build base
-        run: docker buildx bake --file docker-compose.github.yml --file docker-compose.override.yml --file docker-compose.yml
-
+      # --no-deps keeps this lightweight: only web + the database start, not the
+      # sync-based mail/list services that web otherwise depends on.
       - name: run base
-        run: docker compose --file docker-compose.github.yml --file docker-compose.override.yml --file docker-compose.yml up -d --build --quiet-pull
+        run: docker compose $COMPOSE_FILES up -d --build --no-deps --quiet-pull web postgresql
 
       - name: migrate base
         run: make migrate
@@ -52,10 +62,10 @@ jobs:
           echo "MIGRATION_BASE_REPORT=$MIGRATION_BASE_REPORT" >> $GITHUB_ENV
 
       - name: seed base
-        run: make seed
+        run: make seed-core
 
       - name: cleanup base
-        run: docker compose --file docker-compose.github.yml --file docker-compose.override.yml --file docker-compose.yml down
+        run: docker compose $COMPOSE_FILES down
 
       - name: Checkout head branch
         uses: actions/checkout@v4
@@ -63,17 +73,26 @@ jobs:
       - name: Copy .env
         run: cp .env.dist .env
 
-      - name: build head
-        run: docker buildx bake --file docker-compose.github.yml --file docker-compose.override.yml --file docker-compose.yml
-
       - name: run head
-        run: docker compose --file docker-compose.github.yml --file docker-compose.override.yml --file docker-compose.yml up -d --build --quiet-pull
+        run: docker compose $COMPOSE_FILES up -d --build --no-deps --quiet-pull web postgresql
 
       - name: migrate head
         run: make migrate
 
+      - name: ensure migrations are up to date
+        # Regenerate migrations from the current entities; any output here means an
+        # entity changed without a matching migration being committed.
+        run: |
+          make migration-diff
+          if [ -n "$(git status --porcelain | grep 'migrations/')" ]; then
+            echo "::error::Entity changes detected without a matching migration. Run 'make migration-diff' locally and commit the generated migration(s)."
+            git status --porcelain | grep 'migrations/'
+            exit 1
+          fi
+          echo "All migrations are up to date."
+
       - name: seed head
-        run: make seed
+        run: make seed-core
 
       - name: revert to base migration
         run: |
@@ -81,4 +100,4 @@ jobs:
           docker compose exec -u www-data -it web ./orm migrations:migrate --no-interaction --object-manager doctrine.entitymanager.orm_report $MIGRATION_BASE_REPORT
 
       - name: stop
-        run: docker compose down
+        run: docker compose $COMPOSE_FILES down

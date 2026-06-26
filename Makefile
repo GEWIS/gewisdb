@@ -1,4 +1,4 @@
-.PHONY: help runprod rundev runtest runcoverage update updatecomposer getvendordir phpstan phpcs phpcbf phpcsfix phpcsfixtypes replenish compilelang build buildprod builddev update preparelistmonk preparemailman migrate migrate-to migration-down migration-up migration-diff composerunused stripewebhooksecret
+.PHONY: help runprod rundev runtest runcoverage update updatecomposer getvendordir phpstan phpcs phpcbf phpcsfix phpcsfixtypes replenish compilelang build buildprod builddev update preparelistmonk preparemailman migrate migrate-to migration-down migration-up migration-diff composerunused stripewebhooksecret seed seed-core wait-db
 
 help:
 		@echo "Makefile commands:"
@@ -36,30 +36,36 @@ rundev: builddev
 		@docker compose up -d --build --remove-orphans
 		@make replenish
 
-migrate: replenish
+migrate: replenish wait-db
 		@docker compose exec -u www-data -it web ./orm migrations:migrate --object-manager doctrine.entitymanager.orm_default
 		@docker compose exec -u www-data -it web ./orm migrations:migrate --object-manager doctrine.entitymanager.orm_report
+
+# Wait (bounded) for postgresql to accept TCP connections before touching the DB.
+wait-db:
+		@for i in $$(seq 1 30); do \
+			docker compose exec -T postgresql pg_isready -h 127.0.0.1 -p 5432 -q && exit 0; \
+			echo "Waiting for the database to accept connections... ($$i/30)"; \
+			sleep 2; \
+		done; \
+		echo "Database did not become ready in time" && exit 1
 
 migrate-to:
 		@docker compose exec -u www-data web sh -c '. ./scripts/migrate-version.sh && ./orm migrations:migrate $$migrations --object-manager doctrine.entitymanager.$$alias'
 
 migration-diff: replenish
-		@docker compose exec -u root web chown www-data:www-data /code/module/Database/migrations/
-		@docker compose exec -u www-data -T web ./orm migrations:diff --object-manager doctrine.entitymanager.orm_default
-		@docker compose exec -u www-data -T web find /code/module/Database/migrations -type f -user www-data -exec sed -i '/CREATE SCHEMA public/d' {} \;
-		@docker compose exec -u www-data -T web find /code/module/Database/migrations -type f -user www-data -exec sed -i '/^[[:space:]]*\/\//d' {} \;
-		@docker compose exec -u www-data -T web find /code/module/Database/migrations -type f -user www-data -exec sed -i '10,12d' {} \;
-		@docker compose exec -u www-data -T web find /code/module/Database/migrations -type f -user www-data -exec sh -c '[ $$(wc -l < "{}") -lt 26 ] && echo "Empty migration, deleting..." && rm "{}" || true' \;
-		@docker cp "$(shell docker compose ps -q web)":/code/module/Database/migrations ./module/Database
-		@docker compose exec -u root web chown -R root:root /code/module/Database/migrations/
-		@docker compose exec -u root web chown www-data:www-data /code/module/Report/migrations/
-		@docker compose exec -u www-data -T web ./orm migrations:diff --object-manager doctrine.entitymanager.orm_report
-		@docker compose exec -u www-data -T web find /code/module/Report/migrations -type f -user www-data -exec sed -i '/CREATE SCHEMA public/d' {} \;
-		@docker compose exec -u www-data -T web find /code/module/Report/migrations -type f -user www-data -exec sed -i '/^[[:space:]]*\/\//d' {} \;
-		@docker compose exec -u www-data -T web find /code/module/Report/migrations -type f -user www-data -exec sed -i '10,12d' {} \;
-		@docker compose exec -u www-data -T web find /code/module/Report/migrations -type f -user www-data -exec sh -c '[ $$(wc -l < "{}") -lt 26 ] && echo "Empty migration, deleting..." && rm "{}" || true' \;
-		@docker cp "$(shell docker compose ps -q web)":/code/module/Report/migrations ./module/Report
-		@docker compose exec -u root web chown -R root:root /code/module/Report/migrations/
+		@set -e; \
+		for target in "Database:orm_default" "Report:orm_report"; do \
+			module="$${target%%:*}"; \
+			manager="$${target##*:}"; \
+			echo "Generating migrations for $$module ($$manager)..."; \
+			docker compose exec -u root web chown www-data:www-data /code/module/$$module/migrations/; \
+			docker compose exec -u www-data -T web ./orm migrations:diff --allow-empty-diff --object-manager doctrine.entitymanager.$$manager; \
+			docker compose exec -u www-data -T web find /code/module/$$module/migrations -type f -user www-data -exec sed -i '/CREATE SCHEMA public/d' {} \; ; \
+			docker compose exec -u www-data -T web find /code/module/$$module/migrations -type f -user www-data -exec sh -c 'grep -q "addSql(" "$$1" || { echo "Deleting empty migration $$1"; rm "$$1"; }' _ {} \; ; \
+			docker cp "$$(docker compose ps -q web)":/code/module/$$module/migrations ./module/$$module; \
+			docker compose exec -u root web chown -R root:root /code/module/$$module/migrations/; \
+		done
+
 
 migration-up: replenish
 		@docker compose exec -u www-data web sh -c '. ./scripts/migrate-version.sh && ./orm migrations:execute --up $$migrations --object-manager doctrine.entitymanager.$$alias'
@@ -67,9 +73,14 @@ migration-up: replenish
 migration-down: replenish
 		@docker compose exec -u www-data web sh -c '. ./scripts/migrate-version.sh && ./orm migrations:execute --down $$migrations --object-manager doctrine.entitymanager.$$alias'
 
-seed: replenish
+# Seed the core databases only (fixtures + report projection): needs just web + postgresql.
+# Used by CI to test migrations and seeders without booting the sync-based services.
+seed-core: replenish
 		@docker compose exec -u www-data -T web ./web application:fixtures:load
 		@docker compose exec -u www-data web ./web report:generate:full
+
+# Full local seed: core databases plus the (sync-based) Mailman and Listmonk provisioning.
+seed: seed-core
 		@make preparemailman
 		@docker compose exec mailman-web bash -c '(python3 ./manage.py createsuperuser --no-input 2>/dev/null || true)'
 		@docker compose exec -u mailman mailman-core bash -c '(mailman create news@$$MAILMAN_DOMAIN; mailman create other@$$MAILMAN_DOMAIN; true) 2>/dev/null'

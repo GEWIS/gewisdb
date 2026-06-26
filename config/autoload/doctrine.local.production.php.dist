@@ -251,6 +251,7 @@ return [
                 'transactional' => true,
                 'check_database_platform' => true,
                 'organize_migrations' => 'none',
+                'custom_template' => './config/migration.tpl',
             ],
             'orm_report' => [
                 'table_storage' => [
@@ -267,6 +268,7 @@ return [
                 'transactional' => true,
                 'check_database_platform' => true,
                 'organize_migrations' => 'none',
+                'custom_template' => './config/migration.tpl',
             ],
         ],
     ],
