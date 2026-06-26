@@ -275,7 +275,7 @@ class Organ
 
         // Where the installation is before the activeBefore date
         $sq->andWhere($sq->expr()->lte($installAlias . 'Meeting.date', ':' . $parameterPrefix . 'ActiveBefore'));
-        $qb->setParameter(':' . $parameterPrefix . 'ActiveBefore', $activeBefore);
+        $qb->setParameter($parameterPrefix . 'ActiveBefore', $activeBefore);
 
         // And the installation was never annulled
         $sq->andWhere($sq->expr()->isNull($installAlias . 'Annulment.sequence'));
@@ -283,7 +283,7 @@ class Organ
         // And the installation is not for an Inactief Lid
         if (!$inActiveIsActive) {
             $sq->andWhere($sq->expr()->neq($installAlias . '.function', ':' . $parameterPrefix . 'InactiveMember'));
-            $qb->setParameter(':' . $parameterPrefix . 'InactiveMember', InstallationFunctions::InactiveMember->value);
+            $qb->setParameter($parameterPrefix . 'InactiveMember', InstallationFunctions::InactiveMember->value);
         }
 
         // Where there is no discharge (or only an annulled discharge), or the discharge is after the activeAfter date
@@ -305,7 +305,7 @@ class Organ
             $sq->expr()->gte($dischargeAlias . 'Meeting.date', ':' . $parameterPrefix . 'ActiveAfter'),
             $sq->expr()->isNotNull($dischargeAlias . 'Annulment.sequence'),
         ));
-        $qb->setParameter(':' . $parameterPrefix . 'ActiveAfter', $activeAfter);
+        $qb->setParameter($parameterPrefix . 'ActiveAfter', $activeAfter);
 
         return $sq;
     }
