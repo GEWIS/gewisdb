@@ -216,6 +216,15 @@ class Organ
         }
 
         if (null === $organMember) {
+            // The installation's organMember is the inverse side of the relation; it is only hydrated when the
+            // installation is (re)loaded in a fresh session. Within a single session (e.g. seeding, where the install
+            // and discharge are processed back-to-back) it is not, so look the OrganMember up by its installation.
+            $organMember = $this->emReport->getRepository(OrganMember::class)->findOneBy([
+                'installation' => $ref->getInstallation(),
+            ]);
+        }
+
+        if (null === $organMember) {
             throw new LogicException('Discharge without OrganMember');
         }
 

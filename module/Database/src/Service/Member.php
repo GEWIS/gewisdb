@@ -31,6 +31,7 @@ use Database\Model\AuditEntry as AuditEntryModel;
 use Database\Model\AuditMailingListMembership;
 use Database\Model\AuditNote as AuditNoteModel;
 use Database\Model\AuditRenewal as AuditRenewalModel;
+use Database\Model\Enums\AttentionReasons;
 use Database\Model\Enums\MailingListMemberAction;
 use Database\Model\Enums\MailingListMemberOrigin;
 use Database\Model\Enums\Studies;
@@ -59,6 +60,7 @@ use User\Service\UserService;
 
 use function array_diff;
 use function array_intersect;
+use function array_key_exists;
 use function array_merge;
 use function assert;
 use function bin2hex;
@@ -67,6 +69,7 @@ use function date;
 use function in_array;
 use function mb_encode_mimeheader;
 use function random_bytes;
+use function usort;
 
 class Member
 {
@@ -1159,6 +1162,79 @@ class Member
         $form->bind($address);
 
         return $form;
+    }
+
+    /**
+     * Get the members requiring attention
+     *
+     * @return array{
+     *     days: int,
+     *     members: MemberModel[],
+     *     reasons: array<int, AttentionReasons[]>,
+     * }
+     */
+    public function getMembersRequiringAttention(int $days = 30): array
+    {
+        $members = [];
+        $reasons = [];
+
+        /** @var array<value-of<AttentionReasons>, MemberModel[]> $combined */
+        $combined = [];
+
+        $combined[AttentionReasons::MissingEmail->value] = $this->getMemberMapper()->findAttentionWithoutEmail();
+        $combined[AttentionReasons::MissingStudentIdOrdinary->value] =
+        $this->getMemberMapper()->findAttentionWithoutStudentId();
+        $combined[AttentionReasons::ExpiringExternalNonActive->value] =
+        $this->getMemberMapper()->findAttentionExpiring(
+            includeActive: false,
+            includeNonActive: true,
+            specificType: MembershipTypes::External,
+            expiresWithinDays: $days,
+        );
+        $combined[AttentionReasons::ExpiringExternalActive->value] = $this->getMemberMapper()->findAttentionExpiring(
+            includeActive: true,
+            includeNonActive: false,
+            specificType: MembershipTypes::External,
+            expiresWithinDays: $days,
+        );
+        $combined[AttentionReasons::ExpiringOrdinaryActive->value] = $this->getMemberMapper()->findAttentionExpiring(
+            includeActive: true,
+            includeNonActive: false,
+            specificType: MembershipTypes::Ordinary,
+            expiresWithinDays: $days,
+        );
+        $combined[AttentionReasons::ExpiringOrdinaryNonActive->value] = $this->getMemberMapper()->findAttentionExpiring(
+            includeActive: false,
+            includeNonActive: true,
+            specificType: MembershipTypes::Ordinary,
+            expiresWithinDays: $days,
+        );
+        $combined[AttentionReasons::ExpiringGraduateActiveInactive->value] =
+        $this->getMemberMapper()->findAttentionExpiring(
+            includeActive: true,
+            includeNonActive: false,
+            inActiveIsActive: true,
+            specificType: MembershipTypes::Graduate,
+            expiresWithinDays: $days,
+        );
+
+        foreach (AttentionReasons::cases() as $reason) {
+            foreach ($combined[$reason->value] ?? [] as $member) {
+                if (!array_key_exists($member->getLidnr(), $reasons)) {
+                    $members[] = $member;
+                }
+
+                $reasons[$member->getLidnr()][] = $reason;
+            }
+        }
+
+        usort($members, static function (MemberModel $a, MemberModel $b) {
+            return ($a->getExpiration() <=> $b->getExpiration()) * 10
+                + ($a->getLastName() <=> $b->getLastName()) * 2
+                + ($a->getFirstName() <=> $b->getFirstName());
+        });
+
+        return ['days' => $days, 'members' => $members, 'reasons' => $reasons];
     }
 
     /**

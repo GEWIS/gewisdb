@@ -5,13 +5,16 @@ declare(strict_types=1);
 namespace Database\Mapper;
 
 use Application\Model\Enums\MeetingTypes;
+use Database\Model\Enums\InstallationFunctions;
 use Database\Model\SubDecision\Abrogation as AbrogationModel;
 use Database\Model\SubDecision\Annulment as AnnulmentModel;
 use Database\Model\SubDecision\Discharge as DischargeModel;
 use Database\Model\SubDecision\Foundation as FoundationModel;
 use Database\Model\SubDecision\Installation as InstallationModel;
+use DateTimeInterface;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 
 use function strtolower;
 
@@ -232,6 +235,79 @@ class Organ
         $qb->setParameter(':name', '%' . strtolower($query) . '%');
 
         return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * Returns a subquery of all members IDs that were active within a certain timeframe.
+     *
+     * Has manual joins because of limitations with composite primary keys and doctrine.
+     *
+     * @param bool         $inActiveIsActive Whether to include members that are inactive organ members.
+     * @param QueryBuilder $qb               The qb to use. Parameters will be set on this query builder.
+     *
+     * @return QueryBuilder A sub query builder that selects all member IDs that were active within the given timeframe.
+     */
+    public static function getIsActiveWithinSubQuery(
+        QueryBuilder $qb,
+        DateTimeInterface $activeAfter,
+        DateTimeInterface $activeBefore,
+        string $installAlias = 'installation',
+        string $dischargeAlias = 'discharge',
+        string $parameterPrefix = 'iaw',
+        bool $inActiveIsActive = false,
+    ): QueryBuilder {
+        $sq = $qb->getEntityManager()->createQueryBuilder();
+
+        // We take all unique members with installations
+        $sq->select('IDENTITY(' . $installAlias . '.member)')
+            ->distinct()
+            ->from(InstallationModel::class, $installAlias)
+            ->join(
+                $installAlias . '.decision',
+                $installAlias . 'Decision',
+            )->join(
+                $installAlias . 'Decision.meeting',
+                $installAlias . 'Meeting',
+            )->leftJoin(
+                $installAlias . 'Decision.annulledBy',
+                $installAlias . 'Annulment',
+            );
+
+        // Where the installation is before the activeBefore date
+        $sq->andWhere($sq->expr()->lte($installAlias . 'Meeting.date', ':' . $parameterPrefix . 'ActiveBefore'));
+        $qb->setParameter($parameterPrefix . 'ActiveBefore', $activeBefore);
+
+        // And the installation was never annulled
+        $sq->andWhere($sq->expr()->isNull($installAlias . 'Annulment.sequence'));
+
+        // And the installation is not for an Inactief Lid
+        if (!$inActiveIsActive) {
+            $sq->andWhere($sq->expr()->neq($installAlias . '.function', ':' . $parameterPrefix . 'InactiveMember'));
+            $qb->setParameter($parameterPrefix . 'InactiveMember', InstallationFunctions::InactiveMember->value);
+        }
+
+        // Where there is no discharge (or only an annulled discharge), or the discharge is after the activeAfter date
+        // We need manual joins here because of limitations in doctrine
+        $sq->leftJoin(
+            $installAlias . '.discharge',
+            $dischargeAlias,
+        )->leftJoin(
+            $dischargeAlias . '.decision',
+            $dischargeAlias . 'Decision',
+        )->leftJoin(
+            $dischargeAlias . 'Decision.meeting',
+            $dischargeAlias . 'Meeting',
+        )->leftJoin(
+            $dischargeAlias . 'Decision.annulledBy',
+            $dischargeAlias . 'Annulment',
+        )->andWhere($sq->expr()->orX(
+            $sq->expr()->isNull($dischargeAlias . 'Meeting.date'),
+            $sq->expr()->gt($dischargeAlias . 'Meeting.date', ':' . $parameterPrefix . 'ActiveAfter'),
+            $sq->expr()->isNotNull($dischargeAlias . 'Annulment.sequence'),
+        ));
+        $qb->setParameter($parameterPrefix . 'ActiveAfter', $activeAfter);
+
+        return $sq;
     }
 
     /**
