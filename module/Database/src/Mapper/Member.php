@@ -16,7 +16,8 @@ use Database\Model\SubDecision\Discharge as DischargeModel;
 use Database\Model\SubDecision\Financial\Budget as BudgetModel;
 use Database\Model\SubDecision\Financial\Statement as StatementModel;
 use Database\Model\SubDecision\Installation as InstallationModel;
-use DateTime;
+use DateTimeImmutable;
+use DateTimeInterface;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -265,7 +266,7 @@ class Member
      *
      * @return MemberModel[]
      */
-    public function findExpired(DateTime $expiration): array
+    public function findExpired(DateTimeInterface $expiration): array
     {
         $qb = $this->getRepository()->createQueryBuilder('m');
         $qb->where('m.deleted = False');
@@ -302,16 +303,18 @@ class Member
         int $maxExpiredDays = 90,
         ?int $expiresWithinDays = null,
     ): array {
+        $today = $this->getToday();
+
         $qb = $this->getRepository()->createQueryBuilder('m');
         $qb->where('m.deleted = False')
             ->andWhere('m.email IS NULL');
 
         $sq = self::getDatedMembershipSubquery(
             $qb,
-            endsAfter: new DateTime()->modify('-' . $maxExpiredDays . ' days'),
+            endsAfter: $today->modify('-' . $maxExpiredDays . ' days'),
             endsBefore: null === $expiresWithinDays
                 ? null
-                : new DateTime()->modify('+' . $expiresWithinDays . ' days'),
+                : $today->modify('+' . $expiresWithinDays . ' days'),
         );
 
         $qb->andWhere(
@@ -336,16 +339,18 @@ class Member
         int $maxExpiredDays = 90,
         ?int $expiresWithinDays = null,
     ): array {
+        $today = $this->getToday();
+
         $qb = $this->getRepository()->createQueryBuilder('m');
         $qb->where('m.deleted = False')
             ->andWhere('m.tueUsername IS NULL');
 
         $sq = self::getDatedMembershipSubquery(
             $qb,
-            endsAfter: new DateTime()->modify('-' . $maxExpiredDays . ' days'),
+            endsAfter: $today->modify('-' . $maxExpiredDays . ' days'),
             endsBefore: null === $expiresWithinDays
                 ? null
-                : new DateTime()->modify('+' . $expiresWithinDays . ' days'),
+                : $today->modify('+' . $expiresWithinDays . ' days'),
             specificType: MembershipTypes::Ordinary,
         );
 
@@ -379,12 +384,14 @@ class Member
         $qb = $this->getRepository()->createQueryBuilder('m');
         $qb->where('m.deleted = False');
 
+        $today = $this->getToday();
+
         $sqM = self::getDatedMembershipSubquery(
             $qb,
-            endsAfter: new DateTime()->modify('-' . $maxExpiredDays . ' days'),
+            endsAfter: $today->modify('-' . $maxExpiredDays . ' days'),
             endsBefore: null === $expiresWithinDays
                 ? null
-                : new DateTime()->modify('+' . $expiresWithinDays . ' days'),
+                : $today->modify('+' . $expiresWithinDays . ' days'),
             specificType: $specificType,
         );
 
@@ -405,8 +412,8 @@ class Member
             // queries and we don't expect any future decisions to be in the database.
             $sqA = OrganMapper::getIsActiveWithinSubQuery(
                 qb: $qb,
-                activeBefore: new DateTime(),
-                activeAfter: new DateTime(),
+                activeBefore: $today,
+                activeAfter: $today,
                 inActiveIsActive: $inActiveIsActive,
             );
 
@@ -609,8 +616,8 @@ class Member
      */
     private static function getDatedMembershipSubquery(
         QueryBuilder $qb,
-        ?DateTime $endsAfter = null,
-        ?DateTime $endsBefore = null,
+        ?DateTimeInterface $endsAfter = null,
+        ?DateTimeInterface $endsBefore = null,
         ?MembershipTypes $specificType = null,
         bool $onlyLastMembership = true,
         string $membershipAlias = 'daMems',
@@ -637,7 +644,7 @@ class Member
 
         // Which expire after a specific date, if specified
         if (null !== $endsAfter) {
-            $sq->andWhere($membershipAlias . '.endDate >= :' . $parameterPrefix . 'EndsAfter');
+            $sq->andWhere($membershipAlias . '.endDate > :' . $parameterPrefix . 'EndsAfter');
             $qb->setParameter($parameterPrefix . 'EndsAfter', $endsAfter);
         }
 
@@ -655,6 +662,11 @@ class Member
         }
 
         return $sq;
+    }
+
+    private function getToday(): DateTimeImmutable
+    {
+        return (new DateTimeImmutable())->setTime(0, 0, 0);
     }
 
     /**

@@ -11,7 +11,7 @@ use Database\Model\SubDecision\Annulment as AnnulmentModel;
 use Database\Model\SubDecision\Discharge as DischargeModel;
 use Database\Model\SubDecision\Foundation as FoundationModel;
 use Database\Model\SubDecision\Installation as InstallationModel;
-use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -249,8 +249,8 @@ class Organ
      */
     public static function getIsActiveWithinSubQuery(
         QueryBuilder $qb,
-        DateTime $activeAfter,
-        DateTime $activeBefore,
+        DateTimeInterface $activeAfter,
+        DateTimeInterface $activeBefore,
         string $installAlias = 'installation',
         string $dischargeAlias = 'discharge',
         string $parameterPrefix = 'iaw',
@@ -302,7 +302,7 @@ class Organ
             $dischargeAlias . 'Annulment',
         )->andWhere($sq->expr()->orX(
             $sq->expr()->isNull($dischargeAlias . 'Meeting.date'),
-            $sq->expr()->gte($dischargeAlias . 'Meeting.date', ':' . $parameterPrefix . 'ActiveAfter'),
+            $sq->expr()->gt($dischargeAlias . 'Meeting.date', ':' . $parameterPrefix . 'ActiveAfter'),
             $sq->expr()->isNotNull($dischargeAlias . 'Annulment.sequence'),
         ));
         $qb->setParameter($parameterPrefix . 'ActiveAfter', $activeAfter);
