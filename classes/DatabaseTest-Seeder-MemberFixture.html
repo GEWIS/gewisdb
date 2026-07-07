@@ -310,12 +310,11 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/test/Seeder/MemberFixture.php"><a href="files/module-database-test-seeder-memberfixture.html"><abbr title="module/Database/test/Seeder/MemberFixture.php">MemberFixture.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">25</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">phpcs:disable Generic.WhiteSpace.ScopeIndent.IncorrectExact</p>
-
+        
 
 
 
@@ -340,6 +339,32 @@
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/DatabaseTest-Seeder-MemberFixture.html#constant_REF_MEMBER_ATTN_EXTERNAL_ACTIVE">REF_MEMBER_ATTN_EXTERNAL_ACTIVE</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;attn-external-active&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/DatabaseTest-Seeder-MemberFixture.html#constant_REF_MEMBER_ATTN_GRADUATE_ACTIVE">REF_MEMBER_ATTN_GRADUATE_ACTIVE</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;attn-graduate-active&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/DatabaseTest-Seeder-MemberFixture.html#constant_REF_MEMBER_ATTN_MISCLASSIFIED">REF_MEMBER_ATTN_MISCLASSIFIED</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;attn-misclassified&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/DatabaseTest-Seeder-MemberFixture.html#constant_REF_MEMBER_ATTN_ORDINARY_ACTIVE">REF_MEMBER_ATTN_ORDINARY_ACTIVE</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;attn-ordinary-active&#039;                            </span>
+</dt>
+<dd>Members below are crafted to surface on the &quot;members requiring attention&quot; overview. The ones that need to count
+as active organ members are referenced here so {@see DecisionFixture} can install them into an organ.</dd>
+
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/DatabaseTest-Seeder-MemberFixture.html#constant_REF_MEMBER_EXTERNAL">REF_MEMBER_EXTERNAL</a>
     <span>
@@ -380,6 +405,48 @@
                                 &nbsp;: void    </span>
 </dt>
 
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/DatabaseTest-Seeder-MemberFixture.html#method_associationYearChain">associationYearChain()</a>
+    <span>
+                                &nbsp;: array&lt;int, <abbr title="array{0: \Application\Model\Enums\MembershipTypes, 1: \DateTime, 2: \DateTime}">DateTime}</abbr>&gt;    </span>
+</dt>
+<dd>Build a chain of association-year memberships for a member who has been around $years association years. The last
+$finalTypeYears memberships use $finalType (earlier years are Ordinary), modelling a single transition like the
+organ-based Ordinary -&gt; External or the common Ordinary -&gt; Graduate. Pass $finalTypeYears equal to $years for a
+member who joined in that type straight away (e.g. a PhD who joined as External).</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/DatabaseTest-Seeder-MemberFixture.html#method_associationYearPhases">associationYearPhases()</a>
+    <span>
+                                &nbsp;: array&lt;int, <abbr title="array{0: \Application\Model\Enums\MembershipTypes, 1: \DateTime, 2: \DateTime}">DateTime}</abbr>&gt;    </span>
+</dt>
+<dd>Build a chain of association-year memberships from a list of [type, number-of-years] phases, allowing multi-step
+histories. Memberships run July 1 -&gt; July 1; the first one starts on the join date (the introduction week by
+default, but it can be mid-year for someone who joins later). The final membership ends on $finalEnd.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/DatabaseTest-Seeder-MemberFixture.html#method_julyFirstBefore">julyFirstBefore()</a>
+    <span>
+                                &nbsp;: <abbr title="\DateTime">DateTime</abbr>    </span>
+</dt>
+<dd>Return the latest July 1 (association-year boundary) strictly before the given date.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/DatabaseTest-Seeder-MemberFixture.html#method_makeAttentionMember">makeAttentionMember()</a>
+    <span>
+                                &nbsp;: <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>    </span>
+</dt>
+<dd>Create, populate and persist a member with a membership history. Returns it can be used as a reference for
+cross-fixture wiring (e.g., organ installations in DecisionFixture).</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/DatabaseTest-Seeder-MemberFixture.html#method_studentNumber">studentNumber()</a>
+    <span>
+                                &nbsp;: string    </span>
+</dt>
+<dd>Build a TU/e style student number (YYYYABCD) for a member who enrolled $yearsAgo years ago. $sequence is the
+trailing serial; it starts at 2 below because the student and prospective fixtures above already use serial 1.</dd>
+
     </dl>
 
 
@@ -392,6 +459,128 @@
 
         </h3>
                     <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_REF_MEMBER_ATTN_EXTERNAL_ACTIVE">
+        REF_MEMBER_ATTN_EXTERNAL_ACTIVE
+        <a href="classes/DatabaseTest-Seeder-MemberFixture.html#constant_REF_MEMBER_ATTN_EXTERNAL_ACTIVE" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/test/Seeder/MemberFixture.php"><a href="files/module-database-test-seeder-memberfixture.html"><abbr title="module/Database/test/Seeder/MemberFixture.php">MemberFixture.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">37</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">REF_MEMBER_ATTN_EXTERNAL_ACTIVE</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;attn-external-active&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_REF_MEMBER_ATTN_GRADUATE_ACTIVE">
+        REF_MEMBER_ATTN_GRADUATE_ACTIVE
+        <a href="classes/DatabaseTest-Seeder-MemberFixture.html#constant_REF_MEMBER_ATTN_GRADUATE_ACTIVE" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/test/Seeder/MemberFixture.php"><a href="files/module-database-test-seeder-memberfixture.html"><abbr title="module/Database/test/Seeder/MemberFixture.php">MemberFixture.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">38</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">REF_MEMBER_ATTN_GRADUATE_ACTIVE</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;attn-graduate-active&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_REF_MEMBER_ATTN_MISCLASSIFIED">
+        REF_MEMBER_ATTN_MISCLASSIFIED
+        <a href="classes/DatabaseTest-Seeder-MemberFixture.html#constant_REF_MEMBER_ATTN_MISCLASSIFIED" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/test/Seeder/MemberFixture.php"><a href="files/module-database-test-seeder-memberfixture.html"><abbr title="module/Database/test/Seeder/MemberFixture.php">MemberFixture.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">39</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">REF_MEMBER_ATTN_MISCLASSIFIED</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;attn-misclassified&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_REF_MEMBER_ATTN_ORDINARY_ACTIVE">
+        REF_MEMBER_ATTN_ORDINARY_ACTIVE
+        <a href="classes/DatabaseTest-Seeder-MemberFixture.html#constant_REF_MEMBER_ATTN_ORDINARY_ACTIVE" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/test/Seeder/MemberFixture.php"><a href="files/module-database-test-seeder-memberfixture.html"><abbr title="module/Database/test/Seeder/MemberFixture.php">MemberFixture.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">36</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Members below are crafted to surface on the &quot;members requiring attention&quot; overview. The ones that need to count
+as active organ members are referenced here so {@see DecisionFixture} can install them into an organ.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">REF_MEMBER_ATTN_ORDINARY_ACTIVE</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;attn-ordinary-active&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
     <h4 class="phpdocumentor-element__name" id="constant_REF_MEMBER_EXTERNAL">
         REF_MEMBER_EXTERNAL
         <a href="classes/DatabaseTest-Seeder-MemberFixture.html#constant_REF_MEMBER_EXTERNAL" class="headerlink"><i class="fas fa-link"></i></a>
@@ -401,7 +590,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/test/Seeder/MemberFixture.php"><a href="files/module-database-test-seeder-memberfixture.html"><abbr title="module/Database/test/Seeder/MemberFixture.php">MemberFixture.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">27</span>
+    <span class="phpdocumentor-element-found-in__line">28</span>
 
     </aside>
 
@@ -431,7 +620,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/test/Seeder/MemberFixture.php"><a href="files/module-database-test-seeder-memberfixture.html"><abbr title="module/Database/test/Seeder/MemberFixture.php">MemberFixture.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">28</span>
+    <span class="phpdocumentor-element-found-in__line">29</span>
 
     </aside>
 
@@ -461,7 +650,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/test/Seeder/MemberFixture.php"><a href="files/module-database-test-seeder-memberfixture.html"><abbr title="module/Database/test/Seeder/MemberFixture.php">MemberFixture.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">29</span>
+    <span class="phpdocumentor-element-found-in__line">30</span>
 
     </aside>
 
@@ -491,7 +680,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/test/Seeder/MemberFixture.php"><a href="files/module-database-test-seeder-memberfixture.html"><abbr title="module/Database/test/Seeder/MemberFixture.php">MemberFixture.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">26</span>
+    <span class="phpdocumentor-element-found-in__line">27</span>
 
     </aside>
 
@@ -535,7 +724,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/test/Seeder/MemberFixture.php"><a href="files/module-database-test-seeder-memberfixture.html"><abbr title="module/Database/test/Seeder/MemberFixture.php">MemberFixture.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">31</span>
+    <span class="phpdocumentor-element-found-in__line">41</span>
 
     </aside>
 
@@ -576,6 +765,395 @@
     
     
 </article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_associationYearChain">
+        associationYearChain()
+        <a href="classes/DatabaseTest-Seeder-MemberFixture.html#method_associationYearChain" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/test/Seeder/MemberFixture.php"><a href="files/module-database-test-seeder-memberfixture.html"><abbr title="module/Database/test/Seeder/MemberFixture.php">MemberFixture.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">526</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Build a chain of association-year memberships for a member who has been around $years association years. The last
+$finalTypeYears memberships use $finalType (earlier years are Ordinary), modelling a single transition like the
+organ-based Ordinary -&gt; External or the common Ordinary -&gt; Graduate. Pass $finalTypeYears equal to $years for a
+member who joined in that type straight away (e.g. a PhD who joined as External).</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">associationYearChain</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$years</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><abbr title="\DateTime">DateTime</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$finalEnd</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Application-Model-Enums-MembershipTypes.html"><abbr title="\Application\Model\Enums\MembershipTypes">MembershipTypes</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$finalType</span><span> = </span><span class="phpdocumentor-signature__argument__default-value"><a href="classes/Application-Model-Enums-MembershipTypes.html#enumcase_Ordinary"><abbr title="\Application\Model\Enums\MembershipTypes::Ordinary">MembershipTypes::Ordinary</abbr></a></span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$finalTypeYears</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">1</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$joinMonth</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">8</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$joinDay</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">20</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;int, <abbr title="array{0: \Application\Model\Enums\MembershipTypes, 1: \DateTime, 2: \DateTime}">DateTime}</abbr>&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$years</span>
+                : <span class="phpdocumentor-argument-list__argument__type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$finalEnd</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\DateTime">DateTime</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$finalType</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Application-Model-Enums-MembershipTypes.html"><abbr title="\Application\Model\Enums\MembershipTypes">MembershipTypes</abbr></a></span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value"><a href="classes/Application-Model-Enums-MembershipTypes.html#enumcase_Ordinary"><abbr title="\Application\Model\Enums\MembershipTypes::Ordinary">MembershipTypes::Ordinary</abbr></a></span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$finalTypeYears</span>
+                : <span class="phpdocumentor-argument-list__argument__type">int</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">1</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$joinMonth</span>
+                : <span class="phpdocumentor-argument-list__argument__type">int</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">8</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$joinDay</span>
+                : <span class="phpdocumentor-argument-list__argument__type">int</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">20</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;int, <abbr title="array{0: \Application\Model\Enums\MembershipTypes, 1: \DateTime, 2: \DateTime}">DateTime}</abbr>&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_associationYearPhases">
+        associationYearPhases()
+        <a href="classes/DatabaseTest-Seeder-MemberFixture.html#method_associationYearPhases" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/test/Seeder/MemberFixture.php"><a href="files/module-database-test-seeder-memberfixture.html"><abbr title="module/Database/test/Seeder/MemberFixture.php">MemberFixture.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">556</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Build a chain of association-year memberships from a list of [type, number-of-years] phases, allowing multi-step
+histories. Memberships run July 1 -&gt; July 1; the first one starts on the join date (the introduction week by
+default, but it can be mid-year for someone who joins later). The final membership ends on $finalEnd.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">associationYearPhases</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">array&lt;int, <abbr title="array{0: \Application\Model\Enums\MembershipTypes, 1: int}">MembershipTypes, 1: int}</abbr>&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$phases</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><abbr title="\DateTime">DateTime</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$finalEnd</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$joinMonth</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">8</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$joinDay</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">20</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;int, <abbr title="array{0: \Application\Model\Enums\MembershipTypes, 1: \DateTime, 2: \DateTime}">DateTime}</abbr>&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$phases</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;int, <abbr title="array{0: \Application\Model\Enums\MembershipTypes, 1: int}">MembershipTypes, 1: int}</abbr>&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>ordered [type, years] phases</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$finalEnd</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\DateTime">DateTime</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$joinMonth</span>
+                : <span class="phpdocumentor-argument-list__argument__type">int</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">8</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$joinDay</span>
+                : <span class="phpdocumentor-argument-list__argument__type">int</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">20</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;int, <abbr title="array{0: \Application\Model\Enums\MembershipTypes, 1: \DateTime, 2: \DateTime}">DateTime}</abbr>&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_julyFirstBefore">
+        julyFirstBefore()
+        <a href="classes/DatabaseTest-Seeder-MemberFixture.html#method_julyFirstBefore" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/test/Seeder/MemberFixture.php"><a href="files/module-database-test-seeder-memberfixture.html"><abbr title="module/Database/test/Seeder/MemberFixture.php">MemberFixture.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">594</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Return the latest July 1 (association-year boundary) strictly before the given date.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">julyFirstBefore</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><abbr title="\DateTime">DateTime</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$date</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$date</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\DateTime">DateTime</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_makeAttentionMember">
+        makeAttentionMember()
+        <a href="classes/DatabaseTest-Seeder-MemberFixture.html#method_makeAttentionMember" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/test/Seeder/MemberFixture.php"><a href="files/module-database-test-seeder-memberfixture.html"><abbr title="module/Database/test/Seeder/MemberFixture.php">MemberFixture.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">470</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Create, populate and persist a member with a membership history. Returns it can be used as a reference for
+cross-fixture wiring (e.g., organ installations in DecisionFixture).</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">makeAttentionMember</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><abbr title="\Doctrine\Persistence\ObjectManager">ObjectManager</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$manager</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$initials</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$firstName</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$middleName</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$lastName</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><abbr title="\DateTime">DateTime</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$birth</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$email</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$tueUsername</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Model-Enums-Studies.html"><abbr title="\Database\Model\Enums\Studies">Studies</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$study</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">array&lt;int, <abbr title="array{0: \Application\Model\Enums\MembershipTypes, 1: \DateTime, 2: \DateTime}">DateTime}</abbr>&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$segments</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$hidden</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">false</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$manager</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\Doctrine\Persistence\ObjectManager">ObjectManager</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$initials</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$firstName</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$middleName</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$lastName</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$birth</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\DateTime">DateTime</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$email</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$tueUsername</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$study</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Database-Model-Enums-Studies.html"><abbr title="\Database\Model\Enums\Studies">Studies</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$segments</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;int, <abbr title="array{0: \Application\Model\Enums\MembershipTypes, 1: \DateTime, 2: \DateTime}">DateTime}</abbr>&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>[type, start, end]</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$hidden</span>
+                : <span class="phpdocumentor-argument-list__argument__type">bool</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">false</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_studentNumber">
+        studentNumber()
+        <a href="classes/DatabaseTest-Seeder-MemberFixture.html#method_studentNumber" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/test/Seeder/MemberFixture.php"><a href="files/module-database-test-seeder-memberfixture.html"><abbr title="module/Database/test/Seeder/MemberFixture.php">MemberFixture.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">608</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Build a TU/e style student number (YYYYABCD) for a member who enrolled $yearsAgo years ago. $sequence is the
+trailing serial; it starts at 2 below because the student and prospective fixtures above already use serial 1.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">studentNumber</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$yearsAgo</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$sequence</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$yearsAgo</span>
+                : <span class="phpdocumentor-argument-list__argument__type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$sequence</span>
+                : <span class="phpdocumentor-argument-list__argument__type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
+</article>
             </section>
 
         
@@ -597,6 +1175,10 @@
                             <li class="phpdocumentor-on-this-page-section__title">Constants</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
+                                                    <li class=""><a href="classes/DatabaseTest-Seeder-MemberFixture.html#constant_REF_MEMBER_ATTN_EXTERNAL_ACTIVE">REF_MEMBER_ATTN_EXTERNAL_ACTIVE</a></li>
+                                                    <li class=""><a href="classes/DatabaseTest-Seeder-MemberFixture.html#constant_REF_MEMBER_ATTN_GRADUATE_ACTIVE">REF_MEMBER_ATTN_GRADUATE_ACTIVE</a></li>
+                                                    <li class=""><a href="classes/DatabaseTest-Seeder-MemberFixture.html#constant_REF_MEMBER_ATTN_MISCLASSIFIED">REF_MEMBER_ATTN_MISCLASSIFIED</a></li>
+                                                    <li class=""><a href="classes/DatabaseTest-Seeder-MemberFixture.html#constant_REF_MEMBER_ATTN_ORDINARY_ACTIVE">REF_MEMBER_ATTN_ORDINARY_ACTIVE</a></li>
                                                     <li class=""><a href="classes/DatabaseTest-Seeder-MemberFixture.html#constant_REF_MEMBER_EXTERNAL">REF_MEMBER_EXTERNAL</a></li>
                                                     <li class=""><a href="classes/DatabaseTest-Seeder-MemberFixture.html#constant_REF_MEMBER_GRADUATE">REF_MEMBER_GRADUATE</a></li>
                                                     <li class=""><a href="classes/DatabaseTest-Seeder-MemberFixture.html#constant_REF_MEMBER_PROSPECTIVE">REF_MEMBER_PROSPECTIVE</a></li>
@@ -609,6 +1191,11 @@
             <li>
                 <ul class="phpdocumentor-list -clean">
                                             <li class=""><a href="classes/DatabaseTest-Seeder-MemberFixture.html#method_load">load()</a></li>
+                                            <li class=""><a href="classes/DatabaseTest-Seeder-MemberFixture.html#method_associationYearChain">associationYearChain()</a></li>
+                                            <li class=""><a href="classes/DatabaseTest-Seeder-MemberFixture.html#method_associationYearPhases">associationYearPhases()</a></li>
+                                            <li class=""><a href="classes/DatabaseTest-Seeder-MemberFixture.html#method_julyFirstBefore">julyFirstBefore()</a></li>
+                                            <li class=""><a href="classes/DatabaseTest-Seeder-MemberFixture.html#method_makeAttentionMember">makeAttentionMember()</a></li>
+                                            <li class=""><a href="classes/DatabaseTest-Seeder-MemberFixture.html#method_studentNumber">studentNumber()</a></li>
                                     </ul>
             </li>
                     </ul>

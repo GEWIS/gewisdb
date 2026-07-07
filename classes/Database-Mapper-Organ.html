@@ -307,7 +307,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/Organ.php"><a href="files/module-database-src-mapper-organ.html"><abbr title="module/Database/src/Mapper/Organ.php">Organ.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">18</span>
+    <span class="phpdocumentor-element-found-in__line">21</span>
 
     </aside>
 
@@ -385,6 +385,13 @@
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Database-Mapper-Organ.html#method_getIsActiveWithinSubQuery">getIsActiveWithinSubQuery()</a>
+    <span>
+                                &nbsp;: <abbr title="\Doctrine\ORM\QueryBuilder">QueryBuilder</abbr>    </span>
+</dt>
+<dd>Returns a subquery of all members IDs that were active within a certain timeframe.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Mapper-Organ.html#method_getRepository">getRepository()</a>
     <span>
                                 &nbsp;: <abbr title="\Doctrine\ORM\EntityRepository">EntityRepository</abbr>    </span>
@@ -428,7 +435,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/Organ.php"><a href="files/module-database-src-mapper-organ.html"><abbr title="module/Database/src/Mapper/Organ.php">Organ.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">23</span>
 
     </aside>
 
@@ -470,7 +477,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/Organ.php"><a href="files/module-database-src-mapper-organ.html"><abbr title="module/Database/src/Mapper/Organ.php">Organ.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">23</span>
 
     </aside>
 
@@ -514,7 +521,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/Organ.php"><a href="files/module-database-src-mapper-organ.html"><abbr title="module/Database/src/Mapper/Organ.php">Organ.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">37</span>
+    <span class="phpdocumentor-element-found-in__line">40</span>
 
     </aside>
 
@@ -591,7 +598,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/Organ.php"><a href="files/module-database-src-mapper-organ.html"><abbr title="module/Database/src/Mapper/Organ.php">Organ.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">29</span>
+    <span class="phpdocumentor-element-found-in__line">32</span>
 
     </aside>
 
@@ -630,7 +637,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/Organ.php"><a href="files/module-database-src-mapper-organ.html"><abbr title="module/Database/src/Mapper/Organ.php">Organ.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">134</span>
+    <span class="phpdocumentor-element-found-in__line">137</span>
 
     </aside>
 
@@ -706,7 +713,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/Organ.php"><a href="files/module-database-src-mapper-organ.html"><abbr title="module/Database/src/Mapper/Organ.php">Organ.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">108</span>
+    <span class="phpdocumentor-element-found-in__line">111</span>
 
     </aside>
 
@@ -772,6 +779,107 @@
         class="phpdocumentor-element
             -method
             -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getIsActiveWithinSubQuery">
+        getIsActiveWithinSubQuery()
+        <a href="classes/Database-Mapper-Organ.html#method_getIsActiveWithinSubQuery" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/Organ.php"><a href="files/module-database-src-mapper-organ.html"><abbr title="module/Database/src/Mapper/Organ.php">Organ.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">250</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns a subquery of all members IDs that were active within a certain timeframe.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getIsActiveWithinSubQuery</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><abbr title="\Doctrine\ORM\QueryBuilder">QueryBuilder</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$qb</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><abbr title="\DateTimeInterface">DateTimeInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$activeAfter</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><abbr title="\DateTimeInterface">DateTimeInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$activeBefore</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$installAlias</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">'installation'</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$dischargeAlias</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">'discharge'</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$parameterPrefix</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">'iaw'</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$inActiveIsActive</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">false</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\ORM\QueryBuilder">QueryBuilder</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Has manual joins because of limitations with composite primary keys and doctrine.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$qb</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\Doctrine\ORM\QueryBuilder">QueryBuilder</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The qb to use. Parameters will be set on this query builder.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$activeAfter</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\DateTimeInterface">DateTimeInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$activeBefore</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\DateTimeInterface">DateTimeInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$installAlias</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">'installation'</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$dischargeAlias</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">'discharge'</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$parameterPrefix</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">'iaw'</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$inActiveIsActive</span>
+                : <span class="phpdocumentor-argument-list__argument__type">bool</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">false</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Whether to include members that are inactive organ members.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\ORM\QueryBuilder">QueryBuilder</abbr></span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>A sub query builder that selects all member IDs that were active within the given timeframe.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
                                                         "
 >
     <h4 class="phpdocumentor-element__name" id="method_getRepository">
@@ -782,7 +890,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/Organ.php"><a href="files/module-database-src-mapper-organ.html"><abbr title="module/Database/src/Mapper/Organ.php">Organ.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">240</span>
+    <span class="phpdocumentor-element-found-in__line">316</span>
 
     </aside>
 
@@ -821,7 +929,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/Organ.php"><a href="files/module-database-src-mapper-organ.html"><abbr title="module/Database/src/Mapper/Organ.php">Organ.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">171</span>
+    <span class="phpdocumentor-element-found-in__line">174</span>
 
     </aside>
 
@@ -902,6 +1010,7 @@ automatically process changes.</p>
                                             <li class=""><a href="classes/Database-Mapper-Organ.html#method_findAll">findAll()</a></li>
                                             <li class=""><a href="classes/Database-Mapper-Organ.html#method_findInstallationDecision">findInstallationDecision()</a></li>
                                             <li class=""><a href="classes/Database-Mapper-Organ.html#method_findSimple">findSimple()</a></li>
+                                            <li class=""><a href="classes/Database-Mapper-Organ.html#method_getIsActiveWithinSubQuery">getIsActiveWithinSubQuery()</a></li>
                                             <li class=""><a href="classes/Database-Mapper-Organ.html#method_getRepository">getRepository()</a></li>
                                             <li class=""><a href="classes/Database-Mapper-Organ.html#method_organSearch">organSearch()</a></li>
                                     </ul>

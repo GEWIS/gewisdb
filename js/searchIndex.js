@@ -4076,6 +4076,11 @@ Search.appendIndex(
             "summary": "Index\u0020action.",
             "url": "classes/Database-Controller-MemberController.html#method_indexAction"
         },                {
+            "fqsen": "\\Database\\Controller\\MemberController\u003A\u003AattentionNeededAction\u0028\u0029",
+            "name": "attentionNeededAction",
+            "summary": "Attention\u0020needed\u0020action.",
+            "url": "classes/Database-Controller-MemberController.html#method_attentionNeededAction"
+        },                {
             "fqsen": "\\Database\\Controller\\MemberController\u003A\u003AsubscribeAction\u0028\u0029",
             "name": "subscribeAction",
             "summary": "Subscribe\u0020action.",
@@ -6106,6 +6111,21 @@ Search.appendIndex(
             "summary": "Find\u0020all\u0020members\u0020whose\u0020membership\u0020expired\u0020on\u0020or\u0020before\u0020a\u0020date.",
             "url": "classes/Database-Mapper-Member.html#method_findExpired"
         },                {
+            "fqsen": "\\Database\\Mapper\\Member\u003A\u003AfindAttentionWithoutEmail\u0028\u0029",
+            "name": "findAttentionWithoutEmail",
+            "summary": "Find\u0020members\u0020without\u0020an\u0020email\u0020address.",
+            "url": "classes/Database-Mapper-Member.html#method_findAttentionWithoutEmail"
+        },                {
+            "fqsen": "\\Database\\Mapper\\Member\u003A\u003AfindAttentionWithoutStudentId\u0028\u0029",
+            "name": "findAttentionWithoutStudentId",
+            "summary": "Find\u0020ordinary\u0020members\u0020without\u0020a\u0020student\u0020ID.",
+            "url": "classes/Database-Mapper-Member.html#method_findAttentionWithoutStudentId"
+        },                {
+            "fqsen": "\\Database\\Mapper\\Member\u003A\u003AfindAttentionExpiring\u0028\u0029",
+            "name": "findAttentionExpiring",
+            "summary": "Find\u0020members\u0020who\u0020are\u0020expiring\u0020soon\u0020\u0028active\u0020or\u0020nonactive\u0029\u0020\u0028of\u0020a\u0020specific\u0020type,\u0020if\u0020specified\u0029.",
+            "url": "classes/Database-Mapper-Member.html#method_findAttentionExpiring"
+        },                {
             "fqsen": "\\Database\\Mapper\\Member\u003A\u003AcanRemove\u0028\u0029",
             "name": "canRemove",
             "summary": "Check\u0020if\u0020we\u0020can\u0020fully\u0020remove\u0020a\u0020member.",
@@ -6125,6 +6145,16 @@ Search.appendIndex(
             "name": "getMembershipSubquery",
             "summary": "Returns\u0020a\u0020subquery\u0020containing\u0020IDENTIY\u0028m\u0029\u0020of\u0020all\u0020members\u0020that\u0020have\u0020a\u0020membership\u0020\u0028with\u0020optional\u0020constraints\u0029.",
             "url": "classes/Database-Mapper-Member.html#method_getMembershipSubquery"
+        },                {
+            "fqsen": "\\Database\\Mapper\\Member\u003A\u003AgetDatedMembershipSubquery\u0028\u0029",
+            "name": "getDatedMembershipSubquery",
+            "summary": "Returns\u0020a\u0020subquery\u0020of\u0020all\u0020members\u0020that\u0020have\u0020a\u0020membership\u0020meeting\ncertain\u0020date\u0020or\u0020type\u0020conditions.",
+            "url": "classes/Database-Mapper-Member.html#method_getDatedMembershipSubquery"
+        },                {
+            "fqsen": "\\Database\\Mapper\\Member\u003A\u003AgetToday\u0028\u0029",
+            "name": "getToday",
+            "summary": "",
+            "url": "classes/Database-Mapper-Member.html#method_getToday"
         },                {
             "fqsen": "\\Database\\Mapper\\Member\u003A\u003Apersist\u0028\u0029",
             "name": "persist",
@@ -6230,6 +6260,11 @@ Search.appendIndex(
             "name": "organSearch",
             "summary": "Search\u0020for\u0020organ\u0020decisions.",
             "url": "classes/Database-Mapper-Organ.html#method_organSearch"
+        },                {
+            "fqsen": "\\Database\\Mapper\\Organ\u003A\u003AgetIsActiveWithinSubQuery\u0028\u0029",
+            "name": "getIsActiveWithinSubQuery",
+            "summary": "Returns\u0020a\u0020subquery\u0020of\u0020all\u0020members\u0020IDs\u0020that\u0020were\u0020active\u0020within\u0020a\u0020certain\u0020timeframe.",
+            "url": "classes/Database-Mapper-Organ.html#method_getIsActiveWithinSubQuery"
         },                {
             "fqsen": "\\Database\\Mapper\\Organ\u003A\u003AgetRepository\u0028\u0029",
             "name": "getRepository",
@@ -7100,6 +7135,66 @@ Search.appendIndex(
             "name": "Error",
             "summary": "",
             "url": "classes/Database-Model-Enums-ApiResponseStatuses.html#enumcase_Error"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\AttentionReasons",
+            "name": "AttentionReasons",
+            "summary": "Enum\u0020describing\u0020why\u0020a\u0020member\/membership\u0020requires\u0020attention\u0020in\u0020the\u0020overview.",
+            "url": "classes/Database-Model-Enums-AttentionReasons.html"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\AttentionReasons\u003A\u003AgetLabel\u0028\u0029",
+            "name": "getLabel",
+            "summary": "Give\u0020the\u0020function\u0020name\u0020with\u0020the\u0020given\u0020translation.\u0020If\u0020no\u0020translator\u0020is\u0020given,\u0020we\u0020return\u0020the\u0020default\u0020language.",
+            "url": "classes/Database-Model-Enums-AttentionReasons.html#method_getLabel"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\AttentionReasons\u003A\u003AgetRecommendedAction\u0028\u0029",
+            "name": "getRecommendedAction",
+            "summary": "Get\u0020the\u0020recommended\u0020action\u0020for\u0020this\u0020attention\u0020reason.",
+            "url": "classes/Database-Model-Enums-AttentionReasons.html#method_getRecommendedAction"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\AttentionReasons\u003A\u003ArenewRecommended\u0028\u0029",
+            "name": "renewRecommended",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-AttentionReasons.html#method_renewRecommended"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\AttentionReasons\u003A\u003AeditRecommended\u0028\u0029",
+            "name": "editRecommended",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-AttentionReasons.html#method_editRecommended"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\AttentionReasons\u003A\u003AMissingEmail",
+            "name": "MissingEmail",
+            "summary": "Member",
+            "url": "classes/Database-Model-Enums-AttentionReasons.html#enumcase_MissingEmail"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\AttentionReasons\u003A\u003AMissingStudentIdOrdinary",
+            "name": "MissingStudentIdOrdinary",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-AttentionReasons.html#enumcase_MissingStudentIdOrdinary"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\AttentionReasons\u003A\u003AExpiringExternalActive",
+            "name": "ExpiringExternalActive",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-AttentionReasons.html#enumcase_ExpiringExternalActive"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\AttentionReasons\u003A\u003AExpiringExternalNonActive",
+            "name": "ExpiringExternalNonActive",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-AttentionReasons.html#enumcase_ExpiringExternalNonActive"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\AttentionReasons\u003A\u003AExpiringOrdinaryActive",
+            "name": "ExpiringOrdinaryActive",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-AttentionReasons.html#enumcase_ExpiringOrdinaryActive"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\AttentionReasons\u003A\u003AExpiringOrdinaryNonActive",
+            "name": "ExpiringOrdinaryNonActive",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-AttentionReasons.html#enumcase_ExpiringOrdinaryNonActive"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\AttentionReasons\u003A\u003AExpiringGraduateActiveInactive",
+            "name": "ExpiringGraduateActiveInactive",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-AttentionReasons.html#enumcase_ExpiringGraduateActiveInactive"
         },                {
             "fqsen": "\\Database\\Model\\Enums\\BoardFunctions",
             "name": "BoardFunctions",
@@ -11421,6 +11516,11 @@ Search.appendIndex(
             "summary": "Get\u0020the\u0020address\u0020form.",
             "url": "classes/Database-Service-Member.html#method_getAddressForm"
         },                {
+            "fqsen": "\\Database\\Service\\Member\u003A\u003AgetMembersRequiringAttention\u0028\u0029",
+            "name": "getMembersRequiringAttention",
+            "summary": "Get\u0020the\u0020members\u0020requiring\u0020attention",
+            "url": "classes/Database-Service-Member.html#method_getMembersRequiringAttention"
+        },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003AgetAuditNoteForm\u0028\u0029",
             "name": "getAuditNoteForm",
             "summary": "Get\u0020the\u0020audit\u0020note\u0020form.",
@@ -11801,6 +11901,36 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Service-Stripe.html#property_config"
         },                {
+            "fqsen": "\\DatabaseTest\\Seeder\\DecisionFixture",
+            "name": "DecisionFixture",
+            "summary": "Founds\u0020one\u0020organ\u0020and\u0020installs\u0020the\u0020\u0022attention\u0022\u0020members\u0020that\u0020must\u0020count\u0020as\u0020active\u0020organ\u0020members\u0020\u007B\u0040see\u0020MemberFixture\u007D.",
+            "url": "classes/DatabaseTest-Seeder-DecisionFixture.html"
+        },                {
+            "fqsen": "\\DatabaseTest\\Seeder\\DecisionFixture\u003A\u003Aload\u0028\u0029",
+            "name": "load",
+            "summary": "",
+            "url": "classes/DatabaseTest-Seeder-DecisionFixture.html#method_load"
+        },                {
+            "fqsen": "\\DatabaseTest\\Seeder\\DecisionFixture\u003A\u003AregulateOrgan\u0028\u0029",
+            "name": "regulateOrgan",
+            "summary": "Submit\u0020the\u0020organ\u0020regulation\u0020\u0028commissiereglement\u0029\u0020for\u0020the\u0020given\u0020organ,\u0020authored\u0020by\u0020its\u0020chair.",
+            "url": "classes/DatabaseTest-Seeder-DecisionFixture.html#method_regulateOrgan"
+        },                {
+            "fqsen": "\\DatabaseTest\\Seeder\\DecisionFixture\u003A\u003AinstallInOrgan\u0028\u0029",
+            "name": "installInOrgan",
+            "summary": "Install\u0020a\u0020member\u0020into\u0020the\u0020given\u0020organ\u0020via\u0020a\u0020fresh\u0020decision\u0020on\u0020the\u0020given\u0020meeting.",
+            "url": "classes/DatabaseTest-Seeder-DecisionFixture.html#method_installInOrgan"
+        },                {
+            "fqsen": "\\DatabaseTest\\Seeder\\DecisionFixture\u003A\u003AdischargeFromOrgan\u0028\u0029",
+            "name": "dischargeFromOrgan",
+            "summary": "Discharge\u0020the\u0020given\u0020installation\u0020via\u0020a\u0020fresh\u0020decision\u0020on\u0020the\u0020given\u0020meeting.",
+            "url": "classes/DatabaseTest-Seeder-DecisionFixture.html#method_dischargeFromOrgan"
+        },                {
+            "fqsen": "\\DatabaseTest\\Seeder\\DecisionFixture\u003A\u003AgetDependencies\u0028\u0029",
+            "name": "getDependencies",
+            "summary": "Returns\u0020dependent\u0020fixture\u0020classes",
+            "url": "classes/DatabaseTest-Seeder-DecisionFixture.html#method_getDependencies"
+        },                {
             "fqsen": "\\DatabaseTest\\Seeder\\MeetingFixture",
             "name": "MeetingFixture",
             "summary": "",
@@ -11828,13 +11958,38 @@ Search.appendIndex(
         },                {
             "fqsen": "\\DatabaseTest\\Seeder\\MemberFixture",
             "name": "MemberFixture",
-            "summary": "phpcs\u003Adisable\u0020Generic.WhiteSpace.ScopeIndent.IncorrectExact",
+            "summary": "",
             "url": "classes/DatabaseTest-Seeder-MemberFixture.html"
         },                {
             "fqsen": "\\DatabaseTest\\Seeder\\MemberFixture\u003A\u003Aload\u0028\u0029",
             "name": "load",
             "summary": "",
             "url": "classes/DatabaseTest-Seeder-MemberFixture.html#method_load"
+        },                {
+            "fqsen": "\\DatabaseTest\\Seeder\\MemberFixture\u003A\u003AmakeAttentionMember\u0028\u0029",
+            "name": "makeAttentionMember",
+            "summary": "Create,\u0020populate\u0020and\u0020persist\u0020a\u0020member\u0020with\u0020a\u0020membership\u0020history.\u0020Returns\u0020it\u0020can\u0020be\u0020used\u0020as\u0020a\u0020reference\u0020for\ncross\u002Dfixture\u0020wiring\u0020\u0028e.g.,\u0020organ\u0020installations\u0020in\u0020DecisionFixture\u0029.",
+            "url": "classes/DatabaseTest-Seeder-MemberFixture.html#method_makeAttentionMember"
+        },                {
+            "fqsen": "\\DatabaseTest\\Seeder\\MemberFixture\u003A\u003AassociationYearChain\u0028\u0029",
+            "name": "associationYearChain",
+            "summary": "Build\u0020a\u0020chain\u0020of\u0020association\u002Dyear\u0020memberships\u0020for\u0020a\u0020member\u0020who\u0020has\u0020been\u0020around\u0020\u0024years\u0020association\u0020years.\u0020The\u0020last\n\u0024finalTypeYears\u0020memberships\u0020use\u0020\u0024finalType\u0020\u0028earlier\u0020years\u0020are\u0020Ordinary\u0029,\u0020modelling\u0020a\u0020single\u0020transition\u0020like\u0020the\norgan\u002Dbased\u0020Ordinary\u0020\u002D\u003E\u0020External\u0020or\u0020the\u0020common\u0020Ordinary\u0020\u002D\u003E\u0020Graduate.\u0020Pass\u0020\u0024finalTypeYears\u0020equal\u0020to\u0020\u0024years\u0020for\u0020a\nmember\u0020who\u0020joined\u0020in\u0020that\u0020type\u0020straight\u0020away\u0020\u0028e.g.\u0020a\u0020PhD\u0020who\u0020joined\u0020as\u0020External\u0029.",
+            "url": "classes/DatabaseTest-Seeder-MemberFixture.html#method_associationYearChain"
+        },                {
+            "fqsen": "\\DatabaseTest\\Seeder\\MemberFixture\u003A\u003AassociationYearPhases\u0028\u0029",
+            "name": "associationYearPhases",
+            "summary": "Build\u0020a\u0020chain\u0020of\u0020association\u002Dyear\u0020memberships\u0020from\u0020a\u0020list\u0020of\u0020\u005Btype,\u0020number\u002Dof\u002Dyears\u005D\u0020phases,\u0020allowing\u0020multi\u002Dstep\nhistories.\u0020Memberships\u0020run\u0020July\u00201\u0020\u002D\u003E\u0020July\u00201\u003B\u0020the\u0020first\u0020one\u0020starts\u0020on\u0020the\u0020join\u0020date\u0020\u0028the\u0020introduction\u0020week\u0020by\ndefault,\u0020but\u0020it\u0020can\u0020be\u0020mid\u002Dyear\u0020for\u0020someone\u0020who\u0020joins\u0020later\u0029.\u0020The\u0020final\u0020membership\u0020ends\u0020on\u0020\u0024finalEnd.",
+            "url": "classes/DatabaseTest-Seeder-MemberFixture.html#method_associationYearPhases"
+        },                {
+            "fqsen": "\\DatabaseTest\\Seeder\\MemberFixture\u003A\u003AjulyFirstBefore\u0028\u0029",
+            "name": "julyFirstBefore",
+            "summary": "Return\u0020the\u0020latest\u0020July\u00201\u0020\u0028association\u002Dyear\u0020boundary\u0029\u0020strictly\u0020before\u0020the\u0020given\u0020date.",
+            "url": "classes/DatabaseTest-Seeder-MemberFixture.html#method_julyFirstBefore"
+        },                {
+            "fqsen": "\\DatabaseTest\\Seeder\\MemberFixture\u003A\u003AstudentNumber\u0028\u0029",
+            "name": "studentNumber",
+            "summary": "Build\u0020a\u0020TU\/e\u0020style\u0020student\u0020number\u0020\u0028YYYYABCD\u0029\u0020for\u0020a\u0020member\u0020who\u0020enrolled\u0020\u0024yearsAgo\u0020years\u0020ago.\u0020\u0024sequence\u0020is\u0020the\ntrailing\u0020serial\u003B\u0020it\u0020starts\u0020at\u00202\u0020below\u0020because\u0020the\u0020student\u0020and\u0020prospective\u0020fixtures\u0020above\u0020already\u0020use\u0020serial\u00201.",
+            "url": "classes/DatabaseTest-Seeder-MemberFixture.html#method_studentNumber"
         },                {
             "fqsen": "\\DatabaseTest\\Seeder\\MemberFixture\u003A\u003AREF_MEMBER_STUDENT",
             "name": "REF_MEMBER_STUDENT",
@@ -11855,6 +12010,26 @@ Search.appendIndex(
             "name": "REF_MEMBER_PROSPECTIVE",
             "summary": "",
             "url": "classes/DatabaseTest-Seeder-MemberFixture.html#constant_REF_MEMBER_PROSPECTIVE"
+        },                {
+            "fqsen": "\\DatabaseTest\\Seeder\\MemberFixture\u003A\u003AREF_MEMBER_ATTN_ORDINARY_ACTIVE",
+            "name": "REF_MEMBER_ATTN_ORDINARY_ACTIVE",
+            "summary": "Members\u0020below\u0020are\u0020crafted\u0020to\u0020surface\u0020on\u0020the\u0020\u0022members\u0020requiring\u0020attention\u0022\u0020overview.\u0020The\u0020ones\u0020that\u0020need\u0020to\u0020count\nas\u0020active\u0020organ\u0020members\u0020are\u0020referenced\u0020here\u0020so\u0020\u007B\u0040see\u0020DecisionFixture\u007D\u0020can\u0020install\u0020them\u0020into\u0020an\u0020organ.",
+            "url": "classes/DatabaseTest-Seeder-MemberFixture.html#constant_REF_MEMBER_ATTN_ORDINARY_ACTIVE"
+        },                {
+            "fqsen": "\\DatabaseTest\\Seeder\\MemberFixture\u003A\u003AREF_MEMBER_ATTN_EXTERNAL_ACTIVE",
+            "name": "REF_MEMBER_ATTN_EXTERNAL_ACTIVE",
+            "summary": "",
+            "url": "classes/DatabaseTest-Seeder-MemberFixture.html#constant_REF_MEMBER_ATTN_EXTERNAL_ACTIVE"
+        },                {
+            "fqsen": "\\DatabaseTest\\Seeder\\MemberFixture\u003A\u003AREF_MEMBER_ATTN_GRADUATE_ACTIVE",
+            "name": "REF_MEMBER_ATTN_GRADUATE_ACTIVE",
+            "summary": "",
+            "url": "classes/DatabaseTest-Seeder-MemberFixture.html#constant_REF_MEMBER_ATTN_GRADUATE_ACTIVE"
+        },                {
+            "fqsen": "\\DatabaseTest\\Seeder\\MemberFixture\u003A\u003AREF_MEMBER_ATTN_MISCLASSIFIED",
+            "name": "REF_MEMBER_ATTN_MISCLASSIFIED",
+            "summary": "",
+            "url": "classes/DatabaseTest-Seeder-MemberFixture.html#constant_REF_MEMBER_ATTN_MISCLASSIFIED"
         },                {
             "fqsen": "\\DatabaseTest\\Seeder\\SavedQueriesFixture",
             "name": "SavedQueriesFixture",

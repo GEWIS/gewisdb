@@ -307,7 +307,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/Member.php"><a href="files/module-database-src-mapper-member.html"><abbr title="module/Database/src/Mapper/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">30</span>
+    <span class="phpdocumentor-element-found-in__line">32</span>
 
     </aside>
 
@@ -386,6 +386,27 @@ that are not deleted and their `expiration` is later than now.</dd>
                                 &nbsp;: array&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;    </span>
 </dt>
 <dd>Find all members.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Database-Mapper-Member.html#method_findAttentionExpiring">findAttentionExpiring()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;    </span>
+</dt>
+<dd>Find members who are expiring soon (active or nonactive) (of a specific type, if specified).</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Database-Mapper-Member.html#method_findAttentionWithoutEmail">findAttentionWithoutEmail()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;    </span>
+</dt>
+<dd>Find members without an email address.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Database-Mapper-Member.html#method_findAttentionWithoutStudentId">findAttentionWithoutStudentId()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;    </span>
+</dt>
+<dd>Find ordinary members without a student ID.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Mapper-Member.html#method_findByEmail">findByEmail()</a>
@@ -485,6 +506,20 @@ that are not deleted and their `expiration` is later than now.</dd>
 </dt>
 <dd>Search for a member.</dd>
 
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/Database-Mapper-Member.html#method_getDatedMembershipSubquery">getDatedMembershipSubquery()</a>
+    <span>
+                                &nbsp;: <abbr title="\Doctrine\ORM\QueryBuilder">QueryBuilder</abbr>    </span>
+</dt>
+<dd>Returns a subquery of all members that have a membership meeting
+certain date or type conditions.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/Database-Mapper-Member.html#method_getToday">getToday()</a>
+    <span>
+                                &nbsp;: <abbr title="\DateTimeImmutable">DateTimeImmutable</abbr>    </span>
+</dt>
+
     </dl>
 
 
@@ -515,7 +550,7 @@ that are not deleted and their `expiration` is later than now.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/Member.php"><a href="files/module-database-src-mapper-member.html"><abbr title="module/Database/src/Mapper/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">32</span>
+    <span class="phpdocumentor-element-found-in__line">34</span>
 
     </aside>
 
@@ -557,7 +592,7 @@ that are not deleted and their `expiration` is later than now.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/Member.php"><a href="files/module-database-src-mapper-member.html"><abbr title="module/Database/src/Mapper/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">32</span>
+    <span class="phpdocumentor-element-found-in__line">34</span>
 
     </aside>
 
@@ -601,7 +636,7 @@ that are not deleted and their `expiration` is later than now.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/Member.php"><a href="files/module-database-src-mapper-member.html"><abbr title="module/Database/src/Mapper/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">295</span>
+    <span class="phpdocumentor-element-found-in__line">443</span>
 
     </aside>
 
@@ -650,7 +685,7 @@ that are not deleted and their `expiration` is later than now.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/Member.php"><a href="files/module-database-src-mapper-member.html"><abbr title="module/Database/src/Mapper/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">384</span>
+    <span class="phpdocumentor-element-found-in__line">532</span>
 
     </aside>
 
@@ -716,7 +751,7 @@ that are not deleted and their `expiration` is later than now.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/Member.php"><a href="files/module-database-src-mapper-member.html"><abbr title="module/Database/src/Mapper/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">183</span>
+    <span class="phpdocumentor-element-found-in__line">185</span>
 
     </aside>
 
@@ -767,7 +802,7 @@ that are not deleted and their `expiration` is later than now.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/Member.php"><a href="files/module-database-src-mapper-member.html"><abbr title="module/Database/src/Mapper/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">142</span>
+    <span class="phpdocumentor-element-found-in__line">144</span>
 
     </aside>
 
@@ -798,6 +833,216 @@ that are not deleted and their `expiration` is later than now.</p>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_findAttentionExpiring">
+        findAttentionExpiring()
+        <a href="classes/Database-Mapper-Member.html#method_findAttentionExpiring" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/Member.php"><a href="files/module-database-src-mapper-member.html"><abbr title="module/Database/src/Mapper/Member.php">Member.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">376</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Find members who are expiring soon (active or nonactive) (of a specific type, if specified).</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">findAttentionExpiring</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$includeActive</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">true</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$includeNonActive</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">true</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$inActiveIsActive</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">false</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Application-Model-Enums-MembershipTypes.html"><abbr title="\Application\Model\Enums\MembershipTypes">MembershipTypes</abbr></a>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$specificType</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$maxExpiredDays</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">90</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$expiresWithinDays</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$includeActive</span>
+                : <span class="phpdocumentor-argument-list__argument__type">bool</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">true</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$includeNonActive</span>
+                : <span class="phpdocumentor-argument-list__argument__type">bool</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">true</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$inActiveIsActive</span>
+                : <span class="phpdocumentor-argument-list__argument__type">bool</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">false</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Also includes inactive organ members.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$specificType</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Application-Model-Enums-MembershipTypes.html"><abbr title="\Application\Model\Enums\MembershipTypes">MembershipTypes</abbr></a>|null</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$maxExpiredDays</span>
+                : <span class="phpdocumentor-argument-list__argument__type">int</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">90</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Max number of days member can have been expired</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$expiresWithinDays</span>
+                : <span class="phpdocumentor-argument-list__argument__type">int|null</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Max number of days member can expire within</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_findAttentionWithoutEmail">
+        findAttentionWithoutEmail()
+        <a href="classes/Database-Mapper-Member.html#method_findAttentionWithoutEmail" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/Member.php"><a href="files/module-database-src-mapper-member.html"><abbr title="module/Database/src/Mapper/Member.php">Member.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">302</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Find members without an email address.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">findAttentionWithoutEmail</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$maxExpiredDays</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">90</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$expiresWithinDays</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$maxExpiredDays</span>
+                : <span class="phpdocumentor-argument-list__argument__type">int</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">90</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Max number of days member can have been expired</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$expiresWithinDays</span>
+                : <span class="phpdocumentor-argument-list__argument__type">int|null</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Max number of days member can expire within</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_findAttentionWithoutStudentId">
+        findAttentionWithoutStudentId()
+        <a href="classes/Database-Mapper-Member.html#method_findAttentionWithoutStudentId" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/Member.php"><a href="files/module-database-src-mapper-member.html"><abbr title="module/Database/src/Mapper/Member.php">Member.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">338</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Find ordinary members without a student ID.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">findAttentionWithoutStudentId</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$maxExpiredDays</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">90</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$expiresWithinDays</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$maxExpiredDays</span>
+                : <span class="phpdocumentor-argument-list__argument__type">int</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">90</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Max number of days member can have been expired</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$expiresWithinDays</span>
+                : <span class="phpdocumentor-argument-list__argument__type">int|null</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Max number of days member can expire within</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_findByEmail">
         findByEmail()
         <a href="classes/Database-Mapper-Member.html#method_findByEmail" class="headerlink"><i class="fas fa-link"></i></a>
@@ -806,7 +1051,7 @@ that are not deleted and their `expiration` is later than now.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/Member.php"><a href="files/module-database-src-mapper-member.html"><abbr title="module/Database/src/Mapper/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">49</span>
+    <span class="phpdocumentor-element-found-in__line">51</span>
 
     </aside>
 
@@ -855,7 +1100,7 @@ that are not deleted and their `expiration` is later than now.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/Member.php"><a href="files/module-database-src-mapper-member.html"><abbr title="module/Database/src/Mapper/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">267</span>
+    <span class="phpdocumentor-element-found-in__line">269</span>
 
     </aside>
 
@@ -863,7 +1108,7 @@ that are not deleted and their `expiration` is later than now.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">findExpired</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><abbr title="\DateTime">DateTime</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$expiration</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">findExpired</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><abbr title="\DateTimeInterface">DateTimeInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$expiration</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -873,7 +1118,7 @@ that are not deleted and their `expiration` is later than now.</p>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-argument-list__argument__name">$expiration</span>
-                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\DateTime">DateTime</abbr></span>
+                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\DateTimeInterface">DateTimeInterface</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -904,7 +1149,7 @@ that are not deleted and their `expiration` is later than now.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/Member.php"><a href="files/module-database-src-mapper-member.html"><abbr title="module/Database/src/Mapper/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">118</span>
+    <span class="phpdocumentor-element-found-in__line">120</span>
 
     </aside>
 
@@ -960,7 +1205,7 @@ that are not deleted and their `expiration` is later than now.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/Member.php"><a href="files/module-database-src-mapper-member.html"><abbr title="module/Database/src/Mapper/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">152</span>
+    <span class="phpdocumentor-element-found-in__line">154</span>
 
     </aside>
 
@@ -999,7 +1244,7 @@ that are not deleted and their `expiration` is later than now.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/Member.php"><a href="files/module-database-src-mapper-member.html"><abbr title="module/Database/src/Mapper/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">247</span>
+    <span class="phpdocumentor-element-found-in__line">249</span>
 
     </aside>
 
@@ -1050,7 +1295,7 @@ that are not deleted and their `expiration` is later than now.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/Member.php"><a href="files/module-database-src-mapper-member.html"><abbr title="module/Database/src/Mapper/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">421</span>
+    <span class="phpdocumentor-element-found-in__line">569</span>
 
     </aside>
 
@@ -1150,7 +1395,7 @@ $qb-&gt;setParameter($parameter-&gt;getName(), $parameter-&gt;getValue());
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/Member.php"><a href="files/module-database-src-mapper-member.html"><abbr title="module/Database/src/Mapper/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">356</span>
+    <span class="phpdocumentor-element-found-in__line">504</span>
 
     </aside>
 
@@ -1189,7 +1434,7 @@ $qb-&gt;setParameter($parameter-&gt;getName(), $parameter-&gt;getValue());
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/Member.php"><a href="files/module-database-src-mapper-member.html"><abbr title="module/Database/src/Mapper/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">500</span>
+    <span class="phpdocumentor-element-found-in__line">711</span>
 
     </aside>
 
@@ -1228,7 +1473,7 @@ $qb-&gt;setParameter($parameter-&gt;getName(), $parameter-&gt;getValue());
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/Member.php"><a href="files/module-database-src-mapper-member.html"><abbr title="module/Database/src/Mapper/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">39</span>
+    <span class="phpdocumentor-element-found-in__line">41</span>
 
     </aside>
 
@@ -1277,7 +1522,7 @@ $qb-&gt;setParameter($parameter-&gt;getName(), $parameter-&gt;getValue());
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/Member.php"><a href="files/module-database-src-mapper-member.html"><abbr title="module/Database/src/Mapper/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">464</span>
+    <span class="phpdocumentor-element-found-in__line">675</span>
 
     </aside>
 
@@ -1322,7 +1567,7 @@ $qb-&gt;setParameter($parameter-&gt;getName(), $parameter-&gt;getValue());
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/Member.php"><a href="files/module-database-src-mapper-member.html"><abbr title="module/Database/src/Mapper/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">482</span>
+    <span class="phpdocumentor-element-found-in__line">693</span>
 
     </aside>
 
@@ -1367,7 +1612,7 @@ $qb-&gt;setParameter($parameter-&gt;getName(), $parameter-&gt;getValue());
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/Member.php"><a href="files/module-database-src-mapper-member.html"><abbr title="module/Database/src/Mapper/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">473</span>
+    <span class="phpdocumentor-element-found-in__line">684</span>
 
     </aside>
 
@@ -1412,7 +1657,7 @@ $qb-&gt;setParameter($parameter-&gt;getName(), $parameter-&gt;getValue());
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/Member.php"><a href="files/module-database-src-mapper-member.html"><abbr title="module/Database/src/Mapper/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">491</span>
+    <span class="phpdocumentor-element-found-in__line">702</span>
 
     </aside>
 
@@ -1457,7 +1702,7 @@ $qb-&gt;setParameter($parameter-&gt;getName(), $parameter-&gt;getValue());
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/Member.php"><a href="files/module-database-src-mapper-member.html"><abbr title="module/Database/src/Mapper/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">68</span>
+    <span class="phpdocumentor-element-found-in__line">70</span>
 
     </aside>
 
@@ -1499,6 +1744,140 @@ $qb-&gt;setParameter($parameter-&gt;getName(), $parameter-&gt;getValue());
             </section>
 
 </article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getDatedMembershipSubquery">
+        getDatedMembershipSubquery()
+        <a href="classes/Database-Mapper-Member.html#method_getDatedMembershipSubquery" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/Member.php"><a href="files/module-database-src-mapper-member.html"><abbr title="module/Database/src/Mapper/Member.php">Member.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">617</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns a subquery of all members that have a membership meeting
+certain date or type conditions.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getDatedMembershipSubquery</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><abbr title="\Doctrine\ORM\QueryBuilder">QueryBuilder</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$qb</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type"><abbr title="\DateTimeInterface">DateTimeInterface</abbr>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$endsAfter</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type"><abbr title="\DateTimeInterface">DateTimeInterface</abbr>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$endsBefore</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Application-Model-Enums-MembershipTypes.html"><abbr title="\Application\Model\Enums\MembershipTypes">MembershipTypes</abbr></a>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$specificType</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$onlyLastMembership</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">true</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$membershipAlias</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">'daMems'</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$parameterPrefix</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">'daMs'</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\ORM\QueryBuilder">QueryBuilder</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Typically should not be used for a negative check (i.e. whose memberships are expired)
+Better is to check whose memberships have not expired using this subquery and then
+filter those in the main query. That will cover members without membership etc.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$qb</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\Doctrine\ORM\QueryBuilder">QueryBuilder</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$endsAfter</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\DateTimeInterface">DateTimeInterface</abbr>|null</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$endsBefore</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\DateTimeInterface">DateTimeInterface</abbr>|null</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$specificType</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Application-Model-Enums-MembershipTypes.html"><abbr title="\Application\Model\Enums\MembershipTypes">MembershipTypes</abbr></a>|null</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$onlyLastMembership</span>
+                : <span class="phpdocumentor-argument-list__argument__type">bool</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">true</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$membershipAlias</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">'daMems'</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$parameterPrefix</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">'daMs'</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\ORM\QueryBuilder">QueryBuilder</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getToday">
+        getToday()
+        <a href="classes/Database-Mapper-Member.html#method_getToday" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/Member.php"><a href="files/module-database-src-mapper-member.html"><abbr title="module/Database/src/Mapper/Member.php">Member.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">667</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">getToday</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\DateTimeImmutable">DateTimeImmutable</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\DateTimeImmutable">DateTimeImmutable</abbr></span>
+            </section>
+
+</article>
             </section>
 
         
@@ -1533,6 +1912,9 @@ $qb-&gt;setParameter($parameter-&gt;getName(), $parameter-&gt;getValue());
                                             <li class=""><a href="classes/Database-Mapper-Member.html#method_countMembers">countMembers()</a></li>
                                             <li class=""><a href="classes/Database-Mapper-Member.html#method_find">find()</a></li>
                                             <li class=""><a href="classes/Database-Mapper-Member.html#method_findAll">findAll()</a></li>
+                                            <li class=""><a href="classes/Database-Mapper-Member.html#method_findAttentionExpiring">findAttentionExpiring()</a></li>
+                                            <li class=""><a href="classes/Database-Mapper-Member.html#method_findAttentionWithoutEmail">findAttentionWithoutEmail()</a></li>
+                                            <li class=""><a href="classes/Database-Mapper-Member.html#method_findAttentionWithoutStudentId">findAttentionWithoutStudentId()</a></li>
                                             <li class=""><a href="classes/Database-Mapper-Member.html#method_findByEmail">findByEmail()</a></li>
                                             <li class=""><a href="classes/Database-Mapper-Member.html#method_findExpired">findExpired()</a></li>
                                             <li class=""><a href="classes/Database-Mapper-Member.html#method_findMemberAddress">findMemberAddress()</a></li>
@@ -1547,6 +1929,8 @@ $qb-&gt;setParameter($parameter-&gt;getName(), $parameter-&gt;getValue());
                                             <li class=""><a href="classes/Database-Mapper-Member.html#method_remove">remove()</a></li>
                                             <li class=""><a href="classes/Database-Mapper-Member.html#method_removeAddress">removeAddress()</a></li>
                                             <li class=""><a href="classes/Database-Mapper-Member.html#method_search">search()</a></li>
+                                            <li class=""><a href="classes/Database-Mapper-Member.html#method_getDatedMembershipSubquery">getDatedMembershipSubquery()</a></li>
+                                            <li class=""><a href="classes/Database-Mapper-Member.html#method_getToday">getToday()</a></li>
                                     </ul>
             </li>
                     </ul>
