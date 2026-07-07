@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-16 17:16+0000\n"
+"POT-Creation-Date: 2026-06-20 14:15+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -65,6 +65,14 @@ msgid "%d pending mailing list unsubscriptions"
 msgstr "%d geplande maillijst-afmeldingen"
 
 #, php-format
+msgid "%s %s member expiring soon"
+msgstr "%s %s lid verloopt binnenkort"
+
+#, php-format
+msgid "%s OR %s"
+msgstr "%s OF %s"
+
+#, php-format
 msgid "%s has been added to %s"
 msgstr "%s toegevoegd aan %s"
 
@@ -76,6 +84,9 @@ msgstr ""
 #, php-format
 msgid "(Annulled by decision %s %d.%d.%d)"
 msgstr "(Vernietigd door besluit %s %d.%d.%d)"
+
+msgid "(bulk) renew as ordinary"
+msgstr "(bulk-)verleng als gewoon"
 
 #, php-format
 msgid ""
@@ -1169,6 +1180,9 @@ msgstr "Lidmaatschapsnummer"
 msgid "Members"
 msgstr "Leden"
 
+msgid "Members requiring attention"
+msgstr "Lidmaatschappen die aandacht vereisen"
+
 msgid "Membership Ends On (Expires On)"
 msgstr "Lidmaatschap eindigt op (verloopt op)"
 
@@ -1177,6 +1191,9 @@ msgstr "Lidmaatschapstype"
 
 msgid "Membership Type (today)"
 msgstr "Lidmaatschapstype (huidig)"
+
+msgid "Membership number"
+msgstr "Lidmaatschapsnummer"
 
 msgid "Membership of Committees and Fraternities"
 msgstr "Lidmaatschap van commissies en disputen"
@@ -1235,8 +1252,14 @@ msgstr "Er zijn geen afrekensessies geregistreerd."
 msgid "No Exception available"
 msgstr "Geen exceptie beschikbaar"
 
+msgid "No action recommended"
+msgstr "Geen actie aanbevolen"
+
 msgid "No category"
 msgstr "Zonder categorie"
+
+msgid "No email address"
+msgstr "Geen e-mailadres"
 
 msgid "No mailing list subscriptions."
 msgstr "Geen aanmeldingen voor mailinglijsten."
@@ -1274,6 +1297,9 @@ msgstr "Gewoon"
 
 msgid "Ordinary - Enrolled at the department of M&CS"
 msgstr "Gewoon - Ingeschreven bij de faculteit M&CS"
+
+msgid "Ordinary member without student ID"
+msgstr "Gewoon lid zonder studentnummer"
 
 msgid "Organ"
 msgstr "Orgaan"
@@ -1431,7 +1457,13 @@ msgstr "Lid herbenoemen"
 msgid "Reappointments"
 msgstr "Herbenoemingen"
 
+msgid "Reason(s)"
+msgstr "Reden(en)"
+
 msgid "Register Member"
+msgstr "Lid inschrijven"
+
+msgid "Register member"
 msgstr "Lid inschrijven"
 
 msgid "Registration"
@@ -1457,6 +1489,9 @@ msgstr "Verleng"
 
 msgid "Renew until"
 msgstr "Verleng tot en met"
+
+msgid "Renew/Type"
+msgstr "Verleng/Type"
 
 msgid "Renewal"
 msgstr "Verlenging"
@@ -1648,6 +1683,14 @@ msgstr ""
 msgid "The entities that you can use:"
 msgstr "De entiteiten die je kunt gebruiken:"
 
+#, php-format
+msgid ""
+"The following members require attention because their membership will expire "
+"within the next %d days or they are missing required information."
+msgstr ""
+"De volgende leden vereisen aandacht omdat hun lidmaatschap verloopt in de "
+"komende %d dagen of ze vereiste informatie missen."
+
 msgid "The organ to be abolished includes the following members:"
 msgstr "Het op te heffen orgaan heeft de volgende leden:"
 
@@ -1777,6 +1820,9 @@ msgstr "Token"
 msgid "Type"
 msgstr "Type"
 
+msgid "Typical action"
+msgstr "Gebruikelijke actie"
+
 msgid "Unable to check refund status"
 msgstr "Kan terugbetalingsstatus niet controleren"
 
@@ -1785,6 +1831,9 @@ msgstr "Unable to create refund"
 
 msgid "Unknown"
 msgstr "Onbekend"
+
+msgid "Unknown reason"
+msgstr "Reden onbekend"
 
 #, php-format
 msgid "Update %s of %s"
@@ -1817,7 +1866,10 @@ msgstr "Vice-Voorzitter"
 msgid "View"
 msgstr "Toon"
 
-msgid "View Update Requests"
+msgid "View members needing attention"
+msgstr "Geef leden die aandacht vereisen weer"
+
+msgid "View update requests"
 msgstr "Update-aanvragen bekijken"
 
 msgid "Virt"
@@ -1992,6 +2044,12 @@ msgstr ""
 msgid "Your TU/e-username should look like sYYxxxx or YYYYxxxx."
 msgstr "Jouw TU/e-gebruikersnaam moet lijken op sYYxxxx of YYYYxxxx."
 
+msgid "active"
+msgstr "actief"
+
+msgid "active/inactive"
+msgstr "actief/inactief"
+
 msgid "afgekeurd"
 msgstr "afgekeurd"
 
@@ -2008,14 +2066,32 @@ msgstr "wijzig %s"
 msgid "commissiereglement"
 msgstr "commissiereglement"
 
+msgid "complete missing profile information"
+msgstr "vul missende profielinformatie aan"
+
+msgid "contact to renew graduate status"
+msgstr "neem contact om afgestudeerde-status te verlengen"
+
+msgid "convert to graduate"
+msgstr "zet om naar afgestudeerde"
+
+msgid "discharge from organ(s)"
+msgstr "dechargeer commissielid"
+
 msgid "dispuutsreglement"
 msgstr "dispuutsreglement"
 
 msgid "email address change pending"
 msgstr "e-mailadreswijziging gepland"
 
+msgid "external"
+msgstr "extern"
+
 msgid "goedgekeurd"
 msgstr "goedgekeurd"
+
+msgid "graduate"
+msgstr "afgestudeerde"
 
 msgid "https://gewis.nl/association/regulations"
 msgstr "https://gewis.nl/nl/vereniging/reglementen"
@@ -2041,17 +2117,32 @@ msgstr "n.v.t."
 msgid "never"
 msgstr "nooit"
 
+msgid "non-active"
+msgstr "niet-actief"
+
 msgid "onbekend"
 msgstr "onbekend"
 
 msgid "optional"
 msgstr "optioneel"
 
+msgid "ordinary"
+msgstr "gewoon"
+
 msgid "our payment provider"
 msgstr "onze betalingsprovider"
 
+msgid "proof of (non-TU/e) study OR board decision => renew"
+msgstr "bewijs van (niet-TU/e-)studie OF bestuursbesluit => verleng"
+
 msgid "reads as follows:"
 msgstr "luidt als volgt:"
+
+msgid "renew in appropriate type (ordinary or external)"
+msgstr "verleng als gewoon of extern lid"
+
+msgid "renew membership as external"
+msgstr "verleng lidmaatschap als extern"
 
 #, php-format
 msgid "resolves to %s"

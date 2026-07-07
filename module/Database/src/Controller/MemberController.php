@@ -51,6 +51,14 @@ class MemberController extends AbstractActionController
     }
 
     /**
+     * Attention needed action.
+     */
+    public function attentionNeededAction(): ViewModel
+    {
+        return new ViewModel($this->memberService->getMembersRequiringAttention(30));
+    }
+
+    /**
      * Subscribe action.
      */
     public function subscribeAction(): HttpResponse|ViewModel

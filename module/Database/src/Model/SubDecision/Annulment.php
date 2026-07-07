@@ -18,6 +18,7 @@ use Override;
  *
  * This decision references to a different decision. The given decision is
  * annulled, as if it did never exist.
+ * This means that if an installation was annulled, someone was never an active member.
  *
  * Note that this behaviour might not always work flawlessly. It is very
  * complicated, and thus there might be edge cases that I didn't completely

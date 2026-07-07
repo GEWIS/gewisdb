@@ -1,0 +1,62 @@
+<?php
+
+declare(strict_types=1);
+
+use Application\View\HelperTrait;
+use Database\Model\Enums\AttentionReasons;
+use Database\Model\Member as MemberModel;
+use Laminas\View\Renderer\PhpRenderer;
+use Laminas\Translator\TranslatorInterface;
+
+/**
+ * @var PhpRenderer|HelperTrait $this
+ * @var MemberModel[] $members
+ * @var array<int, AttentionReasons[]> $reasons
+ * @var int $days
+ * @var TranslatorInterface $translator
+ */
+$translator = $this->plugin('translate')->getTranslator();
+?>
+
+<h2><?= $this->translate('Members requiring attention') ?></h2>
+<p><?= sprintf($this->translate('The following members require attention because their membership will expire within the next %d days or they are missing required information.'), $days) ?></p>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th><?= $this->translate('Membership number') ?></th>
+            <th><?= $this->translate('Name') ?></th>
+            <th><?= $this->translate('Expiration') ?></th>
+            <th><?= $this->translate('Reason(s)') ?></th>
+            <th><?= $this->translate('Typical action') ?></th>
+            <th width="200"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        foreach ($members as $member) {
+            $rowspan = count($reasons[$member->getLidNr()]);
+            echo '<tr>';
+            echo '<td rowspan="' . $rowspan . '"><a href="' . $this->url('member/show', ['id' => $member->getLidNr()]) . '">' . $member->getLidNr() . '</a></td>';
+            echo '<td rowspan="' . $rowspan . '"><a href="' . $this->url('member/show', ['id' => $member->getLidNr()]) . '">' . $this->escapeHtml($member->getFullName()) . '</a></td>';
+            echo '<td rowspan="' . $rowspan . '">' . $member->getExpiration()->format('Y-m-d') . '</td>';
+            foreach ($reasons[$member->getLidNr()] as $reason) {
+                echo '<td>' . $reason->getLabel($translator) . '</td>';
+                echo '<td>' . $reason->getRecommendedAction($translator) . '</td>';
+                echo '<td>';
+                if ($reason->renewRecommended()) {
+                    echo ' <a target="_blank" href="' . $this->url('member/show/edit/membership', ['id' => $member->getLidNr()]) . '" class="btn btn-sm btn-primary">' . $this->translate('Renew/Type') . '</a>';
+                }
+                if ($reason->editRecommended()) {
+                    echo ' <a target="_blank" href="' . $this->url('member/show/edit', ['id' => $member->getLidNr()]) . '" class="btn btn-sm btn-primary">' . $this->translate('Edit') . '</a>';
+                }
+                echo '</td>';
+                echo '</tr>';
+                if ($reason !== end($reasons[$member->getLidNr()])) {
+                    echo '<tr>';
+                }
+            }
+        }
+        ?>
+    </tbody>
+</table>
+

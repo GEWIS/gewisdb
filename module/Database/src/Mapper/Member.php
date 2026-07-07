@@ -6,6 +6,7 @@ namespace Database\Mapper;
 
 use Application\Model\Enums\AddressTypes;
 use Application\Model\Enums\MembershipTypes;
+use Database\Mapper\Organ as OrganMapper;
 use Database\Model\Address as AddressModel;
 use Database\Model\Member as MemberModel;
 use Database\Model\Membership as MembershipModel;
@@ -15,7 +16,8 @@ use Database\Model\SubDecision\Discharge as DischargeModel;
 use Database\Model\SubDecision\Financial\Budget as BudgetModel;
 use Database\Model\SubDecision\Financial\Statement as StatementModel;
 use Database\Model\SubDecision\Installation as InstallationModel;
-use DateTime;
+use DateTimeImmutable;
+use DateTimeInterface;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -264,7 +266,7 @@ class Member
      *
      * @return MemberModel[]
      */
-    public function findExpired(DateTime $expiration): array
+    public function findExpired(DateTimeInterface $expiration): array
     {
         $qb = $this->getRepository()->createQueryBuilder('m');
         $qb->where('m.deleted = False');
@@ -285,6 +287,152 @@ class Member
         );
 
         $qb->setParameter('expiration', $expiration);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * Find members without an email address.
+     *
+     * @param int      $maxExpiredDays    Max number of days member can have been expired
+     * @param int|null $expiresWithinDays Max number of days member can expire within
+     *
+     * @return MemberModel[]
+     */
+    public function findAttentionWithoutEmail(
+        int $maxExpiredDays = 90,
+        ?int $expiresWithinDays = null,
+    ): array {
+        $today = $this->getToday();
+
+        $qb = $this->getRepository()->createQueryBuilder('m');
+        $qb->where('m.deleted = False')
+            ->andWhere('m.email IS NULL');
+
+        $sq = self::getDatedMembershipSubquery(
+            $qb,
+            endsAfter: $today->modify('-' . $maxExpiredDays . ' days'),
+            endsBefore: null === $expiresWithinDays
+                ? null
+                : $today->modify('+' . $expiresWithinDays . ' days'),
+        );
+
+        $qb->andWhere(
+            $qb->expr()->in(
+                'm',
+                $sq->getDQL(),
+            ),
+        );
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * Find ordinary members without a student ID.
+     *
+     * @param int      $maxExpiredDays    Max number of days member can have been expired
+     * @param int|null $expiresWithinDays Max number of days member can expire within
+     *
+     * @return MemberModel[]
+     */
+    public function findAttentionWithoutStudentId(
+        int $maxExpiredDays = 90,
+        ?int $expiresWithinDays = null,
+    ): array {
+        $today = $this->getToday();
+
+        $qb = $this->getRepository()->createQueryBuilder('m');
+        $qb->where('m.deleted = False')
+            ->andWhere('m.tueUsername IS NULL');
+
+        $sq = self::getDatedMembershipSubquery(
+            $qb,
+            endsAfter: $today->modify('-' . $maxExpiredDays . ' days'),
+            endsBefore: null === $expiresWithinDays
+                ? null
+                : $today->modify('+' . $expiresWithinDays . ' days'),
+            specificType: MembershipTypes::Ordinary,
+        );
+
+        $qb->andWhere(
+            $qb->expr()->in(
+                'm',
+                $sq->getDQL(),
+            ),
+        );
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * Find members who are expiring soon (active or nonactive) (of a specific type, if specified).
+     *
+     * @param int      $maxExpiredDays    Max number of days member can have been expired
+     * @param int|null $expiresWithinDays Max number of days member can expire within
+     * @param bool     $inActiveIsActive  Also includes inactive organ members.
+     *
+     * @return MemberModel[]
+     */
+    public function findAttentionExpiring(
+        bool $includeActive = true,
+        bool $includeNonActive = true,
+        bool $inActiveIsActive = false,
+        ?MembershipTypes $specificType = null,
+        int $maxExpiredDays = 90,
+        ?int $expiresWithinDays = null,
+    ): array {
+        $qb = $this->getRepository()->createQueryBuilder('m');
+        $qb->where('m.deleted = False');
+
+        $today = $this->getToday();
+
+        $sqM = self::getDatedMembershipSubquery(
+            $qb,
+            endsAfter: $today->modify('-' . $maxExpiredDays . ' days'),
+            endsBefore: null === $expiresWithinDays
+                ? null
+                : $today->modify('+' . $expiresWithinDays . ' days'),
+            specificType: $specificType,
+        );
+
+        $qb->andWhere(
+            $qb->expr()->in(
+                'm',
+                $sqM->getDQL(),
+            ),
+        );
+
+        if (!$includeActive && !$includeNonActive) {
+            return [];
+        }
+
+        if (!$includeActive || !$includeNonActive) {
+            // We use todays date to check if the member is active
+            // It would be more accurate to check on the membership end date, but that would require more complex
+            // queries and we don't expect any future decisions to be in the database.
+            $sqA = OrganMapper::getIsActiveWithinSubQuery(
+                qb: $qb,
+                activeBefore: $today,
+                activeAfter: $today,
+                inActiveIsActive: $inActiveIsActive,
+            );
+
+            if (!$includeActive) {
+                $qb->andWhere(
+                    $qb->expr()->notIn(
+                        'm',
+                        $sqA->getDQL(),
+                    ),
+                );
+            } else {
+                $qb->andWhere(
+                    $qb->expr()->in(
+                        'm',
+                        $sqA->getDQL(),
+                    ),
+                );
+            }
+        }
 
         return $qb->getQuery()->getResult();
     }
@@ -456,6 +604,69 @@ class Member
         }
 
         return $sq;
+    }
+
+    /**
+     * Returns a subquery of all members that have a membership meeting
+     * certain date or type conditions.
+     *
+     * Typically should not be used for a negative check (i.e. whose memberships are expired)
+     * Better is to check whose memberships have not expired using this subquery and then
+     * filter those in the main query. That will cover members without membership etc.
+     */
+    private static function getDatedMembershipSubquery(
+        QueryBuilder $qb,
+        ?DateTimeInterface $endsAfter = null,
+        ?DateTimeInterface $endsBefore = null,
+        ?MembershipTypes $specificType = null,
+        bool $onlyLastMembership = true,
+        string $membershipAlias = 'daMems',
+        string $parameterPrefix = 'daMs',
+    ): QueryBuilder {
+        $sq = $qb->getEntityManager()->createQueryBuilder();
+
+        // We take all unique memberships
+        $sq->select('IDENTITY(' . $membershipAlias . '.member)')
+            ->distinct()
+            ->from(MembershipModel::class, $membershipAlias);
+
+        // Of a given type, if specified
+        if (null !== $specificType) {
+            $sq->andWhere($membershipAlias . '.type = :' . $parameterPrefix . 'SpecificType');
+            $qb->setParameter($parameterPrefix . 'SpecificType', $specificType);
+        }
+
+        // Which expire before a specific date, if specified
+        if (null !== $endsBefore) {
+            $sq->andWhere($membershipAlias . '.endDate <= :' . $parameterPrefix . 'EndsBefore');
+            $qb->setParameter($parameterPrefix . 'EndsBefore', $endsBefore);
+        }
+
+        // Which expire after a specific date, if specified
+        if (null !== $endsAfter) {
+            $sq->andWhere($membershipAlias . '.endDate > :' . $parameterPrefix . 'EndsAfter');
+            $qb->setParameter($parameterPrefix . 'EndsAfter', $endsAfter);
+        }
+
+        // And for which there does not exist a later membership (of any type, as long as it is after the current one)
+        if ($onlyLastMembership) {
+            $ssq = $qb->getEntityManager()->createQueryBuilder();
+            $ssq->select('1') // we don't actually need to select any data, just check for existence
+                ->from(MembershipModel::class, $membershipAlias . 'Later')
+                ->where($membershipAlias . 'Later.member = ' . $membershipAlias . '.member')
+                ->andWhere($membershipAlias . 'Later.startDate >= ' . $membershipAlias . '.endDate');
+
+            $sq->andWhere($sq->expr()->not(
+                $sq->expr()->exists($ssq->getDQL()),
+            ));
+        }
+
+        return $sq;
+    }
+
+    private function getToday(): DateTimeImmutable
+    {
+        return (new DateTimeImmutable())->setTime(0, 0, 0);
     }
 
     /**
