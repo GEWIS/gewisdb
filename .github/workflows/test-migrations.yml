@@ -84,7 +84,7 @@ jobs:
         # entity changed without a matching migration being committed.
         run: |
           make migration-diff
-          if [ -n "$(git status --porcelain | grep 'migrations/')" ]; then
+          if git status --porcelain | grep -q 'migrations/'; then
             echo "::error::Entity changes detected without a matching migration. Run 'make migration-diff' locally and commit the generated migration(s)."
             git status --porcelain | grep 'migrations/'
             exit 1
