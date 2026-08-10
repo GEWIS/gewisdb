@@ -19,7 +19,12 @@ $(document).ready(function() {
         source: function(rq, response) {
             $.ajax({
                 dataType: 'json',
-                url: '<?= $this->url('meeting/decision/search') ?>?q=' + rq.term,
+                url: '<?= $this->url('meeting/decision/search') ?>'
+                    + '?q=' + encodeURIComponent(rq.term)
+                    + '&meeting_type=' + encodeURIComponent($('#annulment-form-meeting-type').val())
+                    + '&meeting_number=' + encodeURIComponent($('#annulment-form-meeting-number').val())
+                    + '&point=' + encodeURIComponent($('#annulment-form-point').val())
+                    + '&decision=' + encodeURIComponent($('#annulment-form-decision').val()),
                 context: document.body
             }).done(function(data) {
                 var ret = [];
@@ -70,7 +75,11 @@ echo $this->form()->openTag($form);
 ?>
 <?php /* first do hidden elements */ ?>
 <?php
-$fs = $form->get('meeting')
+$fs = $form->get('meeting');
+$fs->get('type')->setAttribute('id', 'annulment-form-meeting-type');
+$fs->get('number')->setAttribute('id', 'annulment-form-meeting-number');
+$form->get('point')->setAttribute('id', 'annulment-form-point');
+$form->get('decision')->setAttribute('id', 'annulment-form-decision');
 ?>
 <?= $this->formHidden($fs->get('type')) ?>
 <?= $this->formHidden($fs->get('number')) ?>

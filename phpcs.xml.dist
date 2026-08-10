@@ -75,6 +75,7 @@
         <exclude-pattern>module/Database/src/Mapper/Factory/OrganFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/ProspectiveMemberFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/SavedQueryFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Service/Factory/AnnulmentFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Service/Factory/ApiFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Service/Factory/FrontPageFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Service/Factory/MailingListFactory.php</exclude-pattern>

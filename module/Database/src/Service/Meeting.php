@@ -27,10 +27,13 @@ use Database\Mapper\Meeting as MeetingMapper;
 use Database\Mapper\Member as MemberMapper;
 use Database\Mapper\Organ as OrganMapper;
 use Database\Model\Decision as DecisionModel;
+use Database\Model\Exception\AnnulmentNotPossible;
 use Database\Model\Meeting as MeetingModel;
+use Database\Model\SubDecision\Annulment as AnnulmentModel;
 use Database\Model\SubDecision\Board\Installation as BoardInstallationModel;
 use Database\Model\SubDecision\Foundation as FoundationModel;
 use Database\Model\SubDecision\Key\Granting as KeyGrantingModel;
+use Laminas\Mvc\I18n\Translator;
 use Laminas\Stdlib\PriorityQueue;
 use ReflectionObject;
 
@@ -41,6 +44,8 @@ use function intval;
 class Meeting
 {
     public function __construct(
+        private readonly Annulment $annulmentService,
+        private readonly Translator $translator,
         private readonly AbolishForm $abolishForm,
         private readonly AnnulmentForm $annulmentForm,
         private readonly BoardDischargeForm $boardDischargeForm,
@@ -180,6 +185,7 @@ class Meeting
      * }|array{
      *     type: string,
      *     decision: DecisionModel,
+     *     warnings: string[],
      * }
      *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
@@ -201,17 +207,110 @@ class Meeting
         /** @var DecisionModel $decision */
         $decision = $form->getData();
 
+        $check = $this->checkAnnulmentTarget($decision);
+
+        if (null !== $check['error']) {
+            // Building the decision already attached it to its meeting, which cascades persists; a decision that is
+            // turned down has to be taken back out again.
+            $decision->getMeeting()->removeDecision($decision);
+            $form->get('name')->setMessages([$check['error']]);
+
+            return [
+                'type' => 'annulment',
+                'form' => $form,
+            ];
+        }
+
         // simply persist through the meeting mapper
         $this->getMeetingMapper()->persist($decision->getMeeting());
 
         return [
             'type' => 'annulment',
             'decision' => $decision,
+            'warnings' => $check['warnings'],
+        ];
+    }
+
+    /**
+     * Check that the decision targeted by an annulment can actually be annulled.
+     *
+     * The decision search already leaves out the decisions that cannot be annulled, but the form posts the target as
+     * plain identifiers, so it has to be checked again here.
+     *
+     * @return array{error: string|null, warnings: string[]} why the target cannot be annulled, or what is worth
+     *                                                        pointing out about annulling it.
+     */
+    private function checkAnnulmentTarget(DecisionModel $decision): array
+    {
+        /** @var AnnulmentModel $annulment */
+        $annulment = $decision->getSubdecisions()->first();
+        $reference = $annulment->getTarget();
+
+        $target = $this->getMeetingMapper()->findDecision(
+            $reference->getMeetingType(),
+            $reference->getMeetingNumber(),
+            $reference->getPoint(),
+            $reference->getNumber(),
+        );
+
+        if (null === $target) {
+            return $this->error($this->translator->translate('This decision does not exist.'));
+        }
+
+        if (
+            $target->getMeetingType() === $decision->getMeetingType()
+            && $target->getMeetingNumber() === $decision->getMeetingNumber()
+            && $target->getPoint() === $decision->getPoint()
+            && $target->getNumber() === $decision->getNumber()
+        ) {
+            return $this->error($this->translator->translate('A decision cannot annul itself.'));
+        }
+
+        if ($target->isAnnulled()) {
+            return $this->error($this->translator->translate('This decision has already been annulled.'));
+        }
+
+        if (!$this->annulmentService->isBefore($target, $decision)) {
+            // The ledger cannot be rewritten from the past: whatever is annulled must already have happened.
+            return $this->error($this->translator->translate('A decision can only annul a decision taken before it.'));
+        }
+
+        if ($this->annulmentService->isAnnulling($target)) {
+            // Annulling an annulment has no well-defined meaning: an annulment has no effects of its own that can be
+            // reverted. Delete the annulling decision instead, that restores what it annulled.
+            return $this->error($this->translator->translate(
+                'An annulling decision cannot be annulled, delete it instead.',
+            ));
+        }
+
+        // Finally, the ledger must allow the decision to be taken back at all.
+        try {
+            $warnings = $this->annulmentService->assertDecisionCanBeAnnulled($target);
+        } catch (AnnulmentNotPossible $e) {
+            return $this->error($e->getMessage());
+        }
+
+        return [
+            'error' => null,
+            'warnings' => $warnings,
+        ];
+    }
+
+    /**
+     * @return array{error: string, warnings: string[]}
+     */
+    private function error(string $message): array
+    {
+        return [
+            'error' => $message,
+            'warnings' => [],
         ];
     }
 
     /**
      * Delete a decision.
+     *
+     * @throws AnnulmentNotPossible when deleting an annulment would restore a decision that has since been overtaken.
      *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
@@ -231,6 +330,19 @@ class Meeting
         }
 
         $mapper = $this->getMeetingMapper();
+        $model = $mapper->findDecision($type, $number, $point, $decision);
+
+        if (null !== $model) {
+            // Deleting an annulment restores everything it annulled, so the ledger has to allow that. Checking before
+            // the deletion keeps it from failing halfway through.
+            foreach ($model->getSubdecisions() as $subdecision) {
+                if (!($subdecision instanceof AnnulmentModel)) {
+                    continue;
+                }
+
+                $this->annulmentService->assertAnnulmentCanBeDeleted($subdecision);
+            }
+        }
 
         $mapper->deleteDecision($type, $number, $point, $decision);
 
@@ -900,9 +1012,24 @@ class Meeting
      *
      * @return DecisionModel[]
      */
-    public function decisionSearch(string $query): array
-    {
-        return $this->getMeetingMapper()->searchDecision($query);
+    public function decisionSearch(
+        string $query,
+        ?MeetingTypes $meetingType = null,
+        ?int $meetingNumber = null,
+        ?int $point = null,
+        ?int $number = null,
+    ): array {
+        $before = null;
+
+        if (
+            null !== $meetingType
+            && null !== $meetingNumber
+        ) {
+            // Only decisions taken before the one being entered can be annulled by it.
+            $before = $this->getMeetingMapper()->find($meetingType, $meetingNumber);
+        }
+
+        return $this->getMeetingMapper()->searchDecision($query, false, $before, $point, $number);
     }
 
     /**

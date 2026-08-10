@@ -160,6 +160,17 @@ class Meeting
     }
 
     /**
+     * Remove a decision that is not going to be recorded after all.
+     *
+     * {@see Decision::setMeeting()} adds a decision here as soon as it is built, and this collection cascades
+     * persists, so a decision that is turned down has to be taken back out or the next flush would still write it.
+     */
+    public function removeDecision(Decision $decision): void
+    {
+        $this->decisions->removeElement($decision);
+    }
+
+    /**
      * Add multiple decisions.
      *
      * @param Decision[] $decisions

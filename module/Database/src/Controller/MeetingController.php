@@ -8,6 +8,7 @@ use Application\Model\Enums\MeetingTypes;
 use Database\Form\AbstractDecision as AbstractDecisionForm;
 use Database\Form\Fieldset\MemberFunction as MemberFunctionFieldset;
 use Database\Model\Decision as DecisionModel;
+use Database\Model\Exception\AnnulmentNotPossible;
 use Database\Model\Meeting as MeetingModel;
 use Database\Service\Api as ApiService;
 use Database\Service\Meeting as MeetingService;
@@ -237,6 +238,14 @@ class MeetingController extends AbstractActionController
                     'error' => true,
                     'exception' => $e,
                 ]);
+            } catch (AnnulmentNotPossible $e) {
+                // Deleting an annulment restores what it annulled, which is only possible while nothing was decided
+                // about the affected entities since.
+                return new ViewModel([
+                    'error' => true,
+                    'annulment' => true,
+                    'exception' => $e,
+                ]);
             }
 
             // Not deleted
@@ -277,7 +286,16 @@ class MeetingController extends AbstractActionController
     public function searchDecisionAction(): JsonModel
     {
         $query = $this->params()->fromQuery('q');
-        $res = $this->meetingService->decisionSearch($query);
+        // The decision being entered, so that only decisions taken before it are offered for annulment.
+        $meetingType = $this->params()->fromQuery('meeting_type');
+        $meetingNumber = $this->params()->fromQuery('meeting_number');
+        $res = $this->meetingService->decisionSearch(
+            $query,
+            null === $meetingType ? null : MeetingTypes::tryFrom($meetingType),
+            null === $meetingNumber ? null : (int) $meetingNumber,
+            (int) $this->params()->fromQuery('point'),
+            (int) $this->params()->fromQuery('decision'),
+        );
 
         $res = array_map(static function ($decision) {
             return $decision->toArray();

@@ -190,6 +190,12 @@ class Decision
      */
     public function addSubdecision(SubDecision $subdecision): void
     {
+        // {@see SubDecision::setDecision()} adds the subdecision here as well, so callers doing both would otherwise
+        // end up with it twice, and with the content of the decision repeating itself.
+        if ($this->subdecisions->contains($subdecision)) {
+            return;
+        }
+
         $this->subdecisions[] = $subdecision;
     }
 

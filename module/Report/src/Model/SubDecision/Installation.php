@@ -146,6 +146,16 @@ class Installation extends FoundationReference
     }
 
     /**
+     * Forget what was derived from this subdecision, because it no longer exists.
+     *
+     * Leaves the property uninitialised again, which is how the rest of the code recognises that there is nothing.
+     */
+    public function clearOrganMember(): void
+    {
+        unset($this->organMember);
+    }
+
+    /**
      * Get the organ member reference.
      */
     public function getOrganMember(): OrganMember

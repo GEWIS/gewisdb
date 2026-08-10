@@ -23,7 +23,6 @@ use Report\Model\Meeting as ReportMeetingModel;
 use Report\Model\Member as ReportMemberModel;
 use Report\Model\SubDecision as ReportSubDecisionModel;
 use Report\Service\SubDecision as SubDecisionService;
-use RuntimeException;
 use Throwable;
 
 use function array_reverse;
@@ -346,157 +345,35 @@ class Meeting
     /**
      * Annuls a previously recorded decision and its subdecisions in GEWISDB.
      *
-     * This function reverts the effects of a target decision by undoing or removing its associated subdecisions. Each
-     * subdecision type is handled explicitly to ensure that the data remains consistent and auditable.
+     * This function reverts the effects of a target decision by undoing or removing the entities that were derived
+     * from its subdecisions. Each subdecision type is handled explicitly by {@see SubDecisionService::revertRelated()}
+     * to ensure that the data remains consistent and auditable.
      *
      * GEWISDB operates as a ledger, meaning the chronological order of decisions must be preserved. A target decision
-     * made at point X may be annulled at point Z, but any relevant decisions that influence the target (at points Y)
-     * must lie strictly between X and Z. Annulments cannot be applied retroactively or out of sequence. Violating this
-     * breaks the ledger assumption and will result in an inconsistent and potentially irrecoverable state.
-     *
-     * This ordering is what allows us to perform the annulment at point Z, because at that time all points Y will be
-     * known and processed.
+     * made at point X may be annulled at point Z, but only while no decision in between builds on it. That rule lives
+     * in the `Database` module, which owns the ledger and turns down an annulment that would break it; by the time an
+     * annulment reaches ReportDB it merely has to be applied.
      *
      * NOTE: to adhere to our ordering assumption within a decision, we must loop through its subdecisions in reverse.
      */
     private function annulDecision(ReportDecisionModel $target): void
     {
-        foreach (array_reverse($target->getSubDecisions()->toArray()) as $targetSubDecision) {
-            if ($targetSubDecision instanceof ReportSubDecisionModel\Installation) {
-                // installation
-                $organMember = $targetSubDecision->getOrganMember();
-
-                // Cannot annul if organ membership changed since installation.
-                if (
-                    null !== $organMember->getDischargeDate()
-                    || !$organMember->getInstallation()->getReappointments()->isEmpty()
-                ) {
-                    throw new RuntimeException(
-                        'Cannot annul installation due to other relevant decisions after installation',
-                    );
-                }
-
-                $targetSubDecision->getFoundation()->getOrgan()->getMembers()->removeElement($organMember);
-                $this->emReport->remove($organMember);
-            } elseif ($targetSubDecision instanceof ReportSubDecisionModel\Discharge) {
-                // discharge
-                $organMember = $targetSubDecision->getInstallation()->getOrganMember();
-                $organMember->setDischargeDate(null);
-            } elseif ($targetSubDecision instanceof ReportSubDecisionModel\Reappointment) {
-                // reappointment
-                $installation = $targetSubDecision->getInstallation();
-
-                // Cannot annul if the installation has already been discharged.
-                if (null !== $installation->getDischarge()) {
-                    throw new RuntimeException('Cannot annul reappointment due to discharge after reappointment');
-                }
-
-                // Cannot annul if there are later reappointments tied to the same installation.
-                foreach ($installation->getReappointments() as $otherReappointment) {
-                    if ($otherReappointment === $targetSubDecision) {
-                        continue;
-                    }
-
-                    // Compare ordering: if another reappointment comes after this one, annulment is invalid.
-                    if ($this->isAfter($otherReappointment, $targetSubDecision)) {
-                        throw new RuntimeException(
-                            'Cannot annul reappointment due to other relevant decisions after reappointment',
-                        );
-                    }
-                }
-
-                $installation->removeReappointment($targetSubDecision);
-            } elseif ($targetSubDecision instanceof ReportSubDecisionModel\Foundation) {
-                // foundation
-                $organ = $targetSubDecision->getOrgan();
-
-                // Cannot annul if the organ has installations.
-                if (!$organ->getMembers()->isEmpty()) {
-                    throw new RuntimeException('Cannot annul foundation due to existing installations in the organ');
-                }
-
-                $this->emReport->remove($organ);
-            } elseif ($targetSubDecision instanceof ReportSubDecisionModel\Abrogation) {
-                // abrogation
-                $organ = $targetSubDecision->getFoundation()->getOrgan();
-                $organ->setAbrogationDate(null);
-            } elseif ($targetSubDecision instanceof ReportSubDecisionModel\Board\Installation) {
-                // board installation
-                $boardMember = $targetSubDecision->getBoardMember();
-
-                // Cannot annul if the board member has already been released or discharged.
-                if (
-                    null !== $boardMember->getReleaseDate()
-                    || null !== $boardMember->getDischargeDate()
-                ) {
-                    throw new RuntimeException('Cannot annul board installation due to later release or discharge');
-                }
-
-                $this->emReport->remove($boardMember);
-            } elseif ($targetSubDecision instanceof ReportSubDecisionModel\Board\Release) {
-                // board release
-                $installation = $targetSubDecision->getInstallation();
-                $boardMember = $installation->getBoardMember();
-
-                // Cannot annul release if the board member was also discharged afterwards.
-                if (null !== $boardMember->getDischargeDate()) {
-                    throw new RuntimeException('Cannot annul board release due to later discharge');
-                }
-
-                $boardMember->setReleaseDate(null);
-            } elseif ($targetSubDecision instanceof ReportSubDecisionModel\Board\Discharge) {
-                // board discharge
-                $installation = $targetSubDecision->getInstallation();
-                $boardMember  = $installation->getBoardMember();
-
-                $boardMember->setDischargeDate(null);
-            } elseif ($targetSubDecision instanceof ReportSubDecisionModel\Key\Granting) {
-                // key code granting
-                $keyholder = $targetSubDecision->getKeyholder();
-
-                // Cannot annul granting if it has already been withdrawn.
-                if (null !== $keyholder->getWithdrawnDate()) {
-                    throw new RuntimeException('Cannot annul key granting due to later withdrawal');
-                }
-
-                $this->emReport->remove($keyholder);
-            } elseif ($targetSubDecision instanceof ReportSubDecisionModel\Key\Withdrawal) {
-                // key code withdrawal
-                $keyholder = $targetSubDecision->getGranting()->getKeyholder();
-                $keyholder->setWithdrawnDate(null);
-            } elseif ($targetSubDecision instanceof ReportSubDecisionModel\Annulment) {
-                // This is undefined behaviour.
-                throw new LogicException('Annulment of a previous annulment is undefined');
-            }
-
-            $this->emReport->persist($targetSubDecision);
+        foreach (array_reverse($target->getSubdecisions()->toArray()) as $targetSubDecision) {
+            $this->subDecisionService->revertRelated($targetSubDecision);
         }
     }
 
     /**
-     * Determine if $a occurs after $b in the ledger ordering.
+     * Undoes an annulment, restoring the entities that were derived from the annulled decision.
+     *
+     * The same ledger assumption applies as for {@see self::annulDecision()}: the annulment can only be taken back
+     * while nothing has been decided about the affected entities since.
      */
-    private function isAfter(
-        ReportSubDecisionModel $a,
-        ReportSubDecisionModel $b,
-    ): bool {
-        if ($a->getMeetingType() !== $b->getMeetingType()) {
-            throw new LogicException('Cannot compare decisions across different meeting types');
+    private function unannulDecision(ReportDecisionModel $target): void
+    {
+        foreach ($target->getSubdecisions() as $targetSubDecision) {
+            $this->subDecisionService->generateRelated($targetSubDecision);
         }
-
-        if ($a->getMeetingNumber() !== $b->getMeetingNumber()) {
-            return $a->getMeetingNumber() > $b->getMeetingNumber();
-        }
-
-        if ($a->getDecisionPoint() !== $b->getDecisionPoint()) {
-            return $a->getDecisionPoint() > $b->getDecisionPoint();
-        }
-
-        if ($a->getDecisionNumber() !== $b->getDecisionNumber()) {
-            return $a->getDecisionNumber() > $b->getDecisionNumber();
-        }
-
-        return $a->getSequence() > $b->getSequence();
     }
 
     public function deleteDecision(DatabaseDecisionModel $decision): void
@@ -517,67 +394,30 @@ class Meeting
 
     public function deleteSubDecision(ReportSubDecisionModel $subDecision): void
     {
-        switch (true) {
-            case $subDecision instanceof ReportSubDecisionModel\Annulment:
-                $targetDecision = $subDecision->getTarget();
-                foreach ($targetDecision->getSubdecisions() as $targetSubDecision) {
-                    $this->subDecisionService->generateRelated($targetSubDecision);
-                }
+        if ($subDecision instanceof ReportSubDecisionModel\Annulment) {
+            $this->unannulDecision($subDecision->getTarget());
+        } else {
+            // Deleting a subdecision undoes its effects in exactly the same way that annulling it does.
+            $this->subDecisionService->revertRelated($subDecision);
 
-                break;
-            case $subDecision instanceof ReportSubDecisionModel\Reappointment:
-                $installation = $subDecision->getInstallation();
-                $installation->removeReappointment($subDecision);
+            // On top of that, the subdecision is about to disappear, so the references to it must be dropped as well.
+            switch (true) {
+                case $subDecision instanceof ReportSubDecisionModel\Discharge:
+                    $subDecision->getInstallation()->clearDischarge();
+                    break;
 
-                break;
-            case $subDecision instanceof ReportSubDecisionModel\Discharge:
-                $installation = $subDecision->getInstallation();
-                $installation->clearDischarge();
-                $organMember = $subDecision->getInstallation()->getOrganMember();
-                $organMember->setDischargeDate(null);
+                case $subDecision instanceof ReportSubDecisionModel\Board\Release:
+                    $subDecision->getInstallation()->clearRelease();
+                    break;
 
-                break;
-            case $subDecision instanceof ReportSubDecisionModel\Foundation:
-                $organ = $subDecision->getOrgan();
-                $this->emReport->remove($organ);
-                break;
-            case $subDecision instanceof ReportSubDecisionModel\Installation:
-                $organMember = $subDecision->getOrganMember();
+                case $subDecision instanceof ReportSubDecisionModel\Board\Discharge:
+                    $subDecision->getInstallation()->clearDischarge();
+                    break;
 
-                if (null !== $organMember) {
-                    $this->emReport->remove($organMember);
-                }
-
-                break;
-            case $subDecision instanceof ReportSubDecisionModel\Board\Installation:
-                $boardMember = $subDecision->getBoardMember();
-                $this->emReport->remove($boardMember);
-                break;
-            case $subDecision instanceof ReportSubDecisionModel\Board\Release:
-                $installation = $subDecision->getInstallation();
-                $installation->clearRelease();
-
-                $boardMember = $installation->getBoardMember();
-                $boardMember->setReleaseDate(null);
-                break;
-            case $subDecision instanceof ReportSubDecisionModel\Board\Discharge:
-                $installation = $subDecision->getInstallation();
-                $installation->clearDischarge();
-
-                $boardMember = $installation->getBoardMember();
-                $boardMember->setDischargeDate(null);
-                break;
-            case $subDecision instanceof ReportSubDecisionModel\Key\Granting:
-                $keyholder = $subDecision->getKeyholder();
-                $this->emReport->remove($keyholder);
-                break;
-            case $subDecision instanceof ReportSubDecisionModel\Key\Withdrawal:
-                $granting = $subDecision->getGranting();
-                $granting->clearWithdrawal();
-
-                $keyholder = $granting->getKeyholder();
-                $keyholder->setWithdrawnDate(null);
-                break;
+                case $subDecision instanceof ReportSubDecisionModel\Key\Withdrawal:
+                    $subDecision->getGranting()->clearWithdrawal();
+                    break;
+            }
         }
 
         $this->emReport->remove($subDecision);

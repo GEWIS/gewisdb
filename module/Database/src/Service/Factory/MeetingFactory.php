@@ -23,7 +23,9 @@ use Database\Form\Other as OtherForm;
 use Database\Mapper\Meeting as MeetingMapper;
 use Database\Mapper\Member as MemberMapper;
 use Database\Mapper\Organ as OrganMapper;
+use Database\Service\Annulment as AnnulmentService;
 use Database\Service\Meeting as MeetingService;
+use Laminas\Mvc\I18n\Translator;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Override;
 use Psr\Container\ContainerInterface;
@@ -39,6 +41,10 @@ class MeetingFactory implements FactoryInterface
         $requestedName,
         ?array $options = null,
     ): MeetingService {
+        /** @var AnnulmentService $annulmentService */
+        $annulmentService = $container->get(AnnulmentService::class);
+        /** @var Translator $translator */
+        $translator = $container->get(Translator::class);
         /** @var AbolishForm $abolishForm */
         $abolishForm = $container->get(AbolishForm::class);
         /** @var BoardDischargeForm $boardDischargeForm */
@@ -79,6 +85,8 @@ class MeetingFactory implements FactoryInterface
         $organMapper = $container->get(OrganMapper::class);
 
         return new MeetingService(
+            $annulmentService,
+            $translator,
             $abolishForm,
             $annulmentForm,
             $boardDischargeForm,

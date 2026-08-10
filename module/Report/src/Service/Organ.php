@@ -208,21 +208,15 @@ class Organ
 
     public function generateDischarge(ReportDischargeModel $ref): void
     {
+        // The installation's organMember is the inverse side of the relation; it is only hydrated when the installation
+        // is (re)loaded in a fresh session. Within a single session (e.g. seeding, where the install and discharge are
+        // processed back-to-back) it is not, so look the OrganMember up by its installation instead.
         $rp = new ReflectionProperty(ReportInstallationModel::class, 'organMember');
         if ($rp->isInitialized($ref->getInstallation())) {
             $organMember = $ref->getInstallation()->getOrganMember();
         } else {
             $organMember = $this->emReport->getRepository(ReportOrganMemberModel::class)
                 ->findOneBy(['installation' => $ref->getInstallation()]);
-        }
-
-        if (null === $organMember) {
-            // The installation's organMember is the inverse side of the relation; it is only hydrated when the
-            // installation is (re)loaded in a fresh session. Within a single session (e.g. seeding, where the install
-            // and discharge are processed back-to-back) it is not, so look the OrganMember up by its installation.
-            $organMember = $this->emReport->getRepository(OrganMember::class)->findOneBy([
-                'installation' => $ref->getInstallation(),
-            ]);
         }
 
         if (null === $organMember) {

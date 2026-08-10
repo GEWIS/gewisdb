@@ -7,6 +7,7 @@ namespace Database\Mapper;
 use Application\Model\Enums\MeetingTypes;
 use Database\Model\Decision as DecisionModel;
 use Database\Model\Meeting as MeetingModel;
+use Database\Model\SubDecision as SubDecisionModel;
 use Database\Model\SubDecision\Annulment as AnnulmentModel;
 use Database\Model\SubDecision\Board\Discharge as BoardDischargeModel;
 use Database\Model\SubDecision\Board\Installation as BoardInstallationModel;
@@ -16,6 +17,7 @@ use Database\Model\SubDecision\Key\Withdrawal as KeyWithdrawalModel;
 use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 
 use function implode;
 use function str_replace;
@@ -204,11 +206,20 @@ class Meeting
     /**
      * Search for a decision.
      *
+     * Decisions that annul another decision are never returned: annulling an annulment has no well-defined meaning,
+     * because an annulment has no effects of its own to revert.
+     *
+     * @param MeetingModel|null $before when given, only decisions taken before this meeting are returned, and within
+     *                                  that meeting only those before $beforePoint and $beforeNumber.
+     *
      * @return DecisionModel[]
      */
     public function searchDecision(
         string $query,
         bool $includeAnnulled = false,
+        ?MeetingModel $before = null,
+        ?int $beforePoint = null,
+        ?int $beforeNumber = null,
     ): array {
         $qb = $this->em->createQueryBuilder();
 
@@ -248,9 +259,77 @@ class Meeting
             ));
         }
 
+        // and we want to leave out the decisions that do the annulling
+        $qba = $this->em->createQueryBuilder();
+        $qba->select('b')
+            ->from(AnnulmentModel::class, 'b')
+            ->where('b.meeting_type = d.meeting_type')
+            ->andWhere('b.meeting_number = d.meeting_number')
+            ->andWhere('b.decision_point = d.point')
+            ->andWhere('b.decision_number = d.number');
+        $qb->andWhere($qb->expr()->not(
+            $qb->expr()->exists(
+                $qba->getDql(),
+            ),
+        ));
+
+        if (null !== $before) {
+            // A decision can only be annulled by a later one; the ledger cannot be rewritten from the past.
+            $qb->andWhere($qb->expr()->orX(
+                $qb->expr()->lt('m.date', ':before_date'),
+                $qb->expr()->andX(
+                    $qb->expr()->eq('m.type', ':before_type'),
+                    $qb->expr()->eq('m.number', ':before_number'),
+                    $qb->expr()->orX(
+                        $qb->expr()->lt('d.point', ':before_point'),
+                        $qb->expr()->andX(
+                            $qb->expr()->eq('d.point', ':before_point'),
+                            $qb->expr()->lt('d.number', ':before_decision'),
+                        ),
+                    ),
+                ),
+            ));
+
+            $qb->setParameter(':before_date', $before->getDate());
+            $qb->setParameter(':before_type', $before->getType());
+            $qb->setParameter(':before_number', $before->getNumber());
+            $qb->setParameter(':before_point', $beforePoint);
+            $qb->setParameter(':before_decision', $beforeNumber);
+        }
+
         $qb->setParameter(':search', '%' . strtolower($query) . '%');
 
         return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * Constrain a query to subdecisions whose decision was not annulled.
+     *
+     * An annulled decision never happened, so neither the thing it brought about nor the thing it took away counts.
+     * That cuts both ways for the queries below: an annulled installation is not a current one, and an annulled
+     * discharge does not end an installation that is.
+     *
+     * @param non-empty-string $alias alias of the subdecision to constrain, in $qb.
+     */
+    private function whereNotAnnulled(
+        QueryBuilder $qb,
+        string $alias,
+    ): void {
+        $annulment = 'annulment_' . $alias;
+        $target = 'target_' . $alias;
+
+        $qba = $this->em->createQueryBuilder();
+        $qba->select($annulment)
+            ->from(AnnulmentModel::class, $annulment)
+            ->join($annulment . '.target', $target)
+            ->where($target . '.meeting_type = ' . $alias . '.meeting_type')
+            ->andWhere($target . '.meeting_number = ' . $alias . '.meeting_number')
+            ->andWhere($target . '.point = ' . $alias . '.decision_point')
+            ->andWhere($target . '.number = ' . $alias . '.decision_number');
+
+        $qb->andWhere($qb->expr()->not(
+            $qb->expr()->exists($qba->getDql()),
+        ));
     }
 
     /**
@@ -277,7 +356,9 @@ class Meeting
             ->andWhere('x.decision_number = i.decision_number')
             ->andWhere('x.sequence = i.sequence');
 
-        // TODO: annulled decisions (both ways!)
+        $this->whereNotAnnulled($qbn, 'd');
+        $this->whereNotAnnulled($qb, 'i');
+
         $qb->andWhere($qb->expr()->not(
             $qb->expr()->exists($qbn->getDql()),
         ));
@@ -317,7 +398,10 @@ class Meeting
             ->andWhere('y.decision_number = i.decision_number')
             ->andWhere('y.sequence = i.sequence');
 
-        // TODO: annulled decisions (both ways!)
+        $this->whereNotAnnulled($qbd, 'd');
+        $this->whereNotAnnulled($qbr, 'r');
+        $this->whereNotAnnulled($qb, 'i');
+
         $qb->andWhere($qb->expr()->not(
             $qb->expr()->exists($qbd->getDql()),
         ));
@@ -353,7 +437,9 @@ class Meeting
             ->andWhere('x.decision_number = g.decision_number')
             ->andWhere('x.sequence = g.sequence');
 
-        // TODO: annulled decisions (both ways!)
+        $this->whereNotAnnulled($qbn, 'd');
+        $this->whereNotAnnulled($qb, 'g');
+
         $qb->andWhere($qb->expr()->not(
             $qb->expr()->exists($qbn->getDql()),
         ));
@@ -361,6 +447,28 @@ class Meeting
         $qb->setParameter('now', new DateTime('now'));
 
         return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * Find the subdecisions of the given type that reference the given subdecision.
+     *
+     * The references are deliberately looked up here instead of through the inverse side of the association: an
+     * installation can carry more than one discharge once an earlier one has been annulled, and the to-one inverse
+     * sides silently return only the first of those.
+     *
+     * @template T of SubDecisionModel
+     *
+     * @param class-string<T>  $type
+     * @param non-empty-string $property
+     *
+     * @return T[]
+     */
+    public function findReferencingSubDecisions(
+        string $type,
+        string $property,
+        DecisionModel|SubDecisionModel $referenced,
+    ): array {
+        return $this->em->getRepository($type)->findBy([$property => $referenced]);
     }
 
     /**

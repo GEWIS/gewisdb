@@ -110,8 +110,10 @@ use Database\Model\SubDecision\Discharge as DischargeModel;
 use Database\Model\SubDecision\Foundation as FoundationModel;
 use Database\Model\SubDecision\Key\Granting as KeyGrantingModel;
 use Database\Model\SubDecision\Reappointment as ReappointmentModel;
+use Database\Service\Annulment as AnnulmentService;
 use Database\Service\Api as ApiService;
 use Database\Service\Audit as AuditService;
+use Database\Service\Factory\AnnulmentFactory as AnnulmentServiceFactory;
 use Database\Service\Factory\ApiFactory as ApiServiceFactory;
 use Database\Service\Factory\AuditFactory as AuditServiceFactory;
 use Database\Service\Factory\FrontPageFactory as FrontPageServiceFactory;
@@ -183,6 +185,7 @@ class Module
                 MailingListMaintenanceCommand::class => MailingListMaintenanceCommandFactory::class,
                 MailingListSyncCommand::class => MailingListSyncCommandFactory::class,
                 GenerateAuthenticationKeysCommand::class => GenerateAuthenticationKeysCommandFactory::class,
+                AnnulmentService::class => AnnulmentServiceFactory::class,
                 ApiService::class => ApiServiceFactory::class,
                 FrontPageService::class => FrontPageServiceFactory::class,
                 ListmonkService::class => ListmonkServiceFactory::class,

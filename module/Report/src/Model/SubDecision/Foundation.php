@@ -150,6 +150,16 @@ class Foundation extends SubDecision
     }
 
     /**
+     * Forget what was derived from this subdecision, because it no longer exists.
+     *
+     * Leaves the property uninitialised again, which is how the rest of the code recognises that there is nothing.
+     */
+    public function clearOrgan(): void
+    {
+        unset($this->organ);
+    }
+
+    /**
      * Get the referenced organ.
      */
     public function getOrgan(): Organ

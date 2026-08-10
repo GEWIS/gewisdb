@@ -118,7 +118,7 @@ class Organ
      */
     #[ManyToMany(
         targetEntity: SubDecision::class,
-        cascade: ['remove', 'persist'],
+        cascade: ['persist'],
     )]
     #[JoinTable(name: 'organs_subdecisions')]
     #[JoinColumn(
@@ -305,5 +305,17 @@ class Organ
         }
 
         $this->subdecisions[] = $subdecision;
+    }
+
+    /**
+     * Remove a subdecision, if it is related to this organ.
+     */
+    public function removeSubdecision(SubDecision $subdecision): void
+    {
+        if (!$this->subdecisions->contains($subdecision)) {
+            return;
+        }
+
+        $this->subdecisions->removeElement($subdecision);
     }
 }

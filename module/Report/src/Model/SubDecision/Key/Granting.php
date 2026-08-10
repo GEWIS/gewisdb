@@ -85,6 +85,16 @@ class Granting extends SubDecision
     }
 
     /**
+     * Forget what was derived from this subdecision, because it no longer exists.
+     *
+     * Leaves the property uninitialised again, which is how the rest of the code recognises that there is nothing.
+     */
+    public function clearKeyholder(): void
+    {
+        unset($this->keyholder);
+    }
+
+    /**
      * Get the keyholder decision.
      */
     public function getKeyholder(): Keyholder

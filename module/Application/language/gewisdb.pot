@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GEWISdb v4.6.1-5-ge5ec13f4-dirty\n"
+"Project-Id-Version: GEWISdb v4.6.1-10-g5335eba6-dirty\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-17 13:32+0200\n"
+"POT-Creation-Date: 2026-08-17 15:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -68,6 +68,12 @@ msgid "%d pending mailing list unsubscriptions"
 msgstr ""
 
 #, php-format
+msgid ""
+"%s %d.%d.%d has been annulled, but %s. When the term ended now follows from "
+"the Internal Regulations; record a discharge if one is needed."
+msgstr ""
+
+#, php-format
 msgid "%s %s member expiring soon"
 msgstr ""
 
@@ -107,6 +113,12 @@ msgid ""
 msgstr ""
 
 msgid "A TU/e student number consists of 7 digits."
+msgstr ""
+
+msgid "A decision can only annul a decision taken before it."
+msgstr ""
+
+msgid "A decision cannot annul itself."
 msgstr ""
 
 msgid "ALV"
@@ -220,6 +232,9 @@ msgid "Agreement"
 msgstr ""
 
 msgid "All API permissions"
+msgstr ""
+
+msgid "An annulling decision cannot be annulled, delete it instead."
 msgstr ""
 
 msgid "An error occurred"
@@ -625,6 +640,10 @@ msgid ""
 msgstr ""
 
 msgid "Decision"
+msgstr ""
+
+#, php-format
+msgid "Decision %s %d.%d.%d cannot be annulled, because %s."
 msgstr ""
 
 msgid "Decision Already Exists"
@@ -1455,6 +1474,11 @@ msgstr ""
 msgid "Remove Prospective Member"
 msgstr ""
 
+msgid ""
+"Removing this annulment would restore a decision that later decisions have "
+"since overtaken."
+msgstr ""
+
 msgid "Renew"
 msgstr ""
 
@@ -1704,6 +1728,12 @@ msgid ""
 "These organ functions were used in the past but can no longer be selected"
 msgstr ""
 
+msgid "This decision does not exist."
+msgstr ""
+
+msgid "This decision has already been annulled."
+msgstr ""
+
 msgid ""
 "This does not appear to be a valid TU/e student number. Please check it for "
 "typos. If you are certain that it is correct, please contact the secretary."
@@ -1949,6 +1979,9 @@ msgid ""
 "M&CS."
 msgstr ""
 
+msgid "a related decision was annulled after this annulment was made"
+msgstr ""
+
 msgid "active"
 msgstr ""
 
@@ -2001,6 +2034,32 @@ msgstr ""
 msgid "https://gewis.nl/association/regulations"
 msgstr ""
 
+msgid "it was decided about again after this annulment was made"
+msgstr ""
+
+#, php-format
+msgid "it would leave %s with fewer than %d active member(s)"
+msgstr ""
+
+#, php-format
+msgid "it would leave %s without a chair"
+msgstr ""
+
+#, php-format
+msgid ""
+"it would leave someone an inactive member of %s, which does not have those"
+msgstr ""
+
+#, php-format
+msgid ""
+"it would leave someone with a function in %s without being an active member "
+"of it"
+msgstr ""
+
+#, php-format
+msgid "it would make someone an active and an inactive member of %s at once"
+msgstr ""
+
 msgid "mailing list subscriptions"
 msgstr ""
 
@@ -2008,6 +2067,9 @@ msgid "member"
 msgstr ""
 
 msgid "member address"
+msgstr ""
+
+msgid "members were installed in the organ after it was abolished"
 msgstr ""
 
 msgid "membership expiration date"
@@ -2054,6 +2116,48 @@ msgid "resolves to %s"
 msgstr ""
 
 msgid "synced"
+msgstr ""
+
+msgid "the board member was also discharged by another decision"
+msgstr ""
+
+msgid "the board member was also released by another decision"
+msgstr ""
+
+msgid "the board member was discharged after being installed"
+msgstr ""
+
+msgid "the board member was discharged after being released"
+msgstr ""
+
+msgid "the board member was released after being installed"
+msgstr ""
+
+msgid "the installation was prolonged after it was made"
+msgstr ""
+
+msgid "the installation was prolonged again afterwards"
+msgstr ""
+
+msgid "the key code was also withdrawn by another decision"
+msgstr ""
+
+msgid "the key code was withdrawn after it was granted"
+msgstr ""
+
+msgid "the member was also discharged by another decision"
+msgstr ""
+
+msgid "the member was discharged after being installed"
+msgstr ""
+
+msgid "the member was discharged after being reappointed"
+msgstr ""
+
+msgid "the organ is still referenced by other decisions"
+msgstr ""
+
+msgid "the organ was also abolished by another decision"
 msgstr ""
 
 msgid "to be created"
