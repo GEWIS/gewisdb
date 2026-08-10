@@ -1,4 +1,4 @@
-.PHONY: help runprod rundev runtest runcoverage update updatecomposer getvendordir phpstan phpcs phpcbf phpcsfix phpcsfixtypes replenish compilelang build buildprod builddev update preparelistmonk preparemailman migrate migrate-to migration-down migration-up migration-diff composerunused stripewebhooksecret seed seed-core wait-db
+.PHONY: help runprod rundev runtest runcoverage update updatecomposer getvendordir phpstan phpcs phpcbf phpcsfix phpcsfixtypes replenish compilelang build buildprod builddev update preparelistmonk preparemailman migrate migrate-to migration-down migration-up migration-diff composerunused stripewebhooksecret seed
 
 help:
 		@echo "Makefile commands:"
@@ -36,18 +36,9 @@ rundev: builddev
 		@docker compose up -d --build --remove-orphans
 		@make replenish
 
-migrate: replenish wait-db
+migrate: replenish
 		@docker compose exec -u www-data -it web ./orm migrations:migrate --object-manager doctrine.entitymanager.orm_default
 		@docker compose exec -u www-data -it web ./orm migrations:migrate --object-manager doctrine.entitymanager.orm_report
-
-# Wait (bounded) for postgresql to accept TCP connections before touching the DB.
-wait-db:
-		@for i in $$(seq 1 30); do \
-			docker compose exec -T postgresql pg_isready -h 127.0.0.1 -p 5432 -q && exit 0; \
-			echo "Waiting for the database to accept connections... ($$i/30)"; \
-			sleep 2; \
-		done; \
-		echo "Database did not become ready in time" && exit 1
 
 migrate-to:
 		@docker compose exec -u www-data web sh -c '. ./scripts/migrate-version.sh && ./orm migrations:migrate $$migrations --object-manager doctrine.entitymanager.$$alias'
@@ -73,14 +64,9 @@ migration-up: replenish
 migration-down: replenish
 		@docker compose exec -u www-data web sh -c '. ./scripts/migrate-version.sh && ./orm migrations:execute --down $$migrations --object-manager doctrine.entitymanager.$$alias'
 
-# Seed the core databases only (fixtures + report projection): needs just web + postgresql.
-# Used by CI to test migrations and seeders without booting the sync-based services.
-seed-core: replenish
+seed: replenish
 		@docker compose exec -u www-data -T web ./web application:fixtures:load
 		@docker compose exec -u www-data web ./web report:generate:full
-
-# Full local seed: core databases plus the (sync-based) Mailman and Listmonk provisioning.
-seed: seed-core
 		@make preparemailman
 		@docker compose exec mailman-web bash -c '(python3 ./manage.py createsuperuser --no-input 2>/dev/null || true)'
 		@docker compose exec -u mailman mailman-core bash -c '(mailman create news@$$MAILMAN_DOMAIN; mailman create other@$$MAILMAN_DOMAIN; true) 2>/dev/null'

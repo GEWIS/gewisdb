@@ -49,6 +49,20 @@ jobs:
       - name: run base
         run: docker compose $COMPOSE_FILES up -d --build --no-deps --quiet-pull web postgresql
 
+      - name: wait for database (base)
+        run: |
+          for i in $(seq 1 30); do
+            if docker compose $COMPOSE_FILES exec -T postgresql pg_isready -h 127.0.0.1 -p 5432 -q; then
+              echo "Database is accepting connections."
+              exit 0
+            fi
+            echo "Waiting for the database to accept connections... ($i/30)"
+            sleep 2
+          done
+          echo "::error::Database did not become ready in time"
+          docker compose $COMPOSE_FILES logs postgresql
+          exit 1
+
       - name: migrate base
         run: make migrate
 
@@ -62,7 +76,9 @@ jobs:
           echo "MIGRATION_BASE_REPORT=$MIGRATION_BASE_REPORT" >> $GITHUB_ENV
 
       - name: seed base
-        run: make seed-core
+        run: |
+          docker compose exec -u www-data -T web ./web application:fixtures:load
+          docker compose exec -u www-data -T web ./web report:generate:full
 
       - name: cleanup base
         run: docker compose $COMPOSE_FILES down
@@ -75,6 +91,20 @@ jobs:
 
       - name: run head
         run: docker compose $COMPOSE_FILES up -d --build --no-deps --quiet-pull web postgresql
+
+      - name: wait for database (head)
+        run: |
+          for i in $(seq 1 30); do
+            if docker compose $COMPOSE_FILES exec -T postgresql pg_isready -h 127.0.0.1 -p 5432 -q; then
+              echo "Database is accepting connections."
+              exit 0
+            fi
+            echo "Waiting for the database to accept connections... ($i/30)"
+            sleep 2
+          done
+          echo "::error::Database did not become ready in time"
+          docker compose $COMPOSE_FILES logs postgresql
+          exit 1
 
       - name: migrate head
         run: make migrate
@@ -91,8 +121,12 @@ jobs:
           fi
           echo "All migrations are up to date."
 
+      # Seeds the core databases only; `make seed` would also drive the sync-based Mailman
+      # and Listmonk services, which `--no-deps` deliberately never started.
       - name: seed head
-        run: make seed-core
+        run: |
+          docker compose exec -u www-data -T web ./web application:fixtures:load
+          docker compose exec -u www-data -T web ./web report:generate:full
 
       - name: revert to base migration
         run: |
