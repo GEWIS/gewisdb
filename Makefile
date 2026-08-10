@@ -1,4 +1,4 @@
-.PHONY: help runprod rundev runtest runcoverage update updatecomposer getvendordir phpstan phpcs phpcbf phpcsfix phpcsfixtypes replenish compilelang build buildprod builddev update preparelistmonk preparemailman migrate migrate-to migration-down migration-up migration-diff composerunused stripewebhooksecret
+.PHONY: help runprod rundev runtest runcoverage update updatecomposer getvendordir phpstan phpcs phpcbf phpcsfix phpcsfixtypes replenish compilelang build buildprod builddev update preparelistmonk preparemailman migrate migrate-to migration-down migration-up migration-diff composerunused stripewebhooksecret seed
 
 help:
 		@echo "Makefile commands:"
@@ -44,18 +44,19 @@ migrate-to:
 		@docker compose exec -u www-data web sh -c '. ./scripts/migrate-version.sh && ./orm migrations:migrate $$migrations --object-manager doctrine.entitymanager.$$alias'
 
 migration-diff: replenish
-		@docker compose exec -u root web chown www-data:www-data /code/module/Database/migrations/
-		@docker compose exec -u www-data -T web ./orm migrations:diff --object-manager doctrine.entitymanager.orm_default
-		@docker compose exec -u www-data -T web find /code/module/Database/migrations -type f -user www-data -exec sed -i '/CREATE SCHEMA public/d' {} \;
-		@docker compose exec -u www-data -T web find /code/module/Database/migrations -type f -user www-data -exec sed -i '/^[[:space:]]*\/\//d' {} \;
-		@docker cp "$(shell docker compose ps -q web)":/code/module/Database/migrations ./module/Database
-		@docker compose exec -u root web chown -R root:root /code/module/Database/migrations/
-		@docker compose exec -u root web chown www-data:www-data /code/module/Report/migrations/
-		@docker compose exec -u www-data -T web ./orm migrations:diff --object-manager doctrine.entitymanager.orm_report
-		@docker compose exec -u www-data -T web find /code/module/Report/migrations -type f -user www-data -exec sed -i '/CREATE SCHEMA public/d' {} \;
-		@docker compose exec -u www-data -T web find /code/module/Report/migrations -type f -user www-data -exec sed -i '/^[[:space:]]*\/\//d' {} \;
-		@docker cp "$(shell docker compose ps -q web)":/code/module/Report/migrations ./module/Report
-		@docker compose exec -u root web chown -R root:root /code/module/Report/migrations/
+		@set -e; \
+		for target in "Database:orm_default" "Report:orm_report"; do \
+			module="$${target%%:*}"; \
+			manager="$${target##*:}"; \
+			echo "Generating migrations for $$module ($$manager)..."; \
+			docker compose exec -u root web chown www-data:www-data /code/module/$$module/migrations/; \
+			docker compose exec -u www-data -T web ./orm migrations:diff --allow-empty-diff --object-manager doctrine.entitymanager.$$manager; \
+			docker compose exec -u www-data -T web find /code/module/$$module/migrations -type f -user www-data -exec sed -i '/CREATE SCHEMA public/d' {} \; ; \
+			docker compose exec -u www-data -T web find /code/module/$$module/migrations -type f -user www-data -exec sh -c 'grep -q "addSql(" "$$1" || { echo "Deleting empty migration $$1"; rm "$$1"; }' _ {} \; ; \
+			docker cp "$$(docker compose ps -q web)":/code/module/$$module/migrations ./module/$$module; \
+			docker compose exec -u root web chown -R root:root /code/module/$$module/migrations/; \
+		done
+
 
 migration-up: replenish
 		@docker compose exec -u www-data web sh -c '. ./scripts/migrate-version.sh && ./orm migrations:execute --up $$migrations --object-manager doctrine.entitymanager.$$alias'
