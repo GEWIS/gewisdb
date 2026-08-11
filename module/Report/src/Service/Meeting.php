@@ -46,11 +46,17 @@ class Meeting
     }
 
     /**
-     * Export meetings.
+     * Build ReportDB by replaying every meeting in the order it was held.
+     *
+     * ReportDB is a materialised view of GEWISDB, and GEWISDB is a ledger: the state it describes is whatever you end
+     * up with after going through the decisions in order. So that is all this does. Every subdecision is applied the
+     * moment it is reached, including the annulments, which revert what their target set in motion at exactly the
+     * point in the ledger where that happened. Entities being created and later removed again along the way is
+     * expected, and is what makes the result the same whether ReportDB was empty or already up to date.
      */
     public function generate(): void
     {
-        // simply export every meeting
+        // every meeting, oldest first
         $meetings = $this->meetingMapper->findAll(true, true);
 
         $adapter = new Console();
@@ -60,6 +66,8 @@ class Meeting
         foreach ($meetings as $meeting) {
             $this->generateMeeting($meeting[0]);
             $this->emReport->flush();
+            // Nothing generated so far is needed again by name, and holding on to all of it makes every subsequent
+            // flush more expensive than the last.
             $this->emReport->clear();
             $progress->update(++$num);
         }
@@ -133,7 +141,10 @@ class Meeting
         $contentEN = [];
 
         foreach ($decision->getSubdecisions() as $subdecision) {
-            $this->generateSubDecision($subdecision, $reportDecision);
+            /** @var ReportSubDecisionModel $reportSubDecision */
+            $reportSubDecision = $this->generateSubDecision($subdecision, $reportDecision);
+            // Applied right here, so that what a subdecision brings about is in place before the next one is read.
+            $this->subDecisionService->generateRelated($reportSubDecision);
             $contentNL[] = $subdecision->getTranslatedContent($this->translator, AppLanguages::Dutch);
             $contentEN[] = $subdecision->getTranslatedContent($this->translator, AppLanguages::English);
         }

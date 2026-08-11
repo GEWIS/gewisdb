@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Report\Service;
 
 use Doctrine\ORM\EntityManager;
-use Laminas\ProgressBar\Adapter\Console;
-use Laminas\ProgressBar\ProgressBar;
 use LogicException;
 use ReflectionProperty;
 use Report\Model\Organ as ReportOrganModel;
@@ -14,76 +12,12 @@ use Report\Model\OrganMember as ReportOrganMemberModel;
 use Report\Model\SubDecision\Abrogation as ReportAbrogationModel;
 use Report\Model\SubDecision\Discharge as ReportDischargeModel;
 use Report\Model\SubDecision\Foundation as ReportFoundationModel;
-use Report\Model\SubDecision\FoundationReference as ReportFoundationReferenceModel;
 use Report\Model\SubDecision\Installation as ReportInstallationModel;
-
-use function count;
 
 class Organ
 {
     public function __construct(private readonly EntityManager $emReport)
     {
-    }
-
-    /**
-     * Export organ info.
-     */
-    public function generate(): void
-    {
-        $foundationRepo = $this->emReport->getRepository(ReportFoundationModel::class);
-
-        /** @var array<array-key, ReportFoundationModel> $foundations */
-        $foundations = $foundationRepo->findBy([], [
-            'meeting_type' => 'DESC',
-            'meeting_number' => 'ASC',
-            'decision_point' => 'ASC',
-            'decision_number' => 'ASC',
-            'sequence' => 'ASC',
-        ]);
-
-        $adapter = new Console();
-        $progress = new ProgressBar($adapter, 0, count($foundations));
-
-        $num = 0;
-        foreach ($foundations as $foundation) {
-            // see if there already is an organ
-            $repOrgan = $this->generateFoundation($foundation);
-
-            /**
-             * Also find all related subdecisions.
-             *
-             * Types of subdecisions that can be related to an organ:
-             * - foundation
-             * - abrogation
-             * - installation
-             * - discharge
-             */
-            $repOrgan->addSubdecision($foundation);
-
-            // get the abrogation date and find organ members
-            /** @var ReportFoundationReferenceModel $ref */
-            foreach ($foundation->getReferences() as $ref) {
-                // first add as related subdecision
-                $repOrgan->addSubdecision($ref);
-
-                if ($ref instanceof ReportAbrogationModel) {
-                    $this->generateAbrogation($ref);
-                }
-
-                if (!($ref instanceof ReportInstallationModel)) {
-                    continue;
-                }
-
-                $this->generateInstallation($ref);
-            }
-
-            $this->emReport->persist($repOrgan);
-            $this->emReport->flush();
-            $progress->update(++$num);
-        }
-
-        $this->emReport->flush();
-        $progress->finish();
     }
 
     public function generateFoundation(ReportFoundationModel $foundation): ReportOrganModel
@@ -99,6 +33,7 @@ class Organ
         if (null === $repOrgan) {
             $repOrgan = new ReportOrganModel();
             $repOrgan->setFoundation($foundation);
+            $foundation->setOrgan($repOrgan);
         }
 
         $repOrgan->setAbbr($foundation->getAbbr());
@@ -110,7 +45,6 @@ class Organ
         $repOrgan->addSubdecision($foundation);
 
         $this->emReport->persist($repOrgan);
-        $this->emReport->flush();
 
         return $repOrgan;
     }
@@ -136,13 +70,23 @@ class Organ
             }
         }
 
-        $repOrgan->setAbrogationDate($ref->getDecision()->getMeeting()->getDate());
+        $abrogationDate = $ref->getDecision()->getMeeting()->getDate();
+        $repOrgan->setAbrogationDate($abrogationDate);
+
+        // Abolishing an organ discharges whoever is still in it; there is no separate decision for that.
+        foreach ($repOrgan->getMembers() as $organMember) {
+            if (null !== $organMember->getDischargeDate()) {
+                continue;
+            }
+
+            $organMember->setDischargeDate($abrogationDate);
+            $this->emReport->persist($organMember);
+        }
 
         // To ensure that the subdecision is correctly linked to the organ.
         $repOrgan->addSubdecision($ref);
 
         $this->emReport->persist($repOrgan);
-        $this->emReport->flush();
     }
 
     public function generateInstallation(ReportInstallationModel $ref): void
@@ -186,6 +130,8 @@ class Organ
         }
 
         $organMember->setInstallation($ref);
+        $ref->setOrganMember($organMember);
+        $repOrgan->addMember($organMember);
         $discharge = $ref->getDischarge();
 
         if (null !== $discharge) {
@@ -203,7 +149,6 @@ class Organ
         $repOrgan->addSubdecision($ref);
 
         $this->emReport->persist($organMember);
-        $this->emReport->flush();
     }
 
     public function generateDischarge(ReportDischargeModel $ref): void
@@ -247,6 +192,5 @@ class Organ
         $repOrgan->addSubdecision($ref);
 
         $this->emReport->persist($organMember);
-        $this->emReport->flush();
     }
 }

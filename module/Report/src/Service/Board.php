@@ -18,32 +18,6 @@ class Board
     {
     }
 
-    /**
-     * Export board info.
-     */
-    public function generate(): void
-    {
-        $repo = $this->emReport->getRepository(ReportBoardInstallationModel::class);
-
-        $installs = $repo->findAll();
-        /** @var ReportBoardInstallationModel $install */
-        foreach ($installs as $install) {
-            $boardMember = $this->generateInstallation($install);
-
-            if (null !== $install->getRelease()) {
-                $boardMember = $this->generateRelease($install->getRelease());
-            }
-
-            if (null !== $install->getDischarge()) {
-                $boardMember = $this->generateDischarge($install->getDischarge());
-            }
-
-            $this->emReport->persist($boardMember);
-        }
-
-        $this->emReport->flush();
-    }
-
     public function generateInstallation(ReportBoardInstallationModel $installation): BoardMemberModel
     {
         $rp = new ReflectionProperty(ReportBoardInstallationModel::class, 'boardMember');
@@ -56,6 +30,7 @@ class Board
         if (null === $boardMember) {
             $boardMember = new BoardMemberModel();
             $boardMember->setInstallationDec($installation);
+            $installation->setBoardMember($boardMember);
         }
 
         $boardMember->setMember($installation->getMember());
@@ -63,7 +38,6 @@ class Board
         $boardMember->setInstallDate($installation->getDate());
 
         $this->emReport->persist($boardMember);
-        $this->emReport->flush();
 
         return $boardMember;
     }
@@ -84,7 +58,6 @@ class Board
         $boardMember->setDischargeDate($discharge->getDecision()->getMeeting()->getDate());
 
         $this->emReport->persist($boardMember);
-        $this->emReport->flush();
 
         return $boardMember;
     }
@@ -105,7 +78,6 @@ class Board
         $boardMember->setReleaseDate($release->getDate());
 
         $this->emReport->persist($boardMember);
-        $this->emReport->flush();
 
         return $boardMember;
     }

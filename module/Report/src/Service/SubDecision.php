@@ -144,8 +144,18 @@ class SubDecision
 
             case $subDecision instanceof AbrogationModel:
                 $organ = $this->findOrgan($subDecision->getFoundation());
-                $organ?->setAbrogationDate(null);
                 $organ?->removeSubdecision($subDecision);
+
+                if (null !== $organ) {
+                    // Abolishing the organ discharged whoever was still in it, so those discharges go as well.
+                    foreach ($organ->getMembers() as $organMember) {
+                        $discharge = $organMember->getInstallation()->getDischarge();
+                        $organMember->setDischargeDate($discharge?->getDecision()->getMeeting()->getDate());
+                    }
+
+                    $organ->setAbrogationDate(null);
+                }
+
                 break;
 
             case $subDecision instanceof InstallationModel:

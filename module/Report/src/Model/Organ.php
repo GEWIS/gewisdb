@@ -284,6 +284,21 @@ class Organ
     }
 
     /**
+     * Add a member.
+     *
+     * Kept in step with the owning side, so that a member installed earlier in the same meeting is already part of the
+     * organ when a later decision in that meeting asks who is in it.
+     */
+    public function addMember(OrganMember $member): void
+    {
+        if ($this->members->contains($member)) {
+            return;
+        }
+
+        $this->members[] = $member;
+    }
+
+    /**
      * Add multiple subdecisions.
      *
      * @param SubDecision[] $subdecisions

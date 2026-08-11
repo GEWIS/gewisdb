@@ -6,7 +6,6 @@ namespace Report;
 
 use Doctrine\ORM\Mapping\Driver\AttributeDriver;
 use Report\Command\GenerateFullCommand;
-use Report\Command\GeneratePartialCommand;
 
 return [
     'doctrine' => [
@@ -33,7 +32,6 @@ return [
     ],
     'laminas-cli' => [
         'commands' => [
-            'report:generate:partial' => GeneratePartialCommand::class,
             'report:generate:full' => GenerateFullCommand::class,
         ],
     ],

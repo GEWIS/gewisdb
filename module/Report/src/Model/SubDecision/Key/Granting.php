@@ -85,6 +85,17 @@ class Granting extends SubDecision
     }
 
     /**
+     * Set the keyholder decision.
+     *
+     * Kept in step with the owning side, so that a keyholder only just derived from this granting can be found right
+     * away, without having to go through the database for it.
+     */
+    public function setKeyholder(Keyholder $keyholder): void
+    {
+        $this->keyholder = $keyholder;
+    }
+
+    /**
      * Forget what was derived from this subdecision, because it no longer exists.
      *
      * Leaves the property uninitialised again, which is how the rest of the code recognises that there is nothing.

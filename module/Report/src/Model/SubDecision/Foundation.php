@@ -150,6 +150,17 @@ class Foundation extends SubDecision
     }
 
     /**
+     * Set the referenced organ.
+     *
+     * Kept in step with the owning side, so that an organ only just derived from this foundation can be found right
+     * away, without having to go through the database for it.
+     */
+    public function setOrgan(Organ $organ): void
+    {
+        $this->organ = $organ;
+    }
+
+    /**
      * Forget what was derived from this subdecision, because it no longer exists.
      *
      * Leaves the property uninitialised again, which is how the rest of the code recognises that there is nothing.

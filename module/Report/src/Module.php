@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace Report;
 
 use Report\Command\Factory\GenerateFullCommandFactory;
-use Report\Command\Factory\GeneratePartialCommandFactory;
 use Report\Command\GenerateFullCommand;
-use Report\Command\GeneratePartialCommand;
 use Report\Listener\DatabaseDeletionListener;
 use Report\Listener\DatabaseUpdateListener;
 use Report\Listener\Factory\DatabaseDeletionListenerFactory;
@@ -47,7 +45,6 @@ class Module
         return [
             'factories' => [
                 GenerateFullCommand::class => GenerateFullCommandFactory::class,
-                GeneratePartialCommand::class => GeneratePartialCommandFactory::class,
                 BoardService::class => BoardServiceFactory::class,
                 KeyholderService::class => KeyholderServiceFactory::class,
                 MeetingService::class => MeetingServiceFactory::class,
