@@ -29,6 +29,7 @@ use function array_reverse;
 use function count;
 use function implode;
 use function preg_replace;
+use function sprintf;
 
 class Meeting
 {
@@ -89,6 +90,12 @@ class Meeting
             $reportMeeting = new ReportMeetingModel();
             $reportMeeting->setType($meeting->getType());
             $reportMeeting->setNumber($meeting->getNumber());
+            $reportMeeting->setDate($meeting->getDate());
+        } elseif ($reportMeeting->getDate()->format('Y-m-d') !== $meeting->getDate()->format('Y-m-d')) {
+            // The type and number identify the meeting and can therefore never change, but the date can be corrected
+            // after the fact, so it must be kept in sync. Only assign it when the stored date actually differs:
+            // Doctrine detects changes by identity, so handing it an equal but distinct DateTime would mark the
+            // meeting as dirty and rewrite the row on every single projection.
             $reportMeeting->setDate($meeting->getDate());
         }
 
@@ -437,13 +444,19 @@ class Meeting
     /**
      * Obtain the correct member, given a database member. Because these members are generated based on what happens in
      * the `Database` module, this cannot return `null`.
-     *
-     * @psalm-ignore-nullable-return
      */
-    public function findMember(DatabaseMemberModel $member): ?ReportMemberModel
+    public function findMember(DatabaseMemberModel $member): ReportMemberModel
     {
-        return $this->emReport->getRepository(ReportMemberModel::class)
+        $reportMember = $this->emReport->getRepository(ReportMemberModel::class)
             ->find($member->getLidnr());
+
+        if (null === $reportMember) {
+            throw new LogicException(
+                sprintf('Member %d does not exist in ReportDB', $member->getLidnr()),
+            );
+        }
+
+        return $reportMember;
     }
 
     /**
