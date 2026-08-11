@@ -10,6 +10,8 @@ use Checker\Command\CheckDischargesCommand;
 use Checker\Command\CheckMembershipGraduateRenewalCommand;
 use Checker\Command\Factory\AbstractCheckerCommandFactory;
 use Checker\Command\Factory\CheckMembershipGraduateRenewalCommandFactory;
+use Checker\Mapper\Annulment as AnnulmentMapper;
+use Checker\Mapper\Factory\AnnulmentFactory as AnnulmentMapperFactory;
 use Checker\Mapper\Factory\InstallationFactory as InstallationMapperFactory;
 use Checker\Mapper\Factory\KeyFactory as KeyMapperFactory;
 use Checker\Mapper\Factory\MemberFactory as MemberMapperFactory;
@@ -18,7 +20,9 @@ use Checker\Mapper\Installation as InstallationMapper;
 use Checker\Mapper\Key as KeyMapper;
 use Checker\Mapper\Member as MemberMapper;
 use Checker\Mapper\Organ as OrganMapper;
+use Checker\Service\Annulment as AnnulmentService;
 use Checker\Service\Checker as CheckerService;
+use Checker\Service\Factory\AnnulmentFactory as AnnulmentServiceFactory;
 use Checker\Service\Factory\CheckerFactory as CheckerServiceFactory;
 use Checker\Service\Factory\InstallationFactory as InstallationServiceFactory;
 use Checker\Service\Factory\KeyFactory as KeyServiceFactory;
@@ -55,6 +59,7 @@ class Module
                 CheckDatabaseCommand::class => AbstractCheckerCommandFactory::class,
                 CheckDischargesCommand::class => AbstractCheckerCommandFactory::class,
                 CheckMembershipGraduateRenewalCommand::class => CheckMembershipGraduateRenewalCommandFactory::class,
+                AnnulmentService::class => AnnulmentServiceFactory::class,
                 CheckerService::class => CheckerServiceFactory::class,
                 InstallationService::class => InstallationServiceFactory::class,
                 KeyService::class => KeyServiceFactory::class,
@@ -62,6 +67,7 @@ class Module
                 MemberService::class => MemberServiceFactory::class,
                 OrganService::class => OrganServiceFactory::class,
                 RenewalService::class => RenewalServiceFactory::class,
+                AnnulmentMapper::class => AnnulmentMapperFactory::class,
                 InstallationMapper::class => InstallationMapperFactory::class,
                 KeyMapper::class => KeyMapperFactory::class,
                 MemberMapper::class => MemberMapperFactory::class,

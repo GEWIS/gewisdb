@@ -25,7 +25,8 @@ trait Filter
         $deleted = $this->getDeleted();
 
         foreach ($subDecisions as $key => $dec) {
-            if (!in_array($dec, $deleted)) {
+            // Strict, so that two subdecisions that merely look alike are not mistaken for one another.
+            if (!in_array($dec, $deleted, true)) {
                 continue;
             }
 
@@ -54,14 +55,14 @@ trait Filter
 
             // check for all decisions if they are valid
             $deleted = [];
-            foreach ($deletions as $key => $del) {
+            foreach ($deletions as $del) {
                 if (!$this->isValid($del)) {
                     continue;
                 }
 
                 // if they are valid, add all the affected subdecisions
                 // and add them to the array
-                $deleted += $del->getTarget()->getSubDecisions()->toArray();
+                $deleted = [...$deleted, ...$del->getTarget()->getSubDecisions()->toArray()];
             }
         }
 

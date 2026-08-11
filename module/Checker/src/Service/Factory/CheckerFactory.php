@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Checker\Service\Factory;
 
+use Checker\Service\Annulment as AnnulmentService;
 use Checker\Service\Checker as CheckerService;
 use Checker\Service\Installation as InstallationService;
 use Checker\Service\Key as KeyService;
@@ -26,6 +27,8 @@ class CheckerFactory implements FactoryInterface
         $requestedName,
         ?array $options = null,
     ): CheckerService {
+        /** @var AnnulmentService $annulmentService */
+        $annulmentService = $container->get(AnnulmentService::class);
         /** @var InstallationService $installationService */
         $installationService = $container->get(InstallationService::class);
         /** @var KeyService $keyService */
@@ -42,6 +45,7 @@ class CheckerFactory implements FactoryInterface
         $config = $container->get('config');
 
         return new CheckerService(
+            $annulmentService,
             $installationService,
             $keyService,
             $meetingService,

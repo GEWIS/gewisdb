@@ -75,6 +75,8 @@
         <exclude-pattern>module/Database/src/Mapper/Factory/OrganFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/ProspectiveMemberFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/SavedQueryFactory.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Mapper/Factory/AnnulmentFactory.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Service/Factory/AnnulmentFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Service/Factory/AnnulmentFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Service/Factory/ApiFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Service/Factory/FrontPageFactory.php</exclude-pattern>
@@ -190,9 +192,14 @@
 
     <!-- Overrides that provide stricter typing -->
     <rule ref="Generic.CodeAnalysis.UselessOverridingMethod.Found">
+        <exclude-pattern>module/Checker/src/Model/Error/AnnulmentOfAnnulment.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Model/Error/AnnulmentOfLaterDecision.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Model/Error/DecisionAnnulledMoreThanOnce.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Model/Error/MemberActiveAndInactiveInOrgan.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Model/Error/MemberActiveWithRoleAndInactiveInOrgan.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Model/Error/MemberExpiredButStillInOrgan.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Model/Error/MemberInNonExistingOrgan.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Model/Error/MemberInactiveInOrganWithoutInactiveMembers.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Model/Error/OrganWithoutChair.php</exclude-pattern>
     </rule>
 </ruleset>

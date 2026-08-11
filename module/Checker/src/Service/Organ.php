@@ -11,6 +11,7 @@ use Database\Model\SubDecision\Foundation as FoundationModel;
 
 use function array_diff;
 use function array_map;
+use function in_array;
 use function sprintf;
 
 class Organ
@@ -44,6 +45,38 @@ class Organ
         );
 
         return array_diff($hashedOrganFoundations, $hashedOrganAbrogations);
+    }
+
+    /**
+     * Get the organs that exist after $meeting, by hash.
+     *
+     * Where {@see self::getAllOrgans()} hands back the hashes on their own, this keeps the foundations themselves, so
+     * that what a decision says about an organ can still be read.
+     *
+     * @return array<string, FoundationModel>
+     */
+    public function getAllOrganFoundations(MeetingModel $meeting): array
+    {
+        $abrogated = array_map(
+            function (AbrogationModel $organ): string {
+                return $this->getHash($organ->getFoundation());
+            },
+            $this->organMapper->getAllOrganAbrogations($meeting),
+        );
+
+        $organs = [];
+
+        foreach ($this->organMapper->getAllOrganFoundations($meeting) as $foundation) {
+            $hash = $this->getHash($foundation);
+
+            if (in_array($hash, $abrogated, true)) {
+                continue;
+            }
+
+            $organs[$hash] = $foundation;
+        }
+
+        return $organs;
     }
 
     /**
