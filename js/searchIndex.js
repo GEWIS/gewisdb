@@ -4081,6 +4081,11 @@ Search.appendIndex(
             "summary": "Attention\u0020needed\u0020action.",
             "url": "classes/Database-Controller-MemberController.html#method_attentionNeededAction"
         },                {
+            "fqsen": "\\Database\\Controller\\MemberController\u003A\u003AbulkRenewalAction\u0028\u0029",
+            "name": "bulkRenewalAction",
+            "summary": "Bulk\u0020renewal\u0020flow.",
+            "url": "classes/Database-Controller-MemberController.html#method_bulkRenewalAction"
+        },                {
             "fqsen": "\\Database\\Controller\\MemberController\u003A\u003AsubscribeAction\u0028\u0029",
             "name": "subscribeAction",
             "summary": "Subscribe\u0020action.",
@@ -4560,6 +4565,31 @@ Search.appendIndex(
             "name": "translator",
             "summary": "",
             "url": "classes/Database-Form-Budget.html#property_translator"
+        },                {
+            "fqsen": "\\Database\\Form\\BulkMemberRenewal",
+            "name": "BulkMemberRenewal",
+            "summary": "",
+            "url": "classes/Database-Form-BulkMemberRenewal.html"
+        },                {
+            "fqsen": "\\Database\\Form\\BulkMemberRenewal\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Database-Form-BulkMemberRenewal.html#method___construct"
+        },                {
+            "fqsen": "\\Database\\Form\\BulkMemberRenewal\u003A\u003AgetInputFilterSpecification\u0028\u0029",
+            "name": "getInputFilterSpecification",
+            "summary": "",
+            "url": "classes/Database-Form-BulkMemberRenewal.html#method_getInputFilterSpecification"
+        },                {
+            "fqsen": "\\Database\\Form\\BulkMemberRenewal\u003A\u003AgetParsedMemberIds\u0028\u0029",
+            "name": "getParsedMemberIds",
+            "summary": "",
+            "url": "classes/Database-Form-BulkMemberRenewal.html#method_getParsedMemberIds"
+        },                {
+            "fqsen": "\\Database\\Form\\BulkMemberRenewal\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Form-BulkMemberRenewal.html#property_translator"
         },                {
             "fqsen": "\\Database\\Form\\CreateMeeting",
             "name": "CreateMeeting",
@@ -5275,6 +5305,26 @@ Search.appendIndex(
             "name": "translator",
             "summary": "",
             "url": "classes/Database-Form-QuerySave.html#property_translator"
+        },                {
+            "fqsen": "\\Database\\Form\\Validator\\BulkMemberIds",
+            "name": "BulkMemberIds",
+            "summary": "",
+            "url": "classes/Database-Form-Validator-BulkMemberIds.html"
+        },                {
+            "fqsen": "\\Database\\Form\\Validator\\BulkMemberIds\u003A\u003AisValid\u0028\u0029",
+            "name": "isValid",
+            "summary": "",
+            "url": "classes/Database-Form-Validator-BulkMemberIds.html#method_isValid"
+        },                {
+            "fqsen": "\\Database\\Form\\Validator\\BulkMemberIds\u003A\u003AgetMessages\u0028\u0029",
+            "name": "getMessages",
+            "summary": "",
+            "url": "classes/Database-Form-Validator-BulkMemberIds.html#method_getMessages"
+        },                {
+            "fqsen": "\\Database\\Form\\Validator\\BulkMemberIds\u003A\u003A\u0024messages",
+            "name": "messages",
+            "summary": "",
+            "url": "classes/Database-Form-Validator-BulkMemberIds.html#property_messages"
         },                {
             "fqsen": "\\Database\\Hydrator\\Abolish",
             "name": "Abolish",
@@ -7160,6 +7210,16 @@ Search.appendIndex(
             "name": "editRecommended",
             "summary": "",
             "url": "classes/Database-Model-Enums-AttentionReasons.html#method_editRecommended"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\AttentionReasons\u003A\u003AincludeBulkGraduateConversion\u0028\u0029",
+            "name": "includeBulkGraduateConversion",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-AttentionReasons.html#method_includeBulkGraduateConversion"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\AttentionReasons\u003A\u003AincludeBulkActiveMemberRenewal\u0028\u0029",
+            "name": "includeBulkActiveMemberRenewal",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-AttentionReasons.html#method_includeBulkActiveMemberRenewal"
         },                {
             "fqsen": "\\Database\\Model\\Enums\\AttentionReasons\u003A\u003AMissingEmail",
             "name": "MissingEmail",
@@ -11406,6 +11466,21 @@ Search.appendIndex(
             "summary": "Edit\u0020membership\u0020by\u0020secretary.",
             "url": "classes/Database-Service-Member.html#method_membership"
         },                {
+            "fqsen": "\\Database\\Service\\Member\u003A\u003AgetBulkRenewalTypeOptions\u0028\u0029",
+            "name": "getBulkRenewalTypeOptions",
+            "summary": "",
+            "url": "classes/Database-Service-Member.html#method_getBulkRenewalTypeOptions"
+        },                {
+            "fqsen": "\\Database\\Service\\Member\u003A\u003AbuildBulkRenewalPreview\u0028\u0029",
+            "name": "buildBulkRenewalPreview",
+            "summary": "",
+            "url": "classes/Database-Service-Member.html#method_buildBulkRenewalPreview"
+        },                {
+            "fqsen": "\\Database\\Service\\Member\u003A\u003AexecuteBulkRenewal\u0028\u0029",
+            "name": "executeBulkRenewal",
+            "summary": "",
+            "url": "classes/Database-Service-Member.html#method_executeBulkRenewal"
+        },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003Aexpiration\u0028\u0029",
             "name": "expiration",
             "summary": "Extend\u0020the\u0020duration\u0020of\u0020the\u0020membership.",
@@ -11506,6 +11581,21 @@ Search.appendIndex(
             "summary": "Get\u0020the\u0020member\u0020type\u0020form.",
             "url": "classes/Database-Service-Member.html#method_getMemberTypeForm"
         },                {
+            "fqsen": "\\Database\\Service\\Member\u003A\u003AgetBulkMemberRenewalForm\u0028\u0029",
+            "name": "getBulkMemberRenewalForm",
+            "summary": "",
+            "url": "classes/Database-Service-Member.html#method_getBulkMemberRenewalForm"
+        },                {
+            "fqsen": "\\Database\\Service\\Member\u003A\u003AresolveMembershipChange\u0028\u0029",
+            "name": "resolveMembershipChange",
+            "summary": "",
+            "url": "classes/Database-Service-Member.html#method_resolveMembershipChange"
+        },                {
+            "fqsen": "\\Database\\Service\\Member\u003A\u003AapplyMembershipChange\u0028\u0029",
+            "name": "applyMembershipChange",
+            "summary": "",
+            "url": "classes/Database-Service-Member.html#method_applyMembershipChange"
+        },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003AgetListForm\u0028\u0029",
             "name": "getListForm",
             "summary": "Get\u0020the\u0020list\u0020edit\u0020form.",
@@ -11605,6 +11695,11 @@ Search.appendIndex(
             "name": "auditNoteForm",
             "summary": "",
             "url": "classes/Database-Service-Member.html#property_auditNoteForm"
+        },                {
+            "fqsen": "\\Database\\Service\\Member\u003A\u003A\u0024bulkMemberRenewalForm",
+            "name": "bulkMemberRenewalForm",
+            "summary": "",
+            "url": "classes/Database-Service-Member.html#property_bulkMemberRenewalForm"
         },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003A\u0024deleteAddressForm",
             "name": "deleteAddressForm",
@@ -16155,6 +16250,11 @@ Search.appendIndex(
             "name": "Key",
             "summary": "",
             "url": "namespaces/database-form-key.html"
+        },                {
+            "fqsen": "\\Database\\Form\\Validator",
+            "name": "Validator",
+            "summary": "",
+            "url": "namespaces/database-form-validator.html"
         },                {
             "fqsen": "\\Database\\Hydrator",
             "name": "Hydrator",
