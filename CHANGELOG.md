@@ -1,3 +1,11 @@
+## [v4.7.0](https://github.com/GEWIS/gewisdb/tree/v4.7.0) (2026-08-17)
+* Introduce bulk renewal form for memberships
+* Introduce attention overview for members
+* Fix NGINX routing for CBC network migration
+* Migration from TU/e usernames to student numbers
+* Added CI pipeline for migration validity check
+* Upgrade dependencies
+
 ## [v4.6.1](https://github.com/GEWIS/gewisdb/tree/v4.6.1) (2026-06-20)
 * Switch to PHP 8.4
 * Upgrade dependencies
