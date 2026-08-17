@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GEWISdb v4.5.2-26-gc8abd2f8-dirty\n"
+"Project-Id-Version: GEWISdb v4.6.1-5-ge5ec13f4-dirty\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-21 15:01+0000\n"
+"POT-Creation-Date: 2026-08-17 13:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -106,7 +106,7 @@ msgid ""
 "minutes."
 msgstr ""
 
-msgid "A TU/e-username should look like sYYxxxx or YYYYxxxx."
+msgid "A TU/e student number consists of 7 digits."
 msgstr ""
 
 msgid "ALV"
@@ -923,22 +923,13 @@ msgid ""
 "If you are currently studying at TU/e, please do <u>not</u> fill in this "
 "form, but instead inform the secretary of this.\n"
 "                If you want GEWIS to automatically renew your membership, "
-"please send your TU/e username."
+"please send your TU/e student number."
 msgstr ""
 
 msgid "If you are reading this, the secretary has not done their job."
 msgstr ""
 
 msgid "If you have any questions feel free to contact"
-msgstr ""
-
-#, php-format
-msgid ""
-"If you started after 2016, your username is an 8-digit number starting with "
-"the year you started at the TU/e, for example %s0001. You have received this "
-"in an email when you enrolled. Go to <a href=\"%s\">this page</a> if you "
-"need help finding it. Your username will be used to verify you are studying "
-"at the department of M&CS."
 msgstr ""
 
 #, php-format
@@ -1278,7 +1269,7 @@ msgstr ""
 msgid "Ordinary - Enrolled at the department of M&CS"
 msgstr ""
 
-msgid "Ordinary member without student ID"
+msgid "Ordinary member without student number"
 msgstr ""
 
 msgid "Organ"
@@ -1621,7 +1612,7 @@ msgstr ""
 msgid "Synchronisation with other systems is paused until %s."
 msgstr ""
 
-msgid "TU/e-username"
+msgid "TU/e student number"
 msgstr ""
 
 msgid "Tafelvoetbalcoordinator"
@@ -1711,6 +1702,11 @@ msgstr ""
 
 msgid ""
 "These organ functions were used in the past but can no longer be selected"
+msgstr ""
+
+msgid ""
+"This does not appear to be a valid TU/e student number. Please check it for "
+"typos. If you are certain that it is correct, please contact the secretary."
 msgstr ""
 
 #, php-format
@@ -1944,13 +1940,13 @@ msgstr ""
 msgid "Your API token is \"%s\". This value will NOT be shown again!"
 msgstr ""
 
+#, php-format
 msgid ""
-"Your TU/e-username appears to be incorrect. Ensure that it starts with a "
-"valid year and looks like: YYYYxxxx. If you believe your TU/e-username is "
-"correct, please contact the secretary."
-msgstr ""
-
-msgid "Your TU/e-username should look like sYYxxxx or YYYYxxxx."
+"Your student number is a 7-digit number, for example 1234560. You have "
+"received this in an email when you enrolled and it is printed on your campus "
+"card. Go to <a href=\"%s\">this page</a> if you need help finding it. Your "
+"student number will be used to verify you are studying at the department of "
+"M&CS."
 msgstr ""
 
 msgid "active"

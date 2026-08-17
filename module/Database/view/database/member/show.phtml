@@ -44,12 +44,12 @@ $translator = $this->plugin('translate')->getTranslator();
             <td><?= $member->getLastName() ?></td>
         </tr>
         <tr>
-            <th><?= $this->translate('TU/e-username') ?></th>
+            <th><?= $this->translate('TU/e student number') ?></th>
             <td>
-                <?php if (null === $member->getTueUsername()): ?>
+                <?php if (null === $member->getStudentNumber()): ?>
                     <?= $this->translate('Unknown') ?>
                 <?php else: ?>
-                    <?= $member->getTueUsername() ?>
+                    <?= $member->getStudentNumber() ?>
                 <?php
                 endif;
                 ?>

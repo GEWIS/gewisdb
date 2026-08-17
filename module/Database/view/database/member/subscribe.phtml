@@ -166,7 +166,7 @@ $form->setAttribute('id', 'form-subscribe');
     <div class="row">
         <div class="col-md-6">
             <?php
-            $element = $form->get('tueUsername');
+            $element = $form->get('studentNumber');
             $element->setAttribute('class', 'form-control');
             $element->setAttribute('placeholder', $element->getLabel());
             $element->setLabelAttributes(array(
@@ -177,7 +177,7 @@ $form->setAttribute('id', 'form-subscribe');
                 <?= $this->formLabel($element) ?>
                 <?= $this->formInput($element) ?>
                 <?= $this->formElementErrors($element) ?>
-                <p><?= sprintf($this->translate('If you started after 2016, your username is an 8-digit number starting with the year you started at the TU/e, for example %s0001. You have received this in an email when you enrolled. Go to <a href="%s">this page</a> if you need help finding it. Your username will be used to verify you are studying at the department of M&CS.'), date('Y'), "https://wiki.gewis.nl/link/495") ?></p>
+                <p><?= sprintf($this->translate('Your student number is a 7-digit number, for example 1234560. You have received this in an email when you enrolled and it is printed on your campus card. Go to <a href="%s">this page</a> if you need help finding it. Your student number will be used to verify you are studying at the department of M&CS.'), "https://wiki.gewis.nl/link/495") ?></p>
             </div>
         </div>
         <div class="col-md-6">

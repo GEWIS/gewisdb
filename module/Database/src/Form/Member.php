@@ -6,6 +6,7 @@ namespace Database\Form;
 
 use Application\Model\Enums\AddressTypes;
 use Database\Form\Fieldset\Address as AddressFieldset;
+use Database\Form\Validator\StudentNumber as StudentNumberValidator;
 use Database\Model\Enums\Studies;
 use Database\Model\MailingList as MailingListModel;
 use DateInterval;
@@ -26,17 +27,12 @@ use Laminas\Validator\Callback;
 use Laminas\Validator\EmailAddress;
 use Laminas\Validator\Hostname;
 use Laminas\Validator\Identical;
-use Laminas\Validator\Regex;
 use Laminas\Validator\StringLength;
 use Override;
 use Throwable;
 
-use function date;
-use function intval;
-use function preg_match;
 use function sprintf;
 use function str_ends_with;
-use function substr;
 
 class Member extends Form implements InputFilterProviderInterface
 {
@@ -82,10 +78,10 @@ class Member extends Form implements InputFilterProviderInterface
         ]);
 
         $this->add([
-            'name' => 'tueUsername',
+            'name' => 'studentNumber',
             'type' => Text::class,
             'options' => [
-                'label' => $translator->translate('TU/e-username'),
+                'label' => $translator->translate('TU/e student number'),
             ],
         ]);
 
@@ -349,59 +345,17 @@ class Member extends Form implements InputFilterProviderInterface
                     ],
                 ],
             ],
-            'tueUsername' => [
+            'studentNumber' => [
                 'required' => true,
                 'validators' => [
-                    [
-                        'name' => Regex::class,
-                        'options' => [
-                            'pattern' => '/^(s\d{6}|\d{8})$/',
-                            'messages' => [
-                                Regex::NOT_MATCH => $this->translator->translate(
-                                    'Your TU/e-username should look like sYYxxxx or YYYYxxxx.',
-                                ),
-                            ],
-                        ],
-                    ],
-                    [
-                        'name' => Callback::class,
-                        'options' => [
-                            'callback' => function ($value) {
-                                return $this->isNewTueUsernameValid($value);
-                            },
-                            'messages' => [
-                                Callback::INVALID_VALUE => $this->translator->translate(
-                                    // phpcs:ignore -- user-visible strings should not be split
-                                    'Your TU/e-username appears to be incorrect. Ensure that it starts with a valid year and looks like: YYYYxxxx. If you believe your TU/e-username is correct, please contact the secretary.',
-                                ),
-                            ],
-                        ],
-                    ],
+                    new StudentNumberValidator($this->translator),
                 ],
                 'filters' => [
+                    ['name' => StringTrim::class],
                     ['name' => ToNull::class],
                 ],
             ],
         ];
-    }
-
-    private function isNewTueUsernameValid(string $value): bool
-    {
-        try {
-            // Only check for YYYYABCD TU/e usernames.
-            if (preg_match('/^s\d{6}$/', $value)) {
-                return true;
-            }
-
-            $year = intval(substr($value, 0, 4));
-            $currentYear = intval(date('Y'));
-
-            // Check if the year is within the valid range, the assumption being that you can never have a number
-            // starting with a year that is higher than the current year.
-            return $year >= 2000 && $year <= $currentYear;
-        } catch (Throwable) {
-            return false;
-        }
     }
 
     private function isOldEnough(string $value): bool

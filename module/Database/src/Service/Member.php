@@ -342,7 +342,7 @@ class Member
         $member = $form->getData();
 
         // Copy all remaining information
-        $member->setTueUsername($prospectiveMember->getTueUsername());
+        $member->setStudentNumber($prospectiveMember->getStudentNumber());
 
         // changed on date
         $date = new DateTime();
@@ -603,7 +603,7 @@ class Member
         $date = new DateTime('0001-01-01 00:00:00');
 
         $member->setEmail(null);
-        $member->setTueUsername(null);
+        $member->setStudentNumber(null);
         $member->setStudy(Studies::Unknown);
         $member->setLastCheckedOn(null);
         $member->setChangedOn(new DateTime());
@@ -1455,8 +1455,8 @@ class Member
         $combined = [];
 
         $combined[AttentionReasons::MissingEmail->value] = $this->getMemberMapper()->findAttentionWithoutEmail();
-        $combined[AttentionReasons::MissingStudentIdOrdinary->value] =
-        $this->getMemberMapper()->findAttentionWithoutStudentId();
+        $combined[AttentionReasons::MissingStudentNumberOrdinary->value] =
+        $this->getMemberMapper()->findAttentionWithoutStudentNumber();
         $combined[AttentionReasons::ExpiringExternalNonActive->value] =
         $this->getMemberMapper()->findAttentionExpiring(
             includeActive: false,
