@@ -1,0 +1,277 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Property App\\Entity\\Decision\\Meeting\:\:\$minutes is never written, only read\.$#'
+			identifier: property.onlyRead
+			count: 1
+			path: ../src/Entity/Decision/Meeting.php
+
+		-
+			message: '#^Property App\\Entity\\Decision\\Meeting\:\:\$minutes type mapping mismatch\: database can contain App\\Entity\\Decision\\SubDecision\\Minutes\|null but property expects App\\Entity\\Decision\\SubDecision\\Minutes\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Decision/Meeting.php
+
+		-
+			message: '#^Property App\\Entity\\Decision\\SubDecision\:\:\$decision type mapping mismatch\: database can contain App\\Entity\\Decision\\Decision\|null but property expects App\\Entity\\Decision\\Decision\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Decision/SubDecision.php
+
+		-
+			message: '#^Property App\\Entity\\Decision\\SubDecision\\Annulment\:\:\$target type mapping mismatch\: database can contain App\\Entity\\Decision\\Decision\|null but property expects App\\Entity\\Decision\\Decision\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Decision/SubDecision/Annulment.php
+
+		-
+			message: '#^Property App\\Entity\\Decision\\SubDecision\\Board\\Discharge\:\:\$installation type mapping mismatch\: database can contain App\\Entity\\Decision\\SubDecision\\Board\\Installation\|null but property expects App\\Entity\\Decision\\SubDecision\\Board\\Installation\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Decision/SubDecision/Board/Discharge.php
+
+		-
+			message: '#^Property App\\Entity\\Decision\\SubDecision\\Board\\Release\:\:\$installation type mapping mismatch\: database can contain App\\Entity\\Decision\\SubDecision\\Board\\Installation\|null but property expects App\\Entity\\Decision\\SubDecision\\Board\\Installation\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Decision/SubDecision/Board/Release.php
+
+		-
+			message: '#^Property App\\Entity\\Decision\\SubDecision\\Discharge\:\:\$installation type mapping mismatch\: database can contain App\\Entity\\Decision\\SubDecision\\Installation\|null but property expects App\\Entity\\Decision\\SubDecision\\Installation\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Decision/SubDecision/Discharge.php
+
+		-
+			message: '#^Property App\\Entity\\Decision\\SubDecision\\FoundationReference\:\:\$foundation type mapping mismatch\: database can contain App\\Entity\\Decision\\SubDecision\\Foundation\|null but property expects App\\Entity\\Decision\\SubDecision\\Foundation\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Decision/SubDecision/FoundationReference.php
+
+		-
+			message: '#^Property App\\Entity\\Decision\\SubDecision\\Key\\Withdrawal\:\:\$granting type mapping mismatch\: database can contain App\\Entity\\Decision\\SubDecision\\Key\\Granting\|null but property expects App\\Entity\\Decision\\SubDecision\\Key\\Granting\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Decision/SubDecision/Key/Withdrawal.php
+
+		-
+			message: '#^Property App\\Entity\\Decision\\SubDecision\\Minutes\:\:\$meeting type mapping mismatch\: database can contain App\\Entity\\Decision\\Meeting\|null but property expects App\\Entity\\Decision\\Meeting\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Decision/SubDecision/Minutes.php
+
+		-
+			message: '#^Property App\\Entity\\Decision\\SubDecision\\Reappointment\:\:\$installation type mapping mismatch\: database can contain App\\Entity\\Decision\\SubDecision\\Installation\|null but property expects App\\Entity\\Decision\\SubDecision\\Installation\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Decision/SubDecision/Reappointment.php
+
+		-
+			message: '#^Property App\\Entity\\Join\\CheckoutSession\:\:\$prospectiveMember type mapping mismatch\: database can contain App\\Entity\\Join\\ProspectiveMember\|null but property expects App\\Entity\\Join\\ProspectiveMember\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Join/CheckoutSession.php
+
+		-
+			message: '#^Property App\\Entity\\Mailing\\ListmonkMailingList\:\:\$mailingList is never written, only read\.$#'
+			identifier: property.onlyRead
+			count: 1
+			path: ../src/Entity/Mailing/ListmonkMailingList.php
+
+		-
+			message: '#^Property App\\Entity\\Mailing\\MailmanMailingList\:\:\$mailingList is never written, only read\.$#'
+			identifier: property.onlyRead
+			count: 1
+			path: ../src/Entity/Mailing/MailmanMailingList.php
+
+		-
+			message: '#^Property App\\Entity\\Member\\Address\:\:\$member type mapping mismatch\: property can contain App\\Entity\\Member\\Member\|null but database expects App\\Entity\\Member\\Member\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Member/Address.php
+
+		-
+			message: '#^Property App\\Entity\\Member\\AuditMailingListMembership\:\:\$mailingList type mapping mismatch\: database can contain App\\Entity\\Mailing\\MailingList\|null but property expects App\\Entity\\Mailing\\MailingList\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Member/AuditMailingListMembership.php
+
+		-
+			message: '#^Property App\\Entity\\Member\\AuditNote\:\:\$note type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: ../src/Entity/Member/AuditNote.php
+
+		-
+			message: '#^Match arm comparison between \$this\(App\\Entity\\Member\\Enums\\AttentionReasons\)&App\\Entity\\Member\\Enums\\AttentionReasons\:\:ExpiringGraduateActiveInactive and App\\Entity\\Member\\Enums\\AttentionReasons\:\:ExpiringGraduateActiveInactive is always true\.$#'
+			identifier: match.alwaysTrue
+			count: 2
+			path: ../src/Entity/Member/Enums/AttentionReasons.php
+
+		-
+			message: '#^Match arm comparison between \$this\(App\\Entity\\Member\\Enums\\Studies\)&App\\Entity\\Member\\Enums\\Studies\:\:None and App\\Entity\\Member\\Enums\\Studies\:\:None is always true\.$#'
+			identifier: match.alwaysTrue
+			count: 1
+			path: ../src/Entity/Member/Enums/Studies.php
+
+		-
+			message: '#^Property App\\Entity\\Member\\Member\:\:\$auditEntries is never written, only read\.$#'
+			identifier: property.onlyRead
+			count: 1
+			path: ../src/Entity/Member/Member.php
+
+		-
+			message: '#^Property App\\Entity\\Member\\Member\:\:\$renewalLinks is never written, only read\.$#'
+			identifier: property.onlyRead
+			count: 1
+			path: ../src/Entity/Member/Member.php
+
+		-
+			message: '#^Property App\\Entity\\Member\\MemberUpdate\:\:\$requestedDate is never written, only read\.$#'
+			identifier: property.onlyRead
+			count: 1
+			path: ../src/Entity/Member/MemberUpdate.php
+
+		-
+			message: '#^Property App\\Entity\\Member\\PaymentLink\:\:\$prospectiveMember type mapping mismatch\: database can contain App\\Entity\\Join\\ProspectiveMember\|null but property expects App\\Entity\\Join\\ProspectiveMember\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Member/PaymentLink.php
+
+		-
+			message: '#^Property App\\Entity\\Member\\RenewalLink\:\:\$member type mapping mismatch\: database can contain App\\Entity\\Member\\Member\|null but property expects App\\Entity\\Member\\Member\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Member/RenewalLink.php
+
+		-
+			message: '#^Property App\\Entity\\Report\\BoardMember\:\:\$installationDec type mapping mismatch\: database can contain App\\Entity\\Report\\SubDecision\\Board\\Installation\|null but property expects App\\Entity\\Report\\SubDecision\\Board\\Installation\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Report/BoardMember.php
+
+		-
+			message: '#^Property App\\Entity\\Report\\Keyholder\:\:\$grantingDec type mapping mismatch\: database can contain App\\Entity\\Report\\SubDecision\\Key\\Granting\|null but property expects App\\Entity\\Report\\SubDecision\\Key\\Granting\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Report/Keyholder.php
+
+		-
+			message: '#^Property App\\Entity\\Report\\Meeting\:\:\$minutes is never written, only read\.$#'
+			identifier: property.onlyRead
+			count: 1
+			path: ../src/Entity/Report/Meeting.php
+
+		-
+			message: '#^Property App\\Entity\\Report\\Meeting\:\:\$minutes type mapping mismatch\: database can contain App\\Entity\\Report\\SubDecision\\Minutes\|null but property expects App\\Entity\\Report\\SubDecision\\Minutes\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Report/Meeting.php
+
+		-
+			message: '#^Property App\\Entity\\Report\\Member\:\:\$lidnr type mapping mismatch\: property can contain int\|null but database expects int\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: ../src/Entity/Report/Member.php
+
+		-
+			message: '#^Property App\\Entity\\Report\\Organ\:\:\$foundation type mapping mismatch\: database can contain App\\Entity\\Report\\SubDecision\\Foundation\|null but property expects App\\Entity\\Report\\SubDecision\\Foundation\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Report/Organ.php
+
+		-
+			message: '#^Property App\\Entity\\Report\\OrganMember\:\:\$installation type mapping mismatch\: database can contain App\\Entity\\Report\\SubDecision\\Installation\|null but property expects App\\Entity\\Report\\SubDecision\\Installation\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Report/OrganMember.php
+
+		-
+			message: '#^Property App\\Entity\\Report\\OrganMember\:\:\$member type mapping mismatch\: database can contain App\\Entity\\Report\\Member\|null but property expects App\\Entity\\Report\\Member\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Report/OrganMember.php
+
+		-
+			message: '#^Property App\\Entity\\Report\\OrganMember\:\:\$organ type mapping mismatch\: database can contain App\\Entity\\Report\\Organ\|null but property expects App\\Entity\\Report\\Organ\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Report/OrganMember.php
+
+		-
+			message: '#^Property App\\Entity\\Report\\SubDecision\:\:\$decision type mapping mismatch\: database can contain App\\Entity\\Report\\Decision\|null but property expects App\\Entity\\Report\\Decision\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Report/SubDecision.php
+
+		-
+			message: '#^Property App\\Entity\\Report\\SubDecision\\Annulment\:\:\$target type mapping mismatch\: database can contain App\\Entity\\Report\\Decision\|null but property expects App\\Entity\\Report\\Decision\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Report/SubDecision/Annulment.php
+
+		-
+			message: '#^Property App\\Entity\\Report\\SubDecision\\Board\\Discharge\:\:\$installation type mapping mismatch\: database can contain App\\Entity\\Report\\SubDecision\\Board\\Installation\|null but property expects App\\Entity\\Report\\SubDecision\\Board\\Installation\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Report/SubDecision/Board/Discharge.php
+
+		-
+			message: '#^Property App\\Entity\\Report\\SubDecision\\Board\\Installation\:\:\$boardMember type mapping mismatch\: database can contain App\\Entity\\Report\\BoardMember\|null but property expects App\\Entity\\Report\\BoardMember\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Report/SubDecision/Board/Installation.php
+
+		-
+			message: '#^Property App\\Entity\\Report\\SubDecision\\Board\\Release\:\:\$installation type mapping mismatch\: database can contain App\\Entity\\Report\\SubDecision\\Board\\Installation\|null but property expects App\\Entity\\Report\\SubDecision\\Board\\Installation\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Report/SubDecision/Board/Release.php
+
+		-
+			message: '#^Property App\\Entity\\Report\\SubDecision\\Discharge\:\:\$installation type mapping mismatch\: database can contain App\\Entity\\Report\\SubDecision\\Installation\|null but property expects App\\Entity\\Report\\SubDecision\\Installation\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Report/SubDecision/Discharge.php
+
+		-
+			message: '#^Property App\\Entity\\Report\\SubDecision\\Foundation\:\:\$organ type mapping mismatch\: database can contain App\\Entity\\Report\\Organ\|null but property expects App\\Entity\\Report\\Organ\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Report/SubDecision/Foundation.php
+
+		-
+			message: '#^Property App\\Entity\\Report\\SubDecision\\FoundationReference\:\:\$foundation type mapping mismatch\: database can contain App\\Entity\\Report\\SubDecision\\Foundation\|null but property expects App\\Entity\\Report\\SubDecision\\Foundation\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Report/SubDecision/FoundationReference.php
+
+		-
+			message: '#^Property App\\Entity\\Report\\SubDecision\\Installation\:\:\$organMember type mapping mismatch\: database can contain App\\Entity\\Report\\OrganMember\|null but property expects App\\Entity\\Report\\OrganMember\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Report/SubDecision/Installation.php
+
+		-
+			message: '#^Property App\\Entity\\Report\\SubDecision\\Key\\Granting\:\:\$keyholder type mapping mismatch\: database can contain App\\Entity\\Report\\Keyholder\|null but property expects App\\Entity\\Report\\Keyholder\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Report/SubDecision/Key/Granting.php
+
+		-
+			message: '#^Property App\\Entity\\Report\\SubDecision\\Key\\Withdrawal\:\:\$granting type mapping mismatch\: database can contain App\\Entity\\Report\\SubDecision\\Key\\Granting\|null but property expects App\\Entity\\Report\\SubDecision\\Key\\Granting\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Report/SubDecision/Key/Withdrawal.php
+
+		-
+			message: '#^Property App\\Entity\\Report\\SubDecision\\Minutes\:\:\$meeting type mapping mismatch\: database can contain App\\Entity\\Report\\Meeting\|null but property expects App\\Entity\\Report\\Meeting\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Report/SubDecision/Minutes.php
+
+		-
+			message: '#^Property App\\Entity\\Report\\SubDecision\\Reappointment\:\:\$installation type mapping mismatch\: database can contain App\\Entity\\Report\\SubDecision\\Installation\|null but property expects App\\Entity\\Report\\SubDecision\\Installation\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Report/SubDecision/Reappointment.php

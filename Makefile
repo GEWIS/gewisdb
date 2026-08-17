@@ -1,4 +1,4 @@
-.PHONY: help runprod rundev runtest runcoverage update updatecomposer getvendordir phpstan phpcs phpcbf phpcsfix phpcsfixtypes replenish compilelang build buildprod builddev update preparelistmonk preparemailman migrate migrate-to migration-down migration-up migration-diff composerunused stripewebhooksecret seed goldens goldens-verify goldens-freeze goldens-restore
+.PHONY: help runprod rundev runtest runcoverage update updatecomposer getvendordir phpstan phpcs phpcbf phpcsfix phpcsfixtypes replenish compilelang build buildprod builddev update preparelistmonk preparemailman migrate migrate-to migration-down migration-up migration-diff composerunused stripewebhooksecret seed goldens goldens-verify goldens-freeze goldens-restore phpstan-src
 
 help:
 		@echo "Makefile commands:"
@@ -74,11 +74,7 @@ seed: replenish
 		@docker compose exec -u www-data web ./web database:mailinglist:fetch
 
 
-# Behavioural goldens: a recording of what this application does, so the Symfony migration can be checked against it
-# mechanically rather than by inspection. See goldens/README.md.
-#
-# goldens-verify and goldens-restore drop and recreate the public schema in both databases. That is deliberate — a
-# capture is only comparable if it started from identical data — but it does mean they will discard local changes.
+# goldens-verify and goldens-restore drop and recreate the public schema in both databases.
 goldens: replenish
 		@bash scripts/goldens/capture.sh
 
@@ -174,6 +170,10 @@ copyprodconf:
 phpstan:
 		@docker compose exec web /bin/sh -c 'echo "" > phpstan/phpstan-baseline-pr.neon'
 		@docker compose exec web vendor/bin/phpstan analyse -c phpstan.neon --memory-limit 1G
+
+# Analyses the ported Symfony tree, which phpstan.neon cannot cover while its dependencies are uninstallable.
+phpstan-src: replenish
+		@docker compose exec web vendor/bin/phpstan analyse -c phpstan-src.neon --memory-limit 1G
 
 phpstanpr:
 		@git fetch --all

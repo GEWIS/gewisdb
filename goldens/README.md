@@ -100,6 +100,31 @@ Two things this section does **not** prove:
 - **Anything about basic auth.** All three server blocks sit behind `auth_basic ${NGINX_REQUIRE_AUTH}`, which ships
   `off` in `.env.dist`. See the note on GH-572.
 
+## Expected diffs when the ORM 3 switch lands
+
+Two deltas in `schema/` are unavoidable and correct. Do not chase them.
+
+**1. The three `DC2Type` column comments disappear.** DBAL 3 emitted a marker comment for types that declared
+`requiresSQLCommentHint()`; DBAL 4 removed doctrine-type comments entirely. The baseline therefore carries three
+statements that the Symfony stack will not produce:
+
+```
+COMMENT ON COLUMN Membership.startDate     IS '(DC2Type:stringable_datetime)'
+COMMENT ON COLUMN ProspectiveMember.lists  IS '(DC2Type:simple_array)'
+COMMENT ON COLUMN ApiPrincipal.permissions IS '(DC2Type:simple_array)'
+```
+
+The column types are unchanged; only the comments go. The ones already sitting on the production columns become
+harmless orphans, and no migration is needed to remove them — but check that `doctrine:migrations:diff` does not
+decide to generate one.
+
+**2. Statement order.** The dumps are sorted, precisely so that reorganising the mapping does not show up as a
+schema change. Under Laminas each entity manager is a single mapping; under Symfony the default manager is split into
+seven per-domain mappings, which reorders the DDL without altering any of it. Nothing ever executes these files, so
+order carries no meaning worth asserting.
+
+Anything **else** in a schema diff is a real change and needs explaining.
+
 ## Known behaviour recorded here that is wrong
 
 The goldens record what the application *does*, including its bugs. Two are worth knowing about before you read a diff:

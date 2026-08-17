@@ -31,7 +31,15 @@ stack() {
 }
 
 # Run an application console command inside the web container.
+#
+# The user differs with the stack as well as the entrypoint: the Laminas image runs PHP as www-data, the FrankenPHP
+# image as the unprivileged user that owns /app.
 console() {
+    if [ "$(stack)" = symfony ]; then
+        docker compose exec -T web bin/console "$@"
+        return
+    fi
+
     docker compose exec -u www-data -T web ./web "$@"
 }
 
@@ -42,8 +50,13 @@ console() {
 schema_dump() {
     local em="$1"
 
+    # Sorted, because the emission ORDER of the DDL is not something we want to assert. Under Laminas both entity
+    # managers are one mapping each; under Symfony the default manager is split into seven per-domain mappings, which
+    # reorders the statements without changing a single one of them. Sorting keeps the golden a fingerprint of the
+    # schema rather than of the mapping configuration. Nothing ever executes this file, so order is free.
     if [ "$(stack)" = symfony ]; then
-        docker compose exec -u www-data -T web bin/console doctrine:schema:create --dump-sql --em="${em}" 2>/dev/null
+        docker compose exec -T web bin/console doctrine:schema:create --dump-sql --em="${em}" 2>/dev/null \
+            | LC_ALL=C sort
         return
     fi
 
@@ -54,7 +67,8 @@ schema_dump() {
     local alias="orm_default"
     [ "${em}" = report ] && alias="orm_report"
     docker compose exec -e "EM_ALIAS=${alias}" -u www-data -T web \
-        ./orm orm:schema-tool:create --dump-sql 2>/dev/null
+        ./orm orm:schema-tool:create --dump-sql 2>/dev/null \
+        | LC_ALL=C sort
 }
 
 # --- database ----------------------------------------------------------------
