@@ -1,0 +1,24 @@
+framework:
+    mailer:
+        dsn: '%env(MAILER_DSN)%'
+
+# This collapses three byte-identical transport factories into one. GEWISDB defines
+# `application_mail_transport`, `checker_mail_transport` and `database_mail_transport` in the three module classes,
+# each building the same Laminas\Mail\Transport\Smtp from the same config block.
+#
+# MAILER_DSN is a NEW variable and cannot be assembled from the existing SMTP_* ones. Those configure the postfix
+# sidecar; the application's own SMTP target was a literal in config/autoload/local.php (host `postfix`, port 25 in
+# production, 1025 in development — the only difference between the two dists). Deployment has to set it.
+#
+# The eight MAIL_FROM_* / MAIL_TO_* pairs are not framework config. They are per-message identities — the secretary's
+# address, the checker result recipient, the subscription notification target — and belong in services.yaml as bound
+# parameters on whichever service sends that message.
+
+when@dev:
+    framework:
+        mailer:
+            dsn: '%env(default:mailer_dev_dsn:MAILER_DSN)%'
+
+parameters:
+    # MailPit / the postfix sidecar in development.
+    mailer_dev_dsn: 'smtp://postfix:1025'

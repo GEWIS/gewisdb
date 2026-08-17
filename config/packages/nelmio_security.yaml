@@ -1,0 +1,47 @@
+# Security headers, moved out of nginx.
+#
+# These are set today by docker/nginx/snippets/security-headers.conf on every response. Dropping nginx (GH-572) drops
+# them, so they have to live in the application before that happens — otherwise the migration quietly removes the CSP,
+# the referrer policy and the permissions policy from every page.
+#
+# Ported verbatim first. Tightening comes after, not during.
+
+nelmio_security:
+    content_type:
+        nosniff: true
+
+    referrer_policy:
+        enabled: true
+        policies:
+            - strict-origin-when-cross-origin
+
+    csp:
+        enabled: true
+        report_logger_service: logger
+        enforce:
+            level1_fallback: false
+            browser_adaptive:
+                enabled: false
+            default-src: ["'self'"]
+            connect-src: ["'self'"]
+            # 'unsafe-eval' and 'unsafe-inline' are here because the Bootstrap 3 / jQuery templates carry inline
+            # handlers. GH-567 removes jQuery and moves every behaviour to a Stimulus controller, which is what makes
+            # it possible to drop both and move to the nonce form GEWISWEB uses. Do not tighten before then — it will
+            # break pages silently, since a blocked inline script logs to the console and nowhere else.
+            script-src: ["'self'", "'unsafe-eval'", "'unsafe-inline'"]
+            # `data:` is what draws the checkmark in a checkbox, the dot in a radio, the thumb of a switch and
+            # the chevron of a select: Bootstrap ships each as an inline SVG background image. Without it the
+            # browser blocks them and the controls render as empty boxes, which is what the nginx policy this
+            # was ported from did to every page it served.
+            img-src: ["'self'", "data:"]
+            style-src: ["'self'", "'unsafe-inline'"]
+            font-src: ["'self'"]
+            frame-src: ["'self'"]
+            object-src: ["'none'"]
+            frame-ancestors: ["'self'"]
+            form-action: ["'self'"]
+
+# UNRESOLVED: Stripe. The checkout flow redirects to Stripe and back, and the current policy has no Stripe entries in
+# script-src or frame-src at all. Either the flow is a full redirect (in which case the policy never applies to
+# Stripe's own page and this is fine), or something is being framed and the policy is being violated in production
+# already. Verify against the real checkout page before locking anything down — see GH-562.

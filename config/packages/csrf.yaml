@@ -1,0 +1,16 @@
+framework:
+    form:
+        csrf_protection:
+            enabled: true
+    csrf_protection:
+        stateless_token_ids: [submit, authenticate, logout]
+
+# New file — Laminas forms added a Csrf element per form rather than configuring anything centrally.
+#
+# THE STRIPE WEBHOOK MUST BE EXCLUDED. `/member/subscribe/checkout/webhook` is an unauthenticated POST that Stripe
+# makes server-to-server; it carries no session, no cookie and no CSRF token, and it is authenticated instead by the
+# signature check against STRIPE_WEBHOOK_SIGNING_KEY. It has to sit outside CSRF protection and outside any
+# form-login firewall, or payments silently stop being recorded.
+#
+# Stateless CSRF means a scripted POST cannot be made to pass. That is deliberate, and it is why interactive flows
+# get validated in a real browser rather than with curl — see the note in goldens/README.md.
