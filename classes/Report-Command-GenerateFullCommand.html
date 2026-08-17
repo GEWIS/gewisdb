@@ -310,7 +310,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Command/GenerateFullCommand.php"><a href="files/module-report-src-command-generatefullcommand.html"><abbr title="module/Report/src/Command/GenerateFullCommand.php">GenerateFullCommand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">18</span>
+    <span class="phpdocumentor-element-found-in__line">16</span>
 
     </aside>
 
@@ -333,6 +333,20 @@
 
 
 
+<h4 id="toc-constants">
+    Constants
+    <a href="classes/Report-Command-GenerateFullCommand.html#toc-constants" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -constant -private">
+    <a class="" href="classes/Report-Command-GenerateFullCommand.html#constant_SYNC_PAUSE_MINUTES">SYNC_PAUSE_MINUTES</a>
+    <span>
+        &nbsp;: int&nbsp;= 120                            </span>
+</dt>
+<dd>How long the API is kept from syncing while ReportDB is being rebuilt.</dd>
+
+    </dl>
 
 
 <h4 id="toc-properties">
@@ -342,15 +356,9 @@
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a class="" href="classes/Report-Command-GenerateFullCommand.html#property_boardService">$boardService</a>
+    <a class="" href="classes/Report-Command-GenerateFullCommand.html#property_apiService">$apiService</a>
     <span>
-                        &nbsp;: <a href="classes/Report-Service-Board.html"><abbr title="\Report\Service\Board">Board</abbr></a>            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a class="" href="classes/Report-Command-GenerateFullCommand.html#property_keyholderService">$keyholderService</a>
-    <span>
-                        &nbsp;: <a href="classes/Report-Service-Keyholder.html"><abbr title="\Report\Service\Keyholder">Keyholder</abbr></a>            </span>
+                        &nbsp;: <a href="classes/Database-Service-Api.html"><abbr title="\Database\Service\Api">Api</abbr></a>            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
@@ -369,12 +377,6 @@
     <a class="" href="classes/Report-Command-GenerateFullCommand.html#property_miscService">$miscService</a>
     <span>
                         &nbsp;: <a href="classes/Report-Service-Misc.html"><abbr title="\Report\Service\Misc">Misc</abbr></a>            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a class="" href="classes/Report-Command-GenerateFullCommand.html#property_organService">$organService</a>
-    <span>
-                        &nbsp;: <a href="classes/Report-Service-Organ.html"><abbr title="\Report\Service\Organ">Organ</abbr></a>            </span>
 </dt>
 
     </dl>
@@ -402,6 +404,47 @@
 
 
         
+    <section class="phpdocumentor-constants">
+        <h3 class="phpdocumentor-elements__header" id="constants">
+            Constants
+            <a href="classes/Report-Command-GenerateFullCommand.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article class="phpdocumentor-element -constant -private ">
+    <h4 class="phpdocumentor-element__name" id="constant_SYNC_PAUSE_MINUTES">
+        SYNC_PAUSE_MINUTES
+        <a href="classes/Report-Command-GenerateFullCommand.html#constant_SYNC_PAUSE_MINUTES" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Command/GenerateFullCommand.php"><a href="files/module-report-src-command-generatefullcommand.html"><abbr title="module/Report/src/Command/GenerateFullCommand.php">GenerateFullCommand.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">24</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">How long the API is kept from syncing while ReportDB is being rebuilt.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+        <span class="phpdocumentor-signature__type">int</span>
+    <span class="phpdocumentor-signature__name">SYNC_PAUSE_MINUTES</span>
+    = <span class="phpdocumentor-signature__default-value">120</span>
+</code>
+
+
+        <section class="phpdocumentor-description"><p>Generous on purpose: the pause is lifted again as soon as the rebuild is done, so the only thing this bounds is
+how long a crashed run can keep the API waiting.</p>
+</section>
+
+    
+    
+
+        
+    </article>
+            </section>
 
         
     <section class="phpdocumentor-properties">
@@ -417,9 +460,9 @@
             -private
                                                 -read-only                    "
 >
-    <h4 class="phpdocumentor-element__name" id="property_boardService">
-        $boardService
-        <a href="classes/Report-Command-GenerateFullCommand.html#property_boardService" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_apiService">
+        $apiService
+        <a href="classes/Report-Command-GenerateFullCommand.html#property_apiService" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                         <small class="phpdocumentor-element__modifier">read-only</small>                    </span>
@@ -427,7 +470,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Command/GenerateFullCommand.php"><a href="files/module-report-src-command-generatefullcommand.html"><abbr title="module/Report/src/Command/GenerateFullCommand.php">GenerateFullCommand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">21</span>
+    <span class="phpdocumentor-element-found-in__line">27</span>
 
     </aside>
 
@@ -435,45 +478,8 @@
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">private</span>
-            <span class="phpdocumentor-signature__type"><a href="classes/Report-Service-Board.html"><abbr title="\Report\Service\Board">Board</abbr></a></span>
-    <span class="phpdocumentor-signature__name">$boardService</span>
-    </code>
-
-    
-    
-    
-
-        
-        
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                -read-only                    "
->
-    <h4 class="phpdocumentor-element__name" id="property_keyholderService">
-        $keyholderService
-        <a href="classes/Report-Command-GenerateFullCommand.html#property_keyholderService" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                        <small class="phpdocumentor-element__modifier">read-only</small>                    </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Command/GenerateFullCommand.php"><a href="files/module-report-src-command-generatefullcommand.html"><abbr title="module/Report/src/Command/GenerateFullCommand.php">GenerateFullCommand.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">22</span>
-
-    </aside>
-
-    
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">private</span>
-            <span class="phpdocumentor-signature__type"><a href="classes/Report-Service-Keyholder.html"><abbr title="\Report\Service\Keyholder">Keyholder</abbr></a></span>
-    <span class="phpdocumentor-signature__name">$keyholderService</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/Database-Service-Api.html"><abbr title="\Database\Service\Api">Api</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$apiService</span>
     </code>
 
     
@@ -501,7 +507,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Command/GenerateFullCommand.php"><a href="files/module-report-src-command-generatefullcommand.html"><abbr title="module/Report/src/Command/GenerateFullCommand.php">GenerateFullCommand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">23</span>
+    <span class="phpdocumentor-element-found-in__line">28</span>
 
     </aside>
 
@@ -538,7 +544,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Command/GenerateFullCommand.php"><a href="files/module-report-src-command-generatefullcommand.html"><abbr title="module/Report/src/Command/GenerateFullCommand.php">GenerateFullCommand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">29</span>
 
     </aside>
 
@@ -575,7 +581,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Command/GenerateFullCommand.php"><a href="files/module-report-src-command-generatefullcommand.html"><abbr title="module/Report/src/Command/GenerateFullCommand.php">GenerateFullCommand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">25</span>
+    <span class="phpdocumentor-element-found-in__line">30</span>
 
     </aside>
 
@@ -585,43 +591,6 @@
         <span class="phpdocumentor-signature__visibility">private</span>
             <span class="phpdocumentor-signature__type"><a href="classes/Report-Service-Misc.html"><abbr title="\Report\Service\Misc">Misc</abbr></a></span>
     <span class="phpdocumentor-signature__name">$miscService</span>
-    </code>
-
-    
-    
-    
-
-        
-        
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                -read-only                    "
->
-    <h4 class="phpdocumentor-element__name" id="property_organService">
-        $organService
-        <a href="classes/Report-Command-GenerateFullCommand.html#property_organService" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                        <small class="phpdocumentor-element__modifier">read-only</small>                    </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Command/GenerateFullCommand.php"><a href="files/module-report-src-command-generatefullcommand.html"><abbr title="module/Report/src/Command/GenerateFullCommand.php">GenerateFullCommand.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">26</span>
-
-    </aside>
-
-    
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">private</span>
-            <span class="phpdocumentor-signature__type"><a href="classes/Report-Service-Organ.html"><abbr title="\Report\Service\Organ">Organ</abbr></a></span>
-    <span class="phpdocumentor-signature__name">$organService</span>
     </code>
 
     
@@ -654,14 +623,14 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Command/GenerateFullCommand.php"><a href="files/module-report-src-command-generatefullcommand.html"><abbr title="module/Report/src/Command/GenerateFullCommand.php">GenerateFullCommand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">26</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Report-Service-Board.html"><abbr title="\Report\Service\Board">Board</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$boardService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Report-Service-Keyholder.html"><abbr title="\Report\Service\Keyholder">Keyholder</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$keyholderService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Report-Service-Meeting.html"><abbr title="\Report\Service\Meeting">Meeting</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$meetingService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Report-Service-Member.html"><abbr title="\Report\Service\Member">Member</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$memberService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Report-Service-Misc.html"><abbr title="\Report\Service\Misc">Misc</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$miscService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Report-Service-Organ.html"><abbr title="\Report\Service\Organ">Organ</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$organService</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Service-Api.html"><abbr title="\Database\Service\Api">Api</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$apiService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Report-Service-Meeting.html"><abbr title="\Report\Service\Meeting">Meeting</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$meetingService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Report-Service-Member.html"><abbr title="\Report\Service\Member">Member</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$memberService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Report-Service-Misc.html"><abbr title="\Report\Service\Misc">Misc</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$miscService</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -670,15 +639,8 @@
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-argument-list__argument__name">$boardService</span>
-                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Report-Service-Board.html"><abbr title="\Report\Service\Board">Board</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-argument-list__argument__name">$keyholderService</span>
-                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Report-Service-Keyholder.html"><abbr title="\Report\Service\Keyholder">Keyholder</abbr></a></span>
+                <span class="phpdocumentor-argument-list__argument__name">$apiService</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Database-Service-Api.html"><abbr title="\Database\Service\Api">Api</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -700,13 +662,6 @@
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-argument-list__argument__name">$miscService</span>
                 : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Report-Service-Misc.html"><abbr title="\Report\Service\Misc">Misc</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-argument-list__argument__name">$organService</span>
-                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Report-Service-Organ.html"><abbr title="\Report\Service\Organ">Organ</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -733,7 +688,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Command/GenerateFullCommand.php"><a href="files/module-report-src-command-generatefullcommand.html"><abbr title="module/Report/src/Command/GenerateFullCommand.php">GenerateFullCommand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">31</span>
+    <span class="phpdocumentor-element-found-in__line">35</span>
 
     </aside>
 
@@ -799,20 +754,25 @@
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
+                                        <li><a href="classes/Report-Command-GenerateFullCommand.html#toc-constants">Constants</a></li>
                                                             <li><a href="classes/Report-Command-GenerateFullCommand.html#toc-properties">Properties</a></li>
                                                             <li><a href="classes/Report-Command-GenerateFullCommand.html#toc-methods">Methods</a></li>
                                     </ul>
             </li>
+                            <li class="phpdocumentor-on-this-page-section__title">Constants</li>
+                <li>
+                    <ul class="phpdocumentor-list -clean">
+                                                    <li class=""><a href="classes/Report-Command-GenerateFullCommand.html#constant_SYNC_PAUSE_MINUTES">SYNC_PAUSE_MINUTES</a></li>
+                                            </ul>
+                </li>
             
                             <li class="phpdocumentor-on-this-page-section__title">Properties</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
-                                                    <li class=""><a href="classes/Report-Command-GenerateFullCommand.html#property_boardService">$boardService</a></li>
-                                                    <li class=""><a href="classes/Report-Command-GenerateFullCommand.html#property_keyholderService">$keyholderService</a></li>
+                                                    <li class=""><a href="classes/Report-Command-GenerateFullCommand.html#property_apiService">$apiService</a></li>
                                                     <li class=""><a href="classes/Report-Command-GenerateFullCommand.html#property_meetingService">$meetingService</a></li>
                                                     <li class=""><a href="classes/Report-Command-GenerateFullCommand.html#property_memberService">$memberService</a></li>
                                                     <li class=""><a href="classes/Report-Command-GenerateFullCommand.html#property_miscService">$miscService</a></li>
-                                                    <li class=""><a href="classes/Report-Command-GenerateFullCommand.html#property_organService">$organService</a></li>
                                             </ul>
                 </li>
             

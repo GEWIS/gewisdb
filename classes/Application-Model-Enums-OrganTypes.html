@@ -389,6 +389,20 @@
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Application-Model-Enums-OrganTypes.html#method_allowsInactiveMembers">allowsInactiveMembers()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Whether this type of organ knows inactive members (&quot;Inactief Lid&quot;).</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Application-Model-Enums-OrganTypes.html#method_getMinimumMembers">getMinimumMembers()</a>
+    <span>
+                                &nbsp;: int    </span>
+</dt>
+<dd>The number of active members this type of organ must have at all times.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Application-Model-Enums-OrganTypes.html#method_getName">getName()</a>
     <span>
                                 &nbsp;: string    </span>
@@ -407,6 +421,13 @@
     <span>
                                 &nbsp;: bool    </span>
 </dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Application-Model-Enums-OrganTypes.html#method_requiresChair">requiresChair()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Whether this type of organ must be led by a chair.</dd>
 
     </dl>
 
@@ -614,6 +635,93 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_allowsInactiveMembers">
+        allowsInactiveMembers()
+        <a href="classes/Application-Model-Enums-OrganTypes.html#method_allowsInactiveMembers" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/Model/Enums/OrganTypes.php"><a href="files/module-application-src-model-enums-organtypes.html"><abbr title="module/Application/src/Model/Enums/OrganTypes.php">OrganTypes.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">73</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Whether this type of organ knows inactive members (&quot;Inactief Lid&quot;).</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">allowsInactiveMembers</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Only fraternities do: they keep members who no longer study (HR art. 13), who then hold no function. Every other
+organ simply discharges whoever is no longer part of it.</p>
+</section>
+
+    
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getMinimumMembers">
+        getMinimumMembers()
+        <a href="classes/Application-Model-Enums-OrganTypes.html#method_getMinimumMembers" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/Model/Enums/OrganTypes.php"><a href="files/module-application-src-model-enums-organtypes.html"><abbr title="module/Application/src/Model/Enums/OrganTypes.php">OrganTypes.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">88</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The number of active members this type of organ must have at all times.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getMinimumMembers</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>A fraternity has &quot;tenminste 3 actieve dispuutsleden&quot; (HR art. 13.8) and a GMM taskforce &quot;tenminste 3 leden&quot;
+(HR art. 16.5); both counts include the chair. Every other organ needs at least someone in it, if only the
+chair it is required to have. The Internal Regulations and the Articles of Association put a higher floor under
+the KCC, the AVC, the RvA, and the voting committee as well; those are not encoded here yet.</p>
+<p>Members installed as &quot;Inactief Lid&quot; do not count towards this, they hold no function in the organ.</p>
+</section>
+
+    
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">int</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getName">
         getName()
         <a href="classes/Application-Model-Enums-OrganTypes.html#method_getName" class="headerlink"><i class="fas fa-link"></i></a>
@@ -678,7 +786,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/Model/Enums/OrganTypes.php"><a href="files/module-application-src-model-enums-organtypes.html"><abbr title="module/Application/src/Model/Enums/OrganTypes.php">OrganTypes.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">61</span>
+    <span class="phpdocumentor-element-found-in__line">102</span>
 
     </aside>
 
@@ -758,6 +866,48 @@
             </section>
 
 </article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_requiresChair">
+        requiresChair()
+        <a href="classes/Application-Model-Enums-OrganTypes.html#method_requiresChair" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/Model/Enums/OrganTypes.php"><a href="files/module-application-src-model-enums-organtypes.html"><abbr title="module/Application/src/Model/Enums/OrganTypes.php">OrganTypes.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">62</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Whether this type of organ must be led by a chair.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">requiresChair</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Per the Articles of Association (&quot;Iedere commissie heeft een voorzitter&quot;, art. 22.3) and the Internal
+Regulations (art. 11.3.1, 13, and 16) every organ has a chair among its members.</p>
+</section>
+
+    
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            </section>
+
+</article>
             </section>
 
         
@@ -792,9 +942,12 @@
                             <li class="phpdocumentor-on-this-page-section__title">Methods</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
+                                                    <li class=""><a href="classes/Application-Model-Enums-OrganTypes.html#method_allowsInactiveMembers">allowsInactiveMembers()</a></li>
+                                                    <li class=""><a href="classes/Application-Model-Enums-OrganTypes.html#method_getMinimumMembers">getMinimumMembers()</a></li>
                                                     <li class=""><a href="classes/Application-Model-Enums-OrganTypes.html#method_getName">getName()</a></li>
                                                     <li class=""><a href="classes/Application-Model-Enums-OrganTypes.html#method_getTypesArray">getTypesArray()</a></li>
                                                     <li class=""><a href="classes/Application-Model-Enums-OrganTypes.html#method_hasOrganRegulations">hasOrganRegulations()</a></li>
+                                                    <li class=""><a href="classes/Application-Model-Enums-OrganTypes.html#method_requiresChair">requiresChair()</a></li>
                                             </ul>
                 </li>
                     </ul>

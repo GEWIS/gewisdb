@@ -448,6 +448,13 @@
 <dd>Get the meeting type.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Database-Model-Meeting.html#method_removeDecision">removeDecision()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Remove a decision that is not going to be recorded after all.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-Meeting.html#method_setDate">setDate()</a>
     <span>
                                 &nbsp;: void    </span>
@@ -872,7 +879,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Meeting.php"><a href="files/module-database-src-model-meeting.html"><abbr title="module/Database/src/Model/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">167</span>
+    <span class="phpdocumentor-element-found-in__line">178</span>
 
     </aside>
 
@@ -1038,7 +1045,7 @@ https://www.doctrine-project.org/projects/doctrine-dbal/en/stable/reference/type
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Meeting.php"><a href="files/module-database-src-model-meeting.html"><abbr title="module/Database/src/Model/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">195</span>
+    <span class="phpdocumentor-element-found-in__line">206</span>
 
     </aside>
 
@@ -1113,6 +1120,54 @@ https://www.doctrine-project.org/projects/doctrine-dbal/en/stable/reference/type
         <span class="phpdocumentor-signature__response_type"><a href="classes/Application-Model-Enums-MeetingTypes.html"><abbr title="\Application\Model\Enums\MeetingTypes">MeetingTypes</abbr></a></span>
             </section>
 
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_removeDecision">
+        removeDecision()
+        <a href="classes/Database-Model-Meeting.html#method_removeDecision" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Meeting.php"><a href="files/module-database-src-model-meeting.html"><abbr title="module/Database/src/Model/Meeting.php">Meeting.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">168</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Remove a decision that is not going to be recorded after all.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">removeDecision</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Model-Decision.html"><abbr title="\Database\Model\Decision">Decision</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$decision</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p><a href="classes/Database-Model-Decision.html#method_setMeeting"><abbr title="\Database\Model\Decision::setMeeting()">Decision::setMeeting()</abbr></a> adds a decision here as soon as it is built, and this collection cascades
+persists, so a decision that is turned down has to be taken back out or the next flush would still write it.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$decision</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Database-Model-Decision.html"><abbr title="\Database\Model\Decision">Decision</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -1263,7 +1318,7 @@ https://www.doctrine-project.org/projects/doctrine-dbal/en/stable/reference/type
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Meeting.php"><a href="files/module-database-src-model-meeting.html"><abbr title="module/Database/src/Model/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">182</span>
+    <span class="phpdocumentor-element-found-in__line">193</span>
 
     </aside>
 
@@ -1329,6 +1384,7 @@ https://www.doctrine-project.org/projects/doctrine-dbal/en/stable/reference/type
                                             <li class=""><a href="classes/Database-Model-Meeting.html#method_getNumber">getNumber()</a></li>
                                             <li class=""><a href="classes/Database-Model-Meeting.html#method_getNumberAsOrdinal">getNumberAsOrdinal()</a></li>
                                             <li class=""><a href="classes/Database-Model-Meeting.html#method_getType">getType()</a></li>
+                                            <li class=""><a href="classes/Database-Model-Meeting.html#method_removeDecision">removeDecision()</a></li>
                                             <li class=""><a href="classes/Database-Model-Meeting.html#method_setDate">setDate()</a></li>
                                             <li class=""><a href="classes/Database-Model-Meeting.html#method_setNumber">setNumber()</a></li>
                                             <li class=""><a href="classes/Database-Model-Meeting.html#method_setType">setType()</a></li>

@@ -395,6 +395,13 @@
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Report-Model-SubDecision-Key-Granting.html#method_clearKeyholder">clearKeyholder()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Forget what was derived from this subdecision, because it no longer exists.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Report-Model-SubDecision-Key-Granting.html#method_clearWithdrawal">clearWithdrawal()</a>
     <span>
                                 &nbsp;: void    </span>
@@ -505,6 +512,13 @@
                                 &nbsp;: void    </span>
 </dt>
 <dd>Set the decision.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Report-Model-SubDecision-Key-Granting.html#method_setKeyholder">setKeyholder()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Set the keyholder decision.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Report-Model-Trait-MemberAwareTrait.html#method_setMember">setMember()</a>
@@ -785,6 +799,43 @@ this is not null or need to specify an inverse side can do so using an associati
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_clearKeyholder">
+        clearKeyholder()
+        <a href="classes/Report-Model-SubDecision-Key-Granting.html#method_clearKeyholder" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision/Key/Granting.php"><a href="files/module-report-src-model-subdecision-key-granting.html"><abbr title="module/Report/src/Model/SubDecision/Key/Granting.php">Granting.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">103</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Forget what was derived from this subdecision, because it no longer exists.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">clearKeyholder</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Leaves the property uninitialised again, which is how the rest of the code recognises that there is nothing.</p>
+</section>
+
+    
+    
+
+        
+    
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_clearWithdrawal">
         clearWithdrawal()
         <a href="classes/Report-Model-SubDecision-Key-Granting.html#method_clearWithdrawal" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1023,7 +1074,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision/Key/Granting.php"><a href="files/module-report-src-model-subdecision-key-granting.html"><abbr title="module/Report/src/Model/SubDecision/Key/Granting.php">Granting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">90</span>
+    <span class="phpdocumentor-element-found-in__line">111</span>
 
     </aside>
 
@@ -1438,6 +1489,54 @@ this is not null or need to specify an inverse side can do so using an associati
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_setKeyholder">
+        setKeyholder()
+        <a href="classes/Report-Model-SubDecision-Key-Granting.html#method_setKeyholder" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision/Key/Granting.php"><a href="files/module-report-src-model-subdecision-key-granting.html"><abbr title="module/Report/src/Model/SubDecision/Key/Granting.php">Granting.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">93</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Set the keyholder decision.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setKeyholder</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Report-Model-Keyholder.html"><abbr title="\Report\Model\Keyholder">Keyholder</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$keyholder</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Kept in step with the owning side, so that a keyholder only just derived from this granting can be found right
+away, without having to go through the database for it.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$keyholder</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Report-Model-Keyholder.html"><abbr title="\Report\Model\Keyholder">Keyholder</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_setMember">
         setMember()
         <a href="classes/Report-Model-Trait-MemberAwareTrait.html#method_setMember" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1599,6 +1698,7 @@ this is not null or need to specify an inverse side can do so using an associati
                         <li class="phpdocumentor-on-this-page-section__title">Methods</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
+                                            <li class=""><a href="classes/Report-Model-SubDecision-Key-Granting.html#method_clearKeyholder">clearKeyholder()</a></li>
                                             <li class=""><a href="classes/Report-Model-SubDecision-Key-Granting.html#method_clearWithdrawal">clearWithdrawal()</a></li>
                                             <li class=""><a href="classes/Report-Model-SubDecision.html#method_getContentEN">getContentEN()</a></li>
                                             <li class=""><a href="classes/Report-Model-SubDecision.html#method_getContentNL">getContentNL()</a></li>
@@ -1615,6 +1715,7 @@ this is not null or need to specify an inverse side can do so using an associati
                                             <li class=""><a href="classes/Report-Model-SubDecision.html#method_setContentEN">setContentEN()</a></li>
                                             <li class=""><a href="classes/Report-Model-SubDecision.html#method_setContentNL">setContentNL()</a></li>
                                             <li class=""><a href="classes/Report-Model-SubDecision.html#method_setDecision">setDecision()</a></li>
+                                            <li class=""><a href="classes/Report-Model-SubDecision-Key-Granting.html#method_setKeyholder">setKeyholder()</a></li>
                                             <li class=""><a href="classes/Report-Model-Trait-MemberAwareTrait.html#method_setMember">setMember()</a></li>
                                             <li class=""><a href="classes/Report-Model-SubDecision.html#method_setSequence">setSequence()</a></li>
                                             <li class=""><a href="classes/Report-Model-SubDecision-Key-Granting.html#method_setUntil">setUntil()</a></li>

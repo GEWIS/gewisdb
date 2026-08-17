@@ -307,7 +307,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/Meeting.php"><a href="files/module-report-src-service-meeting.html"><abbr title="module/Report/src/Service/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">33</span>
+    <span class="phpdocumentor-element-found-in__line">34</span>
 
     </aside>
 
@@ -363,6 +363,12 @@
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/Report-Service-Meeting.html#property_subDecisionService">$subDecisionService</a>
+    <span>
+                        &nbsp;: <a href="classes/Report-Service-SubDecision.html"><abbr title="\Report\Service\SubDecision">SubDecision</abbr></a>            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/Report-Service-Meeting.html#property_translator">$translator</a>
     <span>
                         &nbsp;: <abbr title="\Laminas\Mvc\I18n\Translator">Translator</abbr>            </span>
@@ -407,7 +413,7 @@ the `Database` module, this cannot return `null`.</dd>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd>Export meetings.</dd>
+<dd>Build ReportDB by replaying every meeting in the order it was held.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Report-Service-Meeting.html#method_generateDecision">generateDecision()</a>
@@ -433,6 +439,20 @@ the `Database` module, this cannot return `null`.</dd>
                                 &nbsp;: void    </span>
 </dt>
 <dd>Send an email about that something went wrong.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/Report-Service-Meeting.html#method_annulDecision">annulDecision()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Annuls a previously recorded decision and its subdecisions in GEWISDB.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/Report-Service-Meeting.html#method_unannulDecision">unannulDecision()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Undoes an annulment, restoring the entities that were derived from the annulled decision.</dd>
 
     </dl>
 
@@ -464,7 +484,7 @@ the `Database` module, this cannot return `null`.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/Meeting.php"><a href="files/module-report-src-service-meeting.html"><abbr title="module/Report/src/Service/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">42</span>
+    <span class="phpdocumentor-element-found-in__line">44</span>
 
     </aside>
 
@@ -501,7 +521,7 @@ the `Database` module, this cannot return `null`.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/Meeting.php"><a href="files/module-report-src-service-meeting.html"><abbr title="module/Report/src/Service/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">41</span>
+    <span class="phpdocumentor-element-found-in__line">43</span>
 
     </aside>
 
@@ -538,7 +558,7 @@ the `Database` module, this cannot return `null`.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/Meeting.php"><a href="files/module-report-src-service-meeting.html"><abbr title="module/Report/src/Service/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">43</span>
+    <span class="phpdocumentor-element-found-in__line">45</span>
 
     </aside>
 
@@ -575,7 +595,7 @@ the `Database` module, this cannot return `null`.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/Meeting.php"><a href="files/module-report-src-service-meeting.html"><abbr title="module/Report/src/Service/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">40</span>
+    <span class="phpdocumentor-element-found-in__line">41</span>
 
     </aside>
 
@@ -585,6 +605,43 @@ the `Database` module, this cannot return `null`.</dd>
         <span class="phpdocumentor-signature__visibility">private</span>
             <span class="phpdocumentor-signature__type"><a href="classes/Database-Mapper-Meeting.html"><abbr title="\Database\Mapper\Meeting">Meeting</abbr></a></span>
     <span class="phpdocumentor-signature__name">$meetingMapper</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                -read-only                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_subDecisionService">
+        $subDecisionService
+        <a href="classes/Report-Service-Meeting.html#property_subDecisionService" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                        <small class="phpdocumentor-element__modifier">read-only</small>                    </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/Meeting.php"><a href="files/module-report-src-service-meeting.html"><abbr title="module/Report/src/Service/Meeting.php">Meeting.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">42</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/Report-Service-SubDecision.html"><abbr title="\Report\Service\SubDecision">SubDecision</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$subDecisionService</span>
     </code>
 
     
@@ -612,7 +669,7 @@ the `Database` module, this cannot return `null`.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/Meeting.php"><a href="files/module-report-src-service-meeting.html"><abbr title="module/Report/src/Service/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">39</span>
+    <span class="phpdocumentor-element-found-in__line">40</span>
 
     </aside>
 
@@ -654,14 +711,14 @@ the `Database` module, this cannot return `null`.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/Meeting.php"><a href="files/module-report-src-service-meeting.html"><abbr title="module/Report/src/Service/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">38</span>
+    <span class="phpdocumentor-element-found-in__line">39</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><abbr title="\Laminas\Mvc\I18n\Translator">Translator</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$translator</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Mapper-Meeting.html"><abbr title="\Database\Mapper\Meeting">Meeting</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$meetingMapper</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><abbr title="\Doctrine\ORM\EntityManager">EntityManager</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$emReport</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$config</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><abbr title="\Laminas\Mail\Transport\TransportInterface">TransportInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mailTransport</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><abbr title="\Laminas\Mvc\I18n\Translator">Translator</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$translator</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Mapper-Meeting.html"><abbr title="\Database\Mapper\Meeting">Meeting</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$meetingMapper</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Report-Service-SubDecision.html"><abbr title="\Report\Service\SubDecision">SubDecision</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$subDecisionService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><abbr title="\Doctrine\ORM\EntityManager">EntityManager</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$emReport</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$config</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><abbr title="\Laminas\Mail\Transport\TransportInterface">TransportInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mailTransport</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -679,6 +736,13 @@ the `Database` module, this cannot return `null`.</dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-argument-list__argument__name">$meetingMapper</span>
                 : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Database-Mapper-Meeting.html"><abbr title="\Database\Mapper\Meeting">Meeting</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$subDecisionService</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Report-Service-SubDecision.html"><abbr title="\Report\Service\SubDecision">SubDecision</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -741,7 +805,7 @@ the `Database` module, this cannot return `null`.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/Meeting.php"><a href="files/module-report-src-service-meeting.html"><abbr title="module/Report/src/Service/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">341</span>
+    <span class="phpdocumentor-element-found-in__line">397</span>
 
     </aside>
 
@@ -785,7 +849,7 @@ the `Database` module, this cannot return `null`.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/Meeting.php"><a href="files/module-report-src-service-meeting.html"><abbr title="module/Report/src/Service/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">357</span>
+    <span class="phpdocumentor-element-found-in__line">413</span>
 
     </aside>
 
@@ -829,7 +893,7 @@ the `Database` module, this cannot return `null`.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/Meeting.php"><a href="files/module-report-src-service-meeting.html"><abbr title="module/Report/src/Service/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">427</span>
+    <span class="phpdocumentor-element-found-in__line">448</span>
 
     </aside>
 
@@ -856,19 +920,6 @@ the `Database` module, this cannot return `null`.</p>
             </dl>
 
     
-    <h5 class="phpdocumentor-tag-list__heading" id="method_findMember_tags">
-        Tags
-        <a href="classes/Report-Service-Meeting.html#method_findMember_tags" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                    <dt class="phpdocumentor-tag-list__entry">
-                <span class="phpdocumentor-tag__name">psalm-ignore-nullable-return</span>
-            </dt>
-                            <dd class="phpdocumentor-tag-list__definition">
-                                                                                                        
-                                    </dd>
-                        </dl>
 
         
     
@@ -892,11 +943,11 @@ the `Database` module, this cannot return `null`.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/Meeting.php"><a href="files/module-report-src-service-meeting.html"><abbr title="module/Report/src/Service/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">50</span>
+    <span class="phpdocumentor-element-found-in__line">58</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Export meetings.</p>
+        <p class="phpdocumentor-summary">Build ReportDB by replaying every meeting in the order it was held.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -905,7 +956,13 @@ the `Database` module, this cannot return `null`.</p>
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <section class="phpdocumentor-description"><p>ReportDB is a materialised view of GEWISDB, and GEWISDB is a ledger: the state it describes is whatever you end
+up with after going through the decisions in order. So that is all this does. Every subdecision is applied the
+moment it is reached, including the annulments, which revert what their target set in motion at exactly the
+point in the ledger where that happened. Entities being created and later removed again along the way is
+expected, and is what makes the result the same whether ReportDB was empty or already up to date.</p>
+</section>
+
     
     
 
@@ -927,7 +984,7 @@ the `Database` module, this cannot return `null`.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/Meeting.php"><a href="files/module-report-src-service-meeting.html"><abbr title="module/Report/src/Service/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">100</span>
+    <span class="phpdocumentor-element-found-in__line">115</span>
 
     </aside>
 
@@ -978,7 +1035,7 @@ the `Database` module, this cannot return `null`.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/Meeting.php"><a href="files/module-report-src-service-meeting.html"><abbr title="module/Report/src/Service/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">70</span>
+    <span class="phpdocumentor-element-found-in__line">80</span>
 
     </aside>
 
@@ -1022,7 +1079,7 @@ the `Database` module, this cannot return `null`.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/Meeting.php"><a href="files/module-report-src-service-meeting.html"><abbr title="module/Report/src/Service/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">157</span>
+    <span class="phpdocumentor-element-found-in__line">175</span>
 
     </aside>
 
@@ -1100,7 +1157,7 @@ the `Database` module, this cannot return `null`.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/Meeting.php"><a href="files/module-report-src-service-meeting.html"><abbr title="module/Report/src/Service/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">437</span>
+    <span class="phpdocumentor-element-found-in__line">465</span>
 
     </aside>
 
@@ -1126,6 +1183,108 @@ the `Database` module, this cannot return `null`.</p>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-argument-list__argument__name">$decision</span>
                 : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Database-Model-Decision.html"><abbr title="\Database\Model\Decision">Decision</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_annulDecision">
+        annulDecision()
+        <a href="classes/Report-Service-Meeting.html#method_annulDecision" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/Meeting.php"><a href="files/module-report-src-service-meeting.html"><abbr title="module/Report/src/Service/Meeting.php">Meeting.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">377</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Annuls a previously recorded decision and its subdecisions in GEWISDB.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">annulDecision</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Report-Model-Decision.html"><abbr title="\Report\Model\Decision">Decision</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$target</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>This function reverts the effects of a target decision by undoing or removing the entities that were derived
+from its subdecisions. Each subdecision type is handled explicitly by <a href="classes/Report-Service-SubDecision.html#method_revertRelated"><abbr title="\Report\Service\SubDecision::revertRelated()">SubDecision::revertRelated()</abbr></a>
+to ensure that the data remains consistent and auditable.</p>
+<p>GEWISDB operates as a ledger, meaning the chronological order of decisions must be preserved. A target decision
+made at point X may be annulled at point Z, but only while no decision in between builds on it. That rule lives
+in the <code class="prettyprint">Database</code> module, which owns the ledger and turns down an annulment that would break it; by the time an
+annulment reaches ReportDB it merely has to be applied.</p>
+<p>NOTE: to adhere to our ordering assumption within a decision, we must loop through its subdecisions in reverse.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$target</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Report-Model-Decision.html"><abbr title="\Report\Model\Decision">Decision</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_unannulDecision">
+        unannulDecision()
+        <a href="classes/Report-Service-Meeting.html#method_unannulDecision" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/Meeting.php"><a href="files/module-report-src-service-meeting.html"><abbr title="module/Report/src/Service/Meeting.php">Meeting.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">390</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Undoes an annulment, restoring the entities that were derived from the annulled decision.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">unannulDecision</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Report-Model-Decision.html"><abbr title="\Report\Model\Decision">Decision</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$target</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>The same ledger assumption applies as for <abbr title="\Report\Service\self::annulDecision()">self::annulDecision()</abbr>: the annulment can only be taken back
+while nothing has been decided about the affected entities since.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$target</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Report-Model-Decision.html"><abbr title="\Report\Model\Decision">Decision</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -1164,6 +1323,7 @@ the `Database` module, this cannot return `null`.</p>
                                                     <li class=""><a href="classes/Report-Service-Meeting.html#property_emReport">$emReport</a></li>
                                                     <li class=""><a href="classes/Report-Service-Meeting.html#property_mailTransport">$mailTransport</a></li>
                                                     <li class=""><a href="classes/Report-Service-Meeting.html#property_meetingMapper">$meetingMapper</a></li>
+                                                    <li class=""><a href="classes/Report-Service-Meeting.html#property_subDecisionService">$subDecisionService</a></li>
                                                     <li class=""><a href="classes/Report-Service-Meeting.html#property_translator">$translator</a></li>
                                             </ul>
                 </li>
@@ -1180,6 +1340,8 @@ the `Database` module, this cannot return `null`.</p>
                                             <li class=""><a href="classes/Report-Service-Meeting.html#method_generateMeeting">generateMeeting()</a></li>
                                             <li class=""><a href="classes/Report-Service-Meeting.html#method_generateSubDecision">generateSubDecision()</a></li>
                                             <li class=""><a href="classes/Report-Service-Meeting.html#method_sendDecisionExceptionMail">sendDecisionExceptionMail()</a></li>
+                                            <li class=""><a href="classes/Report-Service-Meeting.html#method_annulDecision">annulDecision()</a></li>
+                                            <li class=""><a href="classes/Report-Service-Meeting.html#method_unannulDecision">unannulDecision()</a></li>
                                     </ul>
             </li>
                     </ul>

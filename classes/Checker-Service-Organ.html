@@ -307,7 +307,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Organ.php"><a href="files/module-checker-src-service-organ.html"><abbr title="module/Checker/src/Service/Organ.php">Organ.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">16</span>
+    <span class="phpdocumentor-element-found-in__line">17</span>
 
     </aside>
 
@@ -359,6 +359,13 @@
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Checker-Service-Organ.html#method_getAllOrganFoundations">getAllOrganFoundations()</a>
+    <span>
+                                &nbsp;: array&lt;string, <a href="classes/Database-Model-SubDecision-Foundation.html"><abbr title="\Database\Model\SubDecision\Foundation">Foundation</abbr></a>&gt;    </span>
+</dt>
+<dd>Get the organs that exist after $meeting, by hash.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Checker-Service-Organ.html#method_getAllOrgans">getAllOrgans()</a>
     <span>
                                 &nbsp;: array&lt;string|int, string&gt;    </span>
@@ -407,7 +414,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Organ.php"><a href="files/module-checker-src-service-organ.html"><abbr title="module/Checker/src/Service/Organ.php">Organ.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">18</span>
+    <span class="phpdocumentor-element-found-in__line">19</span>
 
     </aside>
 
@@ -449,7 +456,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Organ.php"><a href="files/module-checker-src-service-organ.html"><abbr title="module/Checker/src/Service/Organ.php">Organ.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">18</span>
+    <span class="phpdocumentor-element-found-in__line">19</span>
 
     </aside>
 
@@ -485,6 +492,58 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getAllOrganFoundations">
+        getAllOrganFoundations()
+        <a href="classes/Checker-Service-Organ.html#method_getAllOrganFoundations" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Organ.php"><a href="files/module-checker-src-service-organ.html"><abbr title="module/Checker/src/Service/Organ.php">Organ.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">58</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Get the organs that exist after $meeting, by hash.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getAllOrganFoundations</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Model-Meeting.html"><abbr title="\Database\Model\Meeting">Meeting</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$meeting</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string, <a href="classes/Database-Model-SubDecision-Foundation.html"><abbr title="\Database\Model\SubDecision\Foundation">Foundation</abbr></a>&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Where <abbr title="\Checker\Service\self::getAllOrgans()">self::getAllOrgans()</abbr> hands back the hashes on their own, this keeps the foundations themselves, so
+that what a decision says about an organ can still be read.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$meeting</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Database-Model-Meeting.html"><abbr title="\Database\Model\Meeting">Meeting</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string, <a href="classes/Database-Model-SubDecision-Foundation.html"><abbr title="\Database\Model\SubDecision\Foundation">Foundation</abbr></a>&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getAllOrgans">
         getAllOrgans()
         <a href="classes/Checker-Service-Organ.html#method_getAllOrgans" class="headerlink"><i class="fas fa-link"></i></a>
@@ -493,7 +552,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Organ.php"><a href="files/module-checker-src-service-organ.html"><abbr title="module/Checker/src/Service/Organ.php">Organ.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">27</span>
+    <span class="phpdocumentor-element-found-in__line">28</span>
 
     </aside>
 
@@ -542,7 +601,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Organ.php"><a href="files/module-checker-src-service-organ.html"><abbr title="module/Checker/src/Service/Organ.php">Organ.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">57</span>
+    <span class="phpdocumentor-element-found-in__line">90</span>
 
     </aside>
 
@@ -590,7 +649,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Organ.php"><a href="files/module-checker-src-service-organ.html"><abbr title="module/Checker/src/Service/Organ.php">Organ.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">52</span>
+    <span class="phpdocumentor-element-found-in__line">85</span>
 
     </aside>
 
@@ -654,6 +713,7 @@
             <li>
                 <ul class="phpdocumentor-list -clean">
                                             <li class=""><a href="classes/Checker-Service-Organ.html#method___construct">__construct()</a></li>
+                                            <li class=""><a href="classes/Checker-Service-Organ.html#method_getAllOrganFoundations">getAllOrganFoundations()</a></li>
                                             <li class=""><a href="classes/Checker-Service-Organ.html#method_getAllOrgans">getAllOrgans()</a></li>
                                             <li class=""><a href="classes/Checker-Service-Organ.html#method_getHash">getHash()</a></li>
                                             <li class=""><a href="classes/Checker-Service-Organ.html#method_getOrgansCreatedAtMeeting">getOrgansCreatedAtMeeting()</a></li>

@@ -421,6 +421,21 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Application-Model-Enums-OrganTypes.html#method_hasOrganRegulations"
         },                {
+            "fqsen": "\\Application\\Model\\Enums\\OrganTypes\u003A\u003ArequiresChair\u0028\u0029",
+            "name": "requiresChair",
+            "summary": "Whether\u0020this\u0020type\u0020of\u0020organ\u0020must\u0020be\u0020led\u0020by\u0020a\u0020chair.",
+            "url": "classes/Application-Model-Enums-OrganTypes.html#method_requiresChair"
+        },                {
+            "fqsen": "\\Application\\Model\\Enums\\OrganTypes\u003A\u003AallowsInactiveMembers\u0028\u0029",
+            "name": "allowsInactiveMembers",
+            "summary": "Whether\u0020this\u0020type\u0020of\u0020organ\u0020knows\u0020inactive\u0020members\u0020\u0028\u0022Inactief\u0020Lid\u0022\u0029.",
+            "url": "classes/Application-Model-Enums-OrganTypes.html#method_allowsInactiveMembers"
+        },                {
+            "fqsen": "\\Application\\Model\\Enums\\OrganTypes\u003A\u003AgetMinimumMembers\u0028\u0029",
+            "name": "getMinimumMembers",
+            "summary": "The\u0020number\u0020of\u0020active\u0020members\u0020this\u0020type\u0020of\u0020organ\u0020must\u0020have\u0020at\u0020all\u0020times.",
+            "url": "classes/Application-Model-Enums-OrganTypes.html#method_getMinimumMembers"
+        },                {
             "fqsen": "\\Application\\Model\\Enums\\OrganTypes\u003A\u003AgetTypesArray\u0028\u0029",
             "name": "getTypesArray",
             "summary": "Returns\u0020a\u0020list\u0020of\u0020types\u0020\u0028and\u0020its\u0020translations\u0029",
@@ -2206,6 +2221,41 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Checker-Command-Factory-CheckMembershipGraduateRenewalCommandFactory.html#method___invoke"
         },                {
+            "fqsen": "\\Checker\\Mapper\\Annulment",
+            "name": "Annulment",
+            "summary": "",
+            "url": "classes/Checker-Mapper-Annulment.html"
+        },                {
+            "fqsen": "\\Checker\\Mapper\\Annulment\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Constructor",
+            "url": "classes/Checker-Mapper-Annulment.html#method___construct"
+        },                {
+            "fqsen": "\\Checker\\Mapper\\Annulment\u003A\u003AgetAnnulmentsAtMeeting\u0028\u0029",
+            "name": "getAnnulmentsAtMeeting",
+            "summary": "Returns\u0020the\u0020annulments\u0020that\u0020were\u0020made\u0020during\u0020\u0060\u0024meeting\u0060.",
+            "url": "classes/Checker-Mapper-Annulment.html#method_getAnnulmentsAtMeeting"
+        },                {
+            "fqsen": "\\Checker\\Mapper\\Annulment\u003A\u003AgetAnnulmentsForDecision\u0028\u0029",
+            "name": "getAnnulmentsForDecision",
+            "summary": "Returns\u0020every\u0020annulment\u0020that\u0020annuls\u0020the\u0020given\u0020decision.",
+            "url": "classes/Checker-Mapper-Annulment.html#method_getAnnulmentsForDecision"
+        },                {
+            "fqsen": "\\Checker\\Mapper\\Annulment\u003A\u003A\u0024em",
+            "name": "em",
+            "summary": "",
+            "url": "classes/Checker-Mapper-Annulment.html#property_em"
+        },                {
+            "fqsen": "\\Checker\\Mapper\\Factory\\AnnulmentFactory",
+            "name": "AnnulmentFactory",
+            "summary": "",
+            "url": "classes/Checker-Mapper-Factory-AnnulmentFactory.html"
+        },                {
+            "fqsen": "\\Checker\\Mapper\\Factory\\AnnulmentFactory\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "",
+            "url": "classes/Checker-Mapper-Factory-AnnulmentFactory.html#method___invoke"
+        },                {
             "fqsen": "\\Checker\\Mapper\\Factory\\InstallationFactory",
             "name": "InstallationFactory",
             "summary": "",
@@ -2385,6 +2435,66 @@ Search.appendIndex(
             "name": "em",
             "summary": "",
             "url": "classes/Checker-Mapper-Organ.html#property_em"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\AnnulmentOfAnnulment",
+            "name": "AnnulmentOfAnnulment",
+            "summary": "Error\u0020for\u0020when\u0020a\u0020decision\u0020that\u0020annuls\u0020another\u0020decision\u0020is\u0020itself\u0020annulled.",
+            "url": "classes/Checker-Model-Error-AnnulmentOfAnnulment.html"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\AnnulmentOfAnnulment\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Create\u0020a\u0020new\u0020description.",
+            "url": "classes/Checker-Model-Error-AnnulmentOfAnnulment.html#method___construct"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\AnnulmentOfAnnulment\u003A\u003AgetTarget\u0028\u0029",
+            "name": "getTarget",
+            "summary": "Get\u0020the\u0020decision\u0020that\u0020annuls\u0020another\u0020decision\u0020and\u0020is\u0020annulled\u0020itself.",
+            "url": "classes/Checker-Model-Error-AnnulmentOfAnnulment.html#method_getTarget"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\AnnulmentOfAnnulment\u003A\u003AasText\u0028\u0029",
+            "name": "asText",
+            "summary": "Return\u0020a\u0020textual\u0020representation\u0020of\u0020the\u0020error.",
+            "url": "classes/Checker-Model-Error-AnnulmentOfAnnulment.html#method_asText"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\AnnulmentOfLaterDecision",
+            "name": "AnnulmentOfLaterDecision",
+            "summary": "Error\u0020for\u0020when\u0020a\u0020decision\u0020annuls\u0020a\u0020decision\u0020that\u0020was\u0020taken\u0020after\u0020it.",
+            "url": "classes/Checker-Model-Error-AnnulmentOfLaterDecision.html"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\AnnulmentOfLaterDecision\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Create\u0020a\u0020new\u0020description.",
+            "url": "classes/Checker-Model-Error-AnnulmentOfLaterDecision.html#method___construct"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\AnnulmentOfLaterDecision\u003A\u003AgetTarget\u0028\u0029",
+            "name": "getTarget",
+            "summary": "Get\u0020the\u0020decision\u0020that\u0020is\u0020annulled\u0020before\u0020it\u0020was\u0020taken.",
+            "url": "classes/Checker-Model-Error-AnnulmentOfLaterDecision.html#method_getTarget"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\AnnulmentOfLaterDecision\u003A\u003AasText\u0028\u0029",
+            "name": "asText",
+            "summary": "Return\u0020a\u0020textual\u0020representation\u0020of\u0020the\u0020error.",
+            "url": "classes/Checker-Model-Error-AnnulmentOfLaterDecision.html#method_asText"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\DecisionAnnulledMoreThanOnce",
+            "name": "DecisionAnnulledMoreThanOnce",
+            "summary": "Error\u0020for\u0020when\u0020more\u0020than\u0020one\u0020decision\u0020annuls\u0020the\u0020same\u0020decision.",
+            "url": "classes/Checker-Model-Error-DecisionAnnulledMoreThanOnce.html"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\DecisionAnnulledMoreThanOnce\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Create\u0020a\u0020new\u0020description.",
+            "url": "classes/Checker-Model-Error-DecisionAnnulledMoreThanOnce.html#method___construct"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\DecisionAnnulledMoreThanOnce\u003A\u003AgetTarget\u0028\u0029",
+            "name": "getTarget",
+            "summary": "Get\u0020the\u0020decision\u0020that\u0020is\u0020annulled\u0020more\u0020than\u0020once.",
+            "url": "classes/Checker-Model-Error-DecisionAnnulledMoreThanOnce.html#method_getTarget"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\DecisionAnnulledMoreThanOnce\u003A\u003AasText\u0028\u0029",
+            "name": "asText",
+            "summary": "Return\u0020a\u0020textual\u0020representation\u0020of\u0020the\u0020error.",
+            "url": "classes/Checker-Model-Error-DecisionAnnulledMoreThanOnce.html#method_asText"
         },                {
             "fqsen": "\\Checker\\Model\\Error\\KeyGrantedInThePast",
             "name": "KeyGrantedInThePast",
@@ -2611,6 +2721,31 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Checker-Model-Error-MemberInactiveInOrganButHasOtherRole.html#property_role"
         },                {
+            "fqsen": "\\Checker\\Model\\Error\\MemberInactiveInOrganWithoutInactiveMembers",
+            "name": "MemberInactiveInOrganWithoutInactiveMembers",
+            "summary": "Error\u0020for\u0020when\u0020someone\u0020is\u0020an\u0020inactive\u0020member\u0020of\u0020an\u0020organ\u0020that\u0020does\u0020not\u0020have\u0020those.",
+            "url": "classes/Checker-Model-Error-MemberInactiveInOrganWithoutInactiveMembers.html"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\MemberInactiveInOrganWithoutInactiveMembers\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Create\u0020a\u0020new\u0020description.",
+            "url": "classes/Checker-Model-Error-MemberInactiveInOrganWithoutInactiveMembers.html#method___construct"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\MemberInactiveInOrganWithoutInactiveMembers\u003A\u003AgetMember\u0028\u0029",
+            "name": "getMember",
+            "summary": "Get\u0020the\u0020member\u0020that\u0020is\u0020inactive.",
+            "url": "classes/Checker-Model-Error-MemberInactiveInOrganWithoutInactiveMembers.html#method_getMember"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\MemberInactiveInOrganWithoutInactiveMembers\u003A\u003AgetOrgan\u0028\u0029",
+            "name": "getOrgan",
+            "summary": "Get\u0020the\u0020organ\u0020that\u0020does\u0020not\u0020have\u0020inactive\u0020members.",
+            "url": "classes/Checker-Model-Error-MemberInactiveInOrganWithoutInactiveMembers.html#method_getOrgan"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\MemberInactiveInOrganWithoutInactiveMembers\u003A\u003AasText\u0028\u0029",
+            "name": "asText",
+            "summary": "Return\u0020a\u0020textual\u0020representation\u0020of\u0020the\u0020error.",
+            "url": "classes/Checker-Model-Error-MemberInactiveInOrganWithoutInactiveMembers.html#method_asText"
+        },                {
             "fqsen": "\\Checker\\Model\\Error\\MemberInNonExistingOrgan",
             "name": "MemberInNonExistingOrgan",
             "summary": "Error\u0020for\u0020when\u0020a\u0020member\u0020is\u0020installed\u0020in\u0020an\u0020organ\u0020that\u0020either\u0020is\u0020not\u0020yet\u0020created,\u0020or\u0020already\u0020abrogated.",
@@ -2666,6 +2801,56 @@ Search.appendIndex(
             "summary": "Return\u0020a\u0020textual\u0020representation\u0020of\u0020the\u0020error.",
             "url": "classes/Checker-Model-Error-OrganMeetingType.html#method_asText"
         },                {
+            "fqsen": "\\Checker\\Model\\Error\\OrganTooSmall",
+            "name": "OrganTooSmall",
+            "summary": "Error\u0020for\u0020when\u0020an\u0020organ\u0020has\u0020fewer\u0020members\u0020than\u0020its\u0020type\u0020is\u0020allowed\u0020to\u0020have.",
+            "url": "classes/Checker-Model-Error-OrganTooSmall.html"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\OrganTooSmall\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Create\u0020a\u0020new\u0020description.",
+            "url": "classes/Checker-Model-Error-OrganTooSmall.html#method___construct"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\OrganTooSmall\u003A\u003AgetOrgan\u0028\u0029",
+            "name": "getOrgan",
+            "summary": "Get\u0020the\u0020organ\u0020that\u0020is\u0020too\u0020small.",
+            "url": "classes/Checker-Model-Error-OrganTooSmall.html#method_getOrgan"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\OrganTooSmall\u003A\u003AgetMembers\u0028\u0029",
+            "name": "getMembers",
+            "summary": "Get\u0020the\u0020number\u0020of\u0020members\u0020the\u0020organ\u0020does\u0020have.",
+            "url": "classes/Checker-Model-Error-OrganTooSmall.html#method_getMembers"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\OrganTooSmall\u003A\u003AasText\u0028\u0029",
+            "name": "asText",
+            "summary": "Return\u0020a\u0020textual\u0020representation\u0020of\u0020the\u0020error.",
+            "url": "classes/Checker-Model-Error-OrganTooSmall.html#method_asText"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\OrganTooSmall\u003A\u003A\u0024members",
+            "name": "members",
+            "summary": "",
+            "url": "classes/Checker-Model-Error-OrganTooSmall.html#property_members"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\OrganWithoutChair",
+            "name": "OrganWithoutChair",
+            "summary": "Error\u0020for\u0020when\u0020an\u0020organ\u0020that\u0020has\u0020members\u0020has\u0020nobody\u0020chairing\u0020it.",
+            "url": "classes/Checker-Model-Error-OrganWithoutChair.html"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\OrganWithoutChair\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Create\u0020a\u0020new\u0020description.",
+            "url": "classes/Checker-Model-Error-OrganWithoutChair.html#method___construct"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\OrganWithoutChair\u003A\u003AgetOrgan\u0028\u0029",
+            "name": "getOrgan",
+            "summary": "Get\u0020the\u0020organ\u0020that\u0020has\u0020no\u0020chair.",
+            "url": "classes/Checker-Model-Error-OrganWithoutChair.html#method_getOrgan"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\OrganWithoutChair\u003A\u003AasText\u0028\u0029",
+            "name": "asText",
+            "summary": "Return\u0020a\u0020textual\u0020representation\u0020of\u0020the\u0020error.",
+            "url": "classes/Checker-Model-Error-OrganWithoutChair.html#method_asText"
+        },                {
             "fqsen": "\\Checker\\Model\\Error",
             "name": "Error",
             "summary": "Denotes\u0020an\u0020error\u0020that\u0020was\u0020occurred\u0020while\u0020checking\u0020a\u0020database\ni.e.\u0020the\u0020database\u0020is\u0020left\u0020in\u0020a\u0020wrong\u0020state",
@@ -2715,6 +2900,46 @@ Search.appendIndex(
             "name": "getServiceConfig",
             "summary": "Get\u0020service\u0020configuration.",
             "url": "classes/Checker-Module.html#method_getServiceConfig"
+        },                {
+            "fqsen": "\\Checker\\Service\\Annulment",
+            "name": "Annulment",
+            "summary": "",
+            "url": "classes/Checker-Service-Annulment.html"
+        },                {
+            "fqsen": "\\Checker\\Service\\Annulment\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Checker-Service-Annulment.html#method___construct"
+        },                {
+            "fqsen": "\\Checker\\Service\\Annulment\u003A\u003AgetAnnulmentsAtMeeting\u0028\u0029",
+            "name": "getAnnulmentsAtMeeting",
+            "summary": "Get\u0020the\u0020annulments\u0020that\u0020were\u0020made\u0020during\u0020\u0060\u0024meeting\u0060.",
+            "url": "classes/Checker-Service-Annulment.html#method_getAnnulmentsAtMeeting"
+        },                {
+            "fqsen": "\\Checker\\Service\\Annulment\u003A\u003AannulsAnAnnulment\u0028\u0029",
+            "name": "annulsAnAnnulment",
+            "summary": "Whether\u0020the\u0020given\u0020annulment\u0020annuls\u0020a\u0020decision\u0020that\u0020itself\u0020annuls\u0020another\u0020one.",
+            "url": "classes/Checker-Service-Annulment.html#method_annulsAnAnnulment"
+        },                {
+            "fqsen": "\\Checker\\Service\\Annulment\u003A\u003AannulsALaterDecision\u0028\u0029",
+            "name": "annulsALaterDecision",
+            "summary": "Whether\u0020the\u0020given\u0020annulment\u0020annuls\u0020a\u0020decision\u0020that\u0020was\u0020only\u0020taken\u0020after\u0020it.",
+            "url": "classes/Checker-Service-Annulment.html#method_annulsALaterDecision"
+        },                {
+            "fqsen": "\\Checker\\Service\\Annulment\u003A\u003AgetEarlierAnnulments\u0028\u0029",
+            "name": "getEarlierAnnulments",
+            "summary": "Get\u0020the\u0020annulments\u0020that\u0020already\u0020annulled\u0020the\u0020same\u0020decision\u0020before\u0020the\u0020given\u0020one\u0020did.",
+            "url": "classes/Checker-Service-Annulment.html#method_getEarlierAnnulments"
+        },                {
+            "fqsen": "\\Checker\\Service\\Annulment\u003A\u003A\u0024annulmentMapper",
+            "name": "annulmentMapper",
+            "summary": "",
+            "url": "classes/Checker-Service-Annulment.html#property_annulmentMapper"
+        },                {
+            "fqsen": "\\Checker\\Service\\Annulment\u003A\u003A\u0024annulmentService",
+            "name": "annulmentService",
+            "summary": "",
+            "url": "classes/Checker-Service-Annulment.html#property_annulmentService"
         },                {
             "fqsen": "\\Checker\\Service\\Checker",
             "name": "Checker",
@@ -2776,6 +3001,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Checker-Service-Checker.html#method_checkKeyWithdrawalTime"
         },                {
+            "fqsen": "\\Checker\\Service\\Checker\u003A\u003AcheckOrganComposition\u0028\u0029",
+            "name": "checkOrganComposition",
+            "summary": "Checks\u0020that\u0020the\u0020organs\u0020that\u0020exist\u0020are\u0020made\u0020up\u0020the\u0020way\u0020the\u0020Articles\u0020of\u0020Association\u0020and\u0020the\u0020Internal\u0020Regulations\nrequire,\u0020i.e.\u0020that\u0020they\u0020have\u0020a\u0020chair,\u0020enough\u0020members,\u0020and\u0020no\u0020inactive\u0020members\u0020where\u0020the\u0020type\u0020does\u0020not\u0020have\u0020those.",
+            "url": "classes/Checker-Service-Checker.html#method_checkOrganComposition"
+        },                {
+            "fqsen": "\\Checker\\Service\\Checker\u003A\u003AcheckAnnulments\u0028\u0029",
+            "name": "checkAnnulments",
+            "summary": "Checks\u0020that\u0020the\u0020annulments\u0020made\u0020during\u0020a\u0020meeting\u0020could\u0020have\u0020been\u0020made\u0020at\u0020all.",
+            "url": "classes/Checker-Service-Checker.html#method_checkAnnulments"
+        },                {
             "fqsen": "\\Checker\\Service\\Checker\u003A\u003AcheckAuthenticationKeys\u0028\u0029",
             "name": "checkAuthenticationKeys",
             "summary": "Make\u0020sure\u0020that\u0020members\u0020who\u0020are\u0020hidden\u0020or\u0020whose\u0020membership\u0020has\u0020expired\u0020do\u0020not\u0020have\u0020an\u0020authentication\u0020key.",
@@ -2785,6 +3020,11 @@ Search.appendIndex(
             "name": "getExpiration",
             "summary": "Determine\u0020the\u0020next\u0020expiration\u0020date\u0020\u0028always\u0020the\u0020end\u0020of\u0020the\u0020next\u0020association\u0020year\u0029.",
             "url": "classes/Checker-Service-Checker.html#method_getExpiration"
+        },                {
+            "fqsen": "\\Checker\\Service\\Checker\u003A\u003A\u0024annulmentService",
+            "name": "annulmentService",
+            "summary": "",
+            "url": "classes/Checker-Service-Checker.html#property_annulmentService"
         },                {
             "fqsen": "\\Checker\\Service\\Checker\u003A\u003A\u0024installationService",
             "name": "installationService",
@@ -2820,6 +3060,16 @@ Search.appendIndex(
             "name": "config",
             "summary": "",
             "url": "classes/Checker-Service-Checker.html#property_config"
+        },                {
+            "fqsen": "\\Checker\\Service\\Factory\\AnnulmentFactory",
+            "name": "AnnulmentFactory",
+            "summary": "",
+            "url": "classes/Checker-Service-Factory-AnnulmentFactory.html"
+        },                {
+            "fqsen": "\\Checker\\Service\\Factory\\AnnulmentFactory\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "",
+            "url": "classes/Checker-Service-Factory-AnnulmentFactory.html#method___invoke"
         },                {
             "fqsen": "\\Checker\\Service\\Factory\\CheckerFactory",
             "name": "CheckerFactory",
@@ -3020,6 +3270,11 @@ Search.appendIndex(
             "name": "getAllOrgans",
             "summary": "Get\u0020the\u0020names\u0020of\u0020all\u0020the\u0020organs\u0020after\u0020\u0024meeting",
             "url": "classes/Checker-Service-Organ.html#method_getAllOrgans"
+        },                {
+            "fqsen": "\\Checker\\Service\\Organ\u003A\u003AgetAllOrganFoundations\u0028\u0029",
+            "name": "getAllOrganFoundations",
+            "summary": "Get\u0020the\u0020organs\u0020that\u0020exist\u0020after\u0020\u0024meeting,\u0020by\u0020hash.",
+            "url": "classes/Checker-Service-Organ.html#method_getAllOrganFoundations"
         },                {
             "fqsen": "\\Checker\\Service\\Organ\u003A\u003AgetOrgansCreatedAtMeeting\u0028\u0029",
             "name": "getOrgansCreatedAtMeeting",
@@ -6131,6 +6386,11 @@ Search.appendIndex(
             "summary": "Search\u0020for\u0020a\u0020decision.",
             "url": "classes/Database-Mapper-Meeting.html#method_searchDecision"
         },                {
+            "fqsen": "\\Database\\Mapper\\Meeting\u003A\u003AwhereNotAnnulled\u0028\u0029",
+            "name": "whereNotAnnulled",
+            "summary": "Constrain\u0020a\u0020query\u0020to\u0020subdecisions\u0020whose\u0020decision\u0020was\u0020not\u0020annulled.",
+            "url": "classes/Database-Mapper-Meeting.html#method_whereNotAnnulled"
+        },                {
             "fqsen": "\\Database\\Mapper\\Meeting\u003A\u003AfindCurrentBoard\u0028\u0029",
             "name": "findCurrentBoard",
             "summary": "Find\u0020current\u0020board\u0020members.",
@@ -6145,6 +6405,11 @@ Search.appendIndex(
             "name": "findCurrentKeys",
             "summary": "Find\u0020all\u0020currently\u0020granted\u0020key\u0020codes.",
             "url": "classes/Database-Mapper-Meeting.html#method_findCurrentKeys"
+        },                {
+            "fqsen": "\\Database\\Mapper\\Meeting\u003A\u003AfindReferencingSubDecisions\u0028\u0029",
+            "name": "findReferencingSubDecisions",
+            "summary": "Find\u0020the\u0020subdecisions\u0020of\u0020the\u0020given\u0020type\u0020that\u0020reference\u0020the\u0020given\u0020subdecision.",
+            "url": "classes/Database-Mapper-Meeting.html#method_findReferencingSubDecisions"
         },                {
             "fqsen": "\\Database\\Mapper\\Meeting\u003A\u003AdeleteDecision\u0028\u0029",
             "name": "deleteDecision",
@@ -7776,6 +8041,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Model-Enums-Studies.html#enumcase_Unknown"
         },                {
+            "fqsen": "\\Database\\Model\\Exception\\AnnulmentNotPossible",
+            "name": "AnnulmentNotPossible",
+            "summary": "Thrown\u0020when\u0020a\u0020decision\u0020cannot\u0020be\u0020annulled,\u0020or\u0020when\u0020such\u0020an\u0020annulment\u0020cannot\u0020be\u0020taken\u0020back\u0020again.",
+            "url": "classes/Database-Model-Exception-AnnulmentNotPossible.html"
+        },                {
             "fqsen": "\\Database\\Model\\Exception\\VersionExpected",
             "name": "VersionExpected",
             "summary": "Abstract\u0020class\u0020for\u0020API\u0020exceptions",
@@ -8310,6 +8580,11 @@ Search.appendIndex(
             "name": "addDecision",
             "summary": "Add\u0020a\u0020decision.",
             "url": "classes/Database-Model-Meeting.html#method_addDecision"
+        },                {
+            "fqsen": "\\Database\\Model\\Meeting\u003A\u003AremoveDecision\u0028\u0029",
+            "name": "removeDecision",
+            "summary": "Remove\u0020a\u0020decision\u0020that\u0020is\u0020not\u0020going\u0020to\u0020be\u0020recorded\u0020after\u0020all.",
+            "url": "classes/Database-Model-Meeting.html#method_removeDecision"
         },                {
             "fqsen": "\\Database\\Model\\Meeting\u003A\u003AaddDecisions\u0028\u0029",
             "name": "addDecisions",
@@ -10376,6 +10651,131 @@ Search.appendIndex(
             "summary": "Get\u0020service\u0020configuration.",
             "url": "classes/Database-Module.html#method_getServiceConfig"
         },                {
+            "fqsen": "\\Database\\Service\\Annulment",
+            "name": "Annulment",
+            "summary": "Decides\u0020whether\u0020a\u0020decision\u0020may\u0020be\u0020annulled,\u0020and\u0020whether\u0020an\u0020annulment\u0020may\u0020be\u0020taken\u0020back\u0020again.",
+            "url": "classes/Database-Service-Annulment.html"
+        },                {
+            "fqsen": "\\Database\\Service\\Annulment\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Database-Service-Annulment.html#method___construct"
+        },                {
+            "fqsen": "\\Database\\Service\\Annulment\u003A\u003AassertDecisionCanBeAnnulled\u0028\u0029",
+            "name": "assertDecisionCanBeAnnulled",
+            "summary": "Assert\u0020that\u0020the\u0020given\u0020decision\u0020can\u0020be\u0020annulled.",
+            "url": "classes/Database-Service-Annulment.html#method_assertDecisionCanBeAnnulled"
+        },                {
+            "fqsen": "\\Database\\Service\\Annulment\u003A\u003AassertAnnulmentCanBeDeleted\u0028\u0029",
+            "name": "assertAnnulmentCanBeDeleted",
+            "summary": "Assert\u0020that\u0020the\u0020given\u0020annulment\u0020can\u0020be\u0020deleted,\u0020restoring\u0020the\u0020decision\u0020it\u0020annulled.",
+            "url": "classes/Database-Service-Annulment.html#method_assertAnnulmentCanBeDeleted"
+        },                {
+            "fqsen": "\\Database\\Service\\Annulment\u003A\u003AassertOrgansRemainValid\u0028\u0029",
+            "name": "assertOrgansRemainValid",
+            "summary": "Assert\u0020that\u0020the\u0020organs\u0020affected\u0020by\u0020a\u0020decision\u0020still\u0020hold\u0020up\u0020once\u0020that\u0020decision\u0020starts\u0020or\u0020stops\u0020counting.",
+            "url": "classes/Database-Service-Annulment.html#method_assertOrgansRemainValid"
+        },                {
+            "fqsen": "\\Database\\Service\\Annulment\u003A\u003AfindAffectedFoundations\u0028\u0029",
+            "name": "findAffectedFoundations",
+            "summary": "Find\u0020the\u0020organs\u0020whose\u0020composition\u0020is\u0020touched\u0020by\u0020the\u0020given\u0020decision.",
+            "url": "classes/Database-Service-Annulment.html#method_findAffectedFoundations"
+        },                {
+            "fqsen": "\\Database\\Service\\Annulment\u003A\u003AfindActiveInstallations\u0028\u0029",
+            "name": "findActiveInstallations",
+            "summary": "Determine\u0020who\u0020is\u0020installed\u0020in\u0020an\u0020organ,\u0020as\u0020if\u0020\u0024toggled\u0020were\u0020annulled\u0020\u0028\u0024annulled\u0029\u0020or\u0020not.",
+            "url": "classes/Database-Service-Annulment.html#method_findActiveInstallations"
+        },                {
+            "fqsen": "\\Database\\Service\\Annulment\u003A\u003AfindOrganViolations\u0028\u0029",
+            "name": "findOrganViolations",
+            "summary": "Which\u0020requirements\u0020from\u0020the\u0020Articles\u0020of\u0020Association\u0020and\u0020Internal\u0020Regulations\u0020the\u0020given\u0020composition\u0020breaks.",
+            "url": "classes/Database-Service-Annulment.html#method_findOrganViolations"
+        },                {
+            "fqsen": "\\Database\\Service\\Annulment\u003A\u003AcountsAsAnnulled\u0028\u0029",
+            "name": "countsAsAnnulled",
+            "summary": "Whether\u0020the\u0020given\u0020decision\u0020counts\u0020as\u0020annulled,\u0020with\u0020the\u0020annulled\u0020state\u0020of\u0020\u0024toggled\u0020forced\u0020to\u0020\u0024annulled.",
+            "url": "classes/Database-Service-Annulment.html#method_countsAsAnnulled"
+        },                {
+            "fqsen": "\\Database\\Service\\Annulment\u003A\u003AassertNoDependents\u0028\u0029",
+            "name": "assertNoDependents",
+            "summary": "",
+            "url": "classes/Database-Service-Annulment.html#method_assertNoDependents"
+        },                {
+            "fqsen": "\\Database\\Service\\Annulment\u003A\u003AwarnAbout\u0028\u0029",
+            "name": "warnAbout",
+            "summary": "",
+            "url": "classes/Database-Service-Annulment.html#method_warnAbout"
+        },                {
+            "fqsen": "\\Database\\Service\\Annulment\u003A\u003AassertNone\u0028\u0029",
+            "name": "assertNone",
+            "summary": "",
+            "url": "classes/Database-Service-Annulment.html#method_assertNone"
+        },                {
+            "fqsen": "\\Database\\Service\\Annulment\u003A\u003Acannot\u0028\u0029",
+            "name": "cannot",
+            "summary": "",
+            "url": "classes/Database-Service-Annulment.html#method_cannot"
+        },                {
+            "fqsen": "\\Database\\Service\\Annulment\u003A\u003AfindRelated\u0028\u0029",
+            "name": "findRelated",
+            "summary": "Find\u0020every\u0020subdecision\u0020that\u0020concerns\u0020the\u0020same\u0020entity\u0020as\u0020the\u0020given\u0020subdecision.",
+            "url": "classes/Database-Service-Annulment.html#method_findRelated"
+        },                {
+            "fqsen": "\\Database\\Service\\Annulment\u003A\u003AfindInstallationReferences\u0028\u0029",
+            "name": "findInstallationReferences",
+            "summary": "",
+            "url": "classes/Database-Service-Annulment.html#method_findInstallationReferences"
+        },                {
+            "fqsen": "\\Database\\Service\\Annulment\u003A\u003AfindAnchor\u0028\u0029",
+            "name": "findAnchor",
+            "summary": "Determine\u0020which\u0020entity\u0020a\u0020subdecision\u0020belongs\u0020to.",
+            "url": "classes/Database-Service-Annulment.html#method_findAnchor"
+        },                {
+            "fqsen": "\\Database\\Service\\Annulment\u003A\u003AfindDependents\u0028\u0029",
+            "name": "findDependents",
+            "summary": "Find\u0020the\u0020subdecisions\u0020of\u0020the\u0020given\u0020type\u0020that\u0020reference\u0020\u0024referenced\u0020and\u0020that\u0020still\u0020count.",
+            "url": "classes/Database-Service-Annulment.html#method_findDependents"
+        },                {
+            "fqsen": "\\Database\\Service\\Annulment\u003A\u003AisAnnulled\u0028\u0029",
+            "name": "isAnnulled",
+            "summary": "Whether\u0020the\u0020given\u0020decision\u0020has\u0020been\u0020annulled.",
+            "url": "classes/Database-Service-Annulment.html#method_isAnnulled"
+        },                {
+            "fqsen": "\\Database\\Service\\Annulment\u003A\u003AisSameDecision\u0028\u0029",
+            "name": "isSameDecision",
+            "summary": "",
+            "url": "classes/Database-Service-Annulment.html#method_isSameDecision"
+        },                {
+            "fqsen": "\\Database\\Service\\Annulment\u003A\u003AgetSubDecisionKey\u0028\u0029",
+            "name": "getSubDecisionKey",
+            "summary": "",
+            "url": "classes/Database-Service-Annulment.html#method_getSubDecisionKey"
+        },                {
+            "fqsen": "\\Database\\Service\\Annulment\u003A\u003AisAfter\u0028\u0029",
+            "name": "isAfter",
+            "summary": "Determine\u0020if\u0020\u0024a\u0020occurs\u0020after\u0020\u0024b\u0020in\u0020the\u0020ledger.",
+            "url": "classes/Database-Service-Annulment.html#method_isAfter"
+        },                {
+            "fqsen": "\\Database\\Service\\Annulment\u003A\u003AisBefore\u0028\u0029",
+            "name": "isBefore",
+            "summary": "Whether\u0020decision\u0020\u0024a\u0020was\u0020taken\u0020before\u0020decision\u0020\u0024b.",
+            "url": "classes/Database-Service-Annulment.html#method_isBefore"
+        },                {
+            "fqsen": "\\Database\\Service\\Annulment\u003A\u003AisAnnulling\u0028\u0029",
+            "name": "isAnnulling",
+            "summary": "Whether\u0020the\u0020given\u0020decision\u0020is\u0020an\u0020annulment\u0020of\u0020another\u0020decision.",
+            "url": "classes/Database-Service-Annulment.html#method_isAnnulling"
+        },                {
+            "fqsen": "\\Database\\Service\\Annulment\u003A\u003A\u0024meetingMapper",
+            "name": "meetingMapper",
+            "summary": "",
+            "url": "classes/Database-Service-Annulment.html#property_meetingMapper"
+        },                {
+            "fqsen": "\\Database\\Service\\Annulment\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Service-Annulment.html#property_translator"
+        },                {
             "fqsen": "\\Database\\Service\\Api",
             "name": "Api",
             "summary": "",
@@ -10465,6 +10865,16 @@ Search.appendIndex(
             "name": "auditMapper",
             "summary": "",
             "url": "classes/Database-Service-Audit.html#property_auditMapper"
+        },                {
+            "fqsen": "\\Database\\Service\\Factory\\AnnulmentFactory",
+            "name": "AnnulmentFactory",
+            "summary": "",
+            "url": "classes/Database-Service-Factory-AnnulmentFactory.html"
+        },                {
+            "fqsen": "\\Database\\Service\\Factory\\AnnulmentFactory\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "",
+            "url": "classes/Database-Service-Factory-AnnulmentFactory.html#method___invoke"
         },                {
             "fqsen": "\\Database\\Service\\Factory\\ApiFactory",
             "name": "ApiFactory",
@@ -11146,6 +11556,16 @@ Search.appendIndex(
             "summary": "Annul\u0020decision.",
             "url": "classes/Database-Service-Meeting.html#method_annulDecision"
         },                {
+            "fqsen": "\\Database\\Service\\Meeting\u003A\u003AcheckAnnulmentTarget\u0028\u0029",
+            "name": "checkAnnulmentTarget",
+            "summary": "Check\u0020that\u0020the\u0020decision\u0020targeted\u0020by\u0020an\u0020annulment\u0020can\u0020actually\u0020be\u0020annulled.",
+            "url": "classes/Database-Service-Meeting.html#method_checkAnnulmentTarget"
+        },                {
+            "fqsen": "\\Database\\Service\\Meeting\u003A\u003Aerror\u0028\u0029",
+            "name": "error",
+            "summary": "",
+            "url": "classes/Database-Service-Meeting.html#method_error"
+        },                {
             "fqsen": "\\Database\\Service\\Meeting\u003A\u003AdeleteDecision\u0028\u0029",
             "name": "deleteDecision",
             "summary": "Delete\u0020a\u0020decision.",
@@ -11325,6 +11745,16 @@ Search.appendIndex(
             "name": "getOrganMapper",
             "summary": "Get\u0020the\u0020organ\u0020mapper.",
             "url": "classes/Database-Service-Meeting.html#method_getOrganMapper"
+        },                {
+            "fqsen": "\\Database\\Service\\Meeting\u003A\u003A\u0024annulmentService",
+            "name": "annulmentService",
+            "summary": "",
+            "url": "classes/Database-Service-Meeting.html#property_annulmentService"
+        },                {
+            "fqsen": "\\Database\\Service\\Meeting\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Service-Meeting.html#property_translator"
         },                {
             "fqsen": "\\Database\\Service\\Meeting\u003A\u003A\u0024abolishForm",
             "name": "abolishForm",
@@ -12366,6 +12796,26 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Report-Migrations-Version20260613095524.html#method_down"
         },                {
+            "fqsen": "\\Report\\Migrations\\Version20260817131610",
+            "name": "Version20260817131610",
+            "summary": "phpcs\u003Adisable\u0020Generic.Files.LineLength.TooLong\nphpcs\u003Adisable\u0020SlevomatCodingStandard.Functions.RequireMultiLineCall.RequiredMultiLineCall",
+            "url": "classes/Report-Migrations-Version20260817131610.html"
+        },                {
+            "fqsen": "\\Report\\Migrations\\Version20260817131610\u003A\u003AgetDescription\u0028\u0029",
+            "name": "getDescription",
+            "summary": "",
+            "url": "classes/Report-Migrations-Version20260817131610.html#method_getDescription"
+        },                {
+            "fqsen": "\\Report\\Migrations\\Version20260817131610\u003A\u003Aup\u0028\u0029",
+            "name": "up",
+            "summary": "",
+            "url": "classes/Report-Migrations-Version20260817131610.html#method_up"
+        },                {
+            "fqsen": "\\Report\\Migrations\\Version20260817131610\u003A\u003Adown\u0028\u0029",
+            "name": "down",
+            "summary": "",
+            "url": "classes/Report-Migrations-Version20260817131610.html#method_down"
+        },                {
             "fqsen": "\\Report\\Command\\Factory\\GenerateFullCommandFactory",
             "name": "GenerateFullCommandFactory",
             "summary": "",
@@ -12375,16 +12825,6 @@ Search.appendIndex(
             "name": "__invoke",
             "summary": "",
             "url": "classes/Report-Command-Factory-GenerateFullCommandFactory.html#method___invoke"
-        },                {
-            "fqsen": "\\Report\\Command\\Factory\\GeneratePartialCommandFactory",
-            "name": "GeneratePartialCommandFactory",
-            "summary": "",
-            "url": "classes/Report-Command-Factory-GeneratePartialCommandFactory.html"
-        },                {
-            "fqsen": "\\Report\\Command\\Factory\\GeneratePartialCommandFactory\u003A\u003A__invoke\u0028\u0029",
-            "name": "__invoke",
-            "summary": "",
-            "url": "classes/Report-Command-Factory-GeneratePartialCommandFactory.html#method___invoke"
         },                {
             "fqsen": "\\Report\\Command\\GenerateFullCommand",
             "name": "GenerateFullCommand",
@@ -12401,15 +12841,15 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Report-Command-GenerateFullCommand.html#method_execute"
         },                {
-            "fqsen": "\\Report\\Command\\GenerateFullCommand\u003A\u003A\u0024boardService",
-            "name": "boardService",
-            "summary": "",
-            "url": "classes/Report-Command-GenerateFullCommand.html#property_boardService"
+            "fqsen": "\\Report\\Command\\GenerateFullCommand\u003A\u003ASYNC_PAUSE_MINUTES",
+            "name": "SYNC_PAUSE_MINUTES",
+            "summary": "How\u0020long\u0020the\u0020API\u0020is\u0020kept\u0020from\u0020syncing\u0020while\u0020ReportDB\u0020is\u0020being\u0020rebuilt.",
+            "url": "classes/Report-Command-GenerateFullCommand.html#constant_SYNC_PAUSE_MINUTES"
         },                {
-            "fqsen": "\\Report\\Command\\GenerateFullCommand\u003A\u003A\u0024keyholderService",
-            "name": "keyholderService",
+            "fqsen": "\\Report\\Command\\GenerateFullCommand\u003A\u003A\u0024apiService",
+            "name": "apiService",
             "summary": "",
-            "url": "classes/Report-Command-GenerateFullCommand.html#property_keyholderService"
+            "url": "classes/Report-Command-GenerateFullCommand.html#property_apiService"
         },                {
             "fqsen": "\\Report\\Command\\GenerateFullCommand\u003A\u003A\u0024meetingService",
             "name": "meetingService",
@@ -12425,36 +12865,6 @@ Search.appendIndex(
             "name": "miscService",
             "summary": "",
             "url": "classes/Report-Command-GenerateFullCommand.html#property_miscService"
-        },                {
-            "fqsen": "\\Report\\Command\\GenerateFullCommand\u003A\u003A\u0024organService",
-            "name": "organService",
-            "summary": "",
-            "url": "classes/Report-Command-GenerateFullCommand.html#property_organService"
-        },                {
-            "fqsen": "\\Report\\Command\\GeneratePartialCommand",
-            "name": "GeneratePartialCommand",
-            "summary": "",
-            "url": "classes/Report-Command-GeneratePartialCommand.html"
-        },                {
-            "fqsen": "\\Report\\Command\\GeneratePartialCommand\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Report-Command-GeneratePartialCommand.html#method___construct"
-        },                {
-            "fqsen": "\\Report\\Command\\GeneratePartialCommand\u003A\u003Aexecute\u0028\u0029",
-            "name": "execute",
-            "summary": "",
-            "url": "classes/Report-Command-GeneratePartialCommand.html#method_execute"
-        },                {
-            "fqsen": "\\Report\\Command\\GeneratePartialCommand\u003A\u003A\u0024boardService",
-            "name": "boardService",
-            "summary": "",
-            "url": "classes/Report-Command-GeneratePartialCommand.html#property_boardService"
-        },                {
-            "fqsen": "\\Report\\Command\\GeneratePartialCommand\u003A\u003A\u0024miscService",
-            "name": "miscService",
-            "summary": "",
-            "url": "classes/Report-Command-GeneratePartialCommand.html#property_miscService"
         },                {
             "fqsen": "\\Report\\Listener\\DatabaseDeletionListener",
             "name": "DatabaseDeletionListener",
@@ -12516,35 +12926,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Report-Listener-DatabaseUpdateListener.html#method_postUpdate"
         },                {
-            "fqsen": "\\Report\\Listener\\DatabaseUpdateListener\u003A\u003AprocessOrganUpdates\u0028\u0029",
-            "name": "processOrganUpdates",
-            "summary": "",
-            "url": "classes/Report-Listener-DatabaseUpdateListener.html#method_processOrganUpdates"
-        },                {
-            "fqsen": "\\Report\\Listener\\DatabaseUpdateListener\u003A\u003AprocessKeyholderUpdates\u0028\u0029",
-            "name": "processKeyholderUpdates",
-            "summary": "",
-            "url": "classes/Report-Listener-DatabaseUpdateListener.html#method_processKeyholderUpdates"
-        },                {
-            "fqsen": "\\Report\\Listener\\DatabaseUpdateListener\u003A\u003AprocessBoardMemberUpdates\u0028\u0029",
-            "name": "processBoardMemberUpdates",
-            "summary": "",
-            "url": "classes/Report-Listener-DatabaseUpdateListener.html#method_processBoardMemberUpdates"
-        },                {
             "fqsen": "\\Report\\Listener\\DatabaseUpdateListener\u003A\u003A\u0024isflushing",
             "name": "isflushing",
             "summary": "",
             "url": "classes/Report-Listener-DatabaseUpdateListener.html#property_isflushing"
-        },                {
-            "fqsen": "\\Report\\Listener\\DatabaseUpdateListener\u003A\u003A\u0024boardService",
-            "name": "boardService",
-            "summary": "",
-            "url": "classes/Report-Listener-DatabaseUpdateListener.html#property_boardService"
-        },                {
-            "fqsen": "\\Report\\Listener\\DatabaseUpdateListener\u003A\u003A\u0024keyholderService",
-            "name": "keyholderService",
-            "summary": "",
-            "url": "classes/Report-Listener-DatabaseUpdateListener.html#property_keyholderService"
         },                {
             "fqsen": "\\Report\\Listener\\DatabaseUpdateListener\u003A\u003A\u0024meetingService",
             "name": "meetingService",
@@ -12561,10 +12946,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Report-Listener-DatabaseUpdateListener.html#property_miscService"
         },                {
-            "fqsen": "\\Report\\Listener\\DatabaseUpdateListener\u003A\u003A\u0024organService",
-            "name": "organService",
+            "fqsen": "\\Report\\Listener\\DatabaseUpdateListener\u003A\u003A\u0024subDecisionService",
+            "name": "subDecisionService",
             "summary": "",
-            "url": "classes/Report-Listener-DatabaseUpdateListener.html#property_organService"
+            "url": "classes/Report-Listener-DatabaseUpdateListener.html#property_subDecisionService"
         },                {
             "fqsen": "\\Report\\Listener\\DatabaseUpdateListener\u003A\u003A\u0024emReport",
             "name": "emReport",
@@ -13731,6 +14116,11 @@ Search.appendIndex(
             "summary": "Get\u0020the\u0020members.",
             "url": "classes/Report-Model-Organ.html#method_getMembers"
         },                {
+            "fqsen": "\\Report\\Model\\Organ\u003A\u003AaddMember\u0028\u0029",
+            "name": "addMember",
+            "summary": "Add\u0020a\u0020member.",
+            "url": "classes/Report-Model-Organ.html#method_addMember"
+        },                {
             "fqsen": "\\Report\\Model\\Organ\u003A\u003AaddSubdecisions\u0028\u0029",
             "name": "addSubdecisions",
             "summary": "Add\u0020multiple\u0020subdecisions.",
@@ -13740,6 +14130,11 @@ Search.appendIndex(
             "name": "addSubdecision",
             "summary": "Add\u0020a\u0020subdecision.",
             "url": "classes/Report-Model-Organ.html#method_addSubdecision"
+        },                {
+            "fqsen": "\\Report\\Model\\Organ\u003A\u003AremoveSubdecision\u0028\u0029",
+            "name": "removeSubdecision",
+            "summary": "Remove\u0020a\u0020subdecision,\u0020if\u0020it\u0020is\u0020related\u0020to\u0020this\u0020organ.",
+            "url": "classes/Report-Model-Organ.html#method_removeSubdecision"
         },                {
             "fqsen": "\\Report\\Model\\Organ\u003A\u003A\u0024id",
             "name": "id",
@@ -13996,6 +14391,16 @@ Search.appendIndex(
             "summary": "Clears\u0020the\u0020release,\u0020if\u0020it\u0020exists.",
             "url": "classes/Report-Model-SubDecision-Board-Installation.html#method_clearRelease"
         },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Board\\Installation\u003A\u003AsetBoardMember\u0028\u0029",
+            "name": "setBoardMember",
+            "summary": "Set\u0020the\u0020board\u0020member\u0020decision.",
+            "url": "classes/Report-Model-SubDecision-Board-Installation.html#method_setBoardMember"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Board\\Installation\u003A\u003AclearBoardMember\u0028\u0029",
+            "name": "clearBoardMember",
+            "summary": "Forget\u0020what\u0020was\u0020derived\u0020from\u0020this\u0020subdecision,\u0020because\u0020it\u0020no\u0020longer\u0020exists.",
+            "url": "classes/Report-Model-SubDecision-Board-Installation.html#method_clearBoardMember"
+        },                {
             "fqsen": "\\Report\\Model\\SubDecision\\Board\\Installation\u003A\u003AgetBoardMember\u0028\u0029",
             "name": "getBoardMember",
             "summary": "Get\u0020the\u0020board\u0020member\u0020decision.",
@@ -14221,6 +14626,16 @@ Search.appendIndex(
             "summary": "Get\u0020the\u0020references.",
             "url": "classes/Report-Model-SubDecision-Foundation.html#method_getReferences"
         },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Foundation\u003A\u003AsetOrgan\u0028\u0029",
+            "name": "setOrgan",
+            "summary": "Set\u0020the\u0020referenced\u0020organ.",
+            "url": "classes/Report-Model-SubDecision-Foundation.html#method_setOrgan"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Foundation\u003A\u003AclearOrgan\u0028\u0029",
+            "name": "clearOrgan",
+            "summary": "Forget\u0020what\u0020was\u0020derived\u0020from\u0020this\u0020subdecision,\u0020because\u0020it\u0020no\u0020longer\u0020exists.",
+            "url": "classes/Report-Model-SubDecision-Foundation.html#method_clearOrgan"
+        },                {
             "fqsen": "\\Report\\Model\\SubDecision\\Foundation\u003A\u003AgetOrgan\u0028\u0029",
             "name": "getOrgan",
             "summary": "Get\u0020the\u0020referenced\u0020organ.",
@@ -14331,6 +14746,16 @@ Search.appendIndex(
             "summary": "Clears\u0020the\u0020discharge,\u0020if\u0020it\u0020exists.",
             "url": "classes/Report-Model-SubDecision-Installation.html#method_clearDischarge"
         },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Installation\u003A\u003AsetOrganMember\u0028\u0029",
+            "name": "setOrganMember",
+            "summary": "Set\u0020the\u0020organ\u0020member\u0020reference.",
+            "url": "classes/Report-Model-SubDecision-Installation.html#method_setOrganMember"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Installation\u003A\u003AclearOrganMember\u0028\u0029",
+            "name": "clearOrganMember",
+            "summary": "Forget\u0020what\u0020was\u0020derived\u0020from\u0020this\u0020subdecision,\u0020because\u0020it\u0020no\u0020longer\u0020exists.",
+            "url": "classes/Report-Model-SubDecision-Installation.html#method_clearOrganMember"
+        },                {
             "fqsen": "\\Report\\Model\\SubDecision\\Installation\u003A\u003AgetOrganMember\u0028\u0029",
             "name": "getOrganMember",
             "summary": "Get\u0020the\u0020organ\u0020member\u0020reference.",
@@ -14385,6 +14810,16 @@ Search.appendIndex(
             "name": "clearWithdrawal",
             "summary": "Clears\u0020the\u0020withdrawal,\u0020if\u0020it\u0020exists.",
             "url": "classes/Report-Model-SubDecision-Key-Granting.html#method_clearWithdrawal"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Key\\Granting\u003A\u003AsetKeyholder\u0028\u0029",
+            "name": "setKeyholder",
+            "summary": "Set\u0020the\u0020keyholder\u0020decision.",
+            "url": "classes/Report-Model-SubDecision-Key-Granting.html#method_setKeyholder"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Key\\Granting\u003A\u003AclearKeyholder\u0028\u0029",
+            "name": "clearKeyholder",
+            "summary": "Forget\u0020what\u0020was\u0020derived\u0020from\u0020this\u0020subdecision,\u0020because\u0020it\u0020no\u0020longer\u0020exists.",
+            "url": "classes/Report-Model-SubDecision-Key-Granting.html#method_clearKeyholder"
         },                {
             "fqsen": "\\Report\\Model\\SubDecision\\Key\\Granting\u003A\u003AgetKeyholder\u0028\u0029",
             "name": "getKeyholder",
@@ -14766,11 +15201,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Report-Service-Board.html#method___construct"
         },                {
-            "fqsen": "\\Report\\Service\\Board\u003A\u003Agenerate\u0028\u0029",
-            "name": "generate",
-            "summary": "Export\u0020board\u0020info.",
-            "url": "classes/Report-Service-Board.html#method_generate"
-        },                {
             "fqsen": "\\Report\\Service\\Board\u003A\u003AgenerateInstallation\u0028\u0029",
             "name": "generateInstallation",
             "summary": "",
@@ -14851,6 +15281,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Report-Service-Factory-OrganFactory.html#method___invoke"
         },                {
+            "fqsen": "\\Report\\Service\\Factory\\SubDecisionFactory",
+            "name": "SubDecisionFactory",
+            "summary": "",
+            "url": "classes/Report-Service-Factory-SubDecisionFactory.html"
+        },                {
+            "fqsen": "\\Report\\Service\\Factory\\SubDecisionFactory\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "",
+            "url": "classes/Report-Service-Factory-SubDecisionFactory.html#method___invoke"
+        },                {
             "fqsen": "\\Report\\Service\\Keyholder",
             "name": "Keyholder",
             "summary": "",
@@ -14860,11 +15300,6 @@ Search.appendIndex(
             "name": "__construct",
             "summary": "",
             "url": "classes/Report-Service-Keyholder.html#method___construct"
-        },                {
-            "fqsen": "\\Report\\Service\\Keyholder\u003A\u003Agenerate\u0028\u0029",
-            "name": "generate",
-            "summary": "Export\u0020keyholder\u0020info.",
-            "url": "classes/Report-Service-Keyholder.html#method_generate"
         },                {
             "fqsen": "\\Report\\Service\\Keyholder\u003A\u003AgenerateGranting\u0028\u0029",
             "name": "generateGranting",
@@ -14893,7 +15328,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Report\\Service\\Meeting\u003A\u003Agenerate\u0028\u0029",
             "name": "generate",
-            "summary": "Export\u0020meetings.",
+            "summary": "Build\u0020ReportDB\u0020by\u0020replaying\u0020every\u0020meeting\u0020in\u0020the\u0020order\u0020it\u0020was\u0020held.",
             "url": "classes/Report-Service-Meeting.html#method_generate"
         },                {
             "fqsen": "\\Report\\Service\\Meeting\u003A\u003AgenerateMeeting\u0028\u0029",
@@ -14910,6 +15345,16 @@ Search.appendIndex(
             "name": "generateSubDecision",
             "summary": "",
             "url": "classes/Report-Service-Meeting.html#method_generateSubDecision"
+        },                {
+            "fqsen": "\\Report\\Service\\Meeting\u003A\u003AannulDecision\u0028\u0029",
+            "name": "annulDecision",
+            "summary": "Annuls\u0020a\u0020previously\u0020recorded\u0020decision\u0020and\u0020its\u0020subdecisions\u0020in\u0020GEWISDB.",
+            "url": "classes/Report-Service-Meeting.html#method_annulDecision"
+        },                {
+            "fqsen": "\\Report\\Service\\Meeting\u003A\u003AunannulDecision\u0028\u0029",
+            "name": "unannulDecision",
+            "summary": "Undoes\u0020an\u0020annulment,\u0020restoring\u0020the\u0020entities\u0020that\u0020were\u0020derived\u0020from\u0020the\u0020annulled\u0020decision.",
+            "url": "classes/Report-Service-Meeting.html#method_unannulDecision"
         },                {
             "fqsen": "\\Report\\Service\\Meeting\u003A\u003AdeleteDecision\u0028\u0029",
             "name": "deleteDecision",
@@ -14940,6 +15385,11 @@ Search.appendIndex(
             "name": "meetingMapper",
             "summary": "",
             "url": "classes/Report-Service-Meeting.html#property_meetingMapper"
+        },                {
+            "fqsen": "\\Report\\Service\\Meeting\u003A\u003A\u0024subDecisionService",
+            "name": "subDecisionService",
+            "summary": "",
+            "url": "classes/Report-Service-Meeting.html#property_subDecisionService"
         },                {
             "fqsen": "\\Report\\Service\\Meeting\u003A\u003A\u0024emReport",
             "name": "emReport",
@@ -15066,11 +15516,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Report-Service-Organ.html#method___construct"
         },                {
-            "fqsen": "\\Report\\Service\\Organ\u003A\u003Agenerate\u0028\u0029",
-            "name": "generate",
-            "summary": "Export\u0020organ\u0020info.",
-            "url": "classes/Report-Service-Organ.html#method_generate"
-        },                {
             "fqsen": "\\Report\\Service\\Organ\u003A\u003AgenerateFoundation\u0028\u0029",
             "name": "generateFoundation",
             "summary": "",
@@ -15095,6 +15540,66 @@ Search.appendIndex(
             "name": "emReport",
             "summary": "",
             "url": "classes/Report-Service-Organ.html#property_emReport"
+        },                {
+            "fqsen": "\\Report\\Service\\SubDecision",
+            "name": "SubDecision",
+            "summary": "",
+            "url": "classes/Report-Service-SubDecision.html"
+        },                {
+            "fqsen": "\\Report\\Service\\SubDecision\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Report-Service-SubDecision.html#method___construct"
+        },                {
+            "fqsen": "\\Report\\Service\\SubDecision\u003A\u003AgenerateRelated\u0028\u0029",
+            "name": "generateRelated",
+            "summary": "Generates\u0020related\u0020entities\u0020of\u0020a\u0020subdecision\u0020into\u0020ReportDB.",
+            "url": "classes/Report-Service-SubDecision.html#method_generateRelated"
+        },                {
+            "fqsen": "\\Report\\Service\\SubDecision\u003A\u003ArevertRelated\u0028\u0029",
+            "name": "revertRelated",
+            "summary": "Reverts\u0020the\u0020related\u0020entities\u0020of\u0020a\u0020subdecision\u0020in\u0020ReportDB,\u0020i.e.\u0020undoes\u0020\u007B\u0040see\u0020self\u003A\u003AgenerateRelated\u0028\u0029\u007D.",
+            "url": "classes/Report-Service-SubDecision.html#method_revertRelated"
+        },                {
+            "fqsen": "\\Report\\Service\\SubDecision\u003A\u003AfindOrgan\u0028\u0029",
+            "name": "findOrgan",
+            "summary": "",
+            "url": "classes/Report-Service-SubDecision.html#method_findOrgan"
+        },                {
+            "fqsen": "\\Report\\Service\\SubDecision\u003A\u003AfindOrganMember\u0028\u0029",
+            "name": "findOrganMember",
+            "summary": "",
+            "url": "classes/Report-Service-SubDecision.html#method_findOrganMember"
+        },                {
+            "fqsen": "\\Report\\Service\\SubDecision\u003A\u003AfindBoardMember\u0028\u0029",
+            "name": "findBoardMember",
+            "summary": "",
+            "url": "classes/Report-Service-SubDecision.html#method_findBoardMember"
+        },                {
+            "fqsen": "\\Report\\Service\\SubDecision\u003A\u003AfindKeyholder\u0028\u0029",
+            "name": "findKeyholder",
+            "summary": "",
+            "url": "classes/Report-Service-SubDecision.html#method_findKeyholder"
+        },                {
+            "fqsen": "\\Report\\Service\\SubDecision\u003A\u003A\u0024emReport",
+            "name": "emReport",
+            "summary": "",
+            "url": "classes/Report-Service-SubDecision.html#property_emReport"
+        },                {
+            "fqsen": "\\Report\\Service\\SubDecision\u003A\u003A\u0024boardService",
+            "name": "boardService",
+            "summary": "",
+            "url": "classes/Report-Service-SubDecision.html#property_boardService"
+        },                {
+            "fqsen": "\\Report\\Service\\SubDecision\u003A\u003A\u0024keyholderService",
+            "name": "keyholderService",
+            "summary": "",
+            "url": "classes/Report-Service-SubDecision.html#property_keyholderService"
+        },                {
+            "fqsen": "\\Report\\Service\\SubDecision\u003A\u003A\u0024organService",
+            "name": "organService",
+            "summary": "",
+            "url": "classes/Report-Service-SubDecision.html#property_organService"
         },                {
             "fqsen": "\\User\\Adapter\\ApiPrincipalAdapter",
             "name": "ApiPrincipalAdapter",
@@ -16211,15 +16716,15 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/checker-command-factory.html"
         },                {
-            "fqsen": "\\Checker\\Mapper\\Factory",
-            "name": "Factory",
-            "summary": "",
-            "url": "namespaces/checker-mapper-factory.html"
-        },                {
             "fqsen": "\\Checker\\Mapper",
             "name": "Mapper",
             "summary": "",
             "url": "namespaces/checker-mapper.html"
+        },                {
+            "fqsen": "\\Checker\\Mapper\\Factory",
+            "name": "Factory",
+            "summary": "",
+            "url": "namespaces/checker-mapper-factory.html"
         },                {
             "fqsen": "\\Checker\\Model\\Error",
             "name": "Error",

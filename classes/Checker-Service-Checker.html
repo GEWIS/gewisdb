@@ -307,7 +307,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">28</span>
+    <span class="phpdocumentor-element-found-in__line">30</span>
 
     </aside>
 
@@ -338,6 +338,12 @@
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/Checker-Service-Checker.html#property_annulmentService">$annulmentService</a>
+    <span>
+                        &nbsp;: <a href="classes/Checker-Service-Annulment.html"><abbr title="\Checker\Service\Annulment">Annulment</abbr></a>            </span>
+</dt>
+
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/Checker-Service-Checker.html#property_config">$config</a>
     <span>
@@ -402,6 +408,13 @@
 <dd>Does a full check on each meeting, checking that after each meeting no database violation occurs</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Checker-Service-Checker.html#method_checkAnnulments">checkAnnulments()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, <a href="classes/Checker-Model-Error.html"><abbr title="\Checker\Model\Error">Error</abbr></a>&gt;    </span>
+</dt>
+<dd>Checks that the annulments made during a meeting could have been made at all.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Checker-Service-Checker.html#method_checkAuthenticationKeys">checkAuthenticationKeys()</a>
     <span>
                                 &nbsp;: void    </span>
@@ -454,6 +467,14 @@ anymore, or they are an inactive member.</dd>
 <dd>Checks if there are members in non-existing organs.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Checker-Service-Checker.html#method_checkOrganComposition">checkOrganComposition()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, <a href="classes/Checker-Model-Error.html"><abbr title="\Checker\Model\Error">Error</abbr></a>&gt;    </span>
+</dt>
+<dd>Checks that the organs that exist are made up the way the Articles of Association and the Internal Regulations
+require, i.e. that they have a chair, enough members, and no inactive members where the type does not have those.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Checker-Service-Checker.html#method_checkOrganFoundationMeetingType">checkOrganFoundationMeetingType()</a>
     <span>
                                 &nbsp;: array&lt;string|int, <a href="classes/Checker-Model-Error.html"><abbr title="\Checker\Model\Error">Error</abbr></a>&gt;    </span>
@@ -502,6 +523,43 @@ e.g. ALV-Commissies are only created at an ALV</dd>
             -private
                                                 -read-only                    "
 >
+    <h4 class="phpdocumentor-element__name" id="property_annulmentService">
+        $annulmentService
+        <a href="classes/Checker-Service-Checker.html#property_annulmentService" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                        <small class="phpdocumentor-element__modifier">read-only</small>                    </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">36</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/Checker-Service-Annulment.html"><abbr title="\Checker\Service\Annulment">Annulment</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$annulmentService</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                -read-only                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_config">
         $config
         <a href="classes/Checker-Service-Checker.html#property_config" class="headerlink"><i class="fas fa-link"></i></a>
@@ -512,7 +570,7 @@ e.g. ALV-Commissies are only created at an ALV</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">40</span>
+    <span class="phpdocumentor-element-found-in__line">43</span>
 
     </aside>
 
@@ -549,7 +607,7 @@ e.g. ALV-Commissies are only created at an ALV</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">34</span>
+    <span class="phpdocumentor-element-found-in__line">37</span>
 
     </aside>
 
@@ -586,7 +644,7 @@ e.g. ALV-Commissies are only created at an ALV</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">35</span>
+    <span class="phpdocumentor-element-found-in__line">38</span>
 
     </aside>
 
@@ -623,7 +681,7 @@ e.g. ALV-Commissies are only created at an ALV</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">39</span>
+    <span class="phpdocumentor-element-found-in__line">42</span>
 
     </aside>
 
@@ -660,7 +718,7 @@ e.g. ALV-Commissies are only created at an ALV</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">36</span>
+    <span class="phpdocumentor-element-found-in__line">39</span>
 
     </aside>
 
@@ -697,7 +755,7 @@ e.g. ALV-Commissies are only created at an ALV</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">37</span>
+    <span class="phpdocumentor-element-found-in__line">40</span>
 
     </aside>
 
@@ -734,7 +792,7 @@ e.g. ALV-Commissies are only created at an ALV</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">38</span>
+    <span class="phpdocumentor-element-found-in__line">41</span>
 
     </aside>
 
@@ -776,14 +834,14 @@ e.g. ALV-Commissies are only created at an ALV</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">33</span>
+    <span class="phpdocumentor-element-found-in__line">35</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Checker-Service-Installation.html"><abbr title="\Checker\Service\Installation">Installation</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$installationService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Checker-Service-Key.html"><abbr title="\Checker\Service\Key">Key</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$keyService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Checker-Service-Meeting.html"><abbr title="\Checker\Service\Meeting">Meeting</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$meetingService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Checker-Service-Member.html"><abbr title="\Checker\Service\Member">Member</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$memberService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Checker-Service-Organ.html"><abbr title="\Checker\Service\Organ">Organ</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$organService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><abbr title="\Laminas\Mail\Transport\TransportInterface">TransportInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mailTransport</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$config</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Checker-Service-Annulment.html"><abbr title="\Checker\Service\Annulment">Annulment</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$annulmentService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Checker-Service-Installation.html"><abbr title="\Checker\Service\Installation">Installation</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$installationService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Checker-Service-Key.html"><abbr title="\Checker\Service\Key">Key</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$keyService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Checker-Service-Meeting.html"><abbr title="\Checker\Service\Meeting">Meeting</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$meetingService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Checker-Service-Member.html"><abbr title="\Checker\Service\Member">Member</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$memberService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Checker-Service-Organ.html"><abbr title="\Checker\Service\Organ">Organ</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$organService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><abbr title="\Laminas\Mail\Transport\TransportInterface">TransportInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mailTransport</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$config</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -791,6 +849,13 @@ e.g. ALV-Commissies are only created at an ALV</dd>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$annulmentService</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Checker-Service-Annulment.html"><abbr title="\Checker\Service\Annulment">Annulment</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-argument-list__argument__name">$installationService</span>
                 : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Checker-Service-Installation.html"><abbr title="\Checker\Service\Installation">Installation</abbr></a></span>
@@ -877,7 +942,7 @@ e.g. ALV-Commissies are only created at an ALV</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">47</span>
+    <span class="phpdocumentor-element-found-in__line">50</span>
 
     </aside>
 
@@ -904,6 +969,59 @@ e.g. ALV-Commissies are only created at an ALV</dd>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_checkAnnulments">
+        checkAnnulments()
+        <a href="classes/Checker-Service-Checker.html#method_checkAnnulments" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">459</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Checks that the annulments made during a meeting could have been made at all.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">checkAnnulments</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Model-Meeting.html"><abbr title="\Database\Model\Meeting">Meeting</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$meeting</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Checker-Model-Error.html"><abbr title="\Checker\Model\Error">Error</abbr></a>&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>These are turned down when a decision is entered, so anything found here predates that or was put in by hand.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$meeting</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Database-Model-Meeting.html"><abbr title="\Database\Model\Meeting">Meeting</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>After which meeting do we do the validation</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Checker-Model-Error.html"><abbr title="\Checker\Model\Error">Error</abbr></a>&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_checkAuthenticationKeys">
         checkAuthenticationKeys()
         <a href="classes/Checker-Service-Checker.html#method_checkAuthenticationKeys" class="headerlink"><i class="fas fa-link"></i></a>
@@ -912,7 +1030,7 @@ e.g. ALV-Commissies are only created at an ALV</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">388</span>
+    <span class="phpdocumentor-element-found-in__line">485</span>
 
     </aside>
 
@@ -947,7 +1065,7 @@ e.g. ALV-Commissies are only created at an ALV</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">72</span>
+    <span class="phpdocumentor-element-found-in__line">77</span>
 
     </aside>
 
@@ -983,7 +1101,7 @@ currently installed in an organ that was abrogated (i.e. they were never dischar
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">324</span>
+    <span class="phpdocumentor-element-found-in__line">329</span>
 
     </aside>
 
@@ -1034,7 +1152,7 @@ that ends after September 1st of the next association year.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">369</span>
+    <span class="phpdocumentor-element-found-in__line">374</span>
 
     </aside>
 
@@ -1082,7 +1200,7 @@ that ends after September 1st of the next association year.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">157</span>
+    <span class="phpdocumentor-element-found-in__line">162</span>
 
     </aside>
 
@@ -1133,7 +1251,7 @@ that ends after September 1st of the next association year.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">187</span>
+    <span class="phpdocumentor-element-found-in__line">192</span>
 
     </aside>
 
@@ -1185,7 +1303,7 @@ anymore, or they are an inactive member.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">131</span>
+    <span class="phpdocumentor-element-found-in__line">136</span>
 
     </aside>
 
@@ -1232,6 +1350,58 @@ is nulled</p>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_checkOrganComposition">
+        checkOrganComposition()
+        <a href="classes/Checker-Service-Checker.html#method_checkOrganComposition" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">398</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Checks that the organs that exist are made up the way the Articles of Association and the Internal Regulations
+require, i.e. that they have a chair, enough members, and no inactive members where the type does not have those.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">checkOrganComposition</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Model-Meeting.html"><abbr title="\Database\Model\Meeting">Meeting</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$meeting</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Checker-Model-Error.html"><abbr title="\Checker\Model\Error">Error</abbr></a>&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$meeting</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Database-Model-Meeting.html"><abbr title="\Database\Model\Meeting">Meeting</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>After which meeting do we do the validation</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Checker-Model-Error.html"><abbr title="\Checker\Model\Error">Error</abbr></a>&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_checkOrganFoundationMeetingType">
         checkOrganFoundationMeetingType()
         <a href="classes/Checker-Service-Checker.html#method_checkOrganFoundationMeetingType" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1240,7 +1410,7 @@ is nulled</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">254</span>
+    <span class="phpdocumentor-element-found-in__line">259</span>
 
     </aside>
 
@@ -1292,7 +1462,7 @@ e.g. ALV-Commissies are only created at an ALV</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">403</span>
+    <span class="phpdocumentor-element-found-in__line">500</span>
 
     </aside>
 
@@ -1341,7 +1511,7 @@ e.g. ALV-Commissies are only created at an ALV</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">86</span>
+    <span class="phpdocumentor-element-found-in__line">91</span>
 
     </aside>
 
@@ -1397,7 +1567,7 @@ e.g. ALV-Commissies are only created at an ALV</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">106</span>
+    <span class="phpdocumentor-element-found-in__line">111</span>
 
     </aside>
 
@@ -1450,6 +1620,7 @@ e.g. ALV-Commissies are only created at an ALV</p>
                             <li class="phpdocumentor-on-this-page-section__title">Properties</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
+                                                    <li class=""><a href="classes/Checker-Service-Checker.html#property_annulmentService">$annulmentService</a></li>
                                                     <li class=""><a href="classes/Checker-Service-Checker.html#property_config">$config</a></li>
                                                     <li class=""><a href="classes/Checker-Service-Checker.html#property_installationService">$installationService</a></li>
                                                     <li class=""><a href="classes/Checker-Service-Checker.html#property_keyService">$keyService</a></li>
@@ -1465,6 +1636,7 @@ e.g. ALV-Commissies are only created at an ALV</p>
                 <ul class="phpdocumentor-list -clean">
                                             <li class=""><a href="classes/Checker-Service-Checker.html#method___construct">__construct()</a></li>
                                             <li class=""><a href="classes/Checker-Service-Checker.html#method_check">check()</a></li>
+                                            <li class=""><a href="classes/Checker-Service-Checker.html#method_checkAnnulments">checkAnnulments()</a></li>
                                             <li class=""><a href="classes/Checker-Service-Checker.html#method_checkAuthenticationKeys">checkAuthenticationKeys()</a></li>
                                             <li class=""><a href="classes/Checker-Service-Checker.html#method_checkDischarges">checkDischarges()</a></li>
                                             <li class=""><a href="classes/Checker-Service-Checker.html#method_checkKeyGrantingDuration">checkKeyGrantingDuration()</a></li>
@@ -1472,6 +1644,7 @@ e.g. ALV-Commissies are only created at an ALV</p>
                                             <li class=""><a href="classes/Checker-Service-Checker.html#method_checkMembersExpiredButStillInOrgan">checkMembersExpiredButStillInOrgan()</a></li>
                                             <li class=""><a href="classes/Checker-Service-Checker.html#method_checkMembersHaveRolesButInactiveOrNotInOrgan">checkMembersHaveRolesButInactiveOrNotInOrgan()</a></li>
                                             <li class=""><a href="classes/Checker-Service-Checker.html#method_checkMembersInNonExistingOrgans">checkMembersInNonExistingOrgans()</a></li>
+                                            <li class=""><a href="classes/Checker-Service-Checker.html#method_checkOrganComposition">checkOrganComposition()</a></li>
                                             <li class=""><a href="classes/Checker-Service-Checker.html#method_checkOrganFoundationMeetingType">checkOrganFoundationMeetingType()</a></li>
                                             <li class=""><a href="classes/Checker-Service-Checker.html#method_getExpiration">getExpiration()</a></li>
                                             <li class=""><a href="classes/Checker-Service-Checker.html#method_handleMeetingErrors">handleMeetingErrors()</a></li>

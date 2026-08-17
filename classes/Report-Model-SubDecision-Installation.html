@@ -422,6 +422,13 @@
 <dd>Clears the discharge, if it exists.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Report-Model-SubDecision-Installation.html#method_clearOrganMember">clearOrganMember()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Forget what was derived from this subdecision, because it no longer exists.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Report-Model-SubDecision.html#method_getContentEN">getContentEN()</a>
     <span>
                                 &nbsp;: string    </span>
@@ -567,6 +574,13 @@
                                 &nbsp;: void    </span>
 </dt>
 <dd>Set the member.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Report-Model-SubDecision-Installation.html#method_setOrganMember">setOrganMember()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Set the organ member reference.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Report-Model-SubDecision.html#method_setSequence">setSequence()</a>
@@ -944,6 +958,43 @@ this is not null or need to specify an inverse side can do so using an associati
         </div>
     
     
+    
+    
+
+        
+    
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_clearOrganMember">
+        clearOrganMember()
+        <a href="classes/Report-Model-SubDecision-Installation.html#method_clearOrganMember" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision/Installation.php"><a href="files/module-report-src-model-subdecision-installation.html"><abbr title="module/Report/src/Model/SubDecision/Installation.php">Installation.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">164</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Forget what was derived from this subdecision, because it no longer exists.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">clearOrganMember</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Leaves the property uninitialised again, which is how the rest of the code recognises that there is nothing.</p>
+</section>
+
     
     
 
@@ -1409,7 +1460,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision/Installation.php"><a href="files/module-report-src-model-subdecision-installation.html"><abbr title="module/Report/src/Model/SubDecision/Installation.php">Installation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">151</span>
+    <span class="phpdocumentor-element-found-in__line">172</span>
 
     </aside>
 
@@ -1833,6 +1884,54 @@ this is not null or need to specify an inverse side can do so using an associati
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_setOrganMember">
+        setOrganMember()
+        <a href="classes/Report-Model-SubDecision-Installation.html#method_setOrganMember" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision/Installation.php"><a href="files/module-report-src-model-subdecision-installation.html"><abbr title="module/Report/src/Model/SubDecision/Installation.php">Installation.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">154</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Set the organ member reference.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setOrganMember</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Report-Model-OrganMember.html"><abbr title="\Report\Model\OrganMember">OrganMember</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$organMember</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Kept in step with the owning side, so that a member only just derived from this installation can be found right
+away, without having to go through the database for it.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$organMember</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Report-Model-OrganMember.html"><abbr title="\Report\Model\OrganMember">OrganMember</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_setSequence">
         setSequence()
         <a href="classes/Report-Model-SubDecision.html#method_setSequence" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1907,6 +2006,7 @@ this is not null or need to specify an inverse side can do so using an associati
                 <ul class="phpdocumentor-list -clean">
                                             <li class=""><a href="classes/Report-Model-SubDecision-Installation.html#method___construct">__construct()</a></li>
                                             <li class=""><a href="classes/Report-Model-SubDecision-Installation.html#method_clearDischarge">clearDischarge()</a></li>
+                                            <li class=""><a href="classes/Report-Model-SubDecision-Installation.html#method_clearOrganMember">clearOrganMember()</a></li>
                                             <li class=""><a href="classes/Report-Model-SubDecision.html#method_getContentEN">getContentEN()</a></li>
                                             <li class=""><a href="classes/Report-Model-SubDecision.html#method_getContentNL">getContentNL()</a></li>
                                             <li class=""><a href="classes/Report-Model-SubDecision.html#method_getDecision">getDecision()</a></li>
@@ -1928,6 +2028,7 @@ this is not null or need to specify an inverse side can do so using an associati
                                             <li class=""><a href="classes/Report-Model-SubDecision-FoundationReference.html#method_setFoundation">setFoundation()</a></li>
                                             <li class=""><a href="classes/Report-Model-SubDecision-Installation.html#method_setFunction">setFunction()</a></li>
                                             <li class=""><a href="classes/Report-Model-SubDecision-Installation.html#method_setMember">setMember()</a></li>
+                                            <li class=""><a href="classes/Report-Model-SubDecision-Installation.html#method_setOrganMember">setOrganMember()</a></li>
                                             <li class=""><a href="classes/Report-Model-SubDecision.html#method_setSequence">setSequence()</a></li>
                                     </ul>
             </li>

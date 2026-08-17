@@ -411,6 +411,13 @@
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Report-Model-SubDecision-Foundation.html#method_clearOrgan">clearOrgan()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Forget what was derived from this subdecision, because it no longer exists.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Report-Model-SubDecision-Foundation.html#method_getAbbr">getAbbr()</a>
     <span>
                                 &nbsp;: string    </span>
@@ -542,6 +549,13 @@
                                 &nbsp;: void    </span>
 </dt>
 <dd>Set the name.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Report-Model-SubDecision-Foundation.html#method_setOrgan">setOrgan()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Set the referenced organ.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Report-Model-SubDecision-Foundation.html#method_setOrganType">setOrganType()</a>
@@ -953,6 +967,43 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_clearOrgan">
+        clearOrgan()
+        <a href="classes/Report-Model-SubDecision-Foundation.html#method_clearOrgan" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision/Foundation.php"><a href="files/module-report-src-model-subdecision-foundation.html"><abbr title="module/Report/src/Model/SubDecision/Foundation.php">Foundation.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">168</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Forget what was derived from this subdecision, because it no longer exists.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">clearOrgan</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Leaves the property uninitialised again, which is how the rest of the code recognises that there is nothing.</p>
+</section>
+
+    
+    
+
+        
+    
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getAbbr">
         getAbbr()
         <a href="classes/Report-Model-SubDecision-Foundation.html#method_getAbbr" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1312,7 +1363,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision/Foundation.php"><a href="files/module-report-src-model-subdecision-foundation.html"><abbr title="module/Report/src/Model/SubDecision/Foundation.php">Foundation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">155</span>
+    <span class="phpdocumentor-element-found-in__line">176</span>
 
     </aside>
 
@@ -1724,6 +1775,54 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_setOrgan">
+        setOrgan()
+        <a href="classes/Report-Model-SubDecision-Foundation.html#method_setOrgan" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision/Foundation.php"><a href="files/module-report-src-model-subdecision-foundation.html"><abbr title="module/Report/src/Model/SubDecision/Foundation.php">Foundation.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">158</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Set the referenced organ.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setOrgan</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Report-Model-Organ.html"><abbr title="\Report\Model\Organ">Organ</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$organ</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Kept in step with the owning side, so that an organ only just derived from this foundation can be found right
+away, without having to go through the database for it.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$organ</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Report-Model-Organ.html"><abbr title="\Report\Model\Organ">Organ</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_setOrganType">
         setOrganType()
         <a href="classes/Report-Model-SubDecision-Foundation.html#method_setOrganType" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1867,7 +1966,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision/Foundation.php"><a href="files/module-report-src-model-subdecision-foundation.html"><abbr title="module/Report/src/Model/SubDecision/Foundation.php">Foundation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">176</span>
+    <span class="phpdocumentor-element-found-in__line">197</span>
 
     </aside>
 
@@ -1929,6 +2028,7 @@
             <li>
                 <ul class="phpdocumentor-list -clean">
                                             <li class=""><a href="classes/Report-Model-SubDecision-Foundation.html#method___construct">__construct()</a></li>
+                                            <li class=""><a href="classes/Report-Model-SubDecision-Foundation.html#method_clearOrgan">clearOrgan()</a></li>
                                             <li class=""><a href="classes/Report-Model-SubDecision-Foundation.html#method_getAbbr">getAbbr()</a></li>
                                             <li class=""><a href="classes/Report-Model-SubDecision.html#method_getContentEN">getContentEN()</a></li>
                                             <li class=""><a href="classes/Report-Model-SubDecision.html#method_getContentNL">getContentNL()</a></li>
@@ -1948,6 +2048,7 @@
                                             <li class=""><a href="classes/Report-Model-SubDecision.html#method_setContentNL">setContentNL()</a></li>
                                             <li class=""><a href="classes/Report-Model-SubDecision.html#method_setDecision">setDecision()</a></li>
                                             <li class=""><a href="classes/Report-Model-SubDecision-Foundation.html#method_setName">setName()</a></li>
+                                            <li class=""><a href="classes/Report-Model-SubDecision-Foundation.html#method_setOrgan">setOrgan()</a></li>
                                             <li class=""><a href="classes/Report-Model-SubDecision-Foundation.html#method_setOrganType">setOrganType()</a></li>
                                             <li class=""><a href="classes/Report-Model-SubDecision-Foundation.html#method_setPurpose">setPurpose()</a></li>
                                             <li class=""><a href="classes/Report-Model-SubDecision.html#method_setSequence">setSequence()</a></li>
