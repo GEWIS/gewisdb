@@ -47,10 +47,14 @@ schema_dump() {
         return
     fi
 
+    # `./orm` picks its entity manager from EM_ALIAS, not from --object-manager: see the getenv('EM_ALIAS') block in
+    # the entrypoint. The migrations commands DoctrineORMModule registers do honour --object-manager (which is why
+    # `make migrate` works), but orm:schema-tool:create resolves the plain `em` console helper, so passing the flag
+    # here silently dumped orm_default twice. The guard in capture.sh exists to stop that returning.
     local alias="orm_default"
     [ "${em}" = report ] && alias="orm_report"
-    docker compose exec -u www-data -T web ./orm orm:schema-tool:create --dump-sql \
-        --object-manager "doctrine.entitymanager.${alias}" 2>/dev/null
+    docker compose exec -e "EM_ALIAS=${alias}" -u www-data -T web \
+        ./orm orm:schema-tool:create --dump-sql 2>/dev/null
 }
 
 # --- database ----------------------------------------------------------------

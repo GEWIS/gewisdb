@@ -29,6 +29,14 @@ echo "--> schema: dumping DDL per entity manager"
 schema_dump default > "${OUT}/schema/default.sql"
 schema_dump report  > "${OUT}/schema/report.sql"
 
+# The two entity managers map disjoint sets of tables, so identical dumps mean the manager selection silently fell
+# back to the default rather than that nothing changed. That failure is invisible in a diff — both files stay stable,
+# and the ReportDB schema simply stops being checked — so it has to be caught here.
+if cmp -s "${OUT}/schema/default.sql" "${OUT}/schema/report.sql"; then
+    echo "!! schema/default.sql and schema/report.sql are identical — entity manager selection is broken" >&2
+    exit 1
+fi
+
 # --- reportdb projection -----------------------------------------------------
 # Regenerate the report from scratch and dump what it produced. One diff covers every sub-decision type flowing through
 # the Database -> ReportDB projection, which is the part of the system a port can break invisibly.
