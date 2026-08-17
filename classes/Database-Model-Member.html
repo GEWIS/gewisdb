@@ -479,6 +479,13 @@ when deleting a member and cannot be altered via the interface.</dd>
 <dd>RenewalLinks of this member.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/Database-Model-Member.html#property_studentNumber">$studentNumber</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>TU/e student number.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/Database-Model-Member.html#property_study">$study</a>
     <span>
                         &nbsp;: <a href="classes/Database-Model-Enums-Studies.html"><abbr title="\Database\Model\Enums\Studies">Studies</abbr></a>            </span>
@@ -491,13 +498,6 @@ when deleting a member and cannot be altered via the interface.</dd>
                         &nbsp;: string|null            </span>
 </dt>
 <dd>If the member receives a &#039;supremum&#039;</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a class="" href="classes/Database-Model-Member.html#property_tueUsername">$tueUsername</a>
-    <span>
-                        &nbsp;: string|null            </span>
-</dt>
-<dd>TU/e username.</dd>
 
     </dl>
 
@@ -730,6 +730,13 @@ when deleting a member and cannot be altered via the interface.</dd>
 <dd>Get renewal links of a member</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Database-Model-Member.html#method_getStudentNumber">getStudentNumber()</a>
+    <span>
+                                &nbsp;: string|null    </span>
+</dt>
+<dd>Get the TU/e student number.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-Member.html#method_getStudy">getStudy()</a>
     <span>
                                 &nbsp;: <a href="classes/Database-Model-Enums-Studies.html"><abbr title="\Database\Model\Enums\Studies">Studies</abbr></a>    </span>
@@ -742,13 +749,6 @@ when deleting a member and cannot be altered via the interface.</dd>
                                 &nbsp;: string|null    </span>
 </dt>
 <dd>Get if the member wants a supremum.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Model-Member.html#method_getTueUsername">getTueUsername()</a>
-    <span>
-                                &nbsp;: string|null    </span>
-</dt>
-<dd>Get the TU/e username.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-Member.html#method_hasActiveRenewalLink">hasActiveRenewalLink()</a>
@@ -854,6 +854,13 @@ when deleting a member and cannot be altered via the interface.</dd>
 <dd>Set the student address.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Database-Model-Member.html#method_setStudentNumber">setStudentNumber()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Set the TU/e student number.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-Member.html#method_setStudy">setStudy()</a>
     <span>
                                 &nbsp;: void    </span>
@@ -866,13 +873,6 @@ when deleting a member and cannot be altered via the interface.</dd>
                                 &nbsp;: void    </span>
 </dt>
 <dd>Set if the member wants a supremum.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Model-Member.html#method_setTueUsername">setTueUsername()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-<dd>Set the TU/e username.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-Member.html#method_toArray">toArray()</a>
@@ -1927,6 +1927,61 @@ deleted members and members that are deceased but whose profile should be kept.<
             -private
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_studentNumber">
+        $studentNumber
+        <a href="classes/Database-Model-Member.html#property_studentNumber" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">75</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">TU/e student number.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$studentNumber</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+    
+    
+    
+
+        
+            <section class="phpdocumentor-attributes">
+            <h5 class="phpdocumentor-elements__header" id="property_studentNumber_attributes">
+                Attributes <a href="classes/Database-Model-Member.html#property_studentNumber_attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+            </h5>
+                            <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;string&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $nullable: true
+    </dd>
+    </dl>
+                    </section>
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_study">
         $study
         <a href="classes/Database-Model-Member.html#property_study" class="headerlink"><i class="fas fa-link"></i></a>
@@ -2010,61 +2065,6 @@ deleted members and members that are deceased but whose profile should be kept.<
             <section class="phpdocumentor-attributes">
             <h5 class="phpdocumentor-elements__header" id="property_supremum_attributes">
                 Attributes <a href="classes/Database-Model-Member.html#property_supremum_attributes" class="headerlink"><i class="fas fa-link"></i></a>
-
-            </h5>
-                            <dl class="phpdocumentor-argument-list">
-    <dt class="phpdocumentor-argument-list__entry">
-        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
-    </dt>
-        <dd class="phpdocumentor-argument-list__entry">
-        $type: &#039;string&#039;
-    </dd>
-        <dd class="phpdocumentor-argument-list__entry">
-        $nullable: true
-    </dd>
-    </dl>
-                    </section>
-        
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                                    "
->
-    <h4 class="phpdocumentor-element__name" id="property_tueUsername">
-        $tueUsername
-        <a href="classes/Database-Model-Member.html#property_tueUsername" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">75</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">TU/e username.</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">private</span>
-            <span class="phpdocumentor-signature__type">string|null</span>
-    <span class="phpdocumentor-signature__name">$tueUsername</span>
-     = <span class="phpdocumentor-signature__default-value">null</span></code>
-
-    
-    
-    
-
-        
-            <section class="phpdocumentor-attributes">
-            <h5 class="phpdocumentor-elements__header" id="property_tueUsername_attributes">
-                Attributes <a href="classes/Database-Model-Member.html#property_tueUsername_attributes" class="headerlink"><i class="fas fa-link"></i></a>
 
             </h5>
                             <dl class="phpdocumentor-argument-list">
@@ -3368,6 +3368,45 @@ deleted members and members that are deceased but whose profile should be kept.<
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getStudentNumber">
+        getStudentNumber()
+        <a href="classes/Database-Model-Member.html#method_getStudentNumber" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">426</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Get the TU/e student number.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getStudentNumber</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string|null</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getStudy">
         getStudy()
         <a href="classes/Database-Model-Member.html#method_getStudy" class="headerlink"><i class="fas fa-link"></i></a>
@@ -3424,45 +3463,6 @@ deleted members and members that are deceased but whose profile should be kept.<
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getSupremum</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-    
-
-        
-    
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">string|null</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getTueUsername">
-        getTueUsername()
-        <a href="classes/Database-Model-Member.html#method_getTueUsername" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">426</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Get the TU/e username.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getTueUsername</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -4152,6 +4152,51 @@ deleted members and members that are deceased but whose profile should be kept.<
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_setStudentNumber">
+        setStudentNumber()
+        <a href="classes/Database-Model-Member.html#method_setStudentNumber" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">434</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Set the TU/e student number.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setStudentNumber</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$studentNumber</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$studentNumber</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_setStudy">
         setStudy()
         <a href="classes/Database-Model-Member.html#method_setStudy" class="headerlink"><i class="fas fa-link"></i></a>
@@ -4223,51 +4268,6 @@ deleted members and members that are deceased but whose profile should be kept.<
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-argument-list__argument__name">$supremum</span>
-                : <span class="phpdocumentor-argument-list__argument__type">string|null</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-        
-    
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_setTueUsername">
-        setTueUsername()
-        <a href="classes/Database-Model-Member.html#method_setTueUsername" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">434</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Set the TU/e username.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setTueUsername</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$tueUsername</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-argument-list__argument__name">$tueUsername</span>
                 : <span class="phpdocumentor-argument-list__argument__type">string|null</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
@@ -4447,9 +4447,9 @@ In all other cases, the membership should be updated.</p>
                                                     <li class=""><a href="classes/Database-Model-Member.html#property_memberships">$memberships</a></li>
                                                     <li class=""><a href="classes/Database-Model-Member.html#property_middleName">$middleName</a></li>
                                                     <li class=""><a href="classes/Database-Model-Member.html#property_renewalLinks">$renewalLinks</a></li>
+                                                    <li class=""><a href="classes/Database-Model-Member.html#property_studentNumber">$studentNumber</a></li>
                                                     <li class=""><a href="classes/Database-Model-Member.html#property_study">$study</a></li>
                                                     <li class=""><a href="classes/Database-Model-Member.html#property_supremum">$supremum</a></li>
-                                                    <li class=""><a href="classes/Database-Model-Member.html#property_tueUsername">$tueUsername</a></li>
                                             </ul>
                 </li>
             
@@ -4488,9 +4488,9 @@ In all other cases, the membership should be updated.</p>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getMemberships">getMemberships()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getMiddleName">getMiddleName()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getRenewalLinks">getRenewalLinks()</a></li>
+                                            <li class=""><a href="classes/Database-Model-Member.html#method_getStudentNumber">getStudentNumber()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getStudy">getStudy()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getSupremum">getSupremum()</a></li>
-                                            <li class=""><a href="classes/Database-Model-Member.html#method_getTueUsername">getTueUsername()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_hasActiveRenewalLink">hasActiveRenewalLink()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_setAuthenticationKey">setAuthenticationKey()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_setBirth">setBirth()</a></li>
@@ -4506,9 +4506,9 @@ In all other cases, the membership should be updated.</p>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_setLidnr">setLidnr()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_setMiddleName">setMiddleName()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_setStudentAddress">setStudentAddress()</a></li>
+                                            <li class=""><a href="classes/Database-Model-Member.html#method_setStudentNumber">setStudentNumber()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_setStudy">setStudy()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_setSupremum">setSupremum()</a></li>
-                                            <li class=""><a href="classes/Database-Model-Member.html#method_setTueUsername">setTueUsername()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_toArray">toArray()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_unsetMemberships">unsetMemberships()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_computeMembershipEndDate">computeMembershipEndDate()</a></li>

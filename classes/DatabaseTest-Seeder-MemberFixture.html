@@ -444,8 +444,10 @@ cross-fixture wiring (e.g., organ installations in DecisionFixture).</dd>
     <span>
                                 &nbsp;: string    </span>
 </dt>
-<dd>Build a TU/e style student number (YYYYABCD) for a member who enrolled $yearsAgo years ago. $sequence is the
-trailing serial; it starts at 2 below because the student and prospective fixtures above already use serial 1.</dd>
+<dd>Build a TU/e student number: seven digits that satisfy the Dutch elfproef. The first six digits are derived from
+$sequence, the seventh is the check digit. $sequence starts at 2 below, because the student and prospective
+fixtures above use hardcoded numbers from the same range. Not every prefix has a single-digit check digit, in
+which case the next prefix in the block reserved for this sequence is used.</dd>
 
     </dl>
 
@@ -998,7 +1000,7 @@ cross-fixture wiring (e.g., organ installations in DecisionFixture).</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-                    <span class="phpdocumentor-signature__name">makeAttentionMember</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><abbr title="\Doctrine\Persistence\ObjectManager">ObjectManager</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$manager</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$initials</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$firstName</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$middleName</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$lastName</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><abbr title="\DateTime">DateTime</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$birth</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$email</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$tueUsername</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Model-Enums-Studies.html"><abbr title="\Database\Model\Enums\Studies">Studies</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$study</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">array&lt;int, <abbr title="array{0: \Application\Model\Enums\MembershipTypes, 1: \DateTime, 2: \DateTime}">DateTime}</abbr>&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$segments</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$hidden</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">false</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a></span></code>
+                    <span class="phpdocumentor-signature__name">makeAttentionMember</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><abbr title="\Doctrine\Persistence\ObjectManager">ObjectManager</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$manager</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$initials</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$firstName</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$middleName</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$lastName</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><abbr title="\DateTime">DateTime</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$birth</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$email</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$studentNumber</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Model-Enums-Studies.html"><abbr title="\Database\Model\Enums\Studies">Studies</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$study</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">array&lt;int, <abbr title="array{0: \Application\Model\Enums\MembershipTypes, 1: \DateTime, 2: \DateTime}">DateTime}</abbr>&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$segments</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$hidden</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">false</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1056,7 +1058,7 @@ cross-fixture wiring (e.g., organ installations in DecisionFixture).</p>
                 
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-argument-list__argument__name">$tueUsername</span>
+                <span class="phpdocumentor-argument-list__argument__name">$studentNumber</span>
                 : <span class="phpdocumentor-argument-list__argument__type">string|null</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
@@ -1111,16 +1113,18 @@ cross-fixture wiring (e.g., organ installations in DecisionFixture).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/test/Seeder/MemberFixture.php"><a href="files/module-database-test-seeder-memberfixture.html"><abbr title="module/Database/test/Seeder/MemberFixture.php">MemberFixture.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">608</span>
+    <span class="phpdocumentor-element-found-in__line">610</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Build a TU/e style student number (YYYYABCD) for a member who enrolled $yearsAgo years ago. $sequence is the
-trailing serial; it starts at 2 below because the student and prospective fixtures above already use serial 1.</p>
+        <p class="phpdocumentor-summary">Build a TU/e student number: seven digits that satisfy the Dutch elfproef. The first six digits are derived from
+$sequence, the seventh is the check digit. $sequence starts at 2 below, because the student and prospective
+fixtures above use hardcoded numbers from the same range. Not every prefix has a single-digit check digit, in
+which case the next prefix in the block reserved for this sequence is used.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-                    <span class="phpdocumentor-signature__name">studentNumber</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$yearsAgo</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$sequence</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+                    <span class="phpdocumentor-signature__name">studentNumber</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$sequence</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1128,13 +1132,6 @@ trailing serial; it starts at 2 below because the student and prospective fixtur
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-argument-list__argument__name">$yearsAgo</span>
-                : <span class="phpdocumentor-argument-list__argument__type">int</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-argument-list__argument__name">$sequence</span>
                 : <span class="phpdocumentor-argument-list__argument__type">int</span>

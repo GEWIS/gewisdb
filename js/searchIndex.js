@@ -3551,6 +3551,26 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Migrations-Version20260613120619.html#method_down"
         },                {
+            "fqsen": "\\Database\\Migrations\\Version20260817113219",
+            "name": "Version20260817113219",
+            "summary": "phpcs\u003Adisable\u0020Generic.Files.LineLength.TooLong\nphpcs\u003Adisable\u0020SlevomatCodingStandard.Functions.RequireMultiLineCall.RequiredMultiLineCall",
+            "url": "classes/Database-Migrations-Version20260817113219.html"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20260817113219\u003A\u003AgetDescription\u0028\u0029",
+            "name": "getDescription",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20260817113219.html#method_getDescription"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20260817113219\u003A\u003Aup\u0028\u0029",
+            "name": "up",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20260817113219.html#method_up"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20260817113219\u003A\u003Adown\u0028\u0029",
+            "name": "down",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20260817113219.html#method_down"
+        },                {
             "fqsen": "\\Database\\Command\\DeleteExpiredMembersCommand",
             "name": "DeleteExpiredMembersCommand",
             "summary": "",
@@ -4986,11 +5006,6 @@ Search.appendIndex(
             "summary": "Specification\u0020of\u0020input\u0020filter.",
             "url": "classes/Database-Form-Member.html#method_getInputFilterSpecification"
         },                {
-            "fqsen": "\\Database\\Form\\Member\u003A\u003AisNewTueUsernameValid\u0028\u0029",
-            "name": "isNewTueUsernameValid",
-            "summary": "",
-            "url": "classes/Database-Form-Member.html#method_isNewTueUsernameValid"
-        },                {
             "fqsen": "\\Database\\Form\\Member\u003A\u003AisOldEnough\u0028\u0029",
             "name": "isOldEnough",
             "summary": "",
@@ -5035,11 +5050,6 @@ Search.appendIndex(
             "name": "getInputFilterSpecification",
             "summary": "Specification\u0020of\u0020input\u0020filter.",
             "url": "classes/Database-Form-MemberEdit.html#method_getInputFilterSpecification"
-        },                {
-            "fqsen": "\\Database\\Form\\MemberEdit\u003A\u003AisNewTueUsernameValid\u0028\u0029",
-            "name": "isNewTueUsernameValid",
-            "summary": "",
-            "url": "classes/Database-Form-MemberEdit.html#method_isNewTueUsernameValid"
         },                {
             "fqsen": "\\Database\\Form\\MemberEdit\u003A\u003A\u0024translator",
             "name": "translator",
@@ -5325,6 +5335,56 @@ Search.appendIndex(
             "name": "messages",
             "summary": "",
             "url": "classes/Database-Form-Validator-BulkMemberIds.html#property_messages"
+        },                {
+            "fqsen": "\\Database\\Form\\Validator\\StudentNumber",
+            "name": "StudentNumber",
+            "summary": "Validates\u0020a\u0020TU\/e\u0020student\u0020number.\u0020A\u0020student\u0020number\u0020consists\u0020of\u0020seven\u0020digits\u0020and\u0020must\u0020satisfy\u0020the\u0020Dutch\u0020elfproef.",
+            "url": "classes/Database-Form-Validator-StudentNumber.html"
+        },                {
+            "fqsen": "\\Database\\Form\\Validator\\StudentNumber\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Database-Form-Validator-StudentNumber.html#method___construct"
+        },                {
+            "fqsen": "\\Database\\Form\\Validator\\StudentNumber\u003A\u003AisValid\u0028\u0029",
+            "name": "isValid",
+            "summary": "",
+            "url": "classes/Database-Form-Validator-StudentNumber.html#method_isValid"
+        },                {
+            "fqsen": "\\Database\\Form\\Validator\\StudentNumber\u003A\u003ApassesElfproef\u0028\u0029",
+            "name": "passesElfproef",
+            "summary": "The\u0020Dutch\u0020elfproef\u0020\u0028eleven\u0020test\u0029.\u0020Every\u0020digit\u0020is\u0020weighted\u0020by\u0020its\u0020position,\u0020counting\u0020down\u0020from\u0020the\u0020length\u0020of\u0020the\nnumber\u0020for\u0020the\u0020leftmost\u0020digit\u0020to\u00201\u0020for\u0020the\u0020rightmost\u0020digit.\u0020The\u0020number\u0020is\u0020valid\u0020if\u0020the\u0020sum\u0020of\u0020those\u0020products\u0020is\ndivisible\u0020by\u0020eleven.\u0020A\u0020number\u0020consisting\u0020of\u0020only\u0020zeroes\u0020trivially\u0020satisfies\u0020the\u0020elfproef,\u0020but\u0020is\u0020not\u0020a\u0020student\nnumber,\u0020so\u0020it\u0020is\u0020rejected.",
+            "url": "classes/Database-Form-Validator-StudentNumber.html#method_passesElfproef"
+        },                {
+            "fqsen": "\\Database\\Form\\Validator\\StudentNumber\u003A\u003AgetMessages\u0028\u0029",
+            "name": "getMessages",
+            "summary": "",
+            "url": "classes/Database-Form-Validator-StudentNumber.html#method_getMessages"
+        },                {
+            "fqsen": "\\Database\\Form\\Validator\\StudentNumber\u003A\u003AINVALID_FORMAT",
+            "name": "INVALID_FORMAT",
+            "summary": "",
+            "url": "classes/Database-Form-Validator-StudentNumber.html#constant_INVALID_FORMAT"
+        },                {
+            "fqsen": "\\Database\\Form\\Validator\\StudentNumber\u003A\u003AFAILS_ELFPROEF",
+            "name": "FAILS_ELFPROEF",
+            "summary": "",
+            "url": "classes/Database-Form-Validator-StudentNumber.html#constant_FAILS_ELFPROEF"
+        },                {
+            "fqsen": "\\Database\\Form\\Validator\\StudentNumber\u003A\u003ALENGTH",
+            "name": "LENGTH",
+            "summary": "Number\u0020of\u0020digits\u0020in\u0020a\u0020TU\/e\u0020student\u0020number.",
+            "url": "classes/Database-Form-Validator-StudentNumber.html#constant_LENGTH"
+        },                {
+            "fqsen": "\\Database\\Form\\Validator\\StudentNumber\u003A\u003A\u0024messages",
+            "name": "messages",
+            "summary": "",
+            "url": "classes/Database-Form-Validator-StudentNumber.html#property_messages"
+        },                {
+            "fqsen": "\\Database\\Form\\Validator\\StudentNumber\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Form-Validator-StudentNumber.html#property_translator"
         },                {
             "fqsen": "\\Database\\Hydrator\\Abolish",
             "name": "Abolish",
@@ -6166,10 +6226,10 @@ Search.appendIndex(
             "summary": "Find\u0020members\u0020without\u0020an\u0020email\u0020address.",
             "url": "classes/Database-Mapper-Member.html#method_findAttentionWithoutEmail"
         },                {
-            "fqsen": "\\Database\\Mapper\\Member\u003A\u003AfindAttentionWithoutStudentId\u0028\u0029",
-            "name": "findAttentionWithoutStudentId",
-            "summary": "Find\u0020ordinary\u0020members\u0020without\u0020a\u0020student\u0020ID.",
-            "url": "classes/Database-Mapper-Member.html#method_findAttentionWithoutStudentId"
+            "fqsen": "\\Database\\Mapper\\Member\u003A\u003AfindAttentionWithoutStudentNumber\u0028\u0029",
+            "name": "findAttentionWithoutStudentNumber",
+            "summary": "Find\u0020ordinary\u0020members\u0020without\u0020a\u0020student\u0020number.",
+            "url": "classes/Database-Mapper-Member.html#method_findAttentionWithoutStudentNumber"
         },                {
             "fqsen": "\\Database\\Mapper\\Member\u003A\u003AfindAttentionExpiring\u0028\u0029",
             "name": "findAttentionExpiring",
@@ -7226,10 +7286,10 @@ Search.appendIndex(
             "summary": "Member",
             "url": "classes/Database-Model-Enums-AttentionReasons.html#enumcase_MissingEmail"
         },                {
-            "fqsen": "\\Database\\Model\\Enums\\AttentionReasons\u003A\u003AMissingStudentIdOrdinary",
-            "name": "MissingStudentIdOrdinary",
+            "fqsen": "\\Database\\Model\\Enums\\AttentionReasons\u003A\u003AMissingStudentNumberOrdinary",
+            "name": "MissingStudentNumberOrdinary",
             "summary": "",
-            "url": "classes/Database-Model-Enums-AttentionReasons.html#enumcase_MissingStudentIdOrdinary"
+            "url": "classes/Database-Model-Enums-AttentionReasons.html#enumcase_MissingStudentNumberOrdinary"
         },                {
             "fqsen": "\\Database\\Model\\Enums\\AttentionReasons\u003A\u003AExpiringExternalActive",
             "name": "ExpiringExternalActive",
@@ -8376,15 +8436,15 @@ Search.appendIndex(
             "summary": "Get\u0020the\u0020generation\u0020of\u0020the\u0020member.",
             "url": "classes/Database-Model-Member.html#method_getGeneration"
         },                {
-            "fqsen": "\\Database\\Model\\Member\u003A\u003AgetTueUsername\u0028\u0029",
-            "name": "getTueUsername",
-            "summary": "Get\u0020the\u0020TU\/e\u0020username.",
-            "url": "classes/Database-Model-Member.html#method_getTueUsername"
+            "fqsen": "\\Database\\Model\\Member\u003A\u003AgetStudentNumber\u0028\u0029",
+            "name": "getStudentNumber",
+            "summary": "Get\u0020the\u0020TU\/e\u0020student\u0020number.",
+            "url": "classes/Database-Model-Member.html#method_getStudentNumber"
         },                {
-            "fqsen": "\\Database\\Model\\Member\u003A\u003AsetTueUsername\u0028\u0029",
-            "name": "setTueUsername",
-            "summary": "Set\u0020the\u0020TU\/e\u0020username.",
-            "url": "classes/Database-Model-Member.html#method_setTueUsername"
+            "fqsen": "\\Database\\Model\\Member\u003A\u003AsetStudentNumber\u0028\u0029",
+            "name": "setStudentNumber",
+            "summary": "Set\u0020the\u0020TU\/e\u0020student\u0020number.",
+            "url": "classes/Database-Model-Member.html#method_setStudentNumber"
         },                {
             "fqsen": "\\Database\\Model\\Member\u003A\u003AgetStudy\u0028\u0029",
             "name": "getStudy",
@@ -8606,10 +8666,10 @@ Search.appendIndex(
             "summary": "First\u0020name.",
             "url": "classes/Database-Model-Member.html#property_firstName"
         },                {
-            "fqsen": "\\Database\\Model\\Member\u003A\u003A\u0024tueUsername",
-            "name": "tueUsername",
-            "summary": "TU\/e\u0020username.",
-            "url": "classes/Database-Model-Member.html#property_tueUsername"
+            "fqsen": "\\Database\\Model\\Member\u003A\u003A\u0024studentNumber",
+            "name": "studentNumber",
+            "summary": "TU\/e\u0020student\u0020number.",
+            "url": "classes/Database-Model-Member.html#property_studentNumber"
         },                {
             "fqsen": "\\Database\\Model\\Member\u003A\u003A\u0024study",
             "name": "study",
@@ -8961,15 +9021,15 @@ Search.appendIndex(
             "summary": "Assemble\u0020the\u0020member\u0027s\u0020full\u0020name.",
             "url": "classes/Database-Model-ProspectiveMember.html#method_getFullName"
         },                {
-            "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003AgetTueUsername\u0028\u0029",
-            "name": "getTueUsername",
-            "summary": "Get\u0020the\u0020TU\/e\u0020username.",
-            "url": "classes/Database-Model-ProspectiveMember.html#method_getTueUsername"
+            "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003AgetStudentNumber\u0028\u0029",
+            "name": "getStudentNumber",
+            "summary": "Get\u0020the\u0020TU\/e\u0020student\u0020number.",
+            "url": "classes/Database-Model-ProspectiveMember.html#method_getStudentNumber"
         },                {
-            "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003AsetTueUsername\u0028\u0029",
-            "name": "setTueUsername",
-            "summary": "Set\u0020the\u0020TU\/e\u0020username.",
-            "url": "classes/Database-Model-ProspectiveMember.html#method_setTueUsername"
+            "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003AsetStudentNumber\u0028\u0029",
+            "name": "setStudentNumber",
+            "summary": "Set\u0020the\u0020TU\/e\u0020student\u0020number.",
+            "url": "classes/Database-Model-ProspectiveMember.html#method_setStudentNumber"
         },                {
             "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003AgetStudy\u0028\u0029",
             "name": "getStudy",
@@ -9136,10 +9196,10 @@ Search.appendIndex(
             "summary": "First\u0020name.",
             "url": "classes/Database-Model-ProspectiveMember.html#property_firstName"
         },                {
-            "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003A\u0024tueUsername",
-            "name": "tueUsername",
-            "summary": "TU\/e\u0020username.",
-            "url": "classes/Database-Model-ProspectiveMember.html#property_tueUsername"
+            "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003A\u0024studentNumber",
+            "name": "studentNumber",
+            "summary": "TU\/e\u0020student\u0020number.",
+            "url": "classes/Database-Model-ProspectiveMember.html#property_studentNumber"
         },                {
             "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003A\u0024study",
             "name": "study",
@@ -12083,7 +12143,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\DatabaseTest\\Seeder\\MemberFixture\u003A\u003AstudentNumber\u0028\u0029",
             "name": "studentNumber",
-            "summary": "Build\u0020a\u0020TU\/e\u0020style\u0020student\u0020number\u0020\u0028YYYYABCD\u0029\u0020for\u0020a\u0020member\u0020who\u0020enrolled\u0020\u0024yearsAgo\u0020years\u0020ago.\u0020\u0024sequence\u0020is\u0020the\ntrailing\u0020serial\u003B\u0020it\u0020starts\u0020at\u00202\u0020below\u0020because\u0020the\u0020student\u0020and\u0020prospective\u0020fixtures\u0020above\u0020already\u0020use\u0020serial\u00201.",
+            "summary": "Build\u0020a\u0020TU\/e\u0020student\u0020number\u003A\u0020seven\u0020digits\u0020that\u0020satisfy\u0020the\u0020Dutch\u0020elfproef.\u0020The\u0020first\u0020six\u0020digits\u0020are\u0020derived\u0020from\n\u0024sequence,\u0020the\u0020seventh\u0020is\u0020the\u0020check\u0020digit.\u0020\u0024sequence\u0020starts\u0020at\u00202\u0020below,\u0020because\u0020the\u0020student\u0020and\u0020prospective\nfixtures\u0020above\u0020use\u0020hardcoded\u0020numbers\u0020from\u0020the\u0020same\u0020range.\u0020Not\u0020every\u0020prefix\u0020has\u0020a\u0020single\u002Ddigit\u0020check\u0020digit,\u0020in\nwhich\u0020case\u0020the\u0020next\u0020prefix\u0020in\u0020the\u0020block\u0020reserved\u0020for\u0020this\u0020sequence\u0020is\u0020used.",
             "url": "classes/DatabaseTest-Seeder-MemberFixture.html#method_studentNumber"
         },                {
             "fqsen": "\\DatabaseTest\\Seeder\\MemberFixture\u003A\u003AREF_MEMBER_STUDENT",

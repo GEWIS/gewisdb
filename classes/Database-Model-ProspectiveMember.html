@@ -477,18 +477,18 @@
 <dd>Street.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/Database-Model-ProspectiveMember.html#property_studentNumber">$studentNumber</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>TU/e student number.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/Database-Model-ProspectiveMember.html#property_study">$study</a>
     <span>
                         &nbsp;: <a href="classes/Database-Model-Enums-Studies.html"><abbr title="\Database\Model\Enums\Studies">Studies</abbr></a>            </span>
 </dt>
 <dd>Study of the member.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a class="" href="classes/Database-Model-ProspectiveMember.html#property_tueUsername">$tueUsername</a>
-    <span>
-                        &nbsp;: string|null            </span>
-</dt>
-<dd>TU/e username.</dd>
 
     </dl>
 
@@ -668,18 +668,18 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</dd>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Database-Model-ProspectiveMember.html#method_getStudentNumber">getStudentNumber()</a>
+    <span>
+                                &nbsp;: string|null    </span>
+</dt>
+<dd>Get the TU/e student number.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-ProspectiveMember.html#method_getStudy">getStudy()</a>
     <span>
                                 &nbsp;: <a href="classes/Database-Model-Enums-Studies.html"><abbr title="\Database\Model\Enums\Studies">Studies</abbr></a>    </span>
 </dt>
 <dd>Get the study.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Model-ProspectiveMember.html#method_getTueUsername">getTueUsername()</a>
-    <span>
-                                &nbsp;: string|null    </span>
-</dt>
-<dd>Get the TU/e username.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-ProspectiveMember.html#method_hasPaid">hasPaid()</a>
@@ -766,6 +766,13 @@ is &#039;PAID&#039;.</dd>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Database-Model-ProspectiveMember.html#method_setStudentNumber">setStudentNumber()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Set the TU/e student number.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-ProspectiveMember.html#method_setStudy">setStudy()</a>
     <span>
                                 &nbsp;: void    </span>
@@ -773,16 +780,9 @@ is &#039;PAID&#039;.</dd>
 <dd>Set the study (null should never happen, but made consistent with Member)</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Model-ProspectiveMember.html#method_setTueUsername">setTueUsername()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-<dd>Set the TU/e username.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-ProspectiveMember.html#method_toArray">toArray()</a>
     <span>
-                                &nbsp;: <abbr title="array{lidnr: int, email: string, fullName: string, lastName: string, middleName: string, initials: string, firstName: string, tueUsername: ?string, study: string, birth: string, lists: string[], address: array{type: \Application\Model\Enums\AddressTypes, country: \Application\Model\Enums\PostalRegions, street: string, number: string, city: string, postalCode: string, phone: string}, agreed: string, agreedStripe: string}">PostalRegions, street: string, number: string, city: string, postalCode: string, phone: string}, agreed: string, agreedStripe: string}</abbr>    </span>
+                                &nbsp;: <abbr title="array{lidnr: int, email: string, fullName: string, lastName: string, middleName: string, initials: string, firstName: string, studentNumber: ?string, study: string, birth: string, lists: string[], address: array{type: \Application\Model\Enums\AddressTypes, country: \Application\Model\Enums\PostalRegions, street: string, number: string, city: string, postalCode: string, phone: string}, agreed: string, agreedStripe: string}">PostalRegions, street: string, number: string, city: string, postalCode: string, phone: string}, agreed: string, agreedStripe: string}</abbr>    </span>
 </dt>
 <dd>Convert to array.</dd>
 
@@ -1784,6 +1784,61 @@ is &#039;PAID&#039;.</dd>
             -private
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_studentNumber">
+        $studentNumber
+        <a href="classes/Database-Model-ProspectiveMember.html#property_studentNumber" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">71</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">TU/e student number.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$studentNumber</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+    
+    
+    
+
+        
+            <section class="phpdocumentor-attributes">
+            <h5 class="phpdocumentor-elements__header" id="property_studentNumber_attributes">
+                Attributes <a href="classes/Database-Model-ProspectiveMember.html#property_studentNumber_attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+            </h5>
+                            <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;string&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $nullable: true
+    </dd>
+    </dl>
+                    </section>
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_study">
         $study
         <a href="classes/Database-Model-ProspectiveMember.html#property_study" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1823,61 +1878,6 @@ is &#039;PAID&#039;.</dd>
     </dt>
         <dd class="phpdocumentor-argument-list__entry">
         $enumType: \Database\Model\Enums\Studies::class
-    </dd>
-    </dl>
-                    </section>
-        
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                                    "
->
-    <h4 class="phpdocumentor-element__name" id="property_tueUsername">
-        $tueUsername
-        <a href="classes/Database-Model-ProspectiveMember.html#property_tueUsername" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">71</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">TU/e username.</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">private</span>
-            <span class="phpdocumentor-signature__type">string|null</span>
-    <span class="phpdocumentor-signature__name">$tueUsername</span>
-     = <span class="phpdocumentor-signature__default-value">null</span></code>
-
-    
-    
-    
-
-        
-            <section class="phpdocumentor-attributes">
-            <h5 class="phpdocumentor-elements__header" id="property_tueUsername_attributes">
-                Attributes <a href="classes/Database-Model-ProspectiveMember.html#property_tueUsername_attributes" class="headerlink"><i class="fas fa-link"></i></a>
-
-            </h5>
-                            <dl class="phpdocumentor-argument-list">
-    <dt class="phpdocumentor-argument-list__entry">
-        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
-    </dt>
-        <dd class="phpdocumentor-argument-list__entry">
-        $type: &#039;string&#039;
-    </dd>
-        <dd class="phpdocumentor-argument-list__entry">
-        $nullable: true
     </dd>
     </dl>
                     </section>
@@ -2890,6 +2890,45 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getStudentNumber">
+        getStudentNumber()
+        <a href="classes/Database-Model-ProspectiveMember.html#method_getStudentNumber" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">294</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Get the TU/e student number.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getStudentNumber</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string|null</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getStudy">
         getStudy()
         <a href="classes/Database-Model-ProspectiveMember.html#method_getStudy" class="headerlink"><i class="fas fa-link"></i></a>
@@ -2920,45 +2959,6 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Enums-Studies.html"><abbr title="\Database\Model\Enums\Studies">Studies</abbr></a></span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getTueUsername">
-        getTueUsername()
-        <a href="classes/Database-Model-ProspectiveMember.html#method_getTueUsername" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">294</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Get the TU/e username.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getTueUsername</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-    
-
-        
-    
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">string|null</span>
             </section>
 
 </article>
@@ -3502,6 +3502,51 @@ is &#039;PAID&#039;.</p>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_setStudentNumber">
+        setStudentNumber()
+        <a href="classes/Database-Model-ProspectiveMember.html#method_setStudentNumber" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">302</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Set the TU/e student number.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setStudentNumber</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$studentNumber</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$studentNumber</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_setStudy">
         setStudy()
         <a href="classes/Database-Model-ProspectiveMember.html#method_setStudy" class="headerlink"><i class="fas fa-link"></i></a>
@@ -3547,51 +3592,6 @@ is &#039;PAID&#039;.</p>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_setTueUsername">
-        setTueUsername()
-        <a href="classes/Database-Model-ProspectiveMember.html#method_setTueUsername" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">302</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Set the TU/e username.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setTueUsername</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$tueUsername</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-argument-list__argument__name">$tueUsername</span>
-                : <span class="phpdocumentor-argument-list__argument__type">string|null</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-        
-    
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_toArray">
         toArray()
         <a href="classes/Database-Model-ProspectiveMember.html#method_toArray" class="headerlink"><i class="fas fa-link"></i></a>
@@ -3608,7 +3608,7 @@ is &#039;PAID&#039;.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">toArray</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="array{lidnr: int, email: string, fullName: string, lastName: string, middleName: string, initials: string, firstName: string, tueUsername: ?string, study: string, birth: string, lists: string[], address: array{type: \Application\Model\Enums\AddressTypes, country: \Application\Model\Enums\PostalRegions, street: string, number: string, city: string, postalCode: string, phone: string}, agreed: string, agreedStripe: string}">PostalRegions, street: string, number: string, city: string, postalCode: string, phone: string}, agreed: string, agreedStripe: string}</abbr></span></code>
+                    <span class="phpdocumentor-signature__name">toArray</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="array{lidnr: int, email: string, fullName: string, lastName: string, middleName: string, initials: string, firstName: string, studentNumber: ?string, study: string, birth: string, lists: string[], address: array{type: \Application\Model\Enums\AddressTypes, country: \Application\Model\Enums\PostalRegions, street: string, number: string, city: string, postalCode: string, phone: string}, agreed: string, agreedStripe: string}">PostalRegions, street: string, number: string, city: string, postalCode: string, phone: string}, agreed: string, agreedStripe: string}</abbr></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -3621,7 +3621,7 @@ is &#039;PAID&#039;.</p>
     
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><abbr title="array{lidnr: int, email: string, fullName: string, lastName: string, middleName: string, initials: string, firstName: string, tueUsername: ?string, study: string, birth: string, lists: string[], address: array{type: \Application\Model\Enums\AddressTypes, country: \Application\Model\Enums\PostalRegions, street: string, number: string, city: string, postalCode: string, phone: string}, agreed: string, agreedStripe: string}">PostalRegions, street: string, number: string, city: string, postalCode: string, phone: string}, agreed: string, agreedStripe: string}</abbr></span>
+        <span class="phpdocumentor-signature__response_type"><abbr title="array{lidnr: int, email: string, fullName: string, lastName: string, middleName: string, initials: string, firstName: string, studentNumber: ?string, study: string, birth: string, lists: string[], address: array{type: \Application\Model\Enums\AddressTypes, country: \Application\Model\Enums\PostalRegions, street: string, number: string, city: string, postalCode: string, phone: string}, agreed: string, agreedStripe: string}">PostalRegions, street: string, number: string, city: string, postalCode: string, phone: string}, agreed: string, agreedStripe: string}</abbr></span>
             </section>
 
 </article>
@@ -3703,8 +3703,8 @@ is &#039;PAID&#039;.</p>
                                                     <li class=""><a href="classes/Database-Model-ProspectiveMember.html#property_phone">$phone</a></li>
                                                     <li class=""><a href="classes/Database-Model-ProspectiveMember.html#property_postalCode">$postalCode</a></li>
                                                     <li class=""><a href="classes/Database-Model-ProspectiveMember.html#property_street">$street</a></li>
+                                                    <li class=""><a href="classes/Database-Model-ProspectiveMember.html#property_studentNumber">$studentNumber</a></li>
                                                     <li class=""><a href="classes/Database-Model-ProspectiveMember.html#property_study">$study</a></li>
-                                                    <li class=""><a href="classes/Database-Model-ProspectiveMember.html#property_tueUsername">$tueUsername</a></li>
                                             </ul>
                 </li>
             
@@ -3736,8 +3736,8 @@ is &#039;PAID&#039;.</p>
                                             <li class=""><a href="classes/Database-Model-ProspectiveMember.html#method_getPhone">getPhone()</a></li>
                                             <li class=""><a href="classes/Database-Model-ProspectiveMember.html#method_getPostalCode">getPostalCode()</a></li>
                                             <li class=""><a href="classes/Database-Model-ProspectiveMember.html#method_getStreet">getStreet()</a></li>
+                                            <li class=""><a href="classes/Database-Model-ProspectiveMember.html#method_getStudentNumber">getStudentNumber()</a></li>
                                             <li class=""><a href="classes/Database-Model-ProspectiveMember.html#method_getStudy">getStudy()</a></li>
-                                            <li class=""><a href="classes/Database-Model-ProspectiveMember.html#method_getTueUsername">getTueUsername()</a></li>
                                             <li class=""><a href="classes/Database-Model-ProspectiveMember.html#method_hasPaid">hasPaid()</a></li>
                                             <li class=""><a href="classes/Database-Model-ProspectiveMember.html#method_setAddress">setAddress()</a></li>
                                             <li class=""><a href="classes/Database-Model-ProspectiveMember.html#method_setBirth">setBirth()</a></li>
@@ -3750,8 +3750,8 @@ is &#039;PAID&#039;.</p>
                                             <li class=""><a href="classes/Database-Model-ProspectiveMember.html#method_setMiddleName">setMiddleName()</a></li>
                                             <li class=""><a href="classes/Database-Model-ProspectiveMember.html#method_setPaid">setPaid()</a></li>
                                             <li class=""><a href="classes/Database-Model-ProspectiveMember.html#method_setPaymentLink">setPaymentLink()</a></li>
+                                            <li class=""><a href="classes/Database-Model-ProspectiveMember.html#method_setStudentNumber">setStudentNumber()</a></li>
                                             <li class=""><a href="classes/Database-Model-ProspectiveMember.html#method_setStudy">setStudy()</a></li>
-                                            <li class=""><a href="classes/Database-Model-ProspectiveMember.html#method_setTueUsername">setTueUsername()</a></li>
                                             <li class=""><a href="classes/Database-Model-ProspectiveMember.html#method_toArray">toArray()</a></li>
                                             <li class=""><a href="classes/Database-Model-ProspectiveMember.html#method_getLastCheckoutSessionState">getLastCheckoutSessionState()</a></li>
                                     </ul>
