@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-17 13:32+0200\n"
+"POT-Creation-Date: 2026-08-17 15:01+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -65,6 +65,14 @@ msgid "%d pending mailing list unsubscriptions"
 msgstr "%d geplande maillijst-afmeldingen"
 
 #, php-format
+msgid ""
+"%s %d.%d.%d has been annulled, but %s. When the term ended now follows from "
+"the Internal Regulations; record a discharge if one is needed."
+msgstr ""
+"%s %d.%d.%d is vernietigd, maar %s. Wanneer de termijn is geëindigd volgt nu "
+"uit het huishoudelijk reglement; leg een decharge vast als die nodig is."
+
+#, php-format
 msgid "%s %s member expiring soon"
 msgstr "%s %s lid verloopt binnenkort"
 
@@ -113,6 +121,12 @@ msgstr ""
 
 msgid "A TU/e student number consists of 7 digits."
 msgstr "Een TU/e-studentnummer bestaat uit 7 cijfers."
+
+msgid "A decision can only annul a decision taken before it."
+msgstr "Een besluit kan alleen een eerder genomen besluit vernietigen."
+
+msgid "A decision cannot annul itself."
+msgstr "Een besluit kan zichzelf niet vernietigen."
 
 msgid "ALV"
 msgstr "ALV"
@@ -233,6 +247,11 @@ msgstr "Akkoordverklaring"
 
 msgid "All API permissions"
 msgstr "Alle API-rechten"
+
+msgid "An annulling decision cannot be annulled, delete it instead."
+msgstr ""
+"Een vernietigend besluit kan niet vernietigd worden, verwijder het in plaats "
+"daarvan."
 
 msgid "An error occurred"
 msgstr "Er is een fout opgetreden"
@@ -682,6 +701,10 @@ msgstr ""
 
 msgid "Decision"
 msgstr "Besluit"
+
+#, php-format
+msgid "Decision %s %d.%d.%d cannot be annulled, because %s."
+msgstr "Besluit %s %d.%d.%d kan niet vernietigd worden, omdat %s."
 
 msgid "Decision Already Exists"
 msgstr "Besluit bestaat al"
@@ -1566,6 +1589,13 @@ msgstr "Lid verwijderen"
 msgid "Remove Prospective Member"
 msgstr "Verwijder toekomstig lid"
 
+msgid ""
+"Removing this annulment would restore a decision that later decisions have "
+"since overtaken."
+msgstr ""
+"Het verwijderen van deze vernietiging zou een besluit herstellen dat "
+"inmiddels door latere besluiten is ingehaald."
+
 msgid "Renew"
 msgstr "Verleng"
 
@@ -1846,6 +1876,12 @@ msgid ""
 msgstr ""
 "Deze functies zijn in het verleden gebruikt en kunnen niet langer "
 "geselecteerd worden"
+
+msgid "This decision does not exist."
+msgstr "Dit besluit bestaat niet."
+
+msgid "This decision has already been annulled."
+msgstr "Dit besluit is al vernietigd."
 
 msgid ""
 "This does not appear to be a valid TU/e student number. Please check it for "
@@ -2156,6 +2192,9 @@ msgstr ""
 "studentnummer kunt vinden. We gebruiken je studentnummer om te verifiëren "
 "dat je aan de faculteit van M&CS studeert."
 
+msgid "a related decision was annulled after this annulment was made"
+msgstr "een gerelateerd besluit is vernietigd na deze vernietiging"
+
 msgid "active"
 msgstr "actief"
 
@@ -2208,6 +2247,34 @@ msgstr "afgestudeerde"
 msgid "https://gewis.nl/association/regulations"
 msgstr "https://gewis.nl/nl/vereniging/reglementen"
 
+msgid "it was decided about again after this annulment was made"
+msgstr "er is na deze vernietiging opnieuw over besloten"
+
+#, php-format
+msgid "it would leave %s with fewer than %d active member(s)"
+msgstr "het zou %s met minder dan %d actieve leden achterlaten"
+
+#, php-format
+msgid "it would leave %s without a chair"
+msgstr "het zou %s zonder voorzitter achterlaten"
+
+#, php-format
+msgid ""
+"it would leave someone an inactive member of %s, which does not have those"
+msgstr "het zou iemand inactief lid van %s laten, en dat orgaan kent die niet"
+
+#, php-format
+msgid ""
+"it would leave someone with a function in %s without being an active member "
+"of it"
+msgstr ""
+"het zou iemand een functie in %s laten bekleden zonder daar actief lid van "
+"te zijn"
+
+#, php-format
+msgid "it would make someone an active and an inactive member of %s at once"
+msgstr "het zou iemand tegelijk actief en inactief lid van %s maken"
+
 msgid "mailing list subscriptions"
 msgstr "mailinglijst-registraties"
 
@@ -2216,6 +2283,9 @@ msgstr "lid"
 
 msgid "member address"
 msgstr "lid-adres"
+
+msgid "members were installed in the organ after it was abolished"
+msgstr "er zijn leden in het orgaan geïnstalleerd nadat het is opgeheven"
 
 msgid "membership expiration date"
 msgstr "einddatum lidmaatschap"
@@ -2262,6 +2332,48 @@ msgstr "verwijst naar %s"
 
 msgid "synced"
 msgstr "gesynchroniseerd"
+
+msgid "the board member was also discharged by another decision"
+msgstr "het bestuurslid is ook door een ander besluit gedechargeerd"
+
+msgid "the board member was also released by another decision"
+msgstr "het bestuurslid is ook door een ander besluit ontheven"
+
+msgid "the board member was discharged after being installed"
+msgstr "het bestuurslid is na de installatie gedechargeerd"
+
+msgid "the board member was discharged after being released"
+msgstr "het bestuurslid is na de ontheffing gedechargeerd"
+
+msgid "the board member was released after being installed"
+msgstr "het bestuurslid is na de installatie ontheven"
+
+msgid "the installation was prolonged after it was made"
+msgstr "de installatie is na het besluit verlengd"
+
+msgid "the installation was prolonged again afterwards"
+msgstr "de installatie is daarna opnieuw verlengd"
+
+msgid "the key code was also withdrawn by another decision"
+msgstr "de sleutelcode is ook door een ander besluit ingetrokken"
+
+msgid "the key code was withdrawn after it was granted"
+msgstr "de sleutelcode is na de uitgifte ingetrokken"
+
+msgid "the member was also discharged by another decision"
+msgstr "het lid is ook door een ander besluit gedechargeerd"
+
+msgid "the member was discharged after being installed"
+msgstr "het lid is na de installatie gedechargeerd"
+
+msgid "the member was discharged after being reappointed"
+msgstr "het lid is na de herbenoeming gedechargeerd"
+
+msgid "the organ is still referenced by other decisions"
+msgstr "er verwijzen nog andere besluiten naar het orgaan"
+
+msgid "the organ was also abolished by another decision"
+msgstr "het orgaan is ook door een ander besluit opgeheven"
 
 msgid "to be created"
 msgstr "aanmaken gepland"

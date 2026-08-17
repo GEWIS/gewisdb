@@ -146,6 +146,27 @@ class Installation extends FoundationReference
     }
 
     /**
+     * Set the organ member reference.
+     *
+     * Kept in step with the owning side, so that a member only just derived from this installation can be found right
+     * away, without having to go through the database for it.
+     */
+    public function setOrganMember(OrganMember $organMember): void
+    {
+        $this->organMember = $organMember;
+    }
+
+    /**
+     * Forget what was derived from this subdecision, because it no longer exists.
+     *
+     * Leaves the property uninitialised again, which is how the rest of the code recognises that there is nothing.
+     */
+    public function clearOrganMember(): void
+    {
+        unset($this->organMember);
+    }
+
+    /**
      * Get the organ member reference.
      */
     public function getOrganMember(): OrganMember

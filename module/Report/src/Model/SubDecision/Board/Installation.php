@@ -138,6 +138,27 @@ class Installation extends SubDecision
     }
 
     /**
+     * Set the board member decision.
+     *
+     * Kept in step with the owning side, so that a board member only just derived from this installation can be found
+     * right away, without having to go through the database for it.
+     */
+    public function setBoardMember(BoardMember $boardMember): void
+    {
+        $this->boardMember = $boardMember;
+    }
+
+    /**
+     * Forget what was derived from this subdecision, because it no longer exists.
+     *
+     * Leaves the property uninitialised again, which is how the rest of the code recognises that there is nothing.
+     */
+    public function clearBoardMember(): void
+    {
+        unset($this->boardMember);
+    }
+
+    /**
      * Get the board member decision.
      */
     public function getBoardMember(): BoardMember

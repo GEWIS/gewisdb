@@ -7,11 +7,13 @@ namespace Checker\Service;
 use Application\Model\Enums\MeetingTypes;
 use Application\Model\Enums\OrganTypes;
 use Checker\Model\Error as ErrorModel;
+use Checker\Service\Annulment as AnnulmentService;
 use Checker\Service\Installation as InstallationService;
 use Checker\Service\Key as KeyService;
 use Checker\Service\Meeting as MeetingService;
 use Checker\Service\Member as MemberService;
 use Checker\Service\Organ as OrganService;
+use Database\Model\Enums\InstallationFunctions;
 use Database\Model\Meeting as MeetingModel;
 use DateInterval;
 use DateTime;
@@ -31,6 +33,7 @@ class Checker
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function __construct(
+        private readonly AnnulmentService $annulmentService,
         private readonly InstallationService $installationService,
         private readonly KeyService $keyService,
         private readonly MeetingService $meetingService,
@@ -57,6 +60,8 @@ class Checker
                 $this->checkOrganFoundationMeetingType($meeting),
                 $this->checkKeyGrantingDuration($meeting),
                 $this->checkKeyWithdrawalTime($meeting),
+                $this->checkOrganComposition($meeting),
+                $this->checkAnnulments($meeting),
             );
 
             $message .= $this->handleMeetingErrors($meeting, $errors);
@@ -377,6 +382,98 @@ class Checker
             }
 
             $errors[] = new ErrorModel\KeyWithdrawnPastOriginalGranting($withdrawal);
+        }
+
+        return $errors;
+    }
+
+    /**
+     * Checks that the organs that exist are made up the way the Articles of Association and the Internal Regulations
+     * require, i.e. that they have a chair, enough members, and no inactive members where the type does not have those.
+     *
+     * @param MeetingModel $meeting After which meeting do we do the validation
+     *
+     * @return ErrorModel[]
+     */
+    public function checkOrganComposition(MeetingModel $meeting): array
+    {
+        $errors = [];
+        $organs = $this->organService->getAllOrganFoundations($meeting);
+        $installations = [];
+
+        foreach ($this->installationService->getAllInstallations($meeting) as $installation) {
+            $installations[$this->organService->getHash($installation->getFoundation())][] = $installation;
+        }
+
+        foreach ($organs as $hash => $organ) {
+            $type = $organ->getOrganType();
+            $members = [];
+            $chairs = [];
+
+            foreach ($installations[$hash] ?? [] as $installation) {
+                $function = $installation->getFunction();
+                $lidnr = $installation->getMember()->getLidnr();
+
+                if (InstallationFunctions::Member === $function) {
+                    $members[$lidnr] = $lidnr;
+                }
+
+                if (InstallationFunctions::Chair === $function) {
+                    $chairs[$lidnr] = $lidnr;
+                }
+
+                if (
+                    InstallationFunctions::InactiveMember !== $function
+                    || $type->allowsInactiveMembers()
+                ) {
+                    continue;
+                }
+
+                $errors[] = new ErrorModel\MemberInactiveInOrganWithoutInactiveMembers($meeting, $installation);
+            }
+
+            if (count($members) < $type->getMinimumMembers()) {
+                $errors[] = new ErrorModel\OrganTooSmall($meeting, $organ, count($members));
+            } elseif (
+                $type->requiresChair()
+                && [] === $chairs
+            ) {
+                // Only worth saying once an organ actually has people in it; an empty one is already reported as
+                // being too small.
+                $errors[] = new ErrorModel\OrganWithoutChair($meeting, $organ);
+            }
+        }
+
+        return $errors;
+    }
+
+    /**
+     * Checks that the annulments made during a meeting could have been made at all.
+     *
+     * These are turned down when a decision is entered, so anything found here predates that or was put in by hand.
+     *
+     * @param MeetingModel $meeting After which meeting do we do the validation
+     *
+     * @return ErrorModel[]
+     */
+    public function checkAnnulments(MeetingModel $meeting): array
+    {
+        $errors = [];
+
+        foreach ($this->annulmentService->getAnnulmentsAtMeeting($meeting) as $annulment) {
+            if ($this->annulmentService->annulsAnAnnulment($annulment)) {
+                $errors[] = new ErrorModel\AnnulmentOfAnnulment($meeting, $annulment);
+            }
+
+            if ($this->annulmentService->annulsALaterDecision($annulment)) {
+                $errors[] = new ErrorModel\AnnulmentOfLaterDecision($meeting, $annulment);
+            }
+
+            if ([] === $this->annulmentService->getEarlierAnnulments($annulment)) {
+                continue;
+            }
+
+            $errors[] = new ErrorModel\DecisionAnnulledMoreThanOnce($meeting, $annulment);
         }
 
         return $errors;

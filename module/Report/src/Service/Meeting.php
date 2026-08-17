@@ -11,7 +11,6 @@ use Database\Model\Meeting as DatabaseMeetingModel;
 use Database\Model\Member as DatabaseMemberModel;
 use Database\Model\SubDecision as DatabaseSubDecisionModel;
 use Doctrine\ORM\EntityManager;
-use Exception;
 use Laminas\Mail\Header\MessageId;
 use Laminas\Mail\Message;
 use Laminas\Mail\Transport\TransportInterface;
@@ -23,12 +22,14 @@ use Report\Model\Decision as ReportDecisionModel;
 use Report\Model\Meeting as ReportMeetingModel;
 use Report\Model\Member as ReportMemberModel;
 use Report\Model\SubDecision as ReportSubDecisionModel;
+use Report\Service\SubDecision as SubDecisionService;
 use Throwable;
 
 use function array_reverse;
 use function count;
 use function implode;
 use function preg_replace;
+use function sprintf;
 
 class Meeting
 {
@@ -38,6 +39,7 @@ class Meeting
     public function __construct(
         private readonly Translator $translator,
         private readonly MeetingMapper $meetingMapper,
+        private readonly SubDecisionService $subDecisionService,
         private readonly EntityManager $emReport,
         private readonly array $config,
         private readonly TransportInterface $mailTransport,
@@ -45,11 +47,17 @@ class Meeting
     }
 
     /**
-     * Export meetings.
+     * Build ReportDB by replaying every meeting in the order it was held.
+     *
+     * ReportDB is a materialised view of GEWISDB, and GEWISDB is a ledger: the state it describes is whatever you end
+     * up with after going through the decisions in order. So that is all this does. Every subdecision is applied the
+     * moment it is reached, including the annulments, which revert what their target set in motion at exactly the
+     * point in the ledger where that happened. Entities being created and later removed again along the way is
+     * expected, and is what makes the result the same whether ReportDB was empty or already up to date.
      */
     public function generate(): void
     {
-        // simply export every meeting
+        // every meeting, oldest first
         $meetings = $this->meetingMapper->findAll(true, true);
 
         $adapter = new Console();
@@ -59,6 +67,8 @@ class Meeting
         foreach ($meetings as $meeting) {
             $this->generateMeeting($meeting[0]);
             $this->emReport->flush();
+            // Nothing generated so far is needed again by name, and holding on to all of it makes every subsequent
+            // flush more expensive than the last.
             $this->emReport->clear();
             $progress->update(++$num);
         }
@@ -78,11 +88,16 @@ class Meeting
 
         if (null === $reportMeeting) {
             $reportMeeting = new ReportMeetingModel();
+            $reportMeeting->setType($meeting->getType());
+            $reportMeeting->setNumber($meeting->getNumber());
+            $reportMeeting->setDate($meeting->getDate());
+        } elseif ($reportMeeting->getDate()->format('Y-m-d') !== $meeting->getDate()->format('Y-m-d')) {
+            // The type and number identify the meeting and can therefore never change, but the date can be corrected
+            // after the fact, so it must be kept in sync. Only assign it when the stored date actually differs:
+            // Doctrine detects changes by identity, so handing it an equal but distinct DateTime would mark the
+            // meeting as dirty and rewrite the row on every single projection.
+            $reportMeeting->setDate($meeting->getDate());
         }
-
-        $reportMeeting->setType($meeting->getType());
-        $reportMeeting->setNumber($meeting->getNumber());
-        $reportMeeting->setDate($meeting->getDate());
 
         foreach ($meeting->getDecisions() as $decision) {
             try {
@@ -125,15 +140,18 @@ class Meeting
         if (null === $reportDecision) {
             $reportDecision = new ReportDecisionModel();
             $reportDecision->setMeeting($reportMeeting);
+            $reportDecision->setPoint($decision->getPoint());
+            $reportDecision->setNumber($decision->getNumber());
         }
 
-        $reportDecision->setPoint($decision->getPoint());
-        $reportDecision->setNumber($decision->getNumber());
         $contentNL = [];
         $contentEN = [];
 
         foreach ($decision->getSubdecisions() as $subdecision) {
-            $this->generateSubDecision($subdecision, $reportDecision);
+            /** @var ReportSubDecisionModel $reportSubDecision */
+            $reportSubDecision = $this->generateSubDecision($subdecision, $reportDecision);
+            // Applied right here, so that what a subdecision brings about is in place before the next one is read.
+            $this->subDecisionService->generateRelated($reportSubDecision);
             $contentNL[] = $subdecision->getTranslatedContent($this->translator, AppLanguages::Dutch);
             $contentEN[] = $subdecision->getTranslatedContent($this->translator, AppLanguages::English);
         }
@@ -325,6 +343,10 @@ class Meeting
             ]);
 
             $reportSubDecision->setTarget($target);
+
+            // Annulment must be handled here, because it cannot be part of the process{X}Updates because the
+            // subdecision is the annulment, not the target subdecision(s).
+            $this->annulDecision($target);
         }
 
         // Abolish decisions are handled by foundationreference
@@ -336,6 +358,40 @@ class Meeting
         $this->emReport->persist($reportSubDecision);
 
         return $reportSubDecision;
+    }
+
+    /**
+     * Annuls a previously recorded decision and its subdecisions in GEWISDB.
+     *
+     * This function reverts the effects of a target decision by undoing or removing the entities that were derived
+     * from its subdecisions. Each subdecision type is handled explicitly by {@see SubDecisionService::revertRelated()}
+     * to ensure that the data remains consistent and auditable.
+     *
+     * GEWISDB operates as a ledger, meaning the chronological order of decisions must be preserved. A target decision
+     * made at point X may be annulled at point Z, but only while no decision in between builds on it. That rule lives
+     * in the `Database` module, which owns the ledger and turns down an annulment that would break it; by the time an
+     * annulment reaches ReportDB it merely has to be applied.
+     *
+     * NOTE: to adhere to our ordering assumption within a decision, we must loop through its subdecisions in reverse.
+     */
+    private function annulDecision(ReportDecisionModel $target): void
+    {
+        foreach (array_reverse($target->getSubdecisions()->toArray()) as $targetSubDecision) {
+            $this->subDecisionService->revertRelated($targetSubDecision);
+        }
+    }
+
+    /**
+     * Undoes an annulment, restoring the entities that were derived from the annulled decision.
+     *
+     * The same ledger assumption applies as for {@see self::annulDecision()}: the annulment can only be taken back
+     * while nothing has been decided about the affected entities since.
+     */
+    private function unannulDecision(ReportDecisionModel $target): void
+    {
+        foreach ($target->getSubdecisions() as $targetSubDecision) {
+            $this->subDecisionService->generateRelated($targetSubDecision);
+        }
     }
 
     public function deleteDecision(DatabaseDecisionModel $decision): void
@@ -356,63 +412,30 @@ class Meeting
 
     public function deleteSubDecision(ReportSubDecisionModel $subDecision): void
     {
-        switch (true) {
-            case $subDecision instanceof ReportSubDecisionModel\Annulment:
-                throw new Exception('Deletion of annulling decisions not implemented');
+        if ($subDecision instanceof ReportSubDecisionModel\Annulment) {
+            $this->unannulDecision($subDecision->getTarget());
+        } else {
+            // Deleting a subdecision undoes its effects in exactly the same way that annulling it does.
+            $this->subDecisionService->revertRelated($subDecision);
 
-            case $subDecision instanceof ReportSubDecisionModel\Reappointment:
-                $installation = $subDecision->getInstallation();
-                $installation->removeReappointment($subDecision);
+            // On top of that, the subdecision is about to disappear, so the references to it must be dropped as well.
+            switch (true) {
+                case $subDecision instanceof ReportSubDecisionModel\Discharge:
+                    $subDecision->getInstallation()->clearDischarge();
+                    break;
 
-                break;
-            case $subDecision instanceof ReportSubDecisionModel\Discharge:
-                $installation = $subDecision->getInstallation();
-                $installation->clearDischarge();
-                $organMember = $subDecision->getInstallation()->getOrganMember();
-                $organMember->setDischargeDate(null);
+                case $subDecision instanceof ReportSubDecisionModel\Board\Release:
+                    $subDecision->getInstallation()->clearRelease();
+                    break;
 
-                break;
-            case $subDecision instanceof ReportSubDecisionModel\Foundation:
-                $organ = $subDecision->getOrgan();
-                $this->emReport->remove($organ);
-                break;
-            case $subDecision instanceof ReportSubDecisionModel\Installation:
-                $organMember = $subDecision->getOrganMember();
+                case $subDecision instanceof ReportSubDecisionModel\Board\Discharge:
+                    $subDecision->getInstallation()->clearDischarge();
+                    break;
 
-                if (null !== $organMember) {
-                    $this->emReport->remove($organMember);
-                }
-
-                break;
-            case $subDecision instanceof ReportSubDecisionModel\Board\Installation:
-                $boardMember = $subDecision->getBoardMember();
-                $this->emReport->remove($boardMember);
-                break;
-            case $subDecision instanceof ReportSubDecisionModel\Board\Release:
-                $installation = $subDecision->getInstallation();
-                $installation->clearRelease();
-
-                $boardMember = $installation->getBoardMember();
-                $boardMember->setReleaseDate(null);
-                break;
-            case $subDecision instanceof ReportSubDecisionModel\Board\Discharge:
-                $installation = $subDecision->getInstallation();
-                $installation->clearDischarge();
-
-                $boardMember = $installation->getBoardMember();
-                $boardMember->setDischargeDate(null);
-                break;
-            case $subDecision instanceof ReportSubDecisionModel\Key\Granting:
-                $keyholder = $subDecision->getKeyholder();
-                $this->emReport->remove($keyholder);
-                break;
-            case $subDecision instanceof ReportSubDecisionModel\Key\Withdrawal:
-                $granting = $subDecision->getGranting();
-                $granting->clearWithdrawal();
-
-                $keyholder = $granting->getKeyholder();
-                $keyholder->setWithdrawnDate(null);
-                break;
+                case $subDecision instanceof ReportSubDecisionModel\Key\Withdrawal:
+                    $subDecision->getGranting()->clearWithdrawal();
+                    break;
+            }
         }
 
         $this->emReport->remove($subDecision);
@@ -421,14 +444,19 @@ class Meeting
     /**
      * Obtain the correct member, given a database member. Because these members are generated based on what happens in
      * the `Database` module, this cannot return `null`.
-     *
-     * @psalm-ignore-nullable-return
      */
     public function findMember(DatabaseMemberModel $member): ReportMemberModel
     {
-        $repo = $this->emReport->getRepository(ReportMemberModel::class);
+        $reportMember = $this->emReport->getRepository(ReportMemberModel::class)
+            ->find($member->getLidnr());
 
-        return $repo->find($member->getLidnr());
+        if (null === $reportMember) {
+            throw new LogicException(
+                sprintf('Member %d does not exist in ReportDB', $member->getLidnr()),
+            );
+        }
+
+        return $reportMember;
     }
 
     /**

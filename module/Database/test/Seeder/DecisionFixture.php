@@ -72,7 +72,16 @@ class DecisionFixture extends AbstractFixture implements DependentFixtureInterfa
         $this->regulateOrgan($manager, $foundingMeeting, 2, $organ, $chair);
 
         // B1: ordinary active member, appointed chair on founding (a chair is required; Chair counts as active).
-        $this->installInOrgan($manager, $foundingMeeting, 3, $organ, $chair, InstallationFunctions::Chair);
+        // Whoever holds a function in an organ is one of its members too, and is installed as a member first.
+        $this->installInOrgan(
+            $manager,
+            $foundingMeeting,
+            3,
+            $organ,
+            $chair,
+            InstallationFunctions::Member,
+            InstallationFunctions::Chair,
+        );
 
         // B3: external active member.
         $this->installInOrgan(
@@ -81,6 +90,7 @@ class DecisionFixture extends AbstractFixture implements DependentFixtureInterfa
             4,
             $organ,
             $this->getReference(MemberFixture::REF_MEMBER_ATTN_EXTERNAL_ACTIVE, MemberModel::class),
+            InstallationFunctions::Member,
         );
 
         // B5: graduate installed as "Inactief Lid"; surfaces only because the graduate finder treats
@@ -104,6 +114,7 @@ class DecisionFixture extends AbstractFixture implements DependentFixtureInterfa
             6,
             $organ,
             $this->getReference(MemberFixture::REF_MEMBER_ATTN_MISCLASSIFIED, MemberModel::class),
+            InstallationFunctions::Member,
         );
         $this->dischargeFromOrgan($manager, $dischargeMeeting, 1, $misclassifiedInstallation);
 
@@ -143,6 +154,11 @@ class DecisionFixture extends AbstractFixture implements DependentFixtureInterfa
 
     /**
      * Install a member into the given organ via a fresh decision on the given meeting.
+     *
+     * Someone holding a function in an organ is one of its members as well, so more than one function can be given.
+     * They are installed in the order given, which is why a member is always installed as "Lid" before any function.
+     *
+     * @return Installation the installation for the first of the given functions.
      */
     private function installInOrgan(
         ObjectManager $manager,
@@ -150,25 +166,33 @@ class DecisionFixture extends AbstractFixture implements DependentFixtureInterfa
         int $point,
         Foundation $organ,
         MemberModel $member,
-        InstallationFunctions $function = InstallationFunctions::Member,
+        InstallationFunctions ...$functions,
     ): Installation {
         $decision = new Decision();
         $decision->setMeeting($meeting);
         $decision->setPoint($point);
         $decision->setNumber(1);
 
-        $installation = new Installation();
-        $installation->setFoundation($organ);
-        $installation->setMember($member);
-        $installation->setFunction($function);
-        $installation->setSequence(1);
-        $installation->setDecision($decision);
-        $decision->addSubdecision($installation);
-
         $manager->persist($decision);
-        $manager->persist($installation);
 
-        return $installation;
+        $installations = [];
+        $sequence = 1;
+
+        foreach ($functions as $function) {
+            $installation = new Installation();
+            $installation->setFoundation($organ);
+            $installation->setMember($member);
+            $installation->setFunction($function);
+            $installation->setSequence($sequence++);
+            $installation->setDecision($decision);
+            $decision->addSubdecision($installation);
+
+            $manager->persist($installation);
+
+            $installations[] = $installation;
+        }
+
+        return $installations[0];
     }
 
     /**

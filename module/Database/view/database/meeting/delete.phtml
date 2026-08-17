@@ -10,7 +10,11 @@ use Laminas\View\Renderer\PhpRenderer;
 ?>
 <?php if (isset($error) && $error): ?>
 <h1><?= $this->translate('Decision Cannot Be Removed') ?></h1>
+<?php if (isset($annulment) && $annulment): ?>
+<?= $this->translate('Removing this annulment would restore a decision that later decisions have since overtaken.') ?>
+<?php else: ?>
 <?= $this->translate('There are other decisions that still refer to this decision.') ?>
+<?php endif ?>
 <?php else: ?>
 <?php if (!isset($form)): ?>
 <p><?= $this->translate('Decision removed.') ?></p>

@@ -118,44 +118,38 @@ class Organ
      */
     #[ManyToMany(
         targetEntity: SubDecision::class,
-        cascade: ['remove', 'persist'],
+        cascade: ['persist'],
     )]
     #[JoinTable(name: 'organs_subdecisions')]
     #[JoinColumn(
         name: 'organ_id',
         referencedColumnName: 'id',
         nullable: false,
-        onDelete: 'CASCADE',
     )]
     #[InverseJoinColumn(
         name: 'meeting_type',
         referencedColumnName: 'meeting_type',
         nullable: false,
-        onDelete: 'CASCADE',
     )]
     #[InverseJoinColumn(
         name: 'meeting_number',
         referencedColumnName: 'meeting_number',
         nullable: false,
-        onDelete: 'CASCADE',
     )]
     #[InverseJoinColumn(
         name: 'decision_point',
         referencedColumnName: 'decision_point',
         nullable: false,
-        onDelete: 'CASCADE',
     )]
     #[InverseJoinColumn(
         name: 'decision_number',
         referencedColumnName: 'decision_number',
         nullable: false,
-        onDelete: 'CASCADE',
     )]
     #[InverseJoinColumn(
         name: 'subdecision_sequence',
         referencedColumnName: 'sequence',
         nullable: false,
-        onDelete: 'CASCADE',
     )]
     private Collection $subdecisions;
 
@@ -290,6 +284,21 @@ class Organ
     }
 
     /**
+     * Add a member.
+     *
+     * Kept in step with the owning side, so that a member installed earlier in the same meeting is already part of the
+     * organ when a later decision in that meeting asks who is in it.
+     */
+    public function addMember(OrganMember $member): void
+    {
+        if ($this->members->contains($member)) {
+            return;
+        }
+
+        $this->members[] = $member;
+    }
+
+    /**
      * Add multiple subdecisions.
      *
      * @param SubDecision[] $subdecisions
@@ -311,5 +320,17 @@ class Organ
         }
 
         $this->subdecisions[] = $subdecision;
+    }
+
+    /**
+     * Remove a subdecision, if it is related to this organ.
+     */
+    public function removeSubdecision(SubDecision $subdecision): void
+    {
+        if (!$this->subdecisions->contains($subdecision)) {
+            return;
+        }
+
+        $this->subdecisions->removeElement($subdecision);
     }
 }

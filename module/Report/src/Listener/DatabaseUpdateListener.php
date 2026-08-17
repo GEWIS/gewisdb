@@ -13,22 +13,10 @@ use Database\Model\Member as DatabaseMemberModel;
 use Database\Model\SubDecision as DatabaseSubDecisionModel;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use Report\Model\SubDecision as SubDecisionModel;
-use Report\Model\SubDecision\Abrogation as ReportAbrogationModel;
-use Report\Model\SubDecision\Board\Discharge as ReportBoardDischargeModel;
-use Report\Model\SubDecision\Board\Installation as ReportBoardInstallationModel;
-use Report\Model\SubDecision\Board\Release as ReportBoardReleaseModel;
-use Report\Model\SubDecision\Discharge as ReportDischargeModel;
-use Report\Model\SubDecision\Foundation as ReportFoundationModel;
-use Report\Model\SubDecision\Installation as ReportInstallationModel;
-use Report\Model\SubDecision\Key\Granting as ReportKeyGrantingModel;
-use Report\Model\SubDecision\Key\Withdrawal as ReportKeyWithdrawalModel;
-use Report\Service\Board as BoardService;
-use Report\Service\Keyholder as KeyholderService;
 use Report\Service\Meeting as MeetingService;
 use Report\Service\Member as MemberService;
 use Report\Service\Misc as MiscService;
-use Report\Service\Organ as OrganService;
+use Report\Service\SubDecision as SubDecisionService;
 
 /**
  * Doctrine event listener intended to automatically update reportdb.
@@ -38,12 +26,10 @@ class DatabaseUpdateListener
     protected static bool $isflushing = false;
 
     public function __construct(
-        private readonly BoardService $boardService,
-        private readonly KeyholderService $keyholderService,
         private readonly MeetingService $meetingService,
         private readonly MemberService $memberService,
         private readonly MiscService $miscService,
-        private readonly OrganService $organService,
+        private readonly SubDecisionService $subDecisionService,
         private readonly EntityManager $emReport,
     ) {
     }
@@ -87,9 +73,7 @@ class DatabaseUpdateListener
 
             case $entity instanceof DatabaseSubDecisionModel:
                 $subdecision = $this->meetingService->generateSubDecision($entity);
-                $this->processBoardMemberUpdates($subdecision);
-                $this->processKeyholderUpdates($subdecision);
-                $this->processOrganUpdates($subdecision);
+                $this->subDecisionService->generateRelated($subdecision);
                 $this->emReport->persist($subdecision);
                 break;
 
@@ -115,56 +99,5 @@ class DatabaseUpdateListener
         self::safeFlush(static function () use ($em): void {
             $em->flush();
         });
-    }
-
-    public function processOrganUpdates(SubDecisionModel $entity): void
-    {
-        switch (true) {
-            case $entity instanceof ReportFoundationModel:
-                $this->organService->generateFoundation($entity);
-                break;
-
-            case $entity instanceof ReportAbrogationModel:
-                $this->organService->generateAbrogation($entity);
-                break;
-
-            case $entity instanceof ReportInstallationModel:
-                $this->organService->generateInstallation($entity);
-                break;
-
-            case $entity instanceof ReportDischargeModel:
-                $this->organService->generateDischarge($entity);
-                break;
-        }
-    }
-
-    public function processKeyholderUpdates(SubDecisionModel $entity): void
-    {
-        switch (true) {
-            case $entity instanceof ReportKeyGrantingModel:
-                $this->keyholderService->generateGranting($entity);
-                break;
-
-            case $entity instanceof ReportKeyWithdrawalModel:
-                $this->keyholderService->generateWithdrawal($entity);
-                break;
-        }
-    }
-
-    public function processBoardMemberUpdates(SubDecisionModel $entity): void
-    {
-        switch (true) {
-            case $entity instanceof ReportBoardInstallationModel:
-                $this->boardService->generateInstallation($entity);
-                break;
-
-            case $entity instanceof ReportBoardReleaseModel:
-                $this->boardService->generateRelease($entity);
-                break;
-
-            case $entity instanceof ReportBoardDischargeModel:
-                $this->boardService->generateDischarge($entity);
-                break;
-        }
     }
 }
