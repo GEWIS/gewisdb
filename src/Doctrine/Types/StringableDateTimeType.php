@@ -13,16 +13,8 @@ use Doctrine\DBAL\Types\DateTimeType;
 use Override;
 
 /**
- * Registered as `stringable_datetime` in config/packages/doctrine.yaml.
- *
- * Two methods the Laminas version carried are gone in DBAL 4 and have been dropped rather than reimplemented:
- *
- * - `getName()`. DBAL 4 removed self-naming from Type entirely; a type is known by the key it is registered under,
- *   which is now the one in doctrine.yaml. Keeping the method would not fail loudly, it would simply never be called.
- * - `requiresSQLCommentHint()`. DBAL 4 dropped the doctrine-type comment hints it existed to trigger, along with the
- *   schema-introspection behaviour that read them back.
- *
- * Neither removal changes the generated DDL: the column is still whatever DateTimeType declares.
+ * Dropping requiresSQLCommentHint(), which DBAL 4 removed, stops the schema tool emitting the
+ * `COMMENT ON COLUMN ... IS '(DC2Type:...)'` marker. The column type itself is unchanged.
  */
 class StringableDateTimeType extends DateTimeType
 {

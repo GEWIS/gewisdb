@@ -8,21 +8,15 @@ use Doctrine\DBAL\Driver as DriverInterface;
 use Doctrine\DBAL\Driver\Middleware as MiddlewareInterface;
 use Override;
 use RuntimeException;
-use Symfony\Component\DependencyInjection\Attribute\AsDecorator;
 use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 
 use function implode;
 
 /**
- * Issues `SET ROLE` on every new PostgreSQL connection, so the application runs as a least-privileged role rather
- * than as the login user that owns the schema.
+ * Issues `SET ROLE` per connection so the application runs as a least-privileged role rather than the schema owner.
  *
- * Applies to BOTH connections — the Database and ReportDB have different roles — so the middleware is tagged without
- * a `connection` attribute and the per-connection role is looked up by host:port:dbname inside {@see SetRoleDriver}.
- *
- * The role names still come from the environment rather than from bound parameters, keeping the deployment variables
- * `DOCTRINE_DEFAULT_ROLE` / `DOCTRINE_REPORT_ROLE` (and the host/port/database parts used to key them) under their
- * existing names.
+ * Tagged without a `connection` attribute because it applies to both connections, which use different roles; the
+ * right one is selected by host:port:dbname in {@see SetRoleDriver}.
  */
 #[Autoconfigure(tags: ['doctrine.middleware'])]
 class SetRoleMiddleware implements MiddlewareInterface

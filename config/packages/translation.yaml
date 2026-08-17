@@ -4,18 +4,3 @@ framework:
     translator:
         default_path: '%kernel.project_dir%/translations'
         fallbacks: ['en']
-
-# The Laminas translator loaded gettext .mo files from module/Application/language/. Symfony's MoFileLoader reads
-# them natively, so the catalogues can move across as-is — but GH-569 converts them to XLIFF, which is what GEWISWEB
-# uses and what `translation:extract` round-trips cleanly.
-#
-# Two things from the old config have no successor:
-#
-# - The second translation_file_patterns entry loaded Laminas\Validator's own phparray catalogues. Symfony's
-#   validators ship their own translations.
-# - A comment claiming the entry was needed so "we do not need the intl extension". That is not true under Symfony:
-#   ext-intl is already required in composer.json and the translator and validator both assume it.
-#
-# NOT decided here: locale selection. GEWISDB keeps the language in a session container and flips it via /lang/:lang;
-# GEWISWEB puts the locale in the URL path. Those produce different URLs and different cacheability, and the choice
-# belongs with the three-host split — see H4 on GH-557 and GH-564.

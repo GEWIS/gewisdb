@@ -29,7 +29,7 @@ Content-Type: application/json; charset=utf-8
     "Commissaris Digitale Innovatie": {
       "isLegacy": false,
       "translations": {
-        "en": "Commissaris Digitale Innovatie",
+        "en": "Digital Innovation Officer",
         "nl": "Commissaris Digitale Innovatie"
       }
     },

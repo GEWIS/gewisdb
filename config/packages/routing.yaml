@@ -1,7 +1,5 @@
 framework:
     router:
-        # Routes are attribute-scanned from src/Controller/. The three public hosts (join.gewis.nl, member.gewis.nl,
-        # database.gewis.nl) become host-scoped route scopes rather than nginx rewrites — see GH-564.
         utf8: true
 
 when@prod:

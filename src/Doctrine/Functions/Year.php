@@ -13,9 +13,6 @@ use Override;
 
 /**
  * YearFunction ::= "YEAR" "(" ArithmeticPrimary ")"
- *
- * Registered on the report entity manager only — see config/packages/doctrine.yaml. The report-side membership
- * queries need it because DQL has no portable YEAR().
  */
 class Year extends FunctionNode
 {

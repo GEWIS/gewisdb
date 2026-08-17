@@ -10,6 +10,7 @@
     <arg value="nps" />
 
     <file>module</file>
+    <file>src</file>
     <file>config</file>
 
     <rule ref="GEWISPHPCodingStandards" />
@@ -22,6 +23,12 @@
         <exclude-pattern>module/Report/src/Model/Decision.php</exclude-pattern>
         <exclude-pattern>module/Report/src/Model/MailingList.php</exclude-pattern>
         <exclude-pattern>module/Report/src/Model/SubDecision.php</exclude-pattern>
+        <exclude-pattern>src/Entity/Decision/Decision.php</exclude-pattern>
+        <exclude-pattern>src/Entity/Decision/SubDecision.php</exclude-pattern>
+        <exclude-pattern>src/Entity/Mailing/MailingList.php</exclude-pattern>
+        <exclude-pattern>src/Entity/Report/Decision.php</exclude-pattern>
+        <exclude-pattern>src/Entity/Report/MailingList.php</exclude-pattern>
+        <exclude-pattern>src/Entity/Report/SubDecision.php</exclude-pattern>
         <!-- Stripe also does this, so ignore those too -->
         <exclude-pattern>module/Database/src/Service/Stripe.php</exclude-pattern>
     </rule>
@@ -201,5 +208,14 @@
         <exclude-pattern>module/Checker/src/Model/Error/MemberInNonExistingOrgan.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Model/Error/MemberInactiveInOrganWithoutInactiveMembers.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Model/Error/OrganWithoutChair.php</exclude-pattern>
+        <exclude-pattern>src/ViewModel/Checker/Error/AnnulmentOfAnnulment.php</exclude-pattern>
+        <exclude-pattern>src/ViewModel/Checker/Error/AnnulmentOfLaterDecision.php</exclude-pattern>
+        <exclude-pattern>src/ViewModel/Checker/Error/DecisionAnnulledMoreThanOnce.php</exclude-pattern>
+        <exclude-pattern>src/ViewModel/Checker/Error/MemberActiveAndInactiveInOrgan.php</exclude-pattern>
+        <exclude-pattern>src/ViewModel/Checker/Error/MemberActiveWithRoleAndInactiveInOrgan.php</exclude-pattern>
+        <exclude-pattern>src/ViewModel/Checker/Error/MemberExpiredButStillInOrgan.php</exclude-pattern>
+        <exclude-pattern>src/ViewModel/Checker/Error/MemberInNonExistingOrgan.php</exclude-pattern>
+        <exclude-pattern>src/ViewModel/Checker/Error/MemberInactiveInOrganWithoutInactiveMembers.php</exclude-pattern>
+        <exclude-pattern>src/ViewModel/Checker/Error/OrganWithoutChair.php</exclude-pattern>
     </rule>
 </ruleset>

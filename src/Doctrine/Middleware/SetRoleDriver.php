@@ -13,10 +13,7 @@ use SensitiveParameter;
 use function implode;
 
 /**
- * The driver {@see SetRoleMiddleware} wraps around the real one.
- *
- * Renamed from the Laminas-era `Driver`: under one `App\` namespace a class called `Driver` sitting next to a class
- * called `SetRoleMiddleware` reads as a generic base rather than as the specific thing it is.
+ * Renamed from the Laminas-era `Driver`, which under one `App\` namespace read as a generic base class.
  */
 class SetRoleDriver extends AbstractDriverMiddleware
 {

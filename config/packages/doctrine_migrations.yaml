@@ -1,20 +1,5 @@
-# Migrations for the Database (orm_default).
-#
-# THE NAMESPACES ARE LOAD-BEARING. Production's `doctrine_migration_versions` table stores fully-qualified class
-# names, and every existing row says `Database\Migrations\VersionXXXXXXXX`. Letting Flex relocate these to
-# `DoctrineMigrations\` would make production believe all 19 migrations are pending. So the migration classes keep
-# their original namespace — the two deliberate exceptions to the one-App\-namespace rule — and are simply not
-# autoloaded, which is exactly the arrangement DoctrineMigrationsBundle expects.
-#
-# ReportDB's migrations are NOT here. DoctrineMigrationsBundle exposes a single flat configuration: one
-# `migrations_paths` map, one `storage.table_storage`, and mutually exclusive scalar `em`/`connection` nodes, with an
-# explicit exception thrown if both are set. Two independent migration sets over two entity managers cannot be
-# expressed in it. The second set lives in migrations/report.yaml and is passed at runtime:
-#
-#     bin/console doctrine:migrations:migrate --em=report --configuration=migrations/report.yaml
-#
-# Both sets use the table name `doctrine_migration_versions` and do not collide, because they live in different
-# databases (gewisdb vs gewisdb_report).
+# The namespace is preserved because doctrine_migration_versions stores fully-qualified class names.
+# ReportDB's set cannot live here: the bundle exposes one flat configuration. See migrations/report.yaml.
 
 doctrine_migrations:
     em: default

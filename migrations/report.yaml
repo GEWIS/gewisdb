@@ -1,16 +1,5 @@
-# Migrations for ReportDB (orm_report).
-#
-# This is doctrine/migrations' NATIVE configuration format, not DoctrineMigrationsBundle's DI format, because the
-# bundle cannot express two migration sets over two entity managers — see the note in
-# config/packages/doctrine_migrations.yaml.
-#
-# Passing --configuration to any doctrine:migrations:* command replaces the configuration the bundle injected, so:
-#
+# doctrine/migrations' native format, passed with --configuration since the bundle takes only one set:
 #     bin/console doctrine:migrations:migrate --em=report --configuration=migrations/report.yaml
-#     bin/console doctrine:migrations:diff    --em=report --configuration=migrations/report.yaml
-#
-# The `Report\Migrations` namespace is preserved for the same reason as the Database one: production's
-# doctrine_migration_versions rows record the fully-qualified class names.
 
 migrations_paths:
     'Report\Migrations': 'migrations/report'

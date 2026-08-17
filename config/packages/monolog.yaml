@@ -15,14 +15,10 @@ when@prod:
     monolog:
         handlers:
             main:
-                # Ported one-for-one from the hand-wired Monolog logger in module/Application/src/Module.php:
-                # logfile_path 'data/logs/gewisdb.log' -> path, max_rotate_file_count 10 -> max_files,
-                # minimal_log_level 'INFO' -> level. The channel name was 'gewisdb'.
                 type: fingers_crossed
                 action_level: error
                 handler: rotating
-                # The Laminas listener attached to EVENT_DISPATCH_ERROR explicitly skipped
-                # 'error-router-no-match' so that 404s did not fill the log. This is the declarative equivalent.
+                # Replaces the hand-written listener that skipped 'error-router-no-match' to keep 404s out of the log.
                 excluded_http_codes: [404, 405]
                 buffer_size: 50
             rotating:
