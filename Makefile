@@ -1,4 +1,4 @@
-.PHONY: help runprod rundev runtest runcoverage update updatecomposer getvendordir phpstan phpcs phpcbf phpcsfix phpcsfixtypes replenish compilelang build buildprod builddev update preparelistmonk preparemailman migrate migrate-to migration-down migration-up migration-diff composerunused stripewebhooksecret seed goldens goldens-verify goldens-freeze goldens-restore phpstan-src
+.PHONY: help runprod rundev runtest runcoverage update updatecomposer getvendordir phpstan phpcs phpcbf phpcsfix phpcsfixtypes replenish compilelang build buildprod builddev update preparelistmonk preparemailman migrate migrate-to migration-down migration-up migration-diff composerunused stripewebhooksecret seed goldens goldens-verify goldens-freeze goldens-restore phpstan-src translations-xliff
 
 help:
 		@echo "Makefile commands:"
@@ -151,6 +151,13 @@ translations:
 		msgmerge -U $(TRANSLATIONS_DIR)/en.po $(TRANSLATIONS_DIR)/gewisdb.pot && \
 		msgattrib --no-obsolete --sort-output -o $(TRANSLATIONS_DIR)/en.po $(TRANSLATIONS_DIR)/en.po && \
 		msgattrib --no-obsolete --sort-output -o $(TRANSLATIONS_DIR)/nl.po $(TRANSLATIONS_DIR)/nl.po
+
+# Symfony's extractor. --no-fill leaves new entries with an empty <target/> in BOTH locales; every one has to be
+# filled before the change is done. The gettext `translations` target above still serves the Laminas application and
+# goes away with it.
+translations-xliff: replenish
+		@docker compose exec -u www-data web bin/console translation:extract en --format=xlf --sort=asc --no-fill --force --clean
+		@docker compose exec -u www-data web bin/console translation:extract nl --format=xlf --sort=asc --no-fill --force --clean
 
 update: updatecomposer updatedocker
 
