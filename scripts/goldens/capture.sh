@@ -18,8 +18,8 @@ OUT="${1:-${ROOT}/goldens}"
 cd "${ROOT}"
 
 echo "==> Capturing goldens from the $(stack) stack into ${OUT}"
-rm -rf "${OUT}/api" "${OUT}/schema" "${OUT}/reportdb" "${OUT}/checker"
-mkdir -p "${OUT}"/{api,schema,reportdb,checker}
+rm -rf "${OUT}/api" "${OUT}/schema" "${OUT}/reportdb" "${OUT}/checker" "${OUT}/hosts"
+mkdir -p "${OUT}"/{api,schema,reportdb,checker,hosts}
 
 # --- schema ------------------------------------------------------------------
 # An empty diff here means production tables are already correct and the existing migrations stay valid, so cutover
@@ -99,6 +99,29 @@ while IFS='|' read -r description token; do
     capture_principal "${description#golden:}" "${token}"
 done < <(psql_q "${DB_DEFAULT}" \
     "select description, token from apiprincipal where description like 'golden:%' order by description")
+
+# --- hosts -------------------------------------------------------------------
+# The authorization boundary between the three public hosts. Today it is an nginx allowlist regex; GH-564 replaces it
+# with host-scoped routing and a firewall per host, and this is what that replacement has to reproduce.
+
+echo "--> hosts: per-host reachability"
+while IFS=$'\t' read -r host name path; do
+    case "${host}" in ''|'#'*) continue ;; esac
+    mkdir -p "${OUT}/hosts/${host}"
+    capture_host_request "${host}" "${path}" > "${OUT}/hosts/${host}/${name}.txt"
+done < "${HERE}/hosts.tsv"
+
+# A host whose every route answers the same way is a host whose Host header stopped being routed — nginx falling back
+# to default_server, or a future firewall matching nothing. Either way the boundary has silently stopped existing, and
+# a diff would not show it because the file contents stay perfectly stable.
+for host_dir in "${OUT}"/hosts/*/; do
+    host="$(basename "${host_dir}")"
+    codes="$(grep -h '^--- ' "${host_dir}"*.txt | sort -u | wc -l | tr -d ' ')"
+    if [ "${codes}" -lt 2 ]; then
+        echo "!! every route on ${host} returned the same status — Host routing looks broken" >&2
+        exit 1
+    fi
+done
 
 # --- manifest ----------------------------------------------------------------
 # Deliberately excluded from verification: it records *how* a capture was taken, not what the application did.

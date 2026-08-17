@@ -1,0 +1,6 @@
+GET /query
+Host: database.gewis.nl
+--- 302
+Content-Type: text/html; charset=UTF-8
+Location: /login
+Set-Cookie: GEWISDBSESSID=<redacted>; path=/; HttpOnly; SameSite=Lax

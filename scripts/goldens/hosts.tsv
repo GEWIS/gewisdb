@@ -1,0 +1,78 @@
+# Per-host reachability, captured by scripts/goldens/capture.sh into goldens/hosts/.
+#
+# Columns: host <TAB> name <TAB> path
+#
+# GEWISDB serves three public hosts from one application. Today that split lives entirely in nginx
+# (docker/nginx/nginx.conf): join.gewis.nl and member.gewis.nl are server blocks that proxy back into the same app
+# over a loopback hop, each carrying a path allowlist regex, a couple of rewrites, and a proxy_cookie_domain that
+# rescopes the session cookie. Everything outside the allowlist gets `return 404`.
+#
+# That allowlist is an authorization boundary — it is what stops a public sign-up host reaching the secretary's
+# console — and GH-564 replaces it with host-scoped routing and a firewall per host. This file is the baseline that
+# replacement has to reproduce.
+#
+# Only status codes and a few headers are recorded, deliberately. The question being asked is "is this path reachable
+# from this host, and where does its session cookie get scoped", not "what does the page look like"; bodies would add
+# CSRF-token noise for no gain.
+#
+# KNOWN GAP — cookie scoping is captured but not actually exercised in development. `session.cookie_domain` is set to
+# `database.gewis.nl` only in docker/web/production/php.ini; the development php.ini leaves it unset, so responses
+# carry no `domain` attribute at all and nginx's proxy_cookie_domain rewrite is a no-op locally. The Set-Cookie lines
+# below therefore prove the cookie *name* and flags, not the rescoping that GH-564 has to replace. Verifying that
+# needs a capture against an image built with the production php.ini.
+#
+# NEGATIVE CASES MATTER MOST. Every `admin-*` row below is a real management surface that answers 302 on
+# database.gewis.nl and MUST stay 404 on the other two. If one of them ever turns into a 302, the boundary has moved.
+
+# --- database.gewis.nl: the management console, everything reachable -------------------------------------------
+database.gewis.nl	root	/
+database.gewis.nl	login	/login
+database.gewis.nl	admin-member	/member
+database.gewis.nl	admin-meeting	/meeting
+database.gewis.nl	admin-organ	/organ
+database.gewis.nl	admin-settings	/settings
+database.gewis.nl	admin-export	/export
+database.gewis.nl	admin-query	/query
+database.gewis.nl	api-members	/api/members
+database.gewis.nl	subscribe	/member/subscribe
+database.gewis.nl	renew	/member/renew/nonexistent-token
+database.gewis.nl	lang-en	/lang/en
+database.gewis.nl	lang-nl	/lang/nl
+
+# --- join.gewis.nl: public sign-up only ------------------------------------------------------------------------
+# `/` is rewritten to /member/subscribe, and /checkout/* to /member/subscribe/checkout/*.
+join.gewis.nl	root	/
+join.gewis.nl	subscribe	/member/subscribe
+join.gewis.nl	subscribe-checkout-error	/member/subscribe/checkout/error
+join.gewis.nl	checkout-completed	/checkout/completed
+join.gewis.nl	checkout-cancelled	/checkout/cancelled
+join.gewis.nl	checkout-error	/checkout/error
+join.gewis.nl	lang-en	/lang/en
+join.gewis.nl	lang-nl	/lang/nl
+join.gewis.nl	admin-member	/member
+join.gewis.nl	admin-meeting	/meeting
+join.gewis.nl	admin-organ	/organ
+join.gewis.nl	admin-settings	/settings
+join.gewis.nl	admin-export	/export
+join.gewis.nl	admin-query	/query
+join.gewis.nl	login	/login
+join.gewis.nl	api-members	/api/members
+join.gewis.nl	renew	/member/renew/nonexistent-token
+join.gewis.nl	renew-short	/renew/nonexistent-token
+
+# --- member.gewis.nl: member self-service only -----------------------------------------------------------------
+# `/renew/x` is rewritten to /member/renew/x. Note `/` is NOT allowlisted here, unlike join.
+member.gewis.nl	root	/
+member.gewis.nl	renew-short	/renew/nonexistent-token
+member.gewis.nl	lang-en	/lang/en
+member.gewis.nl	lang-nl	/lang/nl
+member.gewis.nl	admin-member	/member
+member.gewis.nl	admin-meeting	/meeting
+member.gewis.nl	admin-organ	/organ
+member.gewis.nl	admin-settings	/settings
+member.gewis.nl	admin-export	/export
+member.gewis.nl	admin-query	/query
+member.gewis.nl	login	/login
+member.gewis.nl	api-members	/api/members
+member.gewis.nl	subscribe	/member/subscribe
+member.gewis.nl	renew-long	/member/renew/nonexistent-token

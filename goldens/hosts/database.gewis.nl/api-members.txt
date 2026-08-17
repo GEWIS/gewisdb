@@ -1,0 +1,5 @@
+GET /api/members
+Host: database.gewis.nl
+--- 401
+Content-Type: text/html; charset=UTF-8
+Set-Cookie: GEWISDBSESSID=<redacted>; path=/; HttpOnly; SameSite=Lax

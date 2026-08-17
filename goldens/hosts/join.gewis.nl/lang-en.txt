@@ -1,0 +1,6 @@
+GET /lang/en
+Host: join.gewis.nl
+--- 302
+Content-Type: text/html; charset=UTF-8
+Location: /member/subscribe
+Set-Cookie: GEWISDBSESSID=<redacted>; path=/; HttpOnly; SameSite=Lax

@@ -28,7 +28,7 @@ echo "==> Comparing against goldens/"
 # MANIFEST records how a capture was taken (stack, commit) rather than what the application did, and generate.log is
 # progress-bar noise. Neither is a behavioural golden.
 status=0
-for section in schema reportdb checker api; do
+for section in schema reportdb checker hosts api; do
     if diff -r \
         --exclude=generate.log \
         "${ROOT}/goldens/${section}" "${TMP}/${section}" > "${TMP}/${section}.diff" 2>&1
@@ -43,7 +43,7 @@ done
 if [ "${status}" -ne 0 ]; then
     echo
     echo "==> Behaviour differs from the goldens. Full diffs:"
-    for section in schema reportdb checker api; do
+    for section in schema reportdb checker hosts api; do
         [ -s "${TMP}/${section}.diff" ] || continue
         echo
         echo "--- ${section} ---"

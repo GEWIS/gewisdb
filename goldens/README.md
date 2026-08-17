@@ -23,6 +23,7 @@ Symfony existed. **Where a test and a golden disagree, the golden wins.**
 | `schema/report.sql` | DDL the ORM mapping implies for ReportDB. | **Read this one carefully.** See "The GEWISWEB coupling" below. |
 | `reportdb/data.sql` | ReportDB contents after a full regeneration. | The Database → ReportDB projection changed. |
 | `checker/*.txt` | Output of the read-only checker commands. | A rule derived from the Articles of Association changed. |
+| `hosts/<host>/<name>.txt` | Per-host reachability: status, redirect target, session-cookie scope. | The boundary between `join`, `member` and `database` moved. |
 | `api/<principal>/<endpoint>.txt` | Every API response, per permission set. | The API contract changed. |
 | `MANIFEST` | How the capture was taken. Excluded from comparison. | — |
 
@@ -78,6 +79,26 @@ unauthenticated. That is 19 principals × 15 requests.
 Tokens are still randomly generated; the fixture gives each principal a stable `golden:` prefixed description and the
 capture looks the tokens up by that. `ApiPrincipal` deliberately offers no way to set a token and that invariant is
 worth keeping.
+
+## The three hosts
+
+`hosts/` is the baseline for GH-564. GEWISDB serves `join.gewis.nl`, `member.gewis.nl` and `database.gewis.nl` from one
+application, and today the split lives entirely in `docker/nginx/nginx.conf`: the first two are server blocks proxying
+back into the same app over a loopback hop, each carrying a path allowlist regex, a couple of rewrites, and a
+`proxy_cookie_domain` that rescopes the session cookie. Anything outside the allowlist gets `return 404`.
+
+That allowlist is an authorization boundary — it is what stops a public sign-up host reaching the secretary's console —
+and it is being replaced by host-scoped routing and a firewall per host. Every `admin-*` row in
+`scripts/goldens/hosts.tsv` is a real management surface that answers 302 on `database.gewis.nl` and must stay 404 on
+the other two. If one becomes a 302, the boundary has moved.
+
+Two things this section does **not** prove:
+
+- **Cookie rescoping.** `session.cookie_domain` is set only in `docker/web/production/php.ini`; development leaves it
+  unset, so responses carry no `domain` attribute and the `proxy_cookie_domain` rewrite is a no-op locally. Verifying
+  it needs a capture against an image built with the production ini.
+- **Anything about basic auth.** All three server blocks sit behind `auth_basic ${NGINX_REQUIRE_AUTH}`, which ships
+  `off` in `.env.dist`. See the note on GH-572.
 
 ## Known behaviour recorded here that is wrong
 

@@ -1,0 +1,5 @@
+GET /member/subscribe
+Host: database.gewis.nl
+--- 200
+Content-Type: text/html; charset=UTF-8
+Set-Cookie: GEWISDBSESSID=<redacted>; path=/; HttpOnly; SameSite=Lax

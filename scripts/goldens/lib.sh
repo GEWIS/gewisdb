@@ -145,3 +145,29 @@ capture_request() {
     echo "---"
     printf '%s' "${body}" | canon_json
 }
+
+# Perform one request against a named virtual host and record only what the host boundary is about: the status, where
+# a redirect points, and how the session cookie is scoped.
+#
+# Bodies are deliberately not recorded. The question is "is this path reachable from this host", which the status
+# answers; capturing HTML would add CSRF-token churn to every golden for no extra signal.
+capture_host_request() {
+    local host="$1" path="$2"
+
+    local headers status
+    headers="$(curl -s -o /dev/null -D - -w '%{http_code}' -H "Host: ${host}" "${BASE_URL}${path}" 2>/dev/null || true)"
+    status="${headers##*$'\n'}"
+    headers="${headers%$'\n'*}"
+
+    echo "GET ${path}"
+    echo "Host: ${host}"
+    echo "--- ${status}"
+
+    # The session cookie's *value* is random per request; its domain is the thing under test, because that domain is
+    # currently rewritten by nginx's proxy_cookie_domain and has to survive the move to per-host session config.
+    echo "${headers}" \
+        | grep -iE '^(content-type|location|set-cookie):' \
+        | sed -E 's/^([Ss]et-[Cc]ookie: *[^=]+=)[^;]*/\1<redacted>/' \
+        | LC_ALL=C sort \
+        | sed 's/[[:space:]]*$//' || true
+}
