@@ -1,4 +1,4 @@
-.PHONY: help runprod rundev runtest runcoverage update updatecomposer getvendordir phpstan phpcs phpcbf phpcsfix phpcsfixtypes replenish compilelang build buildprod builddev update preparelistmonk preparemailman migrate migrate-to migration-down migration-up migration-diff composerunused stripewebhooksecret seed goldens goldens-verify goldens-freeze goldens-restore phpstan-src translations-xliff
+.PHONY: help runprod rundev runtest runcoverage update updatecomposer getvendordir phpstan phpcs phpcbf phpcsfix phpcsfixtypes replenish compilelang build buildprod builddev update preparelistmonk preparemailman migrate migrate-to migration-down migration-up migration-diff composerunused stripewebhooksecret seed goldens goldens-verify goldens-freeze goldens-restore phpstan-src translations-xliff entity-schema
 
 help:
 		@echo "Makefile commands:"
@@ -86,6 +86,10 @@ goldens-freeze:
 
 goldens-restore:
 		@bash scripts/goldens/restore-input.sh
+
+# Runs on the host: the script needs bash, and the web image is Alpine.
+entity-schema:
+		@DOCTRINE_DEFAULT_HOST=127.0.0.1 bash scripts/goldens/entity-schema-check.sh
 
 exec:
 		docker compose exec -u www-data -it web $(cmd)
