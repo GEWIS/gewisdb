@@ -13,8 +13,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\OneToMany;
-use Laminas\Translator\TranslatorInterface;
 use Override;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Foundation of an organ.
@@ -147,13 +147,13 @@ class Foundation extends SubDecision
         AppLanguages $language,
     ): string {
         if (OrganTypes::SC !== $this->getOrganType()) {
-            return $translator->translate(
+            return $translator->trans(
                 '%ORGAN_TYPE% %ORGAN_NAME% met afkorting %ORGAN_ABBR% wordt opgericht.',
                 locale: $language->getLangParam(),
             );
         }
 
-        return $translator->translate(
+        return $translator->trans(
             'De stemcommissie voor %ORGAN_PURPOSE% van de %MEETING_NUMBER%e %MEETING_TYPE% met afkorting %ORGAN_ABBR% wordt opgericht.', // phpcs:ignore -- user-visible strings should not be split
             locale: $language->getLangParam(),
         );

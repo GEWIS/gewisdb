@@ -11,8 +11,7 @@ use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Doctrine\ORM\Mapping\Id;
-use Laminas\Form\Annotation\Validator;
-use Laminas\Validator\StringLength;
+use Symfony\Component\Validator\Constraints as Assert;
 
 use function array_map;
 use function base64_encode;
@@ -49,7 +48,7 @@ class ApiPrincipal
         type: 'string',
         nullable: true,
     )]
-    #[Validator(StringLength::class, options: ['min' => 8, 'max' => 255])]
+    #[Assert\Length(min: 8, max: 255)]
     protected ?string $description;
 
     /**

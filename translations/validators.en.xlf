@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="B9r0Hn5" resname="Error">
+        <source>Error</source>
+        <target>Error</target>
+      </trans-unit>
+      <trans-unit id="mc0AGDu" resname="Organ regulations can only be created for 'committee', 'fraternity', or 'financial audit committee'.">
+        <source>Organ regulations can only be created for 'committee', 'fraternity', or 'financial audit committee'.</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="KWcTrZE" resname="You cannot use your TU/e (student) e-mail address because if you leave or stop studying, we can no longer reach you about important announcements.">
+        <source>You cannot use your TU/e (student) e-mail address because if you leave or stop studying, we can no longer reach you about important announcements.</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="O_htvlR" resname="You have to agree to the Articles of Association and the Internal Regulations">
+        <source>You have to agree to the Articles of Association and the Internal Regulations</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="HnYDKlp" resname="You have to consent to processing your data">
+        <source>You have to consent to processing your data</source>
+        <target></target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

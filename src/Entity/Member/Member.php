@@ -17,11 +17,10 @@ use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\OrderBy;
-use Laminas\Mail\Address as MailAddress;
 use RuntimeException;
+use Symfony\Component\Mime\Address as MailAddress;
 
 use function is_string;
-use function mb_encode_mimeheader;
 
 /**
  * Member model.
@@ -258,12 +257,7 @@ class Member
 
         return new MailAddress(
             $this->getEmail(),
-            mb_encode_mimeheader(
-                $this->getFullName(),
-                'UTF-8',
-                'Q',
-                '',
-            ),
+            $this->getFullName(),
         );
     }
 

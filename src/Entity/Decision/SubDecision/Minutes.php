@@ -14,8 +14,8 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\OneToOne;
-use Laminas\Translator\TranslatorInterface;
 use Override;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 use function strval;
 
@@ -119,7 +119,7 @@ class Minutes extends SubDecision
         TranslatorInterface $translator,
         AppLanguages $language,
     ): string {
-        return $translator->translate(
+        return $translator->trans(
             'De notulen van de %NUMBERORDINAL% %TYPE%%AUTHOR% worden %APPROVAL%%THANK%%CHANGES%.',
             locale: $language->getLangParam(),
         );
@@ -134,17 +134,17 @@ class Minutes extends SubDecision
             '%TYPE%' => $this->getTarget()->getType()->value,
             '%NUMBERORDINAL%' => strval($this->getTarget()->getNumberAsOrdinal($language->getLocale())),
             '%APPROVAL%' => $this->getApproval()
-                ? $translator->translate('goedgekeurd', locale: $language->getLangParam())
-                : $translator->translate('afgekeurd', locale: $language->getLangParam()),
+                ? $translator->trans('goedgekeurd', locale: $language->getLangParam())
+                : $translator->trans('afgekeurd', locale: $language->getLangParam()),
             '%AUTHOR%' => MeetingTypes::BV === $this->getTarget()->getType()
                 ? ''
-                : $translator->translate(' door ', locale: $language->getLangParam())
+                : $translator->trans(' door ', locale: $language->getLangParam())
                     . $this->getMember()->getFullName(),
             '%CHANGES%' => $this->getApproval() && $this->getChanges()
-                ? $translator->translate(' met genoemde wijzigingen', locale: $language->getLangParam())
+                ? $translator->trans(' met genoemde wijzigingen', locale: $language->getLangParam())
                 : '',
             '%THANK%' => MeetingTypes::BV === $this->getTarget()->getType()
-                ? $translator->translate(' met dank aan de notulist', locale: $language->getLangParam())
+                ? $translator->trans(' met dank aan de notulist', locale: $language->getLangParam())
                 : '',
         ];
 

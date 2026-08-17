@@ -10,8 +10,8 @@ use App\Entity\Decision\SubDecision;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\OneToOne;
-use Laminas\Translator\TranslatorInterface;
 use Override;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Annulling a decision.
@@ -75,7 +75,7 @@ class Annulment extends SubDecision
         TranslatorInterface $translator,
         AppLanguages $language,
     ): string {
-        return $translator->translate(
+        return $translator->trans(
             'Besluit %DECISION_HASH% wordt nietig verklaard. Het besluit luidde: "%DECISION_CONTENT%"',
             locale: $language->getLangParam(),
         );

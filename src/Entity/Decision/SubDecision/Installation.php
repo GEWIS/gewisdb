@@ -16,8 +16,8 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\OneToOne;
-use Laminas\Translator\TranslatorInterface;
 use Override;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Installation into organ.
@@ -115,7 +115,7 @@ class Installation extends FoundationReference
         TranslatorInterface $translator,
         AppLanguages $language,
     ): string {
-        return $translator->translate(
+        return $translator->trans(
             '%MEMBER% wordt geïnstalleerd als %FUNCTION% van %ORGAN_ABBR%.',
             locale: $language->getLangParam(),
         );

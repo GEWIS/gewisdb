@@ -8,10 +8,9 @@ use App\Entity\Application\Enums\AppLanguages;
 use App\Entity\Decision\SubDecision;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
-use Laminas\Mvc\I18n\DummyTranslator;
-use Laminas\Translator\TranslatorInterface;
 use Override;
 use RuntimeException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Entity for undefined decisions.
@@ -46,12 +45,13 @@ class Other extends SubDecision
         TranslatorInterface $translator,
         AppLanguages $language,
     ): string {
-        if ($translator instanceof DummyTranslator || AppLanguages::Dutch === $language) {
+        // The stored content is the (statutory) Dutch text, there is nothing to translate.
+        if (AppLanguages::Dutch === $language) {
             return $this->content;
         }
 
         // No alternative content exists for a custom decision.
-        return $translator->translate(
+        return $translator->trans(
             'If you are reading this, the secretary has not done their job.',
             locale: $language->getLangParam(),
         );

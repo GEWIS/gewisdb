@@ -9,8 +9,8 @@ use App\Entity\Decision\SubDecision;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\OneToOne;
-use Laminas\Translator\TranslatorInterface;
 use Override;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Discharge from board position.
@@ -71,7 +71,7 @@ class Discharge extends SubDecision
         TranslatorInterface $translator,
         AppLanguages $language,
     ): string {
-        return $translator->translate(
+        return $translator->trans(
             '%MEMBER% wordt gedechargeerd als %FUNCTION% der s.v. GEWIS.',
             locale: $language->getLangParam(),
         );

@@ -12,8 +12,8 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\OneToOne;
-use Laminas\Translator\TranslatorInterface;
 use Override;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Release from board duties.
@@ -98,7 +98,7 @@ class Release extends SubDecision
         TranslatorInterface $translator,
         AppLanguages $language,
     ): string {
-        return $translator->translate(
+        return $translator->trans(
             '%MEMBER% wordt per %DATE% ontheven uit de functie van %FUNCTION% der s.v. GEWIS.',
             locale: $language->getLangParam(),
         );

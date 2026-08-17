@@ -2,20 +2,19 @@
 
 declare(strict_types=1);
 
-namespace App\Entity\Decision\Enums;
+namespace App\Entity\Database\Enums;
 
-use App\Entity\Application\Enums\AppLanguages;
-use Laminas\Mvc\I18n\DummyTranslator;
-use Laminas\Mvc\I18n\Translator;
+use Override;
+use Symfony\Component\Translation\TranslatableMessage;
+use Symfony\Contracts\Translation\TranslatableInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
-use function array_combine;
-use function array_map;
 use function in_array;
 
 /**
  * Enum for the different organ types.
  */
-enum OrganTypes: string
+enum OrganTypes: string implements TranslatableInterface
 {
     case Committee = 'committee';
     case AVC = 'avc';
@@ -26,27 +25,27 @@ enum OrganTypes: string
     case SC = 'sc';
 
     /**
-     * Give the function name with the given translation. If no translator is given, we return the default language.
+     * The organ type name, deferred so the caller decides on the locale (or takes the source string).
      */
-    public function getName(
-        ?Translator $translator,
-        ?AppLanguages $language = null,
-    ): string {
-        if (null === $translator) {
-            $translator = new DummyTranslator();
-        }
-
-        $function = match ($this) {
-            self::Committee => $translator->translate('Commissie', locale: $language?->getLangParam()),
-            self::AVC => $translator->translate('ALV-Commissie', locale: $language?->getLangParam()),
-            self::Fraternity => $translator->translate('Dispuut', locale: $language?->getLangParam()),
-            self::KCC => $translator->translate('KCC', locale: $language?->getLangParam()),
-            self::AVW => $translator->translate('ALV-Werkgroep', locale: $language?->getLangParam()),
-            self::RvA => $translator->translate('RvA', locale: $language?->getLangParam()),
-            self::SC => $translator->translate('Stemcommissie', locale: $language?->getLangParam()),
+    public function getName(): TranslatableMessage
+    {
+        return match ($this) {
+            self::Committee => new TranslatableMessage('Commissie'),
+            self::AVC => new TranslatableMessage('ALV-Commissie'),
+            self::Fraternity => new TranslatableMessage('Dispuut'),
+            self::KCC => new TranslatableMessage('KCC'),
+            self::AVW => new TranslatableMessage('ALV-Werkgroep'),
+            self::RvA => new TranslatableMessage('RvA'),
+            self::SC => new TranslatableMessage('Stemcommissie'),
         };
+    }
 
-        return $translator->translate($function, locale: $language?->getLangParam());
+    #[Override]
+    public function trans(
+        TranslatorInterface $translator,
+        ?string $locale = null,
+    ): string {
+        return $this->getName()->trans($translator, $locale);
     }
 
     public function hasOrganRegulations(): bool
@@ -93,24 +92,5 @@ enum OrganTypes: string
             self::AVW => 3,
             default => 1,
         };
-    }
-
-    /**
-     * Returns a list of types (and its translations)
-     *
-     * @return array<string, string>
-     */
-    public static function getTypesArray(
-        Translator $translator,
-        ?AppLanguages $language = null,
-    ): array {
-        return array_combine(
-            array_map(static function ($func) {
-                return $func->value;
-            }, self::cases()),
-            array_map(static function ($func) use ($translator, $language) {
-                return $func->getName($translator, $language);
-            }, self::cases()),
-        );
     }
 }

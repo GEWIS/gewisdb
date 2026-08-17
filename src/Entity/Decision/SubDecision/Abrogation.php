@@ -6,8 +6,8 @@ namespace App\Entity\Decision\SubDecision;
 
 use App\Entity\Application\Enums\AppLanguages;
 use Doctrine\ORM\Mapping\Entity;
-use Laminas\Translator\TranslatorInterface;
 use Override;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Abrogation of an organ.
@@ -20,7 +20,7 @@ class Abrogation extends FoundationReference
         TranslatorInterface $translator,
         AppLanguages $language,
     ): string {
-        return $translator->translate(
+        return $translator->trans(
             '%ORGAN_TYPE% %ORGAN_ABBR% wordt opgeheven.',
             locale: $language->getLangParam(),
         );

@@ -6,8 +6,8 @@ namespace App\Entity\Decision\SubDecision\Financial;
 
 use App\Entity\Application\Enums\AppLanguages;
 use Doctrine\ORM\Mapping\Entity;
-use Laminas\Translator\TranslatorInterface;
 use Override;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Entity]
 class Statement extends Budget
@@ -17,7 +17,7 @@ class Statement extends Budget
         TranslatorInterface $translator,
         AppLanguages $language,
     ): string {
-        return $translator->translate(
+        return $translator->trans(
             'De afrekening %NAME% van %AUTHOR%, versie %VERSION% van %DATE% wordt %APPROVAL%%CHANGES%.',
             locale: $language->getLangParam(),
         );

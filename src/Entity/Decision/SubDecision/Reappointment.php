@@ -9,8 +9,8 @@ use App\Entity\Decision\SubDecision;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
-use Laminas\Translator\TranslatorInterface;
 use Override;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Reappointment of a previous installation.
@@ -70,7 +70,7 @@ class Reappointment extends SubDecision
         TranslatorInterface $translator,
         AppLanguages $language,
     ): string {
-        return $translator->translate(
+        return $translator->trans(
             '%MEMBER% wordt herbenoemd als %FUNCTION% van %ORGAN_ABBR%.',
             locale: $language->getLangParam(),
         );

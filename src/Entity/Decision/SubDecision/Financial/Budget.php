@@ -12,8 +12,8 @@ use App\Entity\Member\Member;
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
-use Laminas\Translator\TranslatorInterface;
 use Override;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Entity]
 class Budget extends SubDecision
@@ -152,7 +152,7 @@ class Budget extends SubDecision
         TranslatorInterface $translator,
         AppLanguages $language,
     ): string {
-        return $translator->translate(
+        return $translator->trans(
             'De begroting %NAME% van %AUTHOR%, versie %VERSION% van %DATE% wordt %APPROVAL%%CHANGES%.',
             locale: $language->getLangParam(),
         );
@@ -166,14 +166,14 @@ class Budget extends SubDecision
         $replacements = [
             '%NAME%' => $this->getName(),
             '%AUTHOR%' => $this->getMember()?->getFullName()
-                ?? $translator->translate('onbekend', locale: $language->getLangParam()),
+                ?? $translator->trans('onbekend', locale: $language->getLangParam()),
             '%VERSION%' => $this->getVersion(),
             '%DATE%' => $this->formatDate($this->getDate(), $language),
             '%APPROVAL%' => $this->getApproval()
-                ? $translator->translate('goedgekeurd', locale: $language->getLangParam())
-                : $translator->translate('afgekeurd', locale: $language->getLangParam()),
+                ? $translator->trans('goedgekeurd', locale: $language->getLangParam())
+                : $translator->trans('afgekeurd', locale: $language->getLangParam()),
             '%CHANGES%' => $this->getApproval() && $this->getChanges()
-                ? $translator->translate(' met genoemde wijzigingen', locale: $language->getLangParam())
+                ? $translator->trans(' met genoemde wijzigingen', locale: $language->getLangParam())
                 : '',
         ];
 

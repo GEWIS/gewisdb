@@ -31,8 +31,7 @@ use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\InheritanceType;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
-use Laminas\Mvc\I18n\Translator;
-use Laminas\Translator\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 use function array_keys;
 use function str_replace;
@@ -235,11 +234,11 @@ abstract class SubDecision
     }
 
     /**
-     * Get the content in the current language (requires real translator)
+     * Get the content of the subdecision in the translator's current language.
      */
-    final public function getContent(Translator $translator): string
+    final public function getContent(TranslatorInterface $translator): string
     {
-        $language = AppLanguages::fromLangParam($translator->getTranslator()->getLocale());
+        $language = AppLanguages::fromLangParam($translator->getLocale());
 
         return $this->getTranslatedContent($translator, $language);
     }

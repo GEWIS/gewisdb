@@ -13,8 +13,8 @@ use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\OneToOne;
-use Laminas\Translator\TranslatorInterface;
 use Override;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Entity]
 class Granting extends SubDecision
@@ -68,7 +68,7 @@ class Granting extends SubDecision
         TranslatorInterface $translator,
         AppLanguages $language,
     ): string {
-        return $translator->translate(
+        return $translator->trans(
             '%GRANTEE% krijgt een sleutelcode van GEWIS tot en met %UNTIL%.',
             locale: $language->getLangParam(),
         );

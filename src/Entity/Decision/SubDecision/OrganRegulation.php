@@ -13,8 +13,8 @@ use App\Entity\Member\Member;
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
-use Laminas\Translator\TranslatorInterface;
 use Override;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use ValueError;
 
 #[Entity]
@@ -175,7 +175,7 @@ class OrganRegulation extends SubDecision
         TranslatorInterface $translator,
         AppLanguages $language,
     ): string {
-        return $translator->translate(
+        return $translator->trans(
             'Het %DOCUMENTTYPE% van %NAME% door %AUTHOR%, versie %VERSION% van %DATE% wordt %APPROVAL%%CHANGES%.',
             locale: $language->getLangParam(),
         );
@@ -190,9 +190,9 @@ class OrganRegulation extends SubDecision
             OrganTypes::Committee === $this->getOrganType()
             || OrganTypes::KCC === $this->getOrganType()
         ) {
-            $documentType = $translator->translate('commissiereglement', locale: $language->getLangParam());
+            $documentType = $translator->trans('commissiereglement', locale: $language->getLangParam());
         } elseif (OrganTypes::Fraternity === $this->getOrganType()) {
-            $documentType = $translator->translate('dispuutsreglement', locale: $language->getLangParam());
+            $documentType = $translator->trans('dispuutsreglement', locale: $language->getLangParam());
         } else {
             throw new ValueError();
         }
@@ -204,10 +204,10 @@ class OrganRegulation extends SubDecision
             '%VERSION%' => $this->getVersion(),
             '%DATE%' => $this->formatDate($this->getDate(), $language),
             '%APPROVAL%' => $this->getApproval()
-                ? $translator->translate('goedgekeurd', locale: $language->getLangParam())
-                : $translator->translate('afgekeurd', locale: $language->getLangParam()),
+                ? $translator->trans('goedgekeurd', locale: $language->getLangParam())
+                : $translator->trans('afgekeurd', locale: $language->getLangParam()),
             '%CHANGES%' => $this->getApproval() && $this->getChanges()
-                ? $translator->translate(' met genoemde wijzigingen', locale: $language->getLangParam())
+                ? $translator->trans(' met genoemde wijzigingen', locale: $language->getLangParam())
                 : '',
         ];
 

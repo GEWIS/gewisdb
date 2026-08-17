@@ -17,9 +17,8 @@ use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\OneToOne;
 use Doctrine\ORM\Mapping\OrderBy;
-use Laminas\Mvc\I18n\DummyTranslator;
-use Laminas\Mvc\I18n\Translator as MvcTranslator;
 use RuntimeException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 use function implode;
 use function preg_replace_callback;
@@ -291,23 +290,21 @@ class Decision
     /**
      * Get the statutory content of the decision by going over all subdecisions.
      */
-    public function getContent(bool $escapeCharacters = false): string
-    {
-        return $this->getTranslatedContent(null, AppLanguages::Dutch, $escapeCharacters);
+    public function getContent(
+        TranslatorInterface $translator,
+        bool $escapeCharacters = false,
+    ): string {
+        return $this->getTranslatedContent($translator, AppLanguages::Dutch, $escapeCharacters);
     }
 
     /**
      * Get the content of the decision in a specified language by going over all subdecisions.
      */
     public function getTranslatedContent(
-        ?MvcTranslator $translator,
+        TranslatorInterface $translator,
         AppLanguages $language,
         bool $escapeCharacters = false,
     ): string {
-        if (null === $translator) {
-            $translator = new MvcTranslator(new DummyTranslator());
-        }
-
         $content = [];
         foreach ($this->getSubdecisions() as $subdecision) {
             $content[] = $subdecision->getTranslatedContent($translator, $language);
@@ -329,9 +326,9 @@ class Decision
      *     content: string,
      * }
      */
-    public function toArray(): array
+    public function toArray(TranslatorInterface $translator): array
     {
-        $content = $this->getContent();
+        $content = $this->getContent($translator);
 
         return [
             'meeting_type' => $this->getMeeting()->getType(),
