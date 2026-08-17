@@ -40,3 +40,12 @@ phpcs.xml
 
 # Local mailman data for development
 /mailman/
+
+###> symfony/framework-bundle ###
+# Symfony's build artefacts and per-developer overrides. Added with the migration scaffold (GH-557); `var/` does not
+# exist yet in the Laminas application but the kernel writes its cache and logs there from the switch onwards.
+/var/
+/public/bundles/
+.env.local
+.env.*.local
+###< symfony/framework-bundle ###
