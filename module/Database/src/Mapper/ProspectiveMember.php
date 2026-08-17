@@ -68,7 +68,7 @@ class ProspectiveMember
         // also allow searching for membership number
         if (is_numeric($query)) {
             $qb->orWhere('m.lidnr = :nr');
-            $qb->orWhere('m.tueUsername = :nr');
+            $qb->orWhere('m.studentNumber = :nr');
             $qb->setParameter(':nr', $query);
         }
 

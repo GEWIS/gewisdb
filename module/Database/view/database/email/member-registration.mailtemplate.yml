@@ -53,8 +53,8 @@ messageblocks:
             <td>{{LAST_NAME}}</td>
           </tr>
           <tr>
-            <th scope='row'>TU/e username</th>
-            <td>{{TUE_USERNAME}}</td>
+            <th scope='row'>TU/e student number</th>
+            <td>{{STUDENT_NUMBER}}</td>
           </tr>
           <tr>
             <th scope='row'>Study</th>

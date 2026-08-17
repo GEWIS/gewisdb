@@ -77,7 +77,7 @@ class Member
             ->from(MemberModel::class, 'm')
             ->where("CONCAT(LOWER(m.firstName), ' ', LOWER(m.lastName)) LIKE :name")
             ->orWhere("CONCAT(LOWER(m.firstName), ' ', LOWER(m.middleName), ' ', LOWER(m.lastName)) LIKE :name")
-            ->orWhere('m.tueUsername = :name')
+            ->orWhere('m.studentNumber = :name')
             ->setMaxResults(32)
             ->orderBy('m.lidnr', 'DESC')
             ->setFirstResult(0);
@@ -328,14 +328,14 @@ class Member
     }
 
     /**
-     * Find ordinary members without a student ID.
+     * Find ordinary members without a student number.
      *
      * @param int      $maxExpiredDays    Max number of days member can have been expired
      * @param int|null $expiresWithinDays Max number of days member can expire within
      *
      * @return MemberModel[]
      */
-    public function findAttentionWithoutStudentId(
+    public function findAttentionWithoutStudentNumber(
         int $maxExpiredDays = 90,
         ?int $expiresWithinDays = null,
     ): array {
@@ -343,7 +343,7 @@ class Member
 
         $qb = $this->getRepository()->createQueryBuilder('m');
         $qb->where('m.deleted = False')
-            ->andWhere('m.tueUsername IS NULL');
+            ->andWhere('m.studentNumber IS NULL');
 
         $sq = self::getDatedMembershipSubquery(
             $qb,

@@ -50,7 +50,7 @@ class MemberFixture extends AbstractFixture
         $pros->setFirstName('Tara');
         $pros->setMiddleName('');
         $pros->setLastName('Testdata');
-        $pros->setTueUsername('20190001');
+        $pros->setStudentNumber('1000012');
         $pros->setBirth(new DateTime('2001-01-01'));
         $pros->setEmail('tara@example.com');
         $pros->setPaid(20);
@@ -85,7 +85,7 @@ class MemberFixture extends AbstractFixture
         $student->setEmail('timon@example.com');
         $student->setBirth(new DateTime('2000-01-01'));
         $student->setChangedOn(new DateTime());
-        $student->setTueUsername('20180001');
+        $student->setStudentNumber('1000020');
         $student->setStudy(Studies::BAM);
 
         $startDate = new DateTime('2018-08-14 midnight');
@@ -184,7 +184,7 @@ class MemberFixture extends AbstractFixture
             lastName: 'HiddenNoEmail',
             birth: new DateTime()->modify('-21 years'),
             email: null,
-            tueUsername: $this->studentNumber(4, 2),
+            studentNumber: $this->studentNumber(2),
             study: Studies::BAM,
             segments: $this->associationYearChain(4, $nextJul1),
             hidden: true,
@@ -200,7 +200,7 @@ class MemberFixture extends AbstractFixture
             lastName: 'SamedayDropped',
             birth: new DateTime()->modify('-21 years'),
             email: null,
-            tueUsername: $this->studentNumber(1, 3),
+            studentNumber: $this->studentNumber(3),
             study: Studies::BAM,
             segments: [
                 [MembershipTypes::Ordinary, $sameDay, clone $sameDay],
@@ -216,12 +216,12 @@ class MemberFixture extends AbstractFixture
             lastName: 'VisibleNoEmail',
             birth: new DateTime()->modify('-22 years'),
             email: null,
-            tueUsername: $this->studentNumber(3, 4),
+            studentNumber: $this->studentNumber(4),
             study: Studies::BAM,
             segments: $this->associationYearChain(3, $nextJul1),
         );
 
-        // A4: ordinary member without student ID -> MissingStudentIdOrdinary.
+        // A4: ordinary member without student number -> MissingStudentNumberOrdinary.
         $this->makeAttentionMember(
             manager: $manager,
             initials: 'N.',
@@ -230,7 +230,7 @@ class MemberFixture extends AbstractFixture
             lastName: 'NoStudentId',
             birth: new DateTime()->modify('-22 years'),
             email: 'nostudentid@example.com',
-            tueUsername: null,
+            studentNumber: null,
             study: Studies::BAM,
             segments: $this->associationYearChain(3, $nextJul1),
         );
@@ -244,7 +244,7 @@ class MemberFixture extends AbstractFixture
             lastName: 'OrdinaryActive',
             birth: new DateTime()->modify('-22 years'),
             email: 'ordinaryactive@example.com',
-            tueUsername: $this->studentNumber(4, 5),
+            studentNumber: $this->studentNumber(5),
             study: Studies::BAM,
             segments: $this->associationYearChain(4, $nextJul1),
         );
@@ -259,7 +259,7 @@ class MemberFixture extends AbstractFixture
             lastName: 'OrdinaryNonActive',
             birth: new DateTime()->modify('-23 years'),
             email: 'ordinarynonactive@example.com',
-            tueUsername: $this->studentNumber(4, 6),
+            studentNumber: $this->studentNumber(6),
             study: Studies::BAM,
             segments: $this->associationYearChain(4, $nextJul1),
         );
@@ -274,7 +274,7 @@ class MemberFixture extends AbstractFixture
             lastName: 'ExternalActive',
             birth: new DateTime()->modify('-24 years'),
             email: 'externalactive@example.com',
-            tueUsername: $this->studentNumber(6, 7),
+            studentNumber: $this->studentNumber(7),
             study: Studies::Other,
             segments: $this->associationYearChain(6, $nextJul1, MembershipTypes::External, 3),
         );
@@ -290,7 +290,7 @@ class MemberFixture extends AbstractFixture
             lastName: 'ExternalNonActive',
             birth: new DateTime()->modify('-26 years'),
             email: 'externalnonactive@example.com',
-            tueUsername: $this->studentNumber(4, 8),
+            studentNumber: $this->studentNumber(8),
             study: Studies::Other,
             segments: $this->associationYearChain(4, $nextJul1, MembershipTypes::External, 4),
         );
@@ -304,7 +304,7 @@ class MemberFixture extends AbstractFixture
             lastName: 'GraduateActive',
             birth: new DateTime()->modify('-31 years'),
             email: 'graduateactive@example.com',
-            tueUsername: $this->studentNumber(7, 9),
+            studentNumber: $this->studentNumber(9),
             study: Studies::None,
             segments: $this->associationYearChain(7, $nextJul1, MembershipTypes::Graduate, 2),
         );
@@ -320,7 +320,7 @@ class MemberFixture extends AbstractFixture
             lastName: 'GraduateNonActive',
             birth: new DateTime()->modify('-32 years'),
             email: 'graduatenonactive@example.com',
-            tueUsername: $this->studentNumber(6, 10),
+            studentNumber: $this->studentNumber(10),
             study: Studies::None,
             segments: $this->associationYearPhases(
                 [
@@ -340,7 +340,7 @@ class MemberFixture extends AbstractFixture
             lastName: 'OrdinaryExpired30',
             birth: new DateTime()->modify('-23 years'),
             email: 'ordinaryexpired30@example.com',
-            tueUsername: $this->studentNumber(4, 11),
+            studentNumber: $this->studentNumber(11),
             study: Studies::BAM,
             segments: $this->associationYearChain(4, new DateTime()->modify('-30 days')),
         );
@@ -354,7 +354,7 @@ class MemberFixture extends AbstractFixture
             lastName: 'OrdinaryBoundary90',
             birth: new DateTime()->modify('-23 years'),
             email: 'ordinaryboundary90@example.com',
-            tueUsername: $this->studentNumber(4, 12),
+            studentNumber: $this->studentNumber(12),
             study: Studies::BAM,
             segments: $this->associationYearChain(4, new DateTime()->modify('-90 days')),
         );
@@ -368,7 +368,7 @@ class MemberFixture extends AbstractFixture
             lastName: 'OrdinaryExpired180',
             birth: new DateTime()->modify('-24 years'),
             email: 'ordinaryexpired180@example.com',
-            tueUsername: $this->studentNumber(4, 13),
+            studentNumber: $this->studentNumber(13),
             study: Studies::BAM,
             segments: $this->associationYearChain(4, new DateTime()->modify('-180 days')),
         );
@@ -382,7 +382,7 @@ class MemberFixture extends AbstractFixture
             lastName: 'OrdinaryFuture180',
             birth: new DateTime()->modify('-22 years'),
             email: 'ordinaryfuture180@example.com',
-            tueUsername: $this->studentNumber(4, 14),
+            studentNumber: $this->studentNumber(14),
             study: Studies::BAM,
             segments: $this->associationYearChain(4, new DateTime()->modify('+180 days')),
         );
@@ -397,7 +397,7 @@ class MemberFixture extends AbstractFixture
             lastName: 'ExternalExpired30',
             birth: new DateTime()->modify('-26 years'),
             email: 'externalexpired30@example.com',
-            tueUsername: $this->studentNumber(4, 15),
+            studentNumber: $this->studentNumber(15),
             study: Studies::Other,
             segments: $this->associationYearChain(
                 4,
@@ -416,7 +416,7 @@ class MemberFixture extends AbstractFixture
             lastName: 'Misclassified',
             birth: new DateTime()->modify('-26 years'),
             email: 'misclassified@example.com',
-            tueUsername: $this->studentNumber(4, 16),
+            studentNumber: $this->studentNumber(16),
             study: Studies::BAM,
             segments: $this->associationYearChain(4, new DateTime()->modify('-30 days')),
         );
@@ -432,7 +432,7 @@ class MemberFixture extends AbstractFixture
             lastName: 'SpringMaster',
             birth: new DateTime()->modify('-24 years'),
             email: 'springmaster@example.com',
-            tueUsername: $this->studentNumber(2, 17),
+            studentNumber: $this->studentNumber(17),
             study: Studies::MCSE,
             segments: $this->associationYearChain(2, $nextJul1, joinMonth: 2, joinDay: 10),
         );
@@ -446,7 +446,7 @@ class MemberFixture extends AbstractFixture
             lastName: 'AutumnExternal',
             birth: new DateTime()->modify('-27 years'),
             email: 'autumnexternal@example.com',
-            tueUsername: $this->studentNumber(3, 18),
+            studentNumber: $this->studentNumber(18),
             study: Studies::PhDCS,
             segments: $this->associationYearChain(
                 3,
@@ -475,7 +475,7 @@ class MemberFixture extends AbstractFixture
         string $lastName,
         DateTime $birth,
         ?string $email,
-        ?string $tueUsername,
+        ?string $studentNumber,
         Studies $study,
         array $segments,
         bool $hidden = false,
@@ -493,8 +493,8 @@ class MemberFixture extends AbstractFixture
             $member->setEmail($email);
         }
 
-        if (null !== $tueUsername) {
-            $member->setTueUsername($tueUsername);
+        if (null !== $studentNumber) {
+            $member->setStudentNumber($studentNumber);
         }
 
         if ($hidden) {
@@ -602,15 +602,27 @@ class MemberFixture extends AbstractFixture
     }
 
     /**
-     * Build a TU/e style student number (YYYYABCD) for a member who enrolled $yearsAgo years ago. $sequence is the
-     * trailing serial; it starts at 2 below because the student and prospective fixtures above already use serial 1.
+     * Build a TU/e student number: seven digits that satisfy the Dutch elfproef. The first six digits are derived from
+     * $sequence, the seventh is the check digit. $sequence starts at 2 below, because the student and prospective
+     * fixtures above use hardcoded numbers from the same range. Not every prefix has a single-digit check digit, in
+     * which case the next prefix in the block reserved for this sequence is used.
      */
-    private function studentNumber(
-        int $yearsAgo,
-        int $sequence,
-    ): string {
-        $year = (int) new DateTime()->format('Y') - $yearsAgo;
+    private function studentNumber(int $sequence): string
+    {
+        $prefix = 100000 + $sequence * 10;
 
-        return $year . sprintf('%04d', $sequence);
+        do {
+            $digits = sprintf('%06d', $prefix);
+            $sum = 0;
+
+            for ($position = 0; $position < 6; $position++) {
+                $sum += (7 - $position) * (int) $digits[$position];
+            }
+
+            $checkDigit = (11 - $sum % 11) % 11;
+            $prefix++;
+        } while (10 === $checkDigit);
+
+        return $digits . $checkDigit;
     }
 }

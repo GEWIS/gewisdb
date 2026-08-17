@@ -18,7 +18,7 @@ enum AttentionReasons: string
 {
     /** Member */
     case MissingEmail = 'missing_email';
-    case MissingStudentIdOrdinary = 'missing_student_id_ordinary';
+    case MissingStudentNumberOrdinary = 'missing_student_number_ordinary';
     case ExpiringExternalActive = 'expiring_external_active';
     case ExpiringExternalNonActive = 'expiring_external_non_active';
     case ExpiringOrdinaryActive = 'expiring_ordinary_active';
@@ -41,8 +41,8 @@ enum AttentionReasons: string
                 'No email address',
                 locale: $language?->getLangParam(),
             ),
-            self::MissingStudentIdOrdinary => $translator->translate(
-                'Ordinary member without student ID',
+            self::MissingStudentNumberOrdinary => $translator->translate(
+                'Ordinary member without student number',
                 locale: $language?->getLangParam(),
             ),
             self::ExpiringExternalActive => sprintf(
@@ -107,7 +107,7 @@ enum AttentionReasons: string
                     locale: $language?->getLangParam(),
                 ),
             ),
-            self::MissingStudentIdOrdinary => ucfirst(
+            self::MissingStudentNumberOrdinary => ucfirst(
                 sprintf(
                     $translator->translate(
                         '%s OR %s',
@@ -190,7 +190,7 @@ enum AttentionReasons: string
     public function renewRecommended(): bool
     {
         return match ($this) {
-            self::MissingStudentIdOrdinary,
+            self::MissingStudentNumberOrdinary,
             self::ExpiringExternalActive,
             self::ExpiringExternalNonActive,
             self::ExpiringOrdinaryActive,
@@ -203,7 +203,7 @@ enum AttentionReasons: string
     {
         return match ($this) {
             self::MissingEmail,
-            self::MissingStudentIdOrdinary => true,
+            self::MissingStudentNumberOrdinary => true,
             default => false,
         };
     }

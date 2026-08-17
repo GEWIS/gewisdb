@@ -66,13 +66,13 @@ class ProspectiveMember
     private string $firstName;
 
     /**
-     * TU/e username.
+     * TU/e student number.
      */
     #[Column(
         type: 'string',
         nullable: true,
     )]
-    private ?string $tueUsername = null;
+    private ?string $studentNumber = null;
 
     /**
      * Study of the member.
@@ -289,19 +289,19 @@ class ProspectiveMember
     }
 
     /**
-     * Get the TU/e username.
+     * Get the TU/e student number.
      */
-    public function getTueUsername(): ?string
+    public function getStudentNumber(): ?string
     {
-        return $this->tueUsername;
+        return $this->studentNumber;
     }
 
     /**
-     * Set the TU/e username.
+     * Set the TU/e student number.
      */
-    public function setTueUsername(?string $tueUsername): void
+    public function setStudentNumber(?string $studentNumber): void
     {
-        $this->tueUsername = $tueUsername;
+        $this->studentNumber = $studentNumber;
     }
 
     /**
@@ -409,7 +409,7 @@ class ProspectiveMember
      *     middleName: string,
      *     initials: string,
      *     firstName: string,
-     *     tueUsername: ?string,
+     *     studentNumber: ?string,
      *     study: string,
      *     birth: string,
      *     lists: string[],
@@ -436,7 +436,7 @@ class ProspectiveMember
             'middleName' => $this->getMiddleName(),
             'initials' => $this->getInitials(),
             'firstName' => $this->getFirstName(),
-            'tueUsername' => $this->getTueUsername(),
+            'studentNumber' => $this->getStudentNumber(),
             'study' => $this->getStudy()->getName(null),
             'birth' => $this->getBirth()->format('Y-m-d'),
             'lists' => $this->getLists(),
