@@ -1,0 +1,3 @@
+[submodule "gewisdb-laminas"]
+	path = gewisdb-laminas
+	url = git@github.com:GEWIS/gewisdb.git

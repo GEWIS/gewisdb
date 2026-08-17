@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
+
 /**
  * Bundles registered with the Symfony kernel.
  *
@@ -14,5 +16,5 @@ declare(strict_types=1);
  */
 
 return [
-    Symfony\Bundle\FrameworkBundle\FrameworkBundle::class => ['all' => true],
+    FrameworkBundle::class => ['all' => true],
 ];

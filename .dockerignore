@@ -35,6 +35,7 @@ data/DoctrineORMModule/
 data/logs/*
 data/mail/*
 docker/nginx/
+gewisdb-laminas/
 Dockerfile
 docker-compose.*
 nbproject
