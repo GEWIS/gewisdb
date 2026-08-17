@@ -1,0 +1,18 @@
+framework:
+    secret: '%env(APP_SECRET)%'
+
+    # GEWISDB sits behind a reverse proxy in every environment. The Laminas application let deployment name the header
+    # via PROXY_HEADER (config/autoload/local.php -> RemoteAddress::setProxyHeader); Symfony only accepts its own enum,
+    # so if any environment sets something other than X-Forwarded-For that configurability is lost — see H5 on GH-557.
+    # Trusted proxy *addresses* come from SYMFONY_TRUSTED_PROXIES in the environment, not from here.
+    trusted_headers: ['x-forwarded-for', 'x-forwarded-proto', 'x-forwarded-host', 'x-forwarded-port']
+
+    # The session is not configured yet. GEWISDB currently keeps the locale in a session container and flips it via
+    # /lang/:lang, while GEWISWEB puts the locale in the URL path. Those produce different URLs and different
+    # cacheability, and the choice belongs with the three-host split — see H4 on GH-557 and GH-564.
+    php_errors:
+        log: true
+
+when@test:
+    framework:
+        test: true

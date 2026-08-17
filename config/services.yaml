@@ -1,0 +1,18 @@
+# Service wiring for the Symfony application.
+#
+# Pure autowire and autoconfigure. GEWISDB's Laminas modules route every injectable through a hand-written factory
+# class — there are 78 of them under `module/*/src/*/Factory/`. None of them survive the migration: constructor
+# property promotion plus autowiring replaces the lot. Do not introduce factory classes here.
+
+parameters:
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/Entity/'
+            - '../src/Kernel.php'

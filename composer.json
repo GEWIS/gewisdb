@@ -113,6 +113,7 @@
     ],
     "autoload": {
         "psr-4": {
+            "App\\": "src/",
             "Application\\": "module/Application/src",
             "Checker\\": "module/Checker/src",
             "Database\\": "module/Database/src",
@@ -122,6 +123,7 @@
     },
     "autoload-dev": {
         "psr-4": {
+            "App\\Tests\\": "tests/",
             "ApplicationTest\\": "module/Application/test",
             "CheckerTest\\": "module/Checker/test"
         }
