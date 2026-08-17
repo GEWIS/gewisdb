@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity\Report;
 
+use App\Repository\Report\MailingListMemberRepository;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Id;
@@ -19,7 +20,7 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
  *
  * Report assumes a full sync has happened (e.g. toBeDeleted entires don't exist)
  */
-#[Entity]
+#[Entity(repositoryClass: MailingListMemberRepository::class)]
 #[UniqueConstraint(
     name: 'mailinglistmember_unique_idx',
     columns: ['mailingList', 'member', 'email'],

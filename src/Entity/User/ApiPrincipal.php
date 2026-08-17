@@ -6,6 +6,7 @@ namespace App\Entity\User;
 
 use App\Entity\Application\Traits\TimestampableTrait;
 use App\Entity\User\Enums\ApiPermissions;
+use App\Repository\User\ApiPrincipalRepository;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
@@ -24,7 +25,7 @@ use function substr;
 /**
  * Member model.
  */
-#[Entity]
+#[Entity(repositoryClass: ApiPrincipalRepository::class)]
 #[HasLifecycleCallbacks]
 class ApiPrincipal
 {
@@ -49,7 +50,7 @@ class ApiPrincipal
         nullable: true,
     )]
     #[Assert\Length(min: 8, max: 255)]
-    protected ?string $description;
+    protected ?string $description = null;
 
     /**
      * Permission groups.

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity\Report\SubDecision;
 
 use App\Entity\Report\SubDecision;
+use App\Repository\Report\SubDecision\ReappointmentRepository;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
@@ -14,7 +15,7 @@ use Doctrine\ORM\Mapping\ManyToOne;
  *
  * To prevent issues with recursive self-references, multiple reappointments can point to the same installation.
  */
-#[Entity]
+#[Entity(repositoryClass: ReappointmentRepository::class)]
 class Reappointment extends SubDecision
 {
     /**

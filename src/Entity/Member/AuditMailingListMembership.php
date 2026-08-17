@@ -8,6 +8,7 @@ use App\Entity\Mailing\Enums\MailingListMemberAction;
 use App\Entity\Mailing\Enums\MailingListMemberOrigin;
 use App\Entity\Mailing\MailingList;
 use App\Entity\User\User;
+use App\Repository\Member\AuditMailingListMembershipRepository;
 use Doctrine\ORM\Mapping\AssociationOverride;
 use Doctrine\ORM\Mapping\AssociationOverrides;
 use Doctrine\ORM\Mapping\Column;
@@ -16,7 +17,7 @@ use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Override;
 
-#[Entity]
+#[Entity(repositoryClass: AuditMailingListMembershipRepository::class)]
 #[AssociationOverrides([
     new AssociationOverride(
         name: 'member',
@@ -125,18 +126,12 @@ class AuditMailingListMembership extends AuditEntry
     #[Override]
     protected function getStringArguments(): array
     {
+        // The body is translated and these are substituted into it afterwards, so they go in as their source string.
         return [
-            match ($this->action) {
-                MailingListMemberAction::Add => 'Add',
-                MailingListMemberAction::Remove => 'Remove',
-            },
+            $this->action->getName()->getMessage(),
             $this->email,
             $this->mailingList->getName(),
-            match ($this->origin) {
-                MailingListMemberOrigin::Manual => 'manual',
-                MailingListMemberOrigin::SyncMailman => 'mailman sync',
-                MailingListMemberOrigin::SyncListmonk => 'listmonk sync',
-            },
+            $this->origin->getName()->getMessage(),
         ];
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity\Member;
 
+use App\Repository\Member\AuditRenewalRepository;
 use DateTime;
 use Doctrine\ORM\Mapping\AssociationOverride;
 use Doctrine\ORM\Mapping\AssociationOverrides;
@@ -15,7 +16,7 @@ use Override;
 /**
  * Class for registering renewals by the member or another user
  */
-#[Entity]
+#[Entity(repositoryClass: AuditRenewalRepository::class)]
 #[AssociationOverrides([
     new AssociationOverride(
         name: 'member',

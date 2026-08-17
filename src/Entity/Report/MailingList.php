@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity\Report;
 
+use App\Repository\Report\MailingListRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\Column;
@@ -16,7 +17,7 @@ use Doctrine\ORM\Mapping\OneToMany;
  *
  * ReportDB does not know about mailman/listmonk and doesn't need to know.
  */
-#[Entity]
+#[Entity(repositoryClass: MailingListRepository::class)]
 class MailingList
 {
     /**

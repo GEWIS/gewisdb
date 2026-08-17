@@ -8,12 +8,13 @@ use App\Entity\Report\Keyholder;
 use App\Entity\Report\Member;
 use App\Entity\Report\SubDecision;
 use App\Entity\Report\Traits\MemberAwareTrait;
+use App\Repository\Report\SubDecision\Key\GrantingRepository;
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\OneToOne;
 
-#[Entity]
+#[Entity(repositoryClass: GrantingRepository::class)]
 class Granting extends SubDecision
 {
     use MemberAwareTrait;

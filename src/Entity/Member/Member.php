@@ -7,6 +7,7 @@ namespace App\Entity\Member;
 use App\Entity\Decision\SubDecision\Installation;
 use App\Entity\Mailing\MailingListMember;
 use App\Entity\Member\Enums\Studies;
+use App\Repository\Member\MemberRepository;
 use DateTime;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -25,7 +26,7 @@ use function is_string;
 /**
  * Member model.
  */
-#[Entity]
+#[Entity(repositoryClass: MemberRepository::class)]
 class Member
 {
     /**

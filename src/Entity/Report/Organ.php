@@ -6,6 +6,7 @@ namespace App\Entity\Report;
 
 use App\Entity\Decision\Enums\OrganTypes;
 use App\Entity\Report\SubDecision\Foundation;
+use App\Repository\Report\OrganRepository;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -25,7 +26,7 @@ use Doctrine\ORM\Mapping\OneToOne;
  *
  * Note that this entity is derived from the decisions themselves.
  */
-#[Entity]
+#[Entity(repositoryClass: OrganRepository::class)]
 class Organ
 {
     /**

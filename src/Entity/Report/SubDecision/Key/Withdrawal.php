@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace App\Entity\Report\SubDecision\Key;
 
 use App\Entity\Report\SubDecision;
+use App\Repository\Report\SubDecision\Key\WithdrawalRepository;
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\OneToOne;
 
-#[Entity]
+#[Entity(repositoryClass: WithdrawalRepository::class)]
 class Withdrawal extends SubDecision
 {
     /**

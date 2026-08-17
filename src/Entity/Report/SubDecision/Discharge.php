@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity\Report\SubDecision;
 
 use App\Entity\Report\SubDecision;
+use App\Repository\Report\SubDecision\DischargeRepository;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\OneToOne;
@@ -15,7 +16,7 @@ use Doctrine\ORM\Mapping\OneToOne;
  * This decision references to an installation. The given installation is
  * 'undone' by this discharge.
  */
-#[Entity]
+#[Entity(repositoryClass: DischargeRepository::class)]
 class Discharge extends SubDecision
 {
     /**

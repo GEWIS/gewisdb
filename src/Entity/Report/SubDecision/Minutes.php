@@ -8,6 +8,7 @@ use App\Entity\Report\Meeting;
 use App\Entity\Report\Member;
 use App\Entity\Report\SubDecision;
 use App\Entity\Report\Traits\MemberAwareTrait;
+use App\Repository\Report\SubDecision\MinutesRepository;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
@@ -16,7 +17,7 @@ use Doctrine\ORM\Mapping\OneToOne;
 /**
  * Decisions on minutes.
  */
-#[Entity]
+#[Entity(repositoryClass: MinutesRepository::class)]
 class Minutes extends SubDecision
 {
     use MemberAwareTrait;

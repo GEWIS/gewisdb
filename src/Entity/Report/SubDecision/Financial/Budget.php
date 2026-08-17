@@ -6,6 +6,7 @@ namespace App\Entity\Report\SubDecision\Financial;
 
 use App\Entity\Report\SubDecision;
 use App\Entity\Report\Traits\MemberAwareTrait;
+use App\Repository\Report\SubDecision\Financial\BudgetRepository;
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
@@ -13,7 +14,7 @@ use Doctrine\ORM\Mapping\Entity;
 /**
  * Budget decision.
  */
-#[Entity]
+#[Entity(repositoryClass: BudgetRepository::class)]
 class Budget extends SubDecision
 {
     use MemberAwareTrait;

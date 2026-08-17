@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace App\Entity\Report;
 
-use App\Entity\Member\Enums\AddressTypes;
-use App\Entity\Member\Enums\PostalRegions;
+use App\Entity\Database\Enums\AddressTypes;
+use App\Entity\Database\Enums\PostalRegions;
+use App\Repository\Report\AddressRepository;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Id;
@@ -15,7 +16,7 @@ use Doctrine\ORM\Mapping\ManyToOne;
 /**
  * Address model.
  */
-#[Entity]
+#[Entity(repositoryClass: AddressRepository::class)]
 class Address
 {
     /**

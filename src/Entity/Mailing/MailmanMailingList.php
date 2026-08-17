@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity\Mailing;
 
+use App\Repository\Mailing\MailmanMailingListRepository;
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
@@ -13,7 +14,7 @@ use Doctrine\ORM\Mapping\OneToOne;
 /**
  * Model that represents/caches mailman mailing lists and stores some additional information
  */
-#[Entity]
+#[Entity(repositoryClass: MailmanMailingListRepository::class)]
 class MailmanMailingList
 {
     /**

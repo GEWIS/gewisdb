@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity\Mailing;
 
 use App\Entity\Member\AuditMailingListMembership;
+use App\Repository\Mailing\MailingListRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\Column;
@@ -17,7 +18,7 @@ use Doctrine\ORM\Mapping\OneToOne;
 /**
  * Mailing List model for lists on the db side.
  */
-#[Entity]
+#[Entity(repositoryClass: MailingListRepository::class)]
 class MailingList
 {
     /**

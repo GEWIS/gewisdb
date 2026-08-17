@@ -23,6 +23,7 @@ use App\Entity\Decision\SubDecision\Minutes;
 use App\Entity\Decision\SubDecision\OrganRegulation;
 use App\Entity\Decision\SubDecision\Other;
 use App\Entity\Decision\SubDecision\Reappointment;
+use App\Repository\Decision\SubDecisionRepository;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\DiscriminatorColumn;
 use Doctrine\ORM\Mapping\DiscriminatorMap;
@@ -39,7 +40,7 @@ use function str_replace;
 /**
  * SubDecision model.
  */
-#[Entity]
+#[Entity(repositoryClass: SubDecisionRepository::class)]
 #[InheritanceType(value: 'SINGLE_TABLE')]
 #[DiscriminatorColumn(
     name: 'type',

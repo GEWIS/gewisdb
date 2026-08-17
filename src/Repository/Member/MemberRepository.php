@@ -15,7 +15,7 @@ use App\Entity\Member\Enums\AddressTypes;
 use App\Entity\Member\Enums\MembershipTypes;
 use App\Entity\Member\Member;
 use App\Entity\Member\Membership;
-use App\Repository\Decision\OrganRepository;
+use App\Repository\Decision\SubDecision\FoundationRepository;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -391,7 +391,7 @@ class MemberRepository extends ServiceEntityRepository
             // We use todays date to check if the member is active
             // It would be more accurate to check on the membership end date, but that would require more complex
             // queries and we don't expect any future decisions to be in the database.
-            $sqA = OrganRepository::getIsActiveWithinSubQuery(
+            $sqA = FoundationRepository::getIsActiveWithinSubQuery(
                 qb: $qb,
                 activeBefore: $today,
                 activeAfter: $today,

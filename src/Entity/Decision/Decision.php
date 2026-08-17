@@ -7,6 +7,7 @@ namespace App\Entity\Decision;
 use App\Entity\Application\Enums\AppLanguages;
 use App\Entity\Decision\Enums\MeetingTypes;
 use App\Entity\Decision\SubDecision\Annulment;
+use App\Repository\Decision\DecisionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\Column;
@@ -27,7 +28,7 @@ use function sprintf;
 /**
  * Decision model.
  */
-#[Entity]
+#[Entity(repositoryClass: DecisionRepository::class)]
 class Decision
 {
     /**

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity\User;
 
 use App\Entity\Application\Traits\TimestampableTrait;
+use App\Repository\User\UserRepository;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
@@ -18,7 +19,7 @@ use function str_contains;
 /**
  * User model.
  */
-#[Entity]
+#[Entity(repositoryClass: UserRepository::class)]
 #[HasLifecycleCallbacks]
 #[Table(name: 'users')]
 class User

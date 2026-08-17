@@ -6,6 +6,7 @@ namespace App\Entity\Report;
 
 use App\Entity\Decision\Enums\BoardFunctions;
 use App\Entity\Report\SubDecision\Board\Installation as BoardInstallation;
+use App\Repository\Report\BoardMemberRepository;
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
@@ -20,7 +21,7 @@ use Doctrine\ORM\Mapping\OneToOne;
  *
  * Note that this entity is derived from the decisions themself.
  */
-#[Entity]
+#[Entity(repositoryClass: BoardMemberRepository::class)]
 class BoardMember
 {
     /**

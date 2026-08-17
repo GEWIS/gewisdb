@@ -6,6 +6,7 @@ namespace App\Entity\Report;
 
 use App\Entity\Decision\Enums\MeetingTypes;
 use App\Entity\Report\SubDecision\Minutes;
+use App\Repository\Report\MeetingRepository;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -18,7 +19,7 @@ use Doctrine\ORM\Mapping\OneToOne;
 /**
  * Meeting model.
  */
-#[Entity]
+#[Entity(repositoryClass: MeetingRepository::class)]
 class Meeting
 {
     /**

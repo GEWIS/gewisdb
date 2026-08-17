@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity\Member;
 
+use App\Repository\Member\AuditNoteRepository;
 use Doctrine\ORM\Mapping\AssociationOverride;
 use Doctrine\ORM\Mapping\AssociationOverrides;
 use Doctrine\ORM\Mapping\Column;
@@ -14,7 +15,7 @@ use Override;
 /**
  * Class for registering manual notes
  */
-#[Entity]
+#[Entity(repositoryClass: AuditNoteRepository::class)]
 #[AssociationOverrides([
     new AssociationOverride(
         name: 'member',

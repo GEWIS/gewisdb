@@ -7,6 +7,7 @@ namespace App\Entity\Application;
 use App\Entity\Application\Enums\ConfigNamespaces;
 use App\Entity\Application\Traits\TimestampableTrait;
 use App\Entity\Application\Traits\VersionTrait;
+use App\Repository\Application\ConfigItemRepository;
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
@@ -26,7 +27,7 @@ use function sprintf;
 /**
  * Runtime configuration items model.
  */
-#[Entity]
+#[Entity(repositoryClass: ConfigItemRepository::class)]
 #[HasLifecycleCallbacks]
 #[UniqueConstraint(
     name: 'configitem_unique_idx',

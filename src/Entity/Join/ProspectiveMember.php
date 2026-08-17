@@ -10,6 +10,7 @@ use App\Entity\Member\Enums\AddressTypes;
 use App\Entity\Member\Enums\PostalRegions;
 use App\Entity\Member\Enums\Studies;
 use App\Entity\Member\PaymentLink;
+use App\Repository\Join\ProspectiveMemberRepository;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -26,7 +27,7 @@ use function in_array;
 /**
  * ProspectiveMember model.
  */
-#[Entity]
+#[Entity(repositoryClass: ProspectiveMemberRepository::class)]
 class ProspectiveMember
 {
     /**
@@ -439,7 +440,7 @@ class ProspectiveMember
             'initials' => $this->getInitials(),
             'firstName' => $this->getFirstName(),
             'studentNumber' => $this->getStudentNumber(),
-            'study' => $this->getStudy()->getName(null),
+            'study' => $this->getStudy()->getName()->getMessage(),
             'birth' => $this->getBirth()->format('Y-m-d'),
             'lists' => $this->getLists(),
             'address' => $this->getAddresses()['studentAddress']->toArray(),

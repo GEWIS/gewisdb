@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity\Report;
 
 use App\Entity\Report\SubDecision\Key\Granting as KeyGranting;
+use App\Repository\Report\KeyholderRepository;
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
@@ -19,7 +20,7 @@ use Doctrine\ORM\Mapping\OneToOne;
  *
  * Note that this entity is derived from the decisions themselves.
  */
-#[Entity]
+#[Entity(repositoryClass: KeyholderRepository::class)]
 class Keyholder
 {
     /**

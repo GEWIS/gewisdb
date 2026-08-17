@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity\Report\SubDecision;
 
 use App\Entity\Report\SubDecision;
+use App\Repository\Report\SubDecision\FoundationReferenceRepository;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
@@ -15,7 +16,7 @@ use Doctrine\ORM\Mapping\ManyToOne;
  * Note that this should not be directly used. It is in the inheritance map,
  * but that is only to make it usable as mappable entity.
  */
-#[Entity]
+#[Entity(repositoryClass: FoundationReferenceRepository::class)]
 abstract class FoundationReference extends SubDecision
 {
     /**

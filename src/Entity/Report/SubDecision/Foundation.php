@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace App\Entity\Report\SubDecision;
 
-use App\Entity\Decision\Enums\MeetingTypes;
-use App\Entity\Decision\Enums\OrganTypes;
+use App\Entity\Database\Enums\MeetingTypes;
+use App\Entity\Database\Enums\OrganTypes;
 use App\Entity\Report\Organ;
 use App\Entity\Report\SubDecision;
+use App\Repository\Report\SubDecision\FoundationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\Column;
@@ -18,7 +19,7 @@ use Doctrine\ORM\Mapping\OneToOne;
 /**
  * Foundation of an organ.
  */
-#[Entity]
+#[Entity(repositoryClass: FoundationRepository::class)]
 class Foundation extends SubDecision
 {
     /**

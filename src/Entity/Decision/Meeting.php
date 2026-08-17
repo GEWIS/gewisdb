@@ -7,6 +7,7 @@ namespace App\Entity\Decision;
 use App\Entity\Application\Enums\AppLanguages;
 use App\Entity\Decision\Enums\MeetingTypes;
 use App\Entity\Decision\SubDecision\Minutes;
+use App\Repository\Decision\MeetingRepository;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -21,7 +22,7 @@ use ValueError;
 /**
  * Meeting model.
  */
-#[Entity]
+#[Entity(repositoryClass: MeetingRepository::class)]
 class Meeting
 {
     /**

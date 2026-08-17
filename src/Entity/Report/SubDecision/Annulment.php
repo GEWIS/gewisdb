@@ -6,6 +6,7 @@ namespace App\Entity\Report\SubDecision;
 
 use App\Entity\Report\Decision;
 use App\Entity\Report\SubDecision;
+use App\Repository\Report\SubDecision\AnnulmentRepository;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\OneToOne;
@@ -22,7 +23,7 @@ use Doctrine\ORM\Mapping\OneToOne;
  *
  * Also note that annulling decisions that annul is undefined behaviour!
  */
-#[Entity]
+#[Entity(repositoryClass: AnnulmentRepository::class)]
 class Annulment extends SubDecision
 {
     /**

@@ -6,6 +6,7 @@ namespace App\Entity\Report;
 
 use App\Entity\Decision\Enums\InstallationFunctions;
 use App\Entity\Report\SubDecision\Installation;
+use App\Repository\Report\OrganMemberRepository;
 use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping\Column;
@@ -21,7 +22,7 @@ use Doctrine\ORM\Mapping\OneToOne;
  *
  * Note that this entity is derived from the decisions themself.
  */
-#[Entity]
+#[Entity(repositoryClass: OrganMemberRepository::class)]
 class OrganMember
 {
     /**

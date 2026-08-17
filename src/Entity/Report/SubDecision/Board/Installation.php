@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App\Entity\Report\SubDecision\Board;
 
-use App\Entity\Decision\Enums\BoardFunctions;
+use App\Entity\Database\Enums\BoardFunctions;
 use App\Entity\Report\BoardMember;
 use App\Entity\Report\Member;
 use App\Entity\Report\SubDecision;
 use App\Entity\Report\Traits\MemberAwareTrait;
+use App\Repository\Report\SubDecision\Board\InstallationRepository;
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
@@ -17,7 +18,7 @@ use Doctrine\ORM\Mapping\OneToOne;
 /**
  * Installation as board member.
  */
-#[Entity]
+#[Entity(repositoryClass: InstallationRepository::class)]
 class Installation extends SubDecision
 {
     use MemberAwareTrait;

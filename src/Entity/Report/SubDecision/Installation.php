@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace App\Entity\Report\SubDecision;
 
-use App\Entity\Decision\Enums\InstallationFunctions;
+use App\Entity\Database\Enums\InstallationFunctions;
 use App\Entity\Report\Member;
 use App\Entity\Report\OrganMember;
 use App\Entity\Report\Traits\MemberAwareTrait;
+use App\Repository\Report\SubDecision\InstallationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\AssociationOverride;
@@ -20,7 +21,7 @@ use Doctrine\ORM\Mapping\OneToOne;
 /**
  * Installation into organ.
  */
-#[Entity]
+#[Entity(repositoryClass: InstallationRepository::class)]
 #[AssociationOverrides([
     new AssociationOverride(
         name: 'member',

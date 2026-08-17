@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace App\Entity\Report\SubDecision;
 
-use App\Entity\Decision\Enums\OrganTypes;
+use App\Entity\Database\Enums\OrganTypes;
 use App\Entity\Report\Member;
 use App\Entity\Report\SubDecision;
 use App\Entity\Report\Traits\MemberAwareTrait;
+use App\Repository\Report\SubDecision\OrganRegulationRepository;
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 
-#[Entity]
+#[Entity(repositoryClass: OrganRegulationRepository::class)]
 class OrganRegulation extends SubDecision
 {
     use MemberAwareTrait;

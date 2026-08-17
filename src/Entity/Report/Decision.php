@@ -6,6 +6,7 @@ namespace App\Entity\Report;
 
 use App\Entity\Decision\Enums\MeetingTypes;
 use App\Entity\Report\SubDecision\Annulment;
+use App\Repository\Report\DecisionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\Column;
@@ -20,7 +21,7 @@ use Doctrine\ORM\Mapping\OrderBy;
 /**
  * Decision model.
  */
-#[Entity]
+#[Entity(repositoryClass: DecisionRepository::class)]
 class Decision
 {
     /**

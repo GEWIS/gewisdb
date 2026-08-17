@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity\Report\SubDecision\Board;
 
 use App\Entity\Report\SubDecision;
+use App\Repository\Report\SubDecision\Board\ReleaseRepository;
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
@@ -17,7 +18,7 @@ use Doctrine\ORM\Mapping\OneToOne;
  * This decision references to an installation. The duties of this installation
  * are released by this release.
  */
-#[Entity]
+#[Entity(repositoryClass: ReleaseRepository::class)]
 class Release extends SubDecision
 {
     /**

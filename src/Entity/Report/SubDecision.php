@@ -22,6 +22,7 @@ use App\Entity\Report\SubDecision\Minutes;
 use App\Entity\Report\SubDecision\OrganRegulation;
 use App\Entity\Report\SubDecision\Other;
 use App\Entity\Report\SubDecision\Reappointment;
+use App\Repository\Report\SubDecisionRepository;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\DiscriminatorColumn;
 use Doctrine\ORM\Mapping\DiscriminatorMap;
@@ -34,7 +35,7 @@ use Doctrine\ORM\Mapping\ManyToOne;
 /**
  * SubDecision model.
  */
-#[Entity]
+#[Entity(repositoryClass: SubDecisionRepository::class)]
 #[InheritanceType(value: 'SINGLE_TABLE')]
 #[DiscriminatorColumn(
     name: 'type',

@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace App\Entity\Report;
 
-use App\Entity\Member\Enums\MembershipTypes;
+use App\Entity\Database\Enums\MembershipTypes;
 use App\Entity\Report\SubDecision\Installation;
+use App\Repository\Report\MemberRepository;
 use DateTime;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -25,7 +26,7 @@ use function in_array;
 /**
  * Member model.
  */
-#[Entity]
+#[Entity(repositoryClass: MemberRepository::class)]
 class Member
 {
     /**
