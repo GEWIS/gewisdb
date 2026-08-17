@@ -41,9 +41,14 @@ class Member
     {
         $qb = $this->getRepository()->createQueryBuilder('m');
 
+        // Ordering is not cosmetic here: combined with the row limit below, an unordered query lets PostgreSQL return
+        // any 32 of the eligible members, and a different 32 on the next call. Consumers of `GET /api/members` cannot
+        // rely on the order because there was none, so pinning it to lidnr is safe and makes the endpoint repeatable.
+        // The limit itself is still wrong — see GH-575 for replacing it with real pagination.
         $qb->where('m.expiration >= CURRENT_TIMESTAMP()')
             ->andWhere('m.hidden = false')
             ->andWhere('m.deleted = false')
+            ->orderBy('m.lidnr', 'ASC')
             ->setMaxResults(32)
             ->setFirstResult(0);
 
@@ -66,6 +71,10 @@ class Member
         if (!$includeInactiveFraternity) {
             $qb->andWhere('om.function <> \'Inactief Lid\'');
         }
+
+        // Unlike findNormal() this is not row-limited, so an unordered query returns the whole set either way — but it
+        // returns it in whatever order the rows happen to sit in, which changes after any ReportDB regeneration.
+        $qb->orderBy('m.lidnr', 'ASC');
 
         return $qb->getQuery()->getResult();
     }
