@@ -1,0 +1,28 @@
+# Migrations for ReportDB (orm_report).
+#
+# This is doctrine/migrations' NATIVE configuration format, not DoctrineMigrationsBundle's DI format, because the
+# bundle cannot express two migration sets over two entity managers — see the note in
+# config/packages/doctrine_migrations.yaml.
+#
+# Passing --configuration to any doctrine:migrations:* command replaces the configuration the bundle injected, so:
+#
+#     bin/console doctrine:migrations:migrate --em=report --configuration=migrations/report.yaml
+#     bin/console doctrine:migrations:diff    --em=report --configuration=migrations/report.yaml
+#
+# The `Report\Migrations` namespace is preserved for the same reason as the Database one: production's
+# doctrine_migration_versions rows record the fully-qualified class names.
+
+migrations_paths:
+    'Report\Migrations': 'migrations/report'
+
+table_storage:
+    table_name: doctrine_migration_versions
+    version_column_name: version
+    version_column_length: 191
+    executed_at_column_name: executed_at
+    execution_time_column_name: execution_time
+
+all_or_nothing: true
+transactional: true
+check_database_platform: true
+custom_template: 'migrations/template.tpl'

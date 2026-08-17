@@ -1,0 +1,104 @@
+# Two databases, two connections, two entity managers.
+#
+#   default -> the Database (orm_default): the transactional source of truth. Members, meetings, decisions, organs,
+#              mailing lists, prospective members, users.
+#   report  -> ReportDB (orm_report): a materialised projection of the above, maintained by Doctrine lifecycle
+#              listeners and rebuilt wholesale by `report:generate:full`.
+#
+# ReportDB is not an internal detail. GEWISWEB opens a direct read-only PostgreSQL connection to it and copies twelve
+# tables column-by-column into its own MariaDB (App\Command\Decision\ImportGewisdbCommand), so its DDL is a
+# cross-system contract. goldens/schema/report.sql is the check on that.
+#
+# NOTE: this file is inert until doctrine-bundle is installed. It cannot be, while the Laminas application is alive —
+# doctrine/doctrine-orm-module is ORM 2 only. See the atomicity note on GH-557.
+
+doctrine:
+    dbal:
+        default_connection: default
+        connections:
+            default:
+                url: '%env(resolve:DATABASE_DSN)%'
+                # `charset: utf8` / `collate: utf8_unicode_ci` in the Laminas config were MySQL-isms that PostgreSQL
+                # ignored; deliberately not carried over rather than translated into something that does apply.
+                types:
+                    stringable_datetime: App\Doctrine\Types\StringableDateTimeType
+            report:
+                url: '%env(resolve:REPORT_DATABASE_DSN)%'
+
+    orm:
+        default_entity_manager: default
+        entity_managers:
+            default:
+                connection: default
+                # THE SINGLE HIGHEST-RISK LINE IN THE MIGRATION.
+                #
+                # Nine entities declare #[GeneratedValue(strategy: 'AUTO')] and PostgreSQL resolved that to SEQUENCE
+                # under ORM 2. Under ORM 3 + DBAL 4 it resolves to IDENTITY instead: ClassMetadataFactory only picks
+                # SEQUENCE for PostgreSQL when `method_exists($platform, 'getIdentitySequenceName')`, a DBAL 3 marker
+                # that in DBAL 4 survives only on OraclePlatform.
+                #
+                # The existing schema has nine bare `CREATE SEQUENCE` objects and plain `id INT NOT NULL` columns with
+                # no `DEFAULT nextval(...)` — see goldens/schema/default.sql. Under IDENTITY the ORM stops issuing
+                # nextval and expects the database to supply the value, which it cannot, so every INSERT into those
+                # nine tables fails a NOT NULL check against the production schema.
+                #
+                # Pinning the preference keeps AUTO meaning SEQUENCE, exactly as the ORM's own deprecation notice
+                # recommends. Do not remove this without re-recording goldens/schema/*.sql and reading the diff.
+                identity_generation_preferences:
+                    Doctrine\DBAL\Platforms\PostgreSQLPlatform: sequence
+                mappings:
+                    Application:
+                        type: attribute
+                        is_bundle: false
+                        dir: '%kernel.project_dir%/src/Entity/Application'
+                        prefix: 'App\Entity\Application'
+                    Decision:
+                        type: attribute
+                        is_bundle: false
+                        dir: '%kernel.project_dir%/src/Entity/Decision'
+                        prefix: 'App\Entity\Decision'
+                    Member:
+                        type: attribute
+                        is_bundle: false
+                        dir: '%kernel.project_dir%/src/Entity/Member'
+                        prefix: 'App\Entity\Member'
+                    Join:
+                        type: attribute
+                        is_bundle: false
+                        dir: '%kernel.project_dir%/src/Entity/Join'
+                        prefix: 'App\Entity\Join'
+                    Mailing:
+                        type: attribute
+                        is_bundle: false
+                        dir: '%kernel.project_dir%/src/Entity/Mailing'
+                        prefix: 'App\Entity\Mailing'
+                    Query:
+                        type: attribute
+                        is_bundle: false
+                        dir: '%kernel.project_dir%/src/Entity/Query'
+                        prefix: 'App\Entity\Query'
+                    User:
+                        type: attribute
+                        is_bundle: false
+                        dir: '%kernel.project_dir%/src/Entity/User'
+                        prefix: 'App\Entity\User'
+
+            report:
+                connection: report
+                identity_generation_preferences:
+                    Doctrine\DBAL\Platforms\PostgreSQLPlatform: sequence
+                mappings:
+                    Report:
+                        type: attribute
+                        is_bundle: false
+                        dir: '%kernel.project_dir%/src/Entity/Report'
+                        prefix: 'App\Entity\Report'
+                dql:
+                    numeric_functions:
+                        # Used by the report-side membership queries; there is no portable DQL YEAR().
+                        YEAR: App\Doctrine\Functions\Year
+
+when@prod:
+    doctrine:
+        orm:
+            auto_generate_proxy_classes: false
