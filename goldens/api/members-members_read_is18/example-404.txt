@@ -1,0 +1,11 @@
+GET /api/example404
+--- 404
+Content-Type: application/json; charset=utf-8
+---
+{
+  "error": {
+    "exception": null,
+    "type": "error-router-no-match"
+  },
+  "status": "notfound"
+}

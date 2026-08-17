@@ -1,0 +1,11 @@
+GET /api/boardFunctions
+--- 406
+Content-Type: application/json; charset=utf-8
+---
+{
+  "error": {
+    "exception": "API version expected, but %2A%2F%2A was given",
+    "type": "Database\\Model\\Exception\\VersionFormat"
+  },
+  "status": "error"
+}

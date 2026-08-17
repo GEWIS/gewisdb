@@ -1,0 +1,12 @@
+GET /api/organFunctions
+Accept: application/vnd.gewis.gewisdb+json;version=4.3.3
+--- 403
+Content-Type: application/json; charset=utf-8
+---
+{
+  "error": {
+    "exception": "Permission `organs_functionslist_read` is needed but is not currently held.",
+    "type": "User\\Model\\Exception\\NotAllowed"
+  },
+  "status": "forbidden"
+}

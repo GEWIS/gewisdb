@@ -1,0 +1,26 @@
+# The API surface, captured once per principal in scripts/goldens/capture.sh.
+#
+# Columns: name <TAB> path <TAB> accept-header
+#
+# {MEMBER} and {DELETED_MEMBER} are substituted at capture time from the seeded database, so this file survives a
+# reseed. "-" in the accept column means no Accept header is sent.
+#
+# The versioned endpoints appear twice on purpose: once negotiating correctly, once without an Accept header at all.
+# The second case exercises the VersionExpected error path, which is part of the contract other GEWIS systems see and
+# is exactly the kind of thing a port silently changes.
+
+root	/api	-
+health	/api/health	-
+members	/api/members	-
+members-include-organs	/api/members?includeOrgans=1	-
+members-active	/api/members/active	-
+members-active-include-inactive	/api/members/active?includeInactive=1	-
+member	/api/members/{MEMBER}	-
+member-deleted	/api/members/{DELETED_MEMBER}	-
+member-unknown	/api/members/99999999	-
+organ-functions	/api/organFunctions	application/vnd.gewis.gewisdb+json;version=4.3.3
+organ-functions-no-version	/api/organFunctions	-
+board-functions	/api/boardFunctions	application/vnd.gewis.gewisdb+json;version=4.3.3
+board-functions-no-version	/api/boardFunctions	-
+example-404	/api/example404	-
+example-500	/api/example500	-

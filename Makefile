@@ -1,4 +1,4 @@
-.PHONY: help runprod rundev runtest runcoverage update updatecomposer getvendordir phpstan phpcs phpcbf phpcsfix phpcsfixtypes replenish compilelang build buildprod builddev update preparelistmonk preparemailman migrate migrate-to migration-down migration-up migration-diff composerunused stripewebhooksecret seed
+.PHONY: help runprod rundev runtest runcoverage update updatecomposer getvendordir phpstan phpcs phpcbf phpcsfix phpcsfixtypes replenish compilelang build buildprod builddev update preparelistmonk preparemailman migrate migrate-to migration-down migration-up migration-diff composerunused stripewebhooksecret seed goldens goldens-verify goldens-freeze goldens-restore
 
 help:
 		@echo "Makefile commands:"
@@ -73,6 +73,23 @@ seed: replenish
 		@make preparelistmonk
 		@docker compose exec -u www-data web ./web database:mailinglist:fetch
 
+
+# Behavioural goldens: a recording of what this application does, so the Symfony migration can be checked against it
+# mechanically rather than by inspection. See goldens/README.md.
+#
+# goldens-verify and goldens-restore drop and recreate the public schema in both databases. That is deliberate — a
+# capture is only comparable if it started from identical data — but it does mean they will discard local changes.
+goldens: replenish
+		@bash scripts/goldens/capture.sh
+
+goldens-verify: replenish
+		@bash scripts/goldens/verify.sh
+
+goldens-freeze:
+		@bash scripts/goldens/freeze-input.sh
+
+goldens-restore:
+		@bash scripts/goldens/restore-input.sh
 
 exec:
 		docker compose exec -u www-data -it web $(cmd)

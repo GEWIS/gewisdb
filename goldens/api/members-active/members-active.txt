@@ -1,0 +1,33 @@
+GET /api/members/active
+--- 200
+Content-Type: application/json; charset=utf-8
+---
+{
+  "data": [
+    {
+      "deleted": false,
+      "expiration": "2027-07-01T00:00:00+02:00",
+      "family_name": "OrdinaryActive",
+      "full_name": "Olaf OrdinaryActive",
+      "generation": 2023,
+      "given_name": "Olaf",
+      "hidden": false,
+      "initials": "O.",
+      "lidnr": 9,
+      "middle_name": ""
+    },
+    {
+      "deleted": false,
+      "expiration": "2027-07-01T00:00:00+02:00",
+      "family_name": "ExternalActive",
+      "full_name": "Ellen ExternalActive",
+      "generation": 2021,
+      "given_name": "Ellen",
+      "hidden": false,
+      "initials": "E.",
+      "lidnr": 11,
+      "middle_name": ""
+    }
+  ],
+  "status": "success"
+}

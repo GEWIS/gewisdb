@@ -1,0 +1,19 @@
+GET /api/members/4
+--- 200
+Content-Type: application/json; charset=utf-8
+---
+{
+  "data": {
+    "deleted": true,
+    "expiration": "2027-07-01T00:00:00+02:00",
+    "family_name": "Removed",
+    "full_name": "Rita Removed",
+    "generation": 2019,
+    "given_name": "Rita",
+    "hidden": false,
+    "initials": "R.",
+    "lidnr": 4,
+    "middle_name": ""
+  },
+  "status": "success"
+}

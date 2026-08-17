@@ -1,0 +1,11 @@
+GET /api/members
+--- 403
+Content-Type: application/json; charset=utf-8
+---
+{
+  "error": {
+    "exception": "Permission `members_read` is needed but is not currently held.",
+    "type": "User\\Model\\Exception\\NotAllowed"
+  },
+  "status": "forbidden"
+}

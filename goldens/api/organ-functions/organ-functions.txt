@@ -1,0 +1,90 @@
+GET /api/organFunctions
+Accept: application/vnd.gewis.gewisdb+json;version=4.3.3
+--- 200
+Content-Type: application/json; charset=utf-8
+---
+{
+  "data": {
+    "Inactief Lid": {
+      "isAdministrative": true,
+      "isLegacy": false,
+      "translations": {
+        "en": "Inactive Member",
+        "nl": "Inactief Lid"
+      }
+    },
+    "Inkoper": {
+      "isAdministrative": false,
+      "isLegacy": true,
+      "translations": {
+        "en": "Procurement Officer",
+        "nl": "Inkoper"
+      }
+    },
+    "Lid": {
+      "isAdministrative": true,
+      "isLegacy": false,
+      "translations": {
+        "en": "Member",
+        "nl": "Lid"
+      }
+    },
+    "Opperhoofd": {
+      "isAdministrative": false,
+      "isLegacy": false,
+      "translations": {
+        "en": "Opperhoofd",
+        "nl": "Opperhoofd"
+      }
+    },
+    "PR-Functionaris": {
+      "isAdministrative": false,
+      "isLegacy": false,
+      "translations": {
+        "en": "PR Officer",
+        "nl": "PR-Functionaris"
+      }
+    },
+    "Penningmeester": {
+      "isAdministrative": false,
+      "isLegacy": false,
+      "translations": {
+        "en": "Treasurer",
+        "nl": "Penningmeester"
+      }
+    },
+    "Secretaris": {
+      "isAdministrative": false,
+      "isLegacy": false,
+      "translations": {
+        "en": "Secretary",
+        "nl": "Secretaris"
+      }
+    },
+    "Tafelvoetbalcoordinator": {
+      "isAdministrative": false,
+      "isLegacy": true,
+      "translations": {
+        "en": "Foosball Coordinator",
+        "nl": "Tafelvoetbalcoordinator"
+      }
+    },
+    "Vice-Voorzitter": {
+      "isAdministrative": false,
+      "isLegacy": false,
+      "translations": {
+        "en": "Vice-Chair",
+        "nl": "Vice-Voorzitter"
+      }
+    },
+    "Voorzitter": {
+      "isAdministrative": false,
+      "isLegacy": false,
+      "translations": {
+        "en": "Chair",
+        "nl": "Voorzitter"
+      }
+    }
+  },
+  "status": "success"
+}

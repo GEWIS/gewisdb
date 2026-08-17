@@ -1,0 +1,17 @@
+generating mailing list tables
+generating members table
+stty: standard input: Not a tty
+
+Deprecated: preg_match(): Passing null to parameter #2 ($subject) of type string is deprecated in /code/vendor/laminas/laminas-progressbar/src/Adapter/Console.php on line 256
+stty: standard input: Not a tty
+
+Deprecated: preg_match(): Passing null to parameter #2 ($subject) of type string is deprecated in /code/vendor/laminas/laminas-progressbar/src/Adapter/Console.php on line 258
+  0% [------------------------------------------------------------]               5% [###---------------------------------------------------------]              95% [#########################################################---]             
+replaying meetings and decisions
+stty: standard input: Not a tty
+
+Deprecated: preg_match(): Passing null to parameter #2 ($subject) of type string is deprecated in /code/vendor/laminas/laminas-progressbar/src/Adapter/Console.php on line 256
+stty: standard input: Not a tty
+
+Deprecated: preg_match(): Passing null to parameter #2 ($subject) of type string is deprecated in /code/vendor/laminas/laminas-progressbar/src/Adapter/Console.php on line 258
+  0% [------------------------------------------------------------]              33% [####################----------------------------------------]              67% [########################################--------------------]             100% [############################################################]             

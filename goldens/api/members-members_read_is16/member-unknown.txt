@@ -1,0 +1,4 @@
+GET /api/members/99999999
+--- 204
+Content-Type: application/json; charset=utf-8
+---

@@ -30,6 +30,13 @@ class MemberFixture extends AbstractFixture
     public const string REF_MEMBER_PROSPECTIVE = 'prospective';
 
     /**
+     * A deleted member. Without one, the `members_deleted` API permission is unobservable: every response looks the
+     * same whether or not the calling principal holds it, and a regression that started leaking deleted members would
+     * go unnoticed.
+     */
+    public const string REF_MEMBER_DELETED = 'deleted';
+
+    /**
      * Members below are crafted to surface on the "members requiring attention" overview. The ones that need to count
      * as active organ members are referenced here so {@see DecisionFixture} can install them into an organ.
      */
@@ -159,6 +166,35 @@ class MemberFixture extends AbstractFixture
 
         $manager->persist($graduate);
         $this->addReference(self::REF_MEMBER_GRADUATE, $graduate);
+
+        /** Deleted */
+        $deleted = new MemberModel();
+        $deleted->setInitials('R.');
+        $deleted->setFirstName('Rita');
+        $deleted->setMiddleName('');
+        $deleted->setLastName('Removed');
+        $deleted->setEmail('rita@example.com');
+        $deleted->setBirth(new DateTime('1998-01-01'));
+        $deleted->setChangedOn(new DateTime());
+        $deleted->setStudentNumber('1000030');
+        $deleted->setStudy(Studies::BAM);
+        $deleted->setDeleted(true);
+
+        $startDate = new DateTime('2019-08-13 midnight');
+        while ($startDate < new DateTime()) {
+            $membership = new MembershipModel(
+                member: $deleted,
+                type: MembershipTypes::Ordinary,
+                startDate: clone $startDate,
+                endDate: null,
+            );
+            $deleted->addMembership($membership);
+
+            $startDate = $membership->getEndDate();
+        }
+
+        $manager->persist($deleted);
+        $this->addReference(self::REF_MEMBER_DELETED, $deleted);
 
         /**
          * Members requiring attention.

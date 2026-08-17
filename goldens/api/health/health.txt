@@ -1,0 +1,9 @@
+GET /api/health
+--- 200
+Content-Type: application/json; charset=utf-8
+---
+{
+  "healthy": true,
+  "status": "success",
+  "sync_paused": false
+}
