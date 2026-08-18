@@ -86,9 +86,9 @@ stay under `Database`, because that directory is what maps them to the default m
 - ~~The fee, €20 or €25~~ — settled: it is **€20**. The registration says so in its own copy, which is where a
   prospective member needs it. Nothing else renders a figure: what a prospective member actually paid comes back from
   Stripe with the checkout, and printing €20 next to it would be a second, unrelated claim.
-- ~~The query console's "read replica" copy~~ — reworded. It is not a read replica and it is not a scheduled copy:
-  `DatabaseUpdateListener` and `DatabaseDeletionListener` write ReportDB as the ledger is written, so the projection
-  is current. The half-hourly job is GEWISWEB's `ImportGewisdbCommand` pulling *from* ReportDB, one hop further out,
-  and says nothing about how fresh ReportDB itself is.
+- ~~The query console's "read replica" copy~~ — the panel is gone. It was wrong twice over: ReportDB is neither a
+  read replica nor a scheduled copy, `DatabaseUpdateListener` and `DatabaseDeletionListener` write it as the ledger
+  is written. (The half-hourly job is GEWISWEB's `ImportGewisdbCommand` pulling *from* ReportDB, one hop further
+  out, and says nothing about how fresh ReportDB itself is.) Nothing on the page claims either way now.
 - Out of scope without backend work: the global search (no endpoint spans members, organs and decisions), CSV export
   of a member selection or of query results, and the full audit log page.
