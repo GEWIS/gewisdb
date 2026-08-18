@@ -1137,6 +1137,10 @@
         <source>Filter entities</source>
         <target state="translated">Filter entities</target>
       </trans-unit>
+      <trans-unit id="uiQkRH6" resname="Finances">
+        <source>Finances</source>
+        <target state="translated">Finances</target>
+      </trans-unit>
       <trans-unit id="BQjGS3q" resname="First Name">
         <source>First Name</source>
         <target state="translated">First Name</target>
@@ -1388,6 +1392,10 @@
       <trans-unit id="9ffhDtY" resname="Key Code(s) to Withdraw">
         <source>Key Code(s) to Withdraw</source>
         <target state="translated">Key Code(s) to Withdraw</target>
+      </trans-unit>
+      <trans-unit id="R7EHc06" resname="Key codes">
+        <source>Key codes</source>
+        <target state="translated">Key codes</target>
       </trans-unit>
       <trans-unit id="i._6Qb0" resname="Kind of decision">
         <source>Kind of decision</source>
@@ -2280,10 +2288,6 @@
       <trans-unit id="SdNWA5t" resname="Search">
         <source>Search</source>
         <target state="translated">Search</target>
-      </trans-unit>
-      <trans-unit id="HcYVu7m" resname="Search Bodies">
-        <source>Search Bodies</source>
-        <target state="translated">Search Bodies</target>
       </trans-unit>
       <trans-unit id="wcsLyzt" resname="Secretaris">
         <source>Secretaris</source>

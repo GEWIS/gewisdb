@@ -61,7 +61,7 @@
             the kind you wanted was often two clicks away behind a label that did not name it.
         #}
         {% set kinds = {
-            'organ': {
+            'body': {
                 'label': 'Bodies'|trans,
                 'items': {
                     'tab-organ-foundation': {'icon': 'fa-sitemap', 'label': 'Foundation'|trans,
@@ -85,19 +85,34 @@
                         'hint': 'Discharge a board member.'|trans},
                 },
             },
-            'other': {
-                'label': 'Everything else'|trans,
+            'finances': {
+                'label': 'Finances'|trans,
                 'items': {
                     'tab-budget': {'icon': 'fa-coins', 'label': 'Budget / Statement'|trans,
                         'hint': 'Approve a budget or a financial statement.'|trans},
+                },
+            },
+            'keys': {
+                'label': 'Key codes'|trans,
+                'items': {
                     'tab-key-grant': {'icon': 'fa-key', 'label': 'Grant Key Code'|trans,
                         'hint': 'Grant a member a key code.'|trans},
                     'tab-key-withdraw': {'icon': 'fa-key', 'label': 'Withdraw Key Code'|trans,
                         'hint': 'Withdraw a key code that was granted.'|trans},
+                },
+            },
+            'meeting': {
+                'label': 'Meetings'|trans,
+                'items': {
                     'tab-minutes': {'icon': 'fa-book', 'label': 'Minutes'|trans,
                         'hint': 'Approve the minutes of an earlier meeting.'|trans},
                     'tab-annulment': {'icon': 'fa-rotate-left', 'label': 'Annul Decision'|trans,
                         'hint': 'Annul an earlier decision and revert what it did.'|trans},
+                },
+            },
+            'other': {
+                'label': 'Everything else'|trans,
+                'items': {
                     'tab-other': {'icon': 'fa-pen-nib', 'label': 'Other'|trans,
                         'hint': 'Free text. Changes nothing on the register.'|trans},
                 },

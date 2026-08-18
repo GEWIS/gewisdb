@@ -18,3 +18,10 @@ body {
         --#{$prefix}page-bg: #{$page-bg-dark};
     }
 }
+
+// What a page opens with sits directly under the header band. A panel carries its own top margin, and the band its
+// own padding, so without this the two stack into a gap twice the size of the one between the panels below.
+.page-body > .panel:first-child,
+.page-body > .row:first-child > * > .panel:first-child {
+    margin-block-start: 0;
+}
