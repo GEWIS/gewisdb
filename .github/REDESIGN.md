@@ -19,9 +19,14 @@ application's own view layer and GEWISWEB's conventions. No inline styles, no se
       recommendation, the checkout history and the applicant's own data.
 - [x] **Meetings** — list; meeting view as decision cards with their subdecision lines; the add-decision affordance.
 - [x] **Organs and decision export** — organ list with search; export as a meeting picker with a running total.
-- [ ] **Decisions** — register with kind tabs and annulled styling; the create flow with the subdecision builder:
-      per-kind fields, discharge selecting an existing installation, an effects panel stating what changes, and
-      submission blocked while any subdecision is incomplete.
+- [x] **Decisions, create** — the kind picker is one flat list with a description per kind, replacing two levels of
+      nested tabs. Each kind keeps its own form and its own post.
+- [ ] **Decisions, the builder** — *needs backend work.* The designs show one decision assembled from several
+      subdecisions of mixed kinds, with a panel stating the effect on the register before it is recorded and
+      submission blocked while any subdecision is incomplete. The entity model supports it — a decision is already a
+      container of subdecisions, and the installation form already records several — but `decision_decision_form`
+      builds one decision from one form type, so mixing kinds needs a form type and a recording path that do not
+      exist. Not faked.
 - [ ] **Registration** — five server-rendered steps (Personal, Study, Address, Mailing lists, Review & pay) with
       GEWISWEB's `form-stepper` ported as progressive enhancement. Per-step server-side validation; student number
       exactly 7 digits; Pattern notice only for a data-science programme; announcements list locked rather than

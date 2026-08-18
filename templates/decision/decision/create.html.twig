@@ -4,148 +4,219 @@
 
 {% block page_title %}{{ 'Add Decision'|trans }} {{ decision_label }} - {{ parent() }}{% endblock %}
 
-{# The tab strip is the same shape at both levels, so it is described as a map of pane id to label and the first
-   entry is the one that opens. Bootstrap 5 drives the panes itself; no controller is involved. #}
-{% macro tabs(panes, justified) %}
-    <ul class="nav nav-tabs{{ justified|default(false) ? ' nav-justified' : '' }}" role="tablist">
-        {% for id, label in panes %}
-            <li class="nav-item" role="presentation">
-                <button class="nav-link{{ loop.first ? ' active' : '' }}" id="{{ id }}-tab" type="button" role="tab"
-                        data-bs-toggle="tab" data-bs-target="#{{ id }}" aria-controls="{{ id }}"
-                        aria-selected="{{ loop.first ? 'true' : 'false' }}">
-                    {{ label }}
-                </button>
-            </li>
-        {% endfor %}
-    </ul>
-{% endmacro %}
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href="{{ path('decision_meeting_index') }}">{{ 'Meetings'|trans }}</a></li>
+    <li class="breadcrumb-item">
+        <a href="{{ path('decision_meeting_view', {type: meeting.type.value, number: meeting.number}) }}">
+            {{ meeting.type.value }} {{ meeting.number }}
+        </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">{{ decision_label }}</li>
+{% endblock %}
 
-{% import _self as strip %}
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_title %}
+            {{ error|default(false) ? 'Decision Already Exists'|trans : 'Add Decision'|trans ~ ' ' ~ decision_label }}
+        {% endblock %}
+        {% block header_subtitle %}
+            {% if not error|default(false) %}
+                <p class="page-header-meta mb-0">
+                    {{ 'Takes effect the moment it is recorded — there is no draft to review first.'|trans }}
+                </p>
+            {% endif %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
 
 {% block contents %}
     {% if error is defined and error %}
-        <h1>{{ 'Decision Already Exists'|trans }}</h1>
-        <p>
-            <a href="{{ path('decision_meeting_view', {
-                   'type': meeting.type.value,
-                   'number': meeting.number,
-               }) }}" class="btn btn-secondary">
-                {{ 'Back to %type% %number%'|trans({
-                    '%type%': meeting.type.value,
-                    '%number%': meeting.number,
-                }) }}
-            </a>
-        </p>
+        <div class="panel">
+            <div class="panel-body">
+                {% include 'partials/application/empty-state.html.twig' with {
+                    icon: 'fa-gavel',
+                    title: 'Decision Already Exists'|trans,
+                    body: 'Pick a decision number that is still free for this point.'|trans,
+                } only %}
+                <div class="text-center">
+                    <a class="btn btn-gewis-primary"
+                       href="{{ path('decision_meeting_view', {type: meeting.type.value, number: meeting.number}) }}">
+                        {{ 'Back to %type% %number%'|trans({
+                            '%type%': meeting.type.value,
+                            '%number%': meeting.number,
+                        }) }}
+                    </a>
+                </div>
+            </div>
+        </div>
     {% else %}
-        <h1>{{ 'Add Decision'|trans }} {{ decision_label }}</h1>
+        {#
+            One kind per decision, because that is what the server records: each of these posts its own form to
+            `decision_decision_form`, which builds one decision from it. The designs show a builder that mixes kinds
+            within a single decision; that needs a form type and a recording path this application does not have, and
+            is listed in .github/REDESIGN.md rather than mocked up here.
 
-        {{ strip.tabs({
-            'tab-budget': 'Budget/Statement'|trans,
-            'tab-organ': 'Organ Mutations'|trans,
-            'tab-board': 'Board Mutations'|trans,
-            'tab-key': 'Key Codes'|trans,
-            'tab-annulment': 'Annul Decision'|trans,
-            'tab-minutes': 'Minutes'|trans,
-            'tab-other': 'Other'|trans,
-        }, true) }}
+            The kinds are one flat list instead of the two levels of tabs this page used to have. Nesting them meant
+            the kind you wanted was often two clicks away behind a label that did not name it.
+        #}
+        {% set kinds = {
+            'organ': {
+                'label': 'Organs'|trans,
+                'items': {
+                    'tab-organ-foundation': {'icon': 'fa-sitemap', 'label': 'Foundation'|trans,
+                        'hint': 'Establish a committee or fraternity.'|trans},
+                    'tab-organ-install': {'icon': 'fa-user-plus', 'label': 'Installation / Discharge'|trans,
+                        'hint': 'Install members in an organ, or end an installation.'|trans},
+                    'tab-organ-regulation': {'icon': 'fa-file-lines', 'label': 'Organ Regulation'|trans,
+                        'hint': 'Approve the regulations of an organ.'|trans},
+                    'tab-organ-abolish': {'icon': 'fa-ban', 'label': 'Abolition'|trans,
+                        'hint': 'Abolish an organ and end its installations.'|trans},
+                },
+            },
+            'board': {
+                'label': 'Board'|trans,
+                'items': {
+                    'tab-board-install': {'icon': 'fa-user-tie', 'label': 'Installation'|trans,
+                        'hint': 'Install a member in a board function.'|trans},
+                    'tab-board-release': {'icon': 'fa-user-minus', 'label': 'Relieve'|trans,
+                        'hint': 'Relieve a board member of their function.'|trans},
+                    'tab-board-discharge': {'icon': 'fa-user-check', 'label': 'Discharge'|trans,
+                        'hint': 'Discharge a board member.'|trans},
+                },
+            },
+            'other': {
+                'label': 'Everything else'|trans,
+                'items': {
+                    'tab-budget': {'icon': 'fa-coins', 'label': 'Budget / Statement'|trans,
+                        'hint': 'Approve a budget or a financial statement.'|trans},
+                    'tab-key-grant': {'icon': 'fa-key', 'label': 'Grant Key Code'|trans,
+                        'hint': 'Grant a member a key code.'|trans},
+                    'tab-key-withdraw': {'icon': 'fa-key', 'label': 'Withdraw Key Code'|trans,
+                        'hint': 'Withdraw a key code that was granted.'|trans},
+                    'tab-minutes': {'icon': 'fa-book', 'label': 'Minutes'|trans,
+                        'hint': 'Approve the minutes of an earlier meeting.'|trans},
+                    'tab-annulment': {'icon': 'fa-rotate-left', 'label': 'Annul Decision'|trans,
+                        'hint': 'Annul an earlier decision and revert what it did.'|trans},
+                    'tab-other': {'icon': 'fa-pen-nib', 'label': 'Other'|trans,
+                        'hint': 'Free text. Changes nothing on the register.'|trans},
+                },
+            },
+        } %}
 
-        <div class="tab-content pt-3">
-            <div class="tab-pane fade show active" id="tab-budget" role="tabpanel" aria-labelledby="tab-budget-tab">
-                {% include 'partials/decision/form/budget.html.twig' with {'form': forms.budget} %}
-            </div>
-
-            <div class="tab-pane fade" id="tab-organ" role="tabpanel" aria-labelledby="tab-organ-tab">
-                {{ strip.tabs({
-                    'tab-organ-regulation': 'Organ Regulation'|trans,
-                    'tab-organ-foundation': 'Foundation'|trans,
-                    'tab-organ-abolish': 'Abolition'|trans,
-                    'tab-organ-install': 'Installation/Discharge'|trans,
-                }) }}
-                <div class="tab-content pt-3">
-                    <div class="tab-pane fade show active" id="tab-organ-regulation" role="tabpanel"
-                         aria-labelledby="tab-organ-regulation-tab">
-                        {% include 'partials/decision/form/organ-regulation.html.twig' with {
-                            'form': forms.organ_regulation,
-                        } %}
-                    </div>
-                    <div class="tab-pane fade" id="tab-organ-foundation" role="tabpanel"
-                         aria-labelledby="tab-organ-foundation-tab">
-                        {% include 'partials/decision/form/foundation.html.twig' with {'form': forms.foundation} %}
-                    </div>
-                    <div class="tab-pane fade" id="tab-organ-abolish" role="tabpanel"
-                         aria-labelledby="tab-organ-abolish-tab">
-                        {% include 'partials/decision/form/abolish.html.twig' with {'form': forms.abolish} %}
-                    </div>
-                    <div class="tab-pane fade" id="tab-organ-install" role="tabpanel"
-                         aria-labelledby="tab-organ-install-tab">
-                        {% include 'partials/decision/form/install.html.twig' with {
-                            'form': forms.install,
-                            'member_function_form': member_function_form,
-                        } %}
+        <div class="row g-3">
+            <div class="col-12 col-xl-4">
+                <div class="panel">
+                    <div class="panel-heading"><h3>{{ 'Kind of decision'|trans }}</h3></div>
+                    <div class="panel-body">
+                        <div class="nav decision-kinds" role="tablist" aria-orientation="vertical">
+                            {% set first = true %}
+                            {% for group in kinds %}
+                                <span class="decision-kinds-group">{{ group.label }}</span>
+                                {% for id, item in group.items %}
+                                    <button class="decision-kind{{ first ? ' active' : '' }}" id="{{ id }}-tab"
+                                            type="button" role="tab" data-bs-toggle="tab"
+                                            data-bs-target="#{{ id }}" aria-controls="{{ id }}"
+                                            aria-selected="{{ first ? 'true' : 'false' }}">
+                                        <span class="decision-kind-icon fas {{ item.icon }}" aria-hidden="true"></span>
+                                        <span class="decision-kind-text">
+                                            <span class="decision-kind-label">{{ item.label }}</span>
+                                            <span class="decision-kind-hint">{{ item.hint }}</span>
+                                        </span>
+                                    </button>
+                                    {% set first = false %}
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="tab-pane fade" id="tab-board" role="tabpanel" aria-labelledby="tab-board-tab">
-                {{ strip.tabs({
-                    'tab-board-install': 'Installation'|trans,
-                    'tab-board-release': 'Relieve'|trans,
-                    'tab-board-discharge': 'Discharge'|trans,
-                }) }}
-                <div class="tab-content pt-3">
-                    <div class="tab-pane fade show active" id="tab-board-install" role="tabpanel"
-                         aria-labelledby="tab-board-install-tab">
-                        {% include 'partials/decision/form/board-install.html.twig' with {
-                            'form': forms.board_install,
-                        } %}
-                    </div>
-                    <div class="tab-pane fade" id="tab-board-release" role="tabpanel"
-                         aria-labelledby="tab-board-release-tab">
-                        {% include 'partials/decision/form/board-release.html.twig' with {
-                            'form': forms.board_release,
-                            'installs': releasable_installs,
-                        } %}
-                    </div>
-                    <div class="tab-pane fade" id="tab-board-discharge" role="tabpanel"
-                         aria-labelledby="tab-board-discharge-tab">
-                        {% include 'partials/decision/form/board-discharge.html.twig' with {
-                            'form': forms.board_discharge,
-                            'installs': installs,
-                        } %}
+            <div class="col-12 col-xl-8">
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="tab-organ-foundation" role="tabpanel"
+                                 aria-labelledby="tab-organ-foundation-tab">
+                                {% include 'partials/decision/form/foundation.html.twig' with {
+                                    'form': forms.foundation,
+                                } %}
+                            </div>
+                            <div class="tab-pane fade" id="tab-organ-install" role="tabpanel"
+                                 aria-labelledby="tab-organ-install-tab">
+                                {% include 'partials/decision/form/install.html.twig' with {
+                                    'form': forms.install,
+                                    'member_function_form': member_function_form,
+                                } %}
+                            </div>
+                            <div class="tab-pane fade" id="tab-organ-regulation" role="tabpanel"
+                                 aria-labelledby="tab-organ-regulation-tab">
+                                {% include 'partials/decision/form/organ-regulation.html.twig' with {
+                                    'form': forms.organ_regulation,
+                                } %}
+                            </div>
+                            <div class="tab-pane fade" id="tab-organ-abolish" role="tabpanel"
+                                 aria-labelledby="tab-organ-abolish-tab">
+                                {% include 'partials/decision/form/abolish.html.twig' with {
+                                    'form': forms.abolish,
+                                } %}
+                            </div>
+
+                            <div class="tab-pane fade" id="tab-board-install" role="tabpanel"
+                                 aria-labelledby="tab-board-install-tab">
+                                {% include 'partials/decision/form/board-install.html.twig' with {
+                                    'form': forms.board_install,
+                                } %}
+                            </div>
+                            <div class="tab-pane fade" id="tab-board-release" role="tabpanel"
+                                 aria-labelledby="tab-board-release-tab">
+                                {% include 'partials/decision/form/board-release.html.twig' with {
+                                    'form': forms.board_release,
+                                    'installs': releasable_installs,
+                                } %}
+                            </div>
+                            <div class="tab-pane fade" id="tab-board-discharge" role="tabpanel"
+                                 aria-labelledby="tab-board-discharge-tab">
+                                {% include 'partials/decision/form/board-discharge.html.twig' with {
+                                    'form': forms.board_discharge,
+                                    'installs': installs,
+                                } %}
+                            </div>
+
+                            <div class="tab-pane fade" id="tab-budget" role="tabpanel"
+                                 aria-labelledby="tab-budget-tab">
+                                {% include 'partials/decision/form/budget.html.twig' with {'form': forms.budget} %}
+                            </div>
+                            <div class="tab-pane fade" id="tab-key-grant" role="tabpanel"
+                                 aria-labelledby="tab-key-grant-tab">
+                                {% include 'partials/decision/form/key-grant.html.twig' with {
+                                    'form': forms.key_grant,
+                                } %}
+                            </div>
+                            <div class="tab-pane fade" id="tab-key-withdraw" role="tabpanel"
+                                 aria-labelledby="tab-key-withdraw-tab">
+                                {% include 'partials/decision/form/key-withdraw.html.twig' with {
+                                    'form': forms.key_withdraw,
+                                    'grants': grants,
+                                } %}
+                            </div>
+                            <div class="tab-pane fade" id="tab-minutes" role="tabpanel"
+                                 aria-labelledby="tab-minutes-tab">
+                                {% include 'partials/decision/form/minutes.html.twig' with {'form': forms.minutes} %}
+                            </div>
+                            <div class="tab-pane fade" id="tab-annulment" role="tabpanel"
+                                 aria-labelledby="tab-annulment-tab">
+                                {% include 'partials/decision/form/annulment.html.twig' with {
+                                    'form': forms.annulment,
+                                } %}
+                            </div>
+                            <div class="tab-pane fade" id="tab-other" role="tabpanel"
+                                 aria-labelledby="tab-other-tab">
+                                {% include 'partials/decision/form/other.html.twig' with {'form': forms.other} %}
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="tab-pane fade" id="tab-key" role="tabpanel" aria-labelledby="tab-key-tab">
-                {{ strip.tabs({
-                    'tab-key-grant': 'Grant'|trans,
-                    'tab-key-withdraw': 'Withdraw'|trans,
-                }) }}
-                <div class="tab-content pt-3">
-                    <div class="tab-pane fade show active" id="tab-key-grant" role="tabpanel"
-                         aria-labelledby="tab-key-grant-tab">
-                        {% include 'partials/decision/form/key-grant.html.twig' with {'form': forms.key_grant} %}
-                    </div>
-                    <div class="tab-pane fade" id="tab-key-withdraw" role="tabpanel"
-                         aria-labelledby="tab-key-withdraw-tab">
-                        {% include 'partials/decision/form/key-withdraw.html.twig' with {
-                            'form': forms.key_withdraw,
-                            'grants': grants,
-                        } %}
-                    </div>
-                </div>
-            </div>
-
-            <div class="tab-pane fade" id="tab-annulment" role="tabpanel" aria-labelledby="tab-annulment-tab">
-                {% include 'partials/decision/form/annulment.html.twig' with {'form': forms.annulment} %}
-            </div>
-
-            <div class="tab-pane fade" id="tab-minutes" role="tabpanel" aria-labelledby="tab-minutes-tab">
-                {% include 'partials/decision/form/minutes.html.twig' with {'form': forms.minutes} %}
-            </div>
-
-            <div class="tab-pane fade" id="tab-other" role="tabpanel" aria-labelledby="tab-other-tab">
-                {% include 'partials/decision/form/other.html.twig' with {'form': forms.other} %}
             </div>
         </div>
     {% endif %}

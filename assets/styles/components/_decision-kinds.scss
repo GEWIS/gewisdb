@@ -1,0 +1,87 @@
+// Decision kinds
+//
+// The list of kinds of decision on the create page. Each row says what the kind does, because "Other" and
+// "Abolition" mean nothing on their own to someone minuting their first meeting. Bootstrap drives the panes; these
+// are its tab buttons with the rows shaped the way the sidebar's are.
+
+.decision-kinds {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+}
+
+.decision-kinds-group {
+    padding: 0.5rem $nav-row-padding-x 0.3125rem;
+    color: var(--#{$prefix}secondary-color);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+
+    &:not(:first-child) {
+        margin-block-start: map-get($spacers, 2);
+    }
+}
+
+.decision-kind {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.625rem;
+    padding: $nav-row-padding-y $nav-row-padding-x;
+    border: 0;
+    border-radius: 0.5625rem;
+    background-color: transparent;
+    color: var(--#{$prefix}body-color);
+    text-align: start;
+
+    &:hover {
+        background-color: $nav-menu-hover-bg;
+    }
+
+    &.active {
+        background-color: $nav-menu-active-bg;
+        color: $nav-menu-active-color;
+    }
+}
+
+.decision-kind-icon {
+    flex: none;
+    inline-size: 1rem;
+    margin-block-start: 0.1875rem;
+    text-align: center;
+    font-size: $font-size-sm;
+    opacity: 0.85;
+}
+
+.decision-kind-text {
+    display: flex;
+    flex-direction: column;
+    min-inline-size: 0;
+}
+
+.decision-kind-label {
+    font-weight: 600;
+}
+
+.decision-kind-hint {
+    color: var(--#{$prefix}secondary-color);
+    font-size: $font-size-sm;
+    line-height: 1.4;
+    text-wrap: pretty;
+}
+
+.decision-kind.active .decision-kind-hint {
+    color: var(--#{$prefix}body-color);
+}
+
+@include color-mode(gewis-night) {
+    .decision-kind {
+        &:hover {
+            background-color: $nav-menu-hover-bg-dark;
+        }
+
+        &.active {
+            background-color: $nav-menu-active-bg-dark;
+        }
+    }
+}
