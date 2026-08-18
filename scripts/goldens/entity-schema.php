@@ -15,13 +15,14 @@ declare(strict_types=1);
 $root = dirname(__DIR__, 2);
 
 require $root . '/vendor/autoload.php';
-require $root . '/scripts/stubs/symfony-security.php';
 
 use App\Doctrine\Types\StringableDateTimeType;
 use Doctrine\DBAL\DriverManager;
+use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\DefaultNamingStrategy;
 use Doctrine\ORM\Mapping\Driver\AttributeDriver;
 use Doctrine\ORM\Tools\SchemaTool;
@@ -44,9 +45,12 @@ foreach ($paths as $path) {
 $config = new Configuration();
 $config->setMetadataDriverImpl(new AttributeDriver($paths));
 $config->setNamingStrategy(new DefaultNamingStrategy());
-$config->setProxyDir(sys_get_temp_dir() . '/gewisdb-entity-schema');
-$config->setProxyNamespace('GewisdbEntitySchemaProxies');
-$config->setAutoGenerateProxyClasses(false);
+$config->enableNativeLazyObjects(true);
+// Mirrors config/packages/doctrine.yaml: ORM 3 resolves AUTO to IDENTITY on PostgreSQL, but the recorded schema
+// has plain INT id columns fed by sequences.
+$config->setIdentityGenerationPreferences([
+    PostgreSQLPlatform::class => ClassMetadata::GENERATOR_TYPE_SEQUENCE,
+]);
 
 if (!Type::hasType('stringable_datetime')) {
     Type::addType('stringable_datetime', StringableDateTimeType::class);

@@ -45,8 +45,8 @@
                 {{ 'Per page'|trans }}
                 {% if route %}
                     <select class="form-select form-select-sm w-auto"
-                            data-controller="application--navigate-select"
-                            data-action="application--navigate-select#navigate">
+                            data-controller="navigate-select"
+                            data-action="navigate-select#navigate">
                         {% for size in pageSizes %}
                             <option value="{{ path(route, routeParams|merge({'page': 1, 'pageSize': size})) }}"
                                     {{ size == pageSize ? 'selected' : '' }}>{{ size }}</option>

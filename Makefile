@@ -1,4 +1,4 @@
-.PHONY: help runprod rundev runtest runcoverage update updatecomposer getvendordir phpstan phpcs phpcbf phpcsfix phpcsfixtypes replenish compilelang build buildprod builddev update preparelistmonk preparemailman migrate migrate-to migration-down migration-up migration-diff composerunused stripewebhooksecret seed goldens goldens-verify goldens-freeze goldens-restore phpstan-src translations-xliff entity-schema
+.PHONY: help runprod runprodtest rundev stop exec update updatecomposer updatedocker getvendordir phpstan phpstanpr phpcs phpcbf phpcbfall phpcsfix checkcomposer replenish build buildprod builddev buildweb buildwebprod buildwebdev buildpgadmin preparelistmonk preparemailman migrate migrate-to migration-down migration-up migration-diff seed goldens goldens-verify goldens-freeze goldens-restore entity-schema translations runtest runcoverage stripewebhooksecret
 
 help:
 		@echo "Makefile commands:"
@@ -11,20 +11,19 @@ help:
 		@echo "phpcs"
 		@echo "phpcbf"
 		@echo "phpcsfix"
-		@echo "phpcsfixtypes"
 		@echo "replenish"
-		@echo "compilelang"
+		@echo "translations"
 		@echo "build"
 		@echo "buildprod"
 		@echo "builddev"
-		@echo "update = updatecomposer"
+		@echo "update = updatecomposer updatedocker"
 
 .DEFAULT_GOAL := rundev
 
-MODULE_DIR := ./module
 LAST_WEB_COMMIT := $(shell git rev-parse --short HEAD)
 SHELL := /bin/bash
-TRANSLATIONS_DIR := $(MODULE_DIR)/Application/language/
+
+CONSOLE := docker compose exec -u www-data -T web bin/console
 
 runprod:
 		@docker compose -f docker-compose.yml up -d --force-recreate --remove-orphans
@@ -37,42 +36,34 @@ rundev: builddev
 		@make replenish
 
 migrate: replenish
-		@docker compose exec -u www-data -it web ./orm migrations:migrate --object-manager doctrine.entitymanager.orm_default
-		@docker compose exec -u www-data -it web ./orm migrations:migrate --object-manager doctrine.entitymanager.orm_report
+		@docker compose exec -u www-data -it web bin/console doctrine:migrations:migrate --em=default
+		@docker compose exec -u www-data -it web bin/console doctrine:migrations:migrate --em=report
 
 migrate-to:
-		@docker compose exec -u www-data web sh -c '. ./scripts/migrate-version.sh && ./orm migrations:migrate $$migrations --object-manager doctrine.entitymanager.$$alias'
+		@docker compose exec -u www-data web sh -c '. ./scripts/migrate-version.sh && bin/console doctrine:migrations:migrate $$migrations --em=$$alias'
 
 migration-diff: replenish
 		@set -e; \
-		for target in "Database:orm_default" "Report:orm_report"; do \
-			module="$${target%%:*}"; \
-			manager="$${target##*:}"; \
-			echo "Generating migrations for $$module ($$manager)..."; \
-			docker compose exec -u root web chown www-data:www-data /code/module/$$module/migrations/; \
-			docker compose exec -u www-data -T web ./orm migrations:diff --allow-empty-diff --object-manager doctrine.entitymanager.$$manager; \
-			docker compose exec -u www-data -T web find /code/module/$$module/migrations -type f -user www-data -exec sed -i '/CREATE SCHEMA public/d' {} \; ; \
-			docker compose exec -u www-data -T web find /code/module/$$module/migrations -type f -user www-data -exec sh -c 'grep -q "addSql(" "$$1" || { echo "Deleting empty migration $$1"; rm "$$1"; }' _ {} \; ; \
-			docker cp "$$(docker compose ps -q web)":/code/module/$$module/migrations ./module/$$module; \
-			docker compose exec -u root web chown -R root:root /code/module/$$module/migrations/; \
+		for manager in default report; do \
+			echo "Generating migrations for $$manager..."; \
+			$(CONSOLE) doctrine:migrations:diff --allow-empty-diff --em=$$manager; \
 		done
-
+		@docker cp "$$(docker compose ps -q web)":/code/migrations ./
 
 migration-up: replenish
-		@docker compose exec -u www-data web sh -c '. ./scripts/migrate-version.sh && ./orm migrations:execute --up $$migrations --object-manager doctrine.entitymanager.$$alias'
+		@docker compose exec -u www-data web sh -c '. ./scripts/migrate-version.sh && bin/console doctrine:migrations:execute --up $$migrations --em=$$alias'
 
 migration-down: replenish
-		@docker compose exec -u www-data web sh -c '. ./scripts/migrate-version.sh && ./orm migrations:execute --down $$migrations --object-manager doctrine.entitymanager.$$alias'
+		@docker compose exec -u www-data web sh -c '. ./scripts/migrate-version.sh && bin/console doctrine:migrations:execute --down $$migrations --em=$$alias'
 
 seed: replenish
-		@docker compose exec -u www-data -T web ./web application:fixtures:load
-		@docker compose exec -u www-data web ./web report:generate:full
+		@$(CONSOLE) doctrine:fixtures:load --no-interaction
+		@$(CONSOLE) report:generate:full
 		@make preparemailman
 		@docker compose exec mailman-web bash -c '(python3 ./manage.py createsuperuser --no-input 2>/dev/null || true)'
 		@docker compose exec -u mailman mailman-core bash -c '(mailman create news@$$MAILMAN_DOMAIN; mailman create other@$$MAILMAN_DOMAIN; true) 2>/dev/null'
 		@make preparelistmonk
-		@docker compose exec -u www-data web ./web database:mailinglist:fetch
-
+		@$(CONSOLE) database:mailinglist:fetch
 
 # goldens-verify and goldens-restore drop and recreate the public schema in both databases.
 goldens: replenish
@@ -89,7 +80,7 @@ goldens-restore:
 
 # Runs on the host: the script needs bash, and the web image is Alpine.
 entity-schema:
-		@DOCTRINE_DEFAULT_HOST=127.0.0.1 bash scripts/goldens/entity-schema-check.sh
+		@DOCTRINE_DEFAULT_HOST=127.0.0.1 DOCTRINE_REPORT_HOST=127.0.0.1 bash scripts/goldens/entity-schema-check.sh
 
 exec:
 		docker compose exec -u www-data -it web $(cmd)
@@ -97,11 +88,11 @@ exec:
 stop:
 		@docker compose down --remove-orphans
 
-runtest: loadenv
-		@vendor/phpunit/phpunit/phpunit --bootstrap ./bootstrap.php --configuration ./phpunit.xml --stop-on-error --stop-on-failure
+runtest:
+		@vendor/bin/phpunit --stop-on-error --stop-on-failure
 
-runcoverage: loadenv
-		@vendor/phpunit/phpunit/phpunit --bootstrap ./bootstrap.php --configuration ./phpunit.xml --coverage-html ./coverage
+runcoverage:
+		@XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-html ./coverage
 
 getvendordir:
 		@rm -Rf ./vendor
@@ -109,136 +100,50 @@ getvendordir:
 		@docker compose cp web:/code/composer.json ./
 		@docker compose cp web:/code/composer.lock ./
 
-# The scan does not consider packages used by ./orm
-# as well as the usage of composer patches in composer.json so these are whitelisted
-# Status code 0 -> Success
-composerunused:
-		@docker compose exec -it web sh -c "ls composer-unused.phar || wget https://github.com/composer-unused/composer-unused/releases/latest/download/composer-unused.phar"
-		@docker compose exec -it web php composer-unused.phar --excludePackage=doctrine/migrations --excludePackage=doctrine/doctrine-orm-module --excludePackage=cweagans/composer-patches
-
 replenish:
 		@docker compose cp ./public web:/code
-		@docker compose cp ./module web:/code
-		@docker compose exec -u root web chown -R root:root /code/public /code/module
+		@docker compose cp ./src web:/code
+		@docker compose cp ./config web:/code
+		@docker compose cp ./templates web:/code
+		@docker compose exec -u root web chown -R root:root /code/public /code/src /code/config /code/templates
 		@docker compose exec -u root web chown -R www-data:www-data /code/public/data
-		@docker compose exec -u www-data web rm -rf data/cache/module-config-cache.application.config.cache.php
 		@docker compose exec -u root web composer dump-autoload --dev
-		@docker compose exec -u www-data web ./orm orm:generate-proxies
-		@docker compose exec -u www-data web /bin/sh -c "EM_ALIAS=orm_report ./orm orm:generate-proxies"
+		@$(CONSOLE) cache:clear
 
-translations:
-		@find $(MODULE_DIR) -iname "*.phtml" -print0 | sort -z | xargs -r0 xgettext \
-				--language=PHP \
-				--from-code=UTF-8 \
-				--keyword=translate \
-				--keyword=translatePlural:1,2 \
-				--output=$(TRANSLATIONS_DIR)/gewisdb.pot \
-				--force-po \
-				--no-location \
-				--package-name=GEWISdb \
-				--package-version=$(shell git describe --dirty --always) \
-				--copyright-holder=GEWIS && \
-		find $(MODULE_DIR) -iname "*.php" -print0 | sort -z | xargs -r0 xgettext \
-				--language=PHP \
-				--from-code=UTF-8 \
-				--keyword=translate \
-				--keyword=translatePlural:1,2 \
-				--output=$(TRANSLATIONS_DIR)/gewisdb.pot \
-				--force-po \
-				--no-location \
-				--package-name=GEWISdb \
-				--package-version=$(shell git describe --dirty --always) \
-				--copyright-holder=GEWIS \
-				--join-existing && \
-		msgattrib --no-obsolete --sort-output -o $(TRANSLATIONS_DIR)/gewisdb.pot $(TRANSLATIONS_DIR)/gewisdb.pot && \
-		msgmerge -U $(TRANSLATIONS_DIR)/nl.po $(TRANSLATIONS_DIR)/gewisdb.pot && \
-		msgmerge -U $(TRANSLATIONS_DIR)/en.po $(TRANSLATIONS_DIR)/gewisdb.pot && \
-		msgattrib --no-obsolete --sort-output -o $(TRANSLATIONS_DIR)/en.po $(TRANSLATIONS_DIR)/en.po && \
-		msgattrib --no-obsolete --sort-output -o $(TRANSLATIONS_DIR)/nl.po $(TRANSLATIONS_DIR)/nl.po
-
-# Symfony's extractor. --no-fill leaves new entries with an empty <target/> in BOTH locales; every one has to be
-# filled before the change is done. The gettext `translations` target above still serves the Laminas application and
-# goes away with it.
-translations-xliff: replenish
-		@docker compose exec -u www-data web bin/console translation:extract en --format=xlf --sort=asc --no-fill --force --clean
-		@docker compose exec -u www-data web bin/console translation:extract nl --format=xlf --sort=asc --no-fill --force --clean
+# --no-fill leaves new entries with an empty <target/> in BOTH locales; every one has to be filled before the change
+# is done.
+translations: replenish
+		@$(CONSOLE) translation:extract en --format=xlf --sort=asc --no-fill --force --clean
+		@$(CONSOLE) translation:extract nl --format=xlf --sort=asc --no-fill --force --clean
 
 update: updatecomposer updatedocker
 
-loadenv: copyprodconf
-		@set -o allexport
-		@source .env
-		@set +o allexport
-
-copyconf:
-		cp config/autoload/local.development.php.dist config/autoload/local.php
-		cp config/autoload/doctrine.local.development.php.dist config/autoload/doctrine.local.php
-
-copyprodconf:
-		@cp config/autoload/local.production.php.dist config/autoload/local.php
-		@cp config/autoload/doctrine.local.production.php.dist config/autoload/doctrine.local.php
-
 phpstan:
-		@docker compose exec web /bin/sh -c 'echo "" > phpstan/phpstan-baseline-pr.neon'
-		@docker compose exec web vendor/bin/phpstan analyse -c phpstan.neon --memory-limit 1G
-
-# Analyses the ported Symfony tree, which phpstan.neon cannot cover while its dependencies are uninstallable.
-phpstan-src: replenish
-		@docker compose exec web vendor/bin/phpstan analyse -c phpstan-src.neon --memory-limit 1G
+		@vendor/bin/phpstan analyse --memory-limit 1G
 
 phpstanpr:
 		@git fetch --all
 		@git update-ref refs/heads/temp-phpstanpr refs/remotes/origin/main
 		@git checkout --detach temp-phpstanpr
-		@echo "" > phpstan/phpstan-baseline.neon
-		@echo "" > phpstan/phpstan-baseline-pr.neon
-		@make rundev
-		@docker compose exec web vendor/bin/phpstan analyse -c phpstan.neon --generate-baseline phpstan/phpstan-baseline-pr.neon --memory-limit 1G --no-progress
+		@vendor/bin/phpstan analyse --generate-baseline phpstan/phpstan-baseline-pr.neon --memory-limit 1G --no-progress
 		@git checkout -- phpstan/phpstan-baseline.neon
 		@git checkout -
-		@docker cp $(shell docker compose ps -q web):/code/phpstan/phpstan-baseline-pr.neon ./phpstan/phpstan-baseline-pr.neon
-		@make rundev
-		@docker compose exec web vendor/bin/phpstan analyse -c phpstan.neon --memory-limit 1G --no-progress
+		@vendor/bin/phpstan analyse --memory-limit 1G --no-progress
 
-psalm: loadenv
-		@echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?><files/>" > psalm/psalm-baseline-pr.xml
-		@vendor/bin/psalm --no-cache
-
-psalmall: loadenv
-		@echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?><files/>" > psalm/psalm-baseline-pr.xml
-		@vendor/bin/psalm --no-cache --ignore-baseline
-
-psalmdiff: loadenv
-		@echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?><files/>" > psalm/psalm-baseline-pr.xml
-		@vendor/bin/psalm --no-cache --show-info=true
-
-psalmbaseline: loadenv
-		@echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?><files/>" > psalm/psalm-baseline-pr.xml
-		@vendor/bin/psalm --set-baseline=psalm/psalm-baseline.xml --no-cache
-
-psalmfix: loadenv
-		@echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?><files/>" > psalm/psalm-baseline-pr.xml
-		@vendor/bin/psalm --no-cache --alter --issues=InvalidReturnType,InvalidNullableReturnType
-
-phpcs: loadenv
+phpcs:
 		@vendor/bin/phpcs -p
 
-phpcbf: loadenv
+phpcbf:
 		@vendor/bin/phpcbf -p --filter=GitModified
 
-phpcbfall: loadenv
+phpcbfall:
 		@vendor/bin/phpcbf -p
 
-phpcsfix: loadenv
+phpcsfix:
 		@vendor/bin/php-cs-fixer fix --format=txt --verbose
 
-phpcsfixrisky: loadenv
-		@vendor/bin/php-cs-fixer fix --cache-file=data/cache/.php-cs-fixer.cache --allow-risky=yes --rules=@PHP82Migration,@PHP80Migration:risky,-declare_strict_types,-use_arrow_functions  module
-		@vendor/bin/php-cs-fixer fix --cache-file=data/cache/.php-cs-fixer.cache --allow-risky=yes --rules=@PHP82Migration,@PHP80Migration:risky,-declare_strict_types,-use_arrow_functions  config
-
-checkcomposer: loadenv
+checkcomposer:
 		@XDEBUG_MODE=off vendor/bin/composer-require-checker check composer.json
-		@vendor/bin/composer-unused
 
 updatecomposer:
 		@docker cp ./composer.json $(shell docker compose ps -q web):/code/composer.json
@@ -249,13 +154,12 @@ updatedocker:
 		@docker compose pull
 		@docker build --pull --no-cache -t abc.docker-registry.gewis.nl/db/gewisdb/web:production -f docker/web/production/Dockerfile .
 		@docker build --pull --no-cache -t abc.docker-registry.gewis.nl/db/gewisdb/web:development -f docker/web/development/Dockerfile .
-		@docker build --pull --no-cache -t abc.docker-registry.gewis.nl/db/gewisdb/nginx:latest -f docker/nginx/Dockerfile docker/nginx
 
-build: buildweb buildnginx
+build: buildweb
 
-buildprod: buildwebprod buildnginx
+buildprod: buildwebprod
 
-builddev: buildwebdev buildnginx
+builddev: buildwebdev
 
 buildweb: buildwebprod buildwebdev
 
@@ -264,9 +168,6 @@ buildwebprod:
 
 buildwebdev:
 		@docker build --build-arg GIT_COMMIT="$(LAST_WEB_COMMIT)" -t abc.docker-registry.gewis.nl/db/gewisdb/web:development -f docker/web/development/Dockerfile .
-
-buildnginx:
-		@docker build -t abc.docker-registry.gewis.nl/db/gewisdb/nginx:latest -f docker/nginx/Dockerfile docker/nginx
 
 buildpgadmin:
 		@docker compose build pgadmin

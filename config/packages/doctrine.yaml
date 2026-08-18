@@ -1,11 +1,13 @@
 doctrine:
     dbal:
         default_connection: default
+        # Registered on the DBAL rather than on a connection: both entity managers map the type, and doctrine-bundle
+        # keeps the type registry global.
+        types:
+            stringable_datetime: App\Doctrine\Types\StringableDateTimeType
         connections:
             default:
                 url: '%env(resolve:DATABASE_DSN)%'
-                types:
-                    stringable_datetime: App\Doctrine\Types\StringableDateTimeType
             report:
                 url: '%env(resolve:REPORT_DATABASE_DSN)%'
 
@@ -28,31 +30,11 @@ doctrine:
                         is_bundle: false
                         dir: '%kernel.project_dir%/src/Entity/Application'
                         prefix: 'App\Entity\Application'
-                    Decision:
+                    Database:
                         type: attribute
                         is_bundle: false
-                        dir: '%kernel.project_dir%/src/Entity/Decision'
-                        prefix: 'App\Entity\Decision'
-                    Member:
-                        type: attribute
-                        is_bundle: false
-                        dir: '%kernel.project_dir%/src/Entity/Member'
-                        prefix: 'App\Entity\Member'
-                    Join:
-                        type: attribute
-                        is_bundle: false
-                        dir: '%kernel.project_dir%/src/Entity/Join'
-                        prefix: 'App\Entity\Join'
-                    Mailing:
-                        type: attribute
-                        is_bundle: false
-                        dir: '%kernel.project_dir%/src/Entity/Mailing'
-                        prefix: 'App\Entity\Mailing'
-                    Query:
-                        type: attribute
-                        is_bundle: false
-                        dir: '%kernel.project_dir%/src/Entity/Query'
-                        prefix: 'App\Entity\Query'
+                        dir: '%kernel.project_dir%/src/Entity/Database'
+                        prefix: 'App\Entity\Database'
                     User:
                         type: attribute
                         is_bundle: false
@@ -74,8 +56,3 @@ doctrine:
                 dql:
                     numeric_functions:
                         YEAR: App\Doctrine\Functions\Year
-
-when@prod:
-    doctrine:
-        orm:
-            auto_generate_proxy_classes: false

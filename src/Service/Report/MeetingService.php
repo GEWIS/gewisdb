@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace App\Service\Report;
 
 use App\Entity\Application\Enums\AppLanguages;
-use App\Entity\Decision\Decision as DatabaseDecision;
-use App\Entity\Decision\Meeting as DatabaseMeeting;
-use App\Entity\Decision\SubDecision as DatabaseSubDecision;
-use App\Entity\Member\Member as DatabaseMember;
+use App\Entity\Database\Decision as DatabaseDecision;
+use App\Entity\Database\Meeting as DatabaseMeeting;
+use App\Entity\Database\Member as DatabaseMember;
+use App\Entity\Database\SubDecision as DatabaseSubDecision;
 use App\Entity\Report\Decision as ReportDecision;
 use App\Entity\Report\Meeting as ReportMeeting;
 use App\Entity\Report\Member as ReportMember;
 use App\Entity\Report\SubDecision as ReportSubDecision;
-use App\Repository\Decision\MeetingRepository;
+use App\Repository\Database\MeetingRepository;
 use Closure;
 use Doctrine\ORM\EntityManagerInterface;
 use LogicException;
@@ -25,8 +25,10 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use Throwable;
 
 use function array_reverse;
+use function assert;
 use function count;
 use function implode;
+use function is_a;
 use function preg_replace;
 use function sprintf;
 
@@ -39,13 +41,9 @@ class MeetingService
         #[Autowire(service: 'doctrine.orm.report_entity_manager')]
         private readonly EntityManagerInterface $emReport,
         private readonly MailerInterface $mailer,
-        #[Autowire(env: 'MAIL_FROM_ADDRESS')]
         private readonly string $mailFromAddress,
-        #[Autowire(env: 'MAIL_FROM_NAME')]
         private readonly string $mailFromName,
-        #[Autowire(env: 'MAIL_TO_REPORT_ERROR_ADDRESS')]
         private readonly string $mailToReportErrorAddress,
-        #[Autowire(env: 'MAIL_TO_REPORT_ERROR_NAME')]
         private readonly string $mailToReportErrorName,
     ) {
     }
@@ -214,19 +212,30 @@ class MeetingService
         ]);
 
         if (null === $reportSubDecision) {
-            // determine type and create
+            // The projection's subdecision is the same class one namespace over, so the class to build is the
+            // ledger's with `Database` swapped for `Report`. A subdecision whose name does not rewrite would
+            // silently build a ledger entity here, which is a bug rather than a case to handle.
             /** @var class-string<ReportSubDecision> $class */
             $class = preg_replace(
-                '/^App\\\\Entity\\\\Decision\\\\/',
+                '/^App\\\\Entity\\\\Database\\\\/',
                 'App\\\\Entity\\\\Report\\\\',
                 $subdecision::class,
             );
+
+            if (!is_a($class, ReportSubDecision::class, true)) {
+                throw new LogicException(sprintf('No projection exists for %s', $subdecision::class));
+            }
+
             $reportSubDecision = new $class();
             $reportSubDecision->setDecision($reportDecision);
             $reportSubDecision->setSequence($subdecision->getSequence());
         }
 
         if ($subdecision instanceof DatabaseSubDecision\FoundationReference) {
+            // The report subdecision is the same class in the report namespace, built by rewriting the
+            // namespace above; asserting it here is what lets the branch use that class's setters.
+            assert($reportSubDecision instanceof ReportSubDecision\FoundationReference);
+
             $ref = $subdecision->getFoundation();
             /** @var ReportSubDecision\Foundation $foundation */
             $foundation = $subdecRepo->find([
@@ -243,6 +252,8 @@ class MeetingService
         // transfer specific data
         if ($subdecision instanceof DatabaseSubDecision\Installation) {
             // installation
+            assert($reportSubDecision instanceof ReportSubDecision\Installation);
+
             $reportSubDecision->setFunction($subdecision->getFunction());
             $reportSubDecision->setMember($this->findMember($subdecision->getMember()));
         } elseif (
@@ -250,6 +261,11 @@ class MeetingService
             || $subdecision instanceof DatabaseSubDecision\Discharge
         ) {
             // reappointment and discharge
+            assert(
+                $reportSubDecision instanceof ReportSubDecision\Reappointment
+                || $reportSubDecision instanceof ReportSubDecision\Discharge,
+            );
+
             $ref = $subdecision->getInstallation();
             /** @var ReportSubDecision\Installation $installation */
             $installation = $subdecRepo->find([
@@ -263,6 +279,8 @@ class MeetingService
             $reportSubDecision->setInstallation($installation);
         } elseif ($subdecision instanceof DatabaseSubDecision\Foundation) {
             // foundation
+            assert($reportSubDecision instanceof ReportSubDecision\Foundation);
+
             $reportSubDecision->setName($subdecision->getName());
             $reportSubDecision->setAbbr($subdecision->getAbbr());
             $reportSubDecision->setPurpose($subdecision->getPurpose());
@@ -275,15 +293,24 @@ class MeetingService
             // There are 147 Board Meetings before BV 1209 that have an "unknown" author for a budget and/or financial
             // statement. As such, we need to allow for the member to be null here. In that case, we simply will not set
             // a member for the report subdecision, and it will be shown as "unknown" in the (sub)decision content.
+            assert(
+                $reportSubDecision instanceof ReportSubDecision\Financial\Budget
+                || $reportSubDecision instanceof ReportSubDecision\OrganRegulation,
+            );
+
             if (null !== $subdecision->getMember()) {
                 $reportSubDecision->setMember($this->findMember($subdecision->getMember()));
             }
 
             // Specific to the `OrganRegulation`s, set the abbr and type of organ
             if ($subdecision instanceof DatabaseSubDecision\OrganRegulation) {
+                assert($reportSubDecision instanceof ReportSubDecision\OrganRegulation);
+
                 $reportSubDecision->setAbbr($subdecision->getAbbr());
                 $reportSubDecision->setOrganType($subdecision->getOrganType());
             } else {
+                assert($reportSubDecision instanceof ReportSubDecision\Financial\Budget);
+
                 $reportSubDecision->setName($subdecision->getName());
             }
 
@@ -292,6 +319,8 @@ class MeetingService
             $reportSubDecision->setApproval($subdecision->getApproval());
             $reportSubDecision->setChanges($subdecision->getChanges());
         } elseif ($subdecision instanceof DatabaseSubDecision\Minutes) {
+            assert($reportSubDecision instanceof ReportSubDecision\Minutes);
+
             $ref = $subdecision->getTarget();
             /** @var ReportMeeting $meeting */
             $meeting = $meetingRepo->find([
@@ -305,11 +334,15 @@ class MeetingService
             $reportSubDecision->setChanges($subdecision->getChanges());
         } elseif ($subdecision instanceof DatabaseSubDecision\Board\Installation) {
             // board installation
+            assert($reportSubDecision instanceof ReportSubDecision\Board\Installation);
+
             $reportSubDecision->setFunction($subdecision->getFunction());
             $reportSubDecision->setMember($this->findMember($subdecision->getMember()));
             $reportSubDecision->setDate($subdecision->getDate());
         } elseif ($subdecision instanceof DatabaseSubDecision\Board\Release) {
             // board release
+            assert($reportSubDecision instanceof ReportSubDecision\Board\Release);
+
             $ref = $subdecision->getInstallation();
             /** @var ReportSubDecision\Board\Installation $installation */
             $installation = $subdecRepo->find([
@@ -323,6 +356,8 @@ class MeetingService
             $reportSubDecision->setInstallation($installation);
             $reportSubDecision->setDate($subdecision->getDate());
         } elseif ($subdecision instanceof DatabaseSubDecision\Board\Discharge) {
+            assert($reportSubDecision instanceof ReportSubDecision\Board\Discharge);
+
             $ref = $subdecision->getInstallation();
             /** @var ReportSubDecision\Board\Installation $installation */
             $installation = $subdecRepo->find([
@@ -336,10 +371,14 @@ class MeetingService
             $reportSubDecision->setInstallation($installation);
         } elseif ($subdecision instanceof DatabaseSubDecision\Key\Granting) {
             // key code granting
+            assert($reportSubDecision instanceof ReportSubDecision\Key\Granting);
+
             $reportSubDecision->setMember($this->findMember($subdecision->getMember()));
             $reportSubDecision->setUntil($subdecision->getUntil());
         } elseif ($subdecision instanceof DatabaseSubDecision\Key\Withdrawal) {
             // key code withdrawal
+            assert($reportSubDecision instanceof ReportSubDecision\Key\Withdrawal);
+
             $ref = $subdecision->getGranting();
             /** @var ReportSubDecision\Key\Granting $granting */
             $granting = $subdecRepo->find([
@@ -353,6 +392,8 @@ class MeetingService
             $reportSubDecision->setGranting($granting);
             $reportSubDecision->setWithdrawnOn($subdecision->getWithdrawnOn());
         } elseif ($subdecision instanceof DatabaseSubDecision\Annulment) {
+            assert($reportSubDecision instanceof ReportSubDecision\Annulment);
+
             $ref = $subdecision->getTarget();
             /** @var ReportDecision $target */
             $target = $decRepo->find([

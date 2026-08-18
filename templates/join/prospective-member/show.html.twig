@@ -1,0 +1,207 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ member.fullName }} - {{ parent() }}{% endblock %}
+
+{% block contents %}
+    <h1>{{ member.fullName }}</h1>
+
+    <div class="row g-4">
+        <div class="col-12 col-lg-6">
+            <table class="table table-bordered align-middle">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">{{ 'Provided Data'|trans }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">{{ 'Initial(s)'|trans }}</th>
+                        <td>{{ member.initials }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{{ 'First Name'|trans }}</th>
+                        <td>{{ member.firstName }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{{ 'Last Name Prepositional Particle'|trans }}</th>
+                        <td>{{ member.middleName }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{{ 'Last Name'|trans }}</th>
+                        <td>{{ member.lastName }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{{ 'TU/e student number'|trans }}</th>
+                        <td>{{ member.studentNumber ?? 'Unknown'|trans }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{{ 'E-mail Address'|trans }}</th>
+                        <td><a href="mailto:{{ member.email }}">{{ member.email }}</a></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{{ 'Birthdate'|trans }}</th>
+                        <td>{{ member.birth|format_date(pattern: 'EEEE d MMMM y') }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{{ 'Last Update to Membership'|trans }}</th>
+                        <td>{{ member.changedOn|format_date(pattern: 'EEEE d MMMM y') }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{{ 'Study'|trans }}</th>
+                        {# `getName()` spelled out: `member.study.name` would resolve to the enum case name. #}
+                        <td>{{ member.study.getName|trans }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-12 col-lg-6">
+            <h3>{{ 'Addresses'|trans }}</h3>
+            {% for address in member.addresses %}
+                <h4>{{ address.type.getName|trans }}</h4>
+                <table class="table table-bordered align-middle">
+                    <tbody>
+                        <tr>
+                            <th scope="row">{{ 'Postal Region'|trans }}</th>
+                            <td>{{ address.country.value }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">{{ 'Street and House Number'|trans }}</th>
+                            <td>{{ address.street }} {{ address.number }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">{{ 'City and Postal Code'|trans }}</th>
+                            <td>{{ address.city }} {{ address.postalCode }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">{{ 'Phone Number'|trans }}</th>
+                            <td>{{ address.phone }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            {% endfor %}
+
+            <h3>{{ 'Mailing List Subscriptions'|trans }}</h3>
+            {% if member.lists is empty %}
+                <p>{{ 'No mailing list subscriptions.'|trans }}</p>
+            {% else %}
+                <ul>
+                    {% for list in member.lists %}
+                        <li>{{ list }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <h3>{{ 'Checkout Status'|trans }}</h3>
+            {% if member.checkoutSessions is empty %}
+                <p>{{ 'No Checkout Sessions on record.'|trans }}</p>
+            {% else %}
+                <table class="table table-bordered align-middle">
+                    <thead>
+                        <tr>
+                            <th scope="col">{{ 'Created'|trans }}</th>
+                            <th scope="col">{{ 'Status'|trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for checkoutSession in member.checkoutSessions %}
+                            <tr>
+                                <td>{{ checkoutSession.created|date('c') }}</td>
+                                <td>{{ checkoutSession.state.getName|trans }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+    </div>
+
+    <h2 class="mt-4">{{ 'Approval'|trans }}</h2>
+
+    {% for alert in approveMessages %}
+        <div class="alert alert-{{ alert[0] }}" role="alert">{{ alert[1]|trans }}</div>
+    {% endfor %}
+
+    {% if form is null %}
+        <p>{{ 'This prospective member cannot be approved.'|trans }}</p>
+    {% else %}
+        {% if member.hasPaid %}
+            {{ _self.approval(form, member) }}
+        {% else %}
+            {# Approving someone who has not paid through the checkout means the fee was settled in cash, which is
+               rare enough that the form stays folded away. #}
+            <div class="accordion mb-3" id="not-paid-accordion">
+                <div class="accordion-item">
+                    <h4 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#not-paid-collapse"
+                                aria-expanded="false" aria-controls="not-paid-collapse">
+                            {{ 'Click here for approval if membership fee paid with cash.'|trans }}
+                        </button>
+                    </h4>
+                    <div id="not-paid-collapse" class="accordion-collapse collapse"
+                         data-bs-parent="#not-paid-accordion">
+                        <div class="accordion-body">
+                            {{ _self.approval(form, member) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+
+    {% if canDelete %}
+        <button type="button" class="btn btn-danger"
+                data-bs-toggle="modal" data-bs-target="#prospective-removal">
+            {{ 'Delete Prospective Member'|trans }}
+        </button>
+
+        <div class="modal fade" id="prospective-removal" tabindex="-1"
+             aria-labelledby="prospective-removal-label" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="prospective-removal-label">
+                            {{ 'Remove Prospective Member'|trans }}
+                        </h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="{{ 'Close'|trans }}"></button>
+                    </div>
+                    <div class="modal-body">
+                        {% if member.hasPaid %}
+                            {{ 'Are you sure that you want to remove %name%? Because they have already paid a refund will be requested. If this fails, the prospective member will NOT be removed.'|trans({
+                                '%name%': member.fullName,
+                            }) }}
+                        {% else %}
+                            {{ 'Are you sure that you want to remove %name%?'|trans({'%name%': member.fullName}) }}
+                        {% endif %}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            {{ 'No'|trans }}
+                        </button>
+                        <form method="post"
+                              action="{{ path('join_prospective_member_delete', {'id': member.lidnr}) }}">
+                            <input type="hidden" name="_csrf_token"
+                                   value="{{ csrf_token('prospective_member_delete-' ~ member.lidnr) }}">
+                            <button type="submit" class="btn btn-danger">
+                                {{ 'Delete Prospective Member'|trans }}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% macro approval(form, member) %}
+    {{ form_start(form, {
+        'action': path('join_prospective_member_finalize', {'id': member.lidnr}),
+        'attr': {'role': 'form'},
+    }) }}
+        {{ form_row(form.type) }}
+        {{ form_widget(form.submit, {'attr': {'class': 'btn btn-success'}}) }}
+    {{ form_end(form) }}
+{% endmacro %}

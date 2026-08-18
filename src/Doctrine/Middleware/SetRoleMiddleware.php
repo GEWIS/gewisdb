@@ -24,14 +24,6 @@ class SetRoleMiddleware implements MiddlewareInterface
     #[Override]
     public function wrap(DriverInterface $driver): DriverInterface
     {
-        $isPgSQL = $driver instanceof DriverInterface\PDO\PgSQL\Driver;
-        if (
-            !$isPgSQL
-            && !$driver instanceof DriverInterface\PDO\SQLite\Driver
-        ) {
-            throw new RuntimeException('Expected DBAL Driver to be PDO PgSQL/Sqlite, but got ' . $driver::class);
-        }
-
         $roleDefaultHost = $_ENV['DOCTRINE_DEFAULT_HOST'] ?? false;
         $roleDefaultPort = $_ENV['DOCTRINE_DEFAULT_PORT'] ?? false;
         $roleDefaultDB = $_ENV['DOCTRINE_DEFAULT_DATABASE'] ?? false;
@@ -65,6 +57,6 @@ class SetRoleMiddleware implements MiddlewareInterface
             implode(':', [$roleReportHost, $roleReportPort, $roleReportDB]) => $roleReportRole,
         ];
 
-        return new SetRoleDriver($driver, $roles, $isPgSQL);
+        return new SetRoleDriver($driver, $roles);
     }
 }

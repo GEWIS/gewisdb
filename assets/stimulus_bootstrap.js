@@ -1,8 +1,12 @@
 import { startStimulusApp } from '@symfony/stimulus-bundle';
 
+const app = startStimulusApp();
+import { startStimulusApp } from '@symfony/stimulus-bundle';
+
 // Application-wide, domain-agnostic controllers.
 import CopyController from './controllers/application/copy_controller.ts';
 import FormCollectionController from './controllers/application/form_collection_controller.ts';
+import NavigateSelectController from './controllers/application/navigate_select_controller.ts';
 
 // Decision-specific controllers.
 import DecisionLookupController from './controllers/decision/decision_lookup_controller.ts';
@@ -17,6 +21,7 @@ import SubDecisionChoiceController from './controllers/decision/subdecision_choi
 
 // Join-specific controllers.
 import InitialsController from './controllers/join/initials_controller.ts';
+import ProspectiveMemberSearchController from './controllers/join/prospective_member_search_controller.ts';
 import StudyNoticeController from './controllers/join/study_notice_controller.ts';
 
 // Member-specific controllers.
@@ -40,7 +45,9 @@ app.register('install-editor', InstallEditorController);
 app.register('meeting-lookup', MeetingLookupController);
 app.register('member-lookup', MemberLookupController);
 app.register('member-search', MemberSearchController);
+app.register('navigate-select', NavigateSelectController);
 app.register('organ-lookup', OrganLookupController);
+app.register('prospective-member-search', ProspectiveMemberSearchController);
 app.register('organ-members', OrganMembersController);
 app.register('query-editor', QueryEditorController);
 app.register('study-notice', StudyNoticeController);

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity\Report;
 
-use App\Entity\Decision\Enums\OrganTypes;
+use App\Entity\Database\Enums\OrganTypes;
 use App\Entity\Report\SubDecision\Foundation;
 use App\Repository\Report\OrganRepository;
 use DateTime;
@@ -20,12 +20,22 @@ use Doctrine\ORM\Mapping\JoinTable;
 use Doctrine\ORM\Mapping\ManyToMany;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\OneToOne;
+use Doctrine\ORM\Mapping\UniqueConstraint;
 
 /**
  * Organ entity.
  *
  * Note that this entity is derived from the decisions themselves.
  */
+/**
+ * ORM 2 emitted a `<field>_uniq` unique index for the join columns of a one-to-one owning side; ORM 3 emits a plain
+ * foreign-key index instead. Declared here so the relation stays one-to-one in the database, under the name the
+ * existing schema already uses.
+ */
+#[UniqueConstraint(
+    name: 'foundation_uniq',
+    columns: ['r_meeting_type', 'r_meeting_number', 'r_decision_point', 'r_decision_number', 'r_sequence'],
+)]
 #[Entity(repositoryClass: OrganRepository::class)]
 class Organ
 {

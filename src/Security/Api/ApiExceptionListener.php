@@ -6,12 +6,16 @@ namespace App\Security\Api;
 
 use App\Entity\Application\Enums\ApiResponseStatuses;
 use App\Entity\User\Enums\ApiPermissions;
+use App\Exception\Database\AnnulmentNotPossible;
+use App\Exception\Report\VersionExpected;
+use App\Exception\Report\VersionFormat;
+use App\Exception\Report\VersionIncompatible;
 use App\Exception\User\ApiException;
 use App\Exception\User\NotAllowed;
+use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Attribute\AsEventListener;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -41,6 +45,25 @@ final class ApiExceptionListener
 {
     private const string API_PREFIX = '/api';
 
+    /** A request that matched no route at all. */
+    private const string TYPE_NO_ROUTE = 'error-router-no-match';
+
+    /**
+     * How the API names each failure it can report.
+     *
+     * The Laminas application put the exception's class name in the response body, so consumers key on strings that
+     * name classes under the old namespaces. Those strings are part of the contract and outlived the classes, which
+     * is why they are stated here rather than derived from `::class` — and why they live at the wire boundary rather
+     * than on the exceptions, which have no business knowing their JSON name.
+     */
+    private const array TYPES = [
+        NotAllowed::class => 'User\\Model\\Exception\\NotAllowed',
+        VersionExpected::class => 'Database\\Model\\Exception\\VersionExpected',
+        VersionFormat::class => 'Database\\Model\\Exception\\VersionFormat',
+        VersionIncompatible::class => 'Database\\Model\\Exception\\VersionIncompatible',
+        AnnulmentNotPossible::class => 'Database\\Model\\Exception\\AnnulmentNotPossible',
+    ];
+
     public function __construct(private readonly TokenStorageInterface $tokenStorage)
     {
     }
@@ -67,7 +90,7 @@ final class ApiExceptionListener
             ? $accessDenied->getMessage()
             : (new NotAllowed($permission))->getMessage();
 
-        $this->respond($event, Response::HTTP_FORBIDDEN, NotAllowed::class, $message);
+        $this->respond($event, Response::HTTP_FORBIDDEN, self::TYPES[NotAllowed::class], $message);
     }
 
     public function onApiException(ExceptionEvent $event): void
@@ -77,12 +100,14 @@ final class ApiExceptionListener
         }
 
         $throwable = $event->getThrowable();
+        $type = $this->type($throwable);
 
         $this->respond(
             $event,
             $this->statusCode($throwable),
-            $this->type($throwable),
-            $throwable->getMessage(),
+            $type,
+            // A routing failure says nothing a consumer can act on, and the framework's message repeats the URL back.
+            self::TYPE_NO_ROUTE === $type ? null : $throwable->getMessage(),
             $throwable instanceof HttpExceptionInterface ? $throwable->getHeaders() : [],
         );
     }
@@ -152,15 +177,14 @@ final class ApiExceptionListener
             $throwable instanceof NotFoundHttpException
             && $throwable->getPrevious() instanceof ResourceNotFoundException
         ) {
-            // Consumers key on this identifier for a request that matched no route at all.
-            return 'error-router-no-match';
+            return self::TYPE_NO_ROUTE;
         }
 
         if ($throwable instanceof AccessDeniedException) {
-            return NotAllowed::class;
+            return self::TYPES[NotAllowed::class];
         }
 
-        return $throwable::class;
+        return self::TYPES[$throwable::class] ?? $throwable::class;
     }
 
     private function responseStatus(int $statusCode): ApiResponseStatuses

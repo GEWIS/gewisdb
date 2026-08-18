@@ -13,7 +13,6 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join as JoinExpr;
 use Doctrine\Persistence\ManagerRegistry;
 
-use function count;
 use function is_numeric;
 use function str_replace;
 use function strtolower;
@@ -42,7 +41,7 @@ class ProspectiveMemberRepository extends ServiceEntityRepository
 
         $ret = $qb->getQuery()->getResult();
 
-        return null !== $ret && count($ret) > 0;
+        return [] !== $ret;
     }
 
     /**

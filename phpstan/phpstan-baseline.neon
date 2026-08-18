@@ -1,14 +1,987 @@
+# Everything the framework switch left behind, so the gate is green and the debt is visible.
+#
+# The bulk is generics (repositories and collections without their type parameters) and the strictness rules the
+# Symfony toolchain brings with it, neither of which the port introduced. Two entries are deliberate: the mailing-list
+# comparison in Report\MemberService that never matches (kept because correcting it changes what a regeneration
+# writes) and the nullable associations whose properties the application keeps non-null.
+#
+# Shrink it; do not grow it.
 parameters:
-    ignoreErrors:
-        - '#Property [a-zA-Z0-9\\_]+\:\:\$[a-zA-Z0-9_]+ type mapping mismatch\: property can contain Doctrine\\Common\\Collections\\Collection but database expects Doctrine\\Common\\Collections\\Collection\&iterable\<[a-zA-Z0-9\\_]+\>\.$#'
-        - '#Property [a-zA-Z0-9\\_]+\:\:\$[a-zA-Z0-9_]+ type mapping mismatch\: property can contain [a-zA-Z0-9\\_]+\|null but database expects [a-zA-Z0-9\\_]+\.$#'
-        - '#Property [a-zA-Z0-9\\_]+\:\:\$[a-zA-Z0-9_]+ type mapping mismatch\: database can contain [a-zA-Z0-9\\_]+\|null but property expects [a-zA-Z0-9\\_]+\.$#'
-        -
-            message: '#^Template type T of method Report\\Service\\Meeting\:\:generateSubDecision\(\) is not referenced in a parameter.$#'
-            count: 1
-            path: ../module/Report/src/Service/Meeting.php
-        - '#Property User\\Model\\ApiPrincipal\:\:\$permissions type mapping mismatch\: backing type string of enum User\\Model\\Enums\\ApiPermissions does not match database type array\<string\>\.$#'
-        - '#Property User\\Model\\ApiPrincipal\:\:\$permissions type mapping mismatch\: database can contain User\\Model\\Enums\\ApiPermissions\|null but property expects array\<User\\Model\\Enums\\ApiPermissions\>.$#'
-        - '#Property User\\Model\\ApiPrincipal\:\:\$permissions type mapping mismatch\: database can contain array<int, User\\Model\\Enums\\ApiPermissions>\|null but property expects array\<User\\Model\\Enums\\ApiPermissions\>.$#'
-        - '#Property User\\Model\\ApiPrincipal\:\:\$permissions type mapping mismatch\: property can contain array\<User\\Model\\Enums\\ApiPermissions\> but database expects User\\Model\\Enums\\ApiPermissions\|null.$#'
-        - '#Class Database\\Form\\Fieldset\\CollectionWithErrors extends @final class Laminas\\Form\\Element\\Collection.$#'
+	ignoreErrors:
+		-
+			message: '#^Only booleans are allowed in a negated boolean, mixed given\.$#'
+			identifier: booleanNot.exprNotBoolean
+			count: 1
+			path: ../src/Command/Database/DeleteExpiredMembersCommand.php
+
+		-
+			message: '#^Only booleans are allowed in a negated boolean, mixed given\.$#'
+			identifier: booleanNot.exprNotBoolean
+			count: 1
+			path: ../src/Command/Database/MailingListMaintenanceCommand.php
+
+		-
+			message: '#^Only booleans are allowed in a negated boolean, mixed given\.$#'
+			identifier: booleanNot.exprNotBoolean
+			count: 1
+			path: ../src/Command/Database/MailingListSyncCommand.php
+
+		-
+			message: '#^Method App\\Controller\\Database\\DecisionController\:\:memberFunctionForm\(\) return type with generic interface Symfony\\Component\\Form\\FormInterface does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Controller/Database/DecisionController.php
+
+		-
+			message: '#^If condition is always true\.$#'
+			identifier: if.alwaysTrue
+			count: 1
+			path: ../src/Controller/Database/ProspectiveMemberController.php
+
+		-
+			message: '#^Short ternary operator is not allowed\. Use null coalesce operator if applicable or consider using long ternary\.$#'
+			identifier: ternary.shortNotAllowed
+			count: 1
+			path: ../src/Controller/Report/QueryController.php
+
+		-
+			message: '#^Property App\\Entity\\Database\\Address\:\:\$member type mapping mismatch\: property can contain App\\Entity\\Database\\Member\|null but database expects App\\Entity\\Database\\Member\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Database/Address.php
+
+		-
+			message: '#^Property App\\Entity\\Database\\AuditMailingListMembership\:\:\$mailingList type mapping mismatch\: database can contain App\\Entity\\Database\\MailingList\|null but property expects App\\Entity\\Database\\MailingList\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Database/AuditMailingListMembership.php
+
+		-
+			message: '#^Property App\\Entity\\Database\\CheckoutSession\:\:\$prospectiveMember type mapping mismatch\: database can contain App\\Entity\\Database\\ProspectiveMember\|null but property expects App\\Entity\\Database\\ProspectiveMember\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Database/CheckoutSession.php
+
+		-
+			message: '#^Match arm comparison between \$this\(App\\Entity\\Database\\Enums\\AttentionReasons\)&App\\Entity\\Database\\Enums\\AttentionReasons\:\:ExpiringGraduateActiveInactive and App\\Entity\\Database\\Enums\\AttentionReasons\:\:ExpiringGraduateActiveInactive is always true\.$#'
+			identifier: match.alwaysTrue
+			count: 2
+			path: ../src/Entity/Database/Enums/AttentionReasons.php
+
+		-
+			message: '#^Call to function in_array\(\) requires parameter \#3 to be set\.$#'
+			identifier: function.strict
+			count: 1
+			path: ../src/Entity/Database/Enums/BoardFunctions.php
+
+		-
+			message: '#^Call to function in_array\(\) requires parameter \#3 to be set\.$#'
+			identifier: function.strict
+			count: 2
+			path: ../src/Entity/Database/Enums/InstallationFunctions.php
+
+		-
+			message: '#^Call to function in_array\(\) requires parameter \#3 to be set\.$#'
+			identifier: function.strict
+			count: 1
+			path: ../src/Entity/Database/Enums/OrganTypes.php
+
+		-
+			message: '#^Call to function in_array\(\) requires parameter \#3 to be set\.$#'
+			identifier: function.strict
+			count: 6
+			path: ../src/Entity/Database/Enums/Studies.php
+
+		-
+			message: '#^Match arm comparison between \$this\(App\\Entity\\Database\\Enums\\Studies\)&App\\Entity\\Database\\Enums\\Studies\:\:None and App\\Entity\\Database\\Enums\\Studies\:\:None is always true\.$#'
+			identifier: match.alwaysTrue
+			count: 1
+			path: ../src/Entity/Database/Enums/Studies.php
+
+		-
+			message: '#^Property App\\Entity\\Database\\Meeting\:\:\$minutes is never written, only read\.$#'
+			identifier: property.onlyRead
+			count: 1
+			path: ../src/Entity/Database/Meeting.php
+
+		-
+			message: '#^Property App\\Entity\\Database\\Meeting\:\:\$minutes type mapping mismatch\: database can contain App\\Entity\\Database\\SubDecision\\Minutes\|null but property expects App\\Entity\\Database\\SubDecision\\Minutes\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Database/Meeting.php
+
+		-
+			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
+			identifier: empty.notAllowed
+			count: 1
+			path: ../src/Entity/Database/Member.php
+
+		-
+			message: '#^Property App\\Entity\\Database\\Member\:\:\$auditEntries is never written, only read\.$#'
+			identifier: property.onlyRead
+			count: 1
+			path: ../src/Entity/Database/Member.php
+
+		-
+			message: '#^Property App\\Entity\\Database\\Member\:\:\$renewalLinks is never written, only read\.$#'
+			identifier: property.onlyRead
+			count: 1
+			path: ../src/Entity/Database/Member.php
+
+		-
+			message: '#^Property App\\Entity\\Database\\MemberUpdate\:\:\$requestedDate is never written, only read\.$#'
+			identifier: property.onlyRead
+			count: 1
+			path: ../src/Entity/Database/MemberUpdate.php
+
+		-
+			message: '#^Property App\\Entity\\Database\\PaymentLink\:\:\$prospectiveMember type mapping mismatch\: database can contain App\\Entity\\Database\\ProspectiveMember\|null but property expects App\\Entity\\Database\\ProspectiveMember\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Database/PaymentLink.php
+
+		-
+			message: '#^Call to function in_array\(\) requires parameter \#3 to be set\.$#'
+			identifier: function.strict
+			count: 1
+			path: ../src/Entity/Database/ProspectiveMember.php
+
+		-
+			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
+			identifier: empty.notAllowed
+			count: 1
+			path: ../src/Entity/Database/ProspectiveMember.php
+
+		-
+			message: '#^Property App\\Entity\\Database\\RenewalLink\:\:\$member type mapping mismatch\: database can contain App\\Entity\\Database\\Member\|null but property expects App\\Entity\\Database\\Member\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Database/RenewalLink.php
+
+		-
+			message: '#^Property App\\Entity\\Database\\SubDecision\:\:\$decision type mapping mismatch\: database can contain App\\Entity\\Database\\Decision\|null but property expects App\\Entity\\Database\\Decision\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Database/SubDecision.php
+
+		-
+			message: '#^Property App\\Entity\\Database\\SubDecision\\Annulment\:\:\$target type mapping mismatch\: database can contain App\\Entity\\Database\\Decision\|null but property expects App\\Entity\\Database\\Decision\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Database/SubDecision/Annulment.php
+
+		-
+			message: '#^Property App\\Entity\\Database\\SubDecision\\Board\\Discharge\:\:\$installation type mapping mismatch\: database can contain App\\Entity\\Database\\SubDecision\\Board\\Installation\|null but property expects App\\Entity\\Database\\SubDecision\\Board\\Installation\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Database/SubDecision/Board/Discharge.php
+
+		-
+			message: '#^Property App\\Entity\\Database\\SubDecision\\Board\\Release\:\:\$installation type mapping mismatch\: database can contain App\\Entity\\Database\\SubDecision\\Board\\Installation\|null but property expects App\\Entity\\Database\\SubDecision\\Board\\Installation\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Database/SubDecision/Board/Release.php
+
+		-
+			message: '#^Property App\\Entity\\Database\\SubDecision\\Discharge\:\:\$installation type mapping mismatch\: database can contain App\\Entity\\Database\\SubDecision\\Installation\|null but property expects App\\Entity\\Database\\SubDecision\\Installation\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Database/SubDecision/Discharge.php
+
+		-
+			message: '#^Property App\\Entity\\Database\\SubDecision\\FoundationReference\:\:\$foundation type mapping mismatch\: database can contain App\\Entity\\Database\\SubDecision\\Foundation\|null but property expects App\\Entity\\Database\\SubDecision\\Foundation\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Database/SubDecision/FoundationReference.php
+
+		-
+			message: '#^Property App\\Entity\\Database\\SubDecision\\Key\\Withdrawal\:\:\$granting type mapping mismatch\: database can contain App\\Entity\\Database\\SubDecision\\Key\\Granting\|null but property expects App\\Entity\\Database\\SubDecision\\Key\\Granting\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Database/SubDecision/Key/Withdrawal.php
+
+		-
+			message: '#^Property App\\Entity\\Database\\SubDecision\\Minutes\:\:\$meeting type mapping mismatch\: database can contain App\\Entity\\Database\\Meeting\|null but property expects App\\Entity\\Database\\Meeting\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Database/SubDecision/Minutes.php
+
+		-
+			message: '#^Property App\\Entity\\Database\\SubDecision\\Reappointment\:\:\$installation type mapping mismatch\: database can contain App\\Entity\\Database\\SubDecision\\Installation\|null but property expects App\\Entity\\Database\\SubDecision\\Installation\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: ../src/Entity/Database/SubDecision/Reappointment.php
+
+		-
+			message: '#^Property App\\Entity\\Report\\BoardMember\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: ../src/Entity/Report/BoardMember.php
+
+		-
+			message: '#^Property App\\Entity\\Report\\Decision\:\:\$annulledBy \(App\\Entity\\Report\\SubDecision\\Annulment\|null\) is never assigned App\\Entity\\Report\\SubDecision\\Annulment so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: ../src/Entity/Report/Decision.php
+
+		-
+			message: '#^Property App\\Entity\\Report\\Keyholder\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: ../src/Entity/Report/Keyholder.php
+
+		-
+			message: '#^Property App\\Entity\\Report\\Meeting\:\:\$minutes is unused\.$#'
+			identifier: property.unused
+			count: 1
+			path: ../src/Entity/Report/Meeting.php
+
+		-
+			message: '#^Call to function in_array\(\) requires parameter \#3 to be set\.$#'
+			identifier: function.strict
+			count: 8
+			path: ../src/Entity/Report/Member.php
+
+		-
+			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
+			identifier: empty.notAllowed
+			count: 1
+			path: ../src/Entity/Report/Member.php
+
+		-
+			message: '#^Property App\\Entity\\Report\\Member\:\:\$boardInstallations is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: ../src/Entity/Report/Member.php
+
+		-
+			message: '#^Property App\\Entity\\Report\\OrganMember\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: ../src/Entity/Report/OrganMember.php
+
+		-
+			message: '#^Property App\\Entity\\Report\\SubDecision\\Board\\Installation\:\:\$discharge \(App\\Entity\\Report\\SubDecision\\Board\\Discharge\|null\) is never assigned App\\Entity\\Report\\SubDecision\\Board\\Discharge so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: ../src/Entity/Report/SubDecision/Board/Installation.php
+
+		-
+			message: '#^Property App\\Entity\\Report\\SubDecision\\Board\\Installation\:\:\$release \(App\\Entity\\Report\\SubDecision\\Board\\Release\|null\) is never assigned App\\Entity\\Report\\SubDecision\\Board\\Release so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: ../src/Entity/Report/SubDecision/Board/Installation.php
+
+		-
+			message: '#^Property App\\Entity\\Report\\SubDecision\\Installation\:\:\$discharge \(App\\Entity\\Report\\SubDecision\\Discharge\|null\) is never assigned App\\Entity\\Report\\SubDecision\\Discharge so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: ../src/Entity/Report/SubDecision/Installation.php
+
+		-
+			message: '#^Property App\\Entity\\Report\\SubDecision\\Key\\Granting\:\:\$withdrawal \(App\\Entity\\Report\\SubDecision\\Key\\Withdrawal\|null\) is never assigned App\\Entity\\Report\\SubDecision\\Key\\Withdrawal so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: ../src/Entity/Report/SubDecision/Key/Granting.php
+
+		-
+			message: '#^Property App\\Entity\\Report\\SubDecision\\OrganRegulation\:\:\$organType is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: ../src/Entity/Report/SubDecision/OrganRegulation.php
+
+		-
+			message: '#^Class App\\Form\\Database\\AbolishType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/AbolishType.php
+
+		-
+			message: '#^Class App\\Form\\Database\\AddressEditType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/AddressEditType.php
+
+		-
+			message: '#^Class App\\Form\\Database\\AddressType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/AddressType.php
+
+		-
+			message: '#^Only booleans are allowed in an if condition, mixed given\.$#'
+			identifier: if.condNotBoolean
+			count: 1
+			path: ../src/Form/Database/AddressType.php
+
+		-
+			message: '#^Class App\\Form\\Database\\AnnulmentType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/AnnulmentType.php
+
+		-
+			message: '#^Class App\\Form\\Database\\AuditNoteType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/AuditNoteType.php
+
+		-
+			message: '#^Class App\\Form\\Database\\BaseDecisionType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/BaseDecisionType.php
+
+		-
+			message: '#^Class App\\Form\\Database\\Board\\DischargeType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/Board/DischargeType.php
+
+		-
+			message: '#^Class App\\Form\\Database\\Board\\InstallType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/Board/InstallType.php
+
+		-
+			message: '#^Class App\\Form\\Database\\Board\\ReleaseType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/Board/ReleaseType.php
+
+		-
+			message: '#^Class App\\Form\\Database\\BudgetType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/BudgetType.php
+
+		-
+			message: '#^Class App\\Form\\Database\\BulkMemberRenewalType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/BulkMemberRenewalType.php
+
+		-
+			message: '#^Short ternary operator is not allowed\. Use null coalesce operator if applicable or consider using long ternary\.$#'
+			identifier: ternary.shortNotAllowed
+			count: 1
+			path: ../src/Form/Database/BulkMemberRenewalType.php
+
+		-
+			message: '#^Class App\\Form\\Database\\CreateMeetingType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/CreateMeetingType.php
+
+		-
+			message: '#^Method App\\Form\\Database\\DataMapper\\AbolishMapper\:\:mapSubDecisions\(\) has parameter \$forms with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/DataMapper/AbolishMapper.php
+
+		-
+			message: '#^Method App\\Form\\Database\\DataMapper\\AbstractDecisionMapper\:\:mapDataToForms\(\) has parameter \$forms with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/DataMapper/AbstractDecisionMapper.php
+
+		-
+			message: '#^Method App\\Form\\Database\\DataMapper\\AbstractDecisionMapper\:\:mapFormsToData\(\) has parameter \$forms with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/DataMapper/AbstractDecisionMapper.php
+
+		-
+			message: '#^Method App\\Form\\Database\\DataMapper\\AbstractDecisionMapper\:\:mapSubDecisions\(\) has parameter \$forms with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/DataMapper/AbstractDecisionMapper.php
+
+		-
+			message: '#^PHPDoc tag @var for variable \$children contains generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/DataMapper/AbstractDecisionMapper.php
+
+		-
+			message: '#^Method App\\Form\\Database\\DataMapper\\AnnulmentMapper\:\:mapSubDecisions\(\) has parameter \$forms with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/DataMapper/AnnulmentMapper.php
+
+		-
+			message: '#^Method App\\Form\\Database\\DataMapper\\Board\\DischargeMapper\:\:mapSubDecisions\(\) has parameter \$forms with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/DataMapper/Board/DischargeMapper.php
+
+		-
+			message: '#^Method App\\Form\\Database\\DataMapper\\Board\\InstallMapper\:\:mapSubDecisions\(\) has parameter \$forms with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/DataMapper/Board/InstallMapper.php
+
+		-
+			message: '#^Method App\\Form\\Database\\DataMapper\\Board\\ReleaseMapper\:\:mapSubDecisions\(\) has parameter \$forms with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/DataMapper/Board/ReleaseMapper.php
+
+		-
+			message: '#^Method App\\Form\\Database\\DataMapper\\BudgetMapper\:\:mapSubDecisions\(\) has parameter \$forms with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/DataMapper/BudgetMapper.php
+
+		-
+			message: '#^Method App\\Form\\Database\\DataMapper\\FoundationMapper\:\:mapSubDecisions\(\) has parameter \$forms with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/DataMapper/FoundationMapper.php
+
+		-
+			message: '#^Method App\\Form\\Database\\DataMapper\\InstallMapper\:\:mapSubDecisions\(\) has parameter \$forms with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/DataMapper/InstallMapper.php
+
+		-
+			message: '#^Method App\\Form\\Database\\DataMapper\\Key\\GrantMapper\:\:mapSubDecisions\(\) has parameter \$forms with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/DataMapper/Key/GrantMapper.php
+
+		-
+			message: '#^Method App\\Form\\Database\\DataMapper\\Key\\WithdrawMapper\:\:mapSubDecisions\(\) has parameter \$forms with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/DataMapper/Key/WithdrawMapper.php
+
+		-
+			message: '#^Method App\\Form\\Database\\DataMapper\\MinutesMapper\:\:mapSubDecisions\(\) has parameter \$forms with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/DataMapper/MinutesMapper.php
+
+		-
+			message: '#^Method App\\Form\\Database\\DataMapper\\OrganRegulationMapper\:\:mapSubDecisions\(\) has parameter \$forms with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/DataMapper/OrganRegulationMapper.php
+
+		-
+			message: '#^Method App\\Form\\Database\\DataMapper\\OtherMapper\:\:mapSubDecisions\(\) has parameter \$forms with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/DataMapper/OtherMapper.php
+
+		-
+			message: '#^Class App\\Form\\Database\\DecisionType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/DecisionType.php
+
+		-
+			message: '#^Class App\\Form\\Database\\DeleteAddressType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/DeleteAddressType.php
+
+		-
+			message: '#^Class App\\Form\\Database\\DeleteDecisionType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/DeleteDecisionType.php
+
+		-
+			message: '#^Class App\\Form\\Database\\DeleteListType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/DeleteListType.php
+
+		-
+			message: '#^Class App\\Form\\Database\\DeleteMemberType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/DeleteMemberType.php
+
+		-
+			message: '#^Class App\\Form\\Database\\FoundationType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/FoundationType.php
+
+		-
+			message: '#^Class App\\Form\\Database\\GrantingType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/GrantingType.php
+
+		-
+			message: '#^Class App\\Form\\Database\\InstallType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/InstallType.php
+
+		-
+			message: '#^Class App\\Form\\Database\\InstallationType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/InstallationType.php
+
+		-
+			message: '#^Class App\\Form\\Database\\Key\\GrantType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/Key/GrantType.php
+
+		-
+			message: '#^Class App\\Form\\Database\\Key\\WithdrawType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/Key/WithdrawType.php
+
+		-
+			message: '#^Method App\\Form\\Database\\Key\\WithdrawType\:\:root\(\) return type with generic interface Symfony\\Component\\Form\\FormInterface does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/Key/WithdrawType.php
+
+		-
+			message: '#^Class App\\Form\\Database\\MailingListType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/MailingListType.php
+
+		-
+			message: '#^Class App\\Form\\Database\\MeetingType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/MeetingType.php
+
+		-
+			message: '#^Class App\\Form\\Database\\MemberEditType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/MemberEditType.php
+
+		-
+			message: '#^Class App\\Form\\Database\\MemberExpirationType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/MemberExpirationType.php
+
+		-
+			message: '#^Class App\\Form\\Database\\MemberFunctionType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/MemberFunctionType.php
+
+		-
+			message: '#^Only booleans are allowed in an if condition, mixed given\.$#'
+			identifier: if.condNotBoolean
+			count: 1
+			path: ../src/Form/Database/MemberFunctionType.php
+
+		-
+			message: '#^Class App\\Form\\Database\\MemberListsType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/MemberListsType.php
+
+		-
+			message: '#^Class App\\Form\\Database\\MemberLookupType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/MemberLookupType.php
+
+		-
+			message: '#^Only booleans are allowed in an if condition, mixed given\.$#'
+			identifier: if.condNotBoolean
+			count: 1
+			path: ../src/Form/Database/MemberLookupType.php
+
+		-
+			message: '#^Class App\\Form\\Database\\MemberRenewalType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/MemberRenewalType.php
+
+		-
+			message: '#^Class App\\Form\\Database\\MembershipTypeType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/MembershipTypeType.php
+
+		-
+			message: '#^Class App\\Form\\Database\\MinutesType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/MinutesType.php
+
+		-
+			message: '#^Class App\\Form\\Database\\OrganRegulationType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/OrganRegulationType.php
+
+		-
+			message: '#^Class App\\Form\\Database\\OtherType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/OtherType.php
+
+		-
+			message: '#^Class App\\Form\\Database\\RegistrationType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/RegistrationType.php
+
+		-
+			message: '#^Class App\\Form\\Database\\SubDecisionType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Database/SubDecisionType.php
+
+		-
+			message: '#^Class App\\Form\\Report\\ExportType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Report/ExportType.php
+
+		-
+			message: '#^Class App\\Form\\Report\\QueryExportType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Report/QueryExportType.php
+
+		-
+			message: '#^Class App\\Form\\Report\\QuerySaveType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Report/QuerySaveType.php
+
+		-
+			message: '#^Class App\\Form\\Report\\QueryType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/Report/QueryType.php
+
+		-
+			message: '#^Method App\\Form\\SubmitButtons\:\:clicked\(\) has parameter \$form with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/SubmitButtons.php
+
+		-
+			message: '#^Class App\\Form\\User\\ApiPrincipalType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/User/ApiPrincipalType.php
+
+		-
+			message: '#^Class App\\Form\\User\\LoginType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/User/LoginType.php
+
+		-
+			message: '#^Class App\\Form\\User\\UserCreateType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/User/UserCreateType.php
+
+		-
+			message: '#^Class App\\Form\\User\\UserEditType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Form/User/UserEditType.php
+
+		-
+			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
+			identifier: empty.notAllowed
+			count: 1
+			path: ../src/Repository/Database/MeetingRepository.php
+
+		-
+			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
+			identifier: empty.notAllowed
+			count: 4
+			path: ../src/Repository/Database/MemberRepository.php
+
+		-
+			message: '#^Class App\\Security\\Api\\ApiPermissionVoter extends generic class Symfony\\Component\\Security\\Core\\Authorization\\Voter\\Voter but does not specify its types\: TAttribute, TSubject$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Security/Api/ApiPermissionVoter.php
+
+		-
+			message: '#^Method App\\Security\\Api\\ApiTokenAuthenticator\:\:onAuthenticationFailure\(\) never returns null so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: ../src/Security/Api/ApiTokenAuthenticator.php
+
+		-
+			message: '#^Method App\\Security\\Api\\ApiTokenAuthenticator\:\:supports\(\) never returns null so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: ../src/Security/Api/ApiTokenAuthenticator.php
+
+		-
+			message: '#^Call to function base64_decode\(\) requires parameter \#2 to be set\.$#'
+			identifier: function.strict
+			count: 1
+			path: ../src/Service/Application/FileStorage.php
+
+		-
+			message: '#^Method App\\Service\\Checker\\Checker\:\:checkAnnulments\(\) return type with generic class App\\ViewModel\\Checker\\Error does not specify its types\: T$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Service/Checker/Checker.php
+
+		-
+			message: '#^Method App\\Service\\Checker\\Checker\:\:checkKeyGrantingDuration\(\) return type with generic class App\\ViewModel\\Checker\\Error does not specify its types\: T$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Service/Checker/Checker.php
+
+		-
+			message: '#^Method App\\Service\\Checker\\Checker\:\:checkKeyWithdrawalTime\(\) return type with generic class App\\ViewModel\\Checker\\Error does not specify its types\: T$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Service/Checker/Checker.php
+
+		-
+			message: '#^Method App\\Service\\Checker\\Checker\:\:checkMembersExpiredButStillInOrgan\(\) return type with generic class App\\ViewModel\\Checker\\Error does not specify its types\: T$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Service/Checker/Checker.php
+
+		-
+			message: '#^Method App\\Service\\Checker\\Checker\:\:checkMembersHaveRolesButInactiveOrNotInOrgan\(\) return type with generic class App\\ViewModel\\Checker\\Error does not specify its types\: T$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Service/Checker/Checker.php
+
+		-
+			message: '#^Method App\\Service\\Checker\\Checker\:\:checkMembersInNonExistingOrgans\(\) return type with generic class App\\ViewModel\\Checker\\Error does not specify its types\: T$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Service/Checker/Checker.php
+
+		-
+			message: '#^Method App\\Service\\Checker\\Checker\:\:checkOrganComposition\(\) return type with generic class App\\ViewModel\\Checker\\Error does not specify its types\: T$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Service/Checker/Checker.php
+
+		-
+			message: '#^Method App\\Service\\Checker\\Checker\:\:checkOrganFoundationMeetingType\(\) return type with generic class App\\ViewModel\\Checker\\Error does not specify its types\: T$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Service/Checker/Checker.php
+
+		-
+			message: '#^Method App\\Service\\Checker\\Checker\:\:getExpiration\(\) is unused\.$#'
+			identifier: method.unused
+			count: 1
+			path: ../src/Service/Checker/Checker.php
+
+		-
+			message: '#^Method App\\Service\\Checker\\Checker\:\:handleMeetingErrors\(\) has parameter \$errors with generic class App\\ViewModel\\Checker\\Error but does not specify its types\: T$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Service/Checker/Checker.php
+
+		-
+			message: '#^Call to function in_array\(\) requires parameter \#3 to be set\.$#'
+			identifier: function.strict
+			count: 1
+			path: ../src/Service/Database/ListmonkService.php
+
+		-
+			message: '#^Call to function in_array\(\) requires parameter \#3 to be set\.$#'
+			identifier: function.strict
+			count: 1
+			path: ../src/Service/Database/MailmanService.php
+
+		-
+			message: '#^Constant App\\Service\\Database\\MailmanService\:\:MM_DELIVERYMODE_DIGESTS_MIME is unused\.$#'
+			identifier: classConstant.unused
+			count: 1
+			path: ../src/Service/Database/MailmanService.php
+
+		-
+			message: '#^Constant App\\Service\\Database\\MailmanService\:\:MM_DELIVERYMODE_DIGESTS_PLAIN is unused\.$#'
+			identifier: classConstant.unused
+			count: 1
+			path: ../src/Service/Database/MailmanService.php
+
+		-
+			message: '#^Constant App\\Service\\Database\\MailmanService\:\:MM_DELIVERYSTATUS_DISABLED_BY_BOUNCES is unused\.$#'
+			identifier: classConstant.unused
+			count: 1
+			path: ../src/Service/Database/MailmanService.php
+
+		-
+			message: '#^Constant App\\Service\\Database\\MailmanService\:\:MM_DELIVERYSTATUS_DISABLED_BY_MODERATOR is unused\.$#'
+			identifier: classConstant.unused
+			count: 1
+			path: ../src/Service/Database/MailmanService.php
+
+		-
+			message: '#^Constant App\\Service\\Database\\MailmanService\:\:MM_DELIVERYSTATUS_DISABLED_BY_USER is unused\.$#'
+			identifier: classConstant.unused
+			count: 1
+			path: ../src/Service/Database/MailmanService.php
+
+		-
+			message: '#^Constant App\\Service\\Database\\MailmanService\:\:MM_DELLIVERYMODE_DIGESTS_SUMMARY is unused\.$#'
+			identifier: classConstant.unused
+			count: 1
+			path: ../src/Service/Database/MailmanService.php
+
+		-
+			message: '#^Constant App\\Service\\Database\\MailmanService\:\:MM_ROLE_MODERATOR is unused\.$#'
+			identifier: classConstant.unused
+			count: 1
+			path: ../src/Service/Database/MailmanService.php
+
+		-
+			message: '#^Constant App\\Service\\Database\\MailmanService\:\:MM_ROLE_NONMEMBER is unused\.$#'
+			identifier: classConstant.unused
+			count: 1
+			path: ../src/Service/Database/MailmanService.php
+
+		-
+			message: '#^Constant App\\Service\\Database\\MailmanService\:\:MM_ROLE_OWNER is unused\.$#'
+			identifier: classConstant.unused
+			count: 1
+			path: ../src/Service/Database/MailmanService.php
+
+		-
+			message: '#^Call to function in_array\(\) requires parameter \#3 to be set\.$#'
+			identifier: function.strict
+			count: 1
+			path: ../src/Service/Database/Member.php
+
+		-
+			message: '#^Method App\\Service\\Database\\Member\:\:addAddress\(\) has parameter \$form with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Service/Database/Member.php
+
+		-
+			message: '#^Method App\\Service\\Database\\Member\:\:addAuditNote\(\) has parameter \$form with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Service/Database/Member.php
+
+		-
+			message: '#^Method App\\Service\\Database\\Member\:\:edit\(\) has parameter \$form with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Service/Database/Member.php
+
+		-
+			message: '#^Method App\\Service\\Database\\Member\:\:editAddress\(\) has parameter \$form with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Service/Database/Member.php
+
+		-
+			message: '#^Method App\\Service\\Database\\Member\:\:expiration\(\) has parameter \$form with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Service/Database/Member.php
+
+		-
+			message: '#^Method App\\Service\\Database\\Member\:\:membership\(\) has parameter \$form with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Service/Database/Member.php
+
+		-
+			message: '#^Method App\\Service\\Database\\Member\:\:persistAddressFromForm\(\) has parameter \$form with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Service/Database/Member.php
+
+		-
+			message: '#^Method App\\Service\\Database\\Member\:\:removeAddress\(\) has parameter \$form with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Service/Database/Member.php
+
+		-
+			message: '#^Method App\\Service\\Database\\Member\:\:subscribe\(\) has parameter \$form with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Service/Database/Member.php
+
+		-
+			message: '#^Method App\\Service\\Database\\Member\:\:subscribeLists\(\) has parameter \$form with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Service/Database/Member.php
+
+		-
+			message: '#^Short ternary operator is not allowed\. Use null coalesce operator if applicable or consider using long ternary\.$#'
+			identifier: ternary.shortNotAllowed
+			count: 2
+			path: ../src/Service/Database/Member.php
+
+		-
+			message: '#^Method App\\Service\\Database\\RegistrationService\:\:register\(\) has parameter \$form with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: ../src/Service/Database/RegistrationService.php
+
+		-
+			message: '#^Parameter \#1 \$params of method Stripe\\Service\\Checkout\\SessionService\:\:create\(\) expects array\{adaptive_pricing\?\: array\{enabled\?\: bool\}, after_expiration\?\: array\{recovery\?\: array\{allow_promotion_codes\?\: bool, enabled\: bool\}\}, allow_promotion_codes\?\: bool, automatic_tax\?\: array\{enabled\: bool, liability\?\: array\{account\?\: string, type\: string\}\}, billing_address_collection\?\: string, branding_settings\?\: array\{background_color\?\: string\|null, border_style\?\: string\|null, button_color\?\: string\|null, display_name\?\: string, font_family\?\: string\|null, icon\?\: array\{file\?\: string, type\: string, url\?\: string\}, logo\?\: array\{file\?\: string, type\: string, url\?\: string\}\}, cancel_url\?\: string, client_reference_id\?\: string, \.\.\.\}\|null, array\{line_items\: array\{array\{price\: string, quantity\: 1\}\}, mode\: ''payment'', payment_intent_data\: array\{statement_descriptor\: non\-falsy\-string\}, cancel_url\: string, success_url\: string, expires_at\: int\<3601, max\>, after_expiration\: array\{recovery\: array\{enabled\: true\}\}, client_reference_id\: int, \.\.\.\} given\.$#'
+			identifier: argument.type
+			count: 1
+			path: ../src/Service/Database/StripeService.php
+
+		-
+			message: '#^Method App\\Service\\Report\\ApiService\:\:getActiveMembers\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: ../src/Service/Report/ApiService.php
+
+		-
+			message: '#^Method App\\Service\\Report\\ApiService\:\:getMember\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: ../src/Service/Report/ApiService.php
+
+		-
+			message: '#^Method App\\Service\\Report\\ApiService\:\:getMembers\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: ../src/Service/Report/ApiService.php
+
+		-
+			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
+			identifier: empty.notAllowed
+			count: 1
+			path: ../src/Service/Report/MeetingService.php
+
+		-
+			message: '#^Short ternary operator is not allowed\. Use null coalesce operator if applicable or consider using long ternary\.$#'
+			identifier: ternary.shortNotAllowed
+			count: 1
+			path: ../src/Validator/Database/BulkMemberIdsValidator.php
+
+		-
+			message: '#^Call to function method_exists\(\) with ''Symfony\\\\Component\\\\Dotenv\\\\Dotenv'' and ''bootEnv'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: ../tests/bootstrap.php
+
+		-
+			message: '#^Only booleans are allowed in an if condition, mixed given\.$#'
+			identifier: if.condNotBoolean
+			count: 1
+			path: ../tests/bootstrap.php

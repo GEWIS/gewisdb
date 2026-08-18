@@ -1,0 +1,14 @@
+api_platform:
+    title: GEWISDB
+    version: '4.3.3'
+
+    # `/api` already answers, and its root is the health endpoint. API Platform's entrypoint and documentation would
+    # both sit on top of paths the existing contract owns, so only declared resources get routes; those appear under
+    # /api/<resource> and do not collide.
+    enable_entrypoint: false
+    enable_docs: false
+
+    defaults:
+        stateless: true
+        cache_headers:
+            vary: ['Content-Type', 'Authorization', 'Origin']

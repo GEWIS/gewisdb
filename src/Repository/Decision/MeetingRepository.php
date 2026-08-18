@@ -250,7 +250,7 @@ class MeetingRepository extends ServiceEntityRepository
                 ->andWhere('x.number = d.number');
             $qb->andWhere($qb->expr()->not(
                 $qb->expr()->exists(
-                    $qbn->getDql(),
+                    $qbn->getDQL(),
                 ),
             ));
         }
@@ -265,7 +265,7 @@ class MeetingRepository extends ServiceEntityRepository
             ->andWhere('b.decision_number = d.number');
         $qb->andWhere($qb->expr()->not(
             $qb->expr()->exists(
-                $qba->getDql(),
+                $qba->getDQL(),
             ),
         ));
 
@@ -324,7 +324,7 @@ class MeetingRepository extends ServiceEntityRepository
             ->andWhere($target . '.number = ' . $alias . '.decision_number');
 
         $qb->andWhere($qb->expr()->not(
-            $qb->expr()->exists($qba->getDql()),
+            $qb->expr()->exists($qba->getDQL()),
         ));
     }
 
@@ -356,7 +356,7 @@ class MeetingRepository extends ServiceEntityRepository
         $this->whereNotAnnulled($qb, 'i');
 
         $qb->andWhere($qb->expr()->not(
-            $qb->expr()->exists($qbn->getDql()),
+            $qb->expr()->exists($qbn->getDQL()),
         ));
 
         return $qb->getQuery()->getResult();
@@ -399,10 +399,10 @@ class MeetingRepository extends ServiceEntityRepository
         $this->whereNotAnnulled($qb, 'i');
 
         $qb->andWhere($qb->expr()->not(
-            $qb->expr()->exists($qbd->getDql()),
+            $qb->expr()->exists($qbd->getDQL()),
         ));
         $qb->andWhere($qb->expr()->not(
-            $qb->expr()->exists($qbr->getDql()),
+            $qb->expr()->exists($qbr->getDQL()),
         ));
 
         return $qb->getQuery()->getResult();
@@ -437,7 +437,7 @@ class MeetingRepository extends ServiceEntityRepository
         $this->whereNotAnnulled($qb, 'g');
 
         $qb->andWhere($qb->expr()->not(
-            $qb->expr()->exists($qbn->getDql()),
+            $qb->expr()->exists($qbn->getDQL()),
         ));
 
         $qb->setParameter('now', new DateTime('now'));

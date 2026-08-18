@@ -1,27 +1,23 @@
 includes:
     - phpstan/phpstan-baseline.neon
-    - phpstan/phpstan-baseline-pr.neon
 
 parameters:
-    level: 1
-    treatPhpDocTypesAsCertain: true
-    reportUnmatchedIgnoredErrors: false
-    bootstrapFiles:
-        - bootstrap.php
-    laminasframework:
-       serviceManagerLoader: phpstan/phpstan-sm.php
-    doctrine:
-        objectManagerLoader: phpstan/phpstan-om.php
+    level: 6
+    # Runtime guards check what the native signature allows, not what a docblock promises.
+    treatPhpDocTypesAsCertain: false
     paths:
-        - config
-        - bootstrap.php
-        - module/Application/src
-        - module/Checker/src
-        - module/Database/src
-        - module/Report/src
-        - module/User/src
-        - module/Application/test
-        - module/Checker/test
-        - module/Database/test
-        - public/index.php
-    tmpDir: data/cache/phpstan
+        - src
+        - tests
+    tmpDir: var/cache/phpstan
+    symfony:
+        containerXmlPath: var/cache/dev/App_KernelDevDebugContainer.xml
+    doctrine:
+        objectManagerLoader: tests/object-manager.php
+
+    # A ratchet rather than a baseline: the percentages are global, so a baseline entry stops matching the moment any
+    # file is added or removed. Raise these as the gaps are closed; never lower them.
+    type_coverage:
+        param_type: 98
+        return_type: 99
+        property_type: 99
+        constant_type: 0

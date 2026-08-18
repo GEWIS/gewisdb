@@ -24,7 +24,12 @@ class MailingList
      * Name of the mailing list
      */
     #[Id]
-    #[Column(type: 'string')]
+    // Length spelled out: ORM 3 only copies an explicit length onto the join columns that reference this one,
+    // which would otherwise become unbounded VARCHAR.
+    #[Column(
+        type: 'string',
+        length: 255,
+    )]
     private string $name;
 
     /**

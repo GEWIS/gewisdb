@@ -15,7 +15,6 @@ use App\Entity\Decision\SubDecision\Board\Discharge as BoardDischargeModel;
 use App\Entity\Decision\SubDecision\Board\Installation as BoardInstallationModel;
 use App\Entity\Decision\SubDecision\Discharge as DischargeModel;
 use App\Entity\Decision\SubDecision\Financial\Budget;
-use App\Entity\Decision\SubDecision\Financial\Statement;
 use App\Entity\Decision\SubDecision\Foundation as FoundationModel;
 use App\Entity\Decision\SubDecision\Installation as InstallationModel;
 use App\Exception\Decision\AnnulmentNotPossible;
@@ -489,8 +488,8 @@ class Meeting
     private function getCategory(SubDecision $subdecision): string
     {
         return match (true) {
-            $subdecision instanceof Budget,
-            $subdecision instanceof Statement => 'financial',
+            // Statement extends Budget, so it arrives here too.
+            $subdecision instanceof Budget => 'financial',
             $subdecision instanceof FoundationModel,
             $subdecision instanceof Abrogation,
             $subdecision instanceof InstallationModel,

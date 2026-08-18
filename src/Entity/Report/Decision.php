@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity\Report;
 
-use App\Entity\Decision\Enums\MeetingTypes;
+use App\Entity\Database\Enums\MeetingTypes;
 use App\Entity\Report\SubDecision\Annulment;
 use App\Repository\Report\DecisionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -49,7 +49,10 @@ class Decision
      * NOTE: This is a hack to make the meeting a primary key here.
      */
     #[Id]
+    // Length spelled out: ORM 3 only copies an explicit length onto the join columns that reference this one,
+    // which would otherwise become unbounded VARCHAR.
     #[Column(
+        length: 255,
         enumType: MeetingTypes::class,
     )]
     private MeetingTypes $meeting_type;

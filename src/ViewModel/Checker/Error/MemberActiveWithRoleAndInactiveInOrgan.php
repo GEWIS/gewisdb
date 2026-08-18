@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\ViewModel\Checker\Error;
 
-use App\Entity\Decision\Meeting as MeetingModel;
-use App\Entity\Decision\SubDecision\Foundation as FoundationModel;
-use App\Entity\Decision\SubDecision\Installation as InstallationModel;
-use App\Entity\Member\Member as MemberModel;
+use App\Entity\Database\Meeting as MeetingModel;
+use App\Entity\Database\Member as MemberModel;
+use App\Entity\Database\SubDecision\Foundation as FoundationModel;
+use App\Entity\Database\SubDecision\Installation as InstallationModel;
 use App\ViewModel\Checker\Error;
 use Override;
 
@@ -53,7 +53,7 @@ class MemberActiveWithRoleAndInactiveInOrgan extends Error
         return sprintf(
             'Member %s (%d) is installed as "Lid" in %s with special roles but is also installed as "Inactief Lid".',
             $this->getMember()->getFullName(),
-            $this->getMember()->getLidNr(),
+            $this->getMember()->getLidnr(),
             $this->getOrgan()->getName(),
         );
     }

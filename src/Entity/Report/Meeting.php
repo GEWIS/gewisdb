@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity\Report;
 
-use App\Entity\Decision\Enums\MeetingTypes;
+use App\Entity\Database\Enums\MeetingTypes;
 use App\Entity\Report\SubDecision\Minutes;
 use App\Repository\Report\MeetingRepository;
 use DateTime;
@@ -26,7 +26,10 @@ class Meeting
      * Meeting type.
      */
     #[Id]
+    // Length spelled out: ORM 3 only copies an explicit length onto the join columns that reference this one,
+    // which would otherwise become unbounded VARCHAR.
     #[Column(
+        length: 255,
         enumType: MeetingTypes::class,
     )]
     private MeetingTypes $type;

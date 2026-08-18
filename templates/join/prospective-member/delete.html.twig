@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'Cannot Delete Prospective Member'|trans }} - {{ parent() }}{% endblock %}
+
+{% block contents %}
+    {# `getName()` spelled out: `reason.name` would resolve to the enum case name. #}
+    <h1>{{ 'Cannot Delete Prospective Member:'|trans }} {{ reason.getName|trans }}</h1>
+    <p>{{ reason.getDescription|trans }}</p>
+{% endblock %}

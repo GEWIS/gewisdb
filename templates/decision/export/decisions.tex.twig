@@ -17,9 +17,12 @@
 \addtolength\topmargin{-1cm}
 \addtolength\textheight{3cm}
 
+{# LaTeX comments start with `%`, so `{%` here opens a Twig tag rather than a group. #}
+{% verbatim %}
 \newcommand\besluit[3]{%
 \textbf{#1 (#2):}\nopagebreak\\#3%
 }
+{% endverbatim %}
 
 \begin{document}
 \modulolinenumbers[5]

@@ -23,7 +23,6 @@ class SetRoleDriver extends AbstractDriverMiddleware
     public function __construct(
         DriverInterface $driver,
         private readonly array $roles,
-        private readonly bool $isPgSQL,
     ) {
         parent::__construct($driver);
     }
@@ -38,12 +37,16 @@ class SetRoleDriver extends AbstractDriverMiddleware
     ): ConnectionInterface {
         $connection = parent::connect($params);
 
-        if (
-            $this->isPgSQL
-            && isset($params['host'], $params['port'], $params['dbname'])
-        ) {
-            $role = $this->roles[implode(':', [$params['host'], $params['port'], $params['dbname']])];
+        // The connection is identified by where it points rather than by its driver class: doctrine-bundle wraps
+        // drivers in middleware of its own, so the concrete driver is not visible here. Anything that is not one of
+        // the two configured databases keeps the role it connected with.
+        if (!isset($params['host'], $params['port'], $params['dbname'])) {
+            return $connection;
+        }
 
+        $role = $this->roles[implode(':', [$params['host'], $params['port'], $params['dbname']])] ?? null;
+
+        if (null !== $role) {
             $connection->exec('SET ROLE ' . $connection->quote($role));
         }
 

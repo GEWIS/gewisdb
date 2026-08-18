@@ -6,7 +6,7 @@ namespace App\Security\User;
 
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
-use Symfony\Component\Security\Http\Authenticator\Passport\Badge\LdapBadge;
+use Symfony\Component\Ldap\Security\LdapBadge;
 use Symfony\Component\Security\Http\Event\CheckPassportEvent;
 
 /**

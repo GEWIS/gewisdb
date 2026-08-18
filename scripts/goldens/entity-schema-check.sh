@@ -2,10 +2,9 @@
 #
 # Compare the DDL implied by the ported entities against the recorded schema.
 #
-# One statement is expected to differ and is subtracted before comparing: DBAL 3 emitted
-# `COMMENT ON COLUMN Membership.startDate IS '(DC2Type:stringable_datetime)'` for the comment-hinted type, and
-# App\Doctrine\Types\StringableDateTimeType no longer declares requiresSQLCommentHint() because DBAL 4 removed it.
-# The simple_array comments survive, since that type still declares the hint under the installed DBAL.
+# Both sides go through normalise-schema.py first, which removes the ways DBAL 4 renders the same declarations
+# differently from the DBAL 3 that made the recording. Everything it does is listed in that file; anything it does not
+# cover is drift and fails here.
 #
 # Usage: scripts/goldens/entity-schema-check.sh
 
@@ -18,17 +17,15 @@ cd "${ROOT}"
 TMP="$(mktemp -d)"
 trap 'rm -rf "${TMP}"' EXIT
 
-DEFAULT_DOMAINS=(Application Decision Member Join Mailing Query User)
-EXPECTED_ABSENT="COMMENT ON COLUMN Membership.startDate IS '(DC2Type:stringable_datetime)'"
+DEFAULT_DOMAINS=(Application Database User)
 
-normalise() { sed 's/;$//' "$1" | LC_ALL=C sort; }
+normalise() { python3 "${HERE}/normalise-schema.py" "$1"; }
 
 status=0
 
 echo "==> default entity manager"
 php scripts/goldens/entity-schema.php "${DEFAULT_DOMAINS[@]}" > "${TMP}/default.sql"
-normalise goldens/schema/default.sql | grep -vF "${EXPECTED_ABSENT}" > "${TMP}/expected-default.sql"
-if diff "${TMP}/expected-default.sql" <(normalise "${TMP}/default.sql") > "${TMP}/default.diff"; then
+if diff <(normalise goldens/schema/default.sql) <(normalise "${TMP}/default.sql") > "${TMP}/default.diff"; then
     echo "    ok"
 else
     echo "    CHANGED"

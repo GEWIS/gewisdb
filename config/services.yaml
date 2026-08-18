@@ -35,6 +35,9 @@ services:
         exclude:
             - '../src/Entity/'
             - '../src/Kernel.php'
+            # Value objects the container has no business constructing: they are built from entities at the point of
+            # use, and their constructors are deliberately not public.
+            - '../src/ViewModel/'
 
     # The connection the login firewall binds against. It is never opened unless a bind actually happens, so this is
     # harmless on the deployments that have no LDAP_SERVERS at all. See LdapEnvVarProcessor for the reshaping.
@@ -48,17 +51,3 @@ services:
                   # Active Directory refuses anything older, and chasing referrals breaks the bind.
                   protocol_version: 3
                   referrals: false
-
-    # Both mailing clients take $endpoint/$username/$password, so these cannot be bound globally.
-    App\Service\Mailing\MailmanService:
-        bind:
-            string $endpoint: '%env(MAILMAN_API_ENDPOINT)%'
-            string $version: '%env(MAILMAN_API_VERSION)%'
-            string $username: '%env(MAILMAN_API_USERNAME)%'
-            string $password: '%env(MAILMAN_API_PASSWORD)%'
-
-    App\Service\Mailing\ListmonkService:
-        bind:
-            string $endpoint: '%env(LISTMONK_API_ENDPOINT)%'
-            string $username: '%env(LISTMONK_API_USERNAME)%'
-            string $password: '%env(LISTMONK_API_PASSWORD)%'

@@ -7,12 +7,11 @@ namespace App\Security\Api;
 use App\Entity\User\Enums\ApiPermissions;
 use Override;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\Vote;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
-use function is_string;
-
 /**
- * Decides on {@see ApiPermissions} attributes, e.g. `#[IsGranted(ApiPermissions::MembersR)]`.
+ * Decides on {@see ApiPermissions} attributes, e.g. `#[IsGranted(ApiPermissions::MembersR->value)]`.
  *
  * The wildcard is not handled here: {@see \App\Entity\User\ApiPrincipal::can()} owns that rule, so a principal
  * holding `ApiPermissions::All` is granted every permission through exactly one implementation.
@@ -30,7 +29,7 @@ final class ApiPermissionVoter extends Voter
 
     #[Override]
     protected function supports(
-        mixed $attribute,
+        string $attribute,
         mixed $subject,
     ): bool {
         return null !== $this->asPermission($attribute);
@@ -38,9 +37,10 @@ final class ApiPermissionVoter extends Voter
 
     #[Override]
     protected function voteOnAttribute(
-        mixed $attribute,
+        string $attribute,
         mixed $subject,
         TokenInterface $token,
+        ?Vote $vote = null,
     ): bool {
         $permission = $this->asPermission($attribute);
 
@@ -55,18 +55,10 @@ final class ApiPermissionVoter extends Voter
     }
 
     /**
-     * Accepts both the enum itself and its backing value, so a permission can also be expressed as a plain string.
+     * Attributes reach a voter as strings, so a permission travels as its backing value and is mapped back here.
      */
-    private function asPermission(mixed $attribute): ?ApiPermissions
+    private function asPermission(string $attribute): ?ApiPermissions
     {
-        if ($attribute instanceof ApiPermissions) {
-            return $attribute;
-        }
-
-        if (is_string($attribute)) {
-            return ApiPermissions::tryFrom($attribute);
-        }
-
-        return null;
+        return ApiPermissions::tryFrom($attribute);
     }
 }
