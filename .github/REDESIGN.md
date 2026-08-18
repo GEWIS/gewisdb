@@ -17,8 +17,8 @@ application's own view layer and GEWISWEB's conventions. No inline styles, no se
       member's organ list links to.
 - [x] **Prospective members** — list with state filters and counts; detail with the approval panel, the
       recommendation, the checkout history and the applicant's own data.
-- [ ] **Meetings** — list; meeting view as decision cards with their subdecision lines; the add-decision affordance.
-- [ ] **Organs and decision export** — organ list with search; export as a meeting picker with a running total.
+- [x] **Meetings** — list; meeting view as decision cards with their subdecision lines; the add-decision affordance.
+- [x] **Organs and decision export** — organ list with search; export as a meeting picker with a running total.
 - [ ] **Decisions** — register with kind tabs and annulled styling; the create flow with the subdecision builder:
       per-kind fields, discharge selecting an existing installation, an effects panel stating what changes, and
       submission blocked while any subdecision is incomplete.

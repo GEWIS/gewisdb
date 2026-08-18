@@ -184,3 +184,62 @@
 .member-note:last-of-type {
     margin-block-end: map-get($spacers, 3);
 }
+
+// A panel that is an invitation rather than a record: the add-a-decision form under a meeting's decisions.
+.panel-dashed {
+    border-style: dashed;
+}
+
+// The subdecisions of one decision, each a sentence. Marked with a rule rather than a bullet, because a decision
+// with one subdecision is the common case and a single bullet reads as a list of one.
+.decision-lines {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    > li {
+        padding-inline-start: map-get($spacers, 3);
+        border-inline-start: 0.125rem solid var(--#{$prefix}border-color-translucent);
+    }
+
+    > li + li {
+        margin-block-start: map-get($spacers, 2);
+    }
+}
+
+// An annulled decision stays in the list — the record is what was decided, not what still holds — but it is set back
+// so it is not mistaken for one in force.
+.decision-annulled .decision-lines > li {
+    color: var(--#{$prefix}secondary-color);
+    text-decoration: line-through;
+}
+
+// Label and value pairs in a panel's rail.
+.meeting-facts {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: map-get($spacers, 1) map-get($spacers, 3);
+
+    > dt {
+        color: var(--#{$prefix}secondary-color);
+        font-weight: 500;
+    }
+
+    > dd {
+        margin: 0;
+        justify-self: end;
+        font-weight: 600;
+    }
+}
+
+// The generated decision list, shown as source to copy rather than as a rendered document.
+.export-source {
+    max-block-size: 70vh;
+    margin: 0;
+    padding: map-get($spacers, 3);
+    overflow: auto;
+    border: var(--#{$prefix}border-width) solid var(--#{$prefix}border-color-translucent);
+    border-radius: var(--#{$prefix}border-radius);
+    background-color: var(--#{$prefix}secondary-bg);
+    font-size: $font-size-sm;
+}
