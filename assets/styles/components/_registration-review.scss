@@ -1,0 +1,53 @@
+// The last step of the registration, where what was filled in is read back before it is paid for. A description list
+// rather than a repeat of the form: these values are the answer, and each row carries the way back to the step it came
+// from.
+
+.registration-review {
+    display: flex;
+    flex-direction: column;
+}
+
+.registration-review-row {
+    display: grid;
+    grid-template-columns: minmax(8rem, 1fr) 2fr auto;
+    align-items: baseline;
+    gap: 0.25rem map-get($spacers, 3);
+    padding-block: map-get($spacers, 2);
+
+    &:not(:last-child) {
+        border-block-end: 1px solid var(--#{$prefix}border-color);
+    }
+
+    @include media-breakpoint-down(md) {
+        grid-template-columns: 1fr auto;
+
+        dd {
+            grid-column: 1;
+        }
+    }
+
+    dt {
+        color: var(--#{$prefix}secondary-color);
+        font-weight: 400;
+    }
+
+    dd {
+        margin-block-end: 0;
+        text-wrap: pretty;
+    }
+}
+
+// Nothing filled in yet reads as a placeholder rather than as an answer.
+.registration-review-empty {
+    color: var(--#{$prefix}secondary-color);
+}
+
+.registration-review-edit {
+    padding: 0;
+    color: $gewis-red;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}

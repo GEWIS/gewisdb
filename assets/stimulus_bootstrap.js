@@ -7,6 +7,8 @@ import { startStimulusApp } from '@symfony/stimulus-bundle';
 // Application-wide, domain-agnostic controllers.
 import CopyController from './controllers/application/copy_controller.ts';
 import FormCollectionController from './controllers/application/form_collection_controller.ts';
+import FormStepperController from './controllers/application/form_stepper_controller.ts';
+import RegistrationReviewController from './controllers/join/registration_review_controller.ts';
 import NavigateSelectController from './controllers/application/navigate_select_controller.ts';
 
 // Decision-specific controllers.
@@ -40,6 +42,8 @@ app.register('copy', CopyController);
 app.register('decision-lookup', DecisionLookupController);
 app.register('decision-number', DecisionNumberController);
 app.register('form-collection', FormCollectionController);
+app.register('form-stepper', FormStepperController);
+app.register('registration-review', RegistrationReviewController);
 app.register('foundation-form', FoundationFormController);
 app.register('initials', InitialsController);
 app.register('install-editor', InstallEditorController);

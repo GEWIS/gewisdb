@@ -27,11 +27,11 @@ application's own view layer and GEWISWEB's conventions. No inline styles, no se
       container of subdecisions, and the installation form already records several — but `decision_decision_form`
       builds one decision from one form type, so mixing kinds needs a form type and a recording path that do not
       exist. Not faked.
-- [ ] **Registration** — five server-rendered steps (Personal, Study, Address, Mailing lists, Review & pay) with
-      GEWISWEB's `form-stepper` ported as progressive enhancement. Per-step server-side validation; student number
-      exactly 7 digits; Pattern notice only for a data-science programme; announcements list locked rather than
-      unchecked; review lists every value with per-section edit; checkout blocked until both agreements are accepted.
-      One submission at the end, 14-day expiry unchanged.
+- [x] **Registration** — five steps (personal, study, address, mailing lists, review and pay) over one form and one
+      POST, using GEWISWEB's `form-stepper` controller and its styles. The review reads the fields already in the
+      document, so nothing is stored half-finished and each row links back to the step it came from. Checkout stays
+      shut until both agreements are ticked. With scripting off the whole form is visible at once and submits as it
+      did before; a rejected submission opens the first step carrying an error.
 - [ ] **Overview** — dashboard last, because its numbers come from queries the screens above build.
 
 ## Domains
@@ -60,8 +60,12 @@ stay under `Database`, because that directory is what maps them to the default m
 
 - **Subdecisions are never reorderable.** `sequence` is part of the primary key and ReportDB copies it downstream.
   The prototype's drag handle is not built, in the builder or anywhere else.
-- **Registration degrades without JavaScript** by being server-rendered steps rather than by falling back to the old
-  single-page form. Server-side validation stays authoritative.
+- **Registration is one form paged into steps, not a step per request.** Every step is rendered by the server in one
+  document and posts once, at the end; the stepper hides the steps you are not on. A step per request would mean
+  storing a half-finished registration between them, and there is nowhere to put one that is not a prospective member
+  record — which is the thing the payment is supposed to create. Without JavaScript all five steps are simply visible
+  and the form submits as it always did. Server-side validation stays authoritative either way; a rejected submission
+  opens the first step that carries an error.
 - **Our tokens, not the prototype's.** The designs use `#C8102E` and Hanken Grotesk; this application uses the GEWIS
   red `#D40000` and Raleway/Lato, both already shared with GEWISWEB. Screens will not pixel-match, deliberately.
 - **`btn-gewis-primary`, not `btn-primary`**, following GEWISWEB: `-primary` stays Bootstrap's blue.
