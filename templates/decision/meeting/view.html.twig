@@ -72,12 +72,7 @@
                             </span>
                         </div>
 
-                        {# One line per subdecision, in the order they were recorded, which is the order they apply. #}
-                        <ul class="decision-lines">
-                            {% for content in decision.subdecisions %}
-                                <li>{{ content }}</li>
-                            {% endfor %}
-                        </ul>
+                        <p class="decision-content mb-0">{{ decision.content }}</p>
                     </div>
                 </div>
             {% else %}

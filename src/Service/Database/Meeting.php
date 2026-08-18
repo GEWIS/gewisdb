@@ -38,6 +38,7 @@ use function array_key_exists;
 use function array_map;
 use function array_values;
 use function explode;
+use function implode;
 use function intval;
 use function sprintf;
 
@@ -111,10 +112,12 @@ class Meeting
             $decisions[] = new DecisionRow(
                 $decision->getPoint(),
                 $decision->getNumber(),
-                array_map(
+                // The same join `Decision::getTranslatedContent()` does, in the language being read rather than
+                // always in Dutch.
+                implode(' ', array_map(
                     fn (SubDecision $subdecision): string => $subdecision->getContent($this->translator),
                     $decision->getSubdecisions()->toArray(),
-                ),
+                )),
                 $this->getCopyContent($decision),
                 null === $decision->getAnnulledBy()
                     ? null

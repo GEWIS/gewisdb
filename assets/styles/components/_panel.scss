@@ -190,26 +190,17 @@
     border-style: dashed;
 }
 
-// The subdecisions of one decision, each a sentence. Marked with a rule rather than a bullet, because a decision
-// with one subdecision is the common case and a single bullet reads as a list of one.
-.decision-lines {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-
-    > li {
-        padding-inline-start: map-get($spacers, 3);
-        border-inline-start: 0.125rem solid var(--#{$prefix}border-color-translucent);
-    }
-
-    > li + li {
-        margin-block-start: map-get($spacers, 2);
-    }
+// A decision reads as one text, set off by a rule so where it starts and ends is clear without breaking it into
+// pieces that each look like a decision of their own.
+.decision-content {
+    padding-inline-start: map-get($spacers, 3);
+    border-inline-start: 0.125rem solid var(--#{$prefix}border-color-translucent);
+    text-wrap: pretty;
 }
 
 // An annulled decision stays in the list — the record is what was decided, not what still holds — but it is set back
 // so it is not mistaken for one in force.
-.decision-annulled .decision-lines > li {
+.decision-annulled .decision-content {
     color: var(--#{$prefix}secondary-color);
     text-decoration: line-through;
 }
