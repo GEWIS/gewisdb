@@ -2,34 +2,35 @@
 
 declare(strict_types=1);
 
-namespace App\Service\Decision;
+namespace App\Service\Database;
 
 use App\Entity\Application\Enums\AppLanguages;
-use App\Entity\Decision\Decision as DecisionModel;
-use App\Entity\Decision\Enums\MeetingTypes;
-use App\Entity\Decision\Meeting as MeetingModel;
-use App\Entity\Decision\SubDecision;
-use App\Entity\Decision\SubDecision\Abrogation;
-use App\Entity\Decision\SubDecision\Annulment as AnnulmentModel;
-use App\Entity\Decision\SubDecision\Board\Discharge as BoardDischargeModel;
-use App\Entity\Decision\SubDecision\Board\Installation as BoardInstallationModel;
-use App\Entity\Decision\SubDecision\Discharge as DischargeModel;
-use App\Entity\Decision\SubDecision\Financial\Budget;
-use App\Entity\Decision\SubDecision\Foundation as FoundationModel;
-use App\Entity\Decision\SubDecision\Installation as InstallationModel;
-use App\Exception\Decision\AnnulmentNotPossible;
-use App\Exception\Decision\DecisionStillReferenced;
-use App\Repository\Decision\MeetingRepository;
-use App\Repository\Decision\SubDecision\FoundationRepository;
-use App\Service\Api\ApiService;
-use App\ViewModel\Decision\DecisionOptions;
-use App\ViewModel\Decision\DecisionReference;
-use App\ViewModel\Decision\DecisionRow;
-use App\ViewModel\Decision\ExportCategories;
-use App\ViewModel\Decision\ExportedDecision;
-use App\ViewModel\Decision\MeetingRow;
-use App\ViewModel\Decision\MeetingView;
-use App\ViewModel\Decision\RecordedDecision;
+use App\Entity\Database\Decision as DecisionModel;
+use App\Entity\Database\Enums\MeetingTypes;
+use App\Entity\Database\Meeting as MeetingModel;
+use App\Entity\Database\SubDecision;
+use App\Entity\Database\SubDecision\Abrogation;
+use App\Entity\Database\SubDecision\Annulment as AnnulmentModel;
+use App\Entity\Database\SubDecision\Board\Discharge as BoardDischargeModel;
+use App\Entity\Database\SubDecision\Board\Installation as BoardInstallationModel;
+use App\Entity\Database\SubDecision\Discharge as DischargeModel;
+use App\Entity\Database\SubDecision\Financial\Budget;
+use App\Entity\Database\SubDecision\Foundation as FoundationModel;
+use App\Entity\Database\SubDecision\Foundation;
+use App\Entity\Database\SubDecision\Installation as InstallationModel;
+use App\Exception\Database\AnnulmentNotPossible;
+use App\Exception\Database\DecisionStillReferenced;
+use App\Repository\Database\MeetingRepository;
+use App\Repository\Database\SubDecision\FoundationRepository;
+use App\Service\Report\ApiService;
+use App\ViewModel\Database\DecisionOptions;
+use App\ViewModel\Database\DecisionReference;
+use App\ViewModel\Database\DecisionRow;
+use App\ViewModel\Database\ExportCategories;
+use App\ViewModel\Database\ExportedDecision;
+use App\ViewModel\Database\MeetingRow;
+use App\ViewModel\Database\MeetingView;
+use App\ViewModel\Database\RecordedDecision;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -346,6 +347,25 @@ class Meeting
         return array_map(
             static fn (MeetingModel $meeting): array => $meeting->toArray(),
             $this->meetingRepository->searchMeeting($query),
+        );
+    }
+
+    /**
+     * The foundation subdecision that created an organ, which is how an organ is addressed.
+     */
+    public function findFoundation(
+        MeetingTypes $meetingType,
+        int $meetingNumber,
+        int $decisionPoint,
+        int $decisionNumber,
+        int $sequence,
+    ): ?Foundation {
+        return $this->foundationRepository->findOrgan(
+            $meetingType,
+            $meetingNumber,
+            $decisionPoint,
+            $decisionNumber,
+            $sequence,
         );
     }
 

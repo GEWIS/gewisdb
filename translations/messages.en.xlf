@@ -3013,6 +3013,42 @@
         <source>¹ This permission will add more properties to existing entities that can already be requested.</source>
         <target state="translated">¹ This permission will add more properties to existing entities that can already be requested.</target>
       </trans-unit>
+      <trans-unit id="8WNxAmi" resname="Wants to receive the Supremum.">
+        <source>Wants to receive the Supremum.</source>
+        <target state="translated">Wants to receive the Supremum.</target>
+      </trans-unit>
+      <trans-unit id="tPVJBmg" resname="Does not want to receive the Supremum.">
+        <source>Does not want to receive the Supremum.</source>
+        <target state="translated">Does not want to receive the Supremum.</target>
+      </trans-unit>
+      <trans-unit id="PQ40PF0" resname="Has not said whether they want the Supremum.">
+        <source>Has not said whether they want the Supremum.</source>
+        <target state="translated">Has not said whether they want the Supremum.</target>
+      </trans-unit>
+      <trans-unit id="wFkdS6Z" resname="Pick a kind of decision">
+        <source>Pick a kind of decision</source>
+        <target state="translated">Pick a kind of decision</target>
+      </trans-unit>
+      <trans-unit id="k02jcp4" resname="Open a group on the left and choose what this decision does.">
+        <source>Open a group on the left and choose what this decision does.</source>
+        <target state="translated">Open a group on the left and choose what this decision does.</target>
+      </trans-unit>
+      <trans-unit id="M4X_09D" resname="Opt in">
+        <source>Opt in</source>
+        <target state="translated">Opt in</target>
+      </trans-unit>
+      <trans-unit id="pkfTKyh" resname="Opt out">
+        <source>Opt out</source>
+        <target state="translated">Opt out</target>
+      </trans-unit>
+      <trans-unit id="2u52BrM" resname="Reset">
+        <source>Reset</source>
+        <target state="translated">Reset</target>
+      </trans-unit>
+      <trans-unit id="_msIDq6" resname="Add an address">
+        <source>Add an address</source>
+        <target state="translated">Add an address</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

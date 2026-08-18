@@ -10,9 +10,11 @@ application's own view layer and GEWISWEB's conventions. No inline styles, no se
 
 - [x] **Shell** — `layout-sidebar.html.twig`, sidebar macros and rows, page-header partial, sidebar SCSS and
       variables, top bar trimmed to what applies everywhere.
-- [x] **Members (list)** — list with search, status filters and pagination; detail with the record table, organs, addresses,
-      mailing lists and notes. Extracts the shared overview pattern (filter chips, table shell, empty state) and
-      proves the pagination base from GH-575 with its first real consumer.
+- [x] **Members, list** — search, status filters and pagination. Extracts the shared overview pattern (pills with
+      counts, empty state, status badge) and proves the pagination base from GH-575 with its first real consumer.
+- [x] **Members, detail** — the record table, the supremum control, organs, addresses, mailing lists and notes,
+      arranged as a main column and a rail. Restored the organ view page, which was never ported and which the
+      member's organ list links to.
 - [ ] **Prospective members** — list with state filters and stat cards; detail with the approval panel, membership
       type as radio cards with a recommendation, and the checkout panel.
 - [ ] **Meetings** — list; meeting view as decision cards with their subdecision lines; the add-decision affordance.

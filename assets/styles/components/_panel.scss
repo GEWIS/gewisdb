@@ -173,3 +173,14 @@
         --#{$prefix}btn-font-weight: 600;
     }
 }
+
+// A note on a member's record: separated by a rule rather than boxed, so a column of them reads as one list.
+.member-note + .member-note {
+    margin-block-start: map-get($spacers, 2);
+    padding-block-start: map-get($spacers, 2);
+    border-block-start: var(--#{$prefix}border-width) solid var(--#{$prefix}border-color-translucent);
+}
+
+.member-note:last-of-type {
+    margin-block-end: map-get($spacers, 3);
+}
