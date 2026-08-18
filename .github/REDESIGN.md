@@ -10,7 +10,7 @@ application's own view layer and GEWISWEB's conventions. No inline styles, no se
 
 - [x] **Shell** — `layout-sidebar.html.twig`, sidebar macros and rows, page-header partial, sidebar SCSS and
       variables, top bar trimmed to what applies everywhere.
-- [ ] **Members** — list with search, status filters and pagination; detail with the record table, organs, addresses,
+- [x] **Members (list)** — list with search, status filters and pagination; detail with the record table, organs, addresses,
       mailing lists and notes. Extracts the shared overview pattern (filter chips, table shell, empty state) and
       proves the pagination base from GH-575 with its first real consumer.
 - [ ] **Prospective members** — list with state filters and stat cards; detail with the approval panel, membership

@@ -2,30 +2,35 @@
 
 declare(strict_types=1);
 
-namespace App\Repository\Member;
+namespace App\Repository\Database;
 
-use App\Entity\Decision\SubDecision\Annulment;
-use App\Entity\Decision\SubDecision\Board\Installation as BoardInstallation;
-use App\Entity\Decision\SubDecision\Discharge;
-use App\Entity\Decision\SubDecision\Financial\Budget;
-use App\Entity\Decision\SubDecision\Financial\Statement;
-use App\Entity\Decision\SubDecision\Installation;
-use App\Entity\Member\Address;
-use App\Entity\Member\Enums\AddressTypes;
-use App\Entity\Member\Enums\MembershipTypes;
-use App\Entity\Member\Member;
-use App\Entity\Member\Membership;
-use App\Repository\Decision\SubDecision\FoundationRepository;
+use App\Entity\Database\Address;
+use App\Entity\Database\Enums\AddressTypes;
+use App\Entity\Database\Enums\MemberFilter;
+use App\Entity\Database\Enums\MembershipTypes;
+use App\Entity\Database\Member;
+use App\Entity\Database\Membership;
+use App\Entity\Database\SubDecision\Annulment;
+use App\Entity\Database\SubDecision\Board\Installation as BoardInstallation;
+use App\Entity\Database\SubDecision\Discharge;
+use App\Entity\Database\SubDecision\Financial\Budget;
+use App\Entity\Database\SubDecision\Financial\Statement;
+use App\Entity\Database\SubDecision\Installation;
+use App\Repository\Database\SubDecision\FoundationRepository;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 use InvalidArgumentException;
 
+use function addcslashes;
 use function filter_var;
 use function is_numeric;
+use function mb_strtolower;
 use function strtolower;
+use function trim;
 
 use const FILTER_VALIDATE_EMAIL;
 
@@ -648,6 +653,144 @@ class MemberRepository extends ServiceEntityRepository
     private function getToday(): DateTimeImmutable
     {
         return (new DateTimeImmutable())->setTime(0, 0, 0);
+    }
+
+    /**
+     * One page of the member overview, filtered the way the overview offers.
+     *
+     * @return Paginator<Member>
+     */
+    public function paginateForOverview(
+        string $search,
+        MemberFilter $filter,
+        int $page,
+        int $pageSize,
+    ): Paginator {
+        $qb = $this->createQueryBuilder('m')
+            ->orderBy('m.lidnr', 'DESC')
+            ->setFirstResult(($page - 1) * $pageSize)
+            ->setMaxResults($pageSize);
+
+        $this->applyOverviewFilter($qb, $filter);
+        $this->applyOverviewSearch($qb, $search);
+
+        return new Paginator($qb->getQuery());
+    }
+
+    /**
+     * How many records each filter would return, so the chips can say so before they are clicked.
+     *
+     * @return array<string, int>
+     */
+    public function countsForOverview(string $search): array
+    {
+        $counts = [];
+
+        foreach (MemberFilter::cases() as $filter) {
+            $qb = $this->createQueryBuilder('m')->select('COUNT(m.lidnr)');
+
+            $this->applyOverviewFilter($qb, $filter);
+            $this->applyOverviewSearch($qb, $search);
+
+            $counts[$filter->value] = (int) $qb->getQuery()->getSingleScalarResult();
+        }
+
+        return $counts;
+    }
+
+    /**
+     * A removed member is only ever reached through its own filter: they are kept so the decisions that mention them
+     * stay readable, not so they turn up while looking for someone.
+     */
+    private function applyOverviewFilter(
+        QueryBuilder $qb,
+        MemberFilter $filter,
+    ): void {
+        if (MemberFilter::Removed === $filter) {
+            $qb->andWhere('m.deleted = true');
+
+            return;
+        }
+
+        $qb->andWhere('m.deleted = false');
+
+        $membership = static function (bool $expired) use ($qb): void {
+            $sq = self::getMembershipSubquery(
+                $qb,
+                includeGraduates: true,
+                includeFutureMembers: true,
+                includeExpired: $expired,
+            );
+
+            $qb->andWhere($qb->expr()->in('m', $sq->getDQL()));
+        };
+
+        match ($filter) {
+            MemberFilter::Everyone => null,
+            MemberFilter::Active => $membership(false),
+            // Held a membership at some point but holds none now, which is the difference between the two subqueries.
+            MemberFilter::Expired => (static function () use ($qb, $membership): void {
+                $membership(true);
+
+                $current = self::getMembershipSubquery(
+                    $qb,
+                    includeGraduates: true,
+                    includeFutureMembers: true,
+                    membershipAlias: 'curmems',
+                    parameterPrefix: 'curms',
+                );
+
+                $qb->andWhere($qb->expr()->notIn('m', $current->getDQL()));
+            })(),
+            MemberFilter::MissingData => $qb->andWhere(
+                $qb->expr()->orX(
+                    'm.email IS NULL',
+                    "m.email = ''",
+                    $qb->expr()->andX(
+                        'm.studentNumber IS NULL',
+                        $qb->expr()->in(
+                            'm',
+                            self::getMembershipSubquery(
+                                $qb,
+                                includeGraduates: false,
+                                specificType: MembershipTypes::Ordinary,
+                                membershipAlias: 'ordmems',
+                                parameterPrefix: 'ordms',
+                            )->getDQL(),
+                        ),
+                    ),
+                ),
+            ),
+        };
+    }
+
+    /**
+     * Name, e-mail, member number or student number — whichever the secretary has to hand.
+     */
+    private function applyOverviewSearch(
+        QueryBuilder $qb,
+        string $search,
+    ): void {
+        $search = trim($search);
+
+        if ('' === $search) {
+            return;
+        }
+
+        $matches = $qb->expr()->orX(
+            "CONCAT(LOWER(m.firstName), ' ', LOWER(m.lastName)) LIKE :needle",
+            "CONCAT(LOWER(m.firstName), ' ', LOWER(m.middleName), ' ', LOWER(m.lastName)) LIKE :needle",
+            'LOWER(m.email) LIKE :needle',
+            'm.studentNumber LIKE :needle',
+        );
+
+        if (is_numeric($search)) {
+            $matches->add('m.lidnr = :lidnr');
+            $qb->setParameter('lidnr', (int) $search);
+        }
+
+        $qb->andWhere($matches)
+            ->setParameter('needle', '%' . mb_strtolower(addcslashes($search, '%_')) . '%');
     }
 
     public function persist(Member $member): void
