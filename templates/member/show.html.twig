@@ -75,7 +75,7 @@
                             ) }}
                             {% if can_change_membership_type %}
                                 <a href="{{ path('member_membership_edit', {lidnr: member.lidnr}) }}"
-                                   class="btn btn-sm btn-primary">
+                                   class="btn btn-sm btn-gewis-primary">
                                     {{ 'Update / Renew'|trans }}
                                 </a>
                             {% endif %}
@@ -99,7 +99,7 @@
                             ({{ member.expiration|date('l j F Y') }})
                             {% if can_extend %}
                                 <a href="{{ path('member_expiration_edit', {lidnr: member.lidnr}) }}"
-                                   class="btn btn-sm btn-primary">
+                                   class="btn btn-sm btn-gewis-primary">
                                     {{ 'Extend'|trans }}
                                 </a>
                             {% endif %}
@@ -109,19 +109,32 @@
                         <th scope="row">{{ 'Wants to Receive Supremum'|trans }}</th>
                         <td>
                             {{ member.supremum }}
-                            <a href="{{ path('member_supremum_optin', {lidnr: member.lidnr}) }}"
-                               class="btn btn-sm btn-primary">{{ 'Opt in'|trans }}</a>
-                            <a href="{{ path('member_supremum_optout', {lidnr: member.lidnr}) }}"
-                               class="btn btn-sm btn-primary">{{ 'Opt out'|trans }}</a>
-                            <a href="{{ path('member_supremum_reset', {lidnr: member.lidnr}) }}"
-                               class="btn btn-sm btn-primary">{{ 'Reset'|trans }}</a>
+                            {# Setting the preference changes the member, so each answer is posted rather than linked. #}
+                            {% set supremum_token = csrf_token('member_supremum-' ~ member.lidnr) %}
+                            <div class="d-inline-flex flex-wrap gap-2">
+                                <form method="post"
+                                      action="{{ path('member_supremum_optin', {lidnr: member.lidnr}) }}">
+                                    <input type="hidden" name="_csrf_token" value="{{ supremum_token }}">
+                                    <button type="submit" class="btn btn-sm btn-gewis-primary">{{ 'Opt in'|trans }}</button>
+                                </form>
+                                <form method="post"
+                                      action="{{ path('member_supremum_optout', {lidnr: member.lidnr}) }}">
+                                    <input type="hidden" name="_csrf_token" value="{{ supremum_token }}">
+                                    <button type="submit" class="btn btn-sm btn-gewis-primary">{{ 'Opt out'|trans }}</button>
+                                </form>
+                                <form method="post"
+                                      action="{{ path('member_supremum_reset', {lidnr: member.lidnr}) }}">
+                                    <input type="hidden" name="_csrf_token" value="{{ supremum_token }}">
+                                    <button type="submit" class="btn btn-sm btn-gewis-primary">{{ 'Reset'|trans }}</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
             </table>
 
             <div class="d-flex flex-wrap gap-2 mb-4">
-                <a href="{{ path('member_edit', {lidnr: member.lidnr}) }}" class="btn btn-primary">
+                <a href="{{ path('member_edit', {lidnr: member.lidnr}) }}" class="btn btn-gewis-primary">
                     {{ 'Change Data'|trans }}
                 </a>
                 <a href="{{ path('member_delete', {lidnr: member.lidnr}) }}" class="btn btn-danger">
@@ -171,7 +184,7 @@
                     <li class="text-secondary">{{ 'None'|trans }}</li>
                 {% endfor %}
             </ul>
-            <a href="{{ path('member_lists_edit', {lidnr: member.lidnr}) }}" class="btn btn-primary mb-4">
+            <a href="{{ path('member_lists_edit', {lidnr: member.lidnr}) }}" class="btn btn-gewis-primary mb-4">
                 {{ 'Change Mailing List Subscriptions'|trans }}
             </a>
         </div>
@@ -193,7 +206,7 @@
                 <tbody>
                     {% for note in notes %}
                         <tr>
-                            <td>{{ note.updated_at|date('j M Y H:i') }}</td>
+                            <td>{{ note.updatedAt|date('j M Y H:i') }}</td>
                             {# Safe to print unescaped: AuditEntryRow escapes the arguments before interpolating them
                                into the entry's own format string, which is what carries the markup. #}
                             <td>{{ note.body|raw }}</td>
