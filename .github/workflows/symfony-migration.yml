@@ -1,11 +1,5 @@
 name: Symfony Migration
 
-# Gates for the ported tree under src/, which the existing workflows cannot cover: they analyse the Laminas
-# application, and the Symfony packages cannot be installed alongside it (laminas-cache pins psr/cache to ^1.0
-# against symfony/cache's ^2|^3, and doctrine-orm-module caps symfony/console at ^7).
-#
-# This whole file goes away at the cutover, when phpstan.neon and the other workflows take over.
-
 on:
     push:
         branches:
@@ -68,8 +62,6 @@ jobs:
         name: Entity schema unchanged
         runs-on: ubuntu-latest
 
-        # The ported entities must imply the same DDL as the Laminas models. An empty diff is what says production
-        # tables are already correct and no data migration is needed at cutover.
         services:
             postgres:
                 image: postgres
