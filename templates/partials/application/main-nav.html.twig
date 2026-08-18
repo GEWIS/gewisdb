@@ -1,21 +1,3 @@
-{% macro item(href, label, active, badge) %}
-    <li class="nav-item">
-        <a class="nav-link{{ active ? ' active' : '' }}" href="{{ href }}"
-           {% if active %}aria-current="page"{% endif %}>
-            {{ label }}
-            {% if badge|default(0) > 0 %}
-                <span class="badge text-bg-light">{{ badge }}</span>
-            {% endif %}
-        </a>
-    </li>
-{% endmacro %}
-
-{% import _self as menu %}
-
-{# Route names are the handle for the active state; the Laminas view helper matched on controller and action, which
-   no longer exist as a concept. #}
-{% set route = app.current_route ?? '' %}
-
 <nav class="navbar navbar-expand-lg navbar-gewis" aria-label="{{ 'Main navigation'|trans }}">
     <div class="container">
         <a class="navbar-brand" href="{{ path('application_home') }}">
@@ -27,54 +9,12 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="main-navbar">
-            {% if null !== app.user %}
-                <ul class="navbar-nav me-auto">
-                    {{ menu.item(
-                        path('application_home'),
-                        'Home'|trans,
-                        'application_home' == route,
-                        notification_count(),
-                    ) }}
-                    {{ menu.item(
-                        path('decision_meeting_index'),
-                        'Meetings and Decisions'|trans,
-                        route starts with 'decision_meeting',
-                    ) }}
-                    {{ menu.item(
-                        path('decision_organ_index'),
-                        'Organ'|trans,
-                        route starts with 'decision_organ',
-                    ) }}
-                    {{ menu.item(
-                        path('join_prospective_member_index'),
-                        'Prospective Members'|trans,
-                        route starts with 'join_prospective_member',
-                    ) }}
-                    {{ menu.item(
-                        path('member_index'),
-                        'Members'|trans,
-                        route starts with 'member_',
-                    ) }}
-                    {{ menu.item(
-                        path('decision_export_index'),
-                        'Decision List'|trans,
-                        route starts with 'decision_export',
-                    ) }}
-                    {{ menu.item(
-                        path('query_index'),
-                        'Query'|trans,
-                        route starts with 'query_',
-                    ) }}
-                    {{ menu.item(
-                        path('application_settings_index'),
-                        'Settings'|trans,
-                        route starts with 'application_settings',
-                    ) }}
-                </ul>
-            {% endif %}
-            {# Who you are, then a rule, then the settings menu — the order GEWISWEB uses. #}
+            {# The sections live in the section sidebar; what stays up here is who you are and what applies to
+               every page, all of it grouped on the right the way GEWISWEB groups it: the bell, then who you are,
+               then a rule and the language. The bell belongs with them because it is about you, not about the page. #}
             <ul class="navbar-nav ms-auto">
                 {% if null !== app.user %}
+                    {{ component('Application:NotificationBell') }}
                     <li class="nav-item dropdown">
                         <button class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
