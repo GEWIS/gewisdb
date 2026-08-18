@@ -2,15 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Entity\Join;
+namespace App\Entity\Database;
 
-use App\Entity\Join\Enums\CheckoutSessionStates;
-use App\Entity\Member\Address;
-use App\Entity\Member\Enums\AddressTypes;
-use App\Entity\Member\Enums\PostalRegions;
-use App\Entity\Member\Enums\Studies;
-use App\Entity\Member\PaymentLink;
-use App\Repository\Join\ProspectiveMemberRepository;
+use App\Entity\Database\Enums\AddressTypes;
+use App\Entity\Database\Enums\CheckoutSessionStates;
+use App\Entity\Database\Enums\PostalRegions;
+use App\Entity\Database\Enums\Studies;
+use App\Repository\Database\ProspectiveMemberRepository;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -586,7 +584,11 @@ class ProspectiveMember
         return CheckoutSessionStates::Paid === $lastState;
     }
 
-    private function getLastCheckoutSessionState(): ?CheckoutSessionStates
+    /**
+     * The state of the applicant's most recent checkout, which is where their registration has got to. Null when
+     * there is no checkout at all, which is its own kind of stuck.
+     */
+    public function getLastCheckoutSessionState(): ?CheckoutSessionStates
     {
         /** @var CheckoutSession|false $lastCheckoutSession */
         $lastCheckoutSession = $this->checkoutSessions->last();

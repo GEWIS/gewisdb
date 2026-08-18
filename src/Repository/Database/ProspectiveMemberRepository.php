@@ -2,20 +2,26 @@
 
 declare(strict_types=1);
 
-namespace App\Repository\Join;
+namespace App\Repository\Database;
 
-use App\Entity\Join\CheckoutSession;
-use App\Entity\Join\Enums\CheckoutSessionStates;
-use App\Entity\Join\ProspectiveMember;
+use App\Entity\Database\CheckoutSession;
+use App\Entity\Database\Enums\CheckoutSessionStates;
+use App\Entity\Database\Enums\ProspectiveMemberFilter;
+use App\Entity\Database\ProspectiveMember;
 use DateInterval;
 use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join as JoinExpr;
+use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
+use function addcslashes;
 use function is_numeric;
+use function mb_strtolower;
 use function str_replace;
 use function strtolower;
+use function trim;
 
 /**
  * @extends ServiceEntityRepository<ProspectiveMember>
@@ -174,6 +180,129 @@ class ProspectiveMemberRepository extends ServiceEntityRepository
     /**
      * Persist a member model.
      */
+
+    /**
+     * One page of the prospective-member overview.
+     *
+     * @return Paginator<ProspectiveMember>
+     */
+    public function paginateForOverview(
+        string $search,
+        ProspectiveMemberFilter $filter,
+        int $page,
+        int $pageSize,
+    ): Paginator {
+        $qb = $this->createQueryBuilder('m')
+            ->orderBy('m.lidnr', 'DESC')
+            ->setFirstResult(($page - 1) * $pageSize)
+            ->setMaxResults($pageSize);
+
+        $this->applyLatestCheckout($qb);
+        $this->applyOverviewFilter($qb, $filter);
+        $this->applyOverviewSearch($qb, $search);
+
+        return new Paginator($qb->getQuery(), false);
+    }
+
+    /**
+     * How many applications each filter would return, so the chips can say so before they are clicked.
+     *
+     * @return array<string, int>
+     */
+    public function countsForOverview(string $search): array
+    {
+        $counts = [];
+
+        foreach (ProspectiveMemberFilter::cases() as $filter) {
+            $qb = $this->createQueryBuilder('m')->select('COUNT(DISTINCT m.lidnr)');
+
+            $this->applyLatestCheckout($qb);
+            $this->applyOverviewFilter($qb, $filter);
+            $this->applyOverviewSearch($qb, $search);
+
+            $counts[$filter->value] = (int) $qb->getQuery()->getSingleScalarResult();
+        }
+
+        return $counts;
+    }
+
+    /**
+     * How many applicants a filter would return.
+     *
+     * Separate from {@see self::countsForOverview()}, which answers for every filter at once: the dashboard wants one
+     * of them and would otherwise pay for four queries to read a single number.
+     */
+    public function countForFilter(ProspectiveMemberFilter $filter): int
+    {
+        $qb = $this->createQueryBuilder('m')->select('COUNT(DISTINCT m.lidnr)');
+
+        $this->applyLatestCheckout($qb);
+        $this->applyOverviewFilter($qb, $filter);
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * Join only the applicant's most recent checkout session, since an applicant who restarted a checkout has several
+     * and only the last one says where they are.
+     */
+    private function applyLatestCheckout(QueryBuilder $qb): void
+    {
+        $latest = $this->getEntityManager()->createQueryBuilder()
+            ->select('MAX(css.id)')
+            ->from(CheckoutSession::class, 'css')
+            ->where('css.prospectiveMember = m.lidnr');
+
+        $qb->leftJoin(CheckoutSession::class, 'cs', JoinExpr::WITH, 'cs.prospectiveMember = m.lidnr')
+            ->andWhere($qb->expr()->orX(
+                $qb->expr()->eq('cs.id', '(' . $latest->getDQL() . ')'),
+                $qb->expr()->isNull('cs.id'),
+            ));
+    }
+
+    private function applyOverviewFilter(
+        QueryBuilder $qb,
+        ProspectiveMemberFilter $filter,
+    ): void {
+        match ($filter) {
+            ProspectiveMemberFilter::All => null,
+            ProspectiveMemberFilter::Paid => $qb->andWhere('cs.state = :paid')
+                ->setParameter('paid', CheckoutSessionStates::Paid),
+            ProspectiveMemberFilter::AwaitingPayment => $qb->andWhere('cs.state IN (:awaiting)')
+                ->setParameter('awaiting', [CheckoutSessionStates::Created, CheckoutSessionStates::Pending]),
+            // No session at all counts as failed: the applicant exists and there is nothing to pay against.
+            ProspectiveMemberFilter::ExpiredOrFailed => $qb->andWhere(
+                $qb->expr()->orX('cs.state IN (:over)', 'cs.state IS NULL'),
+            )->setParameter('over', [CheckoutSessionStates::Expired, CheckoutSessionStates::Failed]),
+        };
+    }
+
+    private function applyOverviewSearch(
+        QueryBuilder $qb,
+        string $search,
+    ): void {
+        $search = trim($search);
+
+        if ('' === $search) {
+            return;
+        }
+
+        $matches = $qb->expr()->orX(
+            "CONCAT(LOWER(m.firstName), ' ', LOWER(m.lastName)) LIKE :needle",
+            "CONCAT(LOWER(m.firstName), ' ', LOWER(m.middleName), ' ', LOWER(m.lastName)) LIKE :needle",
+            'LOWER(m.email) LIKE :needle',
+            'm.studentNumber LIKE :needle',
+        );
+
+        if (is_numeric($search)) {
+            $matches->add('m.lidnr = :lidnr');
+            $qb->setParameter('lidnr', (int) $search);
+        }
+
+        $qb->andWhere($matches)
+            ->setParameter('needle', '%' . mb_strtolower(addcslashes($search, '%_')) . '%');
+    }
+
     public function persist(ProspectiveMember $member): void
     {
         $this->getEntityManager()->persist($member);

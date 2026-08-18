@@ -2,51 +2,24 @@
 
 {% block page_title %}{{ 'Prospective Members'|trans }} - {{ parent() }}{% endblock %}
 
-{% macro results(state, heading) %}
-    <div class="col-12 col-lg-4">
-        <h4>{{ heading }}</h4>
-        <div class="table-responsive">
-            <table class="table table-hover align-middle"
-                   data-prospective-member-search-target="table"
-                   data-state="{{ state }}">
-                <thead>
-                    <tr>
-                        <th scope="col">{{ 'Name'|trans }}</th>
-                        <th scope="col">{{ 'E-mail Address'|trans }}</th>
-                    </tr>
-                </thead>
-                {# Rows are rendered by the controller; the notice below only appears once the result set is capped. #}
-                <tbody></tbody>
-                <tfoot class="d-none">
-                    <tr>
-                        <td colspan="2" class="text-secondary">
-                            {{ 'There are too many results to display. Try filtering to see other results.'|trans }}
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-    </div>
-{% endmacro %}
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_title %}{{ 'Prospective Members'|trans }}{% endblock %}
+        {% block header_subtitle %}
+            <p class="page-header-meta mb-0">
+                {{ 'Everyone who has registered but is not a member yet. A registration expires 14 days after its checkout is created.'|trans }}
+            </p>
+        {% endblock %}
+        {% block header_actions %}
+            <a class="btn btn-gewis-primary" href="{{ path('join_subscribe_index') }}">
+                <span class="fas fa-plus" aria-hidden="true"></span>
+                {{ 'Register member'|trans }}
+            </a>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
 
 {% block contents %}
-    <div data-controller="prospective-member-search"
-         data-prospective-member-search-url-value="{{ path('join_prospective_member_search') }}"
-         data-prospective-member-search-unknown-value="{{ 'Unknown'|trans }}">
-        <div class="mb-3">
-            <label class="form-label" for="prospective-member-search">
-                {{ 'Search Prospective Members'|trans }}
-            </label>
-            <input type="search" class="form-control" id="prospective-member-search" autofocus
-                   placeholder="{{ 'Search'|trans }}"
-                   data-prospective-member-search-target="input"
-                   data-action="input->prospective-member-search#search">
-        </div>
-
-        <div class="row">
-            {{ _self.results('', 'Created / Pending'|trans) }}
-            {{ _self.results('failed', 'Expired / Failed'|trans) }}
-            {{ _self.results('paid', 'Paid'|trans) }}
-        </div>
-    </div>
+    {{ component('Join:ProspectiveMemberOverview') }}
 {% endblock %}

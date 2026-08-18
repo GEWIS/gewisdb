@@ -15,8 +15,8 @@ application's own view layer and GEWISWEB's conventions. No inline styles, no se
 - [x] **Members, detail** — the record table, the supremum control, organs, addresses, mailing lists and notes,
       arranged as a main column and a rail. Restored the organ view page, which was never ported and which the
       member's organ list links to.
-- [ ] **Prospective members** — list with state filters and stat cards; detail with the approval panel, membership
-      type as radio cards with a recommendation, and the checkout panel.
+- [x] **Prospective members** — list with state filters and counts; detail with the approval panel, the
+      recommendation, the checkout history and the applicant's own data.
 - [ ] **Meetings** — list; meeting view as decision cards with their subdecision lines; the add-decision affordance.
 - [ ] **Organs and decision export** — organ list with search; export as a meeting picker with a running total.
 - [ ] **Decisions** — register with kind tabs and annulled styling; the create flow with the subdecision builder:
@@ -28,6 +28,28 @@ application's own view layer and GEWISWEB's conventions. No inline styles, no se
       unchecked; review lists every value with per-section edit; checkout blocked until both agreements are accepted.
       One submission at the end, 14-day expiry unchanged.
 - [ ] **Overview** — dashboard last, because its numbers come from queries the screens above build.
+
+## Domains
+
+The bounded contexts are the five the application always had: **Application**, **Checker**, **Database**,
+**Report**, **User**.
+
+There is no `Api` domain. The API is a delivery mechanism, not a context, and its parts belong to what they serve:
+`ApiService` and `ApiController` read the projection, so they are Report's, next to the query console;
+`ApiPrincipal` is an authentication principal, so it is User's; and `FrontPageService` was never API at all — it is
+the dashboard, and sits under Application. Only `Security/` keeps an `Api` directory, because that layer is
+partitioned by authentication mechanism (token versus form login and LDAP) rather than by domain.
+
+`Database` is the ledger and `Report` is the projection of it. Member, Decision, Meeting, Organ, MailingList,
+ProspectiveMember and the rest are entities *in* one of those two, never domains of their own. The test is which
+context owns the record, not whether it has a counterpart on the other side: a prospective member is a row in the
+ledger that becomes a member, so it is `Database`, and the fact that `Report` has no copy of it says nothing.
+
+Which host serves a controller is a routing concern and not a domain: the sign-up pages answer on the join host and
+still live under `Database`.
+
+The query console is Report's, since its DQL runs against the report entity manager. `SavedQuery` and its repository
+stay under `Database`, because that directory is what maps them to the default manager and the table lives there.
 
 ## Decisions already taken
 
