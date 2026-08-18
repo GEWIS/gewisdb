@@ -1,0 +1,75 @@
+{#
+    Numbered pagination with a window around the current page and a page-size selector.
+
+    Required: route, page, totalPages, totalCount. Optional: routeParams, pageSize.
+#}
+{% macro control(label, targetPage, disabled, active, route, routeParams, pageSize) %}
+    <li class="page-item{% if disabled %} disabled{% endif %}{% if active %} active{% endif %}">
+        {% if disabled %}
+            <span class="page-link" aria-disabled="true">{{ label }}</span>
+        {% else %}
+            <a class="page-link"
+               href="{{ path(route, routeParams|merge({'page': targetPage, 'pageSize': pageSize})) }}">{{ label }}</a>
+        {% endif %}
+    </li>
+{% endmacro %}
+
+{% set routeParams = routeParams|default({}) %}
+{% set pageSize = pageSize|default(25) %}
+{% set pageSizes = [25, 50, 100, 250] %}
+
+{% if totalPages > 1 or totalCount > pageSizes|first %}
+    {% set windowStart = max(1, page - 2) %}
+    {% set windowEnd = min(totalPages, page + 2) %}
+
+    <nav aria-label="{{ 'Pagination'|trans }}"
+         class="d-flex flex-wrap align-items-center justify-content-between gap-2 mt-3">
+        <p class="text-muted small mb-0">
+            {{ 'Page %page% of %totalPages% (%totalCount% records)'|trans({
+                '%page%': page,
+                '%totalPages%': totalPages,
+                '%totalCount%': totalCount,
+            }) }}
+        </p>
+
+        <div class="d-flex flex-wrap align-items-center gap-2">
+            <label class="d-flex align-items-center gap-2 text-muted small mb-0">
+                {{ 'Per page'|trans }}
+                <select class="form-select form-select-sm w-auto"
+                        data-controller="application--navigate-select"
+                        data-action="application--navigate-select#navigate">
+                    {% for size in pageSizes %}
+                        <option value="{{ path(route, routeParams|merge({'page': 1, 'pageSize': size})) }}"
+                                {{ size == pageSize ? 'selected' : '' }}>{{ size }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+
+            {% if totalPages > 1 %}
+                <ul class="pagination pagination-sm mb-0">
+                    {{ _self.control('Previous'|trans, page - 1, page <= 1, false, route, routeParams, pageSize) }}
+
+                    {% if windowStart > 1 %}
+                        {{ _self.control(1, 1, false, false, route, routeParams, pageSize) }}
+                        {% if windowStart > 2 %}
+                            <li class="page-item disabled"><span class="page-link">&hellip;</span></li>
+                        {% endif %}
+                    {% endif %}
+
+                    {% for p in windowStart..windowEnd %}
+                        {{ _self.control(p, p, false, p == page, route, routeParams, pageSize) }}
+                    {% endfor %}
+
+                    {% if windowEnd < totalPages %}
+                        {% if windowEnd < totalPages - 1 %}
+                            <li class="page-item disabled"><span class="page-link">&hellip;</span></li>
+                        {% endif %}
+                        {{ _self.control(totalPages, totalPages, false, false, route, routeParams, pageSize) }}
+                    {% endif %}
+
+                    {{ _self.control('Next'|trans, page + 1, page >= totalPages, false, route, routeParams, pageSize) }}
+                </ul>
+            {% endif %}
+        </div>
+    </nav>
+{% endif %}
