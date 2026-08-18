@@ -1,28 +1,21 @@
 services:
-    nginx:
-        image: abc.docker-registry.gewis.nl/db/gewisdb/nginx:latest
-        env_file:
-            - .env
-        #        environment:
-        #            - NGINX_REQUIRE_AUTH=
-        depends_on:
-            - web
-        volumes:
-            - public:/code/public:ro,cached
-            - logs-nginx:/etc/nginx/logs:rw
-        networks:
-            - network
-        # ports:
-        #     - "9725:9725"
-        restart: unless-stopped
     web:
         image: abc.docker-registry.gewis.nl/db/gewisdb/web:production
         # env_file:
         #     - .env
         environment:
             - APP_ENV=${APP_ENV}
+            - APP_SECRET=${APP_SECRET}
             - APP_URL=${APP_URL}
-            - COOKIE_DOMAIN=${COOKIE_DOMAIN}
+            - CORS_ALLOW_ORIGIN=${CORS_ALLOW_ORIGIN}
+            - DATABASE_DSN=${DATABASE_DSN}
+            - DEFAULT_URI=${DEFAULT_URI}
+            - LOCK_DSN=${LOCK_DSN}
+            - MAILER_DSN=${MAILER_DSN}
+            - MESSENGER_TRANSPORT_DSN=${MESSENGER_TRANSPORT_DSN}
+            - REPORT_DATABASE_DSN=${REPORT_DATABASE_DSN}
+            # The hosts Caddy answers on; the application decides what each may reach.
+            - SERVER_NAME=${SERVER_NAME}
             - DEMO_CREDENTIALS_PASSWORD=${DEMO_CREDENTIALS_PASSWORD}
             - DEMO_CREDENTIALS_USERNAME=${DEMO_CREDENTIALS_USERNAME}
             - DOCTRINE_DEFAULT_DATABASE=${DOCTRINE_DEFAULT_DATABASE}
@@ -72,8 +65,14 @@ services:
         depends_on:
             - postfix
         volumes:
-            - logs-web:/data/logs:rw
-            - public:/code/public:rw,cached
+            - logs-web:/app/var/log:rw
+            - uploads:/app/public/data:rw
+            - caddy-data:/data:rw
+            - caddy-config:/config:rw
+        ports:
+            - "80:80"
+            - "443:443"
+            - "443:443/udp"
         networks:
             - network
         restart: unless-stopped
@@ -94,33 +93,12 @@ services:
         restart: unless-stopped
         stop_grace_period: 60s
 
-###> doctrine/doctrine-bundle ###
-  database:
-    image: postgres:${POSTGRES_VERSION:-16}-alpine
-    environment:
-      POSTGRES_DB: ${POSTGRES_DB:-app}
-      # You should definitely change the password in production
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-!ChangeMe!}
-      POSTGRES_USER: ${POSTGRES_USER:-app}
-    healthcheck:
-      test: ["CMD", "pg_isready", "-d", "${POSTGRES_DB:-app}", "-U", "${POSTGRES_USER:-app}"]
-      timeout: 5s
-      retries: 5
-      start_period: 60s
-    volumes:
-      - database_data:/var/lib/postgresql/data:rw
-      # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
-      # - ./docker/db/data:/var/lib/postgresql/data:rw
-###< doctrine/doctrine-bundle ###
-
 volumes:
+    caddy-config:
+    caddy-data:
     logs-web:
-    logs-nginx:
 
-###> doctrine/doctrine-bundle ###
-  database_data:
-###< doctrine/doctrine-bundle ###
-    public:
+    uploads:
 
 networks:
     network:

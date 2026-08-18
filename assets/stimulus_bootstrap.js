@@ -1,6 +1,7 @@
-import { startStimulusApp } from '@symfony/stimulus-bundle';
-
-const app = startStimulusApp();
+// NOTE: this project has no symfony.lock, so `composer require` re-applies every recipe it can. The
+// stimulus-bundle recipe prepends its own `startStimulusApp()` to this file each time, which leaves `app` defined
+// twice and fails the TypeScript build. If a build reports "the name `app` is defined multiple times", that is what
+// happened; remove the prepended block. See the check in .github/workflows/coding-standards.yml.
 import { startStimulusApp } from '@symfony/stimulus-bundle';
 
 // Application-wide, domain-agnostic controllers.

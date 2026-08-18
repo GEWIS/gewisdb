@@ -1,46 +1,40 @@
-.PHONY: help runprod runprodtest rundev stop exec update updatecomposer updatedocker getvendordir phpstan phpstanpr phpcs phpcbf phpcbfall phpcsfix checkcomposer replenish build buildprod builddev buildweb buildwebprod buildwebdev buildpgadmin preparelistmonk preparemailman migrate migrate-to migration-down migration-up migration-diff seed goldens goldens-verify goldens-freeze goldens-restore entity-schema translations runtest runcoverage stripewebhooksecret
+.PHONY: help start startprod startprodtest runprod runprodtest rundev stop exec update updatecomposer updatedocker getvendordir phpstan phpstanpr phpcs phpcbf phpcbfall phpcsfix checkcomposer replenish build buildprod builddev buildweb buildwebprod buildwebdev buildpgadmin preparelistmonk preparemailman migrate migrate-to migration-down migration-up migration-diff seed goldens goldens-verify goldens-freeze goldens-restore entity-schema smoke translations runtest runcoverage stripewebhooksecret
 
-help:
-		@echo "Makefile commands:"
-		@echo "runprod"
-		@echo "rundev"
-		@echo "updatecomposer"
-		@echo "updatedocker"
-		@echo "getvendordir"
-		@echo "phpstan"
-		@echo "phpcs"
-		@echo "phpcbf"
-		@echo "phpcsfix"
-		@echo "replenish"
-		@echo "translations"
-		@echo "build"
-		@echo "buildprod"
-		@echo "builddev"
-		@echo "update = updatecomposer updatedocker"
+## —— GEWISDB —————————————————————————————————————————————————————————————————
+help: ## Outputs this help screen
+		@grep -E '(^[a-zA-Z0-9\./_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}{printf "\033[32m%-24s\033[0m %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'
 
-.DEFAULT_GOAL := rundev
+.DEFAULT_GOAL := help
 
 LAST_WEB_COMMIT := $(shell git rev-parse --short HEAD)
 SHELL := /bin/bash
 
-CONSOLE := docker compose exec -u www-data -T web bin/console
+# The image runs as `nonroot`, whose uid matches the host user's, which is what owns the bind-mounted source. Running
+# the console as `www-data` instead cannot write to it, which is what used to break `make seed` and `make translations`
+# on a permission error. GEWISWEB does not override the user either.
+CONSOLE := docker compose exec -T web bin/console
 
-runprod:
-		@docker compose -f docker-compose.yml up -d --force-recreate --remove-orphans
-
-runprodtest: buildprod
-		@docker compose -f docker-compose.yml up -d --force-recreate --remove-orphans
-
-rundev: builddev
+start: builddev ## Build and start the development stack
 		@docker compose up -d --build --remove-orphans
 		@make replenish
 
-migrate: replenish
-		@docker compose exec -u www-data -it web bin/console doctrine:migrations:migrate --em=default
-		@docker compose exec -u www-data -it web bin/console doctrine:migrations:migrate --em=report
+startprod: ## Start the production stack
+		@docker compose -f docker-compose.yml up -d --force-recreate --remove-orphans
+
+startprodtest: buildprod ## Build and start the production stack from local sources
+		@docker compose -f docker-compose.yml up -d --force-recreate --remove-orphans
+
+# The names this project used before it followed GEWISWEB's; kept so anything that calls them still works.
+rundev: start
+runprod: startprod
+runprodtest: startprodtest
+
+migrate: replenish ## Run the migrations on both entity managers
+		@docker compose exec -it web bin/console doctrine:migrations:migrate --em=default
+		@docker compose exec -it web bin/console doctrine:migrations:migrate --em=report
 
 migrate-to:
-		@docker compose exec -u www-data web sh -c '. ./scripts/migrate-version.sh && bin/console doctrine:migrations:migrate $$migrations --em=$$alias'
+		@docker compose exec web sh -c '. ./scripts/migrate-version.sh && bin/console doctrine:migrations:migrate $$migrations --em=$$alias'
 
 migration-diff: replenish
 		@set -e; \
@@ -48,15 +42,15 @@ migration-diff: replenish
 			echo "Generating migrations for $$manager..."; \
 			$(CONSOLE) doctrine:migrations:diff --allow-empty-diff --em=$$manager; \
 		done
-		@docker cp "$$(docker compose ps -q web)":/code/migrations ./
+		@docker cp "$$(docker compose ps -q web)":/app/migrations ./
 
 migration-up: replenish
-		@docker compose exec -u www-data web sh -c '. ./scripts/migrate-version.sh && bin/console doctrine:migrations:execute --up $$migrations --em=$$alias'
+		@docker compose exec web sh -c '. ./scripts/migrate-version.sh && bin/console doctrine:migrations:execute --up $$migrations --em=$$alias'
 
 migration-down: replenish
-		@docker compose exec -u www-data web sh -c '. ./scripts/migrate-version.sh && bin/console doctrine:migrations:execute --down $$migrations --em=$$alias'
+		@docker compose exec web sh -c '. ./scripts/migrate-version.sh && bin/console doctrine:migrations:execute --down $$migrations --em=$$alias'
 
-seed: replenish
+seed: replenish ## Load fixtures, generate the report database, and prepare Mailman and Listmonk
 		@$(CONSOLE) doctrine:fixtures:load --no-interaction
 		@$(CONSOLE) report:generate:full
 		@make preparemailman
@@ -66,10 +60,10 @@ seed: replenish
 		@$(CONSOLE) database:mailinglist:fetch
 
 # goldens-verify and goldens-restore drop and recreate the public schema in both databases.
-goldens: replenish
+goldens: replenish ## Capture the behavioural goldens
 		@bash scripts/goldens/capture.sh
 
-goldens-verify: replenish
+goldens-verify: replenish ## Check current behaviour against the goldens
 		@bash scripts/goldens/verify.sh
 
 goldens-freeze:
@@ -78,14 +72,18 @@ goldens-freeze:
 goldens-restore:
 		@bash scripts/goldens/restore-input.sh
 
-# Runs on the host: the script needs bash, and the web image is Alpine.
+# Requests every GET route and reports the ones that fail; parameters come from whatever is in the database.
+smoke: ## Request every GET route and report anything that does not answer
+		@docker compose exec -T web php scripts/smoke-routes.php
+
+# Runs on the host, against the database the containers expose.
 entity-schema:
 		@DOCTRINE_DEFAULT_HOST=127.0.0.1 DOCTRINE_REPORT_HOST=127.0.0.1 bash scripts/goldens/entity-schema-check.sh
 
-exec:
-		docker compose exec -u www-data -it web $(cmd)
+exec: ## Open a shell in the web container
+		docker compose exec -it web $(cmd)
 
-stop:
+stop: ## Stop the stack
 		@docker compose down --remove-orphans
 
 runtest:
@@ -96,29 +94,28 @@ runcoverage:
 
 getvendordir:
 		@rm -Rf ./vendor
-		@docker compose cp web:/code/vendor ./vendor
-		@docker compose cp web:/code/composer.json ./
-		@docker compose cp web:/code/composer.lock ./
+		@docker compose cp web:/app/vendor ./vendor
+		@docker compose cp web:/app/composer.json ./
+		@docker compose cp web:/app/composer.lock ./
 
-replenish:
-		@docker compose cp ./public web:/code
-		@docker compose cp ./src web:/code
-		@docker compose cp ./config web:/code
-		@docker compose cp ./templates web:/code
-		@docker compose exec -u root web chown -R root:root /code/public /code/src /code/config /code/templates
-		@docker compose exec -u root web chown -R www-data:www-data /code/public/data
-		@docker compose exec -u root web composer dump-autoload --dev
+# The development stack bind-mounts the source, so there is nothing to copy in; the cache is what goes stale.
+replenish: ## Clear the cache in the container
 		@$(CONSOLE) cache:clear
 
-# --no-fill leaves new entries with an empty <target/> in BOTH locales; every one has to be filled before the change
-# is done.
-translations: replenish
+# --no-fill leaves new entries with an empty <target/> in BOTH locales, and an empty target is used AS the
+# translation, so the interface renders blank until every one is filled. Fill them before committing.
+#
+# --clean removes units the extractor no longer finds. It only finds a `new TranslatableMessage('...')` where the
+# literal is the argument, so an enum must build its label as `match ($this) { self::X => new TranslatableMessage(...) }`
+# and never as `new TranslatableMessage(match ($this) { self::X => '...' })`. The second form is invisible here and
+# --clean deletes its translations.
+translations: replenish ## Extract translatable strings into the XLIFF files
 		@$(CONSOLE) translation:extract en --format=xlf --sort=asc --no-fill --force --clean
 		@$(CONSOLE) translation:extract nl --format=xlf --sort=asc --no-fill --force --clean
 
 update: updatecomposer updatedocker
 
-phpstan:
+phpstan: ## Run static analysis
 		@vendor/bin/phpstan analyse --memory-limit 1G
 
 phpstanpr:
@@ -130,10 +127,10 @@ phpstanpr:
 		@git checkout -
 		@vendor/bin/phpstan analyse --memory-limit 1G --no-progress
 
-phpcs:
+phpcs: ## Check the coding standard
 		@vendor/bin/phpcs -p
 
-phpcbf:
+phpcbf: ## Fix what the coding standard can fix
 		@vendor/bin/phpcbf -p --filter=GitModified
 
 phpcbfall:
@@ -146,14 +143,14 @@ checkcomposer:
 		@XDEBUG_MODE=off vendor/bin/composer-require-checker check composer.json
 
 updatecomposer:
-		@docker cp ./composer.json $(shell docker compose ps -q web):/code/composer.json
+		@docker cp ./composer.json $(shell docker compose ps -q web):/app/composer.json
 		@docker compose exec web composer update -W
-		@docker cp $(shell docker compose ps -q web):/code/composer.lock ./composer.lock
+		@docker cp $(shell docker compose ps -q web):/app/composer.lock ./composer.lock
 
 updatedocker:
 		@docker compose pull
-		@docker build --pull --no-cache -t abc.docker-registry.gewis.nl/db/gewisdb/web:production -f docker/web/production/Dockerfile .
-		@docker build --pull --no-cache -t abc.docker-registry.gewis.nl/db/gewisdb/web:development -f docker/web/development/Dockerfile .
+		@docker build --pull --no-cache --target gewisdb_web_production -t abc.docker-registry.gewis.nl/db/gewisdb/web:production .
+		@docker build --pull --no-cache --target gewisdb_web_development -t abc.docker-registry.gewis.nl/db/gewisdb/web:development .
 
 build: buildweb
 
@@ -164,10 +161,10 @@ builddev: buildwebdev
 buildweb: buildwebprod buildwebdev
 
 buildwebprod:
-		@docker build --build-arg GIT_COMMIT="$(LAST_WEB_COMMIT)" -t abc.docker-registry.gewis.nl/db/gewisdb/web:production -f docker/web/production/Dockerfile .
+		@docker build --build-arg GIT_COMMIT="$(LAST_WEB_COMMIT)" --target gewisdb_web_production -t abc.docker-registry.gewis.nl/db/gewisdb/web:production .
 
 buildwebdev:
-		@docker build --build-arg GIT_COMMIT="$(LAST_WEB_COMMIT)" -t abc.docker-registry.gewis.nl/db/gewisdb/web:development -f docker/web/development/Dockerfile .
+		@docker build --build-arg GIT_COMMIT="$(LAST_WEB_COMMIT)" --target gewisdb_web_development -t abc.docker-registry.gewis.nl/db/gewisdb/web:development .
 
 buildpgadmin:
 		@docker compose build pgadmin

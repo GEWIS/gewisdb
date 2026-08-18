@@ -104,50 +104,36 @@ services:
             LISTMONK_ADMIN_PASSWORD: ${DEMO_CREDENTIALS_PASSWORD}
         volumes:
             - listmonk-uploads:/listmonk/uploads:rw
-    nginx:
-        build: docker/nginx
-        depends_on:
-            - mailman-web
-        volumes:
-            - mailman-static:/var/html/mailman/:ro
-        ports:
-            - "9725:9725"
     stripe:
         image: stripe/stripe-cli:latest
-        command: listen --forward-to nginx:9725/member/subscribe/checkout/webhook --skip-update -e charge.refund.updated,checkout.session.expired,checkout.session.completed,checkout.session.async_payment_succeeded,checkout.session.async_payment_failed
+        command: listen --forward-to web:9725/member/subscribe/checkout/webhook --skip-update -e charge.refund.updated,checkout.session.expired,checkout.session.completed,checkout.session.async_payment_succeeded,checkout.session.async_payment_failed
         environment:
             - STRIPE_API_KEY=${STRIPE_SECRET_KEY}
             - STRIPE_DEVICE_NAME="GEWISDB on ${HOST:-}${NAME:-}"
             - STRIPE_CLI_TELEMETRY_OPTOUT=1
         depends_on:
-            - nginx
+            - web
         networks:
             - network
     web:
         image: abc.docker-registry.gewis.nl/db/gewisdb/web:development
         build:
-            dockerfile: docker/web/development/Dockerfile
+            dockerfile: Dockerfile
             context: .
+            target: gewisdb_web_development
+        environment:
+            # Caddy answers on the three public hosts plus the plain name the other containers use.
+            - SERVER_NAME=:9725
+        volumes:
+            # The whole project is mounted so a change is picked up without a rebuild; FrankenPHP runs with --watch.
+            # `var/` stays inside the container so its cache does not fight the one the host tooling writes.
+            - ./:/app:rw
+            - /app/var/
+        ports:
+            - "9725:9725"
         depends_on:
             - mailman-core
             - postgresql
-
-###> doctrine/doctrine-bundle ###
-  database:
-    ports:
-      - "5432"
-###< doctrine/doctrine-bundle ###
-
-###> symfony/mailer ###
-  mailer:
-    image: axllent/mailpit
-    ports:
-      - "1025"
-      - "8025"
-    environment:
-      MP_SMTP_AUTH_ACCEPT_ANY: 1
-      MP_SMTP_AUTH_ALLOW_INSECURE: 1
-###< symfony/mailer ###
 
 volumes:
     postgresql:

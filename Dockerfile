@@ -90,6 +90,10 @@ RUN <<-EOF
     fi
     useradd -m -u "$USER_UID" -g "$USER_GID" -s /bin/bash nonroot
     chown -R "$USER_UID:$USER_GID" /data/caddy /config/caddy
+    # `var/` and the upload directory are volumes, which take their ownership from the image; without this the
+    # container cannot write its cache, its log or an uploaded file.
+    mkdir -p /app/var/cache /app/var/log /app/public/data
+    chown -R "$USER_UID:$USER_GID" /app
     git config --system --add safe.directory /app
 EOF
 
