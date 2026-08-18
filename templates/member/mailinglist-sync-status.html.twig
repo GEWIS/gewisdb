@@ -2,9 +2,21 @@
 
 {% block page_title %}{{ 'Sync in progress'|trans }} - {{ parent() }}{% endblock %}
 
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_title %}{{ 'Sync in progress'|trans }}{% endblock %}
+    {% endembed %}
+{% endblock %}
+
 {% block contents %}
-    <h1>{{ 'Sync in progress'|trans }}</h1>
-    <p>
-        {{ 'A Mailman/Listmonk sync is currently in progress. It is now not possible to safely update the mailing list administration, please try again in a few minutes.'|trans }}
-    </p>
+    <div class="panel">
+        <div class="panel-body">
+            {% include 'partials/application/empty-state.html.twig' with {
+                icon: 'fa-rotate',
+                title: 'A mailing list sync is running'|trans,
+                body: 'Subscriptions cannot be changed safely while it runs. Try again in a few minutes.'|trans,
+            } only %}
+        </div>
+    </div>
 {% endblock %}

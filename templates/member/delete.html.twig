@@ -2,32 +2,59 @@
 
 {% block page_title %}{{ 'Delete Member'|trans }} - {{ parent() }}{% endblock %}
 
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href="{{ path('member_index') }}">{{ 'Members'|trans }}</a></li>
+    <li class="breadcrumb-item">
+        <a href="{{ path('member_show', {lidnr: member.lidnr}) }}">{{ member.fullName }}</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">{{ 'Delete'|trans }}</li>
+{% endblock %}
+
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_top %}
+            <span class="page-header-eyebrow">{{ 'Member'|trans }}</span>
+        {% endblock %}
+        {% block header_title %}
+            {{ can_remove ? 'Delete Member'|trans : 'Delete Member Data'|trans }}
+        {% endblock %}
+        {% block header_subtitle %}
+            <p class="page-header-meta mb-0">{{ member.fullName }}</p>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
 {#
     A member who appears in a decision, budget or statement keeps their name on record; only the rest of their data
     can go. Both outcomes are confirmed the same way, so only the explanation ahead of the buttons differs.
 #}
 {% block contents %}
-    <h1>{{ member.fullName }}</h1>
+    <div class="row g-3">
+        <div class="col-12 col-xl-7">
+            <div class="panel">
+                <div class="panel-body">
+                    {% if can_remove %}
+                        <p>{{ 'This deletes %name% and everything on record about them.'|trans({
+                            '%name%': member.fullName,
+                        }) }}</p>
+                    {% else %}
+                        <p>
+                            {{ '%name% has been a member of an organ, or has budgets or statements to their name, so their name stays on record: we have a legal basis under the GDPR to keep it, and the decisions that mention them have to stay correct.'|trans({
+                                '%name%': member.fullName,
+                            }) }}
+                        </p>
+                        <p>{{ 'Everything else about them can be deleted.'|trans }}</p>
+                    {% endif %}
 
-    {% if can_remove %}
-        <p>{{ 'Are you sure you want to delete member %name%?'|trans({'%name%': member.fullName}) }}</p>
-    {% else %}
-        <p>{{ 'Member %name% cannot be deleted.'|trans({'%name%': member.fullName}) }}</p>
-        <p>
-            {{ 'This is because %name% is/has been a member of an organ and/or has budgets/statements to their name.'|trans({
-                '%name%': member.fullName,
-            }) }}
-        </p>
-        <p>
-            {{ 'As a result, this member cannot be removed. According to the AVG, we have a legal basis to keep this member\'s name in our database. The other data can, however, be deleted.'|trans }}
-        </p>
-        <p>{{ 'Do you want to delete the other data?'|trans }}</p>
-    {% endif %}
-
-    {{ form_start(form) }}
-    <div class="d-flex flex-wrap gap-2">
-        {{ form_widget(form.submit_yes, {attr: {class: 'btn-gewis-primary'}}) }}
-        {{ form_widget(form.submit_no, {attr: {class: 'btn btn-secondary'}}) }}
+                    {{ form_start(form) }}
+                    <div class="d-flex flex-wrap gap-2">
+                        {{ form_widget(form.submit_yes, {attr: {class: 'btn-danger'}}) }}
+                        {{ form_widget(form.submit_no, {attr: {class: 'btn btn-secondary'}}) }}
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
     </div>
-    {{ form_end(form) }}
 {% endblock %}

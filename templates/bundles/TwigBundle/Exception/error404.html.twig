@@ -3,8 +3,18 @@
 {% block page_title %}{{ 'A 404 error occurred'|trans }} - {{ parent() }}{% endblock %}
 
 {% block contents %}
-    <h1>{{ 'A 404 error occurred'|trans }}</h1>
     {# Laminas distinguished five reasons for a 404, four of which were dispatch failures inside its own MVC. Only
        the routing miss survives. #}
-    <p>{{ 'The requested URL could not be matched by routing.'|trans }}</p>
+    <div class="panel">
+        <div class="panel-body">
+            {% include 'partials/application/empty-state.html.twig' with {
+                icon: 'fa-compass',
+                title: 'Page not found'|trans,
+                body: 'Nothing answers to this address.'|trans,
+            } only %}
+            <div class="text-center">
+                <a class="btn btn-gewis-primary" href="{{ path('application_home') }}">{{ 'Go home'|trans }}</a>
+            </div>
+        </div>
+    </div>
 {% endblock %}

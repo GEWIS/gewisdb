@@ -2,6 +2,30 @@
 
 {% block page_title %}{{ 'Members requiring attention'|trans }} - {{ parent() }}{% endblock %}
 
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href="{{ path('member_index') }}">{{ 'Members'|trans }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ 'Requiring attention'|trans }}</li>
+{% endblock %}
+
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_title %}{{ 'Members requiring attention'|trans }}{% endblock %}
+        {% block header_subtitle %}
+            <p class="page-header-meta mb-0">
+                {{ 'Memberships expiring within %days% days, and members missing information we need.'|trans({
+                    '%days%': days,
+                }) }}
+            </p>
+        {% endblock %}
+        {% block header_actions %}
+            <a class="btn btn-outline-gewis-primary" href="{{ path('member_bulk_renewal_index') }}">
+                {{ 'Bulk renewal'|trans }}
+            </a>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
 {#
     `rows` pairs each member with the `AttentionReasons` they turned up under; the reason renders its own label and
     recommended action.
@@ -26,32 +50,30 @@
 {% import _self as bulk %}
 
 {% block contents %}
-    <h1>{{ 'Members requiring attention'|trans }}</h1>
-
-    <p>
-        {{ 'The following members require attention because their membership will expire within the next %days% days or they are missing required information.'|trans({
-            '%days%': days,
-        }) }}
-    </p>
-    <p>
-        {{ 'Bulk renewal is available for expiring active members and bulk conversion to graduate available for expiring non-active members. Do this <strong>after</strong> studying members have been renewed.'|trans|raw }}
-    </p>
-
-    <div class="d-flex flex-wrap gap-2 mb-3">
-        {{ bulk.shortcut(
-            bulk_renewal_shortcuts.expiring_active,
-            'external',
-            'Renew expiring active members'|trans,
-        ) }}
-        {{ bulk.shortcut(
-            bulk_renewal_shortcuts.expiring_non_active,
-            'graduate',
-            'Convert expiring non-active members to graduate'|trans,
-        ) }}
+    <div class="panel">
+        <div class="panel-heading"><h3>{{ 'Renew in bulk'|trans }}</h3></div>
+        <div class="panel-body">
+            <p class="text-secondary">
+                {{ 'Each shortcut opens the bulk renewal form with these members already filled in. Renew the members who are still studying <strong>first</strong>.'|trans|raw }}
+            </p>
+            <div class="d-flex flex-wrap gap-2">
+                {{ bulk.shortcut(
+                    bulk_renewal_shortcuts.expiring_active,
+                    'external',
+                    'Renew expiring active members'|trans,
+                ) }}
+                {{ bulk.shortcut(
+                    bulk_renewal_shortcuts.expiring_non_active,
+                    'graduate',
+                    'Convert expiring non-active members to graduate'|trans,
+                ) }}
+            </div>
+        </div>
     </div>
 
-    <div class="table-responsive">
-        <table class="table table-hover align-middle">
+    <div class="panel">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
             <thead>
                 <tr>
                     <th scope="col">{{ 'Membership number'|trans }}</th>
@@ -99,12 +121,17 @@
                     {% endfor %}
                 {% else %}
                     <tr>
-                        <td colspan="6" class="text-secondary">
-                            {{ 'No members require attention.'|trans }}
+                        <td colspan="6">
+                            {% include 'partials/application/empty-state.html.twig' with {
+                                icon: 'fa-user-check',
+                                title: 'Nobody needs attention'|trans,
+                                body: 'No membership expires soon and nothing is missing.'|trans,
+                            } only %}
                         </td>
                     </tr>
                 {% endfor %}
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
 {% endblock %}

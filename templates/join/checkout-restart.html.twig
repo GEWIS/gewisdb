@@ -5,7 +5,11 @@
 {% block page_title %}{{ 'GEWIS Registration - Checkout'|trans }} - {{ parent() }}{% endblock %}
 
 {% block contents %}
-    <h1 class="h3 mb-3">{{ 'GEWIS Registration - Checkout'|trans }}</h1>
+    {% embed 'partials/join/registration-header.html.twig' %}
+        {% block registration_intro %}
+            <p>{{ 'Checkout'|trans }}</p>
+        {% endblock %}
+    {% endembed %}
 
     {% if error %}
         <div class="alert alert-danger" role="alert">

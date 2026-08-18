@@ -24,6 +24,10 @@ application's own view layer and GEWISWEB's conventions. No inline styles, no se
 - [x] **Query console** — the editor with numbered lines, Clear and Execute; the stored queries and the entity list
       in the rail, the latter filterable and clicking one starting a `SELECT` over it; results as their own panel
       with a row count and the CSV download, and an empty state for before anything has run.
+- [x] **Everything the designs do not cover** — the pages the redesigned screens link into (member updates and
+      approvals, bulk renewal, member and address forms, meeting and decision forms, mailing lists, users, API
+      tokens, settings, the error pages) now carry the same header band, breadcrumbs, panels and empty states. No
+      page is left with a bare `<h1>` in its body.
 - [ ] **Decisions, the builder** — *needs backend work.* The designs show one decision assembled from several
       subdecisions of mixed kinds, with a panel stating the effect on the register before it is recorded and
       submission blocked while any subdecision is incomplete. The entity model supports it — a decision is already a
@@ -79,9 +83,12 @@ stay under `Database`, because that directory is what maps them to the default m
 
 ## Open, to raise rather than invent
 
-- The fee appears as €20 on the registration design and €25,00 on the prospective-member design, and the real amount
-  lives in Stripe as a price id. Nothing renders a hardcoded figure until this is settled.
-- ~~The query console's "read replica" copy~~ — reworded: the page now says queries run against the report database,
-  a copy refreshed twice an hour, so a change made in the last half hour may not be in it yet.
+- ~~The fee, €20 or €25~~ — settled: it is **€20**. The registration says so in its own copy, which is where a
+  prospective member needs it. Nothing else renders a figure: what a prospective member actually paid comes back from
+  Stripe with the checkout, and printing €20 next to it would be a second, unrelated claim.
+- ~~The query console's "read replica" copy~~ — reworded. It is not a read replica and it is not a scheduled copy:
+  `DatabaseUpdateListener` and `DatabaseDeletionListener` write ReportDB as the ledger is written, so the projection
+  is current. The half-hourly job is GEWISWEB's `ImportGewisdbCommand` pulling *from* ReportDB, one hop further out,
+  and says nothing about how fresh ReportDB itself is.
 - Out of scope without backend work: the global search (no endpoint spans members, organs and decisions), CSV export
   of a member selection or of query results, and the full audit log page.
