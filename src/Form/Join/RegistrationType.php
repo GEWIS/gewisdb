@@ -10,7 +10,6 @@ use App\Entity\Member\Address;
 use App\Entity\Member\Enums\AddressTypes;
 use App\Entity\Member\Enums\Studies;
 use App\Form\DataTransformer\LowercaseTransformer;
-use App\Form\DataTransformer\StringToEnumTransformer;
 use App\Form\Member\AddressType;
 use App\Form\Member\StudyChoices;
 use App\Validator\Member\DeliverableEmailAddress;
@@ -73,12 +72,19 @@ class RegistrationType extends AbstractType
                 'label' => t('TU/e student number'),
                 'constraints' => [new Assert\NotBlank(), new StudentNumber()],
             ])
+            // Grouped by category, which is why this is not an `EnumType`; the choices are the enum cases all the
+            // same.
             ->add('study', ChoiceType::class, [
                 'label' => t('Study'),
                 'placeholder' => t('Select a study'),
                 'choices' => StudyChoices::grouped(),
-                // Resolved while the view is built rather than at build time, so the labels follow the request locale.
-                'choice_label' => fn (string $study): string => StudyChoices::label($study, $this->translator, true),
+                // Resolved while the view is built rather than at build time, so the footnoted labels follow the
+                // request locale.
+                'choice_label' => fn (Studies $study): Studies|string => StudyChoices::labelWithFootnote(
+                    $study,
+                    $this->translator,
+                ),
+                'choice_value' => static fn (?Studies $study): ?string => $study?->value,
                 'invalid_message' => t('Select an existing study.'),
                 'constraints' => [new Assert\NotNull()],
             ])
@@ -144,7 +150,6 @@ class RegistrationType extends AbstractType
             ->add('submit', SubmitType::class, ['label' => t('Go to checkout')]);
 
         $builder->get('email')->addModelTransformer(new LowercaseTransformer());
-        $builder->get('study')->addModelTransformer(new StringToEnumTransformer(Studies::class));
 
         // The address is always a student address here, and the field that would say so is not rendered.
         $builder->addEventListener(

@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace App\Form\Member;
+namespace App\Form\Database;
 
-use App\Entity\Member\Enums\Studies;
+use App\Entity\Database\Enums\Studies;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Grouping and labelling of the studies offered in a select.
  *
- * The grouping lives here rather than on the enum because a translator would then be needed while the form is being
- * built, which fixes the labels to whatever locale was active at that moment instead of the one the form is
- * rendered in.
+ * `EnumType` cannot group its options, which is the one reason the study select is still built by hand: the choices
+ * are the enum cases themselves, so they label and value themselves the way `EnumType` would have done, but they are
+ * handed over in optgroups. The footnote below is the second reason, and the only place a study is labelled here.
  */
 class StudyChoices
 {
@@ -24,10 +24,10 @@ class StudyChoices
     private const string GROUP_SPECIAL = 'Special cases (secretary use only)';
 
     /**
-     * The keys are the optgroup labels, translated when the choice list is rendered. `Other` closes off every group
-     * so that it can be picked without hunting through the whole list.
+     * The outer keys are the optgroup labels, translated when the choice list is rendered. `Other` closes off every
+     * group so that it can be picked without hunting through the whole list.
      *
-     * @return array<string, array<string, string>>
+     * @return array<string, array<string, Studies>>
      */
     public static function grouped(bool $withSpecialCases = false): array
     {
@@ -49,7 +49,7 @@ class StudyChoices
                     continue;
                 }
 
-                $choices[$group][$study->name] = $study->value;
+                $choices[$group][$study->name] = $study;
             }
         }
 
@@ -59,33 +59,28 @@ class StudyChoices
                     continue;
                 }
 
-                $choices[self::GROUP_SPECIAL][$study->name] = $study->value;
+                $choices[self::GROUP_SPECIAL][$study->name] = $study;
             }
         } else {
-            $choices[self::GROUP_OTHER] = [Studies::Other->name => Studies::Other->value];
+            $choices[self::GROUP_OTHER] = [Studies::Other->name => Studies::Other];
         }
 
         return $choices;
     }
 
     /**
-     * Data Science studies carry a footnote marker on the registration form.
+     * Data Science studies carry a footnote marker on the registration form. Appending it means translating the name
+     * first, so only those labels are resolved here; the rest is left to the enum, which the choice list translates
+     * when it renders.
      */
-    public static function label(
-        string $study,
+    public static function labelWithFootnote(
+        Studies $study,
         TranslatorInterface $translator,
-        bool $withDataScienceFootnote = false,
-    ): string {
-        $study = Studies::from($study);
-        $name = $study->getName()->trans($translator);
-
-        if (
-            $withDataScienceFootnote
-            && $study->isDataScience()
-        ) {
-            return $name . '¹';
+    ): Studies|string {
+        if (!$study->isDataScience()) {
+            return $study;
         }
 
-        return $name;
+        return $study->getName()->trans($translator) . '¹';
     }
 }

@@ -2,13 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Form\Member;
+namespace App\Form\Database;
 
-use App\Entity\Member\Enums\Studies;
-use App\Entity\Member\Member;
+use App\Entity\Database\Enums\Studies;
+use App\Entity\Database\Member;
 use App\Form\DataTransformer\LowercaseTransformer;
-use App\Form\DataTransformer\StringToEnumTransformer;
-use App\Validator\Member\StudentNumber;
+use App\Validator\Database\StudentNumber;
 use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -20,7 +19,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 use function Symfony\Component\Translation\t;
 
@@ -29,14 +27,6 @@ use function Symfony\Component\Translation\t;
  */
 class MemberEditType extends AbstractType
 {
-    public function __construct(private readonly TranslatorInterface $translator)
-    {
-    }
-
-    /**
-     * @param array<string, mixed> $options
-     */
-
     /**
      * @param array<string, mixed> $options
      */
@@ -59,10 +49,13 @@ class MemberEditType extends AbstractType
         $builder->add('middleName', TextType::class, [
             'label' => t('Last Name Prepositional Particle'),
             'required' => false,
+            // The column is NOT NULL: an untouched optional field is an empty string, not a missing one.
+            'empty_data' => '',
             'constraints' => [
-                new Assert\Length(
-                    min: 2,
-                    max: 32,
+                // A member without a particle has an empty one, which is shorter than any real particle.
+                new Assert\When(
+                    expression: "'' !== value",
+                    constraints: [new Assert\Length(min: 2, max: 32)],
                 ),
             ],
         ]);
@@ -109,13 +102,15 @@ class MemberEditType extends AbstractType
             'constraints' => [new Assert\NotNull()],
         ]);
 
+        // Grouped by category, which is why this is not an `EnumType`; the choices are the enum cases all the same.
         $builder->add('study', ChoiceType::class, [
             'label' => t('Study'),
             'placeholder' => t('Select a study'),
             'choices' => StudyChoices::grouped(withSpecialCases: true),
-            // Resolved while the view is built rather than at build time, so the labels follow the request locale.
-            'choice_label' => fn (string $study): string => StudyChoices::label($study, $this->translator),
+            'choice_label' => static fn (Studies $study): Studies => $study,
+            'choice_value' => static fn (?Studies $study): ?string => $study?->value,
             'invalid_message' => t('Select an existing study.'),
+            'constraints' => [new Assert\NotNull()],
         ]);
 
         $builder->add('hidden', CheckboxType::class, [
@@ -126,7 +121,6 @@ class MemberEditType extends AbstractType
         $builder->add('submit', SubmitType::class, ['label' => t('Change Data')]);
 
         $builder->get('email')->addModelTransformer(new LowercaseTransformer());
-        $builder->get('study')->addModelTransformer(new StringToEnumTransformer(Studies::class));
     }
 
     #[Override]

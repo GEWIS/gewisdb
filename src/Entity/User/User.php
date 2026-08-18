@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\Table;
+use Override;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 use function preg_match;
 use function str_contains;
@@ -22,7 +25,7 @@ use function str_contains;
 #[Entity(repositoryClass: UserRepository::class)]
 #[HasLifecycleCallbacks]
 #[Table(name: 'users')]
-class User
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use TimestampableTrait;
 
@@ -80,11 +83,32 @@ class User
         return $this->login;
     }
 
+    /**
+     * The login is what identifies a user, both locally and against AD.
+     */
+    #[Override]
+    public function getUserIdentifier(): string
+    {
+        return $this->login;
+    }
+
+    /**
+     * There is no authorisation model on the web side: a user is either logged in or is not.
+     *
+     * @return string[]
+     */
+    #[Override]
+    public function getRoles(): array
+    {
+        return ['ROLE_USER'];
+    }
+
     public function setLogin(string $login): void
     {
         $this->login = $login;
     }
 
+    #[Override]
     public function getPassword(): ?string
     {
         return $this->password;

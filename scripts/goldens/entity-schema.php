@@ -15,6 +15,7 @@ declare(strict_types=1);
 $root = dirname(__DIR__, 2);
 
 require $root . '/vendor/autoload.php';
+require $root . '/scripts/stubs/symfony-security.php';
 
 use App\Doctrine\Types\StringableDateTimeType;
 use Doctrine\DBAL\DriverManager;

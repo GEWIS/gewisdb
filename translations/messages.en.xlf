@@ -57,57 +57,85 @@
         <source>%ORGAN_TYPE% %ORGAN_NAME% met afkorting %ORGAN_ABBR% wordt opgericht.</source>
         <target state="translated">%ORGAN_TYPE% %ORGAN_NAME% with abbreviation %ORGAN_ABBR% is established.</target>
       </trans-unit>
-      <trans-unit id="qXRwVzF" resname="%d pending mailing list subscriptions">
-        <source>%d pending mailing list subscriptions</source>
-        <target state="translated">%d pending mailing list subscriptions</target>
+      <trans-unit id="N6OPL1H" resname="%creations% subscriptions and %deletions% unsubscriptions pending">
+        <source>%creations% subscriptions and %deletions% unsubscriptions pending</source>
+        <target state="translated">%creations% subscriptions and %deletions% unsubscriptions pending</target>
       </trans-unit>
-      <trans-unit id="NwFNt7C" resname="%d pending mailing list unsubscriptions">
-        <source>%d pending mailing list unsubscriptions</source>
-        <target state="translated">%d pending mailing list unsubscriptions</target>
+      <trans-unit id="SzobEuV" resname="%entity% has been added to %target%">
+        <source>%entity% has been added to %target%</source>
+        <target state="translated">%entity% has been added to %target%</target>
+      </trans-unit>
+      <trans-unit id="0mxjRkL" resname="%members% members, %graduates% graduates, %expired% expired and %prospectives% prospective members">
+        <source>%members% members, %graduates% graduates, %expired% expired and %prospectives% prospective members</source>
+        <target state="translated">%members% members, %graduates% graduates, %expired% expired and %prospectives% prospective members</target>
+      </trans-unit>
+      <trans-unit id="pqLao9N" resname="%name% has been a member of an organ, or has budgets or statements to their name, so their name stays on record: we have a legal basis under the GDPR to keep it, and the decisions that mention them have to stay correct.">
+        <source>%name% has been a member of an organ, or has budgets or statements to their name, so their name stays on record: we have a legal basis under the GDPR to keep it, and the decisions that mention them have to stay correct.</source>
+        <target state="translated">%name% has been a member of an organ, or has budgets or statements to their name, so their name stays on record: we have a legal basis under the GDPR to keep it, and the decisions that mention them have to stay correct.</target>
+      </trans-unit>
+      <trans-unit id="PDyu2UH" resname="%number% decisions">
+        <source>%number% decisions</source>
+        <target state="translated">%number% decisions</target>
+      </trans-unit>
+      <trans-unit id="5BPxLf0" resname="%number% lines · DQL">
+        <source>%number% lines · DQL</source>
+        <target state="translated">%number% lines · DQL</target>
+      </trans-unit>
+      <trans-unit id="oPXmbbi" resname="%number% member updates pending">
+        <source>%number% member updates pending</source>
+        <target state="translated">%number% member updates pending</target>
+      </trans-unit>
+      <trans-unit id="yHWlnZ3" resname="%number% members have requested a change to their data.">
+        <source>%number% members have requested a change to their data.</source>
+        <target state="translated">%number% members have requested a change to their data.</target>
+      </trans-unit>
+      <trans-unit id="RWqIiLg" resname="%number% need attention">
+        <source>%number% need attention</source>
+        <target state="translated">%number% need attention</target>
+      </trans-unit>
+      <trans-unit id="rAsDUSj" resname="%number% prospective members have paid">
+        <source>%number% prospective members have paid</source>
+        <target state="translated">%number% prospective members have paid</target>
+      </trans-unit>
+      <trans-unit id="4UtNiMV" resname="%number% prospective members have paid and are waiting for approval.">
+        <source>%number% prospective members have paid and are waiting for approval.</source>
+        <target state="translated">%number% prospective members have paid and are waiting for approval.</target>
+      </trans-unit>
+      <trans-unit id="BK.WgLh" resname="%number% rows">
+        <source>%number% rows</source>
+        <target state="translated">%number% rows</target>
       </trans-unit>
       <trans-unit id="s48kqVb" resname="%s %d.%d.%d has been annulled, but %s. When the term ended now follows from the Internal Regulations; record a discharge if one is needed.">
         <source>%s %d.%d.%d has been annulled, but %s. When the term ended now follows from the Internal Regulations; record a discharge if one is needed.</source>
         <target state="translated">%s %d.%d.%d has been annulled, but %s. When the term ended now follows from the Internal Regulations; record a discharge if one is needed.</target>
       </trans-unit>
-      <trans-unit id="f561lqp" resname="%s %s member expiring soon">
-        <source>%s %s member expiring soon</source>
-        <target state="translated">%s %s member expiring soon</target>
+      <trans-unit id="FRW1pCY" resname="%service% lists are not being fetched">
+        <source>%service% lists are not being fetched</source>
+        <target state="translated">%service% lists are not being fetched</target>
       </trans-unit>
-      <trans-unit id="pvUns.Q" resname="%s OR %s">
-        <source>%s OR %s</source>
-        <target state="translated">%s OR %s</target>
+      <trans-unit id="lZRmOXM" resname="%service% lists have not been fetched recently. The mailing list server may be down, or fetching may be failing.">
+        <source>%service% lists have not been fetched recently. The mailing list server may be down, or fetching may be failing.</source>
+        <target state="translated">%service% lists have not been fetched recently. The mailing list server may be down, or fetching may be failing.</target>
       </trans-unit>
-      <trans-unit id="Ew4I1rv" resname="%s has been added to %s">
-        <source>%s has been added to %s</source>
-        <target state="translated">%s has been added to %s</target>
+      <trans-unit id="lNmxgOz" resname="%type% %membership% member expiring soon">
+        <source>%type% %membership% member expiring soon</source>
+        <target state="translated">%type% %membership% member expiring soon</target>
       </trans-unit>
-      <trans-unit id="NgaDSvv" resname="%s prospective member(s) have paid and are pending approval.">
-        <source>%s prospective member(s) have paid and are pending approval.</source>
-        <target state="translated">%s prospective member(s) have paid and are pending approval.</target>
+      <trans-unit id="s4eJWBv" resname="%valid% changes, %issues% issues">
+        <source>%valid% changes, %issues% issues</source>
+        <target state="translated">%valid% changes, %issues% issues</target>
       </trans-unit>
-      <trans-unit id="UaIWoHT" resname="(Annulled by decision %s %d.%d.%d)">
-        <source>(Annulled by decision %s %d.%d.%d)</source>
-        <target state="translated">(Annulled by decision %s %d.%d.%d)</target>
-      </trans-unit>
-      <trans-unit id="SKuzfHB" resname="(bulk) renew as ordinary">
-        <source>(bulk) renew as ordinary</source>
-        <target state="translated">(bulk) renew as ordinary</target>
-      </trans-unit>
-      <trans-unit id="0CD6fsN" resname="&lt;strong&gt;Warning:&lt;/strong&gt; The database currently requires the usage of GEWIS m-accounts to log in. Any accounts created here cannot be used to log in. Learn more about m-accounts %shere%s.">
-        <source>&lt;strong&gt;Warning:&lt;/strong&gt; The database currently requires the usage of GEWIS m-accounts to log in. Any accounts created here cannot be used to log in. Learn more about m-accounts %shere%s.</source>
-        <target state="translated">&lt;strong&gt;Warning:&lt;/strong&gt; The database currently requires the usage of GEWIS m-accounts to log in. Any accounts created here cannot be used to log in. Learn more about m-accounts %shere%s.</target>
+      <trans-unit id="r0_Bmcr" resname="(bulk) renew as ordinary OR convert to graduate">
+        <source>(bulk) renew as ordinary OR convert to graduate</source>
+        <target state="translated">(bulk) renew as ordinary OR convert to graduate</target>
       </trans-unit>
       <trans-unit id="_LDDAav" resname="A 404 error occurred">
         <source>A 404 error occurred</source>
         <target state="translated">A 404 error occurred</target>
       </trans-unit>
-      <trans-unit id="s2FPKcY" resname="A Mailman/Listmonk sync is currently in progress. It is now not possible to safely update the mailing list administration, please try again in a few minutes.">
-        <source>A Mailman/Listmonk sync is currently in progress. It is now not possible to safely update the mailing list administration, please try again in a few minutes.</source>
-        <target state="translated">A Mailman/Listmonk sync is currently in progress. It is now not possible to safely update the mailing list administration, please try again in a few minutes.</target>
-      </trans-unit>
-      <trans-unit id="4jvKvzS" resname="A TU/e student number consists of 7 digits.">
-        <source>A TU/e student number consists of 7 digits.</source>
-        <target state="translated">A TU/e student number consists of 7 digits.</target>
+      <trans-unit id="PRWqurt" resname="A change date other than %start% splits the membership in two on that date.">
+        <source>A change date other than %start% splits the membership in two on that date.</source>
+        <target state="translated">A change date other than %start% splits the membership in two on that date.</target>
       </trans-unit>
       <trans-unit id="YRW2Q5p" resname="A decision can only annul a decision taken before it.">
         <source>A decision can only annul a decision taken before it.</source>
@@ -116,6 +144,10 @@
       <trans-unit id="CgePw2X" resname="A decision cannot annul itself.">
         <source>A decision cannot annul itself.</source>
         <target state="translated">A decision cannot annul itself.</target>
+      </trans-unit>
+      <trans-unit id="sjNzVF_" resname="A mailing list sync is running">
+        <source>A mailing list sync is running</source>
+        <target state="translated">A mailing list sync is running</target>
       </trans-unit>
       <trans-unit id="2DI0bbS" resname="ALV">
         <source>ALV</source>
@@ -145,37 +177,45 @@
         <source>Abbreviation</source>
         <target state="translated">Abbreviation</target>
       </trans-unit>
-      <trans-unit id="kxY80eA" resname="Abbreviation suffix (SC%d-{SUFFIX})">
-        <source>Abbreviation suffix (SC%d-{SUFFIX})</source>
-        <target state="translated">Abbreviation suffix (SC%d-{SUFFIX})</target>
+      <trans-unit id="5nnNApK" resname="Abbreviation or name">
+        <source>Abbreviation or name</source>
+        <target state="translated">Abbreviation or name</target>
+      </trans-unit>
+      <trans-unit id="BHG3.H5" resname="Abbreviation suffix (SC%number%-{SUFFIX})">
+        <source>Abbreviation suffix (SC%number%-{SUFFIX})</source>
+        <target state="translated">Abbreviation suffix (SC%number%-{SUFFIX})</target>
       </trans-unit>
       <trans-unit id="J.NLPQn" resname="Abolish Organ">
         <source>Abolish Organ</source>
         <target state="translated">Abolish Organ</target>
       </trans-unit>
+      <trans-unit id="GNeiqBB" resname="Abolish an organ and end its installations.">
+        <source>Abolish an organ and end its installations.</source>
+        <target state="translated">Abolish an organ and end its installations.</target>
+      </trans-unit>
       <trans-unit id="sHC_w4U" resname="Abolition">
         <source>Abolition</source>
         <target state="translated">Abolition</target>
-      </trans-unit>
-      <trans-unit id="0TZQncs" resname="According to our data it is time to renew your status as a graduate of GEWIS.&#10;                To make sure we have up-to-date information on how to contact you, please review your details below.&lt;br/&gt;&#10;                If you do not want to become or remain a graduate, you do not have to do anything. It will simply expire on the indicated date.">
-        <source>According to our data it is time to renew your status as a graduate of GEWIS.
-                To make sure we have up-to-date information on how to contact you, please review your details below.&lt;br/&gt;
-                If you do not want to become or remain a graduate, you do not have to do anything. It will simply expire on the indicated date.</source>
-        <target state="translated">According to our data it is time to renew your status as a graduate of GEWIS.
-                To make sure we have up-to-date information on how to contact you, please review your details below.&lt;br/&gt;
-                If you do not want to become or remain a graduate, you do not have to do anything. It will simply expire on the indicated date.</target>
       </trans-unit>
       <trans-unit id="BUIQ..a" resname="Action">
         <source>Action</source>
         <target state="translated">Action</target>
       </trans-unit>
-      <trans-unit id="r_kXKnG" resname="Ada Alumni">
-        <source>Ada Alumni</source>
-        <target state="translated">Ada Alumni</target>
+      <trans-unit id="JjO6Nuw" resname="Active">
+        <source>Active</source>
+        <target state="translated">Active</target>
       </trans-unit>
-      <trans-unit id="Y4xfhuE" resname="Add %s of %s">
-        <source>Add %s of %s</source>
-        <target state="translated">Add %s of %s</target>
+      <trans-unit id="iR7uht9" resname="Active members who no longer study become external.">
+        <source>Active members who no longer study become external.</source>
+        <target state="translated">Active members who no longer study become external.</target>
+      </trans-unit>
+      <trans-unit id="g.hyGgB" resname="Add">
+        <source>Add</source>
+        <target state="translated">Add</target>
+      </trans-unit>
+      <trans-unit id="szLKipI" resname="Add %type%">
+        <source>Add %type%</source>
+        <target state="translated">Add %type%</target>
       </trans-unit>
       <trans-unit id="uXzabWV" resname="Add Budget/Statement">
         <source>Add Budget/Statement</source>
@@ -185,17 +225,9 @@
         <source>Add Decision</source>
         <target state="translated">Add Decision</target>
       </trans-unit>
-      <trans-unit id="EkNBTRz" resname="Add Home Address">
-        <source>Add Home Address</source>
-        <target state="translated">Add Home Address</target>
-      </trans-unit>
       <trans-unit id="1IEx5qW" resname="Add Inactive Member">
         <source>Add Inactive Member</source>
         <target state="translated">Add Inactive Member</target>
-      </trans-unit>
-      <trans-unit id="aBEKDYP" resname="Add Mail Address">
-        <source>Add Mail Address</source>
-        <target state="translated">Add Mail Address</target>
       </trans-unit>
       <trans-unit id="wiWfcrB" resname="Add Mailing List">
         <source>Add Mailing List</source>
@@ -229,17 +261,17 @@
         <source>Add Organ Regulation</source>
         <target state="translated">Add Organ Regulation</target>
       </trans-unit>
-      <trans-unit id="s7necrh" resname="Add Student Address">
-        <source>Add Student Address</source>
-        <target state="translated">Add Student Address</target>
-      </trans-unit>
       <trans-unit id="3EZgAIw" resname="Add new user">
         <source>Add new user</source>
         <target state="translated">Add new user</target>
       </trans-unit>
-      <trans-unit id="QjFSQh2" resname="Additional information">
-        <source>Additional information</source>
-        <target state="translated">Additional information</target>
+      <trans-unit id="820YnYt" resname="Add one below to start recording what was decided.">
+        <source>Add one below to start recording what was decided.</source>
+        <target state="translated">Add one below to start recording what was decided.</target>
+      </trans-unit>
+      <trans-unit id="HZrsauj" resname="Add one to offer it on the registration form.">
+        <source>Add one to offer it on the registration form.</source>
+        <target state="translated">Add one to offer it on the registration form.</target>
       </trans-unit>
       <trans-unit id="jPtXcgB" resname="Address">
         <source>Address</source>
@@ -249,9 +281,9 @@
         <source>Addresses</source>
         <target state="translated">Addresses</target>
       </trans-unit>
-      <trans-unit id="ZR8WqDm" resname="Administrative Functions">
-        <source>Administrative Functions</source>
-        <target state="translated">Administrative Functions</target>
+      <trans-unit id="DZv60Aj" resname="Administrative">
+        <source>Administrative</source>
+        <target state="translated">Administrative</target>
       </trans-unit>
       <trans-unit id="W1PSNEv" resname="Agreement">
         <source>Agreement</source>
@@ -260,6 +292,10 @@
       <trans-unit id="bN4hpxf" resname="All API permissions">
         <source>All API permissions</source>
         <target state="translated">All API permissions</target>
+      </trans-unit>
+      <trans-unit id="Gfgy9Bw" resname="All applications">
+        <source>All applications</source>
+        <target state="translated">All applications</target>
       </trans-unit>
       <trans-unit id="s3AD5yx" resname="An annulling decision cannot be annulled, delete it instead.">
         <source>An annulling decision cannot be annulled, delete it instead.</source>
@@ -277,29 +313,41 @@
         <source>An error occurred while we were trying to prepare the checkout page. We have received your registration and sent you an e-mail containing a link that allows you to restart the checkout process at a later time.</source>
         <target state="translated">An error occurred while we were trying to prepare the checkout page. We have received your registration and sent you an e-mail containing a link that allows you to restart the checkout process at a later time.</target>
       </trans-unit>
-      <trans-unit id="c97.L.2" resname="Annual bulk conversion of non-active non-studying ordinary/external members. New type is graduate.">
-        <source>Annual bulk conversion of non-active non-studying ordinary/external members. New type is graduate.</source>
-        <target state="translated">Annual bulk conversion of non-active non-studying ordinary/external members. New type is graduate.</target>
-      </trans-unit>
-      <trans-unit id="BCcimZj" resname="Annual renewal of active non-studying ordinary/external members. New type is external.">
-        <source>Annual renewal of active non-studying ordinary/external members. New type is external.</source>
-        <target state="translated">Annual renewal of active non-studying ordinary/external members. New type is external.</target>
-      </trans-unit>
-      <trans-unit id="VJ6HxUd" resname="Annual renewal of studying members. New type is ordinary.">
-        <source>Annual renewal of studying members. New type is ordinary.</source>
-        <target state="translated">Annual renewal of studying members. New type is ordinary.</target>
+      <trans-unit id="_dP8j3Z" resname="Announcements only">
+        <source>Announcements only</source>
+        <target state="translated">Announcements only</target>
       </trans-unit>
       <trans-unit id="ErzXEK0" resname="Annul Decision">
         <source>Annul Decision</source>
         <target state="translated">Annul Decision</target>
       </trans-unit>
+      <trans-unit id="Da1B.EQ" resname="Annul an earlier decision and revert what it did.">
+        <source>Annul an earlier decision and revert what it did.</source>
+        <target state="translated">Annul an earlier decision and revert what it did.</target>
+      </trans-unit>
+      <trans-unit id="OuJL17C" resname="Annulled by %type% %number%.%point%.%decision%">
+        <source>Annulled by %type% %number%.%point%.%decision%</source>
+        <target state="translated">Annulled by %type% %number%.%point%.%decision%</target>
+      </trans-unit>
+      <trans-unit id="mxjIT1l" resname="Anything that needs you shows up here.">
+        <source>Anything that needs you shows up here.</source>
+        <target state="translated">Anything that needs you shows up here.</target>
+      </trans-unit>
       <trans-unit id="co_Fe69" resname="Apply Update">
         <source>Apply Update</source>
         <target state="translated">Apply Update</target>
       </trans-unit>
+      <trans-unit id="IIgIq5g" resname="Applying this writes the proposed values over what is on record.">
+        <source>Applying this writes the proposed values over what is on record.</source>
+        <target state="translated">Applying this writes the proposed values over what is on record.</target>
+      </trans-unit>
       <trans-unit id="cady6.M" resname="Approval">
         <source>Approval</source>
         <target state="translated">Approval</target>
+      </trans-unit>
+      <trans-unit id="1f08Mya" resname="Approvals and system checks that someone has to clear">
+        <source>Approvals and system checks that someone has to clear</source>
+        <target state="translated">Approvals and system checks that someone has to clear</target>
       </trans-unit>
       <trans-unit id="jgbotvk" resname="Approve">
         <source>Approve</source>
@@ -309,41 +357,33 @@
         <source>Approve Membership</source>
         <target state="translated">Approve Membership</target>
       </trans-unit>
-      <trans-unit id="zkPf2Nt" resname="Are you sure %s?">
-        <source>Are you sure %s?</source>
-        <target state="translated">Are you sure %s?</target>
+      <trans-unit id="krXEr9H" resname="Approve a budget or a financial statement.">
+        <source>Approve a budget or a financial statement.</source>
+        <target state="translated">Approve a budget or a financial statement.</target>
+      </trans-unit>
+      <trans-unit id="o6HFQ8E" resname="Approve the minutes of an earlier meeting.">
+        <source>Approve the minutes of an earlier meeting.</source>
+        <target state="translated">Approve the minutes of an earlier meeting.</target>
+      </trans-unit>
+      <trans-unit id="KHFP4_g" resname="Approve the regulations of an organ.">
+        <source>Approve the regulations of an organ.</source>
+        <target state="translated">Approve the regulations of an organ.</target>
+      </trans-unit>
+      <trans-unit id="jHsLfpv" resname="Are you sure %name%?">
+        <source>Are you sure %name%?</source>
+        <target state="translated">Are you sure %name%?</target>
       </trans-unit>
       <trans-unit id="1qT9z3I" resname="Are you sure that you are younger than 10 years?">
         <source>Are you sure that you are younger than 10 years?</source>
         <target state="translated">Are you sure that you are younger than 10 years?</target>
       </trans-unit>
-      <trans-unit id="y7w_DY1" resname="Are you sure that you want to delete decision %s %d.%d.%d?">
-        <source>Are you sure that you want to delete decision %s %d.%d.%d?</source>
-        <target state="translated">Are you sure that you want to delete decision %s %d.%d.%d?</target>
+      <trans-unit id="1oKKl9I" resname="Are you sure that you want to remove %name%?">
+        <source>Are you sure that you want to remove %name%?</source>
+        <target state="translated">Are you sure that you want to remove %name%?</target>
       </trans-unit>
-      <trans-unit id="io7ewzI" resname="Are you sure that you want to delete the %s mailing list?">
-        <source>Are you sure that you want to delete the %s mailing list?</source>
-        <target state="translated">Are you sure that you want to delete the %s mailing list?</target>
-      </trans-unit>
-      <trans-unit id="ztOz455" resname="Are you sure that you want to delete the %s of %s?">
-        <source>Are you sure that you want to delete the %s of %s?</source>
-        <target state="translated">Are you sure that you want to delete the %s of %s?</target>
-      </trans-unit>
-      <trans-unit id="tChcc71" resname="Are you sure that you want to extend the membership of %s to %s (from %s)?">
-        <source>Are you sure that you want to extend the membership of %s to %s (from %s)?</source>
-        <target state="translated">Are you sure that you want to extend the membership of %s to %s (from %s)?</target>
-      </trans-unit>
-      <trans-unit id="L0MZdJm" resname="Are you sure that you want to remove %s?">
-        <source>Are you sure that you want to remove %s?</source>
-        <target state="translated">Are you sure that you want to remove %s?</target>
-      </trans-unit>
-      <trans-unit id="esxltpS" resname="Are you sure that you want to remove %s? Because they have already paid a refund will be requested. If this fails, the prospective member will NOT be removed.">
-        <source>Are you sure that you want to remove %s? Because they have already paid a refund will be requested. If this fails, the prospective member will NOT be removed.</source>
-        <target state="translated">Are you sure that you want to remove %s? Because they have already paid a refund will be requested. If this fails, the prospective member will NOT be removed.</target>
-      </trans-unit>
-      <trans-unit id="t8S17Iw" resname="Are you sure you want to delete member %s?">
-        <source>Are you sure you want to delete member %s?</source>
-        <target state="translated">Are you sure you want to delete member %s?</target>
+      <trans-unit id="f5NDVlc" resname="Are you sure that you want to remove %name%? Because they have already paid a refund will be requested. If this fails, the prospective member will NOT be removed.">
+        <source>Are you sure that you want to remove %name%? Because they have already paid a refund will be requested. If this fails, the prospective member will NOT be removed.</source>
+        <target state="translated">Are you sure that you want to remove %name%? Because they have already paid a refund will be requested. If this fails, the prospective member will NOT be removed.</target>
       </trans-unit>
       <trans-unit id="YYivmU7" resname="Articles of Association, Internal Regulations and privacy statement">
         <source>Articles of Association, Internal Regulations and privacy statement</source>
@@ -361,17 +401,21 @@
         <source>As a graduate, you can choose to keep receiving the physical Supremum magazine.</source>
         <target state="translated">As a graduate, you can choose to keep receiving the physical Supremum magazine.</target>
       </trans-unit>
-      <trans-unit id="iW_ynYv" resname="As a result, this member cannot be removed. According to the AVG, we have a legal basis to keep this member's name in our database. The other data can, however, be deleted.">
-        <source>As a result, this member cannot be removed. According to the AVG, we have a legal basis to keep this member's name in our database. The other data can, however, be deleted.</source>
-        <target state="translated">As a result, this member cannot be removed. According to the AVG, we have a legal basis to keep this member's name in our database. The other data can, however, be deleted.</target>
-      </trans-unit>
       <trans-unit id="devFmcu" resname="Author">
         <source>Author</source>
         <target state="translated">Author</target>
       </trans-unit>
+      <trans-unit id="cfsy_RA" resname="Auto">
+        <source>Auto</source>
+        <target state="translated">Auto</target>
+      </trans-unit>
       <trans-unit id="h2DL0Bj" resname="Auto-subscription">
         <source>Auto-subscription</source>
         <target state="translated">Auto-subscription</target>
+      </trans-unit>
+      <trans-unit id="F0h.9rf" resname="Awaiting payment">
+        <source>Awaiting payment</source>
+        <target state="translated">Awaiting payment</target>
       </trans-unit>
       <trans-unit id="8lZmj_8" resname="Awesome!">
         <source>Awesome!</source>
@@ -397,13 +441,17 @@
         <source>Bachelor Data Science</source>
         <target state="translated">Bachelor Data Science</target>
       </trans-unit>
-      <trans-unit id="7UTJsrE" resname="Bachelor Programs">
-        <source>Bachelor Programs</source>
-        <target state="translated">Bachelor Programs</target>
+      <trans-unit id=".QFPbFe" resname="Back">
+        <source>Back</source>
+        <target state="translated">Back</target>
       </trans-unit>
-      <trans-unit id="VYv0HZU" resname="Back to %s %d">
-        <source>Back to %s %d</source>
-        <target state="translated">Back to %s %d</target>
+      <trans-unit id="4HGwwXT" resname="Back to %type% %number%">
+        <source>Back to %type% %number%</source>
+        <target state="translated">Back to %type% %number%</target>
+      </trans-unit>
+      <trans-unit id="UQNHRgk" resname="Because they have already paid, a refund is requested first. If the refund fails, the application is not removed.">
+        <source>Because they have already paid, a refund is requested first. If the refund fails, the application is not removed.</source>
+        <target state="translated">Because they have already paid, a refund is requested first. If the refund fails, the application is not removed.</target>
       </trans-unit>
       <trans-unit id="LcLVVCf" resname="Before submitting the registration form, please review the">
         <source>Before submitting the registration form, please review the</source>
@@ -417,6 +465,10 @@
         <source>Birthdate</source>
         <target state="translated">Birthdate</target>
       </trans-unit>
+      <trans-unit id="2X9WJ_P" resname="Board">
+        <source>Board</source>
+        <target state="translated">Board</target>
+      </trans-unit>
       <trans-unit id="lSDHhIQ" resname="Board Member(s) to Discharge">
         <source>Board Member(s) to Discharge</source>
         <target state="translated">Board Member(s) to Discharge</target>
@@ -424,10 +476,6 @@
       <trans-unit id="cROG02b" resname="Board Member(s) to Relieve">
         <source>Board Member(s) to Relieve</source>
         <target state="translated">Board Member(s) to Relieve</target>
-      </trans-unit>
-      <trans-unit id="6YFky92" resname="Board Mutations">
-        <source>Board Mutations</source>
-        <target state="translated">Board Mutations</target>
       </trans-unit>
       <trans-unit id="UwyDHXV" resname="Boards - List functions and translations">
         <source>Boards - List functions and translations</source>
@@ -441,25 +489,33 @@
         <source>Budget</source>
         <target state="translated">Budget</target>
       </trans-unit>
+      <trans-unit id="QELSTql" resname="Budget / Statement">
+        <source>Budget / Statement</source>
+        <target state="translated">Budget / Statement</target>
+      </trans-unit>
       <trans-unit id="nI1znlN" resname="Budget/Statement">
         <source>Budget/Statement</source>
         <target state="translated">Budget/Statement</target>
+      </trans-unit>
+      <trans-unit id="wkBZSCm" resname="Build">
+        <source>Build</source>
+        <target state="translated">Build</target>
       </trans-unit>
       <trans-unit id="1.XzYpF" resname="Bulk renew memberships">
         <source>Bulk renew memberships</source>
         <target state="translated">Bulk renew memberships</target>
       </trans-unit>
-      <trans-unit id="ONo9NAr" resname="Bulk renewal is available for expiring active members and bulk conversion to graduate available for expiring non-active members. Do this &lt;strong&gt;after&lt;/strong&gt; studying members have been renewed.">
-        <source>Bulk renewal is available for expiring active members and bulk conversion to graduate available for expiring non-active members. Do this &lt;strong&gt;after&lt;/strong&gt; studying members have been renewed.</source>
-        <target state="translated">Bulk renewal is available for expiring active members and bulk conversion to graduate available for expiring non-active members. Do this &lt;strong&gt;after&lt;/strong&gt; studying members have been renewed.</target>
+      <trans-unit id="uDx7Y1h" resname="Bulk renewal">
+        <source>Bulk renewal</source>
+        <target state="translated">Bulk renewal</target>
       </trans-unit>
       <trans-unit id="itTvL8Z" resname="CM (Chair's Meeting)">
         <source>CM (Chair's Meeting)</source>
         <target state="translated">CM (Chair's Meeting)</target>
       </trans-unit>
-      <trans-unit id="VPYqNid" resname="CSV">
-        <source>CSV</source>
-        <target state="translated">CSV</target>
+      <trans-unit id="6Lvt4k." resname="Can be picked when installing someone in a committee or fraternity.">
+        <source>Can be picked when installing someone in a committee or fraternity.</source>
+        <target state="translated">Can be picked when installing someone in a committee or fraternity.</target>
       </trans-unit>
       <trans-unit id="EhytB4v" resname="Cancel">
         <source>Cancel</source>
@@ -469,9 +525,13 @@
         <source>Cancelled</source>
         <target state="translated">Cancelled</target>
       </trans-unit>
-      <trans-unit id="60MO7Fp" resname="Cannot Delete Prospective Member:">
-        <source>Cannot Delete Prospective Member:</source>
-        <target state="translated">Cannot Delete Prospective Member:</target>
+      <trans-unit id="X4vyX.I" resname="Cannot Delete Prospective Member">
+        <source>Cannot Delete Prospective Member</source>
+        <target state="translated">Cannot Delete Prospective Member</target>
+      </trans-unit>
+      <trans-unit id="nRGTiPX" resname="Cannot be picked; the database uses them itself.">
+        <source>Cannot be picked; the database uses them itself.</source>
+        <target state="translated">Cannot be picked; the database uses them itself.</target>
       </trans-unit>
       <trans-unit id="tceoGZr" resname="Category">
         <source>Category</source>
@@ -489,41 +549,41 @@
         <source>Change Date</source>
         <target state="translated">Change Date</target>
       </trans-unit>
-      <trans-unit id="LFnh.TL" resname="Change Mailing List Subscriptions of %s">
-        <source>Change Mailing List Subscriptions of %s</source>
-        <target state="translated">Change Mailing List Subscriptions of %s</target>
+      <trans-unit id="oGa7F21" resname="Change Mailing List Subscriptions">
+        <source>Change Mailing List Subscriptions</source>
+        <target state="translated">Change Mailing List Subscriptions</target>
       </trans-unit>
       <trans-unit id="kl45XtD" resname="Change Membership Type">
         <source>Change Membership Type</source>
         <target state="translated">Change Membership Type</target>
       </trans-unit>
-      <trans-unit id="cAXeH7n" resname="Change Membership Type of %s">
-        <source>Change Membership Type of %s</source>
-        <target state="translated">Change Membership Type of %s</target>
-      </trans-unit>
       <trans-unit id="h1OWxUU" resname="Change Subscriptions">
         <source>Change Subscriptions</source>
         <target state="translated">Change Subscriptions</target>
       </trans-unit>
-      <trans-unit id="YSHgDgt" resname="Change password for %s">
-        <source>Change password for %s</source>
-        <target state="translated">Change password for %s</target>
+      <trans-unit id="EbzUhXX" resname="Change password">
+        <source>Change password</source>
+        <target state="translated">Change password</target>
       </trans-unit>
-      <trans-unit id="tM6s6mT" resname="Change(s) of %s have been approved and saved!">
-        <source>Change(s) of %s have been approved and saved!</source>
-        <target state="translated">Change(s) of %s have been approved and saved!</target>
+      <trans-unit id="m.8FZeq" resname="Change(s) of %entity% have been approved and saved!">
+        <source>Change(s) of %entity% have been approved and saved!</source>
+        <target state="translated">Change(s) of %entity% have been approved and saved!</target>
       </trans-unit>
-      <trans-unit id="W0TdT93" resname="Change(s) of %s have been rejected!">
-        <source>Change(s) of %s have been rejected!</source>
-        <target state="translated">Change(s) of %s have been rejected!</target>
+      <trans-unit id="fHS0q4Z" resname="Change(s) of %entity% have been rejected!">
+        <source>Change(s) of %entity% have been rejected!</source>
+        <target state="translated">Change(s) of %entity% have been rejected!</target>
       </trans-unit>
-      <trans-unit id="7yyNHuk" resname="Change(s) of %s have been saved!">
-        <source>Change(s) of %s have been saved!</source>
-        <target state="translated">Change(s) of %s have been saved!</target>
+      <trans-unit id="n9lQ3db" resname="Change(s) of %entity% have been saved!">
+        <source>Change(s) of %entity% have been saved!</source>
+        <target state="translated">Change(s) of %entity% have been saved!</target>
       </trans-unit>
-      <trans-unit id="64vfZpn" resname="Check out the website of Ada Alumni &lt;a href=&quot;//%s&quot; target=&quot;_blank&quot;&gt;here&lt;/a&gt;.">
-        <source>Check out the website of Ada Alumni &lt;a href="//%s" target="_blank"&gt;here&lt;/a&gt;.</source>
-        <target state="translated">Check out the website of Ada Alumni &lt;a href="//%s" target="_blank"&gt;here&lt;/a&gt;.</target>
+      <trans-unit id="NN3N6DC" resname="Changes members have asked for, which take effect once they are applied.">
+        <source>Changes members have asked for, which take effect once they are applied.</source>
+        <target state="translated">Changes members have asked for, which take effect once they are applied.</target>
+      </trans-unit>
+      <trans-unit id="Xvjxppn" resname="Checkout">
+        <source>Checkout</source>
+        <target state="translated">Checkout</target>
       </trans-unit>
       <trans-unit id="jyCX6j1" resname="Checkout Status">
         <source>Checkout Status</source>
@@ -533,6 +593,10 @@
         <source>Choose a mailing list</source>
         <target state="translated">Choose a mailing list</target>
       </trans-unit>
+      <trans-unit id="sTB.dTa" resname="Choosing a membership type turns this application into a member record.">
+        <source>Choosing a membership type turns this application into a member record.</source>
+        <target state="translated">Choosing a membership type turns this application into a member record.</target>
+      </trans-unit>
       <trans-unit id="oyRXRUB" resname="City">
         <source>City</source>
         <target state="translated">City</target>
@@ -541,9 +605,17 @@
         <source>City and Postal Code</source>
         <target state="translated">City and Postal Code</target>
       </trans-unit>
+      <trans-unit id="Rn72VE2" resname="Clear">
+        <source>Clear</source>
+        <target state="translated">Clear</target>
+      </trans-unit>
       <trans-unit id="gEz_C4l" resname="Click here for approval if membership fee paid with cash.">
         <source>Click here for approval if membership fee paid with cash.</source>
         <target state="translated">Click here for approval if membership fee paid with cash.</target>
+      </trans-unit>
+      <trans-unit id="qNghuqo" resname="Close">
+        <source>Close</source>
+        <target state="translated">Close</target>
       </trans-unit>
       <trans-unit id="OMN6jzm" resname="Commissaris Carrièreontwikkeling en Externe Betrekkingen">
         <source>Commissaris Carrièreontwikkeling en Externe Betrekkingen</source>
@@ -585,49 +657,65 @@
         <source>Commissie</source>
         <target state="translated">Committee</target>
       </trans-unit>
+      <trans-unit id="Q.n7pd5" resname="Committees and fraternities, each traced back to the decision that founded it.">
+        <source>Committees and fraternities, each traced back to the decision that founded it.</source>
+        <target state="translated">Committees and fraternities, each traced back to the decision that founded it.</target>
+      </trans-unit>
+      <trans-unit id="2f67pNR" resname="Complete missing profile information">
+        <source>Complete missing profile information</source>
+        <target state="translated">Complete missing profile information</target>
+      </trans-unit>
+      <trans-unit id="U4GO.yr" resname="Complete missing profile information OR renew membership as external">
+        <source>Complete missing profile information OR renew membership as external</source>
+        <target state="translated">Complete missing profile information OR renew membership as external</target>
+      </trans-unit>
       <trans-unit id="_DKgrsW" resname="Confirm Changes">
         <source>Confirm Changes</source>
         <target state="translated">Confirm Changes</target>
       </trans-unit>
-      <trans-unit id="9PDsK6o" resname="Confirm renewal">
-        <source>Confirm renewal</source>
-        <target state="translated">Confirm renewal</target>
+      <trans-unit id="2Riv5YI" resname="Confirm changes">
+        <source>Confirm changes</source>
+        <target state="translated">Confirm changes</target>
       </trans-unit>
-      <trans-unit id="dvNWVSd" resname="Confirmed %d membership renewal(s).">
-        <source>Confirmed %d membership renewal(s).</source>
-        <target state="translated">Confirmed %d membership renewal(s).</target>
+      <trans-unit id="4NzFMHh" resname="Confirmed %count% membership renewal(s).">
+        <source>Confirmed %count% membership renewal(s).</source>
+        <target state="translated">Confirmed %count% membership renewal(s).</target>
       </trans-unit>
-      <trans-unit id="2jfnxS_" resname="Controller">
-        <source>Controller</source>
-        <target state="translated">Controller</target>
+      <trans-unit id="UXhGom8" resname="Contact to renew graduate status OR discharge from organ(s)">
+        <source>Contact to renew graduate status OR discharge from organ(s)</source>
+        <target state="translated">Contact to renew graduate status OR discharge from organ(s)</target>
+      </trans-unit>
+      <trans-unit id="pHre2r7" resname="Controleer wachtwoord">
+        <source>Controleer wachtwoord</source>
+        <target state="translated">Verify password</target>
       </trans-unit>
       <trans-unit id="d8fJBGc" resname="Convert expiring non-active members to graduate">
         <source>Convert expiring non-active members to graduate</source>
         <target state="translated">Convert expiring non-active members to graduate</target>
       </trans-unit>
+      <trans-unit id="Ug5tD5a" resname="Copied">
+        <source>Copied</source>
+        <target state="translated">Copied</target>
+      </trans-unit>
+      <trans-unit id="xcITuSl" resname="Copy">
+        <source>Copy</source>
+        <target state="translated">Copy</target>
+      </trans-unit>
       <trans-unit id="PPQvB2." resname="Copy Decision">
         <source>Copy Decision</source>
         <target state="translated">Copy Decision</target>
       </trans-unit>
-      <trans-unit id="VazAAlR" resname="Could not add new %s!">
-        <source>Could not add new %s!</source>
-        <target state="translated">Could not add new %s!</target>
+      <trans-unit id="XtCTubi" resname="Could not find %entity%!">
+        <source>Could not find %entity%!</source>
+        <target state="translated">Could not find %entity%!</target>
       </trans-unit>
-      <trans-unit id="F3V1yed" resname="Could not delete %s!">
-        <source>Could not delete %s!</source>
-        <target state="translated">Could not delete %s!</target>
+      <trans-unit id="kDhOoV8" resname="Could not save change(s) of %entity%!">
+        <source>Could not save change(s) of %entity%!</source>
+        <target state="translated">Could not save change(s) of %entity%!</target>
       </trans-unit>
-      <trans-unit id="WBCkUYp" resname="Could not find %s!">
-        <source>Could not find %s!</source>
-        <target state="translated">Could not find %s!</target>
-      </trans-unit>
-      <trans-unit id="9PPPZRS" resname="Could not reject change(s) of %s!">
-        <source>Could not reject change(s) of %s!</source>
-        <target state="translated">Could not reject change(s) of %s!</target>
-      </trans-unit>
-      <trans-unit id="kEUiznU" resname="Could not save change(s) of %s!">
-        <source>Could not save change(s) of %s!</source>
-        <target state="translated">Could not save change(s) of %s!</target>
+      <trans-unit id="_mm3l_9" resname="Create">
+        <source>Create</source>
+        <target state="translated">Create</target>
       </trans-unit>
       <trans-unit id="HdIfriP" resname="Create API principal">
         <source>Create API principal</source>
@@ -649,21 +737,13 @@
         <source>Created</source>
         <target state="translated">Created</target>
       </trans-unit>
-      <trans-unit id="sT4kvSe" resname="Created / Pending">
-        <source>Created / Pending</source>
-        <target state="translated">Created / Pending</target>
+      <trans-unit id="jYqICEs" resname="Current">
+        <source>Current</source>
+        <target state="translated">Current</target>
       </trans-unit>
       <trans-unit id="g92Z7.b" resname="Current Data">
         <source>Current Data</source>
         <target state="translated">Current Data</target>
-      </trans-unit>
-      <trans-unit id="pRV3iPW" resname="Current Functions">
-        <source>Current Functions</source>
-        <target state="translated">Current Functions</target>
-      </trans-unit>
-      <trans-unit id="N9Kw44S" resname="Current Mailing Lists">
-        <source>Current Mailing Lists</source>
-        <target state="translated">Current Mailing Lists</target>
       </trans-unit>
       <trans-unit id="DDwzDT7" resname="Current Members">
         <source>Current Members</source>
@@ -673,13 +753,25 @@
         <source>Current expiration</source>
         <target state="translated">Current expiration</target>
       </trans-unit>
-      <trans-unit id="LJia1LL" resname="Currently editing membership starting from &lt;strong&gt;%s&lt;/strong&gt; to &lt;strong&gt;%s&lt;/strong&gt; (type &lt;strong&gt;%s&lt;/strong&gt;).">
-        <source>Currently editing membership starting from &lt;strong&gt;%s&lt;/strong&gt; to &lt;strong&gt;%s&lt;/strong&gt; (type &lt;strong&gt;%s&lt;/strong&gt;).</source>
-        <target state="translated">Currently editing membership starting from &lt;strong&gt;%s&lt;/strong&gt; to &lt;strong&gt;%s&lt;/strong&gt; (type &lt;strong&gt;%s&lt;/strong&gt;).</target>
+      <trans-unit id="845OMMC" resname="DQL documentation">
+        <source>DQL documentation</source>
+        <target state="translated">DQL documentation</target>
+      </trans-unit>
+      <trans-unit id="jGZfEE1" resname="Dark">
+        <source>Dark</source>
+        <target state="translated">Dark</target>
       </trans-unit>
       <trans-unit id="oTKll5c" resname="Data Update Requests">
         <source>Data Update Requests</source>
         <target state="translated">Data Update Requests</target>
+      </trans-unit>
+      <trans-unit id="9WSAMwU" resname="Data update request">
+        <source>Data update request</source>
+        <target state="translated">Data update request</target>
+      </trans-unit>
+      <trans-unit id="SU5mdpG" resname="Database">
+        <source>Database</source>
+        <target state="translated">Database</target>
       </trans-unit>
       <trans-unit id="htXSJ2v" resname="Date of Budget/Statement">
         <source>Date of Budget/Statement</source>
@@ -713,9 +805,17 @@
         <source>De stemcommissie voor %ORGAN_PURPOSE% van de %MEETING_NUMBER%e %MEETING_TYPE% met afkorting %ORGAN_ABBR% wordt opgericht.</source>
         <target state="translated">The Voting Committee for %ORGAN_PURPOSE% of the %MEETING_NUMBER%e %MEETING_TYPE% with abbreviation %ORGAN_ABBR% is established.</target>
       </trans-unit>
+      <trans-unit id="ThUAcoN" resname="Decide">
+        <source>Decide</source>
+        <target state="translated">Decide</target>
+      </trans-unit>
       <trans-unit id="ER40Acv" resname="Decision">
         <source>Decision</source>
         <target state="translated">Decision</target>
+      </trans-unit>
+      <trans-unit id="fQrWHsk" resname="Decision %hash%">
+        <source>Decision %hash%</source>
+        <target state="translated">Decision %hash%</target>
       </trans-unit>
       <trans-unit id="woK_qXe" resname="Decision %s %d.%d.%d cannot be annulled, because %s.">
         <source>Decision %s %d.%d.%d cannot be annulled, because %s.</source>
@@ -729,37 +829,41 @@
         <source>Decision Cannot Be Removed</source>
         <target state="translated">Decision Cannot Be Removed</target>
       </trans-unit>
-      <trans-unit id="W5hKVk7" resname="Decision List">
-        <source>Decision List</source>
-        <target state="translated">Decision List</target>
-      </trans-unit>
       <trans-unit id="CVPhJMS" resname="Decision Number">
         <source>Decision Number</source>
         <target state="translated">Decision Number</target>
       </trans-unit>
-      <trans-unit id="mWEBX_." resname="Decision removed.">
-        <source>Decision removed.</source>
-        <target state="translated">Decision removed.</target>
+      <trans-unit id="67PMecO" resname="Decision export">
+        <source>Decision export</source>
+        <target state="translated">Decision export</target>
       </trans-unit>
-      <trans-unit id="ZLKfVS9" resname="Decisions">
-        <source>Decisions</source>
-        <target state="translated">Decisions</target>
+      <trans-unit id="i4j4ZhN" resname="Decision list">
+        <source>Decision list</source>
+        <target state="translated">Decision list</target>
       </trans-unit>
       <trans-unit id="Z_crX_u" resname="Delete">
         <source>Delete</source>
         <target state="translated">Delete</target>
       </trans-unit>
-      <trans-unit id="ka4erKI" resname="Delete %s">
-        <source>Delete %s</source>
-        <target state="translated">Delete %s</target>
+      <trans-unit id="FedHuDm" resname="Delete Address">
+        <source>Delete Address</source>
+        <target state="translated">Delete Address</target>
       </trans-unit>
       <trans-unit id="jiCjoXY" resname="Delete Decision">
         <source>Delete Decision</source>
         <target state="translated">Delete Decision</target>
       </trans-unit>
+      <trans-unit id="so8LNKj" resname="Delete Mailing List">
+        <source>Delete Mailing List</source>
+        <target state="translated">Delete Mailing List</target>
+      </trans-unit>
       <trans-unit id="PVyh739" resname="Delete Member">
         <source>Delete Member</source>
         <target state="translated">Delete Member</target>
+      </trans-unit>
+      <trans-unit id="QV9M_nK" resname="Delete Member Data">
+        <source>Delete Member Data</source>
+        <target state="translated">Delete Member Data</target>
       </trans-unit>
       <trans-unit id="dWRgsrf" resname="Delete Prospective Member">
         <source>Delete Prospective Member</source>
@@ -769,9 +873,25 @@
         <source>Delete User</source>
         <target state="translated">Delete User</target>
       </trans-unit>
+      <trans-unit id="l9KZflr" resname="Deleted">
+        <source>Deleted</source>
+        <target state="translated">Deleted</target>
+      </trans-unit>
+      <trans-unit id="oepf9rO" resname="Deleting a member removes their record and their organ history. Letting the membership expire is almost always what you want instead.">
+        <source>Deleting a member removes their record and their organ history. Letting the membership expire is almost always what you want instead.</source>
+        <target state="translated">Deleting a member removes their record and their organ history. Letting the membership expire is almost always what you want instead.</target>
+      </trans-unit>
       <trans-unit id="NMmVjl0" resname="Description">
         <source>Description</source>
         <target state="translated">Description</target>
+      </trans-unit>
+      <trans-unit id="B7PlTEH" resname="Destructive actions">
+        <source>Destructive actions</source>
+        <target state="translated">Destructive actions</target>
+      </trans-unit>
+      <trans-unit id="JTnK8N0" resname="Diagnose">
+        <source>Diagnose</source>
+        <target state="translated">Diagnose</target>
       </trans-unit>
       <trans-unit id="9nM2PO8" resname="Disapprove">
         <source>Disapprove</source>
@@ -781,9 +901,13 @@
         <source>Discharge</source>
         <target state="translated">Discharge</target>
       </trans-unit>
-      <trans-unit id="tA_R2tn" resname="Discharge %s as %s?">
-        <source>Discharge %s as %s?</source>
-        <target state="translated">Discharge %s as %s?</target>
+      <trans-unit id="Tw1TeAa" resname="Discharge %name% as %function%">
+        <source>Discharge %name% as %function%</source>
+        <target state="translated">Discharge %name% as %function%</target>
+      </trans-unit>
+      <trans-unit id="hHWWVUk" resname="Discharge %name% as %function%?">
+        <source>Discharge %name% as %function%?</source>
+        <target state="translated">Discharge %name% as %function%?</target>
       </trans-unit>
       <trans-unit id="p3SMldG" resname="Discharge Board Member">
         <source>Discharge Board Member</source>
@@ -793,6 +917,14 @@
         <source>Discharge Member</source>
         <target state="translated">Discharge Member</target>
       </trans-unit>
+      <trans-unit id="V0Kt.jL" resname="Discharge a board member.">
+        <source>Discharge a board member.</source>
+        <target state="translated">Discharge a board member.</target>
+      </trans-unit>
+      <trans-unit id="W4AWjU7" resname="Discharge from organ(s) OR renew in appropriate type (ordinary or external)">
+        <source>Discharge from organ(s) OR renew in appropriate type (ordinary or external)</source>
+        <target state="translated">Discharge from organ(s) OR renew in appropriate type (ordinary or external)</target>
+      </trans-unit>
       <trans-unit id=".0w9JW8" resname="Discharges">
         <source>Discharges</source>
         <target state="translated">Discharges</target>
@@ -801,13 +933,21 @@
         <source>Dispuut</source>
         <target state="translated">Fraternity</target>
       </trans-unit>
-      <trans-unit id="GbKRILb" resname="Do you want to delete the other data?">
-        <source>Do you want to delete the other data?</source>
-        <target state="translated">Do you want to delete the other data?</target>
+      <trans-unit id="qK6mnpS" resname="Do these in that order, before the first of July. A membership cannot be renewed twice, and every change takes effect at the end of the membership it renews — to change one now or in the past, go to the member.">
+        <source>Do these in that order, before the first of July. A membership cannot be renewed twice, and every change takes effect at the end of the membership it renews — to change one now or in the past, go to the member.</source>
+        <target state="translated">Do these in that order, before the first of July. A membership cannot be renewed twice, and every change takes effect at the end of the membership it renews — to change one now or in the past, go to the member.</target>
       </trans-unit>
-      <trans-unit id="ARW8f8d" resname="Do you want to reappoint %s? Check functions you also want reappointed, functions that are not selected will result in a discharge of that function.">
-        <source>Do you want to reappoint %s? Check functions you also want reappointed, functions that are not selected will result in a discharge of that function.</source>
-        <target state="translated">Do you want to reappoint %s? Check functions you also want reappointed, functions that are not selected will result in a discharge of that function.</target>
+      <trans-unit id="3i8hgTG" resname="Do you want to reappoint %name%? Check functions you also want reappointed, functions that are not selected will result in a discharge of that function.">
+        <source>Do you want to reappoint %name%? Check functions you also want reappointed, functions that are not selected will result in a discharge of that function.</source>
+        <target state="translated">Do you want to reappoint %name%? Check functions you also want reappointed, functions that are not selected will result in a discharge of that function.</target>
+      </trans-unit>
+      <trans-unit id="SZTDzg8" resname="Doing nothing is also an answer: your graduate status simply expires on the date shown below.">
+        <source>Doing nothing is also an answer: your graduate status simply expires on the date shown below.</source>
+        <target state="translated">Doing nothing is also an answer: your graduate status simply expires on the date shown below.</target>
+      </trans-unit>
+      <trans-unit id="2HytVB1" resname="Download CSV">
+        <source>Download CSV</source>
+        <target state="translated">Download CSV</target>
       </trans-unit>
       <trans-unit id="40Ecvhc" resname="Dutch Description">
         <source>Dutch Description</source>
@@ -816,6 +956,10 @@
       <trans-unit id="xqJDAX4" resname="E-mail Address">
         <source>E-mail Address</source>
         <target state="translated">E-mail Address</target>
+      </trans-unit>
+      <trans-unit id=".QWkpTr" resname="Each shortcut opens the bulk renewal form with these members already filled in. Renew the members who are still studying &lt;strong&gt;first&lt;/strong&gt;.">
+        <source>Each shortcut opens the bulk renewal form with these members already filled in. Renew the members who are still studying &lt;strong&gt;first&lt;/strong&gt;.</source>
+        <target state="translated">Each shortcut opens the bulk renewal form with these members already filled in. Renew the members who are still studying &lt;strong&gt;first&lt;/strong&gt;.</target>
       </trans-unit>
       <trans-unit id="M.l1CPU" resname="Edit">
         <source>Edit</source>
@@ -829,13 +973,17 @@
         <source>Edit Mailing List</source>
         <target state="translated">Edit Mailing List</target>
       </trans-unit>
+      <trans-unit id="aCXq5RB" resname="Editor">
+        <source>Editor</source>
+        <target state="translated">Editor</target>
+      </trans-unit>
       <trans-unit id="OobAhW7" resname="Effective From">
         <source>Effective From</source>
         <target state="translated">Effective From</target>
       </trans-unit>
-      <trans-unit id="3zH2ST_" resname="EngD / PhD Programs">
-        <source>EngD / PhD Programs</source>
-        <target state="translated">EngD / PhD Programs</target>
+      <trans-unit id="_ujLe_1" resname="Ends">
+        <source>Ends</source>
+        <target state="translated">Ends</target>
       </trans-unit>
       <trans-unit id="nJp0lj2" resname="EngD Automotive Systems Design">
         <source>EngD Automotive Systems Design</source>
@@ -857,13 +1005,53 @@
         <source>English Description</source>
         <target state="translated">English Description</target>
       </trans-unit>
-      <trans-unit id="UzV1Tnw" resname="Enter changes chronologically. Example: after entering a change on %s, it is not possible to enter a change for %s.">
-        <source>Enter changes chronologically. Example: after entering a change on %s, it is not possible to enter a change for %s.</source>
-        <target state="translated">Enter changes chronologically. Example: after entering a change on %s, it is not possible to enter a change for %s.</target>
+      <trans-unit id="AtR_Gso" resname="Enter changes in the order they happened: once a change on %later% is recorded, one on %earlier% can no longer be.">
+        <source>Enter changes in the order they happened: once a change on %later% is recorded, one on %earlier% can no longer be.</source>
+        <target state="translated">Enter changes in the order they happened: once a change on %later% is recorded, one on %earlier% can no longer be.</target>
       </trans-unit>
-      <trans-unit id="iqhqTQl" resname="Enter one or more GEWIS membership numbers, choose the target membership type, and &lt;strong&gt;review the preview&lt;/strong&gt; before confirming the renewal.">
-        <source>Enter one or more GEWIS membership numbers, choose the target membership type, and &lt;strong&gt;review the preview&lt;/strong&gt; before confirming the renewal.</source>
-        <target state="translated">Enter one or more GEWIS membership numbers, choose the target membership type, and &lt;strong&gt;review the preview&lt;/strong&gt; before confirming the renewal.</target>
+      <trans-unit id="u5DskYm" resname="Entered by the applicant">
+        <source>Entered by the applicant</source>
+        <target state="translated">Entered by the applicant</target>
+      </trans-unit>
+      <trans-unit id="KgUPmWF" resname="Entities">
+        <source>Entities</source>
+        <target state="translated">Entities</target>
+      </trans-unit>
+      <trans-unit id="_4UtFPd" resname="Establish a committee or fraternity.">
+        <source>Establish a committee or fraternity.</source>
+        <target state="translated">Establish a committee or fraternity.</target>
+      </trans-unit>
+      <trans-unit id="kUxm48F" resname="Every decision of the selected meetings, ordered by meeting, point and decision number, as a LaTeX document ready to be typeset.">
+        <source>Every decision of the selected meetings, ordered by meeting, point and decision number, as a LaTeX document ready to be typeset.</source>
+        <target state="translated">Every decision of the selected meetings, ordered by meeting, point and decision number, as a LaTeX document ready to be typeset.</target>
+      </trans-unit>
+      <trans-unit id="WT26Rhb" resname="Every meeting that has been minuted, and the numbered decisions taken in it.">
+        <source>Every meeting that has been minuted, and the numbered decisions taken in it.</source>
+        <target state="translated">Every meeting that has been minuted, and the numbered decisions taken in it.</target>
+      </trans-unit>
+      <trans-unit id="gGWFXbX" resname="Everyone">
+        <source>Everyone</source>
+        <target state="translated">Everyone</target>
+      </trans-unit>
+      <trans-unit id="ibvUgTf" resname="Everyone on the register, and what needs doing about them.">
+        <source>Everyone on the register, and what needs doing about them.</source>
+        <target state="translated">Everyone on the register, and what needs doing about them.</target>
+      </trans-unit>
+      <trans-unit id="LdakJY6" resname="Everyone who has registered but is not a member yet. A registration expires 14 days after its checkout is created.">
+        <source>Everyone who has registered but is not a member yet. A registration expires 14 days after its checkout is created.</source>
+        <target state="translated">Everyone who has registered but is not a member yet. A registration expires 14 days after its checkout is created.</target>
+      </trans-unit>
+      <trans-unit id="8Bv3bDg" resname="Everything else">
+        <source>Everything else</source>
+        <target state="translated">Everything else</target>
+      </trans-unit>
+      <trans-unit id="2QVMLyk" resname="Everything else about them can be deleted.">
+        <source>Everything else about them can be deleted.</source>
+        <target state="translated">Everything else about them can be deleted.</target>
+      </trans-unit>
+      <trans-unit id="c50s_gO" resname="Everything is clear">
+        <source>Everything is clear</source>
+        <target state="translated">Everything is clear</target>
       </trans-unit>
       <trans-unit id="QnnqihU" resname="Execute">
         <source>Execute</source>
@@ -877,9 +1065,9 @@
         <source>Expired</source>
         <target state="translated">Expired</target>
       </trans-unit>
-      <trans-unit id="RcMAev9" resname="Expired / Failed">
-        <source>Expired / Failed</source>
-        <target state="translated">Expired / Failed</target>
+      <trans-unit id="KnHQlnm" resname="Expired / failed">
+        <source>Expired / failed</source>
+        <target state="translated">Expired / failed</target>
       </trans-unit>
       <trans-unit id="Jp3BFhF" resname="Export">
         <source>Export</source>
@@ -889,13 +1077,21 @@
         <source>Export Decisions</source>
         <target state="translated">Export Decisions</target>
       </trans-unit>
+      <trans-unit id="sjEn4.W" resname="Export a decision list">
+        <source>Export a decision list</source>
+        <target state="translated">Export a decision list</target>
+      </trans-unit>
+      <trans-unit id="Ckuvndt" resname="Export decisions">
+        <source>Export decisions</source>
+        <target state="translated">Export decisions</target>
+      </trans-unit>
       <trans-unit id="nf1Sn8V" resname="Extend">
         <source>Extend</source>
         <target state="translated">Extend</target>
       </trans-unit>
-      <trans-unit id="gsY7sqw" resname="Extend Membership of %s">
-        <source>Extend Membership of %s</source>
-        <target state="translated">Extend Membership of %s</target>
+      <trans-unit id="rxb2fuR" resname="Extend Membership">
+        <source>Extend Membership</source>
+        <target state="translated">Extend Membership</target>
       </trans-unit>
       <trans-unit id="cq.wN9l" resname="External">
         <source>External</source>
@@ -909,21 +1105,17 @@
         <source>Failed</source>
         <target state="translated">Failed</target>
       </trans-unit>
-      <trans-unit id=".jhcwBR" resname="File">
-        <source>File</source>
-        <target state="translated">File</target>
+      <trans-unit id="e3BVeLI" resname="Fetched %when%">
+        <source>Fetched %when%</source>
+        <target state="translated">Fetched %when%</target>
+      </trans-unit>
+      <trans-unit id="_Bu6g7f" resname="Filter entities">
+        <source>Filter entities</source>
+        <target state="translated">Filter entities</target>
       </trans-unit>
       <trans-unit id="BQjGS3q" resname="First Name">
         <source>First Name</source>
         <target state="translated">First Name</target>
-      </trans-unit>
-      <trans-unit id="rzVn4CB" resname="For an overview of how you can use the Doctrine Query Language (DQL) please refer to %sits documentation%s.">
-        <source>For an overview of how you can use the Doctrine Query Language (DQL) please refer to %sits documentation%s.</source>
-        <target state="translated">For an overview of how you can use the Doctrine Query Language (DQL) please refer to %sits documentation%s.</target>
-      </trans-unit>
-      <trans-unit id="QsTk2K2" resname="Fork GEWISDB on GitHub &amp;raquo;">
-        <source>Fork GEWISDB on GitHub &amp;raquo;</source>
-        <target state="translated">Fork GEWISDB on GitHub &amp;raquo;</target>
       </trans-unit>
       <trans-unit id="eW6AkKu" resname="Found Organ">
         <source>Found Organ</source>
@@ -932,6 +1124,22 @@
       <trans-unit id="TDtJcVm" resname="Foundation">
         <source>Foundation</source>
         <target state="translated">Foundation</target>
+      </trans-unit>
+      <trans-unit id="L26dovR" resname="Founded by">
+        <source>Founded by</source>
+        <target state="translated">Founded by</target>
+      </trans-unit>
+      <trans-unit id="uvH9KED" resname="Founded by %decision%">
+        <source>Founded by %decision%</source>
+        <target state="translated">Founded by %decision%</target>
+      </trans-unit>
+      <trans-unit id="o4SwWqO" resname="Free text. Changes nothing on the register.">
+        <source>Free text. Changes nothing on the register.</source>
+        <target state="translated">Free text. Changes nothing on the register.</target>
+      </trans-unit>
+      <trans-unit id="erv1cYm" resname="Functie">
+        <source>Functie</source>
+        <target state="translated">Function</target>
       </trans-unit>
       <trans-unit id="qSI2Da3" resname="Function">
         <source>Function</source>
@@ -945,21 +1153,21 @@
         <source>Functions</source>
         <target state="translated">Functions</target>
       </trans-unit>
+      <trans-unit id="KL_MpTl" resname="GEWIS Registration">
+        <source>GEWIS Registration</source>
+        <target state="translated">GEWIS Registration</target>
+      </trans-unit>
       <trans-unit id="Ergxk6G" resname="GEWIS Registration - Checkout">
         <source>GEWIS Registration - Checkout</source>
         <target state="translated">GEWIS Registration - Checkout</target>
       </trans-unit>
-      <trans-unit id="V9jLOTA" resname="GEWIS currently has &lt;a href=&quot;%s&quot;&gt;%d members and %d graduates&lt;/a&gt; (+%d expired) and &lt;a href=&quot;%s&quot;&gt;%d prospective members (%d paid, %d unpaid)&lt;/a&gt;. &lt;a href=&quot;%s&quot;&gt;Click here&lt;/a&gt; to create a meeting or &lt;a href=&quot;%s&quot;&gt;perform a query&lt;/a&gt;.">
-        <source>GEWIS currently has &lt;a href="%s"&gt;%d members and %d graduates&lt;/a&gt; (+%d expired) and &lt;a href="%s"&gt;%d prospective members (%d paid, %d unpaid)&lt;/a&gt;. &lt;a href="%s"&gt;Click here&lt;/a&gt; to create a meeting or &lt;a href="%s"&gt;perform a query&lt;/a&gt;.</source>
-        <target state="translated">GEWIS currently has &lt;a href="%s"&gt;%d members and %d graduates&lt;/a&gt; (+%d expired) and &lt;a href="%s"&gt;%d prospective members (%d paid, %d unpaid)&lt;/a&gt;. &lt;a href="%s"&gt;Click here&lt;/a&gt; to create a meeting or &lt;a href="%s"&gt;perform a query&lt;/a&gt;.</target>
+      <trans-unit id="rEnPhes" resname="GEWIS Renew Membership">
+        <source>GEWIS Renew Membership</source>
+        <target state="translated">GEWIS Renew Membership</target>
       </trans-unit>
       <trans-unit id="cK8x2NZ" resname="GMM (General Members Meeting)">
         <source>GMM (General Members Meeting)</source>
         <target state="translated">GMM (General Members Meeting)</target>
-      </trans-unit>
-      <trans-unit id="Odtd9M1" resname="Gemeenschap van Wiskunde en Informatica Studenten">
-        <source>Gemeenschap van Wiskunde en Informatica Studenten</source>
-        <target state="translated">Gemeenschap van Wiskunde en Informatica Studenten</target>
       </trans-unit>
       <trans-unit id="QOCXiok" resname="Generation">
         <source>Generation</source>
@@ -985,6 +1193,10 @@
         <source>Give Member Function</source>
         <target state="translated">Give Member Function</target>
       </trans-unit>
+      <trans-unit id="DXuqVxs" resname="Go home">
+        <source>Go home</source>
+        <target state="translated">Go home</target>
+      </trans-unit>
       <trans-unit id="FVNx2sk" resname="Go to checkout">
         <source>Go to checkout</source>
         <target state="translated">Go to checkout</target>
@@ -1001,13 +1213,13 @@
         <source>Graduate renewal</source>
         <target state="translated">Graduate renewal</target>
       </trans-unit>
-      <trans-unit id="VgdJb0J" resname="Grant">
-        <source>Grant</source>
-        <target state="translated">Grant</target>
-      </trans-unit>
       <trans-unit id="UupHvLu" resname="Grant Key Code">
         <source>Grant Key Code</source>
         <target state="translated">Grant Key Code</target>
+      </trans-unit>
+      <trans-unit id="g_d6tIO" resname="Grant a member a key code.">
+        <source>Grant a member a key code.</source>
+        <target state="translated">Grant a member a key code.</target>
       </trans-unit>
       <trans-unit id="adavx0A" resname="Grantee">
         <source>Grantee</source>
@@ -1021,13 +1233,9 @@
         <source>Hide Member</source>
         <target state="translated">Hide Member</target>
       </trans-unit>
-      <trans-unit id="Uu80X2." resname="Historic Functions">
-        <source>Historic Functions</source>
-        <target state="translated">Historic Functions</target>
-      </trans-unit>
-      <trans-unit id="ExFLJqx" resname="Home">
-        <source>Home</source>
-        <target state="translated">Home</target>
+      <trans-unit id="wXL6lNc" resname="Historic">
+        <source>Historic</source>
+        <target state="translated">Historic</target>
       </trans-unit>
       <trans-unit id="kP.uD09" resname="Home Address (Parents)">
         <source>Home Address (Parents)</source>
@@ -1045,13 +1253,17 @@
         <source>House Number</source>
         <target state="translated">House Number</target>
       </trans-unit>
+      <trans-unit id="nKq.QYe" resname="How the change date works">
+        <source>How the change date works</source>
+        <target state="translated">How the change date works</target>
+      </trans-unit>
       <trans-unit id="Oo3oMUm" resname="I am familiar with the contents of the Articles of Association and the Internal Regulations of GEWIS and I would like to renew my status as a graduate">
         <source>I am familiar with the contents of the Articles of Association and the Internal Regulations of GEWIS and I would like to renew my status as a graduate</source>
         <target state="translated">I am familiar with the contents of the Articles of Association and the Internal Regulations of GEWIS and I would like to renew my status as a graduate</target>
       </trans-unit>
-      <trans-unit id="AZqfqHH" resname="I have read the privacy statement of %s and consent to the processing of my data.">
-        <source>I have read the privacy statement of %s and consent to the processing of my data.</source>
-        <target state="translated">I have read the privacy statement of %s and consent to the processing of my data.</target>
+      <trans-unit id="pdFSe7a" resname="I have read the privacy statement of Gemeenschap van Wiskunde en Informatica Studenten and consent to the processing of my data.">
+        <source>I have read the privacy statement of Gemeenschap van Wiskunde en Informatica Studenten and consent to the processing of my data.</source>
+        <target state="translated">I have read the privacy statement of Gemeenschap van Wiskunde en Informatica Studenten and consent to the processing of my data.</target>
       </trans-unit>
       <trans-unit id="Zy9BwnQ" resname="I hereby authorise Stripe to process my personal data according to its privacy policy to pay the one-time membership fee.">
         <source>I hereby authorise Stripe to process my personal data according to its privacy policy to pay the one-time membership fee.</source>
@@ -1065,27 +1277,29 @@
         <source>I'd like to receive the Supremum magazine 3 times a year</source>
         <target state="translated">I'd like to receive the Supremum magazine 3 times a year</target>
       </trans-unit>
-      <trans-unit id="DAbmh24" resname="If you are currently studying at TU/e, please do &lt;u&gt;not&lt;/u&gt; fill in this form, but instead inform the secretary of this.&#10;                If you want GEWIS to automatically renew your membership, please send your TU/e student number.">
-        <source>If you are currently studying at TU/e, please do &lt;u&gt;not&lt;/u&gt; fill in this form, but instead inform the secretary of this.
-                If you want GEWIS to automatically renew your membership, please send your TU/e student number.</source>
-        <target state="translated">If you are currently studying at TU/e, please do &lt;u&gt;not&lt;/u&gt; fill in this form, but instead inform the secretary of this.
-                If you want GEWIS to automatically renew your membership, please send your TU/e student number.</target>
-      </trans-unit>
       <trans-unit id="JxjkpJr" resname="If you are reading this, the secretary has not done their job.">
         <source>If you are reading this, the secretary has not done their job.</source>
         <target state="translated">If you are reading this, the secretary has not done their job.</target>
+      </trans-unit>
+      <trans-unit id="Wxx7FGg" resname="If you are studying at TU/e again, do not fill this in — tell the secretary instead, and send your student number if you want your membership renewed automatically.">
+        <source>If you are studying at TU/e again, do not fill this in — tell the secretary instead, and send your student number if you want your membership renewed automatically.</source>
+        <target state="translated">If you are studying at TU/e again, do not fill this in — tell the secretary instead, and send your student number if you want your membership renewed automatically.</target>
       </trans-unit>
       <trans-unit id="L4krjAi" resname="If you have any questions feel free to contact">
         <source>If you have any questions feel free to contact</source>
         <target state="translated">If you have any questions feel free to contact</target>
       </trans-unit>
-      <trans-unit id="6QKl4bs" resname="If your browser does not redirect you, please &lt;a href=&quot;%s&quot;&gt;click here&lt;/a&gt; to continue.">
-        <source>If your browser does not redirect you, please &lt;a href="%s"&gt;click here&lt;/a&gt; to continue.</source>
-        <target state="translated">If your browser does not redirect you, please &lt;a href="%s"&gt;click here&lt;/a&gt; to continue.</target>
+      <trans-unit id="Lsi9YBZ" resname="If your browser does not redirect you, please &lt;a href=&quot;%url%&quot;&gt;click here&lt;/a&gt; to continue.">
+        <source>If your browser does not redirect you, please &lt;a href="%url%"&gt;click here&lt;/a&gt; to continue.</source>
+        <target state="translated">If your browser does not redirect you, please &lt;a href="%url%"&gt;click here&lt;/a&gt; to continue.</target>
       </trans-unit>
       <trans-unit id="bhJd7GS" resname="Inactief Lid">
         <source>Inactief Lid</source>
         <target state="translated">Inactive Member</target>
+      </trans-unit>
+      <trans-unit id="emdvqbX" resname="Include this in every bug report.">
+        <source>Include this in every bug report.</source>
+        <target state="translated">Include this in every bug report.</target>
       </trans-unit>
       <trans-unit id="mFV9.Tt" resname="Initial(s)">
         <source>Initial(s)</source>
@@ -1095,21 +1309,53 @@
         <source>Inkoper</source>
         <target state="translated">Procurement Officer</target>
       </trans-unit>
+      <trans-unit id="Gcd2EUd" resname="Install %name% as %function%">
+        <source>Install %name% as %function%</source>
+        <target state="translated">Install %name% as %function%</target>
+      </trans-unit>
       <trans-unit id="EsbCmIX" resname="Install Board Member">
         <source>Install Board Member</source>
         <target state="translated">Install Board Member</target>
+      </trans-unit>
+      <trans-unit id="bEoQfWy" resname="Install a member in a board function.">
+        <source>Install a member in a board function.</source>
+        <target state="translated">Install a member in a board function.</target>
+      </trans-unit>
+      <trans-unit id="fBMZIZH" resname="Install members in an organ, or end an installation.">
+        <source>Install members in an organ, or end an installation.</source>
+        <target state="translated">Install members in an organ, or end an installation.</target>
       </trans-unit>
       <trans-unit id="CDGfaMZ" resname="Installation">
         <source>Installation</source>
         <target state="translated">Installation</target>
       </trans-unit>
-      <trans-unit id="h2s0NWL" resname="Installation/Discharge">
-        <source>Installation/Discharge</source>
-        <target state="translated">Installation/Discharge</target>
+      <trans-unit id="AMmJitd" resname="Installation / Discharge">
+        <source>Installation / Discharge</source>
+        <target state="translated">Installation / Discharge</target>
       </trans-unit>
       <trans-unit id="9_qo0Zl" resname="Installations">
         <source>Installations</source>
         <target state="translated">Installations</target>
+      </trans-unit>
+      <trans-unit id="b2ZHt6a" resname="Installed by">
+        <source>Installed by</source>
+        <target state="translated">Installed by</target>
+      </trans-unit>
+      <trans-unit id="TAmhBwT" resname="Integration">
+        <source>Integration</source>
+        <target state="translated">Integration</target>
+      </trans-unit>
+      <trans-unit id="nAA3_tX" resname="Integrations">
+        <source>Integrations</source>
+        <target state="translated">Integrations</target>
+      </trans-unit>
+      <trans-unit id="Xsj2_E2" resname="It is time to renew your status as a graduate of GEWIS. Check that the details below are still right, and confirm.">
+        <source>It is time to renew your status as a graduate of GEWIS. Check that the details below are still right, and confirm.</source>
+        <target state="translated">It is time to renew your status as a graduate of GEWIS. Check that the details below are still right, and confirm.</target>
+      </trans-unit>
+      <trans-unit id="uVRhXdN" resname="It reads as follows">
+        <source>It reads as follows</source>
+        <target state="translated">It reads as follows</target>
       </trans-unit>
       <trans-unit id="DGalwXb" resname="KCC">
         <source>KCC</source>
@@ -1119,33 +1365,17 @@
         <source>Key Code(s) to Withdraw</source>
         <target state="translated">Key Code(s) to Withdraw</target>
       </trans-unit>
-      <trans-unit id="awXTcHG" resname="Key Codes">
-        <source>Key Codes</source>
-        <target state="translated">Key Codes</target>
-      </trans-unit>
-      <trans-unit id="W8uKTTp" resname="Key code cannot be granted after September 1st of the next association year.">
-        <source>Key code cannot be granted after September 1st of the next association year.</source>
-        <target state="translated">Key code cannot be granted after September 1st of the next association year.</target>
-      </trans-unit>
-      <trans-unit id="WLxP5.7" resname="Key code cannot be granted in the past.">
-        <source>Key code cannot be granted in the past.</source>
-        <target state="translated">Key code cannot be granted in the past.</target>
-      </trans-unit>
-      <trans-unit id="JPUWM0H" resname="Key code cannot be withdrawn after its original expiration.">
-        <source>Key code cannot be withdrawn after its original expiration.</source>
-        <target state="translated">Key code cannot be withdrawn after its original expiration.</target>
-      </trans-unit>
-      <trans-unit id="4zk0TKl" resname="Key code cannot be withdrawn in the past.">
-        <source>Key code cannot be withdrawn in the past.</source>
-        <target state="translated">Key code cannot be withdrawn in the past.</target>
+      <trans-unit id="i._6Qb0" resname="Kind of decision">
+        <source>Kind of decision</source>
+        <target state="translated">Kind of decision</target>
       </trans-unit>
       <trans-unit id="FHllCNm" resname="LEGACY Onderwijscommissaris">
         <source>LEGACY Onderwijscommissaris</source>
         <target state="translated">Education Officer</target>
       </trans-unit>
-      <trans-unit id="KPrWkQe" resname="Language Settings">
-        <source>Language Settings</source>
-        <target state="translated">Language Settings</target>
+      <trans-unit id="5q6OTdQ" resname="Language">
+        <source>Language</source>
+        <target state="translated">Language</target>
       </trans-unit>
       <trans-unit id="0jsx_LN" resname="Last Name">
         <source>Last Name</source>
@@ -1159,21 +1389,13 @@
         <source>Last Update to Membership</source>
         <target state="translated">Last Update to Membership</target>
       </trans-unit>
-      <trans-unit id="EWadwro" resname="Last fetch of Listmonk lists">
-        <source>Last fetch of Listmonk lists</source>
-        <target state="translated">Last fetch of Listmonk lists</target>
-      </trans-unit>
-      <trans-unit id="2im5.p3" resname="Last fetch of available Listmonk lists was %s.">
-        <source>Last fetch of available Listmonk lists was %s.</source>
-        <target state="translated">Last fetch of available Listmonk lists was %s.</target>
-      </trans-unit>
-      <trans-unit id="rCKmWAZ" resname="Last fetch of available mailman lists was %s.">
-        <source>Last fetch of available mailman lists was %s.</source>
-        <target state="translated">Last fetch of available mailman lists was %s.</target>
-      </trans-unit>
       <trans-unit id="evs7yYz" resname="Last type">
         <source>Last type</source>
         <target state="translated">Last type</target>
+      </trans-unit>
+      <trans-unit id="gUwuSmo" resname="Learn more about m-accounts.">
+        <source>Learn more about m-accounts.</source>
+        <target state="translated">Learn more about m-accounts.</target>
       </trans-unit>
       <trans-unit id="vAaJ5St" resname="Leave note">
         <source>Leave note</source>
@@ -1183,13 +1405,17 @@
         <source>Lid</source>
         <target state="translated">Member</target>
       </trans-unit>
+      <trans-unit id="7GDr10z" resname="Light">
+        <source>Light</source>
+        <target state="translated">Light</target>
+      </trans-unit>
       <trans-unit id="SzZsrLf" resname="Listmonk Mailing List">
         <source>Listmonk Mailing List</source>
         <target state="translated">Listmonk Mailing List</target>
       </trans-unit>
-      <trans-unit id="ngA2OIf" resname="Listmonk lists not being fetched">
-        <source>Listmonk lists not being fetched</source>
-        <target state="translated">Listmonk lists not being fetched</target>
+      <trans-unit id="gu0fstM" resname="Listmonk lists last fetched %when%">
+        <source>Listmonk lists last fetched %when%</source>
+        <target state="translated">Listmonk lists last fetched %when%</target>
       </trans-unit>
       <trans-unit id="ORL7HIx" resname="Lists">
         <source>Lists</source>
@@ -1207,6 +1433,10 @@
         <source>Login</source>
         <target state="translated">Login</target>
       </trans-unit>
+      <trans-unit id="PUgfeMj" resname="Maak gebruiker aan">
+        <source>Maak gebruiker aan</source>
+        <target state="translated">Create user</target>
+      </trans-unit>
       <trans-unit id="4dFVYgx" resname="Mail Address">
         <source>Mail Address</source>
         <target state="translated">Mail Address</target>
@@ -1219,29 +1449,29 @@
         <source>Mailing Lists</source>
         <target state="translated">Mailing Lists</target>
       </trans-unit>
-      <trans-unit id="u3qgcKI" resname="Mailing list deleted.">
-        <source>Mailing list deleted.</source>
-        <target state="translated">Mailing list deleted.</target>
+      <trans-unit id="rP.3EBU" resname="Mailing list synchronisation">
+        <source>Mailing list synchronisation</source>
+        <target state="translated">Mailing list synchronisation</target>
       </trans-unit>
-      <trans-unit id="Gq_E3t_" resname="Mailing list sync">
-        <source>Mailing list sync</source>
-        <target state="translated">Mailing list sync</target>
+      <trans-unit id="BQ6f7J_" resname="Mailing list synchronisation is paused.">
+        <source>Mailing list synchronisation is paused.</source>
+        <target state="translated">Mailing list synchronisation is paused.</target>
+      </trans-unit>
+      <trans-unit id="zcAhOAC" resname="Mailing lists">
+        <source>Mailing lists</source>
+        <target state="translated">Mailing lists</target>
       </trans-unit>
       <trans-unit id="LQoEY16" resname="Mailman Mailing List">
         <source>Mailman Mailing List</source>
         <target state="translated">Mailman Mailing List</target>
       </trans-unit>
-      <trans-unit id="beIGZxZ" resname="Mailman and Listmonk mailing lists cannot both be set at the same time">
-        <source>Mailman and Listmonk mailing lists cannot both be set at the same time</source>
-        <target state="translated">Mailman and Listmonk mailing lists cannot both be set at the same time</target>
+      <trans-unit id="qzyxADB" resname="Main navigation">
+        <source>Main navigation</source>
+        <target state="translated">Main navigation</target>
       </trans-unit>
-      <trans-unit id="kpWwJ66" resname="Mailman lists not being fetched">
-        <source>Mailman lists not being fetched</source>
-        <target state="translated">Mailman lists not being fetched</target>
-      </trans-unit>
-      <trans-unit id="SjMXWvd" resname="Make %s inactive?">
-        <source>Make %s inactive?</source>
-        <target state="translated">Make %s inactive?</target>
+      <trans-unit id="TOUhAJy" resname="Make %name% inactive?">
+        <source>Make %name% inactive?</source>
+        <target state="translated">Make %name% inactive?</target>
       </trans-unit>
       <trans-unit id="kkv1TeS" resname="Make Inactive">
         <source>Make Inactive</source>
@@ -1253,7 +1483,7 @@
       </trans-unit>
       <trans-unit id="5tRHHkW" resname="Master Artificial Intelligence &amp; Engineering Systems">
         <source>Master Artificial Intelligence &amp; Engineering Systems</source>
-        <target state="translated">Master Artificial Intelligence &amp; Engineering Systems</target>
+        <target state="translated"><![CDATA[Master Artificial Intelligence & Engineering Systems]]></target>
       </trans-unit>
       <trans-unit id="KfPvPm1" resname="Master Computer Science and Engineering">
         <source>Master Computer Science and Engineering</source>
@@ -1261,7 +1491,7 @@
       </trans-unit>
       <trans-unit id="D6xnBk0" resname="Master Data Science &amp; Artificial Intelligence">
         <source>Master Data Science &amp; Artificial Intelligence</source>
-        <target state="translated">Master Data Science &amp; Artificial Intelligence</target>
+        <target state="translated"><![CDATA[Master Data Science & Artificial Intelligence]]></target>
       </trans-unit>
       <trans-unit id="DoKLKg_" resname="Master Data Science in Business and Entrepreneurship">
         <source>Master Data Science in Business and Entrepreneurship</source>
@@ -1278,10 +1508,6 @@
       <trans-unit id="6aAeAdg" resname="Master Information Security Technology">
         <source>Master Information Security Technology</source>
         <target state="translated">Master Information Security Technology</target>
-      </trans-unit>
-      <trans-unit id="_WDdQ1t" resname="Master Programs">
-        <source>Master Programs</source>
-        <target state="translated">Master Programs</target>
       </trans-unit>
       <trans-unit id="BXimblW" resname="Master Science Education">
         <source>Master Science Education</source>
@@ -1303,10 +1529,6 @@
         <source>Meeting Type</source>
         <target state="translated">Meeting Type</target>
       </trans-unit>
-      <trans-unit id="d8liS0R" resname="Meeting added successfully!">
-        <source>Meeting added successfully!</source>
-        <target state="translated">Meeting added successfully!</target>
-      </trans-unit>
       <trans-unit id="lpupbIO" resname="Meetings">
         <source>Meetings</source>
         <target state="translated">Meetings</target>
@@ -1315,9 +1537,17 @@
         <source>Meetings and Decisions</source>
         <target state="translated">Meetings and Decisions</target>
       </trans-unit>
-      <trans-unit id="UurrqZ6" resname="Member %s cannot be deleted.">
-        <source>Member %s cannot be deleted.</source>
-        <target state="translated">Member %s cannot be deleted.</target>
+      <trans-unit id="gprCO9o" resname="Meetings and decisions">
+        <source>Meetings and decisions</source>
+        <target state="translated">Meetings and decisions</target>
+      </trans-unit>
+      <trans-unit id="Cg3S2oo" resname="Member">
+        <source>Member</source>
+        <target state="translated">Member</target>
+      </trans-unit>
+      <trans-unit id="cBoaNoc" resname="Member %number% · Generation %generation% · Expires %expiration%">
+        <source>Member %number% · Generation %generation% · Expires %expiration%</source>
+        <target state="translated">Member %number% · Generation %generation% · Expires %expiration%</target>
       </trans-unit>
       <trans-unit id="QPkiU3s" resname="Member Number">
         <source>Member Number</source>
@@ -1335,6 +1565,10 @@
         <source>Member not found.</source>
         <target state="translated">Member not found.</target>
       </trans-unit>
+      <trans-unit id="3tYRjpu" resname="Member record">
+        <source>Member record</source>
+        <target state="translated">Member record</target>
+      </trans-unit>
       <trans-unit id="28HXF2a" resname="Members">
         <source>Members</source>
         <target state="translated">Members</target>
@@ -1342,6 +1576,14 @@
       <trans-unit id="70RcdtK" resname="Members requiring attention">
         <source>Members requiring attention</source>
         <target state="translated">Members requiring attention</target>
+      </trans-unit>
+      <trans-unit id="yj9GrEL" resname="Members who are neither become graduate.">
+        <source>Members who are neither become graduate.</source>
+        <target state="translated">Members who are neither become graduate.</target>
+      </trans-unit>
+      <trans-unit id="TkLKyPc" resname="Members who are still studying become ordinary.">
+        <source>Members who are still studying become ordinary.</source>
+        <target state="translated">Members who are still studying become ordinary.</target>
       </trans-unit>
       <trans-unit id="GRjUIu_" resname="Membership Ends On (Expires On)">
         <source>Membership Ends On (Expires On)</source>
@@ -1366,6 +1608,14 @@
       <trans-unit id="WGafmAS" resname="Membership of Committees and Fraternities">
         <source>Membership of Committees and Fraternities</source>
         <target state="translated">Membership of Committees and Fraternities</target>
+      </trans-unit>
+      <trans-unit id="fPLxh_i" resname="Membership types">
+        <source>Membership types</source>
+        <target state="translated">Membership types</target>
+      </trans-unit>
+      <trans-unit id="8b7WgJG" resname="Memberships expiring within %days% days, and members missing information we need.">
+        <source>Memberships expiring within %days% days, and members missing information we need.</source>
+        <target state="translated">Memberships expiring within %days% days, and members missing information we need.</target>
       </trans-unit>
       <trans-unit id="JxmR5ja" resname="Member¹ - Allow operations on `deleted' members">
         <source>Member¹ - Allow operations on `deleted' members</source>
@@ -1399,13 +1649,17 @@
         <source>Member¹ - Get email address</source>
         <target state="translated">Member¹ - Get email address</target>
       </trans-unit>
-      <trans-unit id="vtsk56f" resname="Message">
-        <source>Message</source>
-        <target state="translated">Message</target>
+      <trans-unit id="Ejzh4AQ" resname="Minute a meeting to start recording its decisions.">
+        <source>Minute a meeting to start recording its decisions.</source>
+        <target state="translated">Minute a meeting to start recording its decisions.</target>
       </trans-unit>
       <trans-unit id="Bi0SThY" resname="Minutes">
         <source>Minutes</source>
         <target state="translated">Minutes</target>
+      </trans-unit>
+      <trans-unit id="ICfdxrk" resname="Missing data">
+        <source>Missing data</source>
+        <target state="translated">Missing data</target>
       </trans-unit>
       <trans-unit id="Q2p5BhT" resname="Mistake?">
         <source>Mistake?</source>
@@ -1427,45 +1681,141 @@
         <source>Name (Sync)</source>
         <target state="translated">Name (Sync)</target>
       </trans-unit>
+      <trans-unit id="fPcPc7X" resname="Name this query">
+        <source>Name this query</source>
+        <target state="translated">Name this query</target>
+      </trans-unit>
+      <trans-unit id="PxSV8_e" resname="Name, e-mail address or student number">
+        <source>Name, e-mail address or student number</source>
+        <target state="translated">Name, e-mail address or student number</target>
+      </trans-unit>
+      <trans-unit id="xMNaqqB" resname="Name, e-mail address, member number or student number">
+        <source>Name, e-mail address, member number or student number</source>
+        <target state="translated">Name, e-mail address, member number or student number</target>
+      </trans-unit>
+      <trans-unit id="SSAtsR6" resname="Navigation">
+        <source>Navigation</source>
+        <target state="translated">Navigation</target>
+      </trans-unit>
+      <trans-unit id="Bwa.BMm" resname="Needs attention">
+        <source>Needs attention</source>
+        <target state="translated">Needs attention</target>
+      </trans-unit>
+      <trans-unit id="I5N3xqX" resname="Never fetched">
+        <source>Never fetched</source>
+        <target state="translated">Never fetched</target>
+      </trans-unit>
       <trans-unit id="59X.YoF" resname="New expiration">
         <source>New expiration</source>
         <target state="translated">New expiration</target>
+      </trans-unit>
+      <trans-unit id="FzacjvZ" resname="New meeting">
+        <source>New meeting</source>
+        <target state="translated">New meeting</target>
       </trans-unit>
       <trans-unit id="MocQJ0." resname="New type">
         <source>New type</source>
         <target state="translated">New type</target>
       </trans-unit>
+      <trans-unit id="gefhnBC" resname="Next">
+        <source>Next</source>
+        <target state="translated">Next</target>
+      </trans-unit>
       <trans-unit id="wd1MvZW" resname="No">
         <source>No</source>
         <target state="translated">No</target>
+      </trans-unit>
+      <trans-unit id="vhsY1Xp" resname="No API principals">
+        <source>No API principals</source>
+        <target state="translated">No API principals</target>
       </trans-unit>
       <trans-unit id="MguqC5V" resname="No Checkout Sessions on record.">
         <source>No Checkout Sessions on record.</source>
         <target state="translated">No Checkout Sessions on record.</target>
       </trans-unit>
-      <trans-unit id="uiPTdkG" resname="No Exception available">
-        <source>No Exception available</source>
-        <target state="translated">No Exception available</target>
-      </trans-unit>
       <trans-unit id="BkfpdNJ" resname="No action recommended">
         <source>No action recommended</source>
         <target state="translated">No action recommended</target>
+      </trans-unit>
+      <trans-unit id="rPEmEb5" resname="No addresses on record.">
+        <source>No addresses on record.</source>
+        <target state="translated">No addresses on record.</target>
       </trans-unit>
       <trans-unit id="GFQHXum" resname="No category">
         <source>No category</source>
         <target state="translated">No category</target>
       </trans-unit>
+      <trans-unit id="aOcQUCS" resname="No e-mail on record">
+        <source>No e-mail on record</source>
+        <target state="translated">No e-mail on record</target>
+      </trans-unit>
       <trans-unit id="W8tUipN" resname="No email address">
         <source>No email address</source>
         <target state="translated">No email address</target>
+      </trans-unit>
+      <trans-unit id="YUDl_Sg" resname="No entity matches.">
+        <source>No entity matches.</source>
+        <target state="translated">No entity matches.</target>
       </trans-unit>
       <trans-unit id="MLP9YvF" resname="No mailing list subscriptions.">
         <source>No mailing list subscriptions.</source>
         <target state="translated">No mailing list subscriptions.</target>
       </trans-unit>
+      <trans-unit id="CAxbJqj" resname="No mailing lists">
+        <source>No mailing lists</source>
+        <target state="translated">No mailing lists</target>
+      </trans-unit>
+      <trans-unit id="DI5Mjh0" resname="No members match">
+        <source>No members match</source>
+        <target state="translated">No members match</target>
+      </trans-unit>
+      <trans-unit id="X7whl.T" resname="No membership expires soon and nothing is missing.">
+        <source>No membership expires soon and nothing is missing.</source>
+        <target state="translated">No membership expires soon and nothing is missing.</target>
+      </trans-unit>
+      <trans-unit id="zduI6pP" resname="No registrations are in this state.">
+        <source>No registrations are in this state.</source>
+        <target state="translated">No registrations are in this state.</target>
+      </trans-unit>
+      <trans-unit id="drcu0.A" resname="No requests">
+        <source>No requests</source>
+        <target state="translated">No requests</target>
+      </trans-unit>
+      <trans-unit id="aQlndVq" resname="No rows">
+        <source>No rows</source>
+        <target state="translated">No rows</target>
+      </trans-unit>
+      <trans-unit id="sQOlT78" resname="No subscriptions chosen. The defaults are applied on approval.">
+        <source>No subscriptions chosen. The defaults are applied on approval.</source>
+        <target state="translated">No subscriptions chosen. The defaults are applied on approval.</target>
+      </trans-unit>
+      <trans-unit id="Mugo.nw" resname="No users">
+        <source>No users</source>
+        <target state="translated">No users</target>
+      </trans-unit>
+      <trans-unit id="nY8rt47" resname="Nobody can sign in with a password yet.">
+        <source>Nobody can sign in with a password yet.</source>
+        <target state="translated">Nobody can sign in with a password yet.</target>
+      </trans-unit>
+      <trans-unit id="WHq2evG" resname="Nobody has asked for a change to their data.">
+        <source>Nobody has asked for a change to their data.</source>
+        <target state="translated">Nobody has asked for a change to their data.</target>
+      </trans-unit>
+      <trans-unit id="Q6GN7yN" resname="Nobody is installed in this organ.">
+        <source>Nobody is installed in this organ.</source>
+        <target state="translated">Nobody is installed in this organ.</target>
+      </trans-unit>
+      <trans-unit id="kicT4e0" resname="Nobody needs attention">
+        <source>Nobody needs attention</source>
+        <target state="translated">Nobody needs attention</target>
+      </trans-unit>
       <trans-unit id="35SQQqs" resname="None">
         <source>None</source>
         <target state="translated">None</target>
+      </trans-unit>
+      <trans-unit id="V69AV1f" resname="Not run">
+        <source>Not run</source>
+        <target state="translated">Not run</target>
       </trans-unit>
       <trans-unit id="q_qZc3B" resname="Not studying">
         <source>Not studying</source>
@@ -1475,17 +1825,37 @@
         <source>Note</source>
         <target state="translated">Note</target>
       </trans-unit>
-      <trans-unit id="pCsr2el" resname="Note: all changes will take effect at the end of the current membership of a member. Do you want to make changes now or in the past? Go to the individual member profile.">
-        <source>Note: all changes will take effect at the end of the current membership of a member. Do you want to make changes now or in the past? Go to the individual member profile.</source>
-        <target state="translated">Note: all changes will take effect at the end of the current membership of a member. Do you want to make changes now or in the past? Go to the individual member profile.</target>
-      </trans-unit>
-      <trans-unit id="1Yexh7D" resname="Note: if you updated your email address, you have to sign in to the GEWIS website using your new email address once this change has been processed.">
-        <source>Note: if you updated your email address, you have to sign in to the GEWIS website using your new email address once this change has been processed.</source>
-        <target state="translated">Note: if you updated your email address, you have to sign in to the GEWIS website using your new email address once this change has been processed.</target>
-      </trans-unit>
       <trans-unit id="Jc_XWZN" resname="Notes">
         <source>Notes</source>
         <target state="translated">Notes</target>
+      </trans-unit>
+      <trans-unit id="7EZCeDz" resname="Nothing answers to this address.">
+        <source>Nothing answers to this address.</source>
+        <target state="translated">Nothing answers to this address.</target>
+      </trans-unit>
+      <trans-unit id="f3hrz0W" resname="Nothing can read the database over the API yet.">
+        <source>Nothing can read the database over the API yet.</source>
+        <target state="translated">Nothing can read the database over the API yet.</target>
+      </trans-unit>
+      <trans-unit id="NokzVTo" resname="Nothing here">
+        <source>Nothing here</source>
+        <target state="translated">Nothing here</target>
+      </trans-unit>
+      <trans-unit id="yeHvSjg" resname="Nothing is renewed until the preview has been confirmed.">
+        <source>Nothing is renewed until the preview has been confirmed.</source>
+        <target state="translated">Nothing is renewed until the preview has been confirmed.</target>
+      </trans-unit>
+      <trans-unit id="c44xagu" resname="Nothing is waiting for approval and every integration is reporting in.">
+        <source>Nothing is waiting for approval and every integration is reporting in.</source>
+        <target state="translated">Nothing is waiting for approval and every integration is reporting in.</target>
+      </trans-unit>
+      <trans-unit id="w72vTMl" resname="Nothing run yet">
+        <source>Nothing run yet</source>
+        <target state="translated">Nothing run yet</target>
+      </trans-unit>
+      <trans-unit id="gGxnmUA" resname="Notifications">
+        <source>Notifications</source>
+        <target state="translated">Notifications</target>
       </trans-unit>
       <trans-unit id="n0y..GK" resname="Oh snap!">
         <source>Oh snap!</source>
@@ -1499,6 +1869,18 @@
         <source>One membership number per line, or separated by spaces or commas</source>
         <target state="translated">One membership number per line, or separated by spaces or commas</target>
       </trans-unit>
+      <trans-unit id="PS6SICs" resname="Only the last characters of the token are shown; the token cannot be changed.">
+        <source>Only the last characters of the token are shown; the token cannot be changed.</source>
+        <target state="translated">Only the last characters of the token are shown; the token cannot be changed.</target>
+      </trans-unit>
+      <trans-unit id="jWCEU.u" resname="Only their name is kept, so that the decisions mentioning them stay correct. There is nothing here to edit.">
+        <source>Only their name is kept, so that the decisions mentioning them stay correct. There is nothing here to edit.</source>
+        <target state="translated">Only their name is kept, so that the decisions mentioning them stay correct. There is nothing here to edit.</target>
+      </trans-unit>
+      <trans-unit id="_SqArFZ" resname="Open">
+        <source>Open</source>
+        <target state="translated">Open</target>
+      </trans-unit>
       <trans-unit id="FJxCJQn" resname="Opperhoofd">
         <source>Opperhoofd</source>
         <target state="translated">Opperhoofd</target>
@@ -1509,7 +1891,7 @@
       </trans-unit>
       <trans-unit id="G.U_WCI" resname="Ordinary - Enrolled at the department of M&amp;CS">
         <source>Ordinary - Enrolled at the department of M&amp;CS</source>
-        <target state="translated">Ordinary - Enrolled at the department of M&amp;CS</target>
+        <target state="translated"><![CDATA[Ordinary - Enrolled at the department of M&CS]]></target>
       </trans-unit>
       <trans-unit id="Jz_4A.2" resname="Ordinary member without student number">
         <source>Ordinary member without student number</source>
@@ -1519,17 +1901,13 @@
         <source>Organ</source>
         <target state="translated">Organ</target>
       </trans-unit>
-      <trans-unit id="GbQBW8e" resname="Organ Mutations">
-        <source>Organ Mutations</source>
-        <target state="translated">Organ Mutations</target>
-      </trans-unit>
       <trans-unit id="5Cpr50J" resname="Organ Regulation">
         <source>Organ Regulation</source>
         <target state="translated">Organ Regulation</target>
       </trans-unit>
-      <trans-unit id="mc0AGDu" resname="Organ regulations can only be created for 'committee', 'fraternity', or 'financial audit committee'.">
-        <source>Organ regulations can only be created for 'committee', 'fraternity', or 'financial audit committee'.</source>
-        <target state="translated">Organ regulations can only be created for 'committee', 'fraternity', or 'financial audit committee'.</target>
+      <trans-unit id="e0UIqkU" resname="Organs">
+        <source>Organs</source>
+        <target state="translated">Organs</target>
       </trans-unit>
       <trans-unit id="jx7NA8s" resname="Organs - List functions and translations">
         <source>Organs - List functions and translations</source>
@@ -1543,13 +1921,29 @@
         <source>Other</source>
         <target state="translated">Other</target>
       </trans-unit>
+      <trans-unit id="t9gTIHF" resname="Other decisions still refer to this one.">
+        <source>Other decisions still refer to this one.</source>
+        <target state="translated">Other decisions still refer to this one.</target>
+      </trans-unit>
+      <trans-unit id="HmgPmMV" resname="Overview">
+        <source>Overview</source>
+        <target state="translated">Overview</target>
+      </trans-unit>
       <trans-unit id="ENn6SDg" resname="PR-Functionaris">
         <source>PR-Functionaris</source>
         <target state="translated">PR Officer</target>
       </trans-unit>
-      <trans-unit id="hHePCxA" resname="PS: Did you know we have an alumni foundation at the department of M&amp;amp;CS?">
-        <source>PS: Did you know we have an alumni foundation at the department of M&amp;amp;CS?</source>
-        <target state="translated">PS: Did you know we have an alumni foundation at the department of M&amp;amp;CS?</target>
+      <trans-unit id="zvMpy.G" resname="Page %page% of %totalPages% (%totalCount% records)">
+        <source>Page %page% of %totalPages% (%totalCount% records)</source>
+        <target state="translated">Page %page% of %totalPages% (%totalCount% records)</target>
+      </trans-unit>
+      <trans-unit id="_9u.dBq" resname="Page not found">
+        <source>Page not found</source>
+        <target state="translated">Page not found</target>
+      </trans-unit>
+      <trans-unit id="1IhUdFE" resname="Pagination">
+        <source>Pagination</source>
+        <target state="translated">Pagination</target>
       </trans-unit>
       <trans-unit id="ISGEjDb" resname="Paid">
         <source>Paid</source>
@@ -1559,6 +1953,22 @@
         <source>Paid for current/last membership (Amount)</source>
         <target state="translated">Paid for current/last membership (Amount)</target>
       </trans-unit>
+      <trans-unit id="GqmFSHc" resname="Password">
+        <source>Password</source>
+        <target state="translated">Password</target>
+      </trans-unit>
+      <trans-unit id="KuOux_1" resname="Paste this into a LaTeX editor to produce the document.">
+        <source>Paste this into a LaTeX editor to produce the document.</source>
+        <target state="translated">Paste this into a LaTeX editor to produce the document.</target>
+      </trans-unit>
+      <trans-unit id="t_hjNeq" resname="Paused">
+        <source>Paused</source>
+        <target state="translated">Paused</target>
+      </trans-unit>
+      <trans-unit id="jV4hRh." resname="Paused until %until%">
+        <source>Paused until %until%</source>
+        <target state="translated">Paused until %until%</target>
+      </trans-unit>
       <trans-unit id="px6ruCm" resname="Payment of the one-time membership fee is handled by Stripe, please review the">
         <source>Payment of the one-time membership fee is handled by Stripe, please review the</source>
         <target state="translated">Payment of the one-time membership fee is handled by Stripe, please review the</target>
@@ -1567,13 +1977,13 @@
         <source>Pending</source>
         <target state="translated">Pending</target>
       </trans-unit>
-      <trans-unit id=".xMzCVg" resname="Pending member updates">
-        <source>Pending member updates</source>
-        <target state="translated">Pending member updates</target>
-      </trans-unit>
       <trans-unit id="CJZXCgf" resname="Penningmeester">
         <source>Penningmeester</source>
         <target state="translated">Treasurer</target>
+      </trans-unit>
+      <trans-unit id="hPqPyLn" resname="Per page">
+        <source>Per page</source>
+        <target state="translated">Per page</target>
       </trans-unit>
       <trans-unit id="Pb977EF" resname="Permissions">
         <source>Permissions</source>
@@ -1599,25 +2009,21 @@
         <source>Phone Number</source>
         <target state="translated">Phone Number</target>
       </trans-unit>
-      <trans-unit id="EqbsXS_" resname="Please check your e-mail address, '%s' does not appear to be able to receive e-mails. If you are certain that your e-mail address is correct, please contact the board.">
-        <source>Please check your e-mail address, '%s' does not appear to be able to receive e-mails. If you are certain that your e-mail address is correct, please contact the board.</source>
-        <target state="translated">Please check your e-mail address, '%s' does not appear to be able to receive e-mails. If you are certain that your e-mail address is correct, please contact the board.</target>
+      <trans-unit id="6NJPI7c" resname="Pick a decision number that is still free for this point.">
+        <source>Pick a decision number that is still free for this point.</source>
+        <target state="translated">Pick a decision number that is still free for this point.</target>
+      </trans-unit>
+      <trans-unit id="zh81YLt" resname="Pick the meetings to include and build one decision list from them.">
+        <source>Pick the meetings to include and build one decision list from them.</source>
+        <target state="translated">Pick the meetings to include and build one decision list from them.</target>
       </trans-unit>
       <trans-unit id="R6lVjSm" resname="Please select a function">
         <source>Please select a function</source>
         <target state="translated">Please select a function</target>
       </trans-unit>
-      <trans-unit id="lcCBKuL" resname="Please select the new membership type and change date for the member.">
-        <source>Please select the new membership type and change date for the member.</source>
-        <target state="translated">Please select the new membership type and change date for the member.</target>
-      </trans-unit>
       <trans-unit id="NT8emLb" resname="Point">
         <source>Point</source>
         <target state="translated">Point</target>
-      </trans-unit>
-      <trans-unit id="etasTyS" resname="Possibly, the mailing list server is down or fetch mechanism is malfunctioning.">
-        <source>Possibly, the mailing list server is down or fetch mechanism is malfunctioning.</source>
-        <target state="translated">Possibly, the mailing list server is down or fetch mechanism is malfunctioning.</target>
       </trans-unit>
       <trans-unit id="S7yVEI2" resname="Postal Code">
         <source>Postal Code</source>
@@ -1647,25 +2053,25 @@
         <source>Pre-master Information Security Technology</source>
         <target state="translated">Pre-master Information Security Technology</target>
       </trans-unit>
-      <trans-unit id="wo8C8Qu" resname="Pre-master Programs">
-        <source>Pre-master Programs</source>
-        <target state="translated">Pre-master Programs</target>
+      <trans-unit id="yNlWNXs" resname="Preview">
+        <source>Preview</source>
+        <target state="translated">Preview</target>
       </trans-unit>
       <trans-unit id="Hj4m6N." resname="Preview changes">
         <source>Preview changes</source>
         <target state="translated">Preview changes</target>
       </trans-unit>
-      <trans-unit id="VZYa6Y8" resname="Previewing %1$d valid change(s) and %2$d issue(s).">
-        <source>Previewing %1$d valid change(s) and %2$d issue(s).</source>
-        <target state="translated">Previewing %1$d valid change(s) and %2$d issue(s).</target>
-      </trans-unit>
-      <trans-unit id=".UoqAdw" resname="Previous exceptions">
-        <source>Previous exceptions</source>
-        <target state="translated">Previous exceptions</target>
+      <trans-unit id="ouNrIYq" resname="Previous">
+        <source>Previous</source>
+        <target state="translated">Previous</target>
       </trans-unit>
       <trans-unit id="tLbRUvv" resname="Privacy Policy of Stripe">
         <source>Privacy Policy of Stripe</source>
         <target state="translated">Privacy Policy of Stripe</target>
+      </trans-unit>
+      <trans-unit id="T2.N1x3" resname="Proof of (non-TU/e) study OR board decision =&gt; renew">
+        <source>Proof of (non-TU/e) study OR board decision =&gt; renew</source>
+        <target state="translated"><![CDATA[Proof of (non-TU/e) study OR board decision => renew]]></target>
       </trans-unit>
       <trans-unit id="gB_ZE.c" resname="Proposed Data">
         <source>Proposed Data</source>
@@ -1674,6 +2080,10 @@
       <trans-unit id="iOf6rYs" resname="Prospective Members">
         <source>Prospective Members</source>
         <target state="translated">Prospective Members</target>
+      </trans-unit>
+      <trans-unit id="NKC8Rs9" resname="Prospective members">
+        <source>Prospective members</source>
+        <target state="translated">Prospective members</target>
       </trans-unit>
       <trans-unit id="WmGTMUE" resname="Provided Data">
         <source>Provided Data</source>
@@ -1687,10 +2097,6 @@
         <source>Query</source>
         <target state="translated">Query</target>
       </trans-unit>
-      <trans-unit id="DsC__na" resname="Query Result">
-        <source>Query Result</source>
-        <target state="translated">Query Result</target>
-      </trans-unit>
       <trans-unit id="u04D4Xh" resname="Ready to renew.">
         <source>Ready to renew.</source>
         <target state="translated">Ready to renew.</target>
@@ -1698,6 +2104,10 @@
       <trans-unit id="cIqeOBe" resname="Reappoint">
         <source>Reappoint</source>
         <target state="translated">Reappoint</target>
+      </trans-unit>
+      <trans-unit id="Gtu.ZYe" resname="Reappoint %name% as %function%">
+        <source>Reappoint %name% as %function%</source>
+        <target state="translated">Reappoint %name% as %function%</target>
       </trans-unit>
       <trans-unit id="hz7skLG" resname="Reappoint Member">
         <source>Reappoint Member</source>
@@ -1711,13 +2121,21 @@
         <source>Reason(s)</source>
         <target state="translated">Reason(s)</target>
       </trans-unit>
-      <trans-unit id="GpIPO6r" resname="Register Member">
-        <source>Register Member</source>
-        <target state="translated">Register Member</target>
+      <trans-unit id="krgQCqo" resname="Recorded">
+        <source>Recorded</source>
+        <target state="translated">Recorded</target>
       </trans-unit>
       <trans-unit id="i27Eizs" resname="Register member">
         <source>Register member</source>
         <target state="translated">Register member</target>
+      </trans-unit>
+      <trans-unit id="W_u56BZ" resname="Registered">
+        <source>Registered</source>
+        <target state="translated">Registered</target>
+      </trans-unit>
+      <trans-unit id="z3hmFjD" resname="Registered %date%">
+        <source>Registered %date%</source>
+        <target state="translated">Registered %date%</target>
       </trans-unit>
       <trans-unit id="NKWFupb" resname="Registration">
         <source>Registration</source>
@@ -1735,6 +2153,14 @@
         <source>Relieve Board Member</source>
         <target state="translated">Relieve Board Member</target>
       </trans-unit>
+      <trans-unit id="W4eVxqW" resname="Relieve a board member of their function.">
+        <source>Relieve a board member of their function.</source>
+        <target state="translated">Relieve a board member of their function.</target>
+      </trans-unit>
+      <trans-unit id="fEeElvJ" resname="Remove">
+        <source>Remove</source>
+        <target state="translated">Remove</target>
+      </trans-unit>
       <trans-unit id="Q_Ieu0u" resname="Remove Member">
         <source>Remove Member</source>
         <target state="translated">Remove Member</target>
@@ -1742,6 +2168,14 @@
       <trans-unit id="2vyWVfY" resname="Remove Prospective Member">
         <source>Remove Prospective Member</source>
         <target state="translated">Remove Prospective Member</target>
+      </trans-unit>
+      <trans-unit id="PBXyyyY" resname="Removed">
+        <source>Removed</source>
+        <target state="translated">Removed</target>
+      </trans-unit>
+      <trans-unit id="Q9rF..c" resname="Removes the application and everything the applicant entered.">
+        <source>Removes the application and everything the applicant entered.</source>
+        <target state="translated">Removes the application and everything the applicant entered.</target>
       </trans-unit>
       <trans-unit id="OIutRsk" resname="Removing this annulment would restore a decision that later decisions have since overtaken.">
         <source>Removing this annulment would restore a decision that later decisions have since overtaken.</source>
@@ -1755,6 +2189,14 @@
         <source>Renew expiring active members</source>
         <target state="translated">Renew expiring active members</target>
       </trans-unit>
+      <trans-unit id="g9JSeTl" resname="Renew in bulk">
+        <source>Renew in bulk</source>
+        <target state="translated">Renew in bulk</target>
+      </trans-unit>
+      <trans-unit id="P5UpN4V" resname="Renew membership as external">
+        <source>Renew membership as external</source>
+        <target state="translated">Renew membership as external</target>
+      </trans-unit>
       <trans-unit id="uFV2Qy8" resname="Renew until">
         <source>Renew until</source>
         <target state="translated">Renew until</target>
@@ -1763,21 +2205,41 @@
         <source>Renew/Type</source>
         <target state="translated">Renew/Type</target>
       </trans-unit>
-      <trans-unit id="q_iTWkX" resname="Renewal">
-        <source>Renewal</source>
-        <target state="translated">Renewal</target>
-      </trans-unit>
       <trans-unit id="cAOpTtu" resname="Renewed.">
         <source>Renewed.</source>
         <target state="translated">Renewed.</target>
+      </trans-unit>
+      <trans-unit id="2I0d9mq" resname="Requiring attention">
+        <source>Requiring attention</source>
+        <target state="translated">Requiring attention</target>
       </trans-unit>
       <trans-unit id="BbK2K6u" resname="Result">
         <source>Result</source>
         <target state="translated">Result</target>
       </trans-unit>
+      <trans-unit id="IMl5bXs" resname="Results">
+        <source>Results</source>
+        <target state="translated">Results</target>
+      </trans-unit>
       <trans-unit id="gpKdPTJ" resname="Return to registration form">
         <source>Return to registration form</source>
         <target state="translated">Return to registration form</target>
+      </trans-unit>
+      <trans-unit id="pNh7tNv" resname="Review">
+        <source>Review</source>
+        <target state="translated">Review</target>
+      </trans-unit>
+      <trans-unit id="JTTi6lZ" resname="Review and pay">
+        <source>Review and pay</source>
+        <target state="translated">Review and pay</target>
+      </trans-unit>
+      <trans-unit id="faEQleW" resname="Run Doctrine Query Language against the report database and save what you will need again.">
+        <source>Run Doctrine Query Language against the report database and save what you will need again.</source>
+        <target state="translated">Run Doctrine Query Language against the report database and save what you will need again.</target>
+      </trans-unit>
+      <trans-unit id="iZAPsup" resname="Run a query">
+        <source>Run a query</source>
+        <target state="translated">Run a query</target>
       </trans-unit>
       <trans-unit id="xnqYxjq" resname="RvA">
         <source>RvA</source>
@@ -1785,15 +2247,15 @@
       </trans-unit>
       <trans-unit id="hF1gaKj" resname="Sadly, during the month of July we are not able to verify your enrollment at TU/e. Therefore, it is not possible to register for GEWIS at this time. &lt;br/&gt;We would love to welcome you as a member starting on August 1st. If you were already studying at TU/e before the summer break, please reach out to the secretary on the email address below.">
         <source>Sadly, during the month of July we are not able to verify your enrollment at TU/e. Therefore, it is not possible to register for GEWIS at this time. &lt;br/&gt;We would love to welcome you as a member starting on August 1st. If you were already studying at TU/e before the summer break, please reach out to the secretary on the email address below.</source>
-        <target state="translated">Sadly, during the month of July we are not able to verify your enrollment at TU/e. Therefore, it is not possible to register for GEWIS at this time. &lt;br/&gt;We would love to welcome you as a member starting on August 1st. If you were already studying at TU/e before the summer break, please reach out to the secretary on the email address below.</target>
+        <target state="translated"><![CDATA[Sadly, during the month of July we are not able to verify your enrollment at TU/e. Therefore, it is not possible to register for GEWIS at this time. <br/>We would love to welcome you as a member starting on August 1st. If you were already studying at TU/e before the summer break, please reach out to the secretary on the email address below.]]></target>
       </trans-unit>
       <trans-unit id="z9OKodR" resname="Save">
         <source>Save</source>
         <target state="translated">Save</target>
       </trans-unit>
-      <trans-unit id="JbykJtY" resname="Saving a query with a previously used name will overwrite the previously saved query and update its category.">
-        <source>Saving a query with a previously used name will overwrite the previously saved query and update its category.</source>
-        <target state="translated">Saving a query with a previously used name will overwrite the previously saved query and update its category.</target>
+      <trans-unit id="DKMkNpd" resname="Saving with a name that is already in use overwrites that query and updates its category.">
+        <source>Saving with a name that is already in use overwrites that query and updates its category.</source>
+        <target state="translated">Saving with a name that is already in use overwrites that query and updates its category.</target>
       </trans-unit>
       <trans-unit id="wDFtIMF" resname="Schakelprogramma SEC Leraar vho Informatica">
         <source>Schakelprogramma SEC Leraar vho Informatica</source>
@@ -1807,17 +2269,9 @@
         <source>Search</source>
         <target state="translated">Search</target>
       </trans-unit>
-      <trans-unit id="sGCZVlf" resname="Search Members">
-        <source>Search Members</source>
-        <target state="translated">Search Members</target>
-      </trans-unit>
       <trans-unit id="SHkCQCc" resname="Search Organs">
         <source>Search Organs</source>
         <target state="translated">Search Organs</target>
-      </trans-unit>
-      <trans-unit id="jt0aiz6" resname="Search Prospective Members">
-        <source>Search Prospective Members</source>
-        <target state="translated">Search Prospective Members</target>
       </trans-unit>
       <trans-unit id="wcsLyzt" resname="Secretaris">
         <source>Secretaris</source>
@@ -1835,33 +2289,73 @@
         <source>Select a study</source>
         <target state="translated">Select a study</target>
       </trans-unit>
-      <trans-unit id="GmC5b1w" resname="Selecting a change date != %s will split the membership periods on that date.">
-        <source>Selecting a change date != %s will split the membership periods on that date.</source>
-        <target state="translated">Selecting a change date != %s will split the membership periods on that date.</target>
+      <trans-unit id="NRml2pe" resname="Select an existing address type.">
+        <source>Select an existing address type.</source>
+        <target state="translated">Select an existing address type.</target>
       </trans-unit>
-      <trans-unit id="sSPT0IZ" resname="Setting the change date to %s will (also) renew the membership.">
-        <source>Setting the change date to %s will (also) renew the membership.</source>
-        <target state="translated">Setting the change date to %s will (also) renew the membership.</target>
+      <trans-unit id="on3DnG1" resname="Select an existing decision.">
+        <source>Select an existing decision.</source>
+        <target state="translated">Select an existing decision.</target>
+      </trans-unit>
+      <trans-unit id="Ja2Ld.R" resname="Select an existing function.">
+        <source>Select an existing function.</source>
+        <target state="translated">Select an existing function.</target>
+      </trans-unit>
+      <trans-unit id="kGKHJGh" resname="Select an existing key code granting.">
+        <source>Select an existing key code granting.</source>
+        <target state="translated">Select an existing key code granting.</target>
+      </trans-unit>
+      <trans-unit id="q6hbKB9" resname="Select an existing meeting.">
+        <source>Select an existing meeting.</source>
+        <target state="translated">Select an existing meeting.</target>
+      </trans-unit>
+      <trans-unit id="Vl0WfUi" resname="Select an existing member.">
+        <source>Select an existing member.</source>
+        <target state="translated">Select an existing member.</target>
+      </trans-unit>
+      <trans-unit id="FceeXEU" resname="Select an existing membership type.">
+        <source>Select an existing membership type.</source>
+        <target state="translated">Select an existing membership type.</target>
+      </trans-unit>
+      <trans-unit id=".ZyliwH" resname="Select an existing postal region.">
+        <source>Select an existing postal region.</source>
+        <target state="translated">Select an existing postal region.</target>
+      </trans-unit>
+      <trans-unit id="AFc0orS" resname="Select an existing study.">
+        <source>Select an existing study.</source>
+        <target state="translated">Select an existing study.</target>
+      </trans-unit>
+      <trans-unit id="Z88TMEY" resname="Select an existing subdecision.">
+        <source>Select an existing subdecision.</source>
+        <target state="translated">Select an existing subdecision.</target>
+      </trans-unit>
+      <trans-unit id="xz_NhXO" resname="Setting it to %end% also renews the membership.">
+        <source>Setting it to %end% also renews the membership.</source>
+        <target state="translated">Setting it to %end% also renews the membership.</target>
       </trans-unit>
       <trans-unit id="VXFwlwn" resname="Settings">
         <source>Settings</source>
         <target state="translated">Settings</target>
       </trans-unit>
+      <trans-unit id="x6H42sq" resname="Signing in goes through GEWIS m-accounts, so an account created here cannot be used to sign in.">
+        <source>Signing in goes through GEWIS m-accounts, so an account created here cannot be used to sign in.</source>
+        <target state="translated">Signing in goes through GEWIS m-accounts, so an account created here cannot be used to sign in.</target>
+      </trans-unit>
+      <trans-unit id="1hOWNds" resname="Since 2024 these can only be changed in the code.">
+        <source>Since 2024 these can only be changed in the code.</source>
+        <target state="translated">Since 2024 these can only be changed in the code.</target>
+      </trans-unit>
       <trans-unit id="._2p1Cl" resname="Some of the entered information appears to be missing or incorrect. Please check your data and submit again.">
         <source>Some of the entered information appears to be missing or incorrect. Please check your data and submit again.</source>
         <target state="translated">Some of the entered information appears to be missing or incorrect. Please check your data and submit again.</target>
       </trans-unit>
-      <trans-unit id="MGMD6gU" resname="Special cases (secretary use only)">
-        <source>Special cases (secretary use only)</source>
-        <target state="translated">Special cases (secretary use only)</target>
+      <trans-unit id="0yVywJH" resname="Something went wrong">
+        <source>Something went wrong</source>
+        <target state="translated">Something went wrong</target>
       </trans-unit>
-      <trans-unit id="C7dyqJE" resname="Stack trace">
-        <source>Stack trace</source>
-        <target state="translated">Stack trace</target>
-      </trans-unit>
-      <trans-unit id="SyvKmIO" resname="Starting 2024, organ installation functions can only be changed through the code">
-        <source>Starting 2024, organ installation functions can only be changed through the code</source>
-        <target state="translated">Starting 2024, organ installation functions can only be changed through the code</target>
+      <trans-unit id="zaHZ0Lc" resname="Starts">
+        <source>Starts</source>
+        <target state="translated">Starts</target>
       </trans-unit>
       <trans-unit id="xBBQdBy" resname="Statement">
         <source>Statement</source>
@@ -1875,9 +2369,9 @@
         <source>Stemcommissie</source>
         <target state="translated">Voting Committee</target>
       </trans-unit>
-      <trans-unit id="HYyqtKl" resname="Stored Queries">
-        <source>Stored Queries</source>
-        <target state="translated">Stored Queries</target>
+      <trans-unit id="stlnIwt" resname="Stored queries">
+        <source>Stored queries</source>
+        <target state="translated">Stored queries</target>
       </trans-unit>
       <trans-unit id="s10dvLP" resname="Street">
         <source>Street</source>
@@ -1903,13 +2397,17 @@
         <source>Subscribe</source>
         <target state="translated">Subscribe</target>
       </trans-unit>
-      <trans-unit id="F5XB.8P" resname="Succesfully created %s!">
-        <source>Succesfully created %s!</source>
-        <target state="translated">Succesfully created %s!</target>
+      <trans-unit id="etRjvgO" resname="Subscriptions cannot be changed safely while it runs. Try again in a few minutes.">
+        <source>Subscriptions cannot be changed safely while it runs. Try again in a few minutes.</source>
+        <target state="translated">Subscriptions cannot be changed safely while it runs. Try again in a few minutes.</target>
       </trans-unit>
-      <trans-unit id="eU40x0a" resname="Succesfully deleted %s!">
-        <source>Succesfully deleted %s!</source>
-        <target state="translated">Succesfully deleted %s!</target>
+      <trans-unit id="jQTQ11s" resname="Succesfully created %entity%!">
+        <source>Succesfully created %entity%!</source>
+        <target state="translated">Succesfully created %entity%!</target>
+      </trans-unit>
+      <trans-unit id="qniSpVB" resname="Succesfully deleted %entity%!">
+        <source>Succesfully deleted %entity%!</source>
+        <target state="translated">Succesfully deleted %entity%!</target>
       </trans-unit>
       <trans-unit id="R34wcDm" resname="Supremum">
         <source>Supremum</source>
@@ -1919,17 +2417,9 @@
         <source>Sync in progress</source>
         <target state="translated">Sync in progress</target>
       </trans-unit>
-      <trans-unit id="bXwsQ4r" resname="Synchronisation paused">
-        <source>Synchronisation paused</source>
-        <target state="translated">Synchronisation paused</target>
-      </trans-unit>
-      <trans-unit id="h0lwG9V" resname="Synchronisation with other systems is paused and will resume in %d minutes.">
-        <source>Synchronisation with other systems is paused and will resume in %d minutes.</source>
-        <target state="translated">Synchronisation with other systems is paused and will resume in %d minutes.</target>
-      </trans-unit>
-      <trans-unit id="tMxVtUH" resname="Synchronisation with other systems is paused until %s.">
-        <source>Synchronisation with other systems is paused until %s.</source>
-        <target state="translated">Synchronisation with other systems is paused until %s.</target>
+      <trans-unit id="6mYMHiN" resname="Synchronisation is paused">
+        <source>Synchronisation is paused</source>
+        <target state="translated">Synchronisation is paused</target>
       </trans-unit>
       <trans-unit id="rkryn3S" resname="TU/e student number">
         <source>TU/e student number</source>
@@ -1939,13 +2429,17 @@
         <source>Tafelvoetbalcoordinator</source>
         <target state="translated">Foosball Coordinator</target>
       </trans-unit>
-      <trans-unit id="MIzsIHh" resname="Thank you %s!">
-        <source>Thank you %s!</source>
-        <target state="translated">Thank you %s!</target>
+      <trans-unit id="O0ABwE4" resname="Takes effect the moment it is recorded — there is no draft to review first.">
+        <source>Takes effect the moment it is recorded — there is no draft to review first.</source>
+        <target state="translated">Takes effect the moment it is recorded — there is no draft to review first.</target>
       </trans-unit>
-      <trans-unit id="nZuAMJz" resname="The change will take effect on the selected date.">
-        <source>The change will take effect on the selected date.</source>
-        <target state="translated">The change will take effect on the selected date.</target>
+      <trans-unit id="Mfs74KT" resname="Thank you %name%!">
+        <source>Thank you %name%!</source>
+        <target state="translated">Thank you %name%!</target>
+      </trans-unit>
+      <trans-unit id="DuYh2fL" resname="The change">
+        <source>The change</source>
+        <target state="translated">The change</target>
       </trans-unit>
       <trans-unit id="EQewiik" resname="The database currently is in demo mode and uses environment credentials.">
         <source>The database currently is in demo mode and uses environment credentials.</source>
@@ -1959,101 +2453,117 @@
         <source>The database currently only accepts logins using your database credentials.</source>
         <target state="translated">The database currently only accepts logins using your database credentials.</target>
       </trans-unit>
-      <trans-unit id="YLfh6b_" resname="The entities that you can use:">
-        <source>The entities that you can use:</source>
-        <target state="translated">The entities that you can use:</target>
+      <trans-unit id="CaROd3w" resname="The decision was not recorded. Correct what is marked below and submit again.">
+        <source>The decision was not recorded. Correct what is marked below and submit again.</source>
+        <target state="translated">The decision was not recorded. Correct what is marked below and submit again.</target>
       </trans-unit>
-      <trans-unit id="1whqdCc" resname="The following members require attention because their membership will expire within the next %d days or they are missing required information.">
-        <source>The following members require attention because their membership will expire within the next %d days or they are missing required information.</source>
-        <target state="translated">The following members require attention because their membership will expire within the next %d days or they are missing required information.</target>
+      <trans-unit id="z9daT.9" resname="The e-mail address changes. Any mailing list the member is on has to be updated as well.">
+        <source>The e-mail address changes. Any mailing list the member is on has to be updated as well.</source>
+        <target state="translated">The e-mail address changes. Any mailing list the member is on has to be updated as well.</target>
+      </trans-unit>
+      <trans-unit id="BYNkH6V" resname="The functions someone can be installed in.">
+        <source>The functions someone can be installed in.</source>
+        <target state="translated">The functions someone can be installed in.</target>
+      </trans-unit>
+      <trans-unit id="5d8NCrw" resname="The lists members can subscribe to, and how they are synchronised.">
+        <source>The lists members can subscribe to, and how they are synchronised.</source>
+        <target state="translated">The lists members can subscribe to, and how they are synchronised.</target>
       </trans-unit>
       <trans-unit id="hkMxh_v" resname="The organ to be abolished includes the following members:">
         <source>The organ to be abolished includes the following members:</source>
         <target state="translated">The organ to be abolished includes the following members:</target>
       </trans-unit>
-      <trans-unit id="uSR2J7E" resname="The query did not return any results.">
-        <source>The query did not return any results.</source>
-        <target state="translated">The query did not return any results.</target>
+      <trans-unit id="3XfnUZu" resname="The page could not be built. Try again later.">
+        <source>The page could not be built. Try again later.</source>
+        <target state="translated">The page could not be built. Try again later.</target>
       </trans-unit>
-      <trans-unit id="F6ZhboJ" resname="The requested URL could not be matched by routing.">
-        <source>The requested URL could not be matched by routing.</source>
-        <target state="translated">The requested URL could not be matched by routing.</target>
+      <trans-unit id="i2UpJwV" resname="The point and the decision number are combined with the meeting to address the decision.">
+        <source>The point and the decision number are combined with the meeting to address the decision.</source>
+        <target state="translated">The point and the decision number are combined with the meeting to address the decision.</target>
       </trans-unit>
-      <trans-unit id="NOv6wt3" resname="The requested controller could not be mapped to an existing controller class.">
-        <source>The requested controller could not be mapped to an existing controller class.</source>
-        <target state="translated">The requested controller could not be mapped to an existing controller class.</target>
+      <trans-unit id="QgwTjy1" resname="The query ran and matched nothing.">
+        <source>The query ran and matched nothing.</source>
+        <target state="translated">The query ran and matched nothing.</target>
       </trans-unit>
-      <trans-unit id="HoyfNC9" resname="The requested controller was not dispatchable.">
-        <source>The requested controller was not dispatchable.</source>
-        <target state="translated">The requested controller was not dispatchable.</target>
+      <trans-unit id="M5lAm8M" resname="The state of their membership fee does not allow removal.">
+        <source>The state of their membership fee does not allow removal.</source>
+        <target state="translated">The state of their membership fee does not allow removal.</target>
       </trans-unit>
-      <trans-unit id="73ouenD" resname="The requested controller was unable to dispatch the request.">
-        <source>The requested controller was unable to dispatch the request.</source>
-        <target state="translated">The requested controller was unable to dispatch the request.</target>
+      <trans-unit id="H5QX6J4" resname="The two given tokens do not match">
+        <source>The two given tokens do not match</source>
+        <target state="translated">The two given tokens do not match</target>
       </trans-unit>
-      <trans-unit id="lnpezlO" resname="There are">
-        <source>There are</source>
-        <target state="translated">There are</target>
+      <trans-unit id="wJ7LeGz" resname="The type and the number together address the meeting and everything decided at it.">
+        <source>The type and the number together address the meeting and everything decided at it.</source>
+        <target state="translated">The type and the number together address the meeting and everything decided at it.</target>
       </trans-unit>
-      <trans-unit id="qlbGv5I" resname="There are currently no data update requests.">
-        <source>There are currently no data update requests.</source>
-        <target state="translated">There are currently no data update requests.</target>
+      <trans-unit id="PL2fcxN" resname="Theme">
+        <source>Theme</source>
+        <target state="translated">Theme</target>
+      </trans-unit>
+      <trans-unit id="JrW42JT" resname="There are no board members to choose from.">
+        <source>There are no board members to choose from.</source>
+        <target state="translated">There are no board members to choose from.</target>
+      </trans-unit>
+      <trans-unit id="7Xnw03E" resname="There are no key codes to withdraw.">
+        <source>There are no key codes to withdraw.</source>
+        <target state="translated">There are no key codes to withdraw.</target>
+      </trans-unit>
+      <trans-unit id="F1qoSYA" resname="There are no meetings yet.">
+        <source>There are no meetings yet.</source>
+        <target state="translated">There are no meetings yet.</target>
       </trans-unit>
       <trans-unit id="yg5l10C" resname="There are no notes for this member.">
         <source>There are no notes for this member.</source>
         <target state="translated">There are no notes for this member.</target>
       </trans-unit>
+      <trans-unit id="dzHfUTK" resname="There are no organs that match.">
+        <source>There are no organs that match.</source>
+        <target state="translated">There are no organs that match.</target>
+      </trans-unit>
       <trans-unit id="xqkRW6p" resname="There are no saved queries.">
         <source>There are no saved queries.</source>
         <target state="translated">There are no saved queries.</target>
       </trans-unit>
-      <trans-unit id="Ra13HI4" resname="There are other decisions that still refer to this decision.">
-        <source>There are other decisions that still refer to this decision.</source>
-        <target state="translated">There are other decisions that still refer to this decision.</target>
-      </trans-unit>
-      <trans-unit id="Cla9Un2" resname="There are too many results to display. Try filtering to see other results.">
-        <source>There are too many results to display. Try filtering to see other results.</source>
-        <target state="translated">There are too many results to display. Try filtering to see other results.</target>
-      </trans-unit>
-      <trans-unit id="goDaNoM" resname="There is currently &lt;a href=&quot;%s&quot;&gt;%d update&lt;/a&gt; pending approval.">
-        <source>There is currently &lt;a href="%s"&gt;%d update&lt;/a&gt; pending approval.</source>
-        <target state="translated">There is currently &lt;a href="%s"&gt;%d update&lt;/a&gt; pending approval.|There are currently &lt;a href="%s"&gt;%d updates&lt;/a&gt; pending approval.</target>
-      </trans-unit>
-      <trans-unit id="AHcJ4w4" resname="These organ functions can be selected when installing someone into a committee/fraternity">
-        <source>These organ functions can be selected when installing someone into a committee/fraternity</source>
-        <target state="translated">These organ functions can be selected when installing someone into a committee/fraternity</target>
-      </trans-unit>
-      <trans-unit id="QnHB7RJ" resname="These organ functions cannot be selected manually but are used by the database internally">
-        <source>These organ functions cannot be selected manually but are used by the database internally</source>
-        <target state="translated">These organ functions cannot be selected manually but are used by the database internally</target>
-      </trans-unit>
-      <trans-unit id="KKdmoGD" resname="These organ functions were used in the past but can no longer be selected">
-        <source>These organ functions were used in the past but can no longer be selected</source>
-        <target state="translated">These organ functions were used in the past but can no longer be selected</target>
-      </trans-unit>
-      <trans-unit id="YznBdMQ" resname="This decision does not exist.">
-        <source>This decision does not exist.</source>
-        <target state="translated">This decision does not exist.</target>
+      <trans-unit id="Y89MCQY" resname="This account signs in through an external directory, so there is no password to change here.">
+        <source>This account signs in through an external directory, so there is no password to change here.</source>
+        <target state="translated">This account signs in through an external directory, so there is no password to change here.</target>
       </trans-unit>
       <trans-unit id="I6hgvcK" resname="This decision has already been annulled.">
         <source>This decision has already been annulled.</source>
         <target state="translated">This decision has already been annulled.</target>
       </trans-unit>
-      <trans-unit id="O0iJCH3" resname="This does not appear to be a valid TU/e student number. Please check it for typos. If you are certain that it is correct, please contact the secretary.">
-        <source>This does not appear to be a valid TU/e student number. Please check it for typos. If you are certain that it is correct, please contact the secretary.</source>
-        <target state="translated">This does not appear to be a valid TU/e student number. Please check it for typos. If you are certain that it is correct, please contact the secretary.</target>
+      <trans-unit id="pvQxQCC" resname="This deletes %name% and everything on record about them.">
+        <source>This deletes %name% and everything on record about them.</source>
+        <target state="translated">This deletes %name% and everything on record about them.</target>
       </trans-unit>
-      <trans-unit id="rJDFuS5" resname="This is because %s is/has been a member of an organ and/or has budgets/statements to their name.">
-        <source>This is because %s is/has been a member of an organ and/or has budgets/statements to their name.</source>
-        <target state="translated">This is because %s is/has been a member of an organ and/or has budgets/statements to their name.</target>
+      <trans-unit id="mWq0m5P" resname="This deletes decision %decision% and everything it recorded.">
+        <source>This deletes decision %decision% and everything it recorded.</source>
+        <target state="translated">This deletes decision %decision% and everything it recorded.</target>
+      </trans-unit>
+      <trans-unit id="uaeusw7" resname="This deletes the %name% mailing list and every subscription to it.">
+        <source>This deletes the %name% mailing list and every subscription to it.</source>
+        <target state="translated">This deletes the %name% mailing list and every subscription to it.</target>
+      </trans-unit>
+      <trans-unit id="aVtCGfP" resname="This deletes the %type% of %name%.">
+        <source>This deletes the %type% of %name%.</source>
+        <target state="translated">This deletes the %type% of %name%.</target>
+      </trans-unit>
+      <trans-unit id="FK_w4_M" resname="This extends the membership of %name% to %to%. It currently runs to %from%.">
+        <source>This extends the membership of %name% to %to%. It currently runs to %from%.</source>
+        <target state="translated">This extends the membership of %name% to %to%. It currently runs to %from%.</target>
+      </trans-unit>
+      <trans-unit id="biVEJUy" resname="This meeting">
+        <source>This meeting</source>
+        <target state="translated">This meeting</target>
       </trans-unit>
       <trans-unit id="SyPSgf9" resname="This meeting has no decisions (yet).">
         <source>This meeting has no decisions (yet).</source>
         <target state="translated">This meeting has no decisions (yet).</target>
       </trans-unit>
-      <trans-unit id="2VcUcTE" resname="This member has been deleted, you cannot edit their information. Only the name of this member is stored so that decisions that mention this member remain correct.">
-        <source>This member has been deleted, you cannot edit their information. Only the name of this member is stored so that decisions that mention this member remain correct.</source>
-        <target state="translated">This member has been deleted, you cannot edit their information. Only the name of this member is stored so that decisions that mention this member remain correct.</target>
+      <trans-unit id="xwQ1IJ4" resname="This member has been deleted">
+        <source>This member has been deleted</source>
+        <target state="translated">This member has been deleted</target>
       </trans-unit>
       <trans-unit id="0cwffVH" resname="This member is not installed in an organ.">
         <source>This member is not installed in an organ.</source>
@@ -2063,21 +2573,17 @@
         <source>This payment link could not be found. Perhaps it has been used before or has expired.</source>
         <target state="translated">This payment link could not be found. Perhaps it has been used before or has expired.</target>
       </trans-unit>
-      <trans-unit id="cmR030E" resname="This permission will add more properties to existing entities that can already be requested.">
-        <source>This permission will add more properties to existing entities that can already be requested.</source>
-        <target state="translated">This permission will add more properties to existing entities that can already be requested.</target>
-      </trans-unit>
       <trans-unit id="XnE_YiA" resname="This prospective member cannot be approved.">
         <source>This prospective member cannot be approved.</source>
         <target state="translated">This prospective member cannot be approved.</target>
       </trans-unit>
-      <trans-unit id="hMBja3w" resname="This renewal link could not be found. Perhaps it has been used before or has expired.">
-        <source>This renewal link could not be found. Perhaps it has been used before or has expired.</source>
-        <target state="translated">This renewal link could not be found. Perhaps it has been used before or has expired.</target>
+      <trans-unit id="ROW7BJf" resname="This prospective member cannot be removed.">
+        <source>This prospective member cannot be removed.</source>
+        <target state="translated">This prospective member cannot be removed.</target>
       </trans-unit>
-      <trans-unit id="YycsmU0" resname="Tip: perform these changes in this order before July 1st of each association year. This form will prevent you from renewing the membership twice.">
-        <source>Tip: perform these changes in this order before July 1st of each association year. This form will prevent you from renewing the membership twice.</source>
-        <target state="translated">Tip: perform these changes in this order before July 1st of each association year. This form will prevent you from renewing the membership twice.</target>
+      <trans-unit id="KMSHp7E" resname="This removes the account. Nothing it recorded is removed with it.">
+        <source>This removes the account. Nothing it recorded is removed with it.</source>
+        <target state="translated">This removes the account. Nothing it recorded is removed with it.</target>
       </trans-unit>
       <trans-unit id="mdHmLw3" resname="To pay the membership fee you must accept Stripe's privacy policy.">
         <source>To pay the membership fee you must accept Stripe's privacy policy.</source>
@@ -2087,9 +2593,21 @@
         <source>Toggle Navigation</source>
         <target state="translated">Toggle Navigation</target>
       </trans-unit>
+      <trans-unit id="FC.YH9X" resname="Toggle navigation">
+        <source>Toggle navigation</source>
+        <target state="translated">Toggle navigation</target>
+      </trans-unit>
       <trans-unit id="VDGUTe6" resname="Token">
         <source>Token</source>
         <target state="translated">Token</target>
+      </trans-unit>
+      <trans-unit id="EPM0yvi" resname="Try a different abbreviation or name, or clear the search.">
+        <source>Try a different abbreviation or name, or clear the search.</source>
+        <target state="translated">Try a different abbreviation or name, or clear the search.</target>
+      </trans-unit>
+      <trans-unit id="fhVR..D" resname="Try a different filter, or clear the search.">
+        <source>Try a different filter, or clear the search.</source>
+        <target state="translated">Try a different filter, or clear the search.</target>
       </trans-unit>
       <trans-unit id="DL_wAnF" resname="Type">
         <source>Type</source>
@@ -2107,10 +2625,6 @@
         <source>Unable to create refund</source>
         <target state="translated">Unable to create refund</target>
       </trans-unit>
-      <trans-unit id="8yHB1u7" resname="Unable to renew deleted member.">
-        <source>Unable to renew deleted member.</source>
-        <target state="translated">Unable to renew deleted member.</target>
-      </trans-unit>
       <trans-unit id="KEhkI6s" resname="Unknown">
         <source>Unknown</source>
         <target state="translated">Unknown</target>
@@ -2119,9 +2633,13 @@
         <source>Unknown reason</source>
         <target state="translated">Unknown reason</target>
       </trans-unit>
-      <trans-unit id="V9QNUII" resname="Update %s of %s">
-        <source>Update %s of %s</source>
-        <target state="translated">Update %s of %s</target>
+      <trans-unit id="_TEgMtE" resname="Up to date">
+        <source>Up to date</source>
+        <target state="translated">Up to date</target>
+      </trans-unit>
+      <trans-unit id="jHEJM6N" resname="Update %type%">
+        <source>Update %type%</source>
+        <target state="translated">Update %type%</target>
       </trans-unit>
       <trans-unit id="8aBi_JE" resname="Update / Renew">
         <source>Update / Renew</source>
@@ -2135,9 +2653,9 @@
         <source>Update Address</source>
         <target state="translated">Update Address</target>
       </trans-unit>
-      <trans-unit id="uTqAmeX" resname="Use cases:">
-        <source>Use cases:</source>
-        <target state="translated">Use cases:</target>
+      <trans-unit id="TkiKoB6" resname="User">
+        <source>User</source>
+        <target state="translated">User</target>
       </trans-unit>
       <trans-unit id="VhxhtYo" resname="Username">
         <source>Username</source>
@@ -2159,18 +2677,6 @@
         <source>Vice-Voorzitter</source>
         <target state="translated">Vice-Chair</target>
       </trans-unit>
-      <trans-unit id=".EmYZIu" resname="View">
-        <source>View</source>
-        <target state="translated">View</target>
-      </trans-unit>
-      <trans-unit id="XpHAgo8" resname="View members needing attention">
-        <source>View members needing attention</source>
-        <target state="translated">View members needing attention</target>
-      </trans-unit>
-      <trans-unit id="rMT0amL" resname="View update requests">
-        <source>View update requests</source>
-        <target state="translated">View update requests</target>
-      </trans-unit>
       <trans-unit id="VT6vAVS" resname="Virt">
         <source>Virt</source>
         <target state="translated">VIRT</target>
@@ -2183,29 +2689,29 @@
         <source>Voorzitter</source>
         <target state="translated">Chair</target>
       </trans-unit>
+      <trans-unit id="coQxdTz" resname="Wachtwoord">
+        <source>Wachtwoord</source>
+        <target state="translated">Password</target>
+      </trans-unit>
       <trans-unit id="JmejWFZ" resname="Wants to Receive Supremum">
         <source>Wants to Receive Supremum</source>
         <target state="translated">Wants to Receive Supremum</target>
       </trans-unit>
-      <trans-unit id="OLq2dl0" resname="Warning: the e-mail address of the member will be updated! This will require additional changes to any mailing lists the member is added to.">
-        <source>Warning: the e-mail address of the member will be updated! This will require additional changes to any mailing lists the member is added to.</source>
-        <target state="translated">Warning: the e-mail address of the member will be updated! This will require additional changes to any mailing lists the member is added to.</target>
-      </trans-unit>
-      <trans-unit id="iqFCa9S" resname="Was it not your intention to close the payment page? Then do not worry, &lt;a href=&quot;%s&quot;&gt;click here&lt;/a&gt; to go back. Are you unable to finish the payment now? Then also do not worry, we have sent you an e-mail containing a link that allows you to go to the payment page again. Do you not want to become a member of GEWIS after all? Let us know and we will delete your details.">
-        <source>Was it not your intention to close the payment page? Then do not worry, &lt;a href="%s"&gt;click here&lt;/a&gt; to go back. Are you unable to finish the payment now? Then also do not worry, we have sent you an e-mail containing a link that allows you to go to the payment page again. Do you not want to become a member of GEWIS after all? Let us know and we will delete your details.</source>
-        <target state="translated">Was it not your intention to close the payment page? Then do not worry, &lt;a href="%s"&gt;click here&lt;/a&gt; to go back. Are you unable to finish the payment now? Then also do not worry, we have sent you an e-mail containing a link that allows you to go to the payment page again. Do you not want to become a member of GEWIS after all? Let us know and we will delete your details.</target>
+      <trans-unit id="3B9A3Hz" resname="Was it not your intention to close the payment page? Then do not worry, &lt;a href=&quot;%url%&quot;&gt;click here&lt;/a&gt; to go back. Are you unable to finish the payment now? Then also do not worry, we have sent you an e-mail containing a link that allows you to go to the payment page again. Do you not want to become a member of GEWIS after all? Let us know and we will delete your details.">
+        <source>Was it not your intention to close the payment page? Then do not worry, &lt;a href="%url%"&gt;click here&lt;/a&gt; to go back. Are you unable to finish the payment now? Then also do not worry, we have sent you an e-mail containing a link that allows you to go to the payment page again. Do you not want to become a member of GEWIS after all? Let us know and we will delete your details.</source>
+        <target state="translated">Was it not your intention to close the payment page? Then do not worry, &lt;a href="%url%"&gt;click here&lt;/a&gt; to go back. Are you unable to finish the payment now? Then also do not worry, we have sent you an e-mail containing a link that allows you to go to the payment page again. Do you not want to become a member of GEWIS after all? Let us know and we will delete your details.</target>
       </trans-unit>
       <trans-unit id="ZNXr.2Z" resname="Was it not your intention to close the payment page? Then do not worry, we have sent you an e-mail containing a link that allows you to go to the payment page again. Do you not want to become a member of GEWIS after all? Let us know and we will delete your details.">
         <source>Was it not your intention to close the payment page? Then do not worry, we have sent you an e-mail containing a link that allows you to go to the payment page again. Do you not want to become a member of GEWIS after all? Let us know and we will delete your details.</source>
         <target state="translated">Was it not your intention to close the payment page? Then do not worry, we have sent you an e-mail containing a link that allows you to go to the payment page again. Do you not want to become a member of GEWIS after all? Let us know and we will delete your details.</target>
       </trans-unit>
-      <trans-unit id="DIDwD8m" resname="We cannot determine at this time why a 404 was generated.">
-        <source>We cannot determine at this time why a 404 was generated.</source>
-        <target state="translated">We cannot determine at this time why a 404 was generated.</target>
-      </trans-unit>
       <trans-unit id="ZHHQek2" resname="We have received your registration, once your payment is verified the secretary will approve your membership. We will let you know via e-mail when this happens.">
         <source>We have received your registration, once your payment is verified the secretary will approve your membership. We will let you know via e-mail when this happens.</source>
         <target state="translated">We have received your registration, once your payment is verified the secretary will approve your membership. We will let you know via e-mail when this happens.</target>
+      </trans-unit>
+      <trans-unit id="jdiujb2" resname="We use this address for everything we send you, so use one you keep after you stop studying.">
+        <source>We use this address for everything we send you, so use one you keep after you stop studying.</source>
+        <target state="translated">We use this address for everything we send you, so use one you keep after you stop studying.</target>
       </trans-unit>
       <trans-unit id="XtkFHTN" resname="We were unable to create a refund for the prospective member. Please try again later. If this error stays, contact the ApplicatieBeheerCommissie and/or treasurer for more information.">
         <source>We were unable to create a refund for the prospective member. Please try again later. If this error stays, contact the ApplicatieBeheerCommissie and/or treasurer for more information.</source>
@@ -2219,81 +2725,101 @@
         <source>Welcome! With this form you can register for a membership of GEWIS. Becoming a member of the assocation costs a one-time fee of 20 euros and your membership is valid as long as you study.</source>
         <target state="translated">Welcome! With this form you can register for a membership of GEWIS. Becoming a member of the assocation costs a one-time fee of 20 euros and your membership is valid as long as you study.</target>
       </trans-unit>
+      <trans-unit id="i23fR0f" resname="Were used in the past and can no longer be picked.">
+        <source>Were used in the past and can no longer be picked.</source>
+        <target state="translated">Were used in the past and can no longer be picked.</target>
+      </trans-unit>
+      <trans-unit id="RQ.yDI_" resname="What changes">
+        <source>What changes</source>
+        <target state="translated">What changes</target>
+      </trans-unit>
+      <trans-unit id="oQlyaKK" resname="What you are editing">
+        <source>What you are editing</source>
+        <target state="translated">What you are editing</target>
+      </trans-unit>
+      <trans-unit id="p9ChyN1" resname="What you get">
+        <source>What you get</source>
+        <target state="translated">What you get</target>
+      </trans-unit>
+      <trans-unit id="Pw06KjY" resname="When to use which type">
+        <source>When to use which type</source>
+        <target state="translated">When to use which type</target>
+      </trans-unit>
+      <trans-unit id="DNzYRSg" resname="Who can sign in to this application.">
+        <source>Who can sign in to this application.</source>
+        <target state="translated">Who can sign in to this application.</target>
+      </trans-unit>
+      <trans-unit id="5NmTxHT" resname="Who may read the database over the API, and what they may read.">
+        <source>Who may read the database over the API, and what they may read.</source>
+        <target state="translated">Who may read the database over the API, and what they may read.</target>
+      </trans-unit>
+      <trans-unit id="OyOkpbP" resname="Who to renew">
+        <source>Who to renew</source>
+        <target state="translated">Who to renew</target>
+      </trans-unit>
+      <trans-unit id="vJDnkcP" resname="Wijzig gebruiker">
+        <source>Wijzig gebruiker</source>
+        <target state="translated">Edit user</target>
+      </trans-unit>
       <trans-unit id="fqZfDzZ" resname="With Modifications">
         <source>With Modifications</source>
         <target state="translated">With Modifications</target>
-      </trans-unit>
-      <trans-unit id="RKK8L3w" resname="Withdraw">
-        <source>Withdraw</source>
-        <target state="translated">Withdraw</target>
       </trans-unit>
       <trans-unit id="ABlWhVz" resname="Withdraw Key Code">
         <source>Withdraw Key Code</source>
         <target state="translated">Withdraw Key Code</target>
       </trans-unit>
+      <trans-unit id="hOWnXKo" resname="Withdraw a key code that was granted.">
+        <source>Withdraw a key code that was granted.</source>
+        <target state="translated">Withdraw a key code that was granted.</target>
+      </trans-unit>
       <trans-unit id="i1Pbibt" resname="Without Modifications">
         <source>Without Modifications</source>
         <target state="translated">Without Modifications</target>
+      </trans-unit>
+      <trans-unit id="dIdW1ak" resname="Write a query or open a stored one, then execute it.">
+        <source>Write a query or open a stored one, then execute it.</source>
+        <target state="translated">Write a query or open a stored one, then execute it.</target>
       </trans-unit>
       <trans-unit id="pRCwpOT" resname="Yes">
         <source>Yes</source>
         <target state="translated">Yes</target>
       </trans-unit>
-      <trans-unit id="ZrrmPgh" resname="You are being redirected to %s">
-        <source>You are being redirected to %s</source>
-        <target state="translated">You are being redirected to %s</target>
+      <trans-unit id="sTJmkRm" resname="You are all caught up">
+        <source>You are all caught up</source>
+        <target state="translated">You are all caught up</target>
       </trans-unit>
-      <trans-unit id="2WG6bR4" resname="You are using a build based on commit &lt;a target=&quot;_blank&quot; href=&quot;https://github.com/GEWIS/gewisdb/commit/%1$s&quot;&gt;%1$s&lt;/a&gt;. Please include this in all your bug reports.">
-        <source>You are using a build based on commit &lt;a target="_blank" href="https://github.com/GEWIS/gewisdb/commit/%1$s"&gt;%1$s&lt;/a&gt;. Please include this in all your bug reports.</source>
-        <target state="translated">You are using a build based on commit &lt;a target="_blank" href="https://github.com/GEWIS/gewisdb/commit/%1$s"&gt;%1$s&lt;/a&gt;. Please include this in all your bug reports.</target>
+      <trans-unit id="nYGFiM2" resname="You are being redirected">
+        <source>You are being redirected</source>
+        <target state="translated">You are being redirected</target>
       </trans-unit>
-      <trans-unit id="pR2nZwu" resname="You can always read the online Supremum on %s.">
-        <source>You can always read the online Supremum on %s.</source>
-        <target state="translated">You can always read the online Supremum on %s.</target>
+      <trans-unit id="j39_YJm" resname="You are being redirected to %destination%">
+        <source>You are being redirected to %destination%</source>
+        <target state="translated">You are being redirected to %destination%</target>
+      </trans-unit>
+      <trans-unit id="qDvnWHd" resname="You can always read the online Supremum on %link%.">
+        <source>You can always read the online Supremum on %link%.</source>
+        <target state="translated">You can always read the online Supremum on %link%.</target>
+      </trans-unit>
+      <trans-unit id="fDRBJ1U" resname="You can change these at any time once you are a member.">
+        <source>You can change these at any time once you are a member.</source>
+        <target state="translated">You can change these at any time once you are a member.</target>
       </trans-unit>
       <trans-unit id="FLbmfMo" resname="You cannot become a member of the association without agreeing to the terms.">
         <source>You cannot become a member of the association without agreeing to the terms.</source>
         <target state="translated">You cannot become a member of the association without agreeing to the terms.</target>
       </trans-unit>
-      <trans-unit id="KWcTrZE" resname="You cannot use your TU/e (student) e-mail address because if you leave or stop studying, we can no longer reach you about important announcements.">
-        <source>You cannot use your TU/e (student) e-mail address because if you leave or stop studying, we can no longer reach you about important announcements.</source>
-        <target state="translated">You cannot use your TU/e (student) e-mail address because if you leave or stop studying, we can no longer reach you about important announcements.</target>
+      <trans-unit id="7qHcWJI" resname="Your API token is &quot;%token%&quot;. This value will NOT be shown again!">
+        <source>Your API token is "%token%". This value will NOT be shown again!</source>
+        <target state="translated">Your API token is "%token%". This value will NOT be shown again!</target>
       </trans-unit>
-      <trans-unit id="QdzpkBU" resname="You have requested renewal of your status as graduate. Within 24 hours, you will see your new expiry date &lt;b&gt;%1$s&lt;/b&gt; on your member page on &lt;a href=&quot;//%2$s&quot;&gt;%2$s&lt;/a&gt;.">
-        <source>You have requested renewal of your status as graduate. Within 24 hours, you will see your new expiry date &lt;b&gt;%1$s&lt;/b&gt; on your member page on &lt;a href="//%2$s"&gt;%2$s&lt;/a&gt;.</source>
-        <target state="translated">You have requested renewal of your status as graduate. Within 24 hours, you will see your new expiry date &lt;b&gt;%1$s&lt;/b&gt; on your member page on &lt;a href="//%2$s"&gt;%2$s&lt;/a&gt;.</target>
-      </trans-unit>
-      <trans-unit id="q6p0vKv" resname="You have successfully requested renewal of your status as graduate.">
-        <source>You have successfully requested renewal of your status as graduate.</source>
-        <target state="translated">You have successfully requested renewal of your status as graduate.</target>
-      </trans-unit>
-      <trans-unit id="O_htvlR" resname="You have to agree to the Articles of Association and the Internal Regulations">
-        <source>You have to agree to the Articles of Association and the Internal Regulations</source>
-        <target state="translated">You have to agree to the Articles of Association and the Internal Regulations</target>
-      </trans-unit>
-      <trans-unit id="HnYDKlp" resname="You have to consent to processing your data">
-        <source>You have to consent to processing your data</source>
-        <target state="translated">You have to consent to processing your data</target>
-      </trans-unit>
-      <trans-unit id="pMROPbm" resname="Your API token is &quot;%s&quot;. This value will NOT be shown again!">
-        <source>Your API token is "%s". This value will NOT be shown again!</source>
-        <target state="translated">Your API token is "%s". This value will NOT be shown again!</target>
-      </trans-unit>
-      <trans-unit id="Un97QA4" resname="Your student number is a 7-digit number, for example 1234560. You have received this in an email when you enrolled and it is printed on your campus card. Go to &lt;a href=&quot;%s&quot;&gt;this page&lt;/a&gt; if you need help finding it. Your student number will be used to verify you are studying at the department of M&amp;CS.">
-        <source>Your student number is a 7-digit number, for example 1234560. You have received this in an email when you enrolled and it is printed on your campus card. Go to &lt;a href="%s"&gt;this page&lt;/a&gt; if you need help finding it. Your student number will be used to verify you are studying at the department of M&amp;CS.</source>
-        <target state="translated">Your student number is a 7-digit number, for example 1234560. You have received this in an email when you enrolled and it is printed on your campus card. Go to &lt;a href="%s"&gt;this page&lt;/a&gt; if you need help finding it. Your student number will be used to verify you are studying at the department of M&amp;CS.</target>
+      <trans-unit id="u2D_HZ." resname="Your student number is a 7-digit number, for example 1234560. You have received this in an email when you enrolled and it is printed on your campus card. Go to &lt;a href=&quot;%url%&quot;&gt;this page&lt;/a&gt; if you need help finding it. Your student number will be used to verify you are studying at the department of M&amp;CS.">
+        <source>Your student number is a 7-digit number, for example 1234560. You have received this in an email when you enrolled and it is printed on your campus card. Go to &lt;a href="%url%"&gt;this page&lt;/a&gt; if you need help finding it. Your student number will be used to verify you are studying at the department of M&amp;CS.</source>
+        <target state="translated">Your student number is a 7-digit number, for example 1234560. You have received this in an email when you enrolled and it is printed on your campus card. Go to &lt;a href="%url%"&gt;this page&lt;/a&gt; if you need help finding it. Your student number will be used to verify you are studying at the department of M&amp;CS.</target>
       </trans-unit>
       <trans-unit id="Wagn40Q" resname="a related decision was annulled after this annulment was made">
         <source>a related decision was annulled after this annulment was made</source>
         <target state="translated">a related decision was annulled after this annulment was made</target>
-      </trans-unit>
-      <trans-unit id="dtOd8PK" resname="active">
-        <source>active</source>
-        <target state="translated">active</target>
-      </trans-unit>
-      <trans-unit id="ST_rdFy" resname="active/inactive">
-        <source>active/inactive</source>
-        <target state="translated">active/inactive</target>
       </trans-unit>
       <trans-unit id="zxPuD2." resname="afgekeurd">
         <source>afgekeurd</source>
@@ -2307,29 +2833,9 @@
         <source>as</source>
         <target state="translated">as</target>
       </trans-unit>
-      <trans-unit id="80s76Ms" resname="change %s">
-        <source>change %s</source>
-        <target state="translated">change %s</target>
-      </trans-unit>
       <trans-unit id="RjhTtRC" resname="commissiereglement">
         <source>commissiereglement</source>
         <target state="translated">committee regulations</target>
-      </trans-unit>
-      <trans-unit id="8zu4a9C" resname="complete missing profile information">
-        <source>complete missing profile information</source>
-        <target state="translated">complete missing profile information</target>
-      </trans-unit>
-      <trans-unit id="Ap7H80t" resname="contact to renew graduate status">
-        <source>contact to renew graduate status</source>
-        <target state="translated">contact to renew graduate status</target>
-      </trans-unit>
-      <trans-unit id="iYI_E4F" resname="convert to graduate">
-        <source>convert to graduate</source>
-        <target state="translated">convert to graduate</target>
-      </trans-unit>
-      <trans-unit id="VCewc1B" resname="discharge from organ(s)">
-        <source>discharge from organ(s)</source>
-        <target state="translated">discharge from organ(s)</target>
       </trans-unit>
       <trans-unit id="S4170GF" resname="dispuutsreglement">
         <source>dispuutsreglement</source>
@@ -2339,17 +2845,9 @@
         <source>email address change pending</source>
         <target state="translated">email address change pending</target>
       </trans-unit>
-      <trans-unit id="bwHeqG3" resname="external">
-        <source>external</source>
-        <target state="translated">external</target>
-      </trans-unit>
       <trans-unit id="OgZ0qFO" resname="goedgekeurd">
         <source>goedgekeurd</source>
         <target state="translated">approved</target>
-      </trans-unit>
-      <trans-unit id="iznpmrh" resname="graduate">
-        <source>graduate</source>
-        <target state="translated">graduate</target>
       </trans-unit>
       <trans-unit id="Y2mxPzh" resname="https://gewis.nl/association/regulations">
         <source>https://gewis.nl/association/regulations</source>
@@ -2379,9 +2877,21 @@
         <source>it would make someone an active and an inactive member of %s at once</source>
         <target state="translated">it would make someone an active and an inactive member of %s at once</target>
       </trans-unit>
+      <trans-unit id="NoLyHVo" resname="listmonk sync">
+        <source>listmonk sync</source>
+        <target state="translated">listmonk sync</target>
+      </trans-unit>
       <trans-unit id="Kh6tBOa" resname="mailing list subscriptions">
         <source>mailing list subscriptions</source>
         <target state="translated">mailing list subscriptions</target>
+      </trans-unit>
+      <trans-unit id="EOcAucU" resname="mailman sync">
+        <source>mailman sync</source>
+        <target state="translated">mailman sync</target>
+      </trans-unit>
+      <trans-unit id="ikTP6Vn" resname="manual">
+        <source>manual</source>
+        <target state="translated">manual</target>
       </trans-unit>
       <trans-unit id="QOKJ.4x" resname="member">
         <source>member</source>
@@ -2411,10 +2921,6 @@
         <source>never</source>
         <target state="translated">never</target>
       </trans-unit>
-      <trans-unit id="P.KH1.n" resname="non-active">
-        <source>non-active</source>
-        <target state="translated">non-active</target>
-      </trans-unit>
       <trans-unit id="H7S2KJm" resname="onbekend">
         <source>onbekend</source>
         <target state="translated">unknown</target>
@@ -2423,33 +2929,9 @@
         <source>optional</source>
         <target state="translated">optional</target>
       </trans-unit>
-      <trans-unit id="YLX.Vbb" resname="ordinary">
-        <source>ordinary</source>
-        <target state="translated">ordinary</target>
-      </trans-unit>
       <trans-unit id="44E9u_Q" resname="our payment provider">
         <source>our payment provider</source>
         <target state="translated">our payment provider</target>
-      </trans-unit>
-      <trans-unit id="IkpSsp6" resname="proof of (non-TU/e) study OR board decision =&gt; renew">
-        <source>proof of (non-TU/e) study OR board decision =&gt; renew</source>
-        <target state="translated">proof of (non-TU/e) study OR board decision =&gt; renew</target>
-      </trans-unit>
-      <trans-unit id="sChfQMn" resname="reads as follows:">
-        <source>reads as follows:</source>
-        <target state="translated">reads as follows:</target>
-      </trans-unit>
-      <trans-unit id="rQJCV3q" resname="renew in appropriate type (ordinary or external)">
-        <source>renew in appropriate type (ordinary or external)</source>
-        <target state="translated">renew in appropriate type (ordinary or external)</target>
-      </trans-unit>
-      <trans-unit id="_42UFdt" resname="renew membership as external">
-        <source>renew membership as external</source>
-        <target state="translated">renew membership as external</target>
-      </trans-unit>
-      <trans-unit id="5rShlza" resname="resolves to %s">
-        <source>resolves to %s</source>
-        <target state="translated">resolves to %s</target>
       </trans-unit>
       <trans-unit id="wRWeEvR" resname="synced">
         <source>synced</source>
@@ -2511,6 +2993,10 @@
         <source>the organ was also abolished by another decision</source>
         <target state="translated">the organ was also abolished by another decision</target>
       </trans-unit>
+      <trans-unit id="Ga2SNrG" resname="things need attention">
+        <source>things need attention</source>
+        <target state="translated">things need attention</target>
+      </trans-unit>
       <trans-unit id="Zuj3UWC" resname="to be created">
         <source>to be created</source>
         <target state="translated">to be created</target>
@@ -2521,7 +3007,11 @@
       </trans-unit>
       <trans-unit id="g6iurXi" resname="¹ DSA Pattern is the study association for students of the data science programs. The introduction week, round table discussions, and other education activities for these programs are organized by Pattern. Although you can join GEWIS, you might benefit more from joining Pattern on &lt;a href=&quot;https://dsapattern.nl/&quot; target=&quot;_blank&quot;&gt;their website&lt;/a&gt;.">
         <source>¹ DSA Pattern is the study association for students of the data science programs. The introduction week, round table discussions, and other education activities for these programs are organized by Pattern. Although you can join GEWIS, you might benefit more from joining Pattern on &lt;a href="https://dsapattern.nl/" target="_blank"&gt;their website&lt;/a&gt;.</source>
-        <target state="translated">¹ DSA Pattern is the study association for students of the data science programs. The introduction week, round table discussions, and other education activities for these programs are organized by Pattern. Although you can join GEWIS, you might benefit more from joining Pattern on &lt;a href="https://dsapattern.nl/" target="_blank"&gt;their website&lt;/a&gt;.</target>
+        <target state="translated"><![CDATA[¹ DSA Pattern is the study association for students of the data science programs. The introduction week, round table discussions, and other education activities for these programs are organized by Pattern. Although you can join GEWIS, you might benefit more from joining Pattern on <a href="https://dsapattern.nl/" target="_blank">their website</a>.]]></target>
+      </trans-unit>
+      <trans-unit id="dch67pJ" resname="¹ This permission will add more properties to existing entities that can already be requested.">
+        <source>¹ This permission will add more properties to existing entities that can already be requested.</source>
+        <target state="translated">¹ This permission will add more properties to existing entities that can already be requested.</target>
       </trans-unit>
     </body>
   </file>

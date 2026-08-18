@@ -79,7 +79,12 @@ class LoginType extends AbstractType
     #[Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults(['data_class' => null]);
+        $resolver->setDefaults([
+            'data_class' => null,
+            // The submitted credentials never reach a controller — the firewall intercepts them — so the token this
+            // form renders is the one the firewall validates, under the identifier it uses.
+            'csrf_token_id' => 'authenticate',
+        ]);
     }
 
     /**

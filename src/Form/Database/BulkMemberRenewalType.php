@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Form\Member;
+namespace App\Form\Database;
 
-use App\Entity\Member\Enums\MembershipTypes;
-use App\Form\DataTransformer\StringToEnumTransformer;
-use App\Validator\Member\BulkMemberIds;
+use App\Entity\Database\Enums\MembershipTypes;
+use App\Validator\Database\BulkMemberIds;
 use Override;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,8 +16,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Translation\TranslatableMessage;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use function array_column;
-use function array_combine;
 use function preg_split;
 use function Symfony\Component\Translation\t;
 use function trim;
@@ -48,14 +45,13 @@ class BulkMemberRenewalType extends AbstractType
             ],
         ]);
 
-        $membershipTypes = array_column(MembershipTypes::cases(), 'value');
-
-        $builder->add('membershipType', ChoiceType::class, [
+        $builder->add('membershipType', EnumType::class, [
             'label' => t('Membership Type'),
+            'class' => MembershipTypes::class,
             'expanded' => true,
-            'choices' => array_combine($membershipTypes, $membershipTypes),
-            'choice_label' => static fn (string $type): TranslatableMessage => MembershipTypeChoices::label(
-                MembershipTypes::from($type),
+            // The radios say who each type applies to, which is more than the enum labels itself with.
+            'choice_label' => static fn (MembershipTypes $type): TranslatableMessage => MembershipTypeChoices::label(
+                $type,
             ),
             'invalid_message' => t('Select an existing membership type.'),
         ]);
@@ -64,8 +60,6 @@ class BulkMemberRenewalType extends AbstractType
 
         // The second step of the flow submits through this button instead, which is how the preview is confirmed.
         $builder->add('intent', SubmitType::class, ['label' => t('Confirm changes')]);
-
-        $builder->get('membershipType')->addModelTransformer(new StringToEnumTransformer(MembershipTypes::class));
     }
 
     #[Override]

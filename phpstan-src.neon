@@ -18,6 +18,7 @@ parameters:
     # PHPStan cannot analyse a subclass of a class it cannot reflect.
     bootstrapFiles:
         - phpstan/stubs/ServiceEntityRepository.php
+        - scripts/stubs/symfony-security.php
     ignoreErrors:
         -
             identifier: class.notFound

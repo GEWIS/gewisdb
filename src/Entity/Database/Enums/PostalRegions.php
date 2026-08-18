@@ -2,15 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Entity\Member\Enums;
+namespace App\Entity\Database\Enums;
 
 use Override;
 use Symfony\Component\Translation\TranslatableMessage;
 use Symfony\Contracts\Translation\TranslatableInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-use function array_column;
-use function array_combine;
 use function array_map;
 use function array_merge;
 
@@ -287,16 +285,6 @@ enum PostalRegions: string implements TranslatableInterface
         ?string $locale = null,
     ): string {
         return $this->getName()->trans($translator, $locale);
-    }
-
-    /**
-     * @return string[]
-     */
-    public static function formValues(): array
-    {
-        $values = array_column(self::cases(), 'value');
-
-        return array_combine($values, $values);
     }
 
     /**

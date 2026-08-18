@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Form\Member;
+namespace App\Form\Database;
 
-use App\Entity\Member\Address;
-use App\Entity\Member\Enums\AddressTypes;
-use App\Entity\Member\Enums\PostalRegions;
+use App\Entity\Database\Address;
+use App\Entity\Database\Enums\AddressTypes;
+use App\Entity\Database\Enums\PostalRegions;
 use App\Form\DataTransformer\StringToEnumTransformer;
 use Override;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,6 +19,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\Constraints\Regex;
 
 use function Symfony\Component\Translation\t;
@@ -45,11 +46,12 @@ class AddressType extends AbstractType
             $builder->get('type')->addModelTransformer(new StringToEnumTransformer(AddressTypes::class));
         }
 
-        $builder->add('country', ChoiceType::class, [
+        $builder->add('country', EnumType::class, [
             'label' => t('Postal Region'),
+            'class' => PostalRegions::class,
             'placeholder' => t('Select Postal Region'),
-            'choices' => PostalRegions::formValues(),
             'invalid_message' => t('Select an existing postal region.'),
+            'constraints' => [new NotNull()],
         ]);
 
         $builder->add('street', TextType::class, [
@@ -96,9 +98,9 @@ class AddressType extends AbstractType
         $builder->add('phone', TextType::class, [
             'label' => t('Phone Number'),
             'required' => false,
+            // The column is NOT NULL: an untouched optional field is an empty string, not a missing one.
+            'empty_data' => '',
         ]);
-
-        $builder->get('country')->addModelTransformer(new StringToEnumTransformer(PostalRegions::class));
 
         // A new address starts out in the Netherlands; one that already exists keeps the region it has.
         $builder->get('country')->addEventListener(

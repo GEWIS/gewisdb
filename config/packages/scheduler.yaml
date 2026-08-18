@@ -1,0 +1,12 @@
+# Symfony Scheduler takes over from the container crontab. The schedules declared in src/Scheduler/ are dispatched by
+# a long-running worker instead of by crond:
+#
+#     bin/console messenger:consume scheduler_maintenance scheduler_mailinglist
+#
+# Command output no longer goes to a per-job file under /data/logs; it is captured by the worker and reaches the
+# monolog handlers along with everything else.
+framework:
+    lock:
+        # Both schedules are consumed inside a single container, exactly as the crontab was. If the worker is ever
+        # spread over more than one container this has to become a store they share.
+        default: 'flock'

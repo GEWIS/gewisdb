@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Form\Member;
+namespace App\Form\Database;
 
-use App\Entity\Member\Address;
-use App\Entity\Member\Enums\PostalRegions;
-use App\Form\DataTransformer\StringToEnumTransformer;
+use App\Entity\Database\Address;
+use App\Entity\Database\Enums\PostalRegions;
 use Override;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -36,12 +35,12 @@ class AddressEditType extends AbstractType
         FormBuilderInterface $builder,
         array $options,
     ): void {
-        $builder->add('country', ChoiceType::class, [
+        $builder->add('country', EnumType::class, [
             'label' => t('Postal Region'),
+            'class' => PostalRegions::class,
             'placeholder' => t('Select Postal Region'),
-            'choices' => PostalRegions::formValues(),
-            'choice_translation_domain' => false,
             'invalid_message' => t('Select an existing postal region.'),
+            'constraints' => [new Assert\NotNull()],
         ]);
 
         $builder->add('street', TextType::class, [
@@ -92,8 +91,6 @@ class AddressEditType extends AbstractType
         ]);
 
         $builder->add('submit', SubmitType::class, ['label' => t('Update Address')]);
-
-        $builder->get('country')->addModelTransformer(new StringToEnumTransformer(PostalRegions::class));
     }
 
     #[Override]
