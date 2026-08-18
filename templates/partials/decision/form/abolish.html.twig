@@ -24,7 +24,7 @@
         {% include 'partials/decision/lookup-input.html.twig' with {
             'controller': 'organ-lookup',
             'field': form.name,
-            'placeholder': 'Organ'|trans,
+            'placeholder': 'Body'|trans,
         } only %}
         {{ form_errors(form.name) }}
         {{ form_errors(form.subdecision) }}
@@ -37,7 +37,7 @@
     {{ form_widget(form.subdecision.sequence, {'attr': {'data-organ-lookup-target': 'sequence'}}) }}
 
     <div class="mb-3 d-none" data-organ-members-target="panel">
-        <strong>{{ 'The organ to be abolished includes the following members:'|trans }}</strong>
+        <strong>{{ 'The body to be abolished includes the following members:'|trans }}</strong>
         <ul data-organ-members-target="list"></ul>
     </div>
 

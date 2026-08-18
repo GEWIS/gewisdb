@@ -33,7 +33,7 @@ class InstallType extends AbstractType
         $builder
             // Only the source for the organ autocomplete, which fills in the foundation reference below.
             ->add('name', TextType::class, [
-                'label' => t('Organ'),
+                'label' => t('Body'),
                 'mapped' => false,
                 'required' => false,
             ])

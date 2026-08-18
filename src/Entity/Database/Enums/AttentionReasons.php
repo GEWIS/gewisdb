@@ -72,12 +72,12 @@ enum AttentionReasons: string implements TranslatableInterface
                 'Proof of (non-TU/e) study OR board decision => renew',
             ),
             self::ExpiringOrdinaryActive =>
-                new TranslatableMessage('Discharge from organ(s) OR renew in appropriate type (ordinary or external)'),
+                new TranslatableMessage('Discharge from bodies OR renew in appropriate type (ordinary or external)'),
             self::ExpiringOrdinaryNonActive => new TranslatableMessage(
                 '(bulk) renew as ordinary OR convert to graduate',
             ),
             self::ExpiringGraduateActiveInactive => new TranslatableMessage(
-                'Contact to renew graduate status OR discharge from organ(s)',
+                'Contact to renew graduate status OR discharge from bodies',
             ),
             default => new TranslatableMessage('No action recommended'),
         };

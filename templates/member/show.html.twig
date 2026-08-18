@@ -154,7 +154,7 @@
                             {% endfor %}
                         </div>
                     {% else %}
-                        <p class="text-secondary mb-0">{{ 'This member is not installed in an organ.'|trans }}</p>
+                        <p class="text-secondary mb-0">{{ 'This member is not installed in a body.'|trans }}</p>
                     {% endif %}
                 </div>
             </div>
@@ -164,7 +164,7 @@
                     <span class="flex-grow-1">
                         <span class="d-block fw-semibold">{{ 'Destructive actions'|trans }}</span>
                         <span class="text-secondary small">
-                            {{ 'Deleting a member removes their record and their organ history. Letting the membership expire is almost always what you want instead.'|trans }}
+                            {{ 'Deleting a member removes their record and their body history. Letting the membership expire is almost always what you want instead.'|trans }}
                         </span>
                     </span>
                     <a href="{{ path('member_delete', {lidnr: member.lidnr}) }}" class="btn btn-sm btn-outline-danger">

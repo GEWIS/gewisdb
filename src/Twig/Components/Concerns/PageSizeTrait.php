@@ -14,14 +14,14 @@ use function in_array;
  */
 trait PageSizeTrait
 {
-    public const array PAGE_SIZES = [25, 50, 100, 250];
+    public const array PAGE_SIZES = [10, 25, 50, 100];
 
     #[LiveProp(
         writable: true,
         url: true,
         onUpdated: 'onPageSizeUpdated',
     )]
-    public int $pageSize = 25;
+    public int $pageSize = 10;
 
     public function onPageSizeUpdated(): void
     {
@@ -29,8 +29,18 @@ trait PageSizeTrait
         $this->page = 1;
     }
 
+    /**
+     * The sizes offered, so the pagination partial does not keep its own copy of the list.
+     *
+     * @return int[]
+     */
+    public function getPageSizes(): array
+    {
+        return self::PAGE_SIZES;
+    }
+
     protected function pageSize(): int
     {
-        return in_array($this->pageSize, self::PAGE_SIZES, true) ? $this->pageSize : 25;
+        return in_array($this->pageSize, self::PAGE_SIZES, true) ? $this->pageSize : self::PAGE_SIZES[0];
     }
 }

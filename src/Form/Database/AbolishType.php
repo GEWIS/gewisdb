@@ -31,12 +31,12 @@ class AbolishType extends AbstractType
         $builder
             // Only the source for the organ autocomplete, which fills in the foundation reference below.
             ->add('name', TextType::class, [
-                'label' => t('Organ'),
+                'label' => t('Body'),
                 'mapped' => false,
                 'required' => false,
             ])
             ->add('subdecision', SubDecisionType::class, ['subdecision_class' => Foundation::class])
-            ->add('submit', SubmitType::class, ['label' => t('Abolish Organ')])
+            ->add('submit', SubmitType::class, ['label' => t('Abolish Body')])
             ->setDataMapper($this->dataMapper);
     }
 

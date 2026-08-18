@@ -1,11 +1,15 @@
 {% extends 'layout-sidebar.html.twig' %}
 
-{% block page_title %}{{ 'Organs'|trans }} - {{ parent() }}{% endblock %}
+{% block page_title %}{{ 'Bodies'|trans }} - {{ parent() }}{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item active" aria-current="page">{{ 'Bodies'|trans }}</li>
+{% endblock %}
 
 {% block page_header %}
     {% embed 'partials/application/page-header.html.twig' %}
         {% block header_container_class %}container-fluid px-3{% endblock %}
-        {% block header_title %}{{ 'Organs'|trans }}{% endblock %}
+        {% block header_title %}{{ 'Bodies'|trans }}{% endblock %}
         {% block header_subtitle %}
             <p class="page-header-meta mb-0">
                 {{ 'Committees and fraternities, each traced back to the decision that founded it.'|trans }}
@@ -15,64 +19,5 @@
 {% endblock %}
 
 {% block contents %}
-    <div class="panel">
-        <div class="panel-body">
-            {# Searching is a page of its own rather than a type-ahead, so a search can be linked to and reloaded. #}
-            <form method="get" action="{{ path('decision_organ_index') }}" role="search">
-                <label class="form-label" for="organ-search">{{ 'Search Organs'|trans }}</label>
-                <div class="input-group">
-                    <input type="search" class="form-control" id="organ-search" name="q" autofocus
-                           value="{{ query }}" placeholder="{{ 'Abbreviation or name'|trans }}">
-                    <button type="submit" class="btn btn-gewis-primary">{{ 'Search'|trans }}</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div class="panel">
-        <div class="panel-body">
-            {% if organs is empty %}
-                {% include 'partials/application/empty-state.html.twig' with {
-                    icon: 'fa-sitemap',
-                    title: 'There are no organs that match.'|trans,
-                    body: 'Try a different abbreviation or name, or clear the search.'|trans,
-                } only %}
-            {% else %}
-                <div class="table-responsive">
-                    <table class="table table-hover align-middle mb-0">
-                        <thead>
-                            <tr>
-                                <th scope="col">{{ 'Abbreviation'|trans }}</th>
-                                <th scope="col">{{ 'Name'|trans }}</th>
-                                <th scope="col">{{ 'Founded by'|trans }}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for organ in organs %}
-                                {% set url = path('decision_organ_view', {
-                                    type: organ.meetingType.value,
-                                    number: organ.meetingNumber,
-                                    point: organ.decisionPoint,
-                                    decision: organ.decisionNumber,
-                                    sequence: organ.sequence,
-                                }) %}
-                                <tr>
-                                    <td>
-                                        <a class="fw-semibold text-body text-decoration-none" href="{{ url }}">
-                                            {{ organ.abbr }}
-                                        </a>
-                                    </td>
-                                    <td><a class="text-body text-decoration-none" href="{{ url }}">{{ organ.name }}</a></td>
-                                    <td class="font-monospace">
-                                        {{ organ.meetingType.value }}
-                                        {{ organ.meetingNumber }}.{{ organ.decisionPoint }}.{{ organ.decisionNumber }}
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            {% endif %}
-        </div>
-    </div>
+    {{ component('Database:BodyOverview') }}
 {% endblock %}

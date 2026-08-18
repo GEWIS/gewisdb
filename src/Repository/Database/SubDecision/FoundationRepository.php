@@ -14,6 +14,7 @@ use App\Entity\Database\SubDecision\Installation;
 use DateTimeInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 use function strtolower;
@@ -171,11 +172,45 @@ class FoundationRepository extends ServiceEntityRepository
         string $query,
         bool $includeAbrogated = false,
     ): array {
+        return $this->overviewQuery($query, $includeAbrogated)->getQuery()->getResult();
+    }
+
+    /**
+     * One page of bodies, ordered by abbreviation.
+     *
+     * @return Paginator<Foundation>
+     */
+    public function paginateForOverview(
+        string $search,
+        int $page,
+        int $pageSize,
+    ): Paginator {
+        $qb = $this->overviewQuery($search)
+            ->orderBy('o.abbr', 'ASC')
+            ->setFirstResult(($page - 1) * $pageSize)
+            ->setMaxResults($pageSize);
+
+        return new Paginator($qb->getQuery(), false);
+    }
+
+    /**
+     * The bodies that exist: founded, not abrogated, and their founding decision not annulled.
+     *
+     * A body is not an entity of its own, so "exists" is three conditions on the decision graph rather than a column.
+     */
+    private function overviewQuery(
+        string $search,
+        bool $includeAbrogated = false,
+    ): QueryBuilder {
         $qb = $this->createQueryBuilder('o');
 
+        // The two ways of matching are grouped: `A OR B AND C` binds the AND tighter, so without the grouping a
+        // body whose name matched came back even when the conditions below excluded it.
         $qb->addSelect('d', 'm')
-            ->where('LOWER(o.name) LIKE :name')
-            ->orWhere('LOWER(o.abbr) LIKE :name')
+            ->andWhere($qb->expr()->orX(
+                'LOWER(o.name) LIKE :name',
+                'LOWER(o.abbr) LIKE :name',
+            ))
             ->join('o.decision', 'd')
             ->join('d.meeting', 'm');
 
@@ -194,7 +229,7 @@ class FoundationRepository extends ServiceEntityRepository
         ));
 
         if (!$includeAbrogated) {
-            // we want to leave out organs that have been abrogated
+            // we want to leave out bodies that have been abrogated
             $qbn = $this->getEntityManager()->createQueryBuilder();
             $qbn->select('a')
                 ->from(Abrogation::class, 'a')
@@ -227,9 +262,9 @@ class FoundationRepository extends ServiceEntityRepository
             ));
         }
 
-        $qb->setParameter(':name', '%' . strtolower($query) . '%');
+        $qb->setParameter(':name', '%' . strtolower($search) . '%');
 
-        return $qb->getQuery()->getResult();
+        return $qb;
     }
 
     /**

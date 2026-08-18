@@ -70,7 +70,7 @@ class OrganRegulationType extends AbstractType
                 ],
             ])
             ->add('date', DateType::class, [
-                'label' => t('Date of Organ Regulation'),
+                'label' => t('Date of Body Regulation'),
                 'widget' => 'single_text',
                 'constraints' => [new NotNull()],
             ])
@@ -100,7 +100,7 @@ class OrganRegulationType extends AbstractType
                 'placeholder' => false,
                 'required' => false,
             ])
-            ->add('submit', SubmitType::class, ['label' => t('Add Organ Regulation')])
+            ->add('submit', SubmitType::class, ['label' => t('Add Body Regulation')])
             ->setDataMapper($this->dataMapper);
     }
 

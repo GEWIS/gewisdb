@@ -81,6 +81,7 @@ class MeetingRepository extends ServiceEntityRepository
     public function paginateForOverview(
         int $page,
         int $pageSize,
+        ?MeetingTypes $type = null,
     ): Paginator {
         $qb = $this->createQueryBuilder('m')
             ->addSelect('(CASE WHEN m.type = :virtual_meeting THEN 1 ELSE 0 END) AS HIDDEN virtSort')
@@ -90,7 +91,40 @@ class MeetingRepository extends ServiceEntityRepository
             ->setFirstResult(($page - 1) * $pageSize)
             ->setMaxResults($pageSize);
 
+        if (null !== $type) {
+            $qb->andWhere('m.type = :type')
+                ->setParameter('type', $type);
+        }
+
         return new Paginator($qb->getQuery(), false);
+    }
+
+    /**
+     * How many meetings each type has, so the chips can say so before they are clicked.
+     *
+     * @return array<string, int> keyed by the value of `MeetingTypes`, in the order that enum declares them
+     */
+    public function countsByType(): array
+    {
+        $rows = $this->createQueryBuilder('m')
+            ->select('m.type AS type', 'COUNT(m.number) AS total')
+            ->groupBy('m.type')
+            ->getQuery()
+            ->getResult();
+
+        $counts = [];
+        foreach ($rows as $row) {
+            $counts[$row['type']->value] = (int) $row['total'];
+        }
+
+        // A type nobody has minuted does not come back from a `GROUP BY`, and it is still a type: it is a zero, not
+        // a missing row.
+        $byType = [];
+        foreach (MeetingTypes::cases() as $case) {
+            $byType[$case->value] = $counts[$case->value] ?? 0;
+        }
+
+        return $byType;
     }
 
     /**

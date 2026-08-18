@@ -69,9 +69,9 @@
         <source>%members% members, %graduates% graduates, %expired% expired and %prospectives% prospective members</source>
         <target state="translated">%members% members, %graduates% graduates, %expired% expired and %prospectives% prospective members</target>
       </trans-unit>
-      <trans-unit id="pqLao9N" resname="%name% has been a member of an organ, or has budgets or statements to their name, so their name stays on record: we have a legal basis under the GDPR to keep it, and the decisions that mention them have to stay correct.">
-        <source>%name% has been a member of an organ, or has budgets or statements to their name, so their name stays on record: we have a legal basis under the GDPR to keep it, and the decisions that mention them have to stay correct.</source>
-        <target state="translated">%name% has been a member of an organ, or has budgets or statements to their name, so their name stays on record: we have a legal basis under the GDPR to keep it, and the decisions that mention them have to stay correct.</target>
+      <trans-unit id="IXsFOWz" resname="%name% has been a member of a body, or has budgets or statements to their name, so their name stays on record: we have a legal basis under the GDPR to keep it, and the decisions that mention them have to stay correct.">
+        <source>%name% has been a member of a body, or has budgets or statements to their name, so their name stays on record: we have a legal basis under the GDPR to keep it, and the decisions that mention them have to stay correct.</source>
+        <target state="translated">%name% has been a member of a body, or has budgets or statements to their name, so their name stays on record: we have a legal basis under the GDPR to keep it, and the decisions that mention them have to stay correct.</target>
       </trans-unit>
       <trans-unit id="PDyu2UH" resname="%number% decisions">
         <source>%number% decisions</source>
@@ -185,13 +185,13 @@
         <source>Abbreviation suffix (SC%number%-{SUFFIX})</source>
         <target state="translated">Abbreviation suffix (SC%number%-{SUFFIX})</target>
       </trans-unit>
-      <trans-unit id="J.NLPQn" resname="Abolish Organ">
-        <source>Abolish Organ</source>
-        <target state="translated">Abolish Organ</target>
+      <trans-unit id="muqVQnb" resname="Abolish Body">
+        <source>Abolish Body</source>
+        <target state="translated">Abolish Body</target>
       </trans-unit>
-      <trans-unit id="GNeiqBB" resname="Abolish an organ and end its installations.">
-        <source>Abolish an organ and end its installations.</source>
-        <target state="translated">Abolish an organ and end its installations.</target>
+      <trans-unit id="nwdQ2M8" resname="Abolish a body and end its installations.">
+        <source>Abolish a body and end its installations.</source>
+        <target state="translated">Abolish a body and end its installations.</target>
       </trans-unit>
       <trans-unit id="sHC_w4U" resname="Abolition">
         <source>Abolition</source>
@@ -216,6 +216,10 @@
       <trans-unit id="szLKipI" resname="Add %type%">
         <source>Add %type%</source>
         <target state="translated">Add %type%</target>
+      </trans-unit>
+      <trans-unit id="nlYjaTZ" resname="Add Body Regulation">
+        <source>Add Body Regulation</source>
+        <target state="translated">Add Body Regulation</target>
       </trans-unit>
       <trans-unit id="uXzabWV" resname="Add Budget/Statement">
         <source>Add Budget/Statement</source>
@@ -257,10 +261,6 @@
         <source>Add New Meeting</source>
         <target state="translated">Add New Meeting</target>
       </trans-unit>
-      <trans-unit id="pIjBdBI" resname="Add Organ Regulation">
-        <source>Add Organ Regulation</source>
-        <target state="translated">Add Organ Regulation</target>
-      </trans-unit>
       <trans-unit id="3EZgAIw" resname="Add new user">
         <source>Add new user</source>
         <target state="translated">Add new user</target>
@@ -288,6 +288,10 @@
       <trans-unit id="W1PSNEv" resname="Agreement">
         <source>Agreement</source>
         <target state="translated">Agreement</target>
+      </trans-unit>
+      <trans-unit id="tHdA52O" resname="All">
+        <source>All</source>
+        <target state="translated">All</target>
       </trans-unit>
       <trans-unit id="bN4hpxf" resname="All API permissions">
         <source>All API permissions</source>
@@ -365,9 +369,9 @@
         <source>Approve the minutes of an earlier meeting.</source>
         <target state="translated">Approve the minutes of an earlier meeting.</target>
       </trans-unit>
-      <trans-unit id="KHFP4_g" resname="Approve the regulations of an organ.">
-        <source>Approve the regulations of an organ.</source>
-        <target state="translated">Approve the regulations of an organ.</target>
+      <trans-unit id="IKRxUb3" resname="Approve the regulations of a body.">
+        <source>Approve the regulations of a body.</source>
+        <target state="translated">Approve the regulations of a body.</target>
       </trans-unit>
       <trans-unit id="jHsLfpv" resname="Are you sure %name%?">
         <source>Are you sure %name%?</source>
@@ -480,6 +484,26 @@
       <trans-unit id="UwyDHXV" resname="Boards - List functions and translations">
         <source>Boards - List functions and translations</source>
         <target state="translated">Boards - List functions and translations</target>
+      </trans-unit>
+      <trans-unit id="oqXX_GF" resname="Bodies">
+        <source>Bodies</source>
+        <target state="translated">Bodies</target>
+      </trans-unit>
+      <trans-unit id="5niZzt5" resname="Bodies - List functions and translations">
+        <source>Bodies - List functions and translations</source>
+        <target state="translated">Bodies - List functions and translations</target>
+      </trans-unit>
+      <trans-unit id="9U0Wrgh" resname="Bodies - Read body membership (per user/body)">
+        <source>Bodies - Read body membership (per user/body)</source>
+        <target state="translated">Bodies - Read body membership (per user/body)</target>
+      </trans-unit>
+      <trans-unit id="cGXWNw." resname="Body">
+        <source>Body</source>
+        <target state="translated">Body</target>
+      </trans-unit>
+      <trans-unit id="ppP2kVG" resname="Body Regulation">
+        <source>Body Regulation</source>
+        <target state="translated">Body Regulation</target>
       </trans-unit>
       <trans-unit id="pg8.RVR" resname="Brand Manager">
         <source>Brand Manager</source>
@@ -681,9 +705,9 @@
         <source>Confirmed %count% membership renewal(s).</source>
         <target state="translated">Confirmed %count% membership renewal(s).</target>
       </trans-unit>
-      <trans-unit id="UXhGom8" resname="Contact to renew graduate status OR discharge from organ(s)">
-        <source>Contact to renew graduate status OR discharge from organ(s)</source>
-        <target state="translated">Contact to renew graduate status OR discharge from organ(s)</target>
+      <trans-unit id="m9wdMc7" resname="Contact to renew graduate status OR discharge from bodies">
+        <source>Contact to renew graduate status OR discharge from bodies</source>
+        <target state="translated">Contact to renew graduate status OR discharge from bodies</target>
       </trans-unit>
       <trans-unit id="pHre2r7" resname="Controleer wachtwoord">
         <source>Controleer wachtwoord</source>
@@ -773,6 +797,10 @@
         <source>Database</source>
         <target state="translated">Database</target>
       </trans-unit>
+      <trans-unit id="Rr92VOc" resname="Date of Body Regulation">
+        <source>Date of Body Regulation</source>
+        <target state="translated">Date of Body Regulation</target>
+      </trans-unit>
       <trans-unit id="htXSJ2v" resname="Date of Budget/Statement">
         <source>Date of Budget/Statement</source>
         <target state="translated">Date of Budget/Statement</target>
@@ -780,10 +808,6 @@
       <trans-unit id="EodRb5J" resname="Date of Expiration">
         <source>Date of Expiration</source>
         <target state="translated">Date of Expiration</target>
-      </trans-unit>
-      <trans-unit id="stfQbnB" resname="Date of Organ Regulation">
-        <source>Date of Organ Regulation</source>
-        <target state="translated">Date of Organ Regulation</target>
       </trans-unit>
       <trans-unit id="juv_fhG" resname="De afrekening %NAME% van %AUTHOR%, versie %VERSION% van %DATE% wordt %APPROVAL%%CHANGES%.">
         <source>De afrekening %NAME% van %AUTHOR%, versie %VERSION% van %DATE% wordt %APPROVAL%%CHANGES%.</source>
@@ -877,9 +901,9 @@
         <source>Deleted</source>
         <target state="translated">Deleted</target>
       </trans-unit>
-      <trans-unit id="oepf9rO" resname="Deleting a member removes their record and their organ history. Letting the membership expire is almost always what you want instead.">
-        <source>Deleting a member removes their record and their organ history. Letting the membership expire is almost always what you want instead.</source>
-        <target state="translated">Deleting a member removes their record and their organ history. Letting the membership expire is almost always what you want instead.</target>
+      <trans-unit id="ACQCBTW" resname="Deleting a member removes their record and their body history. Letting the membership expire is almost always what you want instead.">
+        <source>Deleting a member removes their record and their body history. Letting the membership expire is almost always what you want instead.</source>
+        <target state="translated">Deleting a member removes their record and their body history. Letting the membership expire is almost always what you want instead.</target>
       </trans-unit>
       <trans-unit id="NMmVjl0" resname="Description">
         <source>Description</source>
@@ -921,9 +945,9 @@
         <source>Discharge a board member.</source>
         <target state="translated">Discharge a board member.</target>
       </trans-unit>
-      <trans-unit id="W4AWjU7" resname="Discharge from organ(s) OR renew in appropriate type (ordinary or external)">
-        <source>Discharge from organ(s) OR renew in appropriate type (ordinary or external)</source>
-        <target state="translated">Discharge from organ(s) OR renew in appropriate type (ordinary or external)</target>
+      <trans-unit id="m12dSPp" resname="Discharge from bodies OR renew in appropriate type (ordinary or external)">
+        <source>Discharge from bodies OR renew in appropriate type (ordinary or external)</source>
+        <target state="translated">Discharge from bodies OR renew in appropriate type (ordinary or external)</target>
       </trans-unit>
       <trans-unit id=".0w9JW8" resname="Discharges">
         <source>Discharges</source>
@@ -959,7 +983,7 @@
       </trans-unit>
       <trans-unit id=".QWkpTr" resname="Each shortcut opens the bulk renewal form with these members already filled in. Renew the members who are still studying &lt;strong&gt;first&lt;/strong&gt;.">
         <source>Each shortcut opens the bulk renewal form with these members already filled in. Renew the members who are still studying &lt;strong&gt;first&lt;/strong&gt;.</source>
-        <target state="translated">Each shortcut opens the bulk renewal form with these members already filled in. Renew the members who are still studying &lt;strong&gt;first&lt;/strong&gt;.</target>
+        <target state="translated"><![CDATA[Each shortcut opens the bulk renewal form with these members already filled in. Renew the members who are still studying <strong>first</strong>.]]></target>
       </trans-unit>
       <trans-unit id="M.l1CPU" resname="Edit">
         <source>Edit</source>
@@ -1117,9 +1141,9 @@
         <source>First Name</source>
         <target state="translated">First Name</target>
       </trans-unit>
-      <trans-unit id="eW6AkKu" resname="Found Organ">
-        <source>Found Organ</source>
-        <target state="translated">Found Organ</target>
+      <trans-unit id="RHM6LTR" resname="Found Body">
+        <source>Found Body</source>
+        <target state="translated">Found Body</target>
       </trans-unit>
       <trans-unit id="TDtJcVm" resname="Foundation">
         <source>Foundation</source>
@@ -1177,9 +1201,9 @@
         <source>Get API Health</source>
         <target state="translated">Get API Health</target>
       </trans-unit>
-      <trans-unit id="ffwrQ0B" resname="Get active Members (members that are in one or more organs)">
-        <source>Get active Members (members that are in one or more organs)</source>
-        <target state="translated">Get active Members (members that are in one or more organs)</target>
+      <trans-unit id="ga4HTaq" resname="Get active Members (members that are in one or more bodies)">
+        <source>Get active Members (members that are in one or more bodies)</source>
+        <target state="translated">Get active Members (members that are in one or more bodies)</target>
       </trans-unit>
       <trans-unit id="RsggguW" resname="Get all Members">
         <source>Get all Members</source>
@@ -1291,7 +1315,7 @@
       </trans-unit>
       <trans-unit id="Lsi9YBZ" resname="If your browser does not redirect you, please &lt;a href=&quot;%url%&quot;&gt;click here&lt;/a&gt; to continue.">
         <source>If your browser does not redirect you, please &lt;a href="%url%"&gt;click here&lt;/a&gt; to continue.</source>
-        <target state="translated">If your browser does not redirect you, please &lt;a href="%url%"&gt;click here&lt;/a&gt; to continue.</target>
+        <target state="translated"><![CDATA[If your browser does not redirect you, please <a href="%url%">click here</a> to continue.]]></target>
       </trans-unit>
       <trans-unit id="bhJd7GS" resname="Inactief Lid">
         <source>Inactief Lid</source>
@@ -1321,9 +1345,9 @@
         <source>Install a member in a board function.</source>
         <target state="translated">Install a member in a board function.</target>
       </trans-unit>
-      <trans-unit id="fBMZIZH" resname="Install members in an organ, or end an installation.">
-        <source>Install members in an organ, or end an installation.</source>
-        <target state="translated">Install members in an organ, or end an installation.</target>
+      <trans-unit id="kveFmeW" resname="Install members in a body, or end an installation.">
+        <source>Install members in a body, or end an installation.</source>
+        <target state="translated">Install members in a body, or end an installation.</target>
       </trans-unit>
       <trans-unit id="CDGfaMZ" resname="Installation">
         <source>Installation</source>
@@ -1765,6 +1789,10 @@
         <source>No mailing lists</source>
         <target state="translated">No mailing lists</target>
       </trans-unit>
+      <trans-unit id="JVu2Rm6" resname="No meetings of this type">
+        <source>No meetings of this type</source>
+        <target state="translated">No meetings of this type</target>
+      </trans-unit>
       <trans-unit id="DI5Mjh0" resname="No members match">
         <source>No members match</source>
         <target state="translated">No members match</target>
@@ -1801,9 +1829,9 @@
         <source>Nobody has asked for a change to their data.</source>
         <target state="translated">Nobody has asked for a change to their data.</target>
       </trans-unit>
-      <trans-unit id="Q6GN7yN" resname="Nobody is installed in this organ.">
-        <source>Nobody is installed in this organ.</source>
-        <target state="translated">Nobody is installed in this organ.</target>
+      <trans-unit id="fPDHDLX" resname="Nobody is installed in this body.">
+        <source>Nobody is installed in this body.</source>
+        <target state="translated">Nobody is installed in this body.</target>
       </trans-unit>
       <trans-unit id="kicT4e0" resname="Nobody needs attention">
         <source>Nobody needs attention</source>
@@ -1896,26 +1924,6 @@
       <trans-unit id="Jz_4A.2" resname="Ordinary member without student number">
         <source>Ordinary member without student number</source>
         <target state="translated">Ordinary member without student number</target>
-      </trans-unit>
-      <trans-unit id="w4JtsHz" resname="Organ">
-        <source>Organ</source>
-        <target state="translated">Organ</target>
-      </trans-unit>
-      <trans-unit id="5Cpr50J" resname="Organ Regulation">
-        <source>Organ Regulation</source>
-        <target state="translated">Organ Regulation</target>
-      </trans-unit>
-      <trans-unit id="e0UIqkU" resname="Organs">
-        <source>Organs</source>
-        <target state="translated">Organs</target>
-      </trans-unit>
-      <trans-unit id="jx7NA8s" resname="Organs - List functions and translations">
-        <source>Organs - List functions and translations</source>
-        <target state="translated">Organs - List functions and translations</target>
-      </trans-unit>
-      <trans-unit id="BAC7tvg" resname="Organs - Read organ membership (per user/organ)">
-        <source>Organs - Read organ membership (per user/organ)</source>
-        <target state="translated">Organs - Read organ membership (per user/organ)</target>
       </trans-unit>
       <trans-unit id="aiFSOsy" resname="Other">
         <source>Other</source>
@@ -2012,6 +2020,10 @@
       <trans-unit id="6NJPI7c" resname="Pick a decision number that is still free for this point.">
         <source>Pick a decision number that is still free for this point.</source>
         <target state="translated">Pick a decision number that is still free for this point.</target>
+      </trans-unit>
+      <trans-unit id="iqy_I.w" resname="Pick another type, or All.">
+        <source>Pick another type, or All.</source>
+        <target state="translated">Pick another type, or All.</target>
       </trans-unit>
       <trans-unit id="zh81YLt" resname="Pick the meetings to include and build one decision list from them.">
         <source>Pick the meetings to include and build one decision list from them.</source>
@@ -2269,9 +2281,9 @@
         <source>Search</source>
         <target state="translated">Search</target>
       </trans-unit>
-      <trans-unit id="SHkCQCc" resname="Search Organs">
-        <source>Search Organs</source>
-        <target state="translated">Search Organs</target>
+      <trans-unit id="HcYVu7m" resname="Search Bodies">
+        <source>Search Bodies</source>
+        <target state="translated">Search Bodies</target>
       </trans-unit>
       <trans-unit id="wcsLyzt" resname="Secretaris">
         <source>Secretaris</source>
@@ -2437,6 +2449,10 @@
         <source>Thank you %name%!</source>
         <target state="translated">Thank you %name%!</target>
       </trans-unit>
+      <trans-unit id="41aTr2J" resname="The body to be abolished includes the following members:">
+        <source>The body to be abolished includes the following members:</source>
+        <target state="translated">The body to be abolished includes the following members:</target>
+      </trans-unit>
       <trans-unit id="DuYh2fL" resname="The change">
         <source>The change</source>
         <target state="translated">The change</target>
@@ -2468,10 +2484,6 @@
       <trans-unit id="5d8NCrw" resname="The lists members can subscribe to, and how they are synchronised.">
         <source>The lists members can subscribe to, and how they are synchronised.</source>
         <target state="translated">The lists members can subscribe to, and how they are synchronised.</target>
-      </trans-unit>
-      <trans-unit id="hkMxh_v" resname="The organ to be abolished includes the following members:">
-        <source>The organ to be abolished includes the following members:</source>
-        <target state="translated">The organ to be abolished includes the following members:</target>
       </trans-unit>
       <trans-unit id="3XfnUZu" resname="The page could not be built. Try again later.">
         <source>The page could not be built. Try again later.</source>
@@ -2505,6 +2517,10 @@
         <source>There are no board members to choose from.</source>
         <target state="translated">There are no board members to choose from.</target>
       </trans-unit>
+      <trans-unit id="IrLM5h2" resname="There are no bodies that match.">
+        <source>There are no bodies that match.</source>
+        <target state="translated">There are no bodies that match.</target>
+      </trans-unit>
       <trans-unit id="7Xnw03E" resname="There are no key codes to withdraw.">
         <source>There are no key codes to withdraw.</source>
         <target state="translated">There are no key codes to withdraw.</target>
@@ -2516,10 +2532,6 @@
       <trans-unit id="yg5l10C" resname="There are no notes for this member.">
         <source>There are no notes for this member.</source>
         <target state="translated">There are no notes for this member.</target>
-      </trans-unit>
-      <trans-unit id="dzHfUTK" resname="There are no organs that match.">
-        <source>There are no organs that match.</source>
-        <target state="translated">There are no organs that match.</target>
       </trans-unit>
       <trans-unit id="xqkRW6p" resname="There are no saved queries.">
         <source>There are no saved queries.</source>
@@ -2565,9 +2577,9 @@
         <source>This member has been deleted</source>
         <target state="translated">This member has been deleted</target>
       </trans-unit>
-      <trans-unit id="0cwffVH" resname="This member is not installed in an organ.">
-        <source>This member is not installed in an organ.</source>
-        <target state="translated">This member is not installed in an organ.</target>
+      <trans-unit id="aWvFOrg" resname="This member is not installed in a body.">
+        <source>This member is not installed in a body.</source>
+        <target state="translated">This member is not installed in a body.</target>
       </trans-unit>
       <trans-unit id="0Pvnuwy" resname="This payment link could not be found. Perhaps it has been used before or has expired.">
         <source>This payment link could not be found. Perhaps it has been used before or has expired.</source>
@@ -2699,7 +2711,7 @@
       </trans-unit>
       <trans-unit id="3B9A3Hz" resname="Was it not your intention to close the payment page? Then do not worry, &lt;a href=&quot;%url%&quot;&gt;click here&lt;/a&gt; to go back. Are you unable to finish the payment now? Then also do not worry, we have sent you an e-mail containing a link that allows you to go to the payment page again. Do you not want to become a member of GEWIS after all? Let us know and we will delete your details.">
         <source>Was it not your intention to close the payment page? Then do not worry, &lt;a href="%url%"&gt;click here&lt;/a&gt; to go back. Are you unable to finish the payment now? Then also do not worry, we have sent you an e-mail containing a link that allows you to go to the payment page again. Do you not want to become a member of GEWIS after all? Let us know and we will delete your details.</source>
-        <target state="translated">Was it not your intention to close the payment page? Then do not worry, &lt;a href="%url%"&gt;click here&lt;/a&gt; to go back. Are you unable to finish the payment now? Then also do not worry, we have sent you an e-mail containing a link that allows you to go to the payment page again. Do you not want to become a member of GEWIS after all? Let us know and we will delete your details.</target>
+        <target state="translated"><![CDATA[Was it not your intention to close the payment page? Then do not worry, <a href="%url%">click here</a> to go back. Are you unable to finish the payment now? Then also do not worry, we have sent you an e-mail containing a link that allows you to go to the payment page again. Do you not want to become a member of GEWIS after all? Let us know and we will delete your details.]]></target>
       </trans-unit>
       <trans-unit id="ZNXr.2Z" resname="Was it not your intention to close the payment page? Then do not worry, we have sent you an e-mail containing a link that allows you to go to the payment page again. Do you not want to become a member of GEWIS after all? Let us know and we will delete your details.">
         <source>Was it not your intention to close the payment page? Then do not worry, we have sent you an e-mail containing a link that allows you to go to the payment page again. Do you not want to become a member of GEWIS after all? Let us know and we will delete your details.</source>
@@ -2815,7 +2827,7 @@
       </trans-unit>
       <trans-unit id="u2D_HZ." resname="Your student number is a 7-digit number, for example 1234560. You have received this in an email when you enrolled and it is printed on your campus card. Go to &lt;a href=&quot;%url%&quot;&gt;this page&lt;/a&gt; if you need help finding it. Your student number will be used to verify you are studying at the department of M&amp;CS.">
         <source>Your student number is a 7-digit number, for example 1234560. You have received this in an email when you enrolled and it is printed on your campus card. Go to &lt;a href="%url%"&gt;this page&lt;/a&gt; if you need help finding it. Your student number will be used to verify you are studying at the department of M&amp;CS.</source>
-        <target state="translated">Your student number is a 7-digit number, for example 1234560. You have received this in an email when you enrolled and it is printed on your campus card. Go to &lt;a href="%url%"&gt;this page&lt;/a&gt; if you need help finding it. Your student number will be used to verify you are studying at the department of M&amp;CS.</target>
+        <target state="translated"><![CDATA[Your student number is a 7-digit number, for example 1234560. You have received this in an email when you enrolled and it is printed on your campus card. Go to <a href="%url%">this page</a> if you need help finding it. Your student number will be used to verify you are studying at the department of M&CS.]]></target>
       </trans-unit>
       <trans-unit id="Wagn40Q" resname="a related decision was annulled after this annulment was made">
         <source>a related decision was annulled after this annulment was made</source>

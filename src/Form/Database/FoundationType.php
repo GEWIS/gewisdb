@@ -67,7 +67,7 @@ class FoundationType extends AbstractType
                 'data' => [[], []],
                 'constraints' => [new Count(min: 1)],
             ])
-            ->add('submit', SubmitType::class, ['label' => t('Found Organ')])
+            ->add('submit', SubmitType::class, ['label' => t('Found Body')])
             ->setDataMapper($this->dataMapper);
     }
 

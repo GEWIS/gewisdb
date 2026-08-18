@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace App\Twig\Components\Database;
 
+use App\Entity\Database\Enums\MeetingTypes;
 use App\Entity\Database\Meeting;
 use App\Repository\Database\MeetingRepository;
 use App\Twig\Components\Application\AbstractPaginatedOverview;
+use App\Twig\Components\Concerns\FilterPillsTrait;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Override;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
+use Symfony\UX\LiveComponent\Attribute\LiveProp;
 
 /**
  * Every meeting that has been minuted, most recent first.
@@ -25,11 +28,45 @@ use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 )]
 final class MeetingOverview extends AbstractPaginatedOverview
 {
+    use FilterPillsTrait;
+
+    /** Empty is every type, which is what the first chip stands for. */
+    #[LiveProp(
+        writable: true,
+        url: true,
+        onUpdated: 'onFilterUpdated',
+    )]
+    public string $filter = '';
+
     /** @var array<string, int>|null */
     private ?array $decisionCounts = null;
 
+    /** @var array<string, int>|null */
+    private ?array $counts = null;
+
     public function __construct(private readonly MeetingRepository $meetingRepository)
     {
+    }
+
+    public function onFilterUpdated(): void
+    {
+        $this->resetToFirstPage();
+    }
+
+    /**
+     * @return MeetingTypes[]
+     */
+    public function getFilters(): array
+    {
+        return MeetingTypes::cases();
+    }
+
+    /**
+     * @return array<string, int>
+     */
+    public function getCounts(): array
+    {
+        return $this->counts ??= $this->meetingRepository->countsByType();
     }
 
     /**
@@ -56,6 +93,10 @@ final class MeetingOverview extends AbstractPaginatedOverview
         int $page,
         int $pageSize,
     ): Paginator {
-        return $this->meetingRepository->paginateForOverview($page, $pageSize);
+        return $this->meetingRepository->paginateForOverview(
+            $page,
+            $pageSize,
+            MeetingTypes::tryFrom($this->filter),
+        );
     }
 }

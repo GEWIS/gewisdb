@@ -39,7 +39,7 @@ enum ApiPermissions: string implements TranslatableInterface
             self::HealthR => new TranslatableMessage('Get API Health'),
             self::MembersR => new TranslatableMessage('Get all Members'),
             self::MembersActiveR => new TranslatableMessage(
-                'Get active Members (members that are in one or more organs)',
+                'Get active Members (members that are in one or more bodies)',
             ),
             self::MembersPropertyKeyholder => new TranslatableMessage('Member¹ - Check if keyholder'),
             self::MembersPropertyType => new TranslatableMessage('Member¹ - Check membership type'),
@@ -49,8 +49,8 @@ enum ApiPermissions: string implements TranslatableInterface
             self::MembersPropertyAge18 => new TranslatableMessage('Member¹ - Check if has reached age 18'),
             self::MembersPropertyAge21 => new TranslatableMessage('Member¹ - Check if has reached age 21'),
             self::MembersDeleted => new TranslatableMessage('Member¹ - Allow operations on `deleted\' members'),
-            self::OrgansMembershipR => new TranslatableMessage('Organs - Read organ membership (per user/organ)'),
-            self::OrganFunctionsListR => new TranslatableMessage('Organs - List functions and translations'),
+            self::OrgansMembershipR => new TranslatableMessage('Bodies - Read body membership (per user/body)'),
+            self::OrganFunctionsListR => new TranslatableMessage('Bodies - List functions and translations'),
             self::BoardFunctionsListR => new TranslatableMessage('Boards - List functions and translations'),
             self::All => new TranslatableMessage('All API permissions'),
         };

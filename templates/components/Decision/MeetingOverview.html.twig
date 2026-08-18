@@ -1,11 +1,46 @@
 <div {{ attributes }}>
     <div class="panel">
         <div class="panel-body">
+            {# Counts are of the whole register rather than of what is on screen, so a chip says how many meetings of
+               that type there are, not how many are on this page. #}
+            <ul class="nav nav-pills" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button type="button" role="tab"
+                            class="nav-link{{ '' == this.filter ? ' active' : '' }}"
+                            {% if '' == this.filter %}aria-selected="true"{% endif %}
+                            data-action="live#action"
+                            data-live-action-param="filterBy"
+                            data-live-filter-param="">
+                        {{ 'All'|trans }}
+                        <span class="badge">{{ this.counts|reduce((total, count) => total + count, 0) }}</span>
+                    </button>
+                </li>
+                {% for option in this.filters %}
+                    <li class="nav-item" role="presentation">
+                        <button type="button" role="tab"
+                                class="nav-link{{ this.filter == option.value ? ' active' : '' }}"
+                                {% if this.filter == option.value %}aria-selected="true"{% endif %}
+                                data-action="live#action"
+                                data-live-action-param="filterBy"
+                                data-live-filter-param="{{ option.value }}">
+                            {{ option.getName|trans }}
+                            <span class="badge">{{ this.counts[option.value] ?? 0 }}</span>
+                        </button>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-body">
             {% if this.totalCount == 0 %}
                 {% include 'partials/application/empty-state.html.twig' with {
                     icon: 'fa-gavel',
-                    title: 'There are no meetings yet.'|trans,
-                    body: 'Minute a meeting to start recording its decisions.'|trans,
+                    title: '' == this.filter ? 'There are no meetings yet.'|trans : 'No meetings of this type'|trans,
+                    body: '' == this.filter
+                        ? 'Minute a meeting to start recording its decisions.'|trans
+                        : 'Pick another type, or All.'|trans,
                 } only %}
             {% else %}
                 <div class="table-responsive">
@@ -51,6 +86,7 @@
                 {% include 'partials/application/pagination.html.twig' with {
                     page: this.page,
                     pageSize: this.pageSize,
+                    pageSizes: this.pageSizes,
                     totalPages: this.totalPages,
                     totalCount: this.totalCount,
                 } only %}

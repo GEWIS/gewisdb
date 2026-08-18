@@ -69,8 +69,8 @@
         <source>%members% members, %graduates% graduates, %expired% expired and %prospectives% prospective members</source>
         <target state="translated">%members% leden, %graduates% afgestudeerden, %expired% verlopen en %prospectives% toekomstige leden</target>
       </trans-unit>
-      <trans-unit id="pqLao9N" resname="%name% has been a member of an organ, or has budgets or statements to their name, so their name stays on record: we have a legal basis under the GDPR to keep it, and the decisions that mention them have to stay correct.">
-        <source>%name% has been a member of an organ, or has budgets or statements to their name, so their name stays on record: we have a legal basis under the GDPR to keep it, and the decisions that mention them have to stay correct.</source>
+      <trans-unit id="IXsFOWz" resname="%name% has been a member of a body, or has budgets or statements to their name, so their name stays on record: we have a legal basis under the GDPR to keep it, and the decisions that mention them have to stay correct.">
+        <source>%name% has been a member of a body, or has budgets or statements to their name, so their name stays on record: we have a legal basis under the GDPR to keep it, and the decisions that mention them have to stay correct.</source>
         <target state="translated">%name% is lid geweest van een orgaan, of heeft begrotingen of afrekeningen op naam staan, dus de naam blijft bewaard: we hebben op grond van de AVG een grondslag om die te bewaren, en de besluiten waarin deze persoon genoemd wordt moeten kloppen.</target>
       </trans-unit>
       <trans-unit id="PDyu2UH" resname="%number% decisions">
@@ -185,12 +185,12 @@
         <source>Abbreviation suffix (SC%number%-{SUFFIX})</source>
         <target state="translated">Afkortingssuffix (SC%number%-{SUFFIX})</target>
       </trans-unit>
-      <trans-unit id="J.NLPQn" resname="Abolish Organ">
-        <source>Abolish Organ</source>
+      <trans-unit id="muqVQnb" resname="Abolish Body">
+        <source>Abolish Body</source>
         <target state="translated">Hef orgaan op</target>
       </trans-unit>
-      <trans-unit id="GNeiqBB" resname="Abolish an organ and end its installations.">
-        <source>Abolish an organ and end its installations.</source>
+      <trans-unit id="nwdQ2M8" resname="Abolish a body and end its installations.">
+        <source>Abolish a body and end its installations.</source>
         <target state="translated">Hef een orgaan op en beëindig de installaties daarin.</target>
       </trans-unit>
       <trans-unit id="sHC_w4U" resname="Abolition">
@@ -216,6 +216,10 @@
       <trans-unit id="szLKipI" resname="Add %type%">
         <source>Add %type%</source>
         <target state="translated">%type% toevoegen</target>
+      </trans-unit>
+      <trans-unit id="nlYjaTZ" resname="Add Body Regulation">
+        <source>Add Body Regulation</source>
+        <target state="translated">Voeg orgaanreglement toe</target>
       </trans-unit>
       <trans-unit id="uXzabWV" resname="Add Budget/Statement">
         <source>Add Budget/Statement</source>
@@ -257,10 +261,6 @@
         <source>Add New Meeting</source>
         <target state="translated">Voeg nieuwe vergadering toe</target>
       </trans-unit>
-      <trans-unit id="pIjBdBI" resname="Add Organ Regulation">
-        <source>Add Organ Regulation</source>
-        <target state="translated">Voeg orgaanreglement toe</target>
-      </trans-unit>
       <trans-unit id="3EZgAIw" resname="Add new user">
         <source>Add new user</source>
         <target state="translated">Nieuwe gebruiker toevoegen</target>
@@ -288,6 +288,10 @@
       <trans-unit id="W1PSNEv" resname="Agreement">
         <source>Agreement</source>
         <target state="translated">Akkoordverklaring</target>
+      </trans-unit>
+      <trans-unit id="tHdA52O" resname="All">
+        <source>All</source>
+        <target state="translated">Alles</target>
       </trans-unit>
       <trans-unit id="bN4hpxf" resname="All API permissions">
         <source>All API permissions</source>
@@ -365,8 +369,8 @@
         <source>Approve the minutes of an earlier meeting.</source>
         <target state="translated">Keur de notulen van een eerdere vergadering goed.</target>
       </trans-unit>
-      <trans-unit id="KHFP4_g" resname="Approve the regulations of an organ.">
-        <source>Approve the regulations of an organ.</source>
+      <trans-unit id="IKRxUb3" resname="Approve the regulations of a body.">
+        <source>Approve the regulations of a body.</source>
         <target state="translated">Keur het reglement van een orgaan goed.</target>
       </trans-unit>
       <trans-unit id="jHsLfpv" resname="Are you sure %name%?">
@@ -480,6 +484,26 @@
       <trans-unit id="UwyDHXV" resname="Boards - List functions and translations">
         <source>Boards - List functions and translations</source>
         <target state="translated">Bestuur - Functie- en vertalingenlijst bekijken</target>
+      </trans-unit>
+      <trans-unit id="oqXX_GF" resname="Bodies">
+        <source>Bodies</source>
+        <target state="translated">Organen</target>
+      </trans-unit>
+      <trans-unit id="5niZzt5" resname="Bodies - List functions and translations">
+        <source>Bodies - List functions and translations</source>
+        <target state="translated">Organen - Functie- en vertalingenlijst bekijken</target>
+      </trans-unit>
+      <trans-unit id="9U0Wrgh" resname="Bodies - Read body membership (per user/body)">
+        <source>Bodies - Read body membership (per user/body)</source>
+        <target state="translated">Organen - Orgaanlidmaatschap ophalen (per gebruiker/orgaan)</target>
+      </trans-unit>
+      <trans-unit id="cGXWNw." resname="Body">
+        <source>Body</source>
+        <target state="translated">Orgaan</target>
+      </trans-unit>
+      <trans-unit id="ppP2kVG" resname="Body Regulation">
+        <source>Body Regulation</source>
+        <target state="translated">Orgaanreglement</target>
       </trans-unit>
       <trans-unit id="pg8.RVR" resname="Brand Manager">
         <source>Brand Manager</source>
@@ -681,8 +705,8 @@
         <source>Confirmed %count% membership renewal(s).</source>
         <target state="translated">%count% lidmaatschapsverlenging(en) bevestigd.</target>
       </trans-unit>
-      <trans-unit id="UXhGom8" resname="Contact to renew graduate status OR discharge from organ(s)">
-        <source>Contact to renew graduate status OR discharge from organ(s)</source>
+      <trans-unit id="m9wdMc7" resname="Contact to renew graduate status OR discharge from bodies">
+        <source>Contact to renew graduate status OR discharge from bodies</source>
         <target state="translated">Neem contact om afgestudeerde-status te verlengen OF dechargeer commissielid</target>
       </trans-unit>
       <trans-unit id="pHre2r7" resname="Controleer wachtwoord">
@@ -773,6 +797,10 @@
         <source>Database</source>
         <target state="translated">Database</target>
       </trans-unit>
+      <trans-unit id="Rr92VOc" resname="Date of Body Regulation">
+        <source>Date of Body Regulation</source>
+        <target state="translated">Datum orgaanreglement</target>
+      </trans-unit>
       <trans-unit id="htXSJ2v" resname="Date of Budget/Statement">
         <source>Date of Budget/Statement</source>
         <target state="translated">Datum begroting/afrekening</target>
@@ -780,10 +808,6 @@
       <trans-unit id="EodRb5J" resname="Date of Expiration">
         <source>Date of Expiration</source>
         <target state="translated">Afloopdatum</target>
-      </trans-unit>
-      <trans-unit id="stfQbnB" resname="Date of Organ Regulation">
-        <source>Date of Organ Regulation</source>
-        <target state="translated">Datum orgaanreglement</target>
       </trans-unit>
       <trans-unit id="juv_fhG" resname="De afrekening %NAME% van %AUTHOR%, versie %VERSION% van %DATE% wordt %APPROVAL%%CHANGES%.">
         <source>De afrekening %NAME% van %AUTHOR%, versie %VERSION% van %DATE% wordt %APPROVAL%%CHANGES%.</source>
@@ -877,8 +901,8 @@
         <source>Deleted</source>
         <target state="translated">Verwijderd</target>
       </trans-unit>
-      <trans-unit id="oepf9rO" resname="Deleting a member removes their record and their organ history. Letting the membership expire is almost always what you want instead.">
-        <source>Deleting a member removes their record and their organ history. Letting the membership expire is almost always what you want instead.</source>
+      <trans-unit id="ACQCBTW" resname="Deleting a member removes their record and their body history. Letting the membership expire is almost always what you want instead.">
+        <source>Deleting a member removes their record and their body history. Letting the membership expire is almost always what you want instead.</source>
         <target state="translated">Een lid verwijderen wist het record en de orgaangeschiedenis. Het lidmaatschap laten verlopen is bijna altijd wat je in plaats daarvan wilt.</target>
       </trans-unit>
       <trans-unit id="NMmVjl0" resname="Description">
@@ -921,8 +945,8 @@
         <source>Discharge a board member.</source>
         <target state="translated">Decharcheer een bestuurslid.</target>
       </trans-unit>
-      <trans-unit id="W4AWjU7" resname="Discharge from organ(s) OR renew in appropriate type (ordinary or external)">
-        <source>Discharge from organ(s) OR renew in appropriate type (ordinary or external)</source>
+      <trans-unit id="m12dSPp" resname="Discharge from bodies OR renew in appropriate type (ordinary or external)">
+        <source>Discharge from bodies OR renew in appropriate type (ordinary or external)</source>
         <target state="translated">Dechargeer commissielid OF verleng als gewoon of extern lid</target>
       </trans-unit>
       <trans-unit id=".0w9JW8" resname="Discharges">
@@ -959,7 +983,7 @@
       </trans-unit>
       <trans-unit id=".QWkpTr" resname="Each shortcut opens the bulk renewal form with these members already filled in. Renew the members who are still studying &lt;strong&gt;first&lt;/strong&gt;.">
         <source>Each shortcut opens the bulk renewal form with these members already filled in. Renew the members who are still studying &lt;strong&gt;first&lt;/strong&gt;.</source>
-        <target state="translated">Elke snelkoppeling opent het bulkverlengingsformulier met deze leden al ingevuld. Verleng &lt;strong&gt;eerst&lt;/strong&gt; de leden die nog studeren.</target>
+        <target state="translated"><![CDATA[Elke snelkoppeling opent het bulkverlengingsformulier met deze leden al ingevuld. Verleng <strong>eerst</strong> de leden die nog studeren.]]></target>
       </trans-unit>
       <trans-unit id="M.l1CPU" resname="Edit">
         <source>Edit</source>
@@ -1117,8 +1141,8 @@
         <source>First Name</source>
         <target state="translated">Voornaam</target>
       </trans-unit>
-      <trans-unit id="eW6AkKu" resname="Found Organ">
-        <source>Found Organ</source>
+      <trans-unit id="RHM6LTR" resname="Found Body">
+        <source>Found Body</source>
         <target state="translated">Orgaan oprichten</target>
       </trans-unit>
       <trans-unit id="TDtJcVm" resname="Foundation">
@@ -1177,8 +1201,8 @@
         <source>Get API Health</source>
         <target state="translated">API-status ophalen</target>
       </trans-unit>
-      <trans-unit id="ffwrQ0B" resname="Get active Members (members that are in one or more organs)">
-        <source>Get active Members (members that are in one or more organs)</source>
+      <trans-unit id="ga4HTaq" resname="Get active Members (members that are in one or more bodies)">
+        <source>Get active Members (members that are in one or more bodies)</source>
         <target state="translated">Bekijk actieve leden (leden die in één of meer organen zijn geïnstalleerd)</target>
       </trans-unit>
       <trans-unit id="RsggguW" resname="Get all Members">
@@ -1291,7 +1315,7 @@
       </trans-unit>
       <trans-unit id="Lsi9YBZ" resname="If your browser does not redirect you, please &lt;a href=&quot;%url%&quot;&gt;click here&lt;/a&gt; to continue.">
         <source>If your browser does not redirect you, please &lt;a href="%url%"&gt;click here&lt;/a&gt; to continue.</source>
-        <target state="translated">Als je browser je niet doorstuurt, &lt;a href="%url%"&gt;klik dan hier&lt;/a&gt; om verder te gaan.</target>
+        <target state="translated"><![CDATA[Als je browser je niet doorstuurt, <a href="%url%">klik dan hier</a> om verder te gaan.]]></target>
       </trans-unit>
       <trans-unit id="bhJd7GS" resname="Inactief Lid">
         <source>Inactief Lid</source>
@@ -1321,8 +1345,8 @@
         <source>Install a member in a board function.</source>
         <target state="translated">Installeer een lid in een bestuursfunctie.</target>
       </trans-unit>
-      <trans-unit id="fBMZIZH" resname="Install members in an organ, or end an installation.">
-        <source>Install members in an organ, or end an installation.</source>
+      <trans-unit id="kveFmeW" resname="Install members in a body, or end an installation.">
+        <source>Install members in a body, or end an installation.</source>
         <target state="translated">Installeer leden in een orgaan, of beëindig een installatie.</target>
       </trans-unit>
       <trans-unit id="CDGfaMZ" resname="Installation">
@@ -1765,6 +1789,10 @@
         <source>No mailing lists</source>
         <target state="translated">Geen mailinglijsten</target>
       </trans-unit>
+      <trans-unit id="JVu2Rm6" resname="No meetings of this type">
+        <source>No meetings of this type</source>
+        <target state="translated">Geen vergaderingen van dit type</target>
+      </trans-unit>
       <trans-unit id="DI5Mjh0" resname="No members match">
         <source>No members match</source>
         <target state="translated">Geen leden komen overeen</target>
@@ -1801,8 +1829,8 @@
         <source>Nobody has asked for a change to their data.</source>
         <target state="translated">Niemand heeft een wijziging van gegevens aangevraagd.</target>
       </trans-unit>
-      <trans-unit id="Q6GN7yN" resname="Nobody is installed in this organ.">
-        <source>Nobody is installed in this organ.</source>
+      <trans-unit id="fPDHDLX" resname="Nobody is installed in this body.">
+        <source>Nobody is installed in this body.</source>
         <target state="translated">Niemand is in dit orgaan geïnstalleerd.</target>
       </trans-unit>
       <trans-unit id="kicT4e0" resname="Nobody needs attention">
@@ -1896,26 +1924,6 @@
       <trans-unit id="Jz_4A.2" resname="Ordinary member without student number">
         <source>Ordinary member without student number</source>
         <target state="translated">Gewoon lid zonder studentnummer</target>
-      </trans-unit>
-      <trans-unit id="w4JtsHz" resname="Organ">
-        <source>Organ</source>
-        <target state="translated">Orgaan</target>
-      </trans-unit>
-      <trans-unit id="5Cpr50J" resname="Organ Regulation">
-        <source>Organ Regulation</source>
-        <target state="translated">Orgaanreglement</target>
-      </trans-unit>
-      <trans-unit id="e0UIqkU" resname="Organs">
-        <source>Organs</source>
-        <target state="translated">Organen</target>
-      </trans-unit>
-      <trans-unit id="jx7NA8s" resname="Organs - List functions and translations">
-        <source>Organs - List functions and translations</source>
-        <target state="translated">Organen - Functie- en vertalingenlijst bekijken</target>
-      </trans-unit>
-      <trans-unit id="BAC7tvg" resname="Organs - Read organ membership (per user/organ)">
-        <source>Organs - Read organ membership (per user/organ)</source>
-        <target state="translated">Organen - Orgaanlidmaatschap ophalen (per gebruiker/orgaan)</target>
       </trans-unit>
       <trans-unit id="aiFSOsy" resname="Other">
         <source>Other</source>
@@ -2012,6 +2020,10 @@
       <trans-unit id="6NJPI7c" resname="Pick a decision number that is still free for this point.">
         <source>Pick a decision number that is still free for this point.</source>
         <target state="translated">Kies een besluitnummer dat nog vrij is voor dit punt.</target>
+      </trans-unit>
+      <trans-unit id="iqy_I.w" resname="Pick another type, or All.">
+        <source>Pick another type, or All.</source>
+        <target state="translated">Kies een ander type, of Alles.</target>
       </trans-unit>
       <trans-unit id="zh81YLt" resname="Pick the meetings to include and build one decision list from them.">
         <source>Pick the meetings to include and build one decision list from them.</source>
@@ -2269,8 +2281,8 @@
         <source>Search</source>
         <target state="translated">Zoek</target>
       </trans-unit>
-      <trans-unit id="SHkCQCc" resname="Search Organs">
-        <source>Search Organs</source>
+      <trans-unit id="HcYVu7m" resname="Search Bodies">
+        <source>Search Bodies</source>
         <target state="translated">Organen zoeken</target>
       </trans-unit>
       <trans-unit id="wcsLyzt" resname="Secretaris">
@@ -2437,6 +2449,10 @@
         <source>Thank you %name%!</source>
         <target state="translated">Bedankt, %name%!</target>
       </trans-unit>
+      <trans-unit id="41aTr2J" resname="The body to be abolished includes the following members:">
+        <source>The body to be abolished includes the following members:</source>
+        <target state="translated">Het op te heffen orgaan heeft de volgende leden:</target>
+      </trans-unit>
       <trans-unit id="DuYh2fL" resname="The change">
         <source>The change</source>
         <target state="translated">De wijziging</target>
@@ -2468,10 +2484,6 @@
       <trans-unit id="5d8NCrw" resname="The lists members can subscribe to, and how they are synchronised.">
         <source>The lists members can subscribe to, and how they are synchronised.</source>
         <target state="translated">De lijsten waarop leden zich kunnen aanmelden, en hoe ze gesynchroniseerd worden.</target>
-      </trans-unit>
-      <trans-unit id="hkMxh_v" resname="The organ to be abolished includes the following members:">
-        <source>The organ to be abolished includes the following members:</source>
-        <target state="translated">Het op te heffen orgaan heeft de volgende leden:</target>
       </trans-unit>
       <trans-unit id="3XfnUZu" resname="The page could not be built. Try again later.">
         <source>The page could not be built. Try again later.</source>
@@ -2505,6 +2517,10 @@
         <source>There are no board members to choose from.</source>
         <target state="translated">Er zijn geen bestuursleden om uit te kiezen.</target>
       </trans-unit>
+      <trans-unit id="IrLM5h2" resname="There are no bodies that match.">
+        <source>There are no bodies that match.</source>
+        <target state="translated">Er zijn geen organen die overeenkomen.</target>
+      </trans-unit>
       <trans-unit id="7Xnw03E" resname="There are no key codes to withdraw.">
         <source>There are no key codes to withdraw.</source>
         <target state="translated">Er zijn geen sleutelcodes om in te trekken.</target>
@@ -2516,10 +2532,6 @@
       <trans-unit id="yg5l10C" resname="There are no notes for this member.">
         <source>There are no notes for this member.</source>
         <target state="translated">Dit lid heeft geen notities.</target>
-      </trans-unit>
-      <trans-unit id="dzHfUTK" resname="There are no organs that match.">
-        <source>There are no organs that match.</source>
-        <target state="translated">Er zijn geen organen die overeenkomen.</target>
       </trans-unit>
       <trans-unit id="xqkRW6p" resname="There are no saved queries.">
         <source>There are no saved queries.</source>
@@ -2565,8 +2577,8 @@
         <source>This member has been deleted</source>
         <target state="translated">Dit lid is verwijderd</target>
       </trans-unit>
-      <trans-unit id="0cwffVH" resname="This member is not installed in an organ.">
-        <source>This member is not installed in an organ.</source>
+      <trans-unit id="aWvFOrg" resname="This member is not installed in a body.">
+        <source>This member is not installed in a body.</source>
         <target state="translated">Dit lid is niet lid van een orgaan.</target>
       </trans-unit>
       <trans-unit id="0Pvnuwy" resname="This payment link could not be found. Perhaps it has been used before or has expired.">
@@ -2699,7 +2711,7 @@
       </trans-unit>
       <trans-unit id="3B9A3Hz" resname="Was it not your intention to close the payment page? Then do not worry, &lt;a href=&quot;%url%&quot;&gt;click here&lt;/a&gt; to go back. Are you unable to finish the payment now? Then also do not worry, we have sent you an e-mail containing a link that allows you to go to the payment page again. Do you not want to become a member of GEWIS after all? Let us know and we will delete your details.">
         <source>Was it not your intention to close the payment page? Then do not worry, &lt;a href="%url%"&gt;click here&lt;/a&gt; to go back. Are you unable to finish the payment now? Then also do not worry, we have sent you an e-mail containing a link that allows you to go to the payment page again. Do you not want to become a member of GEWIS after all? Let us know and we will delete your details.</source>
-        <target state="translated">Was het niet je bedoeling om de betaalpagina te sluiten? Geen zorgen, &lt;a href="%url%"&gt;klik hier&lt;/a&gt; om terug te gaan. Lukt het je nu niet om de betaling af te ronden? Ook geen zorgen, we hebben je een e-mail gestuurd met een link waarmee je opnieuw naar de betaalpagina kunt. Wil je toch geen lid worden van GEWIS? Laat het ons weten, dan verwijderen we je gegevens.</target>
+        <target state="translated"><![CDATA[Was het niet je bedoeling om de betaalpagina te sluiten? Geen zorgen, <a href="%url%">klik hier</a> om terug te gaan. Lukt het je nu niet om de betaling af te ronden? Ook geen zorgen, we hebben je een e-mail gestuurd met een link waarmee je opnieuw naar de betaalpagina kunt. Wil je toch geen lid worden van GEWIS? Laat het ons weten, dan verwijderen we je gegevens.]]></target>
       </trans-unit>
       <trans-unit id="ZNXr.2Z" resname="Was it not your intention to close the payment page? Then do not worry, we have sent you an e-mail containing a link that allows you to go to the payment page again. Do you not want to become a member of GEWIS after all? Let us know and we will delete your details.">
         <source>Was it not your intention to close the payment page? Then do not worry, we have sent you an e-mail containing a link that allows you to go to the payment page again. Do you not want to become a member of GEWIS after all? Let us know and we will delete your details.</source>
@@ -2815,7 +2827,7 @@
       </trans-unit>
       <trans-unit id="u2D_HZ." resname="Your student number is a 7-digit number, for example 1234560. You have received this in an email when you enrolled and it is printed on your campus card. Go to &lt;a href=&quot;%url%&quot;&gt;this page&lt;/a&gt; if you need help finding it. Your student number will be used to verify you are studying at the department of M&amp;CS.">
         <source>Your student number is a 7-digit number, for example 1234560. You have received this in an email when you enrolled and it is printed on your campus card. Go to &lt;a href="%url%"&gt;this page&lt;/a&gt; if you need help finding it. Your student number will be used to verify you are studying at the department of M&amp;CS.</source>
-        <target state="translated">Je studentnummer is een getal van 7 cijfers, bijvoorbeeld 1234560. Je hebt dit per e-mail gekregen toen je je inschreef en het staat op je campuskaart. Ga naar &lt;a href="%url%"&gt;deze pagina&lt;/a&gt; als je het niet kunt vinden. Je studentnummer wordt gebruikt om te controleren of je bij de faculteit W&amp;I studeert.</target>
+        <target state="translated"><![CDATA[Je studentnummer is een getal van 7 cijfers, bijvoorbeeld 1234560. Je hebt dit per e-mail gekregen toen je je inschreef en het staat op je campuskaart. Ga naar <a href="%url%">deze pagina</a> als je het niet kunt vinden. Je studentnummer wordt gebruikt om te controleren of je bij de faculteit W&I studeert.]]></target>
       </trans-unit>
       <trans-unit id="Wagn40Q" resname="a related decision was annulled after this annulment was made">
         <source>a related decision was annulled after this annulment was made</source>

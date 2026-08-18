@@ -28,14 +28,10 @@ final class OrganController extends AbstractController
         name: 'decision_organ_index',
         methods: ['GET'],
     )]
-    public function index(Request $request): Response
+    public function index(): Response
     {
-        $query = (string) $request->query->get('q', '');
-
-        return $this->render('decision/organ/index.html.twig', [
-            'query' => $query,
-            'organs' => $this->meetingService->findOrgans($query),
-        ]);
+        // The list itself is a live component: it searches and pages without the controller.
+        return $this->render('decision/organ/index.html.twig');
     }
 
     /**

@@ -3,7 +3,7 @@
 {% block page_title %}{{ foundation.abbr }} - {{ parent() }}{% endblock %}
 
 {% block breadcrumbs %}
-    <li class="breadcrumb-item"><a href="{{ path('decision_organ_index') }}">{{ 'Organs'|trans }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('decision_organ_index') }}">{{ 'Bodies'|trans }}</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{ foundation.abbr }}</li>
 {% endblock %}
 
@@ -58,7 +58,7 @@
                         {% else %}
                             <tr>
                                 <td colspan="3">
-                                    <span class="text-secondary">{{ 'Nobody is installed in this organ.'|trans }}</span>
+                                    <span class="text-secondary">{{ 'Nobody is installed in this body.'|trans }}</span>
                                 </td>
                             </tr>
                         {% endfor %}
