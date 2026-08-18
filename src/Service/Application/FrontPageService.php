@@ -10,11 +10,24 @@ use App\Service\Database\MailmanService;
 use App\Service\Database\Member as MemberService;
 use App\Service\Report\ApiService;
 use DateTime;
+use Override;
+use Symfony\Contracts\Service\ResetInterface;
 
 use function array_merge;
 
-class FrontPageService
+class FrontPageService implements ResetInterface
 {
+    /**
+     * What the figures were this request.
+     *
+     * The bell reads them on every page and the dashboard reads them again, and each of the five services behind
+     * them runs its own queries, so without this a page pays for the same counts several times over. Cleared
+     * between requests because the application runs in a worker, where the service outlives the request.
+     *
+     * @var array<string, mixed>|null
+     */
+    private ?array $data = null;
+
     public function __construct(
         private readonly ApiService $apiService,
         private readonly ListmonkService $listmonkService,
@@ -51,16 +64,33 @@ class FrontPageService
      */
     public function getFrontpageData(): array
     {
-        return array_merge(
+        if (null !== $this->data) {
+            return $this->data;
+        }
+
+        $data = array_merge(
             $this->memberService->getFrontpageData(),
             $this->apiService->getFrontpageData(),
             $this->mailmanService->getFrontpageData(),
             $this->listmonkService->getFrontpageData(),
             $this->mailingListService->getFrontpageData(),
-            [
-                'totalCount' => $this->getNotificationCount(),
-            ],
         );
+
+        // Counted from the figures rather than asked for again: the bell and the dashboard then cannot state
+        // different numbers, and it saves running every one of those queries a second time.
+        $data['totalCount'] = $data['updates']
+            + $data['prospectives']['paid']
+            + (int) $data['syncPaused']
+            + (int) $data['mailmanLastFetchOverdue']
+            + (int) $data['listmonkLastFetchOverdue'];
+
+        return $this->data = $data;
+    }
+
+    #[Override]
+    public function reset(): void
+    {
+        $this->data = null;
     }
 
     /**
@@ -89,14 +119,20 @@ class FrontPageService
     }
 
     /**
-     * Get the total notification count to show in the navbar, not including 'info' messages
+     * How many members hold a current membership of each type, for the dashboard's breakdown.
+     *
+     * @return array<string, int>
+     */
+    public function getMembershipBreakdown(): array
+    {
+        return $this->memberService->getMembershipBreakdown();
+    }
+
+    /**
+     * How many things need someone, which is what the bell shows.
      */
     public function getNotificationCount(): int
     {
-        return $this->memberService->getPendingUpdateCount() +
-        (int) $this->apiService->isSyncPaused() +
-        $this->memberService->getPaidProspectivesCount() +
-        (int) $this->mailmanService->isLastFetchOverdue() +
-        (int) $this->listmonkService->isLastFetchOverdue();
+        return $this->getFrontpageData()['totalCount'];
     }
 }

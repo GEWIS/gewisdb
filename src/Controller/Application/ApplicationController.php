@@ -6,6 +6,7 @@ namespace App\Controller\Application;
 
 use App\Entity\Database\Enums\InstallationFunctions;
 use App\Service\Application\FrontPageService;
+use App\ViewModel\Application\Notification;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Request;
@@ -44,6 +45,10 @@ final class ApplicationController extends AbstractController
     public function index(): Response
     {
         $data = $this->frontPageService->getFrontpageViewData();
+        // The same set the notification bell reads, so what the dashboard opens with and what the bell counts cannot
+        // drift apart.
+        $data['notifications'] = Notification::fromFrontPage($data);
+        $data['membership_breakdown'] = $this->frontPageService->getMembershipBreakdown();
         // The build a deployment runs is not part of the dashboard's data, it comes from the image it was built as.
         $data['git_commit'] = $this->gitCommit;
 

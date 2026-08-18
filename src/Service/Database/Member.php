@@ -14,6 +14,7 @@ use App\Entity\Database\Enums\AttentionReasons;
 use App\Entity\Database\Enums\MailingListMemberAction;
 use App\Entity\Database\Enums\MailingListMemberOrigin;
 use App\Entity\Database\Enums\MembershipTypes;
+use App\Entity\Database\Enums\ProspectiveMemberFilter;
 use App\Entity\Database\Enums\Studies;
 use App\Entity\Database\MailingList as MailingListModel;
 use App\Entity\Database\MailingListMember as MailingListMemberModel;
@@ -52,7 +53,6 @@ use function array_unique;
 use function array_values;
 use function assert;
 use function bin2hex;
-use function count;
 use function date;
 use function in_array;
 use function preg_split;
@@ -1048,10 +1048,23 @@ class Member
             'expired' => $totalInclExpired - $totalExclExpired,
             'prospectives' => [
                 'total' => $this->prospectiveMemberRepository->count([]),
-                'paid' => count($this->prospectiveMemberRepository->search('', 'paid')),
+                'paid' => $this->getPaidProspectivesCount(),
             ],
             'updates' => $this->getPendingUpdateCount(),
         ];
+    }
+
+    /**
+     * How many members hold a current membership of each type.
+     *
+     * Kept out of the front page data because only the dashboard asks for it, and the front page data is read on
+     * every page for the notification bell.
+     *
+     * @return array<string, int>
+     */
+    public function getMembershipBreakdown(): array
+    {
+        return $this->memberRepository->countByMembershipType();
     }
 
     /**
@@ -1069,7 +1082,7 @@ class Member
      */
     public function getPaidProspectivesCount(): int
     {
-        return count($this->prospectiveMemberRepository->search('', 'paid'));
+        return $this->prospectiveMemberRepository->countForFilter(ProspectiveMemberFilter::Paid);
     }
 
     /**

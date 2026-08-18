@@ -20,6 +20,7 @@ use App\Repository\Database\SubDecision\FoundationRepository;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
@@ -542,6 +543,40 @@ class MemberRepository extends ServiceEntityRepository
     }
 
     /**
+     * How many members hold a current membership of each type.
+     *
+     * Counts members rather than memberships, and someone who holds two current memberships of different types is
+     * counted under both, so these do not add up to the number of members and are not rendered as a share of one.
+     *
+     * @return array<string, int> keyed by the value of `MembershipTypes`, in the order that enum declares them
+     */
+    public function countByMembershipType(): array
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb->select('ms.type AS type', 'COUNT(DISTINCT ms.member) AS total')
+            ->from(Membership::class, 'ms')
+            ->innerJoin(Member::class, 'm', Join::WITH, 'm = ms.member')
+            ->where('m.deleted = False')
+            ->andWhere('ms.startDate <= CURRENT_TIMESTAMP()')
+            ->andWhere('ms.endDate >= CURRENT_TIMESTAMP()')
+            ->groupBy('ms.type');
+
+        $counts = [];
+        foreach ($qb->getQuery()->getResult() as $row) {
+            $counts[$row['type']->value] = (int) $row['total'];
+        }
+
+        // A type nobody holds does not come back from a `GROUP BY`, and it is still a type: it is a zero, not a
+        // missing row.
+        $breakdown = [];
+        foreach (MembershipTypes::cases() as $type) {
+            $breakdown[$type->value] = $counts[$type->value] ?? 0;
+        }
+
+        return $breakdown;
+    }
+
+    /**
      * Returns a subquery containing IDENTIY(m) of all members that have a membership (with optional constraints).
      *
      * Builds a subquery, set parameters to the inputted QueryBuilder $qb, and returns the subquery.
@@ -666,7 +701,12 @@ class MemberRepository extends ServiceEntityRepository
         int $page,
         int $pageSize,
     ): Paginator {
+        // The memberships come along: every row states the membership a member holds, and reading that off a lazy
+        // collection is one query per row. `Paginator` pages the members first and fetches their memberships after,
+        // so the join does not cut the page short.
         $qb = $this->createQueryBuilder('m')
+            ->addSelect('memberships')
+            ->leftJoin('m.memberships', 'memberships')
             ->orderBy('m.lidnr', 'DESC')
             ->setFirstResult(($page - 1) * $pageSize)
             ->setMaxResults($pageSize);

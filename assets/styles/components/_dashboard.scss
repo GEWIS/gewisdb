@@ -1,0 +1,172 @@
+// The dashboard: the figures across the top, what needs someone underneath, and the rail that says where the numbers
+// come from.
+
+.stat .panel-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.stat-label {
+    color: var(--#{$prefix}secondary-color);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.stat-value {
+    font-size: 1.875rem;
+    font-weight: 700;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+}
+
+.stat-note {
+    color: var(--#{$prefix}secondary-color);
+    font-size: $font-size-sm;
+}
+
+.panel-heading-meta {
+    color: var(--#{$prefix}secondary-color);
+    font-size: $font-size-sm;
+}
+
+// One row per thing that needs someone. Each is its own panel body so the rows are separated the way the panel
+// separates anything else, rather than by a rule this file would have to invent.
+.attention {
+    display: flex;
+    align-items: flex-start;
+    gap: map-get($spacers, 3);
+
+    & + .attention {
+        border-block-start: 1px solid var(--#{$prefix}border-color);
+    }
+}
+
+.attention-icon {
+    flex: none;
+    inline-size: 1.875rem;
+    block-size: 1.875rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5625rem;
+    background-color: var(--#{$prefix}tertiary-bg);
+}
+
+.attention-text {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-inline-size: 0;
+}
+
+.attention-title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: map-get($spacers, 2);
+    font-weight: 600;
+}
+
+.attention-body {
+    color: var(--#{$prefix}secondary-color);
+    text-wrap: pretty;
+}
+
+.section-label {
+    margin-block: map-get($spacers, 4) map-get($spacers, 2);
+    color: var(--#{$prefix}secondary-color);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.breakdown {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.3125rem map-get($spacers, 2);
+
+    & + .breakdown {
+        margin-block-start: map-get($spacers, 3);
+    }
+}
+
+.breakdown-count {
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.breakdown-bar {
+    grid-column: 1 / -1;
+    block-size: 0.375rem;
+    border-radius: $border-radius-pill;
+    background-color: var(--#{$prefix}tertiary-bg);
+    overflow: hidden;
+}
+
+.breakdown-fill {
+    display: block;
+    block-size: 100%;
+    border-radius: $border-radius-pill;
+    background-color: var(--#{$prefix}secondary-color);
+}
+
+// Ordinary members are the association's own, so they carry the association's colour; the rest are told apart from
+// them and from each other rather than ranked.
+.breakdown-fill-ordinary {
+    background-color: $gewis-red;
+}
+
+.breakdown-fill-graduate {
+    background-color: var(--#{$prefix}success);
+}
+
+.breakdown-fill-honorary {
+    background-color: var(--#{$prefix}warning);
+}
+
+.integration {
+    display: flex;
+    align-items: flex-start;
+    gap: map-get($spacers, 2);
+
+    & + .integration {
+        margin-block-start: map-get($spacers, 3);
+    }
+}
+
+.integration-dot {
+    flex: none;
+    inline-size: 0.5rem;
+    block-size: 0.5rem;
+    margin-block-start: 0.4375rem;
+    border-radius: 50%;
+}
+
+.integration-text {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-inline-size: 0;
+}
+
+.integration-label {
+    font-weight: 600;
+}
+
+.integration-value {
+    color: var(--#{$prefix}secondary-color);
+    font-size: $font-size-sm;
+    line-height: 1.45;
+    text-wrap: pretty;
+}
+
+.integration-action {
+    flex: none;
+    font-size: $font-size-sm;
+    font-weight: 600;
+}

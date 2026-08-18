@@ -32,7 +32,11 @@ application's own view layer and GEWISWEB's conventions. No inline styles, no se
       document, so nothing is stored half-finished and each row links back to the step it came from. Checkout stays
       shut until both agreements are ticked. With scripting off the whole form is visible at once and submits as it
       did before; a rejected submission opens the first step carrying an error.
-- [ ] **Overview** — dashboard last, because its numbers come from queries the screens above build.
+- [x] **Overview** — four figures, what needs someone, the jump-to grid, and a rail with the membership breakdown,
+      the integrations and the build. The attention list is the notification bell's set, read from the same view
+      model, so the dashboard and the bell cannot state different things. The designs' trend pills ("+2 this month",
+      "stable") are not rendered: nothing records a figure over time to compare against. The activity feed and its
+      "full audit log" are not rendered either, for the same reason — see the out-of-scope list below.
 
 ## Domains
 
