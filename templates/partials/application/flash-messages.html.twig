@@ -1,0 +1,18 @@
+{# Laminas rendered one namespace per alert style; Symfony leaves the label free-form, so it is mapped here and
+   anything unrecognised falls back to the informational style rather than disappearing. #}
+{% set alert_styles = {
+    'default': 'alert-info',
+    'error': 'alert-danger',
+    'info': 'alert-info',
+    'success': 'alert-success',
+    'warning': 'alert-warning',
+} %}
+
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="alert {{ alert_styles[label]|default('alert-info') }} alert-dismissible fade show" role="alert">
+            {{ message|trans }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{{ 'Close'|trans }}"></button>
+        </div>
+    {% endfor %}
+{% endfor %}

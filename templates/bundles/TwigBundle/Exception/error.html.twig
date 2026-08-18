@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'An error occurred'|trans }} - {{ parent() }}{% endblock %}
+
+{% block contents %}
+    <h1>{{ 'An error occurred'|trans }}</h1>
+    {# The old template printed the exception, its file, its stack trace and every previous exception whenever
+       `display_exceptions` was on. That is the profiler's job now, and this template is only ever reached with
+       debugging off. #}
+    <p>{{ 'An error occurred during execution; please try again later.'|trans }}</p>
+{% endblock %}

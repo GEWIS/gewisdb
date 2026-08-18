@@ -1,0 +1,49 @@
+{# The settings menu, the same shape GEWISWEB uses: a gear in the navbar opening onto segmented controls. Choosing a
+   language navigates away, but choosing a theme should not close the panel from under the reader who is still looking
+   at it, which is what `data-bs-auto-close="outside"` is for. #}
+<li class="nav-item dropdown">
+    <button class="nav-link dropdown-toggle" type="button" role="button"
+            data-bs-toggle="dropdown" data-bs-auto-close="outside"
+            aria-haspopup="true" aria-expanded="false" aria-label="{{ 'Settings'|trans }}">
+        <span class="fas fa-gear" aria-hidden="true"></span>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end">
+        <li>
+            <h6 class="dropdown-header">{{ 'Language'|trans }}</h6>
+        </li>
+        <li>
+            <div class="nav-menu-segmented">
+                {% for locale in supported_locales %}
+                    {% set current = locale == app.request.locale %}
+                    <a lang="{{ locale }}" hreflang="{{ locale }}" translate="no"
+                       class="btn{{ current ? ' active' : '' }}"
+                       href="{{ path('application_lang', {lang: locale}) }}"
+                       {% if current %}aria-current="true"{% endif %}>
+                        <span class="flag-icon flag-icon-{{ locale }}" aria-hidden="true"></span>
+                        {{ locale|locale_name(locale) }}
+                    </a>
+                {% endfor %}
+            </div>
+        </li>
+        <li><hr class="dropdown-divider"></li>
+        <li>
+            <h6 class="dropdown-header">{{ 'Theme'|trans }}</h6>
+        </li>
+        <li>
+            <div class="nav-menu-segmented">
+                <button type="button" class="btn" data-bs-theme-value="gewis-day" aria-pressed="false">
+                    <span class="fas fa-sun" aria-hidden="true"></span>
+                    {{ 'Light'|trans }}
+                </button>
+                <button type="button" class="btn" data-bs-theme-value="gewis-night" aria-pressed="false">
+                    <span class="fas fa-moon" aria-hidden="true"></span>
+                    {{ 'Dark'|trans }}
+                </button>
+                <button type="button" class="btn" data-bs-theme-value="auto" aria-pressed="false">
+                    <span class="fas fa-star-half-stroke" aria-hidden="true"></span>
+                    {{ 'Auto'|trans }}
+                </button>
+            </div>
+        </li>
+    </ul>
+</li>

@@ -31,6 +31,7 @@
         <exclude-pattern>src/Entity/Report/SubDecision.php</exclude-pattern>
         <!-- Stripe also does this, so ignore those too -->
         <exclude-pattern>module/Database/src/Service/Stripe.php</exclude-pattern>
+        <exclude-pattern>src/Service/Join/StripeService.php</exclude-pattern>
     </rule>
 
     <!-- Type hints that cannot converted to native types due to signature of parent -->

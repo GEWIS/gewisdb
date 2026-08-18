@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'A 404 error occurred'|trans }} - {{ parent() }}{% endblock %}
+
+{% block contents %}
+    <h1>{{ 'A 404 error occurred'|trans }}</h1>
+    {# Laminas distinguished five reasons for a 404, four of which were dispatch failures inside its own MVC. Only
+       the routing miss survives. #}
+    <p>{{ 'The requested URL could not be matched by routing.'|trans }}</p>
+{% endblock %}
