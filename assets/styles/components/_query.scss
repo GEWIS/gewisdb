@@ -1,0 +1,145 @@
+// The query console: the box you type DQL into, the numbers beside it, and the two lists in the rail that fill it.
+
+.query-editor {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    padding: 0;
+}
+
+// The numbers are one text node with newlines in it, aligned to the box by sharing its font and line height, and
+// scrolled along with it by the controller.
+.query-editor-gutter {
+    flex: none;
+    padding: $input-padding-y map-get($spacers, 2);
+    border-inline-end: 1px solid var(--#{$prefix}border-color);
+    background-color: var(--#{$prefix}tertiary-bg);
+    color: var(--#{$prefix}secondary-color);
+    font-family: $font-family-monospace;
+    font-size: $input-font-size;
+    line-height: $input-line-height;
+    text-align: end;
+    white-space: pre;
+    overflow: hidden;
+    user-select: none;
+}
+
+.query-editor-input.form-control {
+    border: 0;
+    border-radius: 0;
+    resize: vertical;
+
+    &:focus {
+        box-shadow: none;
+    }
+}
+
+.query-category {
+    inline-size: 11rem;
+    flex: none;
+}
+
+.stored-queries-group {
+    display: block;
+    padding-block: map-get($spacers, 2) 0.3125rem;
+    color: var(--#{$prefix}secondary-color);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+
+    &:first-child {
+        padding-block-start: 0;
+    }
+}
+
+.stored-query {
+    display: flex;
+    align-items: center;
+    gap: map-get($spacers, 2);
+    padding: $nav-row-padding-y $nav-row-padding-x;
+    border-radius: 0.5625rem;
+    color: var(--#{$prefix}body-color);
+    text-decoration: none;
+
+    &:hover {
+        background-color: $nav-menu-hover-bg;
+        color: var(--#{$prefix}body-color);
+        text-decoration: none;
+    }
+
+    &.active {
+        background-color: $nav-menu-active-bg;
+        color: $nav-menu-active-color;
+    }
+}
+
+.stored-query-icon {
+    flex: none;
+    color: var(--#{$prefix}secondary-color);
+    font-size: $font-size-sm;
+}
+
+.stored-query.active .stored-query-icon {
+    color: inherit;
+}
+
+// The entity list scrolls on its own so a long list does not push the rail past the results beside it.
+.entity-list {
+    max-block-size: 22rem;
+    overflow-y: auto;
+    border-block-start: 1px solid var(--#{$prefix}border-color);
+}
+
+.entity {
+    display: flex;
+    align-items: center;
+    gap: map-get($spacers, 2);
+    inline-size: 100%;
+    padding: 0.4375rem var(--#{$prefix}panel-spacer-x);
+    border: 0;
+    border-block-end: 1px solid var(--#{$prefix}border-color);
+    background-color: transparent;
+    color: var(--#{$prefix}body-color);
+    font-size: $font-size-sm;
+    text-align: start;
+
+    &:hover {
+        background-color: $nav-menu-hover-bg;
+    }
+
+    &:last-of-type {
+        border-block-end: 0;
+    }
+}
+
+.entity-insert {
+    margin-inline-start: auto;
+    color: var(--#{$prefix}secondary-color);
+    font-size: 0.625rem;
+    rotate: 90deg;
+}
+
+.entity-empty {
+    margin: 0;
+    padding: map-get($spacers, 3) var(--#{$prefix}panel-spacer-x);
+    color: var(--#{$prefix}secondary-color);
+    font-size: $font-size-sm;
+    text-align: center;
+}
+
+@include color-mode(gewis-night) {
+    .stored-query {
+        &:hover {
+            background-color: $nav-menu-hover-bg-dark;
+        }
+
+        &.active {
+            background-color: $nav-menu-active-bg-dark;
+        }
+    }
+
+    .entity:hover {
+        background-color: $nav-menu-hover-bg-dark;
+    }
+}

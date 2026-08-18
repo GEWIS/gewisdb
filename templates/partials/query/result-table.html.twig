@@ -22,5 +22,11 @@
         </table>
     </div>
 {% else %}
-    <p>{{ 'The query did not return any results.'|trans }}</p>
+    <div class="panel-body">
+        {% include 'partials/application/empty-state.html.twig' with {
+            icon: 'fa-table',
+            title: 'No rows'|trans,
+            body: 'The query ran and matched nothing.'|trans,
+        } only %}
+    </div>
 {% endif %}

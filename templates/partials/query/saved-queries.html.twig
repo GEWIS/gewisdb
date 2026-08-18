@@ -8,22 +8,18 @@
 {% endfor %}
 
 {% if grouped is not empty %}
-    <ul>
-        {% for category, queries in grouped %}
-            <li>
-                <strong>{{ category }}</strong>
-                <ul>
-                    {% for saved_query in queries %}
-                        <li>
-                            <a href="{{ path('query_show', {'query': saved_query.id}) }}">
-                                {{ saved_query.name }}
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </li>
+    {% for category, queries in grouped %}
+        <span class="stored-queries-group">{{ category }}</span>
+        {% for saved_query in queries %}
+            {# Opening a stored query is a page load rather than a client-side fill, so what is running is always the
+               query the address names. #}
+            <a class="stored-query{{ saved_query.id == (current_query_id|default(null)) ? ' active' : '' }}"
+               href="{{ path('query_show', {'query': saved_query.id}) }}">
+                <span class="fas fa-code stored-query-icon" aria-hidden="true"></span>
+                {{ saved_query.name }}
+            </a>
         {% endfor %}
-    </ul>
+    {% endfor %}
 {% else %}
-    <p><em>{{ 'There are no saved queries.'|trans }}</em></p>
+    {{ 'There are no saved queries.'|trans }}
 {% endif %}

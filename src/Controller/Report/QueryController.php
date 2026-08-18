@@ -132,6 +132,7 @@ final class QueryController extends AbstractController
             ]),
             'entities' => $this->queryService->getEntities(),
             'saved_queries' => $this->queryService->getSavedQueries(),
+            'current_query_id' => $savedQuery?->getId(),
             'result' => $result,
         ]);
     }
