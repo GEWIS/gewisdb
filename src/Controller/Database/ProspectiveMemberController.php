@@ -7,12 +7,14 @@ namespace App\Controller\Database;
 use App\Entity\Database\Enums\MembershipTypes;
 use App\Entity\Database\ProspectiveMember as ProspectiveMemberModel;
 use App\Form\Database\MemberApproveType;
+use App\Form\Database\MemberRenewalType;
 use App\Form\Database\RegistrationType;
 use App\Service\Database\Member as MemberService;
 use App\Service\Database\ProspectiveMemberRemoval;
 use App\Service\Database\RegistrationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\ExpressionLanguage\Expression;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -77,6 +79,56 @@ final class ProspectiveMemberController extends AbstractController
         }
 
         return $this->render('join/subscribe.html.twig', ['form' => $form]);
+    }
+
+    /**
+     * Graduate renewal, reached from the link in the renewal e-mail.
+     *
+     * Served from the join host and open to anyone holding the token: whoever follows the link is not signed in, and
+     * the token is what says who they are. A token that has been used or has expired is not an error — the page says
+     * the link no longer works rather than pretending it does.
+     */
+    #[Route(
+        path: '/renew/{token}',
+        name: 'join_renew_short',
+        requirements: ['token' => '[a-zA-Z0-9_\-\+]+'],
+        methods: ['GET', 'POST'],
+    )]
+    #[Route(
+        path: '/member/renew/{token}',
+        name: 'join_renew',
+        requirements: ['token' => '[a-zA-Z0-9_\-\+]+'],
+        methods: ['GET', 'POST'],
+    )]
+    public function renew(
+        Request $request,
+        string $token,
+    ): Response {
+        $renewalLink = $this->memberService->getRenewalLink($token);
+
+        if (null === $renewalLink) {
+            return $this->render('join/renew-unavailable.html.twig');
+        }
+
+        $member = $renewalLink->getMember();
+        $form = $this->createForm(MemberRenewalType::class, $member, ['renewal_link' => $renewalLink]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            $email = (string) $form->get('email')->getData();
+
+            if ($this->memberService->emailBelongsToSomeoneElse($email, $member)) {
+                $form->get('email')->addError(new FormError(
+                    $this->translator->trans('There already is a member with this e-mail address.'),
+                ));
+            } elseif ($form->isValid()) {
+                $this->memberService->renewMember($member, $renewalLink, $renewalLink->getNewExpiration());
+
+                return $this->render('join/renew-done.html.twig', ['member' => $member]);
+            }
+        }
+
+        return $this->render('join/renew.html.twig', ['form' => $form]);
     }
 
     #[Route(

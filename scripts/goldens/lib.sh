@@ -179,8 +179,13 @@ capture_host_request() {
 
     # The session cookie's *value* is random per request; its domain is the thing under test, because that domain is
     # currently rewritten by nginx's proxy_cookie_domain and has to survive the move to per-host session config.
+    #
+    # `sf_redirect` and the `*_profile_token` pair are set by the web profiler and the security profiler, which only
+    # exist in dev. They say nothing about what the application does and are absent from a production response, so
+    # recording them would make the goldens depend on which environment took the capture.
     echo "${headers}" \
         | grep -iE '^(content-type|location|set-cookie):' \
+        | grep -viE '^set-cookie: *(sf_redirect|[a-z0-9_]*_profile_token)=' \
         | sed -E 's/^([Ss]et-[Cc]ookie: *[^=]+=)[^;]*/\1<redacted>/' \
         | LC_ALL=C sort \
         | sed 's/[[:space:]]*$//' || true

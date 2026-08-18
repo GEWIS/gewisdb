@@ -1433,6 +1433,24 @@ class Member
     }
 
     /**
+     * Whether this address already belongs to someone else — a member or an applicant.
+     *
+     * A renewal may change the address it is sent to, and two records answering to the same address cannot both be
+     * reached, so the form refuses one that is taken.
+     */
+    public function emailBelongsToSomeoneElse(
+        string $email,
+        MemberModel $member,
+    ): bool {
+        if ($email === $member->getEmail()) {
+            return false;
+        }
+
+        return $this->memberRepository->hasMemberWith($email)
+            || $this->prospectiveMemberRepository->hasMemberWith($email);
+    }
+
+    /**
      * Renew a member (with existing membership type).
      * Currently only used for renewal links.
      */

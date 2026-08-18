@@ -10,17 +10,50 @@
     gap: 0.125rem;
 }
 
+// The group heading is the control that folds the group away, so it is a button that still reads as a heading.
 .decision-kinds-group {
+    display: flex;
+    align-items: center;
+    gap: map-get($spacers, 2);
+    inline-size: 100%;
     padding: 0.5rem $nav-row-padding-x 0.3125rem;
+    border: 0;
+    background-color: transparent;
     color: var(--#{$prefix}secondary-color);
     font-size: 0.6875rem;
     font-weight: 700;
     letter-spacing: 0.09em;
+    text-align: start;
     text-transform: uppercase;
 
     &:not(:first-child) {
         margin-block-start: map-get($spacers, 2);
     }
+
+    &:hover {
+        color: var(--#{$prefix}body-color);
+    }
+}
+
+.decision-kinds-group-label {
+    min-inline-size: 0;
+}
+
+.decision-kinds-group-count {
+    margin-inline-start: auto;
+    font-variant-numeric: tabular-nums;
+    opacity: 0.75;
+}
+
+.decision-kinds-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+}
+
+// Bootstrap toggles `.collapse` with inline display, so the flex column above only applies while it is open.
+.decision-kinds-items.collapsing {
+    display: block;
 }
 
 .decision-kind {

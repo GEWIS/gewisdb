@@ -124,23 +124,34 @@
                 <div class="panel">
                     <div class="panel-heading"><h3>{{ 'Kind of decision'|trans }}</h3></div>
                     <div class="panel-body">
+                        {# Each group folds away. They start open, because which kind you want is easier to find by
+                           reading than by opening; folding is for putting aside the ones you never record. #}
                         <div class="nav decision-kinds" role="tablist" aria-orientation="vertical">
                             {% set first = true %}
-                            {% for group in kinds %}
-                                <span class="decision-kinds-group">{{ group.label }}</span>
-                                {% for id, item in group.items %}
-                                    <button class="decision-kind{{ first ? ' active' : '' }}" id="{{ id }}-tab"
-                                            type="button" role="tab" data-bs-toggle="tab"
-                                            data-bs-target="#{{ id }}" aria-controls="{{ id }}"
-                                            aria-selected="{{ first ? 'true' : 'false' }}">
-                                        <span class="decision-kind-icon fas {{ item.icon }}" aria-hidden="true"></span>
-                                        <span class="decision-kind-text">
-                                            <span class="decision-kind-label">{{ item.label }}</span>
-                                            <span class="decision-kind-hint">{{ item.hint }}</span>
-                                        </span>
-                                    </button>
-                                    {% set first = false %}
-                                {% endfor %}
+                            {% for key, group in kinds %}
+                                <button class="decision-kinds-group" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#kinds-{{ key }}"
+                                        aria-expanded="true" aria-controls="kinds-{{ key }}">
+                                    <span class="decision-kinds-group-label">{{ group.label }}</span>
+                                    <span class="decision-kinds-group-count">{{ group.items|length }}</span>
+                                    <span class="fas fa-chevron-down panel-collapse-chevron" aria-hidden="true"></span>
+                                </button>
+                                <div class="collapse show decision-kinds-items" id="kinds-{{ key }}">
+                                    {% for id, item in group.items %}
+                                        <button class="decision-kind{{ first ? ' active' : '' }}" id="{{ id }}-tab"
+                                                type="button" role="tab" data-bs-toggle="tab"
+                                                data-bs-target="#{{ id }}" aria-controls="{{ id }}"
+                                                aria-selected="{{ first ? 'true' : 'false' }}">
+                                            <span class="decision-kind-icon fas {{ item.icon }}"
+                                                  aria-hidden="true"></span>
+                                            <span class="decision-kind-text">
+                                                <span class="decision-kind-label">{{ item.label }}</span>
+                                                <span class="decision-kind-hint">{{ item.hint }}</span>
+                                            </span>
+                                        </button>
+                                        {% set first = false %}
+                                    {% endfor %}
+                                </div>
                             {% endfor %}
                         </div>
                     </div>

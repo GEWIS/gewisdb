@@ -1321,6 +1321,10 @@
         <source>If your browser does not redirect you, please &lt;a href="%url%"&gt;click here&lt;/a&gt; to continue.</source>
         <target state="translated"><![CDATA[If your browser does not redirect you, please <a href="%url%">click here</a> to continue.]]></target>
       </trans-unit>
+      <trans-unit id="TUZhqpq" resname="If your graduate status has not been renewed and you would like it to be, let the secretary know.">
+        <source>If your graduate status has not been renewed and you would like it to be, let the secretary know.</source>
+        <target state="translated">If your graduate status has not been renewed and you would like it to be, let the secretary know.</target>
+      </trans-unit>
       <trans-unit id="bhJd7GS" resname="Inactief Lid">
         <source>Inactief Lid</source>
         <target state="translated">Inactive Member</target>
@@ -2453,6 +2457,10 @@
         <source>Thank you %name%!</source>
         <target state="translated">Thank you %name%!</target>
       </trans-unit>
+      <trans-unit id="0_cKFc5" resname="Thank you %name%! Your graduate status has been renewed and we have sent you a confirmation by e-mail.">
+        <source>Thank you %name%! Your graduate status has been renewed and we have sent you a confirmation by e-mail.</source>
+        <target state="translated">Thank you %name%! Your graduate status has been renewed and we have sent you a confirmation by e-mail.</target>
+      </trans-unit>
       <trans-unit id="41aTr2J" resname="The body to be abolished includes the following members:">
         <source>The body to be abolished includes the following members:</source>
         <target state="translated">The body to be abolished includes the following members:</target>
@@ -2516,6 +2524,10 @@
       <trans-unit id="PL2fcxN" resname="Theme">
         <source>Theme</source>
         <target state="translated">Theme</target>
+      </trans-unit>
+      <trans-unit id="pijhSvj" resname="There already is a member with this e-mail address.">
+        <source>There already is a member with this e-mail address.</source>
+        <target state="translated">There already is a member with this e-mail address.</target>
       </trans-unit>
       <trans-unit id="JrW42JT" resname="There are no board members to choose from.">
         <source>There are no board members to choose from.</source>
@@ -2600,6 +2612,10 @@
       <trans-unit id="KMSHp7E" resname="This removes the account. Nothing it recorded is removed with it.">
         <source>This removes the account. Nothing it recorded is removed with it.</source>
         <target state="translated">This removes the account. Nothing it recorded is removed with it.</target>
+      </trans-unit>
+      <trans-unit id="RvZCAE1" resname="This renewal link no longer works. It was either used already or it has expired.">
+        <source>This renewal link no longer works. It was either used already or it has expired.</source>
+        <target state="translated">This renewal link no longer works. It was either used already or it has expired.</target>
       </trans-unit>
       <trans-unit id="mdHmLw3" resname="To pay the membership fee you must accept Stripe's privacy policy.">
         <source>To pay the membership fee you must accept Stripe's privacy policy.</source>

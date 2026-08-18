@@ -18,7 +18,6 @@ use function is_string;
  * Where the payment provider drops a prospective member off: the pages they return to after the checkout, the link
  * that puts them back on it, and the webhook that tells us what actually happened.
  */
-#[Route(path: '/member/subscribe/checkout')]
 final class CheckoutController extends AbstractController
 {
     public function __construct(
@@ -28,7 +27,12 @@ final class CheckoutController extends AbstractController
     }
 
     #[Route(
-        path: '/completed',
+        path: '/checkout/completed',
+        name: 'join_checkout_completed_short',
+        methods: ['GET'],
+    )]
+    #[Route(
+        path: '/member/subscribe/checkout/completed',
         name: 'join_checkout_completed',
         methods: ['GET'],
     )]
@@ -38,7 +42,12 @@ final class CheckoutController extends AbstractController
     }
 
     #[Route(
-        path: '/cancelled',
+        path: '/checkout/cancelled',
+        name: 'join_checkout_cancelled_short',
+        methods: ['GET'],
+    )]
+    #[Route(
+        path: '/member/subscribe/checkout/cancelled',
         name: 'join_checkout_cancelled',
         methods: ['GET'],
     )]
@@ -48,7 +57,12 @@ final class CheckoutController extends AbstractController
     }
 
     #[Route(
-        path: '/error',
+        path: '/checkout/error',
+        name: 'join_checkout_error_short',
+        methods: ['GET'],
+    )]
+    #[Route(
+        path: '/member/subscribe/checkout/error',
         name: 'join_checkout_error',
         methods: ['GET'],
     )]
@@ -58,7 +72,13 @@ final class CheckoutController extends AbstractController
     }
 
     #[Route(
-        path: '/restart/{token}',
+        path: '/checkout/restart/{token}',
+        name: 'join_checkout_restart_short',
+        requirements: ['token' => '[a-zA-Z0-9_\-+]+'],
+        methods: ['GET'],
+    )]
+    #[Route(
+        path: '/member/subscribe/checkout/restart/{token}',
         name: 'join_checkout_restart',
         requirements: ['token' => '[a-zA-Z0-9_\-+]+'],
         methods: ['GET'],
@@ -81,7 +101,12 @@ final class CheckoutController extends AbstractController
      * only thing that says the call is theirs, so nothing else happens until it has been verified.
      */
     #[Route(
-        path: '/webhook',
+        path: '/checkout/webhook',
+        name: 'join_checkout_webhook_short',
+        methods: ['POST'],
+    )]
+    #[Route(
+        path: '/member/subscribe/checkout/webhook',
         name: 'join_checkout_webhook',
         methods: ['POST'],
     )]
