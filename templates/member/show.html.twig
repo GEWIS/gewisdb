@@ -1,0 +1,223 @@
+{% extends 'base.html.twig' %}
+
+{% import 'partials/member/labels.html.twig' as labels %}
+
+{% block page_title %}{{ member.fullName }} - {{ parent() }}{% endblock %}
+
+{#
+    `membership_ends_on` is nullable while `Member::getMembershipEndsOn()` falls back to a sentinel date, so the
+    controller passes the real value. `organs` pairs each installation with the decision it rests on, which spares
+    this page a five-step walk through the decision graph, and `notes` carries the audit trail with its format
+    string already filled in.
+#}
+{% block contents %}
+    <h1>{{ member.fullName }}</h1>
+
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <th scope="row">{{ 'Member Number'|trans }}</th>
+                        <td>{{ member.lidnr }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{{ 'Initial(s)'|trans }}</th>
+                        <td>{{ member.initials }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{{ 'First Name'|trans }}</th>
+                        <td>{{ member.firstName }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{{ 'Last Name Prepositional Particle'|trans }}</th>
+                        <td>{{ member.middleName }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{{ 'Last Name'|trans }}</th>
+                        <td>{{ member.lastName }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{{ 'TU/e student number'|trans }}</th>
+                        <td>{{ member.studentNumber ?? 'Unknown'|trans }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{{ 'E-mail Address'|trans }}</th>
+                        <td>
+                            {% if null is not same as(member.email) %}
+                                <a href="mailto:{{ member.email }}">{{ member.email }}</a>
+                            {% else %}
+                                {{ 'Unknown'|trans }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{{ 'Birthdate'|trans }}</th>
+                        <td>{{ member.birth|date('l j F Y') }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{{ 'Generation'|trans }}</th>
+                        <td>{{ member.generation }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{{ 'Paid for current/last membership (Amount)'|trans }}</th>
+                        <td>
+                            {{- null is same as(member.currentOrLastMembership)
+                                ? ''
+                                : member.currentOrLastMembership.paid -}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{{ 'Membership Type (today)'|trans }}</th>
+                        <td>
+                            {{ labels.membership_type(
+                                null is same as(member.currentMembership) ? null : member.currentMembership.type,
+                            ) }}
+                            {% if can_change_membership_type %}
+                                <a href="{{ path('member_membership_edit', {lidnr: member.lidnr}) }}"
+                                   class="btn btn-sm btn-primary">
+                                    {{ 'Update / Renew'|trans }}
+                                </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{{ 'Study'|trans }}</th>
+                        {# `getName()` spelled out: `member.study.name` would resolve to the enum case name. #}
+                        <td>{{ member.study.getName|trans }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{{ 'Last Update to Membership'|trans }}</th>
+                        <td>{{ member.changedOn|date('l j F Y') }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{{ 'Membership Ends On (Expires On)'|trans }}</th>
+                        <td>
+                            {{ null is same as(membership_ends_on)
+                                ? 'n/a'|trans
+                                : membership_ends_on|date('l j F Y') }}
+                            ({{ member.expiration|date('l j F Y') }})
+                            {% if can_extend %}
+                                <a href="{{ path('member_expiration_edit', {lidnr: member.lidnr}) }}"
+                                   class="btn btn-sm btn-primary">
+                                    {{ 'Extend'|trans }}
+                                </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{{ 'Wants to Receive Supremum'|trans }}</th>
+                        <td>
+                            {{ member.supremum }}
+                            <a href="{{ path('member_supremum_optin', {lidnr: member.lidnr}) }}"
+                               class="btn btn-sm btn-primary">{{ 'Opt in'|trans }}</a>
+                            <a href="{{ path('member_supremum_optout', {lidnr: member.lidnr}) }}"
+                               class="btn btn-sm btn-primary">{{ 'Opt out'|trans }}</a>
+                            <a href="{{ path('member_supremum_reset', {lidnr: member.lidnr}) }}"
+                               class="btn btn-sm btn-primary">{{ 'Reset'|trans }}</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="d-flex flex-wrap gap-2 mb-4">
+                <a href="{{ path('member_edit', {lidnr: member.lidnr}) }}" class="btn btn-primary">
+                    {{ 'Change Data'|trans }}
+                </a>
+                <a href="{{ path('member_delete', {lidnr: member.lidnr}) }}" class="btn btn-danger">
+                    {{ 'Delete Member'|trans }}
+                </a>
+            </div>
+
+            <h2 class="h4">{{ 'Membership of Committees and Fraternities'|trans }}</h2>
+            {% if has_correct_installations %}
+                <ul>
+                    {% for organ in organs %}
+                        <li><a href="{{ organ.url }}">{{ organ.abbr }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>{{ 'This member is not installed in an organ.'|trans }}</p>
+            {% endif %}
+        </div>
+
+        <div class="col-md-6">
+            <h2 class="h4">{{ 'Addresses'|trans }}</h2>
+            {% for address in member.addresses %}
+                {% include 'partials/member/address-card.html.twig' %}
+            {% endfor %}
+
+            {# Only the address types the member does not have yet can be added. #}
+            {% set present = member.addresses|map(address => address.type.value) %}
+            {% set addable = {
+                'home': 'Add Home Address',
+                'student': 'Add Student Address',
+                'mail': 'Add Mail Address',
+            } %}
+            <div class="d-flex flex-wrap gap-2 mb-4">
+                {% for type, label in addable|filter((text, key) => key not in present) %}
+                    <a href="{{ path('member_address_add', {lidnr: member.lidnr, type: type}) }}"
+                       class="btn btn-success">
+                        {{ label|trans }}
+                    </a>
+                {% endfor %}
+            </div>
+
+            <h2 class="h4">{{ 'Mailing List Subscriptions'|trans }}</h2>
+            <ul>
+                {% for subscription in member.mailingListMemberships|filter(s => not s.isToBeDeleted) %}
+                    <li>{{ subscription.mailingList.name }}</li>
+                {% else %}
+                    <li class="text-secondary">{{ 'None'|trans }}</li>
+                {% endfor %}
+            </ul>
+            <a href="{{ path('member_lists_edit', {lidnr: member.lidnr}) }}" class="btn btn-primary mb-4">
+                {{ 'Change Mailing List Subscriptions'|trans }}
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="h4">{{ 'Notes'|trans }}</h2>
+            {# The note form posts back to this page, which is where the audit trail lives. #}
+            {{ form_start(note_form) }}
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col" class="w-25">{{ 'Date'|trans }}</th>
+                        <th scope="col">{{ 'Entry'|trans }}</th>
+                        <th scope="col" class="w-25">{{ 'User'|trans }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for note in notes %}
+                        <tr>
+                            <td>{{ note.updated_at|date('j M Y H:i') }}</td>
+                            {# Safe to print unescaped: AuditEntryRow escapes the arguments before interpolating them
+                               into the entry's own format string, which is what carries the markup. #}
+                            <td>{{ note.body|raw }}</td>
+                            <td>{{ note.user }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="3" class="text-secondary">
+                                {{ 'There are no notes for this member.'|trans }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="2">
+                            {{ form_widget(note_form.note, {attr: {
+                                placeholder: note_form.note.vars.label|trans,
+                            }}) }}
+                            {{ form_errors(note_form.note) }}
+                        </td>
+                        <td>{{ form_widget(note_form.submit, {attr: {class: 'btn btn-success'}}) }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            {{ form_end(note_form) }}
+        </div>
+    </div>
+{% endblock %}

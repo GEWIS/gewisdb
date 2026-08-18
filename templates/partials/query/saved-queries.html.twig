@@ -1,0 +1,29 @@
+{# Stored queries, grouped under their category. The Laminas view opened and closed the nested lists as the category
+   changed while walking a list it assumed to be sorted; grouping first says the same thing and does not depend on
+   the order the queries come back in. #}
+{% set grouped = {} %}
+{% for saved_query in saved_queries %}
+    {% set category = saved_query.category|default('') is empty ? 'No category'|trans : saved_query.category %}
+    {% set grouped = grouped|merge({(category): grouped[category]|default([])|merge([saved_query])}) %}
+{% endfor %}
+
+{% if grouped is not empty %}
+    <ul>
+        {% for category, queries in grouped %}
+            <li>
+                <strong>{{ category }}</strong>
+                <ul>
+                    {% for saved_query in queries %}
+                        <li>
+                            <a href="{{ path('query_show', {'query': saved_query.id}) }}">
+                                {{ saved_query.name }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p><em>{{ 'There are no saved queries.'|trans }}</em></p>
+{% endif %}

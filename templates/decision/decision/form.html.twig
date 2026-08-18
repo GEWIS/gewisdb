@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'Add Decision'|trans }} - {{ parent() }}{% endblock %}
+
+{% block contents %}
+    {# One sub-decision form on its own, after it came back with errors. The form keys are the partial names, so the
+       thirteen-way switch the Laminas view carried is just the path. #}
+    {% include 'partials/decision/form/' ~ type|replace({'_': '-'}) ~ '.html.twig' with {
+        'form': form,
+        'installs': installs|default([]),
+        'grants': grants|default([]),
+        'member_function_form': member_function_form|default(null),
+    } %}
+{% endblock %}

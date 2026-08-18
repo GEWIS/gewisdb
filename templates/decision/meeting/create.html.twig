@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'Add Meeting'|trans }} - {{ parent() }}{% endblock %}
+
+{% block contents %}
+    <div class="row">
+        <div class="col-lg-6">
+            <h1>{{ 'Add Meeting'|trans }}</h1>
+            {{ form_start(form) }}
+                {{ form_row(form.type) }}
+                {{ form_row(form.number) }}
+                {{ form_row(form.date) }}
+                {{ form_widget(form.submit, {'attr': {'class': 'btn-gewis-primary'}}) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

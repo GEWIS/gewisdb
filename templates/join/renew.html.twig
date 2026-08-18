@@ -1,0 +1,74 @@
+{% extends 'join/base.html.twig' %}
+
+{% set nav_title = 'GEWIS Renew Membership'|trans %}
+
+{% block page_title %}{{ 'Graduate renewal'|trans }} - {{ parent() }}{% endblock %}
+
+{% block contents %}
+    <h1 class="mb-3">{{ 'Graduate renewal'|trans }}</h1>
+
+    <p class="lead">
+        {{ 'According to our data it is time to renew your status as a graduate of GEWIS. To make sure we have up-to-date information on how to contact you, please review your details below.'|trans }}
+    </p>
+    <p>
+        {{ 'If you do not want to become or remain a graduate, you do not have to do anything. It will simply expire on the indicated date.'|trans }}
+    </p>
+    <p>
+        {{ 'If you are currently studying at TU/e, please do not fill in this form, but instead inform the secretary of this. If you want GEWIS to automatically renew your membership, please send your TU/e student number.'|trans }}
+    </p>
+
+    {{ form_start(form, {attr: {id: 'form-renew'}}) }}
+
+    {% if form.vars.submitted and not form.vars.valid %}
+        <div class="alert alert-danger" role="alert">
+            {{ 'Some of the entered information appears to be missing or incorrect. Please check your data and submit again.'|trans }}
+        </div>
+    {% endif %}
+
+    <h2 class="h3">{{ 'Personal details'|trans }}</h2>
+    <div class="row">
+        <div class="col-md-2">
+            {{ form_row(form.initials) }}
+        </div>
+        <div class="col-md-4">
+            {{ form_row(form.firstName) }}
+        </div>
+        <div class="col-md-2">
+            {{ form_row(form.middleName) }}
+        </div>
+        <div class="col-md-4">
+            {{ form_row(form.lastName) }}
+        </div>
+    </div>
+    {{ form_row(form.email) }}
+
+    <hr>
+    <h2 class="h3">{{ 'Supremum'|trans }}</h2>
+    <p>
+        {{ 'As a graduate, you can choose to keep receiving the physical Supremum magazine.'|trans }}
+        {{ 'You can always read the online Supremum on %link%.'|trans({
+            '%link%': '<a target="_blank" href="https://supremum.gewis.nl">supremum.gewis.nl</a>',
+        })|raw }}
+    </p>
+    {{ form_row(form.supremum) }}
+
+    <hr>
+    <h2 class="h3">{{ 'Agreement'|trans }}</h2>
+    <p>
+        <a target="_blank" href="{{ 'https://gewis.nl/association/regulations'|trans }}">
+            {{ 'Articles of Association, Internal Regulations and privacy statement'|trans }}
+        </a>
+    </p>
+    {{ form_row(form.privacy) }}
+    {{ form_row(form.agreed) }}
+
+    <div class="row">
+        <div class="col-md-4">
+            {{ form_row(form.expiration) }}
+        </div>
+    </div>
+
+    {{ form_widget(form.submit, {attr: {class: 'btn-gewis-primary'}}) }}
+
+    {{ form_end(form) }}
+{% endblock %}

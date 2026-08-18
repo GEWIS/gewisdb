@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'Sync in progress'|trans }} - {{ parent() }}{% endblock %}
+
+{% block contents %}
+    <h1>{{ 'Sync in progress'|trans }}</h1>
+    <p>
+        {{ 'A Mailman/Listmonk sync is currently in progress. It is now not possible to safely update the mailing list administration, please try again in a few minutes.'|trans }}
+    </p>
+{% endblock %}

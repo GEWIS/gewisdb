@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'Decision'|trans }} {{ decision.hash }} - {{ parent() }}{% endblock %}
+
+{% block contents %}
+    <h1>{{ 'Decision %hash% reads as follows:'|trans({'%hash%': decision.hash}) }}</h1>
+
+    {% for warning in warnings|default([]) %}
+        <div class="alert alert-warning" role="alert">{{ warning }}</div>
+    {% endfor %}
+
+    {# `contents` is the decision as it reads in each of the application's languages, already assembled from its
+       sub-decisions; a template cannot hand the entity the translator that needs. #}
+    {% for content in contents %}
+        <p>{{ content }}</p>
+    {% endfor %}
+
+    <div class="d-flex flex-wrap gap-2" data-controller="copy"
+         data-copy-text-value="{{ decision.copyContent }}">
+        <button type="button" class="btn btn-info" data-action="copy#copy"
+                data-copy-copied-label="{{ 'Copied'|trans }}">
+            {{ 'Copy Decision'|trans }}
+        </button>
+        <a href="{{ path('decision_meeting_view', {
+               'type': decision.meetingType,
+               'number': decision.meetingNumber,
+           }) }}" class="btn btn-success">
+            {{ 'Back to %type% %number%'|trans({
+                '%type%': decision.meetingType,
+                '%number%': decision.meetingNumber,
+            }) }}
+        </a>
+    </div>
+{% endblock %}

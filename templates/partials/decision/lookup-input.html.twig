@@ -1,0 +1,13 @@
+{# A type-ahead text field. The field itself is never what the form reads back: picking a match fills in the hidden
+   identifiers next to it, which is why the lookup controller owns both the input and the dropdown below it.
+
+   Parameters: `controller` (the Stimulus identifier of the lookup), `field` (the text FormView) and `placeholder`. #}
+<div class="position-relative">
+    {{ form_widget(field, {'attr': {
+        'autocomplete': 'off',
+        'placeholder': placeholder,
+        ('data-' ~ controller ~ '-target'): 'input',
+        'data-action': 'input->' ~ controller ~ '#search keydown->' ~ controller ~ '#navigate',
+    }}) }}
+    <div class="dropdown-menu w-100" role="listbox" {{ 'data-' ~ controller ~ '-target' }}="results"></div>
+</div>

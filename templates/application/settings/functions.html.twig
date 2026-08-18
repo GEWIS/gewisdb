@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'Functions'|trans }} - {{ parent() }}{% endblock %}
+
+{# The three sections are the same list of organ functions with a different explanation, so the list itself is a
+   macro. The cases carry their own (translatable) name, which is why they are passed as enum cases rather than as
+   the pre-translated array the Laminas controller built. #}
+{% macro functions(functions) %}
+    <ul>
+        {% for function in functions %}
+            <li>{{ function.getName|trans }} (<code>{{ function.value }}</code>)</li>
+        {% endfor %}
+    </ul>
+{% endmacro %}
+
+{% import _self as list %}
+
+{% block contents %}
+    <h1>{{ 'Functions'|trans }}</h1>
+
+    <h2>{{ 'Current Functions'|trans }}</h2>
+    <p>{{ 'These organ functions can be selected when installing someone into a committee/fraternity'|trans }}</p>
+    {{ list.functions(current_functions) }}
+
+    <h2>{{ 'Historic Functions'|trans }}</h2>
+    <p>{{ 'These organ functions were used in the past but can no longer be selected'|trans }}</p>
+    {{ list.functions(legacy_functions) }}
+
+    <h2>{{ 'Administrative Functions'|trans }}</h2>
+    <p>{{ 'These organ functions cannot be selected manually but are used by the database internally'|trans }}</p>
+    {{ list.functions(administrative_functions) }}
+
+    <em>{{ 'Starting 2024, organ installation functions can only be changed through the code'|trans }}</em>
+{% endblock %}

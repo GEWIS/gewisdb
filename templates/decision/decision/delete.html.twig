@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% set decision_label = type.value ~ ' ' ~ number ~ '.' ~ point ~ '.' ~ decision %}
+
+{% block page_title %}{{ 'Delete Decision'|trans }} - {{ parent() }}{% endblock %}
+
+{% block contents %}
+    {% if error is defined and error %}
+        <h1>{{ 'Decision Cannot Be Removed'|trans }}</h1>
+        <p>
+            {% if annulment|default(false) %}
+                {{ 'Removing this annulment would restore a decision that later decisions have since overtaken.'|trans }}
+            {% else %}
+                {{ 'There are other decisions that still refer to this decision.'|trans }}
+            {% endif %}
+        </p>
+        <a href="{{ path('decision_meeting_view', {'type': type.value, 'number': number}) }}" class="btn btn-secondary">
+            {{ 'Back to %type% %number%'|trans({'%type%': type.value, '%number%': number}) }}
+        </a>
+    {% else %}
+        <h1>{{ 'Delete Decision'|trans }}</h1>
+        <p>
+            {{ 'Are you sure that you want to delete decision %decision%?'|trans({'%decision%': decision_label}) }}
+        </p>
+        {{ form_start(form) }}
+            <div class="d-flex gap-2">
+                {{ form_widget(form.submit_yes, {'attr': {'class': 'btn btn-danger'}}) }}
+                {{ form_widget(form.submit_no, {'attr': {'class': 'btn btn-secondary'}}) }}
+            </div>
+        {{ form_end(form) }}
+    {% endif %}
+{% endblock %}

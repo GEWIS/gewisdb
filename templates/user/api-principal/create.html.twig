@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'Create API token'|trans }} - {{ parent() }}{% endblock %}
+
+{% block contents %}
+    <div class="row">
+        <div class="col-md-10 col-lg-8">
+            <h1>{{ 'Create API token'|trans }}</h1>
+
+            {% include 'partials/user/api-principal-form.html.twig' with {'form': form} only %}
+        </div>
+    </div>
+{% endblock %}

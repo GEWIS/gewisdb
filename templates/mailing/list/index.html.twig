@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'Mailing Lists'|trans }} - {{ parent() }}{% endblock %}
+
+{# A yes/no column used to be a glyphicon tick or cross; without an icon font a badge says the same thing and does
+   not need a text alternative bolted on. #}
+{% macro yes_no(value) %}
+    {% if value %}
+        <span class="badge text-bg-success">{{ 'Yes'|trans }}</span>
+    {% else %}
+        <span class="badge text-bg-secondary">{{ 'No'|trans }}</span>
+    {% endif %}
+{% endmacro %}
+
+{% import _self as flag %}
+
+{% block contents %}
+    <div class="d-flex justify-content-between align-items-start mb-3">
+        <div>
+            <h1>{{ 'Current Mailing Lists'|trans }}</h1>
+            <p class="text-secondary mb-0">
+                {{ 'Last fetch of Listmonk lists'|trans }}:
+                {{ null is same as(listmonk_last_fetch) ? 'never'|trans : listmonk_last_fetch|date('Y-m-d H:i:s') }}
+            </p>
+        </div>
+        <a href="{{ path('mailing_list_create') }}" class="btn btn-gewis-primary">
+            {{ 'Add Mailing List'|trans }}
+        </a>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead>
+                <tr>
+                    <th scope="col">{{ 'Name (Sync)'|trans }}</th>
+                    <th scope="col">{{ 'Dutch Description'|trans }}</th>
+                    <th scope="col">{{ 'English Description'|trans }}</th>
+                    <th scope="col">{{ 'On Form'|trans }}</th>
+                    <th scope="col">{{ 'Auto-subscription'|trans }}</th>
+                    <th scope="col">{{ 'Actions'|trans }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for list in lists %}
+                    <tr>
+                        <td>
+                            {{ list.name }}
+                            {# A list synchronises with at most one external system, so at most one of these is set. #}
+                            ({% if list.hasListmonkList %}
+                                {{ list.listmonkList.name }}
+                            {% elseif list.hasMailmanList %}
+                                {{ list.mailmanList.mailmanId }}
+                            {% else %}
+                                {{ 'n/a'|trans }}
+                            {% endif %})
+                        </td>
+                        <td>{{ list.nlDescription }}</td>
+                        <td>{{ list.enDescription }}</td>
+                        <td>{{ flag.yes_no(list.onForm) }}</td>
+                        <td>{{ flag.yes_no(list.defaultSub) }}</td>
+                        <td>
+                            <a href="{{ path('mailing_list_edit', {'name': list.name}) }}"
+                               class="btn btn-sm btn-secondary">
+                                {{ 'Edit'|trans }}
+                            </a>
+                            <a href="{{ path('mailing_list_delete', {'name': list.name}) }}"
+                               class="btn btn-sm btn-danger">
+                                {{ 'Delete'|trans }}
+                            </a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6" class="text-secondary">{{ 'There are no mailing lists.'|trans }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

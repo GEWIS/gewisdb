@@ -1,0 +1,7 @@
+{# Body fragment for the shared email layout; it is rendered on its own and handed to `email/basic.html.twig` as
+   `body_main`. This one goes to the secretary rather than to a member, so it has no signature and no reason line. #}
+<p>
+    An issue was detected with the following refund: <strong>{{ refundId }}</strong>, its status is
+    <em>{{ refundStatus }}</em>.
+</p>
+<p>Contact the ApplicatieBeheerCommissie and/or the treasurer to determine the underlying issue.</p>

@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ member.fullName }} - {{ parent() }}{% endblock %}
+
+{% block contents %}
+    <h1>{{ member.fullName }}</h1>
+    <p>
+        {{ 'This member has been deleted, you cannot edit their information. Only the name of this member is stored so that decisions that mention this member remain correct.'|trans }}
+    </p>
+{% endblock %}

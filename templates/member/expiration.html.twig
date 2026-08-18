@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'Extend Membership'|trans }} - {{ parent() }}{% endblock %}
+
+{# `new_expiration` is the first of July after the current expiration; the controller works it out so that this page
+   and the action that carries it out cannot drift apart. #}
+{% block contents %}
+    <h1>{{ 'Extend Membership of %name%'|trans({'%name%': member.fullName}) }}</h1>
+
+    <p>
+        {{ 'Are you sure that you want to extend the membership of %name% to %to% (from %from%)?'|trans({
+            '%name%': member.fullName,
+            '%to%': new_expiration|date('l j F Y'),
+            '%from%': member.expiration|date('l j F Y'),
+        }) }}
+    </p>
+
+    {{ form_start(form) }}
+    <div class="d-flex flex-wrap gap-2">
+        {{ form_widget(form.submit_yes, {attr: {class: 'btn-gewis-primary'}}) }}
+        {{ form_widget(form.submit_no, {attr: {class: 'btn btn-secondary'}}) }}
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

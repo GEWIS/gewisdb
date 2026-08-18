@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'Query'|trans }} - {{ parent() }}{% endblock %}
+
+{% block contents %}
+    <div class="row">
+        <div class="col-md-9">
+            {# One form holds both buttons: `QuerySaveType` extends `QueryType`, so executing and saving submit the
+               same query field and the controller decides on the button that was clicked. That is also why the editor
+               behaviour hangs off the form rather than off the textarea: Ctrl/Cmd+Enter has to submit through
+               "Execute" specifically, so the controller needs to reach that button. #}
+            {{ form_start(form, {'attr': {'data-controller': 'query-editor'}}) }}
+                {{ form_row(form.query, {'attr': {
+                    'class': 'font-monospace',
+                    'rows': 12,
+                    'spellcheck': 'false',
+                    'data-query-editor-target': 'editor',
+                    'data-action': 'keydown->query-editor#keydown',
+                }}) }}
+                <div class="d-flex flex-wrap gap-2 align-items-start justify-content-between">
+                    {{ form_widget(form.submit, {'attr': {
+                        'class': 'btn-gewis-primary',
+                        'data-query-editor-target': 'submit',
+                    }}) }}
+                    <div class="d-flex flex-wrap gap-2 align-items-start">
+                        {{ form_widget(form.category, {'attr': {
+                            'class': 'form-control',
+                            'placeholder': 'Category'|trans ~ ' (' ~ 'optional'|trans ~ ')',
+                        }}) }}
+                        {{ form_widget(form.name, {'attr': {
+                            'class': 'form-control',
+                            'placeholder': 'Name'|trans,
+                        }}) }}
+                        {{ form_widget(form.submit_save, {'attr': {'class': 'btn btn-success'}}) }}
+                    </div>
+                </div>
+            {{ form_end(form) }}
+        </div>
+        <div class="col-md-3">
+            <h3>{{ 'Stored Queries'|trans }}</h3>
+            {% include 'partials/query/saved-queries.html.twig' %}
+
+            <p>
+                {{ 'Saving a query with a previously used name will overwrite the previously saved query and update its category.'|trans }}
+            </p>
+            <p>
+                {{ 'For an overview of how you can use the Doctrine Query Language (DQL) please refer to <a href="%url%" target="_blank" rel="noopener">its documentation</a>.'|trans({
+                    '%url%': 'https://www.doctrine-project.org/projects/doctrine-orm/en/current/reference/dql-doctrine-query-language.html',
+                })|raw }}
+            </p>
+            <p>{{ 'The entities that you can use:'|trans }}</p>
+            <ul>
+                {% for entity in entities|sort %}
+                    <li><code>{{ entity }}</code></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    {% if result is defined and null is not same as(result) %}
+        <hr>
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h2>{{ 'Query Result'|trans }}</h2>
+            </div>
+            <div class="col-md-6">
+                {{ form_start(export_form, {'attr': {
+                    'class': 'd-flex flex-wrap gap-2 align-items-start justify-content-md-end',
+                }}) }}
+                    {{ form_widget(export_form.query) }}
+                    {{ form_widget(export_form.name) }}
+                    {{ form_widget(export_form.type, {'attr': {'class': 'form-select'}}) }}
+                    {{ form_widget(export_form.submit, {'attr': {'class': 'btn-gewis-primary'}}) }}
+                {{ form_end(export_form) }}
+            </div>
+        </div>
+        {% include 'partials/query/result-table.html.twig' %}
+    {% endif %}
+{% endblock %}

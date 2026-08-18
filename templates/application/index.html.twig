@@ -1,0 +1,138 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'Home'|trans }} - {{ parent() }}{% endblock %}
+
+{# Every dashboard notice is the same coloured panel with a heading and one line of copy; the body is captured with
+   `{% set %}` so a notice can carry a link without the macro having to unescape anything. #}
+{% macro notice(title, body, style) %}
+    <div class="panel border-{{ style|default('info') }}">
+        <div class="panel-heading">
+            <h3>{{ title }}</h3>
+        </div>
+        <div class="panel-body">
+            <p class="mb-0">{{ body }}</p>
+        </div>
+    </div>
+{% endmacro %}
+
+{% import _self as dashboard %}
+
+{% block contents %}
+    <div class="row">
+        <div class="col-12">
+            <h1><span class="text-primary-emphasis"><strong>GEWIS</strong></span>Database</h1>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <p>
+                {# The sentence is one translatable unit with the links inside it, so a translator can move them
+                   around; the only interpolations are counts and generated URLs. #}
+                {{ 'GEWIS currently has <a href="%members_url%">%members% members and %graduates% graduates</a> (+%expired% expired) and <a href="%prospectives_url%">%prospectives% prospective members (%paid% paid, %unpaid% unpaid)</a>. <a href="%meeting_url%">Click here</a> to create a meeting or <a href="%query_url%">perform a query</a>.'|trans({
+                    '%members_url%': path('member_index')|escape('html'),
+                    '%members%': members,
+                    '%graduates%': graduates,
+                    '%expired%': expired,
+                    '%prospectives_url%': path('join_prospective_member_index')|escape('html'),
+                    '%prospectives%': prospectives.total,
+                    '%paid%': prospectives.paid,
+                    '%unpaid%': prospectives.total - prospectives.paid,
+                    '%meeting_url%': path('decision_meeting_create')|escape('html'),
+                    '%query_url%': path('query_index')|escape('html'),
+                })|raw }}
+            </p>
+            <p>
+                {{ 'You are using a build based on commit'|trans }}
+                <a href="https://github.com/GEWIS/gewisdb/commit/{{ git_commit }}" target="_blank" rel="noopener">
+                    {{ git_commit }}
+                </a>.
+                {{ 'Please include this in all your bug reports.'|trans }}
+            </p>
+        </div>
+        <div class="col-md-4">
+            {% if updates > 0 %}
+                {% set updates_notice %}
+                    {{ 'There is currently <a href="%url%">one update</a> pending approval.|There are currently <a href="%url%">%count% updates</a> pending approval.'|trans({
+                        '%url%': path('member_update_index')|escape('html'),
+                        '%count%': updates,
+                    })|raw }}
+                {% endset %}
+                {{ dashboard.notice('Pending member updates'|trans, updates_notice) }}
+            {% endif %}
+            {% if sync_paused and null is not same as(sync_paused_until) %}
+                {% set sync_notice %}
+                    {% set minutes_left = ((sync_paused_until.timestamp - "now"|date('U')) / 60)|round(0, 'floor') %}
+                    {% if minutes_left > 60 %}
+                        {{ 'Synchronisation with other systems is paused until %until%.'|trans({
+                            '%until%': sync_paused_until|date('c'),
+                        }) }}
+                    {% else %}
+                        {{ 'Synchronisation with other systems is paused and will resume in %minutes% minutes.'|trans({
+                            '%minutes%': minutes_left,
+                        }) }}
+                    {% endif %}
+                {% endset %}
+                {{ dashboard.notice('Synchronisation paused'|trans, sync_notice) }}
+            {% endif %}
+            {% if prospectives.paid > 0 %}
+                {% set prospectives_notice %}
+                    {{ '%count% prospective member(s) have paid and are pending approval.'|trans({
+                        '%count%': prospectives.paid,
+                    }) }}
+                {% endset %}
+                {{ dashboard.notice('Prospective Members'|trans, prospectives_notice, 'warning') }}
+            {% endif %}
+            {% if mailman_last_fetch_overdue %}
+                {% set mailman_notice %}
+                    {{ 'Last fetch of available mailman lists was %fetched%.'|trans({
+                        '%fetched%': null is same as(mailman_last_fetch) ? 'never'|trans : mailman_last_fetch|date('c'),
+                    }) }}
+                    {{ 'Possibly, the mailing list server is down or fetch mechanism is malfunctioning.'|trans }}
+                {% endset %}
+                {{ dashboard.notice('Mailman lists not being fetched'|trans, mailman_notice, 'warning') }}
+            {% endif %}
+            {% if listmonk_last_fetch_overdue %}
+                {% set listmonk_notice %}
+                    {{ 'Last fetch of available Listmonk lists was %fetched%.'|trans({
+                        '%fetched%': null is same as(listmonk_last_fetch) ? 'never'|trans : listmonk_last_fetch|date('c'),
+                    }) }}
+                    {{ 'Possibly, the mailing list server is down or fetch mechanism is malfunctioning.'|trans }}
+                {% endset %}
+                {{ dashboard.notice('Listmonk lists not being fetched'|trans, listmonk_notice, 'warning') }}
+            {% endif %}
+            {% if mailing_list_changes_pending.creations > 0 or mailing_list_changes_pending.deletions > 0 %}
+                {% set pending_changes = [] %}
+                {% if mailing_list_changes_pending.creations > 0 %}
+                    {% set pending_changes = pending_changes|merge([
+                        '%count% pending mailing list subscriptions'|trans({
+                            '%count%': mailing_list_changes_pending.creations,
+                        }),
+                    ]) %}
+                {% endif %}
+                {% if mailing_list_changes_pending.deletions > 0 %}
+                    {% set pending_changes = pending_changes|merge([
+                        '%count% pending mailing list unsubscriptions'|trans({
+                            '%count%': mailing_list_changes_pending.deletions,
+                        }),
+                    ]) %}
+                {% endif %}
+                {% set sync_changes_notice %}
+                    {{ 'There are %changes%.'|trans({
+                        '%changes%': pending_changes|join(' ' ~ 'and'|trans ~ ' '),
+                    }) }}
+                {% endset %}
+                {{ dashboard.notice('Mailing list sync'|trans, sync_changes_notice) }}
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <p>
+                <a class="btn btn-gewis-primary" href="https://github.com/GEWIS/gewisdb" target="_blank" rel="noopener">
+                    {{ 'Fork GEWISDB on GitHub'|trans }} &raquo;
+                </a>
+            </p>
+        </div>
+    </div>
+{% endblock %}

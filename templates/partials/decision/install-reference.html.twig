@@ -1,0 +1,12 @@
+{# A reappointment or a discharge the decision will make: both point at an existing installation, so they differ only
+   in the sentence that describes them. The `%…%` tokens are filled in when the row is created.
+
+   Parameters: `entry` (a `SubDecisionType` FormView) and `label`. #}
+<div class="mb-1">
+    {{ label }}
+    {{ form_widget(entry.meeting_type, {'value': '%meeting_type%'}) }}
+    {{ form_widget(entry.meeting_number, {'value': '%meeting_number%'}) }}
+    {{ form_widget(entry.decision_point, {'value': '%decision_point%'}) }}
+    {{ form_widget(entry.decision_number, {'value': '%decision_number%'}) }}
+    {{ form_widget(entry.sequence, {'value': '%sequence%'}) }}
+</div>

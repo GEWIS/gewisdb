@@ -1,0 +1,25 @@
+{# The executed query's result as a downloadable CSV.
+
+   Twig escapes a `.csv.twig` template as HTML, which would turn every `&` and quote in the data into an entity, so
+   escaping is off here and the CSV's own quoting takes over: each field is wrapped in `"` and any `"` inside it is
+   doubled. That is what makes a separator, a quote or a newline in a value harmless, and it is why every field is
+   quoted rather than only the ones that need it.
+
+   `result` is the query's rows with their values already reduced to scalars (dates formatted, entities resolved), the
+   same shape `partials/query/result-table.html.twig` renders; the leading `sep=;` line is the hint spreadsheet
+   software needs to read `;` as the separator rather than guessing. #}
+{% autoescape false %}
+{% macro row(values) %}
+    {%- for value in values -%}
+        {{ loop.first ? '' : ';' }}"{{ (value ?? '')|replace({'"': '""'}) }}"
+    {%- endfor -%}
+{% endmacro %}
+{% import _self as csv %}
+sep=;
+{% if result is not empty %}
+{{ csv.row(result|first|keys) }}
+{% for line in result %}
+{{ csv.row(line) }}
+{% endfor %}
+{% endif %}
+{% endautoescape %}

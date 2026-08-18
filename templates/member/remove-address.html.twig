@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% import 'partials/member/labels.html.twig' as labels %}
+
+{% block page_title %}{{ 'Delete'|trans }} - {{ parent() }}{% endblock %}
+
+{% block contents %}
+    <h1>{{ member.fullName }}</h1>
+
+    <p>
+        {{ 'Are you sure that you want to delete the %type% of %name%?'|trans({
+            '%type%': labels.address_type(address_type),
+            '%name%': member.fullName,
+        }) }}
+    </p>
+
+    {{ form_start(form) }}
+    <div class="d-flex flex-wrap gap-2">
+        {{ form_widget(form.submit_yes, {attr: {class: 'btn-gewis-primary'}}) }}
+        {{ form_widget(form.submit_no, {attr: {class: 'btn btn-secondary'}}) }}
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

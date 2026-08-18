@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'Export Decisions'|trans }} - {{ parent() }}{% endblock %}
+
+{% block contents %}
+    <h1>{{ 'Export Decisions'|trans }}</h1>
+    {% if latex is defined and null is not same as(latex) %}
+        {# The rendered document is shown as text to be copied into a LaTeX editor, so it is escaped like any other
+           string; the Laminas view emitted it as markup to bold the \besluit calls. #}
+        <pre class="border rounded p-3 overflow-auto" style="max-height: 80vh"><code>{{ latex }}</code></pre>
+    {% else %}
+        <div class="row">
+            <div class="col-md-6 col-lg-4">
+                {{ form_start(form) }}
+                    {{ form_row(form.meetings, {'attr': {'size': 32}}) }}
+                    {{ form_widget(form.submit, {'attr': {'class': 'btn-gewis-primary'}}) }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

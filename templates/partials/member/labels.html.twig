@@ -1,0 +1,10 @@
+{# `AddressTypes` and `MembershipTypes` are translatable themselves, so the case goes straight to `trans`. The macros
+   stay because a membership type is optional and renders as "None" when absent. #}
+
+{% macro address_type(type) %}
+    {{- type|trans -}}
+{% endmacro %}
+
+{% macro membership_type(type) %}
+    {{- null is same as(type) ? 'None'|trans : type|trans -}}
+{% endmacro %}

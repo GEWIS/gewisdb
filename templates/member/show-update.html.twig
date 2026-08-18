@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'Data Update Requests'|trans }} - {{ parent() }}{% endblock %}
+
+{# Every field is the same comparison of what is on record against what the member proposes, so the rows are driven
+   off a list rather than written out one by one. #}
+{% macro value(text, mailto) %}
+    {%- if mailto -%}
+        <a href="mailto:{{ text }}">{{ text }}</a>
+    {%- else -%}
+        {{ text }}
+    {%- endif -%}
+{% endmacro %}
+
+{% import _self as field %}
+
+{% block contents %}
+    {% set comparisons = [
+        {label: 'Initial(s)'|trans, current: member.initials, proposed: member_update.initials},
+        {label: 'First Name'|trans, current: member.firstName, proposed: member_update.firstName},
+        {
+            label: 'Last Name Prepositional Particle'|trans,
+            current: member.middleName,
+            proposed: member_update.middleName,
+        },
+        {label: 'Last Name'|trans, current: member.lastName, proposed: member_update.lastName},
+        {label: 'E-mail Address'|trans, current: member.email, proposed: member_update.email, mailto: true},
+    ] %}
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1>{{ member.fullName }}</h1>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">{{ 'Current Data'|trans }}</th>
+                        <th scope="col">{{ 'Proposed Data'|trans }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for comparison in comparisons %}
+                        <tr>
+                            <th scope="row">{{ comparison.label }}</th>
+                            <td>{{ field.value(comparison.current, comparison.mailto|default(false)) }}</td>
+                            {# The proposed value is highlighted only where it actually differs. #}
+                            <td class="{{ comparison.current != comparison.proposed ? 'table-warning' }}">
+                                {{ field.value(comparison.proposed, comparison.mailto|default(false)) }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            {% if member.email != member_update.email %}
+                <div class="alert alert-warning" role="alert">
+                    {{ 'Warning: the e-mail address of the member will be updated! This will require additional changes to any mailing lists the member is added to.'|trans }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="d-flex flex-wrap gap-2">
+        <form method="post" action="{{ path('member_update_approve', {lidnr: member.lidnr}) }}">
+            <button type="submit" class="btn btn-success" name="approve" value="1">
+                {{ 'Apply Update'|trans }}
+            </button>
+        </form>
+        <form method="post" action="{{ path('member_update_reject', {lidnr: member.lidnr}) }}">
+            <button type="submit" class="btn btn-danger" name="reject" value="1">
+                {{ 'Reject Update'|trans }}
+            </button>
+        </form>
+    </div>
+{% endblock %}

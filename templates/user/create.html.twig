@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'Create user'|trans }} - {{ parent() }}{% endblock %}
+
+{% block contents %}
+    <div class="row">
+        <div class="col-md-8 col-lg-6">
+            <h1>{{ 'Create user'|trans }}</h1>
+
+            {{ form_start(form) }}
+                {{ form_errors(form) }}
+                {{ form_row(form.login) }}
+                {# The password is a RepeatedType; rendering both halves directly avoids the extra fieldset and the
+                   duplicate label that come with rendering the pair as one row. #}
+                {{ form_row(form.password.password) }}
+                {{ form_row(form.password.password_verify) }}
+                <div class="d-flex justify-content-end">
+                    {{ form_widget(form.submit) }}
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

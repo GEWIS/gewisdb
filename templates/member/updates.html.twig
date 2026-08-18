@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'Data Update Requests'|trans }} - {{ parent() }}{% endblock %}
+
+{% block contents %}
+    <h1>{{ 'Data Update Requests'|trans }}</h1>
+
+    {% if updates is empty %}
+        <p>{{ 'There are currently no data update requests.'|trans }}</p>
+    {% else %}
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">{{ 'Name'|trans }}</th>
+                        <th scope="col">{{ 'Action'|trans }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for update in updates %}
+                        <tr>
+                            <td>{{ update.member.lidnr }}</td>
+                            <td>{{ update.member.fullName }}</td>
+                            <td>
+                                <a href="{{ path('member_update_show', {lidnr: update.member.lidnr}) }}"
+                                   class="btn btn-sm btn-gewis-primary">
+                                    {{ 'View'|trans }}
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+{% endblock %}

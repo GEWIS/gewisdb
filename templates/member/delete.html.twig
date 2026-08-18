@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'Delete Member'|trans }} - {{ parent() }}{% endblock %}
+
+{#
+    A member who appears in a decision, budget or statement keeps their name on record; only the rest of their data
+    can go. Both outcomes are confirmed the same way, so only the explanation ahead of the buttons differs.
+#}
+{% block contents %}
+    <h1>{{ member.fullName }}</h1>
+
+    {% if can_remove %}
+        <p>{{ 'Are you sure you want to delete member %name%?'|trans({'%name%': member.fullName}) }}</p>
+    {% else %}
+        <p>{{ 'Member %name% cannot be deleted.'|trans({'%name%': member.fullName}) }}</p>
+        <p>
+            {{ 'This is because %name% is/has been a member of an organ and/or has budgets/statements to their name.'|trans({
+                '%name%': member.fullName,
+            }) }}
+        </p>
+        <p>
+            {{ 'As a result, this member cannot be removed. According to the AVG, we have a legal basis to keep this member\'s name in our database. The other data can, however, be deleted.'|trans }}
+        </p>
+        <p>{{ 'Do you want to delete the other data?'|trans }}</p>
+    {% endif %}
+
+    <form method="post" class="d-flex flex-wrap gap-2">
+        <button type="submit" class="btn btn-primary" name="delete" value="1">{{ 'Yes'|trans }}</button>
+        <a href="{{ path('member_show', {lidnr: member.lidnr}) }}" class="btn btn-secondary">{{ 'No'|trans }}</a>
+    </form>
+{% endblock %}

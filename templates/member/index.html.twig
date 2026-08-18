@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'Members'|trans }} - {{ parent() }}{% endblock %}
+
+{% block contents %}
+    <div data-controller="member-search"
+         data-member-search-url-value="{{ path('member_search') }}"
+         data-member-search-unknown-value="{{ 'Unknown'|trans }}">
+        <div class="mb-3">
+            <label class="form-label" for="member-search">{{ 'Search Members'|trans }}</label>
+            <input type="search" class="form-control" id="member-search" autofocus
+                   placeholder="{{ 'Search'|trans }}"
+                   data-member-search-target="input"
+                   data-action="input->member-search#search">
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">{{ 'Name'|trans }}</th>
+                        <th scope="col">{{ 'E-mail Address'|trans }}</th>
+                        <th scope="col">{{ 'Generation'|trans }}</th>
+                        <th scope="col">{{ 'Expiration'|trans }}</th>
+                    </tr>
+                </thead>
+                {# Rows are rendered by the controller; the notice below only appears once the result set is capped. #}
+                <tbody data-member-search-target="results"></tbody>
+                <tfoot class="d-none" data-member-search-target="capped">
+                    <tr>
+                        <td colspan="5" class="text-secondary">
+                            {{ 'There are too many results to display. Try filtering to see other results.'|trans }}
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <div class="d-flex flex-wrap gap-2">
+        <a href="{{ path('join_subscribe_index') }}" class="btn btn-success">
+            {{ 'Register member'|trans }}
+        </a>
+        <a href="{{ path('member_update_index') }}" class="btn btn-info">
+            {{ 'View update requests'|trans }}
+        </a>
+        <a href="{{ path('member_attention_index') }}" class="btn btn-warning">
+            {{ 'View members needing attention'|trans }}
+        </a>
+        <a href="{{ path('member_bulk_renewal_index') }}" class="btn btn-info">
+            {{ 'Bulk renew memberships'|trans }}
+        </a>
+    </div>
+{% endblock %}

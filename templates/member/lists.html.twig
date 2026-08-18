@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'Mailing List Subscriptions'|trans }} - {{ parent() }}{% endblock %}
+
+{% block contents %}
+    <h1>{{ 'Change Mailing List Subscriptions of %name%'|trans({'%name%': member.fullName}) }}</h1>
+
+    {{ form_start(form) }}
+    {# `MemberListsType` spells out the pending sync state in each label and locks the subscriptions that are still
+       waiting on it, so the checkboxes need nothing beyond the form theme. #}
+    {{ form_row(form.lists, {label: false}) }}
+    {{ form_widget(form.submit, {attr: {class: 'btn-gewis-primary'}}) }}
+    {{ form_end(form) }}
+{% endblock %}

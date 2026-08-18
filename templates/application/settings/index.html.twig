@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'Settings'|trans }} - {{ parent() }}{% endblock %}
+
+{% block contents %}
+    <h1>{{ 'Settings'|trans }}</h1>
+
+    {# The settings pages live in their own domains; this page is only the way in. #}
+    <div class="list-group">
+        <a class="list-group-item list-group-item-action" href="{{ path('user_api_principal_index') }}">
+            {{ 'API Tokens'|trans }}
+        </a>
+        <a class="list-group-item list-group-item-action" href="{{ path('application_settings_function_index') }}">
+            {{ 'Functions'|trans }}
+        </a>
+        <a class="list-group-item list-group-item-action" href="{{ path('mailing_list_index') }}">
+            {{ 'Mailing Lists'|trans }}
+        </a>
+        <a class="list-group-item list-group-item-action" href="{{ path('user_index') }}">
+            {{ 'Users'|trans }}
+        </a>
+    </div>
+{% endblock %}

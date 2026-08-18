@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% set meeting_label = meeting.type.value ~ ' ' ~ meeting.number %}
+
+{% block page_title %}{{ meeting_label }} - {{ parent() }}{% endblock %}
+
+{% block contents %}
+    <h1>
+        {{ meeting_label }}
+        <small class="text-secondary">{{ meeting.date|format_date('full') }}</small>
+    </h1>
+
+    <h2>{{ 'Decisions'|trans }}</h2>
+
+    {% if decisions is empty %}
+        <p>{{ 'This meeting has no decisions (yet).'|trans }}</p>
+    {% else %}
+        <ul class="list-unstyled">
+            {% for decision in decisions %}
+                <li class="mb-4">
+                    <h3 class="h5">
+                        {{ 'Decision'|trans }}
+                        {{ meeting.number }}.{{ decision.point }}.{{ decision.number }}
+                        {% if null is not same as(decision.annulment) %}
+                            <strong class="text-danger">
+                                {{ '(Annulled by decision %type% %number%.%point%.%decision%)'|trans({
+                                    '%type%': decision.annulment.meetingType,
+                                    '%number%': decision.annulment.meetingNumber,
+                                    '%point%': decision.annulment.point,
+                                    '%decision%': decision.annulment.number,
+                                }) }}
+                            </strong>
+                        {% endif %}
+                    </h3>
+                    <ul>
+                        {% for content in decision.subdecisions %}
+                            <li>{{ content }}</li>
+                        {% endfor %}
+                    </ul>
+                    <div class="d-flex flex-wrap gap-2" data-controller="copy"
+                         data-copy-text-value="{{ decision.copyContent }}">
+                        <a href="{{ path('decision_decision_delete', {
+                               'type': meeting.type.value,
+                               'number': meeting.number,
+                               'point': decision.point,
+                               'decision': decision.number,
+                           }) }}" class="btn btn-danger btn-sm">
+                            {{ 'Delete Decision'|trans }}
+                        </a>
+                        <button type="button" class="btn btn-info btn-sm"
+                                data-action="copy#copy"
+                                data-copy-copied-label="{{ 'Copied'|trans }}">
+                            {{ 'Copy Decision'|trans }}
+                        </button>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <h2>{{ 'Add New Decision'|trans }}</h2>
+
+    {# Not a form the server ever receives: filling in a point and a decision number navigates to the page that
+       records that decision. The point also suggests the next free number, which the meeting already knows.
+
+       The URL is generated with both numbers set to zero and the controller replaces the last two segments, because
+       the route requires digits there and so cannot be asked to generate a template with named placeholders in
+       them. #}
+    <form class="row row-cols-lg-auto g-2 align-items-start" data-controller="decision-number"
+          data-decision-number-url-value="{{ path('decision_decision_create', {
+              'type': meeting.type.value,
+              'number': meeting.number,
+              'point': 0,
+              'decision': 0,
+          }) }}"
+          {# Forced to an object: a meeting with no decisions yet has an empty PHP array, which encodes as `[]`, and
+             the controller's value is declared as an object. #}
+          data-decision-number-next-value="{{ next_decision_numbers|json_encode(constant('JSON_FORCE_OBJECT')) }}"
+          data-action="submit->decision-number#open">
+        <div class="col-12">
+            <label class="visually-hidden" for="create-point">{{ 'Point'|trans }}</label>
+            <input type="number" min="1" class="form-control" id="create-point" required
+                   placeholder="{{ 'Point'|trans }}"
+                   data-decision-number-target="point"
+                   data-action="input->decision-number#suggest">
+        </div>
+        <div class="col-12">
+            <label class="visually-hidden" for="create-decision">{{ 'Decision Number'|trans }}</label>
+            <input type="number" min="1" class="form-control" id="create-decision" required
+                   placeholder="{{ 'Decision Number'|trans }}"
+                   data-decision-number-target="number">
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-success">{{ 'Add Decision'|trans }}</button>
+        </div>
+    </form>
+{% endblock %}

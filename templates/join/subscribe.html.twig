@@ -1,0 +1,116 @@
+{% extends 'join/base.html.twig' %}
+
+{% set nav_title = 'GEWIS Registration'|trans %}
+
+{% block page_title %}{{ 'GEWIS Registration'|trans }} - {{ parent() }}{% endblock %}
+
+{% block contents %}
+    {% embed 'partials/join/registration-header.html.twig' %}
+        {% block registration_intro %}
+            <p>
+                {{ 'Welcome! With this form you can register for a membership of GEWIS. Becoming a member of the assocation costs a one-time fee of 20 euros and your membership is valid as long as you study.'|trans }}
+            </p>
+        {% endblock %}
+    {% endembed %}
+
+    {{ form_start(form, {attr: {id: 'form-subscribe'}}) }}
+
+    {% if form.vars.submitted and not form.vars.valid %}
+        <div class="alert alert-danger" role="alert">
+            {{ 'Some of the entered information appears to be missing or incorrect. Please check your data and submit again.'|trans }}
+        </div>
+    {% endif %}
+
+    <h2 class="h3">{{ 'Personal details'|trans }}</h2>
+    <div class="row">
+        <div class="col-md-2">
+            {{ form_row(form.initials, {attr: {
+                'data-controller': 'initials',
+                'data-action': 'focusout->initials#normalise',
+            }}) }}
+        </div>
+        <div class="col-md-4">
+            {{ form_row(form.firstName) }}
+        </div>
+        <div class="col-md-2">
+            {{ form_row(form.middleName) }}
+        </div>
+        <div class="col-md-4">
+            {{ form_row(form.lastName) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            {{ form_row(form.email) }}
+        </div>
+        <div class="col-md-4">
+            {{ form_row(form.birth) }}
+        </div>
+    </div>
+
+    <hr>
+    <h2 class="h3">{{ 'Study'|trans }}</h2>
+    <div class="row">
+        <div class="col-md-6">
+            {{ form_row(form.studentNumber, {help_html: true, help: 'Your student number is a 7-digit number, for example 1234560. You have received this in an email when you enrolled and it is printed on your campus card. Go to <a href="%url%">this page</a> if you need help finding it. Your student number will be used to verify you are studying at the department of M&CS.'|trans({
+                '%url%': 'https://wiki.gewis.nl/link/495',
+            })}) }}
+        </div>
+        <div class="col-md-6" data-controller="study-notice">
+            {{ form_row(form.study, {attr: {'data-action': 'change->study-notice#toggle'}}) }}
+            {# The footnote marker is put on the label by `StudyChoices`, so the notice keys off the option text
+               rather than off a list of studies repeated here. It starts out visible, as it does for an empty
+               selection. #}
+            <p class="form-text" data-study-notice-target="notice">
+                {{ '¹ DSA Pattern is the study association for students of the data science programs. The introduction week, round table discussions, and other education activities for these programs are organized by Pattern. Although you can join GEWIS, you might benefit more from joining Pattern on <a href="https://dsapattern.nl/" target="_blank">their website</a>.'|trans|raw }}
+            </p>
+        </div>
+    </div>
+
+    <hr>
+    <h2 class="h3">{{ 'Address'|trans }}</h2>
+    <div class="row">
+        <div class="col-md-8">
+            {{ form_row(form.address.street) }}
+        </div>
+        <div class="col-md-4">
+            {{ form_row(form.address.number) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            {{ form_row(form.address.postalCode) }}
+        </div>
+        <div class="col-md-8">
+            {{ form_row(form.address.city) }}
+        </div>
+    </div>
+    {{ form_row(form.address.country) }}
+    {{ form_row(form.address.phone) }}
+
+    <hr>
+    <h2 class="h3">{{ 'Mailing Lists'|trans }}</h2>
+    <p>
+        {{ 'As a GEWIS member, you are automatically subscribed to the "announcements" mailing list. This list is used solely for announcements from the study association, such as invitations to General Members Meetings (GMMs). In addition, there are several other optional mailing lists. You can subscribe to the following mailing lists. These subscriptions can be changed at a later date.'|trans }}
+    </p>
+    {# `MailingListLabel` renders the list name in bold ahead of its description, so the choice labels carry markup. #}
+    {{ form_row(form.lists, {label: false, label_html: true}) }}
+
+    <hr>
+    <h2 class="h3">{{ 'Agreement'|trans }}</h2>
+    <p>
+        {{ 'Before submitting the registration form, please review the'|trans }}
+        <a target="_blank" href="{{ 'https://gewis.nl/association/regulations'|trans }}">
+            {{ 'Articles of Association, Internal Regulations, and Privacy Statement of GEWIS'|trans }}</a>.
+        {{ 'Payment of the one-time membership fee is handled by Stripe, please review the'|trans }}
+        <a target="_blank" href="https://stripe.com/privacy">{{ 'Privacy Policy of Stripe'|trans }}</a>.
+    </p>
+    {{ form_row(form.agreed) }}
+    {{ form_row(form.agreedStripe) }}
+
+    <div class="d-flex justify-content-end">
+        {{ form_widget(form.submit, {attr: {class: 'btn-gewis-primary'}}) }}
+    </div>
+
+    {{ form_end(form) }}
+{% endblock %}

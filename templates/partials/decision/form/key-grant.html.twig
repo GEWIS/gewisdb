@@ -1,0 +1,8 @@
+{{ form_start(form, {'action': path('decision_decision_form', {'form': 'key_grant'})}) }}
+    {% include 'partials/decision/member-lookup.html.twig' with {
+        'field': form.grantee,
+        'label': 'Grantee'|trans,
+    } only %}
+    {{ form_row(form.until) }}
+    {{ form_widget(form.submit, {'attr': {'class': 'btn-gewis-primary'}}) }}
+{{ form_end(form) }}

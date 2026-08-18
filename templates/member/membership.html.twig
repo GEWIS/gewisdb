@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% import 'partials/member/labels.html.twig' as labels %}
+
+{% block page_title %}{{ 'Change Membership Type'|trans }} - {{ parent() }}{% endblock %}
+
+{# `membership` is the period the form edits. `MembershipTypeType` takes it as an option, which a template cannot
+   read back, so the controller passes it along for the explanation below. #}
+{% block contents %}
+    <h1>{{ 'Change Membership Type of %name%'|trans({'%name%': member.fullName}) }}</h1>
+
+    <p>
+        {{ 'Currently editing membership starting from <strong>%start%</strong> to <strong>%end%</strong> (type <strong>%type%</strong>).'|trans({
+            '%start%': membership.startDate|date('l j F Y'),
+            '%end%': membership.endDate|date('l j F Y'),
+            '%type%': labels.membership_type(membership.type),
+        })|raw }}
+        <br>
+        {{ 'Please select the new membership type and change date for the member.'|trans }}
+        {{ 'The change will take effect on the selected date.'|trans }}
+    </p>
+    <p>
+        {{ 'Enter changes chronologically. Example: after entering a change on %later%, it is not possible to enter a change for %earlier%.'|trans({
+            '%later%': membership.startDate|date_modify('+6 days')|date('j F Y'),
+            '%earlier%': membership.startDate|date_modify('+3 days')|date('j F Y'),
+        }) }}
+    </p>
+    <ul>
+        <li>
+            {{ 'Selecting a change date != %start% will split the membership periods on that date.'|trans({
+                '%start%': membership.startDate|date('l j F Y'),
+            }) }}
+        </li>
+        <li>
+            {{ 'Setting the change date to %end% will (also) renew the membership.'|trans({
+                '%end%': membership.endDate|date('l j F Y'),
+            }) }}
+        </li>
+    </ul>
+
+    <div class="row">
+        <div class="col-md-8">
+            {{ form_start(form) }}
+            {{ form_row(form.type) }}
+            {{ form_row(form.changeDate) }}
+            {{ form_widget(form.submit, {attr: {class: 'btn-gewis-primary'}}) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
