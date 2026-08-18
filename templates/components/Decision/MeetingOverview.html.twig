@@ -1,0 +1,60 @@
+<div {{ attributes }}>
+    <div class="panel">
+        <div class="panel-body">
+            {% if this.totalCount == 0 %}
+                {% include 'partials/application/empty-state.html.twig' with {
+                    icon: 'fa-gavel',
+                    title: 'There are no meetings yet.'|trans,
+                    body: 'Minute a meeting to start recording its decisions.'|trans,
+                } only %}
+            {% else %}
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">{{ 'Type'|trans }}</th>
+                                <th scope="col">{{ 'Meeting Number'|trans }}</th>
+                                <th scope="col">{{ 'Meeting Date'|trans }}</th>
+                                <th scope="col" class="text-end">{{ '# Decisions'|trans }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for meeting in this.meetings %}
+                                {% set url = path('decision_meeting_view', {
+                                    type: meeting.type.value,
+                                    number: meeting.number,
+                                }) %}
+                                <tr>
+                                    <td>
+                                        <a class="badge badge-secondary text-decoration-none" href="{{ url }}">
+                                            {{ meeting.type.value }}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a class="fw-semibold text-body text-decoration-none font-monospace"
+                                           href="{{ url }}">{{ meeting.number }}</a>
+                                    </td>
+                                    <td>
+                                        <a class="text-body text-decoration-none" href="{{ url }}">
+                                            {{ meeting.date|format_date('full') }}
+                                        </a>
+                                    </td>
+                                    <td class="text-end font-monospace">
+                                        {{ this.decisionCounts[meeting.type.value ~ '-' ~ meeting.number] ?? 0 }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                {% include 'partials/application/pagination.html.twig' with {
+                    page: this.page,
+                    pageSize: this.pageSize,
+                    totalPages: this.totalPages,
+                    totalCount: this.totalCount,
+                } only %}
+            {% endif %}
+        </div>
+    </div>
+</div>

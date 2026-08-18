@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Decision;
+namespace App\Controller\Database;
 
-use App\Entity\Decision\Enums\MeetingTypes;
-use App\Entity\Decision\Meeting;
-use App\Form\Decision\CreateMeetingType;
-use App\Service\Decision\Meeting as MeetingService;
+use App\Entity\Database\Enums\MeetingTypes;
+use App\Entity\Database\Meeting;
+use App\Form\Database\CreateMeetingType;
+use App\Service\Database\Meeting as MeetingService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -29,9 +29,7 @@ final class MeetingController extends AbstractController
     )]
     public function index(): Response
     {
-        return $this->render('decision/meeting/index.html.twig', [
-            'meetings' => $this->meetingService->getMeetingRows(),
-        ]);
+        return $this->render('decision/meeting/index.html.twig');
     }
 
     #[Route(

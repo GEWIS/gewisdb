@@ -2,23 +2,28 @@
 
 declare(strict_types=1);
 
-namespace App\Repository\Decision;
+namespace App\Repository\Database;
 
-use App\Entity\Decision\Decision;
-use App\Entity\Decision\Enums\MeetingTypes;
-use App\Entity\Decision\Meeting;
-use App\Entity\Decision\SubDecision;
-use App\Entity\Decision\SubDecision\Annulment;
-use App\Entity\Decision\SubDecision\Board\Discharge as BoardDischarge;
-use App\Entity\Decision\SubDecision\Board\Installation as BoardInstallation;
-use App\Entity\Decision\SubDecision\Board\Release as BoardRelease;
-use App\Entity\Decision\SubDecision\Key\Granting as KeyGranting;
-use App\Entity\Decision\SubDecision\Key\Withdrawal as KeyWithdrawal;
+use App\Entity\Database\Decision;
+use App\Entity\Database\Enums\MeetingTypes;
+use App\Entity\Database\Meeting;
+use App\Entity\Database\SubDecision;
+use App\Entity\Database\SubDecision\Annulment;
+use App\Entity\Database\SubDecision\Board\Discharge as BoardDischarge;
+use App\Entity\Database\SubDecision\Board\Installation as BoardInstallation;
+use App\Entity\Database\SubDecision\Board\Release as BoardRelease;
+use App\Entity\Database\SubDecision\Key\Granting as KeyGranting;
+use App\Entity\Database\SubDecision\Key\Withdrawal as KeyWithdrawal;
 use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<Meeting>
+ */
+use function array_values;
 use function implode;
 use function str_replace;
 use function strtolower;
@@ -63,6 +68,73 @@ class MeetingRepository extends ServiceEntityRepository
         $qb->setParameter(':search', str_replace(' ', '', strtolower($query)) . '%');
 
         return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * One page of meetings, most recent first.
+     *
+     * Virtual meetings sort after real ones of the same date: they are a bookkeeping device for decisions that were
+     * never taken in a room, so they should not lead the list.
+     *
+     * @return Paginator<Meeting>
+     */
+    public function paginateForOverview(
+        int $page,
+        int $pageSize,
+    ): Paginator {
+        $qb = $this->createQueryBuilder('m')
+            ->addSelect('(CASE WHEN m.type = :virtual_meeting THEN 1 ELSE 0 END) AS HIDDEN virtSort')
+            ->setParameter('virtual_meeting', MeetingTypes::VIRT)
+            ->addOrderBy('m.date', 'DESC')
+            ->addOrderBy('virtSort', 'ASC')
+            ->setFirstResult(($page - 1) * $pageSize)
+            ->setMaxResults($pageSize);
+
+        return new Paginator($qb->getQuery(), false);
+    }
+
+    /**
+     * How many decisions each of the given meetings holds, keyed by type and number.
+     *
+     * Counted for the visible page in one query rather than read off each meeting, so the table costs two queries
+     * whatever the page size.
+     *
+     * @param Meeting[] $meetings
+     *
+     * @return array<string, int>
+     */
+    public function decisionCountsFor(array $meetings): array
+    {
+        if ([] === $meetings) {
+            return [];
+        }
+
+        $qb = $this->createQueryBuilder('m')
+            ->select('m.type AS type', 'm.number AS number', 'COUNT(d) AS total')
+            ->leftJoin('m.decisions', 'd')
+            ->groupBy('m.type')
+            ->addGroupBy('m.number');
+
+        // A meeting is identified by its type and its number together, and a composite key cannot be bound as one
+        // parameter, so the page is named as an explicit list of pairs. Assembled before it is applied, so the
+        // condition is never added empty.
+        $pairs = [];
+
+        foreach (array_values($meetings) as $index => $meeting) {
+            $pairs[] = $qb->expr()->andX('m.type = :type' . $index, 'm.number = :number' . $index);
+            $qb->setParameter('type' . $index, $meeting->getType())
+                ->setParameter('number' . $index, $meeting->getNumber());
+        }
+
+        $rows = $qb->andWhere($qb->expr()->orX(...$pairs))->getQuery()->getResult();
+
+        $counts = [];
+
+        foreach ($rows as $row) {
+            $counts[$row['type']->value . '-' . $row['number']] = (int) $row['total'];
+        }
+
+        return $counts;
     }
 
     /**
