@@ -92,7 +92,8 @@ final readonly class Notification
                 t('%service% lists are not being fetched', ['%service%' => $label]),
                 $integration,
                 t(
-                    '%service% lists have not been fetched recently. The mailing list server may be down, or fetching may be failing.',
+                    '%service% lists have not been fetched recently. The mailing list server may be down, '
+                    . 'or fetching may be failing.',
                     [
                         '%service%' => $label,
                     ],
