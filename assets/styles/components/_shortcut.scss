@@ -26,13 +26,18 @@
     font-weight: 600;
 }
 
+// See the note on `.empty-state-icon`: the icon font's `display` would otherwise win over this one.
 .shortcut-icon {
+    --fa-display: inline-flex;
+
     flex: none;
     inline-size: 1.625rem;
     block-size: 1.625rem;
+    aspect-ratio: 1;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    line-height: 1;
     border-radius: 0.5rem;
     background-color: var(--#{$prefix}tertiary-bg);
     color: var(--#{$prefix}secondary-color);

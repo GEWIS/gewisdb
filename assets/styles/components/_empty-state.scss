@@ -13,12 +13,21 @@
     text-align: center;
 }
 
+// Font Awesome's own rules are imported after every component, and `.fas` sets `display: var(--fa-display,
+// inline-block)`, which beats a `display` declared here. Setting the variable is how the icon font means for that to
+// be overridden, so the box centres its glyph instead of dropping it in the corner. `aspect-ratio` keeps it square
+// whatever the glyph's own metrics are.
 .empty-state-icon {
+    --fa-display: inline-flex;
+
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    flex: none;
     inline-size: 2.25rem;
     block-size: 2.25rem;
+    aspect-ratio: 1;
+    line-height: 1;
     margin-block-end: map-get($spacers, 2);
     border-radius: var(--#{$prefix}border-radius-lg);
     background-color: var(--#{$prefix}secondary-bg);
