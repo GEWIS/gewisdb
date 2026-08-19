@@ -17,6 +17,9 @@ jobs:
         name: PHPUnit
         runs-on: ubuntu-latest
 
+        # No database service: the suite is unit-level and boots no kernel. Adding tests that do will need a
+        # `when@test` doctrine connection and dama/doctrine-test-bundle registered in config/bundles.php first
+        # (the package is required but not enabled), and a Postgres service here to go with them.
         steps:
             -   name: Checkout
                 uses: actions/checkout@v4
@@ -24,8 +27,8 @@ jobs:
             -   name: Install PHP
                 uses: shivammathur/setup-php@v2
                 with:
-                    php-version: '8.4'
-                    extensions: calendar, curl, intl, opcache, pdo_sqlite, sqlite3, zip
+                    php-version: '8.5'
+                    extensions: calendar, curl, intl, ldap, opcache, pgsql, pdo_pgsql, zip
 
             -   name: Setup problem matchers for PHPUnit
                 run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
@@ -33,16 +36,5 @@ jobs:
             -   name: Install dependencies with Composer
                 uses: ramsey/composer-install@v3
 
-            -   name: Extract configuration files
-                run: |
-                    cp config/autoload/doctrine.local.development.php.dist config/autoload/doctrine.local.php
-                    cp config/autoload/laminas-developer-tools.local.php.dist config/autoload/laminas-developer-tools.local.php
-                    cp config/autoload/local.development.php.dist config/autoload/local.php
-
-            -   name: Load environment variables
-                uses: c-py/action-dotenv-to-setenv@v3
-                with:
-                    env-file: .env.dist
-
             -   name: Run PHPUnit
-                run: vendor/phpunit/phpunit/phpunit --bootstrap bootstrap.php --configuration phpunit.xml
+                run: bin/phpunit

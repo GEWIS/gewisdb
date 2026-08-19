@@ -1,9 +1,9 @@
 name: Check migrations and seed
 
-# Runs whenever an entity, migration, or seeder changes. On a slim web + database stack it:
+# Runs whenever an entity, migration, or fixture changes. On a slim web + database stack it:
 #  - applies the migrations + seed from the base branch up to the head branch (and back down again), and
 #  - verifies every entity change has a matching migration committed (i.e. no schema drift).
-# Mailman and Listmonk are sync-based and not needed to exercise migrations or seeders, so only the web +
+# Mailman and Listmonk are sync-based and not needed to exercise migrations or fixtures, so only the web +
 # database containers are started.
 on:
   pull_request:
@@ -12,9 +12,9 @@ on:
       - synchronize
       - reopened
     paths:
-      - '**/Model/**/*.php'
-      - '**/migrations/*.php'
-      - '**/test/Seeder/*.php'
+      - 'src/Entity/**/*.php'
+      - 'src/DataFixtures/**/*.php'
+      - 'migrations/**/*.php'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -23,6 +23,9 @@ concurrency:
 env:
   # Shared compose file set for the docker compose invocations below.
   COMPOSE_FILES: --file docker-compose.github.yml --file docker-compose.override.yml --file docker-compose.yml
+  # ReportDB's migrations are a second set and the bundle only holds one; without --configuration the ledger's
+  # migrations are applied to the report connection. Mirrors REPORT_MIGRATIONS in the Makefile.
+  REPORT_MIGRATIONS: --em=report --configuration=migrations/report.yaml
 
 jobs:
   migration_seed:
@@ -38,11 +41,12 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.base.ref }}
 
-      - name: Copy .env
-        run: cp .env.dist .env
+      # `.env` is committed; `.env.local` is not, and the Makefile passes both to compose.
+      - name: Prepare the local environment file
+        run: make setuplocalenv
 
       - name: setup docker buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
 
       # --no-deps keeps this lightweight: only web + the database start, not the
       # sync-based mail/list services that web otherwise depends on.
@@ -67,18 +71,19 @@ jobs:
         run: make migrate
 
       - name: get migration status
+        # `current` prints "<version> - <description>"; only the version is something to migrate back to.
         run: |
-          MIGRATION_BASE_DEFAULT=$(docker compose exec -u www-data -it web ./orm migrations:current --no-interaction --object-manager doctrine.entitymanager.orm_default | sed 's/\s-.*//' | sed 's/\s//')
+          MIGRATION_BASE_DEFAULT=$(docker compose exec -T web bin/console doctrine:migrations:current --no-interaction --em=default | sed 's/[[:space:]]-[[:space:]].*//' | tr -d '[:space:]')
           echo "Default is at: $MIGRATION_BASE_DEFAULT"
           echo "MIGRATION_BASE_DEFAULT=$MIGRATION_BASE_DEFAULT" >> $GITHUB_ENV
-          MIGRATION_BASE_REPORT=$(docker compose exec -u www-data -it web ./orm migrations:current --no-interaction --object-manager doctrine.entitymanager.orm_report | sed 's/\s-.*//' | sed 's/\s//')
+          MIGRATION_BASE_REPORT=$(docker compose exec -T web bin/console doctrine:migrations:current --no-interaction $REPORT_MIGRATIONS | sed 's/[[:space:]]-[[:space:]].*//' | tr -d '[:space:]')
           echo "Report is at: $MIGRATION_BASE_REPORT"
           echo "MIGRATION_BASE_REPORT=$MIGRATION_BASE_REPORT" >> $GITHUB_ENV
 
       - name: seed base
         run: |
-          docker compose exec -u www-data -T web ./web application:fixtures:load
-          docker compose exec -u www-data -T web ./web report:generate:full
+          docker compose exec -T web bin/console doctrine:fixtures:load --no-interaction
+          docker compose exec -T web bin/console report:generate:full
 
       - name: cleanup base
         run: docker compose $COMPOSE_FILES down
@@ -86,8 +91,8 @@ jobs:
       - name: Checkout head branch
         uses: actions/checkout@v4
 
-      - name: Copy .env
-        run: cp .env.dist .env
+      - name: Prepare the local environment file
+        run: make setuplocalenv
 
       - name: run head
         run: docker compose $COMPOSE_FILES up -d --build --no-deps --quiet-pull web postgresql
@@ -125,13 +130,13 @@ jobs:
       # and Listmonk services, which `--no-deps` deliberately never started.
       - name: seed head
         run: |
-          docker compose exec -u www-data -T web ./web application:fixtures:load
-          docker compose exec -u www-data -T web ./web report:generate:full
+          docker compose exec -T web bin/console doctrine:fixtures:load --no-interaction
+          docker compose exec -T web bin/console report:generate:full
 
       - name: revert to base migration
         run: |
-          docker compose exec -u www-data -it web ./orm migrations:migrate --no-interaction --object-manager doctrine.entitymanager.orm_default $MIGRATION_BASE_DEFAULT
-          docker compose exec -u www-data -it web ./orm migrations:migrate --no-interaction --object-manager doctrine.entitymanager.orm_report $MIGRATION_BASE_REPORT
+          docker compose exec -T web bin/console doctrine:migrations:migrate --no-interaction --em=default $MIGRATION_BASE_DEFAULT
+          docker compose exec -T web bin/console doctrine:migrations:migrate --no-interaction $REPORT_MIGRATIONS $MIGRATION_BASE_REPORT
 
       - name: stop
         run: docker compose $COMPOSE_FILES down

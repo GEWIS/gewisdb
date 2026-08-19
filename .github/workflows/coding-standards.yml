@@ -14,6 +14,8 @@ concurrency:
 
 jobs:
     php-codesniffer:
-        uses: 'GEWIS/gewisphp-coding-standards/.github/workflows/coding-standards.yml@1.2.0'
+        # Matched to the `gewis/gewisphp-coding-standards` version in composer.json, and to the PHP the application
+        # requires: the reusable workflow runs `composer install`, which refuses to resolve `php: ^8.5` on 8.4.
+        uses: 'GEWIS/gewisphp-coding-standards/.github/workflows/coding-standards.yml@1.3.1'
         with:
-            php-version: '8.4'
+            php-version: '8.5'

@@ -19,9 +19,6 @@ env:
 jobs:
     build:
         runs-on: ubuntu-latest
-        strategy:
-            matrix:
-                image: ['web', 'nginx']
         steps:
             -   name: Checkout
                 uses: actions/checkout@v4
@@ -39,14 +36,18 @@ jobs:
                     username: ${{ secrets.SVC_GH_ABCDB_USERNAME }}
                     password: ${{ secrets.SVC_GH_ABCDB_PWD }}
 
+            # One image, built from the root Dockerfile by target. There is no separate nginx image any more: the
+            # web server is Caddy inside FrankenPHP, and the scheduler workers run this same image with a different
+            # command.
             -   name: Build and push image
                 uses: docker/build-push-action@v6
                 with:
                     build-args: GIT_COMMIT=${{ env.SHORT_COMMIT_SHA }}
                     cache-from: type=gha
                     cache-to: type=gha,mode=max
-                    context: ${{ matrix.image == 'web' && '.' || format('./docker/{0}', matrix.image) }}
-                    file: ${{ matrix.image == 'web' && (env.IS_RELEASE == 'true' && './docker/web/production/Dockerfile' || './docker/web/development/Dockerfile') || format('./docker/{0}/Dockerfile', matrix.image) }}
+                    context: .
+                    file: ./Dockerfile
+                    target: ${{ env.IS_RELEASE == 'true' && 'gewisdb_web_production' || 'gewisdb_web_development' }}
                     platforms: linux/amd64
                     push: true
-                    tags: ${{ format('{0}:{1}', format('{0}/db/gewisdb/{1}', vars.ABC_DOCKER_REGISTRY, matrix.image), env.IS_RELEASE == 'true' && format('{0},{1}:latest', github.ref_name, format('{0}/db/gewisdb/{1}', vars.ABC_DOCKER_REGISTRY, matrix.image)) || 'development') }}
+                    tags: ${{ format('{0}:{1}', format('{0}/db/gewisdb/web', vars.ABC_DOCKER_REGISTRY), env.IS_RELEASE == 'true' && format('{0},{1}:latest', github.ref_name, format('{0}/db/gewisdb/web', vars.ABC_DOCKER_REGISTRY)) || 'development') }}
