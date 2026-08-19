@@ -89,7 +89,12 @@ class Meeting
                 $qb->addOrderBy('m.date', 'DESC');
             }
 
-            $qb->addOrderBy('virtSort', 'ASC');
+            // A meeting held to put right what an earlier one got wrong is a virtual one on that same date, so it goes
+            // last of that date. Beyond that the date says nothing about which of two meetings came first, and a
+            // replay has to make the same choice every time, so type and number settle the rest.
+            $qb->addOrderBy('virtSort', 'ASC')
+                ->addOrderBy('m.type', 'ASC')
+                ->addOrderBy('m.number', 'ASC');
 
             return $qb->getQuery()->getResult();
         }

@@ -165,7 +165,9 @@ class Organ
         }
 
         if (null === $organMember) {
-            throw new LogicException('Discharge without OrganMember');
+            // The installation this discharge undoes never took effect, so there is nobody in the organ to discharge.
+            // That is what the ledger says whenever the installation was annulled before this point.
+            return;
         }
 
         $rp = new ReflectionProperty(ReportFoundationModel::class, 'organ');

@@ -103,11 +103,16 @@ class Organ
     /**
      * Reference to members.
      *
+     * Membership of an organ is derived from the decisions about that organ, so it cannot outlast the organ itself:
+     * an organ whose foundation was annulled never existed, and neither did anyone's membership of it. To keep the
+     * projection consistent, deleting an organ should also delete its derived OrganMember rows (handled via cascade).
+     *
      * @var Collection<array-key, OrganMember>
      */
     #[OneToMany(
         mappedBy: 'organ',
         targetEntity: OrganMember::class,
+        cascade: ['remove'],
     )]
     private Collection $members;
 

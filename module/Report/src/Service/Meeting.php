@@ -11,6 +11,7 @@ use Database\Model\Meeting as DatabaseMeetingModel;
 use Database\Model\Member as DatabaseMemberModel;
 use Database\Model\SubDecision as DatabaseSubDecisionModel;
 use Doctrine\ORM\EntityManager;
+use Doctrine\Persistence\Proxy;
 use Laminas\Mail\Header\MessageId;
 use Laminas\Mail\Message;
 use Laminas\Mail\Transport\TransportInterface;
@@ -27,6 +28,7 @@ use Throwable;
 
 use function array_reverse;
 use function count;
+use function get_parent_class;
 use function implode;
 use function preg_replace;
 use function sprintf;
@@ -193,6 +195,9 @@ class Meeting
             }
         }
 
+        /** @var class-string<T> $class */
+        $class = preg_replace('/^Database/', 'Report', $this->realClass($subdecision));
+
         /** @var T|null $reportSubDecision */
         $reportSubDecision = $subdecRepo->find([
             'meeting_type' => $subdecision->getMeetingType(),
@@ -202,11 +207,23 @@ class Meeting
             'sequence' => $subdecision->getSequence(),
         ]);
 
+        if (
+            null !== $reportSubDecision
+            && $this->realClass($reportSubDecision) !== $class
+        ) {
+            // A subdecision that turned out to be wrong is put right by replacing it with one of another kind, and
+            // then this position no longer holds what ReportDB has at it. Nothing about the old one is still true, so
+            // it goes, along with everything derived from it, rather than being dressed up as the new one; keeping it
+            // would leave the organ member it discharged, or the organ it founded, standing on a decision that was
+            // never taken. Its removal has to reach the database before the replacement takes its place, because they
+            // share an identity and a single flush would insert before it deletes.
+            $this->deleteSubDecision($reportSubDecision);
+            $this->emReport->flush();
+
+            $reportSubDecision = null;
+        }
+
         if (null === $reportSubDecision) {
-            // determine type and create
-            $class = $subdecision::class;
-            /** @var class-string<T> $class */
-            $class = preg_replace('/^Database/', 'Report', $class);
             /** @var T $reportSubDecision */
             $reportSubDecision = new $class();
             $reportSubDecision->setDecision($reportDecision);
@@ -413,32 +430,62 @@ class Meeting
     public function deleteSubDecision(ReportSubDecisionModel $subDecision): void
     {
         if ($subDecision instanceof ReportSubDecisionModel\Annulment) {
-            $this->unannulDecision($subDecision->getTarget());
+            if ($this->subDecisionService->stillReferences($subDecision)) {
+                $this->unannulDecision($subDecision->getTarget());
+            }
         } else {
             // Deleting a subdecision undoes its effects in exactly the same way that annulling it does.
             $this->subDecisionService->revertRelated($subDecision);
 
             // On top of that, the subdecision is about to disappear, so the references to it must be dropped as well.
-            switch (true) {
-                case $subDecision instanceof ReportSubDecisionModel\Discharge:
-                    $subDecision->getInstallation()->clearDischarge();
-                    break;
+            // One that no longer has the subdecision it points at has nothing to drop; being reverted above is what
+            // it came here for.
+            if ($this->subDecisionService->stillReferences($subDecision)) {
+                switch (true) {
+                    case $subDecision instanceof ReportSubDecisionModel\Discharge:
+                        $subDecision->getInstallation()->clearDischarge();
+                        break;
 
-                case $subDecision instanceof ReportSubDecisionModel\Board\Release:
-                    $subDecision->getInstallation()->clearRelease();
-                    break;
+                    case $subDecision instanceof ReportSubDecisionModel\Board\Release:
+                        $subDecision->getInstallation()->clearRelease();
+                        break;
 
-                case $subDecision instanceof ReportSubDecisionModel\Board\Discharge:
-                    $subDecision->getInstallation()->clearDischarge();
-                    break;
+                    case $subDecision instanceof ReportSubDecisionModel\Board\Discharge:
+                        $subDecision->getInstallation()->clearDischarge();
+                        break;
 
-                case $subDecision instanceof ReportSubDecisionModel\Key\Withdrawal:
-                    $subDecision->getGranting()->clearWithdrawal();
-                    break;
+                    case $subDecision instanceof ReportSubDecisionModel\Key\Withdrawal:
+                        $subDecision->getGranting()->clearWithdrawal();
+                        break;
+                }
             }
+
+            // An organ keeps a list of the decisions it was shaped by, and that list stands in the way of the row
+            // going anywhere until the organ lets go of it.
+            $this->subDecisionService->detachFromOrgans($subDecision);
         }
 
         $this->emReport->remove($subDecision);
+    }
+
+    /**
+     * The class an entity actually is, rather than the one it presents itself as.
+     *
+     * Doctrine hands out proxies for entities it has not loaded yet, and those are subclasses in a namespace of their
+     * own. Anything that reasons about which kind of subdecision it is holding has to look past that.
+     *
+     * @return class-string
+     */
+    private function realClass(object $entity): string
+    {
+        if ($entity instanceof Proxy) {
+            /** @var class-string $parent */
+            $parent = get_parent_class($entity);
+
+            return $parent;
+        }
+
+        return $entity::class;
     }
 
     /**
