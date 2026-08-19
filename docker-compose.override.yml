@@ -135,11 +135,39 @@ services:
         environment:
             # Caddy answers on the three public hosts plus the plain name the other containers use.
             - SERVER_NAME=:9725
+            # Hot reload, the way GEWISWEB has it, which is two halves. `watch` restarts the workers when a
+            # watched file changes — without it the kernel stays in memory and a code change does nothing until the
+            # container is restarted. `hot_reload` then tells the browser to reload itself, which it does over the
+            # Mercure hub in the Caddyfile; `anonymous` is what lets the page subscribe without a token, and `ui`
+            # serves the hub's own debug page.
+            #
+            # The directories are named rather than watching /app whole. Symfony rewrites `var/cache` as it serves,
+            # so watching everything means the workers restart on their own cache writes, in a loop that never
+            # settles. `var/sass` and `var/typescript` are where the two asset watchers put what they compile, and
+            # they are watched so a change to a stylesheet or a controller still reloads the page.
+            - |
+                FRANKENPHP_WORKER_CONFIG=watch ./src
+                watch ./config
+                watch ./templates
+                watch ./translations
+                watch ./assets
+                watch ./var/sass
+                watch ./var/typescript
+            - FRANKENPHP_SITE_CONFIG=hot_reload
+            - |
+                MERCURE_EXTRA_DIRECTIVES=ui
+                anonymous
+            - MERCURE_PUBLISHER_JWT_KEY=${MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
+            - MERCURE_SUBSCRIBER_JWT_KEY=${MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
+            - XDEBUG_MODE=${XDEBUG_MODE:-off}
         volumes:
-            # The whole project is mounted so a change is picked up without a rebuild; FrankenPHP runs with --watch.
+            # The whole project is mounted so a change is picked up without a rebuild.
             # `var/` stays inside the container so its cache does not fight the one the host tooling writes.
             - ./:/app:rw
             - /app/var/
+            # Mounted read-only so a change to either takes effect without rebuilding the image, as GEWISWEB does.
+            - ./docker/web/frankenphp/Caddyfile:/etc/frankenphp/Caddyfile:ro
+            - ./docker/web/frankenphp/conf.d/20-gewisdb.dev.ini:/usr/local/etc/php/app.conf.d/20-gewisdb.dev.ini:ro
         ports:
             - "9725:9725"
         depends_on:

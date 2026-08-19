@@ -11,7 +11,7 @@
       checkboxes) are not single controls, so `.form-floating` has nothing to float over and would fold the label on
       top of the first option. Those rows keep a label above them.
     - `form_help` is rendered. Dropping it loses every `help` a form type declares, which is the only place some
-      fields explain themselves — the student number, for one. Reported as GEWISWEB#2171.
+      fields explain themselves — the student number, for one. Reported as GEWISWEB#2172.
 #}
 {% block form_row %}
     {% if compound or expanded|default(false) %}

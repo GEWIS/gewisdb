@@ -16,6 +16,10 @@ services:
             - REPORT_DATABASE_DSN=${REPORT_DATABASE_DSN}
             # The hosts Caddy answers on; the application decides what each may reach.
             - SERVER_NAME=${SERVER_NAME}
+            # The Caddyfile's Mercure hub always wants a key, even where nothing publishes: development uses it for
+            # hot reload, production leaves the hub closed (no `anonymous`) and idle.
+            - MERCURE_PUBLISHER_JWT_KEY=${MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
+            - MERCURE_SUBSCRIBER_JWT_KEY=${MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
             - DEMO_CREDENTIALS_PASSWORD=${DEMO_CREDENTIALS_PASSWORD}
             - DEMO_CREDENTIALS_USERNAME=${DEMO_CREDENTIALS_USERNAME}
             - DOCTRINE_DEFAULT_DATABASE=${DOCTRINE_DEFAULT_DATABASE}

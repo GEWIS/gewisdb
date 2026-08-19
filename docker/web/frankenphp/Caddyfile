@@ -26,11 +26,23 @@
 
 	root /app/public
 
+	# The hub `hot_reload` publishes through in development. In production nothing enables `hot_reload` and nothing
+	# subscribes, so the hub sits idle; the directives that would open it up are supplied per environment.
+	mercure {
+		transport bolt {
+			path /data/caddy/mercure.db
+		}
+		publisher_jwt {env.MERCURE_PUBLISHER_JWT_KEY}
+		subscriber_jwt {env.MERCURE_SUBSCRIBER_JWT_KEY}
+		{$MERCURE_EXTRA_DIRECTIVES}
+	}
+
 	{$CADDY_SERVER_EXTRA_DIRECTIVES}
 
 	header ?Permissions-Policy "accelerometer=(), ambient-light-sensor=(), autoplay=(), battery=(), camera=(), cross-origin-isolated=(), display-capture=(), document-domain=(), encrypted-media=(), execution-while-not-rendered=(), execution-while-out-of-viewport=(), fullscreen=(self), geolocation=(), gyroscope=(), keyboard-map=(), magnetometer=(), microphone=(), midi=(), navigation-override=(), payment=(), picture-in-picture=(), publickey-credentials-get=(), screen-wake-lock=(), sync-xhr=(), usb=(), web-share=(), xr-spatial-tracking=(), clipboard-write=(self), interest-cohort=()"
 
 	@phpRoute {
+		not path /.well-known/mercure*
 		not file {path}
 	}
 	rewrite @phpRoute index.php
