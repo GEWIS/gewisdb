@@ -30,6 +30,29 @@
             <meta name="frankenphp-hot-reload:url" content="{{ app.request.server.get('FRANKENPHP_HOT_RELOAD') }}">
             <script src="https://cdn.jsdelivr.net/npm/idiomorph"></script>
             <script src="https://cdn.jsdelivr.net/npm/frankenphp-hot-reload/+esm" type="module"></script>
+            {#
+                The client swaps a stylesheet by matching the changed file against the ones the page links, on the
+                name before the first dot. That never matches here: Sass compiles to `app-<hash of its path>.output
+                .css` and the asset mapper publishes it as `app-<hash of its contents>.css`, so a stylesheet change
+                is recognised and then quietly matches nothing. Reload the page for those instead.
+
+                The event arrives after Sass has written the file, so what the reload fetches is the new stylesheet.
+            #}
+            <script>
+                (() => {
+                    const url = document.querySelector('meta[name="frankenphp-hot-reload:url"]')?.content;
+
+                    if (!url) {
+                        return;
+                    }
+
+                    new EventSource(url).onmessage = ({data}) => {
+                        if (JSON.parse(data).some(({path_name: path}) => path.endsWith('.css'))) {
+                            window.location.reload();
+                        }
+                    };
+                })();
+            </script>
         {% endif %}
         {% block head %}{% endblock %}
     </head>

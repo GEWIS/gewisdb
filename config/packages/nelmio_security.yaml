@@ -36,3 +36,14 @@ nelmio_security:
 
 # The policy has no Stripe entries at all. Verify against the real checkout flow before tightening — either it is a
 # full redirect and the policy never applies, or something is being framed and is already violating it.
+
+when@dev:
+    nelmio_security:
+        csp:
+            enforce:
+                # FrankenPHP injects the hot reload client, and idiomorph with it, as script tags pointing at
+                # jsDelivr; it has no option to serve them itself. Without this the browser refuses both, nothing
+                # subscribes to the hub, and a file change publishes a reload that no page is listening for.
+                #
+                # This adds to the list above rather than replacing it, so only the host belongs here.
+                script-src: ["https://cdn.jsdelivr.net"]

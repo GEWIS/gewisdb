@@ -109,7 +109,8 @@ data the regulations forbid.
 - `make seed` — load fixtures, rebuild ReportDB, prepare Mailman and Listmonk.
 - `make translations` — extract into `translations/*.xlf`. **Fill every new target before committing**: an empty
   `<target/>` is used *as* the translation, so the interface renders blank rather than falling back.
-- `make replenish` — clear the cache in the container.
+- `make cc` — clear the cache and restart the worker. Rarely needed in development: the file watcher restarts it
+  on a change.
 - `make exec cmd="..."` — run something in the `web` container.
 
 `.env` is committed and holds development defaults; `.env.local` is yours and is not. Seven names are deliberately

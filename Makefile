@@ -1,4 +1,4 @@
-.PHONY: help start up setuplocalenv startprod startprodtest runprod runprodtest rundev stop exec update updatecomposer updatedocker getvendordir phpstan phpstanpr phpcs phpcbf phpcbfall phpcsfix checkcomposer replenish build buildprod builddev buildweb buildwebprod buildwebdev buildpgadmin preparelistmonk preparemailman migrate migrate-to migration-down migration-up migration-diff seed smoke translations runtest runcoverage stripewebhooksecret
+.PHONY: help start up setuplocalenv startprod startprodtest runprod runprodtest rundev stop exec update updatecomposer updatedocker getvendordir phpstan phpstanpr phpcs phpcbf phpcbfall phpcsfix checkcomposer cc build buildprod builddev buildweb buildwebprod buildwebdev buildpgadmin preparelistmonk preparemailman migrate migrate-to migration-down migration-up migration-diff seed smoke translations runtest runcoverage stripewebhooksecret
 
 ## —— GEWISDB —————————————————————————————————————————————————————————————————
 help: ## Outputs this help screen
@@ -48,14 +48,14 @@ runprodtest: startprodtest
 # migrations are applied to the report connection, which fills ReportDB with the ledger's tables.
 REPORT_MIGRATIONS := --em=report --configuration=migrations/report.yaml
 
-migrate: replenish ## Run the migrations on both entity managers
+migrate: ## Run the migrations on both entity managers
 		@$(COMPOSE) exec -it web bin/console doctrine:migrations:migrate --em=default
 		@$(COMPOSE) exec -it web bin/console doctrine:migrations:migrate $(REPORT_MIGRATIONS)
 
 migrate-to:
 		@$(COMPOSE) exec web sh -c '. ./scripts/migrate-version.sh && bin/console doctrine:migrations:migrate $$migrations --em=$$alias'
 
-migration-diff: replenish
+migration-diff:
 		@set -e; \
 		echo "Generating migrations for default..."; \
 		$(CONSOLE) doctrine:migrations:diff --allow-empty-diff --em=default; \
@@ -63,10 +63,10 @@ migration-diff: replenish
 		$(CONSOLE) doctrine:migrations:diff --allow-empty-diff $(REPORT_MIGRATIONS);
 		@docker cp "$$(docker compose ps -q web)":/app/migrations ./
 
-migration-up: replenish
+migration-up:
 		@$(COMPOSE) exec web sh -c '. ./scripts/migrate-version.sh && bin/console doctrine:migrations:execute --up $$migrations --em=$$alias'
 
-migration-down: replenish
+migration-down:
 		@$(COMPOSE) exec web sh -c '. ./scripts/migrate-version.sh && bin/console doctrine:migrations:execute --down $$migrations --em=$$alias'
 
 # The lists the fixtures seed. Both servers are given the same three, because the fixtures bind each list to the one
@@ -74,7 +74,7 @@ migration-down: replenish
 # succeed. Listmonk identifies a list by number rather than by name, so the ids are pinned to match the fixtures.
 SEEDED_LISTS := announcements activities vacancies
 
-seed: replenish ## Load fixtures, generate the report database, and prepare Mailman and Listmonk
+seed: ## Load fixtures, generate the report database, and prepare Mailman and Listmonk
 		@$(CONSOLE) doctrine:fixtures:load --no-interaction
 		# Loading the fixtures empties the ledger and fills it again, and the members come back under new numbers.
 		# ReportDB is a projection of what the ledger says, so it is rebuilt from nothing rather than written over:
@@ -114,9 +114,12 @@ getvendordir:
 		@$(COMPOSE) cp web:/app/composer.json ./
 		@$(COMPOSE) cp web:/app/composer.lock ./
 
-# The development stack bind-mounts the source, so there is nothing to copy in; the cache is what goes stale.
-replenish: ## Clear the cache in the container
+# The development stack bind-mounts the source, so there is nothing to copy in; the cache is what goes stale. The
+# worker holds the compiled container and the asset manifest, so it is restarted with it, as GEWISWEB does. In
+# development the file watcher restarts it on a change of its own, which is why nothing here depends on this.
+cc: ## Clear the cache and restart the worker, which holds the compiled container and the asset manifest
 		@$(CONSOLE) cache:clear
+		@$(COMPOSE) restart web
 
 # --no-fill leaves new entries with an empty <target/> in BOTH locales, and an empty target is used AS the
 # translation, so the interface renders blank until every one is filled. Fill them before committing.
@@ -125,7 +128,7 @@ replenish: ## Clear the cache in the container
 # literal is the argument, so an enum must build its label as `match ($this) { self::X => new TranslatableMessage(...) }`
 # and never as `new TranslatableMessage(match ($this) { self::X => '...' })`. The second form is invisible here and
 # --clean deletes its translations.
-translations: replenish ## Extract translatable strings into the XLIFF files
+translations: ## Extract translatable strings into the XLIFF files
 		@$(CONSOLE) translation:extract en --format=xlf --sort=asc --no-fill --force --clean
 		@$(CONSOLE) translation:extract nl --format=xlf --sort=asc --no-fill --force --clean
 
