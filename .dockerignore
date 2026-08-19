@@ -1,7 +1,5 @@
 *~
-*autoload_classmap.php
 *.cache
-*.gitignore
 *.kate-swp
 *.log
 .*.DS_Store
@@ -9,40 +7,32 @@
 ._*
 .buildpath
 .editorconfig
-.env
-.env.dist
 .git/
 .gitattributes
+.github/
+.gitignore
 .idea/
 .postgresql/
 .project
-.sass-cache/
 .scannerwork/
 .settings
 .vs/
 .~lock.*
 Makefile
-autoload_classmap.php
 composer.phar
-config/autoload/doctrine.local.php
-config/autoload/local.php
-config/autoload/doctrine.local.test.php
-config/autoload/local.test.php
-config/autoload/laminas-developer-tools.local.php
 coverage/
-data/cache/*
-data/DoctrineORMModule/
-data/logs/*
-data/mail/*
-docker/nginx/
-gewisdb-laminas/
 Dockerfile
 docker-compose.*
 nbproject
 node_modules/
-public/css/gewis-theme.css
-public/css/gewis-theme.css.map
+tests/
+var/
 vendor/
 
-# Language binaries are created during the docker build process or using 'make compilelang'
-*.mo
+# `.env` is deliberately *not* ignored: `composer dump-env prod` reads it during the build and fails without it. What
+# is ignored is everything that layers a local value over it, because those hold the secrets `make setuplocalenv`
+# writes and `dump-env` would bake them into the image.
+.env.*.local
+.env.local
+.env.local.php
+.env.test
