@@ -12,7 +12,7 @@
     <version number="latest">
         <api format="php">
             <source dsn=".">
-                <path>module</path>
+                <path>src</path>
             </source>
             <extensions>
                 <extension>php</extension>

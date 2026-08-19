@@ -20,11 +20,7 @@ import SubDecisionChoiceController from './controllers/decision/subdecision_choi
 
 // Join-specific controllers.
 import InitialsController from './controllers/join/initials_controller.ts';
-import ProspectiveMemberSearchController from './controllers/join/prospective_member_search_controller.ts';
 import StudyNoticeController from './controllers/join/study_notice_controller.ts';
-
-// Member-specific controllers.
-import MemberSearchController from './controllers/member/member_search_controller.ts';
 
 // Query-specific controllers.
 import QueryEditorController from './controllers/query/query_editor_controller.ts';
@@ -32,8 +28,8 @@ import QueryEditorController from './controllers/query/query_editor_controller.t
 const app = startStimulusApp();
 
 // Controllers live in domain subdirectories under controllers/, but are registered here with flat identifiers so a
-// template writes `data-controller="member-search"`; the path-based autoload would namespace them instead
-// (`member--member-search`).
+// template writes `data-controller="member-lookup"`; the path-based autoload would namespace them instead
+// (`decision--member-lookup`).
 app.register('copy', CopyController);
 app.register('decision-lookup', DecisionLookupController);
 app.register('decision-number', DecisionNumberController);
@@ -45,10 +41,8 @@ app.register('initials', InitialsController);
 app.register('install-editor', InstallEditorController);
 app.register('meeting-lookup', MeetingLookupController);
 app.register('member-lookup', MemberLookupController);
-app.register('member-search', MemberSearchController);
 app.register('navigate-select', NavigateSelectController);
 app.register('organ-lookup', OrganLookupController);
-app.register('prospective-member-search', ProspectiveMemberSearchController);
 app.register('organ-members', OrganMembersController);
 app.register('query-editor', QueryEditorController);
 app.register('study-notice', StudyNoticeController);

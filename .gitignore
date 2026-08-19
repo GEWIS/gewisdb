@@ -25,7 +25,6 @@ autoload_classmap.php
 .idea/sonarlint-state.xml
 phpstan/phpstan-baseline-temp.neon
 phpstan/phpstan-baseline-pr.neon
-psalm/psalm-baseline-pr.xml
 .DS_Store
 /.htaccess
 .postgres
