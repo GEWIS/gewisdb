@@ -7,8 +7,9 @@ Guidance for AI coding agents working in this repository. Humans should read `RE
 GEWISDB is the GEWIS decision and membership database. It records meetings, decisions (the immutable history of what
 the association decided), members, bodies and mailing lists, and exposes them to other GEWIS systems through an API.
 
-It has been ported from Laminas MVC to Symfony. Nothing of the Laminas tree is left in `src/`; the old application is
-pinned as the `gewisdb-laminas` submodule and is a reference for behaviour, never a place to copy patterns from.
+It has been ported from Laminas MVC to Symfony. Nothing of the Laminas tree is left; for the behaviour of the old
+application, read its history on the `main` branch — it is a reference for behaviour, never a place to copy
+patterns from.
 
 ## Stack
 
