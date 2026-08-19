@@ -15,6 +15,7 @@ use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\OneToOne;
+use Doctrine\ORM\Mapping\OrderBy;
 use NumberFormatter;
 use ValueError;
 
@@ -56,6 +57,10 @@ class Meeting
     /**
      * Decisions.
      *
+     * A meeting works through its agenda from top to bottom, and a decision may build on one taken earlier in the same
+     * meeting. Anything replaying the meeting has to see them in that order, so it is fixed here instead of being left
+     * to whatever order the database happens to return the rows in.
+     *
      * @var Collection<array-key, Decision>
      */
     #[OneToMany(
@@ -63,6 +68,10 @@ class Meeting
         mappedBy: 'meeting',
         cascade: ['persist'],
     )]
+    #[OrderBy(value: [
+        'point' => 'ASC',
+        'number' => 'ASC',
+    ])]
     private Collection $decisions;
 
     #[OneToOne(
