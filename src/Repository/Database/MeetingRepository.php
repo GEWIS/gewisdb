@@ -88,6 +88,11 @@ class MeetingRepository extends ServiceEntityRepository
             ->setParameter('virtual_meeting', MeetingTypes::VIRT)
             ->addOrderBy('m.date', 'DESC')
             ->addOrderBy('virtSort', 'ASC')
+            // Type and number are the identity of a meeting, and they are ordered on so that two meetings sharing a
+            // date and a virtSort cannot swap places between the count query and the page query, which would show one
+            // of them twice and leave the other out of the register entirely.
+            ->addOrderBy('m.type', 'ASC')
+            ->addOrderBy('m.number', 'ASC')
             ->setFirstResult(($page - 1) * $pageSize)
             ->setMaxResults($pageSize);
 

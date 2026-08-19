@@ -187,6 +187,14 @@ class FoundationRepository extends ServiceEntityRepository
     ): Paginator {
         $qb = $this->overviewQuery($search)
             ->orderBy('o.abbr', 'ASC')
+            // Abbreviations repeat, so on their own they leave the order of a page up to the database. The identity of
+            // the founding decision settles the rest, so that paging through the list cannot show one body twice and
+            // skip another.
+            ->addOrderBy('o.meeting_type', 'ASC')
+            ->addOrderBy('o.meeting_number', 'ASC')
+            ->addOrderBy('o.decision_point', 'ASC')
+            ->addOrderBy('o.decision_number', 'ASC')
+            ->addOrderBy('o.sequence', 'ASC')
             ->setFirstResult(($page - 1) * $pageSize)
             ->setMaxResults($pageSize);
 
