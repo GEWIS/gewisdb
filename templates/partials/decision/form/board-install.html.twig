@@ -5,5 +5,7 @@
     } only %}
     {{ form_row(form.function) }}
     {{ form_row(form.date) }}
-    {{ form_widget(form.submit, {'attr': {'class': 'btn-gewis-primary'}}) }}
+    <div class="decision-form-actions">
+        {{ form_widget(form.submit, {'attr': {'class': 'btn-gewis-primary'}}) }}
+    </div>
 {{ form_end(form) }}

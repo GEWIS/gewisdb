@@ -14,7 +14,16 @@
       fields explain themselves — the student number, for one. Reported as GEWISWEB#2172.
 #}
 {% block form_row %}
-    {% if compound or expanded|default(false) %}
+    {% if compound and form.children is not empty and form.children|filter(child => 'hidden' not in child.vars.block_prefixes)|length == 0 %}
+        {# A compound of nothing but hidden fields -- a reference to another record, say -- has nothing on the page to
+           label. Labelling it anyway puts a legend above an empty space; every decision form carries a hidden
+           reference to its meeting, and each one grew a stray "Meeting" heading from it.
+
+           A compound with no children at all is a different thing -- an empty collection waiting to be added to --
+           and keeps its label, which is the only thing naming what the button below it adds. #}
+        {{ form_widget(form) }}
+        {{ form_errors(form) }}
+    {% elseif compound or expanded|default(false) %}
         <div class="mb-2">
             {{ form_label(form) }}
             {{ form_widget(form) }}

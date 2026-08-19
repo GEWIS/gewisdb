@@ -19,8 +19,7 @@
         'data-action': 'organ-lookup:selected->organ-members#render',
     },
 }) }}
-    <div class="mb-3">
-        {{ form_label(form.name) }}
+    <div class="mb-2">
         {% include 'partials/decision/lookup-input.html.twig' with {
             'controller': 'organ-lookup',
             'field': form.name,
@@ -36,14 +35,16 @@
     {{ form_widget(form.subdecision.decision_number, {'attr': {'data-organ-lookup-target': 'decisionNumber'}}) }}
     {{ form_widget(form.subdecision.sequence, {'attr': {'data-organ-lookup-target': 'sequence'}}) }}
 
-    <div class="mb-3 d-none" data-organ-members-target="panel">
+    <div class="mb-2 d-none" data-organ-members-target="panel">
         <strong>{{ 'The body to be abolished includes the following members:'|trans }}</strong>
         <ul data-organ-members-target="list"></ul>
     </div>
 
-    {{ form_widget(form.submit, {'attr': {
-        'class': 'btn-gewis-primary',
-        'disabled': 'disabled',
-        'data-organ-lookup-target': 'submit',
-    }}) }}
+    <div class="decision-form-actions">
+        {{ form_widget(form.submit, {'attr': {
+            'class': 'btn-gewis-primary',
+            'disabled': 'disabled',
+            'data-organ-lookup-target': 'submit',
+        }}) }}
+    </div>
 {{ form_end(form) }}

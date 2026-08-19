@@ -44,8 +44,7 @@
      data-install-editor-discharge-prototype-value="{{ discharge_prototype|e('html_attr') }}">
 
     {{ form_start(form, {'action': path('decision_decision_form', {'form': 'install'})}) }}
-        <div class="mb-3">
-            {{ form_label(form.name) }}
+        <div class="mb-2">
             {% include 'partials/decision/lookup-input.html.twig' with {
                 'controller': 'organ-lookup',
                 'field': form.name,
@@ -176,11 +175,13 @@
             </div>
 
             <div class="mt-3">
-                {{ form_widget(form.submit, {'attr': {
-                    'class': 'btn-gewis-primary',
-                    'disabled': 'disabled',
-                    'data-organ-lookup-target': 'submit',
-                }}) }}
+                <div class="decision-form-actions">
+                    {{ form_widget(form.submit, {'attr': {
+                        'class': 'btn-gewis-primary',
+                        'disabled': 'disabled',
+                        'data-organ-lookup-target': 'submit',
+                    }}) }}
+                </div>
             </div>
         </div>
     {{ form_end(form) }}

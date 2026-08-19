@@ -4,7 +4,7 @@
     'action': path('decision_decision_form', {'form': 'key_withdraw'}),
     'attr': {'data-controller': 'subdecision-choice'},
 }) }}
-    <div class="mb-3">
+    <div class="mb-2">
         <span class="form-label d-block">{{ 'Key Code(s) to Withdraw'|trans }}</span>
         {% for grant in grants %}
             <div class="form-check">
@@ -39,9 +39,11 @@
 
     {{ form_row(form.withdrawOn) }}
 
-    {{ form_widget(form.submit, {'attr': {
-        'class': 'btn-gewis-primary',
-        'disabled': 'disabled',
-        'data-subdecision-choice-target': 'submit',
-    }}) }}
+    <div class="decision-form-actions">
+        {{ form_widget(form.submit, {'attr': {
+            'class': 'btn-gewis-primary',
+            'disabled': 'disabled',
+            'data-subdecision-choice-target': 'submit',
+        }}) }}
+    </div>
 {{ form_end(form) }}

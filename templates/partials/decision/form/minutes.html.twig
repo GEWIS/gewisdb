@@ -8,8 +8,7 @@
         'data-meeting-lookup-min-length-value': 1,
     },
 }) }}
-    <div class="mb-3">
-        {{ form_label(form.name) }}
+    <div class="mb-2">
         {% include 'partials/decision/lookup-input.html.twig' with {
             'controller': 'meeting-lookup',
             'field': form.name,
@@ -28,5 +27,7 @@
     } only %}
     {{ form_row(form.approve) }}
     {{ form_row(form.changes) }}
-    {{ form_widget(form.submit, {'attr': {'class': 'btn-gewis-primary'}}) }}
+    <div class="decision-form-actions">
+        {{ form_widget(form.submit, {'attr': {'class': 'btn-gewis-primary'}}) }}
+    </div>
 {{ form_end(form) }}

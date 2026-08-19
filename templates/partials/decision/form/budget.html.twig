@@ -9,5 +9,7 @@
     {{ form_row(form.version) }}
     {{ form_row(form.approve) }}
     {{ form_row(form.changes) }}
-    {{ form_widget(form.submit, {'attr': {'class': 'btn-gewis-primary'}}) }}
+    <div class="decision-form-actions">
+        {{ form_widget(form.submit, {'attr': {'class': 'btn-gewis-primary'}}) }}
+    </div>
 {{ form_end(form) }}

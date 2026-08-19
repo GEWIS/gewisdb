@@ -15,9 +15,11 @@
     {{ form_widget(form.subdecision.sequence, {'attr': {'data-subdecision-choice-target': 'sequence'}}) }}
     {{ form_errors(form.subdecision) }}
 
-    {{ form_widget(form.submit, {'attr': {
-        'class': 'btn-gewis-primary',
-        'disabled': 'disabled',
-        'data-subdecision-choice-target': 'submit',
-    }}) }}
+    <div class="decision-form-actions">
+        {{ form_widget(form.submit, {'attr': {
+            'class': 'btn-gewis-primary',
+            'disabled': 'disabled',
+            'data-subdecision-choice-target': 'submit',
+        }}) }}
+    </div>
 {{ form_end(form) }}

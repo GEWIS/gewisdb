@@ -24,28 +24,28 @@
         {{ form_row(form.type) }}
     </div>
 
-    <div class="mb-3">
-        {{ form_label(form.name, null, {'label_attr': {'data-foundation-form-target': 'nameLabel'}}) }}
+    <div class="form-floating mb-2">
         {{ form_widget(form.name, {'attr': {
             'data-foundation-form-target': 'name',
             'placeholder': 'Name'|trans,
         }}) }}
+        {{ form_label(form.name, null, {'label_attr': {'data-foundation-form-target': 'nameLabel'}}) }}
         {{ form_errors(form.name) }}
     </div>
 
-    <div class="mb-3">
-        {{ form_label(form.abbr, null, {'label_attr': {'data-foundation-form-target': 'abbrLabel'}}) }}
+    <div class="form-floating mb-2">
         {{ form_widget(form.abbr, {'attr': {
             'data-foundation-form-target': 'abbr',
             'placeholder': 'Abbreviation'|trans,
         }}) }}
+        {{ form_label(form.abbr, null, {'label_attr': {'data-foundation-form-target': 'abbrLabel'}}) }}
         {{ form_errors(form.abbr) }}
     </div>
 
-    <div class="mb-3" data-controller="form-collection"
+    <div class="mb-2" data-controller="form-collection"
          data-form-collection-prototype-value="{{ member_prototype|e('html_attr') }}"
          data-form-collection-prototype-name-value="__index__">
-        <strong>{{ 'Members'|trans }}</strong>
+        <span class="form-label d-block">{{ 'Members'|trans }}</span>
         <div data-form-collection-target="entries" data-foundation-form-target="members">
             {% for entry in form.members %}
                 {% include 'partials/decision/foundation-member.html.twig' with {'entry': entry} only %}
@@ -58,5 +58,7 @@
         </button>
     </div>
 
-    {{ form_widget(form.submit, {'attr': {'class': 'btn-gewis-primary'}}) }}
+    <div class="decision-form-actions">
+        {{ form_widget(form.submit, {'attr': {'class': 'btn-gewis-primary'}}) }}
+    </div>
 {{ form_end(form) }}
