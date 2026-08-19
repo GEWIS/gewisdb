@@ -26,7 +26,10 @@ use function preg_match;
  * A name that is not one of the three is unrestricted: that is `localhost` in development and the container name in
  * a health check, neither of which is a public boundary.
  */
-#[AsEventListener(event: KernelEvents::REQUEST, priority: 32)]
+// Above RouterListener's 32 rather than equal to it. At the same priority the two are ordered by whichever was
+// registered first, which nothing here declares and an added bundle or a Symfony upgrade can reverse; running after the
+// router would mean the request already carries the `_controller` of the page the host is not allowed to reach.
+#[AsEventListener(event: KernelEvents::REQUEST, priority: 33)]
 final readonly class HostFirewallListener
 {
     /**
@@ -122,8 +125,11 @@ final readonly class HostFirewallListener
         $server = $request->server->all();
         $server['REQUEST_URI'] = $path;
 
+        // Empty attributes rather than `null`: `null` keeps a clone of the parent's, and a sub-request that already
+        // has a `_controller` is one the router refuses to touch, so it would serve the parent's route instead of the
+        // path asked for here.
         return $this->kernel->handle(
-            $request->duplicate(null, null, null, null, null, $server),
+            $request->duplicate(null, null, [], null, null, $server),
             HttpKernelInterface::SUB_REQUEST,
         );
     }
