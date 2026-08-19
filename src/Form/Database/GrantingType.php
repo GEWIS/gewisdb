@@ -12,8 +12,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-use function Symfony\Component\Translation\t;
-
 /**
  * Carries the grantee and the expiration of the key code granting a withdrawal points at.
  *
@@ -48,7 +46,7 @@ class GrantingType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => null,
-            'invalid_message' => t('Select an existing key code granting.'),
+            'invalid_message' => 'Select an existing key code granting.',
         ]);
     }
 }

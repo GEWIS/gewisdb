@@ -9,15 +9,21 @@ use App\Entity\Database\Member;
 use App\Repository\Database\MailingListRepository;
 use Override;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Event\PreSubmitEvent;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 use function array_combine;
 use function array_keys;
 use function array_map;
+use function array_unique;
+use function array_values;
+use function in_array;
+use function is_array;
 use function Symfony\Component\Translation\t;
 
 /**
@@ -41,6 +47,7 @@ class MemberListsType extends AbstractType
         array $options,
     ): void {
         $subscriptions = $this->subscriptionStates($options['member']);
+        $locked = $this->lockedLists($subscriptions);
         $listNames = array_map(
             static fn (MailingList $list): string => $list->getName(),
             $this->mailingListRepository->findAll(),
@@ -61,11 +68,8 @@ class MemberListsType extends AbstractType
 
                 return $name . ' (' . $this->stateLabel(...$subscriptions[$name]) . ')';
             },
-            'choice_attr' => static function (string $name) use ($subscriptions): array {
-                if (
-                    !isset($subscriptions[$name])
-                    || [false, false] === $subscriptions[$name]
-                ) {
+            'choice_attr' => static function (string $name) use ($locked): array {
+                if (!in_array($name, $locked, true)) {
                     return [];
                 }
 
@@ -73,6 +77,26 @@ class MemberListsType extends AbstractType
             },
             'choice_translation_domain' => false,
         ]);
+
+        // A disabled checkbox is not submitted at all, which arrives here as indistinguishable from one that was
+        // unticked. Left alone, saving any change to this form reads every locked list as an unsubscribe and queues it
+        // for removal; putting them back is what makes 'locked' mean unchanged.
+        //
+        // Ahead of ChoiceType's own PRE_SUBMIT, which sits at 0: that one rewrites the submitted list into a map from
+        // child name to value, and a list of names appended after it no longer lines up with anything.
+        $builder->get('lists')->addEventListener(
+            FormEvents::PRE_SUBMIT,
+            static function (PreSubmitEvent $event) use ($locked): void {
+                $submitted = $event->getData();
+
+                if (!is_array($submitted)) {
+                    $submitted = [];
+                }
+
+                $event->setData(array_values(array_unique([...$submitted, ...$locked])));
+            },
+            priority: 1,
+        );
 
         $builder->add('submit', SubmitType::class, ['label' => t('Change Subscriptions')]);
     }
@@ -105,6 +129,28 @@ class MemberListsType extends AbstractType
         }
 
         return $states;
+    }
+
+    /**
+     * The lists whose subscription is waiting to be synced, and so cannot be changed until it has been.
+     *
+     * @param array<string, array{0: bool, 1: bool}> $subscriptions
+     *
+     * @return string[]
+     */
+    private function lockedLists(array $subscriptions): array
+    {
+        $locked = [];
+
+        foreach ($subscriptions as $name => $state) {
+            if ([false, false] === $state) {
+                continue;
+            }
+
+            $locked[] = $name;
+        }
+
+        return $locked;
     }
 
     private function stateLabel(

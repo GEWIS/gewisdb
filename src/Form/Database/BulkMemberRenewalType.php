@@ -49,7 +49,10 @@ class BulkMemberRenewalType extends AbstractType
             'choice_label' => static fn (MembershipTypes $type): TranslatableMessage => MembershipTypeChoices::label(
                 $type,
             ),
-            'invalid_message' => t('Select an existing membership type.'),
+            'invalid_message' => 'Select an existing membership type.',
+            // Without this an unanswered form validates, and the renewal then previews and applies nothing at all with
+            // no indication of why.
+            'constraints' => [new Assert\NotNull()],
         ]);
 
         $builder->add('submit', SubmitType::class, ['label' => t('Preview changes')]);

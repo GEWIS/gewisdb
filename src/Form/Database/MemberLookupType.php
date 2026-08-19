@@ -53,7 +53,7 @@ class MemberLookupType extends AbstractType
         $resolver->setDefaults([
             'data_class' => null,
             'include_name' => true,
-            'invalid_message' => t('Select an existing member.'),
+            'invalid_message' => 'Select an existing member.',
         ]);
 
         $resolver->setAllowedTypes('include_name', 'bool');

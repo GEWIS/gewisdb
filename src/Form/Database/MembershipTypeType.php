@@ -44,7 +44,10 @@ class MembershipTypeType extends AbstractType
             'choice_label' => static fn (MembershipTypes $type): TranslatableMessage => MembershipTypeChoices::label(
                 $type,
             ),
-            'invalid_message' => t('Select an existing membership type.'),
+            'invalid_message' => 'Select an existing membership type.',
+            // Nothing is preselected while a prospective member is approved, and `Member::membership()` takes the type
+            // as a non-nullable argument, so an unanswered form has to fail here rather than there.
+            'constraints' => [new Assert\NotNull()],
         ];
 
         // The change date can only fall inside the membership it changes.

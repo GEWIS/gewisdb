@@ -12,8 +12,6 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-use function Symfony\Component\Translation\t;
-
 /**
  * A single member being installed in an organ, in one function.
  *
@@ -35,7 +33,7 @@ class InstallationType extends AbstractType
         ]);
 
         $builder->add('function', HiddenType::class, [
-            'invalid_message' => t('Select an existing function.'),
+            'invalid_message' => 'Select an existing function.',
         ]);
 
         $builder->get('function')->addModelTransformer(

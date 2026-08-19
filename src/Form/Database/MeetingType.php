@@ -13,8 +13,6 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-use function Symfony\Component\Translation\t;
-
 /**
  * Refers to the meeting in which a decision is taken.
  *
@@ -50,7 +48,7 @@ class MeetingType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => null,
-            'invalid_message' => t('Select an existing meeting.'),
+            'invalid_message' => 'Select an existing meeting.',
         ]);
     }
 }

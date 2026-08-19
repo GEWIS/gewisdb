@@ -35,8 +35,17 @@ class AddressEditType extends AbstractType
             'label' => t('Postal Region'),
             'class' => PostalRegions::class,
             'placeholder' => t('Select Postal Region'),
-            'invalid_message' => t('Select an existing postal region.'),
+            'invalid_message' => 'Select an existing postal region.',
             'constraints' => [new Assert\NotNull()],
+            // The data mapper writes to the address before the constraint above is checked, and the setter does not
+            // accept null, so an empty submission would be a TypeError rather than the violation it should be.
+            'setter' => static function (Address $address, ?PostalRegions $country): void {
+                if (null === $country) {
+                    return;
+                }
+
+                $address->setCountry($country);
+            },
         ]);
 
         $builder->add('street', TextType::class, [
@@ -81,9 +90,13 @@ class AddressEditType extends AbstractType
         ]);
 
         // TODO: phone number validation
+        // Optional, as it is on the registration form: the column is NOT NULL, so an untouched field is an empty
+        // string rather than a missing one. Requiring it here would leave the secretary unable to save any edit to an
+        // address that has no phone number, which most of them do not.
         $builder->add('phone', TextType::class, [
             'label' => t('Phone Number'),
-            'constraints' => [new Assert\NotBlank()],
+            'required' => false,
+            'empty_data' => '',
         ]);
 
         $builder->add('submit', SubmitType::class, ['label' => t('Update Address')]);

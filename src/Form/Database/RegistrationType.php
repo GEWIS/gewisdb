@@ -91,7 +91,7 @@ class RegistrationType extends AbstractType
                     $this->translator,
                 ),
                 'choice_value' => static fn (?Studies $study): ?string => $study?->value,
-                'invalid_message' => t('Select an existing study.'),
+                'invalid_message' => 'Select an existing study.',
                 'constraints' => [new Assert\NotNull()],
             ])
             ->add('email', EmailType::class, [

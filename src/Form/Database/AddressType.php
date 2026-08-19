@@ -40,7 +40,7 @@ class AddressType extends AbstractType
         if ($options['include_type']) {
             // Which of the three addresses this is follows from the page, not from the person filling it in.
             $builder->add('type', HiddenType::class, [
-                'invalid_message' => t('Select an existing address type.'),
+                'invalid_message' => 'Select an existing address type.',
             ]);
 
             $builder->get('type')->addModelTransformer(new StringToEnumTransformer(AddressTypes::class));
@@ -50,7 +50,7 @@ class AddressType extends AbstractType
             'label' => t('Postal Region'),
             'class' => PostalRegions::class,
             'placeholder' => t('Select Postal Region'),
-            'invalid_message' => t('Select an existing postal region.'),
+            'invalid_message' => 'Select an existing postal region.',
             'constraints' => [new NotNull()],
         ]);
 

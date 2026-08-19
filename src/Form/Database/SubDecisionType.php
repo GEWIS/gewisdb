@@ -16,7 +16,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use function is_subclass_of;
-use function Symfony\Component\Translation\t;
 
 /**
  * Refers to an existing subdecision, such as the foundation an organ is installed into.
@@ -59,7 +58,7 @@ class SubDecisionType extends AbstractType
         $resolver->setDefaults([
             'data_class' => null,
             'subdecision_class' => SubDecision::class,
-            'invalid_message' => t('Select an existing subdecision.'),
+            'invalid_message' => 'Select an existing subdecision.',
         ]);
 
         $resolver->setAllowedTypes('subdecision_class', 'string');

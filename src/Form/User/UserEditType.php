@@ -72,7 +72,7 @@ class UserEditType extends AbstractType
             'second_name' => 'password_verify',
             'first_options' => ['label' => t('Wachtwoord')],
             'second_options' => ['label' => t('Controleer wachtwoord')],
-            'invalid_message' => t('The two given tokens do not match'),
+            'invalid_message' => 'The two given tokens do not match',
             'constraints' => $passwordNeeded
                 ? [
                     new Assert\NotBlank(),
