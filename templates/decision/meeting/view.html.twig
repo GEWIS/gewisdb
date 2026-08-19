@@ -58,7 +58,7 @@
                                         data-action="copy#copy"
                                         data-copy-copied-label="{{ 'Copied'|trans }}">
                                     <span class="fas fa-copy" aria-hidden="true"></span>
-                                    {{ 'Copy Decision'|trans }}
+                                    <span data-copy-target="label">{{ 'Copy Decision'|trans }}</span>
                                 </button>
                                 <a class="btn btn-sm btn-outline-danger"
                                    href="{{ path('decision_decision_delete', {
