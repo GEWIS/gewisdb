@@ -125,6 +125,20 @@ order carries no meaning worth asserting.
 
 Anything **else** in a schema diff is a real change and needs explaining.
 
+## Recorded deltas in `hosts/`
+
+The boundary itself is unchanged: every path answers on the same host, with the same status, as it did under nginx.
+Two things about *how* a response is shaped differ, both deliberate, and the section was re-recorded with them.
+
+**1. No session cookie where nothing uses a session.** Laminas started a session on every request, so the baseline
+carried a `Set-Cookie` on pages that never read or wrote one — the sign-up form, the checkout pages, the login page.
+Symfony starts a session when something is put in it. Nothing downstream depends on the cookie being handed out
+early, and not issuing one to an anonymous visitor who is only reading a form is the better of the two.
+
+**2. A refused `/api/` path answers as the API.** The boundary used to be enforced by nginx, which had no idea what
+it was refusing and returned its own HTML page. It is enforced by `HostFirewallListener` now, inside the application,
+so the API's own exception listener formats the 404 as JSON — which is what a client calling an API path can read.
+
 ## Known behaviour recorded here that is wrong
 
 The goldens record what the application *does*, including its bugs. Two are worth knowing about before you read a diff:

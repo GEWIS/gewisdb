@@ -1,6 +1,6 @@
 GET /lang/en
 Host: database.gewis.nl
 --- 302
-Content-Type: text/html; charset=UTF-8
+Content-Type: text/html; charset=utf-8
 Location: /member/subscribe
-Set-Cookie: GEWISDBSESSID=<redacted>; path=/; HttpOnly; SameSite=Lax
+Set-Cookie: GEWISDBSESSID=<redacted>; path=/; httponly; samesite=lax
