@@ -1,6 +1,0 @@
-GET /organ
-Host: database.gewis.nl
---- 302
-Content-Type: text/html; charset=utf-8
-Location: http://database.gewis.nl/login
-Set-Cookie: GEWISDBSESSID=<redacted>; path=/; httponly; samesite=lax

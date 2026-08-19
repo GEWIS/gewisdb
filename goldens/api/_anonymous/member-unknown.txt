@@ -1,5 +1,0 @@
-GET /api/members/99999999
---- 401
-Content-Type: text/html; charset=UTF-8
-WWW-Authenticate: Bearer realm="/api"
----

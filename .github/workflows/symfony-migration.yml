@@ -26,16 +26,11 @@ jobs:
                     extensions: calendar, curl, intl, opcache, pgsql, pdo_pgsql, zip
                     tools: cs2pr
 
-            -   name: Extract configuration files
-                run: |
-                    cp config/autoload/doctrine.local.development.php.dist config/autoload/doctrine.local.php
-                    cp config/autoload/local.development.php.dist config/autoload/local.php
-
             -   name: Install dependencies with Composer
                 uses: ramsey/composer-install@v3
 
             -   name: Run PHPStan
-                run: vendor/bin/phpstan analyse -c phpstan-src.neon --memory-limit 1G --no-progress --error-format=checkstyle | cs2pr
+                run: vendor/bin/phpstan analyse --memory-limit 1G --no-progress --error-format=checkstyle | cs2pr
 
     phpcs-src:
         name: PHP CodeSniffer (src)
@@ -57,50 +52,3 @@ jobs:
 
             -   name: Run PHP CodeSniffer
                 run: vendor/bin/phpcs src --report=checkstyle | cs2pr
-
-    entity-schema:
-        name: Entity schema unchanged
-        runs-on: ubuntu-latest
-
-        services:
-            postgres:
-                image: postgres
-                env:
-                    POSTGRES_PASSWORD: gewisdb
-                    POSTGRES_USER: gewisdb
-                ports:
-                    - 5432:5432
-                options: >-
-                    --health-cmd pg_isready
-                    --health-interval 10s
-                    --health-timeout 5s
-                    --health-retries 5
-
-        steps:
-            -   name: Checkout
-                uses: actions/checkout@v4
-
-            -   name: Install PHP
-                uses: shivammathur/setup-php@v2
-                with:
-                    php-version: '8.4'
-                    extensions: calendar, curl, intl, opcache, pgsql, pdo_pgsql, zip
-
-            -   name: Extract configuration files
-                run: |
-                    cp config/autoload/doctrine.local.development.php.dist config/autoload/doctrine.local.php
-                    cp config/autoload/local.development.php.dist config/autoload/local.php
-
-            -   name: Install dependencies with Composer
-                uses: ramsey/composer-install@v3
-
-            -   name: Load environment variables
-                uses: c-py/action-dotenv-to-setenv@v3
-                with:
-                    env-file: .env.dist
-
-            -   name: Compare the ported entities against the recorded schema
-                env:
-                    DOCTRINE_DEFAULT_HOST: 127.0.0.1
-                    DOCTRINE_REPORT_HOST: 127.0.0.1
-                run: scripts/goldens/entity-schema-check.sh

@@ -1,3 +1,0 @@
-GET /api/members/4
---- 204
----

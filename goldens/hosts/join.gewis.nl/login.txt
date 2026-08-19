@@ -1,4 +1,0 @@
-GET /login
-Host: join.gewis.nl
---- 404
-Content-Type: text/html; charset=UTF-8

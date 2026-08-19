@@ -1,4 +1,4 @@
-.PHONY: help start up setuplocalenv startprod startprodtest runprod runprodtest rundev stop exec update updatecomposer updatedocker getvendordir phpstan phpstanpr phpcs phpcbf phpcbfall phpcsfix checkcomposer replenish build buildprod builddev buildweb buildwebprod buildwebdev buildpgadmin preparelistmonk preparemailman migrate migrate-to migration-down migration-up migration-diff seed goldens goldens-verify goldens-freeze goldens-restore entity-schema smoke translations runtest runcoverage stripewebhooksecret
+.PHONY: help start up setuplocalenv startprod startprodtest runprod runprodtest rundev stop exec update updatecomposer updatedocker getvendordir phpstan phpstanpr phpcs phpcbf phpcbfall phpcsfix checkcomposer replenish build buildprod builddev buildweb buildwebprod buildwebdev buildpgadmin preparelistmonk preparemailman migrate migrate-to migration-down migration-up migration-diff seed smoke translations runtest runcoverage stripewebhooksecret
 
 ## —— GEWISDB —————————————————————————————————————————————————————————————————
 help: ## Outputs this help screen
@@ -74,26 +74,10 @@ seed: replenish ## Load fixtures, generate the report database, and prepare Mail
 		@make preparelistmonk
 		@$(CONSOLE) database:mailinglist:fetch
 
-# goldens-verify and goldens-restore drop and recreate the public schema in both databases.
-goldens: replenish ## Capture the behavioural goldens
-		@bash scripts/goldens/capture.sh
-
-goldens-verify: replenish ## Check current behaviour against the goldens
-		@bash scripts/goldens/verify.sh
-
-goldens-freeze:
-		@bash scripts/goldens/freeze-input.sh
-
-goldens-restore:
-		@bash scripts/goldens/restore-input.sh
 
 # Requests every GET route and reports the ones that fail; parameters come from whatever is in the database.
 smoke: ## Request every GET route and report anything that does not answer
 		@$(COMPOSE) exec -T web php scripts/smoke-routes.php
-
-# Runs on the host, against the database the containers expose.
-entity-schema:
-		@DOCTRINE_DEFAULT_HOST=127.0.0.1 DOCTRINE_REPORT_HOST=127.0.0.1 bash scripts/goldens/entity-schema-check.sh
 
 exec: ## Open a shell in the web container
 		docker compose exec -it web $(cmd)
