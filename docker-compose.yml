@@ -5,7 +5,7 @@ services:
         #     - .env
         environment:
             - APP_ENV=${APP_ENV}
-            - APP_SECRET=${APP_SECRET}
+            - APP_SECRET
             - APP_URL=${APP_URL}
             - CORS_ALLOW_ORIGIN=${CORS_ALLOW_ORIGIN}
             - DATABASE_DSN=${DATABASE_DSN}
@@ -31,7 +31,7 @@ services:
             - DOCTRINE_REPORT_ROLE=${DOCTRINE_REPORT_ROLE}
             - DOCTRINE_REPORT_USER=${DOCTRINE_REPORT_USER}
             - LDAP_BASEDN=${LDAP_BASEDN}
-            - LDAP_BINDUSER_PASS=${LDAP_BINDUSER_PASS}
+            - LDAP_BINDUSER_PASS
             - LDAP_BINDUSER_USERNAME=${LDAP_BINDUSER_USERNAME}
             - LDAP_DOMAIN=${LDAP_DOMAIN}
             - LDAP_FILTER=${LDAP_FILTER}
@@ -57,11 +57,11 @@ services:
             - PHP_IDE_CONFIG=${PHP_IDE_CONFIG}
             - STRIPE_API_VERSION=${STRIPE_API_VERSION}
             - STRIPE_CANCEL_URL=${STRIPE_CANCEL_URL}
-            - STRIPE_MEMBERSHIP_PRICE_ID=${STRIPE_MEMBERSHIP_PRICE_ID}
-            - STRIPE_PUBLISHABLE_KEY=${STRIPE_PUBLISHABLE_KEY}
-            - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+            - STRIPE_MEMBERSHIP_PRICE_ID
+            - STRIPE_PUBLISHABLE_KEY
+            - STRIPE_SECRET_KEY
             - STRIPE_SUCCESS_URL=${STRIPE_SUCCESS_URL}
-            - STRIPE_WEBHOOK_SIGNING_KEY=${STRIPE_WEBHOOK_SIGNING_KEY}
+            - STRIPE_WEBHOOK_SIGNING_KEY
         depends_on:
             - postfix
         volumes:

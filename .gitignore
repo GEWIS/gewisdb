@@ -6,7 +6,6 @@ nbproject
 *.kate-swp
 .buildpath
 *.DS_Store
-.env
 .idea/sonarlint/
 .project
 .settings
