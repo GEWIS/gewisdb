@@ -789,12 +789,6 @@ parameters:
 			path: ../src/Service/Checker/Checker.php
 
 		-
-			message: '#^Method App\\Service\\Checker\\Checker\:\:handleMeetingErrors\(\) has parameter \$errors with generic class App\\ViewModel\\Checker\\Error but does not specify its types\: T$#'
-			identifier: missingType.generics
-			count: 1
-			path: ../src/Service/Checker/Checker.php
-
-		-
 			message: '#^Call to function in_array\(\) requires parameter \#3 to be set\.$#'
 			identifier: function.strict
 			count: 1

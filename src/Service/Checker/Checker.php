@@ -8,6 +8,7 @@ use App\Entity\Database\Enums\InstallationFunctions;
 use App\Entity\Database\Enums\MeetingTypes;
 use App\Entity\Database\Enums\OrganTypes;
 use App\Entity\Database\Meeting as MeetingModel;
+use App\Entity\Database\SubDecision as SubDecisionModel;
 use App\Service\Checker\Annulment as AnnulmentService;
 use App\Service\Checker\Installation as InstallationService;
 use App\Service\Checker\Key as KeyService;
@@ -17,9 +18,9 @@ use App\Service\Checker\Organ as OrganService;
 use App\ViewModel\Checker\Error as ErrorModel;
 use DateInterval;
 use DateTime;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
-use Symfony\Component\Mime\Email as MimeEmail;
 
 use function array_merge;
 use function count;
@@ -51,7 +52,7 @@ class Checker
     {
         $meetings = $this->meetingService->getAllMeetings();
 
-        $message = '';
+        $reports = [];
         foreach ($meetings as $meeting) {
             $errors = array_merge(
                 $this->checkMembersHaveRolesButInactiveOrNotInOrgan($meeting),
@@ -64,10 +65,13 @@ class Checker
                 $this->checkAnnulments($meeting),
             );
 
-            $message .= $this->handleMeetingErrors($meeting, $errors);
+            $reports[] = [
+                'meeting' => $meeting,
+                'errors' => $errors,
+            ];
         }
 
-        $this->sendMail($message);
+        $this->sendMail($reports);
     }
 
     /**
@@ -78,43 +82,27 @@ class Checker
     {
         $meeting = $this->meetingService->getLastMeeting();
 
-        $message = $this->handleMeetingErrors($meeting, $this->checkMembersInNonExistingOrgans($meeting));
-
-        $this->sendMail($message);
-    }
-
-    /**
-     * Makes sure that the errors are handled correctly
-     *
-     * @param ErrorModel[] $errors
-     */
-    private function handleMeetingErrors(
-        MeetingModel $meeting,
-        array $errors,
-    ): string {
-        // At this moment only write to output.
-        $body =  'Errors after meeting ' . $meeting->getNumber() . ' hold at '
-            . $meeting->getDate()->format('Y-m-d') . "\n";
-
-        foreach ($errors as $error) {
-            $body .= $error->asText() . "\n";
-        }
-
-        $body .= "\n";
-
-        return $body;
+        $this->sendMail([
+            [
+                'meeting' => $meeting,
+                'errors' => $this->checkMembersInNonExistingOrgans($meeting),
+            ],
+        ]);
     }
 
     /**
      * Send a mail with the detected errors to the secretary
+     *
+     * @param list<array{meeting: MeetingModel, errors: ErrorModel<SubDecisionModel>[]}> $reports
      */
-    private function sendMail(string $body): void
+    private function sendMail(array $reports): void
     {
-        $message = (new MimeEmail())
+        $message = (new TemplatedEmail())
             ->to(new Address($this->mailToCheckerResultAddress, $this->mailToCheckerResultName))
             ->from(new Address($this->mailFromAddress, $this->mailFromName))
             ->subject('Database Checker Report')
-            ->text($body);
+            ->textTemplate('checker/report.txt.twig')
+            ->context(['reports' => $reports]);
 
         $this->mailer->send($message);
     }
