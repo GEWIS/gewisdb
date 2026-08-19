@@ -839,6 +839,20 @@ class MemberRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();
     }
 
+    /**
+     * Persist several members in a single flush.
+     *
+     * @param Member[] $members
+     */
+    public function persistAll(array $members): void
+    {
+        foreach ($members as $member) {
+            $this->getEntityManager()->persist($member);
+        }
+
+        $this->getEntityManager()->flush();
+    }
+
     public function remove(Member $member): void
     {
         $this->getEntityManager()->remove($member);

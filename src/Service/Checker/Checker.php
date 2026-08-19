@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Service\Checker;
 
+use App\Entity\Application\AssociationYear;
 use App\Entity\Database\Enums\InstallationFunctions;
 use App\Entity\Database\Enums\MeetingTypes;
 use App\Entity\Database\Enums\OrganTypes;
@@ -25,8 +26,6 @@ use Symfony\Component\Mime\Address;
 use function array_merge;
 use function count;
 use function in_array;
-
-use const PHP_EOL;
 
 class Checker
 {
@@ -124,7 +123,7 @@ class Checker
         $installations = $this->installationService->getAllInstallations($meeting);
 
         foreach ($installations as $installation) {
-            $installationToOrganFoundation = $this->organService->getHash($installation->getFoundation());
+            $installationToOrganFoundation = $installation->getFoundation()->getHash();
 
             if (in_array($installationToOrganFoundation, $organs, true)) {
                 continue;
@@ -178,32 +177,36 @@ class Checker
         $errors = [];
         $organs = $this->installationService->getCurrentRolesPerOrgan($meeting);
 
+        // The roles are keyed by the enum's value, so match on that rather than on the Dutch string it happens to be.
+        $active = InstallationFunctions::Member->value;
+        $inactive = InstallationFunctions::InactiveMember->value;
+
         foreach ($organs as $organMembers) {
             foreach ($organMembers as $memberRoles) {
                 if (
-                    isset($memberRoles['Lid'])
-                    && isset($memberRoles['Inactief Lid'])
+                    isset($memberRoles[$active])
+                    && isset($memberRoles[$inactive])
                 ) {
                     // Member is active AND inactive in the same organ.
                     if (count($memberRoles) > 2) {
                         $errors[] = new ErrorModel\MemberActiveWithRoleAndInactiveInOrgan(
                             $meeting,
-                            $memberRoles['Inactief Lid'],
+                            $memberRoles[$inactive],
                         );
                     } else {
                         $errors[] = new ErrorModel\MemberActiveAndInactiveInOrgan(
                             $meeting,
-                            $memberRoles['Lid'],
+                            $memberRoles[$active],
                         );
                     }
                 } elseif (
-                    !isset($memberRoles['Lid'])
-                    && isset($memberRoles['Inactief Lid'])
+                    !isset($memberRoles[$active])
+                    && isset($memberRoles[$inactive])
                     && count($memberRoles) > 1
                 ) {
                     // Member is inactive but still has roles.
                     foreach ($memberRoles as $role => $installation) {
-                        if ('Inactief Lid' === $role) {
+                        if ($inactive === $role) {
                             continue;
                         }
 
@@ -214,8 +217,8 @@ class Checker
                         );
                     }
                 } elseif (
-                    !isset($memberRoles['Lid'])
-                    && !isset($memberRoles['Inactief Lid'])
+                    !isset($memberRoles[$active])
+                    && !isset($memberRoles[$inactive])
                 ) {
                     // Member is not active (nor inactive) but still has roles.
                     foreach ($memberRoles as $role => $installation) {
@@ -321,14 +324,7 @@ class Checker
         $today = $meeting->getDate();
         $todayNextYear = (clone $today)->add(new DateInterval('P1Y'));
 
-        if ($today->format('m') >= 7) {
-            $year = (int) $today->format('Y') + 1;
-        } else {
-            $year = (int) $today->format('Y');
-        }
-
-        $septemberFirstNextAssociationYear = clone $today;
-        $septemberFirstNextAssociationYear->setDate($year, 9, 1);
+        $septemberFirstNextAssociationYear = AssociationYear::of($today)->septemberFirst();
 
         foreach ($grantings as $granting) {
             $until = $granting->getUntil();
@@ -386,7 +382,7 @@ class Checker
         $installations = [];
 
         foreach ($this->installationService->getAllInstallations($meeting) as $installation) {
-            $installations[$this->organService->getHash($installation->getFoundation())][] = $installation;
+            $installations[$installation->getFoundation()->getHash()][] = $installation;
         }
 
         foreach ($organs as $hash => $organ) {
@@ -465,35 +461,19 @@ class Checker
 
     /**
      * Make sure that members who are hidden or whose membership has expired do not have an authentication key.
+     *
+     * @return int the number of members whose key was revoked
      */
-    public function checkAuthenticationKeys(): void
+    public function checkAuthenticationKeys(): int
     {
         $members = $this->memberService->getExpiredOrHiddenMembersWithAuthenticationKey();
 
-        echo '' . count($members) . ' members incorrectly have an authentication key' . PHP_EOL;
-
         foreach ($members as $member) {
             $member->setAuthenticationKey(null);
-            $this->memberService->persist($member);
-        }
-    }
-
-    /**
-     * Determine the next expiration date (always the end of the next association year).
-     */
-    private function getExpiration(DateTime $now): DateTime
-    {
-        $exp = clone $now;
-        $exp->setTime(0, 0);
-
-        if ($exp->format('m') >= 7) {
-            $year = (int) $exp->format('Y') + 1;
-        } else {
-            $year = (int) $exp->format('Y');
         }
 
-        $exp->setDate($year, 7, 1);
+        $this->memberService->persistAll($members);
 
-        return $exp;
+        return count($members);
     }
 }

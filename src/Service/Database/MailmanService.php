@@ -27,6 +27,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
+use function array_flip;
 use function array_map;
 use function in_array;
 use function json_decode;
@@ -392,11 +393,6 @@ class MailmanService
         return $this->mailmanMailingListRepository->getLastFetchTime();
     }
 
-    public function isLastFetchOverdue(): bool
-    {
-        return self::isOverdue($this->getLastFetchTime());
-    }
-
     /**
      * Whether a fetch that last succeeded at this time is late.
      *
@@ -647,20 +643,20 @@ class MailmanService
         $membersDB = $mailingList->getMailingListMemberships();
         $listId = $mailingList->getMailmanList()->getMailmanId();
 
+        $memberEmails = array_flip(array_map(
+            static fn (MailingListMember $member): string => $member->getEmail(),
+            $membersDB->toArray(),
+        ));
+
         $entries = $this->getMailmanListSubscriberEntries($listId);
         foreach ($entries as $entry) {
-            $found = false;
-            foreach ($membersDB as $member) {
-                if ($member->getEmail() !== $entry['email']) {
-                    continue;
-                }
-
-                $found = true;
+            if (isset($memberEmails[$entry['email']])) {
+                continue;
             }
 
             $foundMember = $this->memberRepository->findByEmail($entry['email']);
 
-            if (!$found && null === $foundMember) {
+            if (null === $foundMember) {
                 $output->writeln(
                     sprintf(
                         '--> Removing unknown email %s from %s',
@@ -676,7 +672,7 @@ class MailmanService
                         method: Request::METHOD_DELETE,
                     );
                 }
-            } elseif (!$found) {
+            } else {
                 $output->writeln(
                     sprintf(
                         '--> Found %s on %s, updating database',

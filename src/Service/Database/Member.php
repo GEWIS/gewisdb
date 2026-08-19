@@ -34,6 +34,7 @@ use App\Repository\Database\MemberUpdateRepository;
 use App\Repository\Database\ProspectiveMemberRepository;
 use App\Service\Application\Email as EmailService;
 use App\Service\Checker\Renewal as RenewalService;
+use App\Validator\Database\BulkMemberIds;
 use DateTime;
 use InvalidArgumentException;
 use ReflectionClass;
@@ -53,9 +54,7 @@ use function assert;
 use function bin2hex;
 use function date;
 use function in_array;
-use function preg_split;
 use function random_bytes;
-use function trim;
 use function uasort;
 
 class Member
@@ -1140,8 +1139,9 @@ class Member
 
         foreach ($members as $member) {
             $member->setAuthenticationKey($this->generateAuthenticationKey());
-            $this->memberRepository->persist($member);
         }
+
+        $this->memberRepository->persistAll($members);
     }
 
     /**
@@ -1162,14 +1162,9 @@ class Member
      */
     private function parseMemberIds(string $rawMemberIds): array
     {
-        $tokens = preg_split('/[\s,;]+/', trim($rawMemberIds)) ?: [];
         $memberIds = [];
 
-        foreach ($tokens as $token) {
-            if ('' === $token) {
-                continue;
-            }
-
+        foreach (BulkMemberIds::tokenize($rawMemberIds) as $token) {
             $memberIds[] = (int) $token;
         }
 

@@ -51,6 +51,60 @@ class MeetingService
     }
 
     /**
+     * Find the ReportDB twin of a meeting, if it has already been projected.
+     */
+    private function findReportMeeting(DatabaseMeeting $meeting): ?ReportMeeting
+    {
+        return $this->emReport->getRepository(ReportMeeting::class)->find([
+            'type' => $meeting->getType(),
+            'number' => $meeting->getNumber(),
+        ]);
+    }
+
+    /**
+     * Find the ReportDB twin of a decision, if it has already been projected.
+     */
+    private function findReportDecision(DatabaseDecision $decision): ?ReportDecision
+    {
+        return $this->emReport->getRepository(ReportDecision::class)->find([
+            'meeting_type' => $decision->getMeeting()->getType(),
+            'meeting_number' => $decision->getMeeting()->getNumber(),
+            'point' => $decision->getPoint(),
+            'number' => $decision->getNumber(),
+        ]);
+    }
+
+    /**
+     * Find the ReportDB twin of the decision a subdecision belongs to.
+     *
+     * Keyed off the subdecision's own columns rather than off its decision, so that reaching the twin does not first
+     * have to load the ledger's decision.
+     */
+    private function findReportDecisionOf(DatabaseSubDecision $subdecision): ?ReportDecision
+    {
+        return $this->emReport->getRepository(ReportDecision::class)->find([
+            'meeting_type' => $subdecision->getMeetingType(),
+            'meeting_number' => $subdecision->getMeetingNumber(),
+            'point' => $subdecision->getDecisionPoint(),
+            'number' => $subdecision->getDecisionNumber(),
+        ]);
+    }
+
+    /**
+     * Find the ReportDB twin of a subdecision, if it has already been projected.
+     */
+    private function findReportSubDecision(DatabaseSubDecision $subdecision): ?ReportSubDecision
+    {
+        return $this->emReport->getRepository(ReportSubDecision::class)->find([
+            'meeting_type' => $subdecision->getMeetingType(),
+            'meeting_number' => $subdecision->getMeetingNumber(),
+            'decision_point' => $subdecision->getDecisionPoint(),
+            'decision_number' => $subdecision->getDecisionNumber(),
+            'sequence' => $subdecision->getSequence(),
+        ]);
+    }
+
+    /**
      * Build ReportDB by replaying every meeting in the order it was held.
      *
      * ReportDB is a materialised view of GEWISDB, and GEWISDB is a ledger: the state it describes is whatever you end
@@ -91,12 +145,7 @@ class MeetingService
 
     public function generateMeeting(DatabaseMeeting $meeting): void
     {
-        $repo = $this->emReport->getRepository(ReportMeeting::class);
-
-        $reportMeeting = $repo->find([
-            'type' => $meeting->getType(),
-            'number' => $meeting->getNumber(),
-        ]);
+        $reportMeeting = $this->findReportMeeting($meeting);
 
         if (null === $reportMeeting) {
             $reportMeeting = new ReportMeeting();
@@ -128,13 +177,8 @@ class MeetingService
         DatabaseDecision $decision,
         ?ReportMeeting $reportMeeting = null,
     ): void {
-        $decRepo = $this->emReport->getRepository(ReportDecision::class);
-
         if (null === $reportMeeting) {
-            $reportMeeting = $this->emReport->getRepository(ReportMeeting::class)->find([
-                'type' => $decision->getMeeting()->getType(),
-                'number' => $decision->getMeeting()->getNumber(),
-            ]);
+            $reportMeeting = $this->findReportMeeting($decision->getMeeting());
 
             if (null === $reportMeeting) {
                 throw new LogicException('Decision without meeting');
@@ -142,12 +186,7 @@ class MeetingService
         }
 
         // see if decision exists
-        $reportDecision = $decRepo->find([
-            'meeting_type' => $decision->getMeeting()->getType(),
-            'meeting_number' => $decision->getMeeting()->getNumber(),
-            'point' => $decision->getPoint(),
-            'number' => $decision->getNumber(),
-        ]);
+        $reportDecision = $this->findReportDecision($decision);
 
         if (null === $reportDecision) {
             $reportDecision = new ReportDecision();
@@ -188,17 +227,8 @@ class MeetingService
         DatabaseSubDecision $subdecision,
         ?ReportDecision $reportDecision = null,
     ): ReportSubDecision {
-        $decRepo = $this->emReport->getRepository(ReportDecision::class);
-        $subdecRepo = $this->emReport->getRepository(ReportSubDecision::class);
-        $meetingRepo = $this->emReport->getRepository(ReportMeeting::class);
-
         if (null === $reportDecision) {
-            $reportDecision = $decRepo->find([
-                'meeting_type' => $subdecision->getMeetingType(),
-                'meeting_number' => $subdecision->getMeetingNumber(),
-                'point' => $subdecision->getDecisionPoint(),
-                'number' => $subdecision->getDecisionNumber(),
-            ]);
+            $reportDecision = $this->findReportDecisionOf($subdecision);
 
             if (null === $reportDecision) {
                 throw new LogicException('Decision without meeting');
@@ -219,13 +249,7 @@ class MeetingService
             throw new LogicException(sprintf('No projection exists for %s', $subdecision::class));
         }
 
-        $reportSubDecision = $subdecRepo->find([
-            'meeting_type' => $subdecision->getMeetingType(),
-            'meeting_number' => $subdecision->getMeetingNumber(),
-            'decision_point' => $subdecision->getDecisionPoint(),
-            'decision_number' => $subdecision->getDecisionNumber(),
-            'sequence' => $subdecision->getSequence(),
-        ]);
+        $reportSubDecision = $this->findReportSubDecision($subdecision);
 
         if (
             null !== $reportSubDecision
@@ -256,20 +280,13 @@ class MeetingService
 
             $ref = $subdecision->getFoundation();
             /** @var ReportSubDecision\Foundation $foundation */
-            $foundation = $subdecRepo->find([
-                'meeting_type' => $ref->getDecision()->getMeeting()->getType(),
-                'meeting_number' => $ref->getDecision()->getMeeting()->getNumber(),
-                'decision_point' => $ref->getDecision()->getPoint(),
-                'decision_number' => $ref->getDecision()->getNumber(),
-                'sequence' => $ref->getSequence(),
-            ]);
+            $foundation = $this->findReportSubDecision($ref);
 
             $reportSubDecision->setFoundation($foundation);
         }
 
         // transfer specific data
         if ($subdecision instanceof DatabaseSubDecision\Installation) {
-            // installation
             assert($reportSubDecision instanceof ReportSubDecision\Installation);
 
             $reportSubDecision->setFunction($subdecision->getFunction());
@@ -278,7 +295,6 @@ class MeetingService
             $subdecision instanceof DatabaseSubDecision\Reappointment
             || $subdecision instanceof DatabaseSubDecision\Discharge
         ) {
-            // reappointment and discharge
             assert(
                 $reportSubDecision instanceof ReportSubDecision\Reappointment
                 || $reportSubDecision instanceof ReportSubDecision\Discharge,
@@ -286,17 +302,10 @@ class MeetingService
 
             $ref = $subdecision->getInstallation();
             /** @var ReportSubDecision\Installation $installation */
-            $installation = $subdecRepo->find([
-                'meeting_type' => $ref->getDecision()->getMeeting()->getType(),
-                'meeting_number' => $ref->getDecision()->getMeeting()->getNumber(),
-                'decision_point' => $ref->getDecision()->getPoint(),
-                'decision_number' => $ref->getDecision()->getNumber(),
-                'sequence' => $ref->getSequence(),
-            ]);
+            $installation = $this->findReportSubDecision($ref);
 
             $reportSubDecision->setInstallation($installation);
         } elseif ($subdecision instanceof DatabaseSubDecision\Foundation) {
-            // foundation
             assert($reportSubDecision instanceof ReportSubDecision\Foundation);
 
             $reportSubDecision->setName($subdecision->getName());
@@ -339,37 +348,25 @@ class MeetingService
         } elseif ($subdecision instanceof DatabaseSubDecision\Minutes) {
             assert($reportSubDecision instanceof ReportSubDecision\Minutes);
 
-            $ref = $subdecision->getTarget();
             /** @var ReportMeeting $meeting */
-            $meeting = $meetingRepo->find([
-                'type' => $ref->getType(),
-                'number' => $ref->getNumber(),
-            ]);
+            $meeting = $this->findReportMeeting($subdecision->getTarget());
 
             $reportSubDecision->setMeeting($meeting);
             $reportSubDecision->setMember($this->findMember($subdecision->getMember()));
             $reportSubDecision->setApproval($subdecision->getApproval());
             $reportSubDecision->setChanges($subdecision->getChanges());
         } elseif ($subdecision instanceof DatabaseSubDecision\Board\Installation) {
-            // board installation
             assert($reportSubDecision instanceof ReportSubDecision\Board\Installation);
 
             $reportSubDecision->setFunction($subdecision->getFunction());
             $reportSubDecision->setMember($this->findMember($subdecision->getMember()));
             $reportSubDecision->setDate($subdecision->getDate());
         } elseif ($subdecision instanceof DatabaseSubDecision\Board\Release) {
-            // board release
             assert($reportSubDecision instanceof ReportSubDecision\Board\Release);
 
             $ref = $subdecision->getInstallation();
             /** @var ReportSubDecision\Board\Installation $installation */
-            $installation = $subdecRepo->find([
-                'meeting_type' => $ref->getDecision()->getMeeting()->getType(),
-                'meeting_number' => $ref->getDecision()->getMeeting()->getNumber(),
-                'decision_point' => $ref->getDecision()->getPoint(),
-                'decision_number' => $ref->getDecision()->getNumber(),
-                'sequence' => $ref->getSequence(),
-            ]);
+            $installation = $this->findReportSubDecision($ref);
 
             $reportSubDecision->setInstallation($installation);
             $reportSubDecision->setDate($subdecision->getDate());
@@ -378,48 +375,28 @@ class MeetingService
 
             $ref = $subdecision->getInstallation();
             /** @var ReportSubDecision\Board\Installation $installation */
-            $installation = $subdecRepo->find([
-                'meeting_type' => $ref->getDecision()->getMeeting()->getType(),
-                'meeting_number' => $ref->getDecision()->getMeeting()->getNumber(),
-                'decision_point' => $ref->getDecision()->getPoint(),
-                'decision_number' => $ref->getDecision()->getNumber(),
-                'sequence' => $ref->getSequence(),
-            ]);
+            $installation = $this->findReportSubDecision($ref);
 
             $reportSubDecision->setInstallation($installation);
         } elseif ($subdecision instanceof DatabaseSubDecision\Key\Granting) {
-            // key code granting
             assert($reportSubDecision instanceof ReportSubDecision\Key\Granting);
 
             $reportSubDecision->setMember($this->findMember($subdecision->getMember()));
             $reportSubDecision->setUntil($subdecision->getUntil());
         } elseif ($subdecision instanceof DatabaseSubDecision\Key\Withdrawal) {
-            // key code withdrawal
             assert($reportSubDecision instanceof ReportSubDecision\Key\Withdrawal);
 
             $ref = $subdecision->getGranting();
             /** @var ReportSubDecision\Key\Granting $granting */
-            $granting = $subdecRepo->find([
-                'meeting_type' => $ref->getDecision()->getMeeting()->getType(),
-                'meeting_number' => $ref->getDecision()->getMeeting()->getNumber(),
-                'decision_point' => $ref->getDecision()->getPoint(),
-                'decision_number' => $ref->getDecision()->getNumber(),
-                'sequence' => $ref->getSequence(),
-            ]);
+            $granting = $this->findReportSubDecision($ref);
 
             $reportSubDecision->setGranting($granting);
             $reportSubDecision->setWithdrawnOn($subdecision->getWithdrawnOn());
         } elseif ($subdecision instanceof DatabaseSubDecision\Annulment) {
             assert($reportSubDecision instanceof ReportSubDecision\Annulment);
 
-            $ref = $subdecision->getTarget();
             /** @var ReportDecision $target */
-            $target = $decRepo->find([
-                'meeting_type' => $ref->getMeeting()->getType(),
-                'meeting_number' => $ref->getMeeting()->getNumber(),
-                'point' => $ref->getPoint(),
-                'number' => $ref->getNumber(),
-            ]);
+            $target = $this->findReportDecision($subdecision->getTarget());
 
             $reportSubDecision->setTarget($target);
 
@@ -475,12 +452,7 @@ class MeetingService
 
     public function deleteDecision(DatabaseDecision $decision): void
     {
-        $reportDecision = $this->emReport->getRepository(ReportDecision::class)->find([
-            'meeting_type' => $decision->getMeeting()->getType(),
-            'meeting_number' => $decision->getMeeting()->getNumber(),
-            'point' => $decision->getPoint(),
-            'number' => $decision->getNumber(),
-        ]);
+        $reportDecision = $this->findReportDecision($decision);
 
         foreach (array_reverse($reportDecision->getSubdecisions()->toArray()) as $subDecision) {
             $this->deleteSubDecision($subDecision);

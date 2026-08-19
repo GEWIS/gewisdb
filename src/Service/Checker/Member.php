@@ -23,8 +23,11 @@ class Member
         return $this->memberRepository->getExpiredOrHiddenMembersWithAuthenticationKey();
     }
 
-    public function persist(MemberModel $member): void
+    /**
+     * @param MemberModel[] $members
+     */
+    public function persistAll(array $members): void
     {
-        $this->memberRepository->persist($member);
+        $this->memberRepository->persistAll($members);
     }
 }

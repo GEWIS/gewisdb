@@ -13,6 +13,7 @@ use App\Entity\Database\Member;
 use App\Service\Report\MeetingService;
 use App\Service\Report\MemberService;
 use App\Service\Report\MiscService;
+use App\Service\Report\ProjectionState;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\PreRemoveEventArgs;
@@ -29,18 +30,8 @@ use Symfony\Component\DependencyInjection\Attribute\Autowire;
 #[AsDoctrineListener(event: Events::preRemove, connection: 'default')]
 final class DatabaseDeletionListener
 {
-    /**
-     * Whether the projection follows the ledger at all. {@see BulkLoadListener} turns it off for a bulk load, after
-     * which the projection is rebuilt in one pass instead.
-     */
-    private static bool $enabled = true;
-
-    public static function disable(): void
-    {
-        self::$enabled = false;
-    }
-
     public function __construct(
+        private readonly ProjectionState $state,
         private readonly MeetingService $meetingService,
         private readonly MemberService $memberService,
         private readonly MiscService $miscService,
@@ -51,7 +42,7 @@ final class DatabaseDeletionListener
 
     public function preRemove(PreRemoveEventArgs $args): void
     {
-        if (!self::$enabled) {
+        if (!$this->state->isEnabled()) {
             return;
         }
 

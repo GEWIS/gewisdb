@@ -385,11 +385,6 @@ class ListmonkService
         return $this->listmonkMailingListRepository->getLastFetchTime();
     }
 
-    public function isLastFetchOverdue(): bool
-    {
-        return self::isOverdue($this->getLastFetchTime());
-    }
-
     /**
      * Whether a fetch that last succeeded at this time is late.
      *
@@ -674,10 +669,13 @@ class ListmonkService
 
         if (isset($subscribers['data']['results'])) {
             foreach ($subscribers['data']['results'] as $subscriber) {
-                $found = isset($memberEmails[$subscriber['email']]);
+                if (isset($memberEmails[$subscriber['email']])) {
+                    continue;
+                }
+
                 $foundMember = $this->memberRepository->findByEmail($subscriber['email']);
 
-                if (!$found && null === $foundMember) {
+                if (null === $foundMember) {
                     $output->writeln(
                         sprintf(
                             '--> Removing unknown email %s from %s',
@@ -699,7 +697,7 @@ class ListmonkService
                             ],
                         );
                     }
-                } elseif (!$found) {
+                } else {
                     $output->writeln(
                         sprintf(
                             '--> Found %s on %s, updating database',

@@ -9,42 +9,33 @@ use App\Entity\Database\SubDecision\Abrogation as AbrogationModel;
 use App\Entity\Database\SubDecision\Foundation as FoundationModel;
 use App\Repository\Checker\OrganRepository;
 
-use function array_diff;
+use function array_keys;
 use function array_map;
 use function in_array;
-use function sprintf;
 
 class Organ
 {
+    /**
+     * The organs of the meeting most recently asked about, for the same reason as in {@see Installation}.
+     *
+     * @var array<string, FoundationModel>|null
+     */
+    private ?array $foundations = null;
+
+    private ?string $foundationsFor = null;
+
     public function __construct(private readonly OrganRepository $organRepository)
     {
     }
 
     /**
-     * Get the names of all the organs after $meeting
+     * Get the hashes of all the organs after $meeting
      *
      * @return string[]
      */
     public function getAllOrgans(MeetingModel $meeting): array
     {
-        $organFoundations = $this->organRepository->getAllOrganFoundations($meeting);
-        $organAbrogations = $this->organRepository->getAllOrganAbrogations($meeting);
-
-        $hashedOrganFoundations = array_map(
-            function (FoundationModel $organ) {
-                return $this->getHash($organ);
-            },
-            $organFoundations,
-        );
-
-        $hashedOrganAbrogations = array_map(
-            function (AbrogationModel $organ) {
-                return $this->getHash($organ->getFoundation());
-            },
-            $organAbrogations,
-        );
-
-        return array_diff($hashedOrganFoundations, $hashedOrganAbrogations);
+        return array_keys($this->getAllOrganFoundations($meeting));
     }
 
     /**
@@ -57,9 +48,15 @@ class Organ
      */
     public function getAllOrganFoundations(MeetingModel $meeting): array
     {
+        $key = $meeting->getType()->value . '-' . $meeting->getNumber();
+
+        if (null !== $this->foundations && $key === $this->foundationsFor) {
+            return $this->foundations;
+        }
+
         $abrogated = array_map(
-            function (AbrogationModel $organ): string {
-                return $this->getHash($organ->getFoundation());
+            static function (AbrogationModel $organ): string {
+                return $organ->getFoundation()->getHash();
             },
             $this->organRepository->getAllOrganAbrogations($meeting),
         );
@@ -67,7 +64,7 @@ class Organ
         $organs = [];
 
         foreach ($this->organRepository->getAllOrganFoundations($meeting) as $foundation) {
-            $hash = $this->getHash($foundation);
+            $hash = $foundation->getHash();
 
             if (in_array($hash, $abrogated, true)) {
                 continue;
@@ -75,6 +72,9 @@ class Organ
 
             $organs[$hash] = $foundation;
         }
+
+        $this->foundations = $organs;
+        $this->foundationsFor = $key;
 
         return $organs;
     }
@@ -85,17 +85,5 @@ class Organ
     public function getOrgansCreatedAtMeeting(MeetingModel $meeting): array
     {
         return $this->organRepository->getOrgansCreatedAtMeeting($meeting);
-    }
-
-    public function getHash(FoundationModel $foundation): string
-    {
-        return sprintf(
-            '%s-%d.%d.%d.%d',
-            $foundation->getMeetingType()->value,
-            $foundation->getMeetingNumber(),
-            $foundation->getDecisionPoint(),
-            $foundation->getDecisionNumber(),
-            $foundation->getSequence(),
-        );
     }
 }

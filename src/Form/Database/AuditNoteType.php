@@ -23,10 +23,6 @@ class AuditNoteType extends AbstractType
     /**
      * @param array<string, mixed> $options
      */
-
-    /**
-     * @param array<string, mixed> $options
-     */
     #[Override]
     public function buildForm(
         FormBuilderInterface $builder,

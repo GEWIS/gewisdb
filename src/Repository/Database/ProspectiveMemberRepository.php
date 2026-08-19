@@ -178,10 +178,6 @@ class ProspectiveMemberRepository extends ServiceEntityRepository
     }
 
     /**
-     * Persist a member model.
-     */
-
-    /**
      * One page of the prospective-member overview.
      *
      * @return Paginator<ProspectiveMember>

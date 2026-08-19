@@ -85,24 +85,6 @@ class MailingListMemberRepository extends ServiceEntityRepository
     }
 
     /**
-     * Get the mailing list members that should exist after the next sync
-     * Value of toBeCreated does not matter, toBeDeleted should be excluded
-     *
-     * @return MailingListMember[]
-     */
-    public function findAfterSync(): array
-    {
-        $qb = $this->createQueryBuilder('mlm');
-
-        $qb->where('mlm.toBeDeleted != True');
-
-        /** @var MailingListMember[] $result */
-        $result = $qb->getQuery()->getResult();
-
-        return $result;
-    }
-
-    /**
      * Mark all members of a mailing list as needing to be created.
      * This does not perform changes in report which is correct.
      */

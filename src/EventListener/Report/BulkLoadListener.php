@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\EventListener\Report;
 
+use App\Service\Report\ProjectionState;
 use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\Console\Event\ConsoleCommandEvent;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
@@ -28,13 +29,16 @@ final class BulkLoadListener
         'doctrine:fixtures:load',
     ];
 
+    public function __construct(private readonly ProjectionState $state)
+    {
+    }
+
     public function __invoke(ConsoleCommandEvent $event): void
     {
         if (!in_array($event->getCommand()?->getName(), self::BULK_COMMANDS, true)) {
             return;
         }
 
-        DatabaseUpdateListener::disable();
-        DatabaseDeletionListener::disable();
+        $this->state->disable();
     }
 }

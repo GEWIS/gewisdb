@@ -26,8 +26,7 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
  * Organ entity.
  *
  * Note that this entity is derived from the decisions themselves.
- */
-/**
+ *
  * ORM 2 emitted a `<field>_uniq` unique index for the join columns of a one-to-one owning side; ORM 3 emits a plain
  * foreign-key index instead. Declared here so the relation stays one-to-one in the database, under the name the
  * existing schema already uses.

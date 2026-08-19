@@ -24,10 +24,6 @@ class MiscService
     }
 
     /**
-     * Export misc info.
-     */
-
-    /**
      * Generate the mailing lists themselves.
      *
      * The memberships of those lists are not generated here. A membership needs both its list and its member to be

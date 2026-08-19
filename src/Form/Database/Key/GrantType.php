@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Form\Database\Key;
 
+use App\Entity\Application\AssociationYear;
 use App\Entity\Database\Meeting;
 use App\Form\Database\BaseDecisionType;
 use App\Form\Database\DataMapper\Key\GrantMapper;
@@ -92,12 +93,7 @@ class GrantType extends AbstractType
             return;
         }
 
-        $meetingDate = $meeting->getDate();
-        // The association year turns over halfway through the calendar year, so a meeting held in its second half
-        // already belongs to the year that ends in the next one.
-        $year = (int) $meetingDate->format('Y') + ((int) $meetingDate->format('m') >= 7 ? 1 : 0);
-
-        $limit = (clone $meetingDate)->setDate($year, 9, 1);
+        $limit = AssociationYear::of($meeting->getDate())->septemberFirst();
 
         if ($value <= $limit) {
             return;

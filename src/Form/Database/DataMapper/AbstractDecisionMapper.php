@@ -25,9 +25,7 @@ abstract class AbstractDecisionMapper implements DataMapperInterface
     /**
      * Decisions are the association's historical record. These forms only ever record a new one, they never read an
      * existing one back into their fields, so there is nothing to map outwards.
-     */
-
-    /**
+     *
      * @param Traversable<mixed, FormInterface> $forms
      */
     #[Override]
@@ -75,9 +73,6 @@ abstract class AbstractDecisionMapper implements DataMapperInterface
      * that does not take null.
      *
      * @param array<string, FormInterface> $forms
-     */
-
-    /**
      * @param array<string, FormInterface> $forms
      */
     abstract protected function mapSubDecisions(

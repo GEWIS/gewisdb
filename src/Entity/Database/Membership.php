@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity\Database;
 
 use App\Doctrine\Types\StringableDateTime;
+use App\Entity\Application\AssociationYear;
 use App\Entity\Database\Enums\MembershipTypes;
 use App\Repository\Database\MembershipRepository;
 use DateTime;
@@ -93,11 +94,7 @@ class Membership
         if (null === $endDate) {
             $endDate = clone $startDate;
 
-            if ($endDate->format('m') >= 7) {
-                $expirationYear = (int) $endDate->format('Y') + 1;
-            } else {
-                $expirationYear = (int) $endDate->format('Y');
-            }
+            $expirationYear = AssociationYear::of($endDate)->endYear();
 
             if (MembershipTypes::Honorary === $type) {
                 // Honorary memberships do not expire, so we set the expiration date to 100 years in the future.

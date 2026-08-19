@@ -23,23 +23,6 @@ class UserRepository extends ServiceEntityRepository
         return $this->findOneBy(['login' => $login]);
     }
 
-    /**
-     * findByLogin, but always returns a user
-     */
-    public function findOrCreateByLogin(string $login): User
-    {
-        $user = $this->findByLogin($login);
-        if (null !== $user) {
-            return $user;
-        }
-
-        $user = new User();
-        $user->setLogin($login);
-        $this->persist($user);
-
-        return $user;
-    }
-
     public function persist(User $user): void
     {
         $this->getEntityManager()->persist($user);

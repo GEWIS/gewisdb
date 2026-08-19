@@ -80,24 +80,6 @@ class QueryService
     }
 
     /**
-     * Execute a saved query.
-     *
-     * @return array<array-key, mixed>|null
-     *
-     * @throws ORMException if the query cannot be executed.
-     */
-    public function executeSaved(int $id): ?array
-    {
-        $query = $this->getSavedQuery($id);
-
-        if (null === $query) {
-            return null;
-        }
-
-        return $this->execute($query->getQuery());
-    }
-
-    /**
      * Execute a query.
      *
      * @return array<array-key, mixed>

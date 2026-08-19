@@ -8,7 +8,7 @@ use App\Entity\Database\SubDecision;
 use App\Entity\Database\SubDecision\Annulment;
 use Doctrine\ORM\EntityManagerInterface;
 
-use function in_array;
+use function spl_object_id;
 
 /**
  * Removes subdecisions that were annulled from the results of the checker queries.
@@ -17,7 +17,7 @@ use function in_array;
  */
 class AnnulledSubDecisionFilter
 {
-    /** @var SubDecision[]|null */
+    /** @var array<int, SubDecision>|null Annulled subdecisions, keyed by object id. */
     private ?array $deleted = null;
 
     public function __construct(private readonly EntityManagerInterface $em)
@@ -38,8 +38,8 @@ class AnnulledSubDecisionFilter
         $deleted = $this->getDeleted();
 
         foreach ($subDecisions as $key => $dec) {
-            // Strict, so that two subdecisions that merely look alike are not mistaken for one another.
-            if (!in_array($dec, $deleted, true)) {
+            // Keyed by object id, so that two subdecisions that merely look alike are not mistaken for one another.
+            if (!isset($deleted[spl_object_id($dec)])) {
                 continue;
             }
 
@@ -50,9 +50,9 @@ class AnnulledSubDecisionFilter
     }
 
     /**
-     * Return an array of all subdecisions that are deleted
+     * Return all subdecisions that are deleted, keyed by object id.
      *
-     * @return SubDecision[]
+     * @return array<int, SubDecision>
      */
     private function getDeleted(): array
     {
@@ -72,7 +72,9 @@ class AnnulledSubDecisionFilter
 
                 // if they are valid, add all the affected subdecisions
                 // and add them to the array
-                $deleted = [...$deleted, ...$del->getTarget()->getSubdecisions()->toArray()];
+                foreach ($del->getTarget()->getSubdecisions() as $subDecision) {
+                    $deleted[spl_object_id($subDecision)] = $subDecision;
+                }
             }
 
             $this->deleted = $deleted;

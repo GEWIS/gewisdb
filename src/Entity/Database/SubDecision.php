@@ -35,6 +35,7 @@ use Doctrine\ORM\Mapping\ManyToOne;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 use function array_keys;
+use function sprintf;
 use function str_replace;
 
 /**
@@ -209,6 +210,24 @@ abstract class SubDecision
     public function setSequence(int $sequence): void
     {
         $this->sequence = $sequence;
+    }
+
+    /**
+     * Get the string ("hash") that uniquely identifies this subdecision.
+     *
+     * The sibling of {@see Decision::getHash()} one level down; matching subdecisions across two sets should always
+     * happen through this and only this identifier, so that keys built in different places stay comparable.
+     */
+    public function getHash(): string
+    {
+        return sprintf(
+            '%s %d.%d.%d.%d',
+            $this->getMeetingType()->value,
+            $this->getMeetingNumber(),
+            $this->getDecisionPoint(),
+            $this->getDecisionNumber(),
+            $this->getSequence(),
+        );
     }
 
     /**

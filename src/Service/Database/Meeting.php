@@ -28,7 +28,6 @@ use App\ViewModel\Database\DecisionReference;
 use App\ViewModel\Database\DecisionRow;
 use App\ViewModel\Database\ExportCategories;
 use App\ViewModel\Database\ExportedDecision;
-use App\ViewModel\Database\MeetingRow;
 use App\ViewModel\Database\MeetingView;
 use App\ViewModel\Database\RecordedDecision;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
@@ -75,21 +74,6 @@ class Meeting
         int $number,
     ): ?MeetingModel {
         return $this->meetingRepository->findMeeting($type, $number);
-    }
-
-    /**
-     * Get all meetings, each with the number of decisions taken in it.
-     *
-     * TODO: pagination
-     *
-     * @return MeetingRow[]
-     */
-    public function getMeetingRows(): array
-    {
-        return array_map(
-            static fn (array $row): MeetingRow => new MeetingRow($row[0], (int) $row[1]),
-            $this->meetingRepository->findAllWithDecisionCount(),
-        );
     }
 
     /**

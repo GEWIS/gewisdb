@@ -14,6 +14,7 @@ use App\Entity\Database\SubDecision;
 use App\Service\Report\MeetingService;
 use App\Service\Report\MemberService;
 use App\Service\Report\MiscService;
+use App\Service\Report\ProjectionState;
 use App\Service\Report\SubDecisionService;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
 use Doctrine\ORM\EntityManagerInterface;
@@ -33,24 +34,8 @@ use Symfony\Component\DependencyInjection\Attribute\Autowire;
 #[AsDoctrineListener(event: Events::postUpdate, connection: 'default')]
 final class DatabaseUpdateListener
 {
-    /**
-     * Generating into ReportDB flushes it, and that flush reaches this listener again through the entities it just
-     * wrote. The flag stops the recursion; it is static because Doctrine may hand out more than one instance.
-     */
-    private static bool $flushing = false;
-
-    /**
-     * Whether the projection follows the ledger at all. {@see BulkLoadListener} turns it off for a bulk load, after
-     * which the projection is rebuilt in one pass instead.
-     */
-    private static bool $enabled = true;
-
-    public static function disable(): void
-    {
-        self::$enabled = false;
-    }
-
     public function __construct(
+        private readonly ProjectionState $state,
         private readonly MeetingService $meetingService,
         private readonly MemberService $memberService,
         private readonly MiscService $miscService,
@@ -72,7 +57,7 @@ final class DatabaseUpdateListener
 
     private function project(object $entity): void
     {
-        if (!self::$enabled) {
+        if (!$this->state->isEnabled()) {
             return;
         }
 
@@ -117,16 +102,16 @@ final class DatabaseUpdateListener
                 return;
         }
 
-        if (self::$flushing) {
+        if ($this->state->isProjecting()) {
             return;
         }
 
-        self::$flushing = true;
+        $this->state->beginProjecting();
 
         try {
             $this->emReport->flush();
         } finally {
-            self::$flushing = false;
+            $this->state->endProjecting();
         }
     }
 }

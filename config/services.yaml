@@ -27,9 +27,6 @@ services:
             string $stripeSuccessUrl: '%env(STRIPE_SUCCESS_URL)%'
             array $enabledLocales: '%kernel.enabled_locales%'
             string $defaultLocale: '%kernel.default_locale%'
-            string $storageDir: '%kernel.project_dir%/public/data'
-            # Octal: the upload directory is shared with the web server's group.
-            int $dirMode: 0770
 
     App\:
         resource: '../src/'

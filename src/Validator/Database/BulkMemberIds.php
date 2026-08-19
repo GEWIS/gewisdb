@@ -7,6 +7,11 @@ namespace App\Validator\Database;
 use Attribute;
 use Symfony\Component\Validator\Constraint;
 
+use function preg_split;
+use function trim;
+
+use const PREG_SPLIT_NO_EMPTY;
+
 /**
  * Validates a free-form list of membership numbers: every token must be numeric and may occur only once.
  */
@@ -46,5 +51,20 @@ class BulkMemberIds extends Constraint
         $this->emptyMessage = $emptyMessage ?? $this->emptyMessage;
         $this->nonNumericMessage = $nonNumericMessage ?? $this->nonNumericMessage;
         $this->duplicateMessage = $duplicateMessage ?? $this->duplicateMessage;
+    }
+
+    /**
+     * Split raw input into membership number tokens.
+     *
+     * The separator set is the contract between this constraint and everything that later parses the input, so both
+     * sides tokenise through here.
+     *
+     * @return string[]
+     */
+    public static function tokenize(string $rawMemberIds): array
+    {
+        $tokens = preg_split('/[\s,;]+/', trim($rawMemberIds), -1, PREG_SPLIT_NO_EMPTY);
+
+        return false === $tokens ? [] : $tokens;
     }
 }

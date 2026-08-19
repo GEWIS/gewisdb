@@ -194,7 +194,7 @@ class Annulment
                 continue;
             }
 
-            $foundations[$this->getSubDecisionKey($foundation)] = $foundation;
+            $foundations[$foundation->getHash()] = $foundation;
         }
 
         return $foundations;
@@ -745,18 +745,6 @@ class Annulment
             && $a->getMeetingNumber() === $b->getMeetingNumber()
             && $a->getDecisionPoint() === $b->getDecisionPoint()
             && $a->getDecisionNumber() === $b->getDecisionNumber();
-    }
-
-    private function getSubDecisionKey(SubDecisionModel $subDecision): string
-    {
-        return sprintf(
-            '%s%d.%d.%d.%d',
-            $subDecision->getMeetingType()->value,
-            $subDecision->getMeetingNumber(),
-            $subDecision->getDecisionPoint(),
-            $subDecision->getDecisionNumber(),
-            $subDecision->getSequence(),
-        );
     }
 
     /**

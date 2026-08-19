@@ -13,7 +13,6 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
 use function array_key_exists;
 use function ctype_digit;
 use function is_scalar;
-use function preg_split;
 use function trim;
 
 class BulkMemberIdsValidator extends ConstraintValidator
@@ -45,14 +44,9 @@ class BulkMemberIdsValidator extends ConstraintValidator
             return;
         }
 
-        $tokens = preg_split('/[\s,;]+/', $rawMemberIds) ?: [];
         $seenIds = [];
 
-        foreach ($tokens as $token) {
-            if ('' === $token) {
-                continue;
-            }
-
+        foreach (BulkMemberIds::tokenize($rawMemberIds) as $token) {
             if (!ctype_digit($token)) {
                 $this->context->buildViolation($constraint->nonNumericMessage)
                     ->setParameter('{{ value }}', $token)

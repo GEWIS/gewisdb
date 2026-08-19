@@ -48,10 +48,6 @@ final class OrganController extends AbstractController
     }
 
     /**
-     * One organ, with everyone currently installed in it.
-     */
-
-    /**
      * An organ and who is installed in it.
      *
      * An organ is identified by the foundation subdecision that created it, which is why its address is a

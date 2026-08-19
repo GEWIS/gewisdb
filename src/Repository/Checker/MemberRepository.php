@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Repository\Checker;
 
+use App\Entity\Application\AssociationYear;
 use App\Entity\Database\Enums\MembershipTypes;
 use App\Entity\Database\Member;
 use App\Entity\Database\Membership;
@@ -70,7 +71,7 @@ class MemberRepository extends ServiceEntityRepository
             ->andWhere('rl.member = m')
             ->andWhere('rl.currentExpiration = mem.endDate');
 
-        $qb->setParameter('expiresBefore', $expiresBefore ?? $this->getEndOfCurrentAssociationYear());
+        $qb->setParameter('expiresBefore', $expiresBefore ?? AssociationYear::of(new DateTime())->endsOn());
 
         $qb->andWhere($qb->expr()->not(
             $qb->expr()->exists($qbal->getDQL()),
@@ -98,30 +99,17 @@ class MemberRepository extends ServiceEntityRepository
         return $qb;
     }
 
-    private function getEndOfCurrentAssociationYear(): DateTime
+    /**
+     * Persist several member models in a single flush.
+     *
+     * @param Member[] $members
+     */
+    public function persistAll(array $members): void
     {
-        $end = new DateTime();
-        $end->setTime(0, 0);
-
-        if ($end->format('m') >= 7) {
-            $year = (int) $end->format('Y') + 1;
-        } else {
-            $year = (int) $end->format('Y');
+        foreach ($members as $member) {
+            $this->getEntityManager()->persist($member);
         }
 
-        $end->setDate($year, 7, 1);
-
-        return $end;
-    }
-
-    /**
-     * Persist a member model.
-     *
-     * @param Member $member Member to persist.
-     */
-    public function persist(Member $member): void
-    {
-        $this->getEntityManager()->persist($member);
         $this->getEntityManager()->flush();
     }
 }
