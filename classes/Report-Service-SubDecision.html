@@ -307,7 +307,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/SubDecision.php"><a href="files/module-report-src-service-subdecision.html"><abbr title="module/Report/src/Service/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">27</span>
+    <span class="phpdocumentor-element-found-in__line">30</span>
 
     </aside>
 
@@ -377,6 +377,13 @@
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Report-Service-SubDecision.html#method_detachFromOrgans">detachFromOrgans()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Take the subdecision out of every organ that lists it among the decisions it was shaped by.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Report-Service-SubDecision.html#method_generateRelated">generateRelated()</a>
     <span>
                                 &nbsp;: void    </span>
@@ -390,11 +397,25 @@
 </dt>
 <dd>Reverts the related entities of a subdecision in ReportDB, i.e. undoes {@see self::generateRelated()}.</dd>
 
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Report-Service-SubDecision.html#method_stillReferences">stillReferences()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Whether the subdecision still has the subdecision, or decision, that it points at.</dd>
+
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a class="" href="classes/Report-Service-SubDecision.html#method_findBoardMember">findBoardMember()</a>
     <span>
                                 &nbsp;: <a href="classes/Report-Model-BoardMember.html"><abbr title="\Report\Model\BoardMember">BoardMember</abbr></a>|null    </span>
 </dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/Report-Service-SubDecision.html#method_findFoundedOrgan">findFoundedOrgan()</a>
+    <span>
+                                &nbsp;: <a href="classes/Report-Model-Organ.html"><abbr title="\Report\Model\Organ">Organ</abbr></a>|null    </span>
+</dt>
+<dd>Find the organ that the subdecision&#039;s foundation brought into being, if it still has one.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a class="" href="classes/Report-Service-SubDecision.html#method_findKeyholder">findKeyholder()</a>
@@ -444,7 +465,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/SubDecision.php"><a href="files/module-report-src-service-subdecision.html"><abbr title="module/Report/src/Service/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">31</span>
+    <span class="phpdocumentor-element-found-in__line">34</span>
 
     </aside>
 
@@ -481,7 +502,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/SubDecision.php"><a href="files/module-report-src-service-subdecision.html"><abbr title="module/Report/src/Service/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">30</span>
+    <span class="phpdocumentor-element-found-in__line">33</span>
 
     </aside>
 
@@ -518,7 +539,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/SubDecision.php"><a href="files/module-report-src-service-subdecision.html"><abbr title="module/Report/src/Service/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">32</span>
+    <span class="phpdocumentor-element-found-in__line">35</span>
 
     </aside>
 
@@ -555,7 +576,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/SubDecision.php"><a href="files/module-report-src-service-subdecision.html"><abbr title="module/Report/src/Service/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">33</span>
+    <span class="phpdocumentor-element-found-in__line">36</span>
 
     </aside>
 
@@ -597,7 +618,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/SubDecision.php"><a href="files/module-report-src-service-subdecision.html"><abbr title="module/Report/src/Service/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">29</span>
+    <span class="phpdocumentor-element-found-in__line">32</span>
 
     </aside>
 
@@ -654,6 +675,54 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_detachFromOrgans">
+        detachFromOrgans()
+        <a href="classes/Report-Service-SubDecision.html#method_detachFromOrgans" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/SubDecision.php"><a href="files/module-report-src-service-subdecision.html"><abbr title="module/Report/src/Service/SubDecision.php">SubDecision.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">258</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Take the subdecision out of every organ that lists it among the decisions it was shaped by.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">detachFromOrgans</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Report-Model-SubDecision.html"><abbr title="\Report\Model\SubDecision">SubDecision</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$subDecision</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Reverting already does that for the organ a subdecision was about, but a subdecision that is about to be
+deleted has to be let go of by any organ at all, including one it can no longer point back to.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$subDecision</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Report-Model-SubDecision.html"><abbr title="\Report\Model\SubDecision">SubDecision</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_generateRelated">
         generateRelated()
         <a href="classes/Report-Service-SubDecision.html#method_generateRelated" class="headerlink"><i class="fas fa-link"></i></a>
@@ -662,7 +731,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/SubDecision.php"><a href="files/module-report-src-service-subdecision.html"><abbr title="module/Report/src/Service/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">40</span>
+    <span class="phpdocumentor-element-found-in__line">43</span>
 
     </aside>
 
@@ -707,7 +776,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/SubDecision.php"><a href="files/module-report-src-service-subdecision.html"><abbr title="module/Report/src/Service/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">97</span>
+    <span class="phpdocumentor-element-found-in__line">102</span>
 
     </aside>
 
@@ -725,7 +794,9 @@ marked as annulled. Only the entities that were derived from it are removed or r
 <p>Whether reverting is allowed at all is decided in the <code class="prettyprint">Database</code> module, which owns the ledger; by the time a
 subdecision gets here it may simply be reverted. Reverting is however tolerant of missing related entities:
 during a full (re)generation the decisions are processed before the organ, board, and keyholder tables are
-built, so there may be nothing to revert yet.</p>
+built, so there may be nothing to revert yet. It is equally tolerant of a subdecision that no longer has the
+subdecision it points at, which is how a row that GEWISDB has since replaced by one of another kind arrives
+here to be cleaned up.</p>
 </section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -748,6 +819,60 @@ built, so there may be nothing to revert yet.</p>
                     <article
         class="phpdocumentor-element
             -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_stillReferences">
+        stillReferences()
+        <a href="classes/Report-Service-SubDecision.html#method_stillReferences" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/SubDecision.php"><a href="files/module-report-src-service-subdecision.html"><abbr title="module/Report/src/Service/SubDecision.php">SubDecision.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">219</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Whether the subdecision still has the subdecision, or decision, that it points at.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">stillReferences</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Report-Model-SubDecision.html"><abbr title="\Report\Model\SubDecision">SubDecision</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$subDecision</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>A subdecision that turned out to be wrong is put right by replacing it with one of another kind, and ReportDB
+can be left holding the old one without what it pointed at. Doctrine leaves a typed property without a default
+uninitialised when the columns behind it are empty, so such a subdecision cannot simply be asked for it. A
+subdecision that points at nothing to begin with has nothing to be missing, and so always says yes.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$subDecision</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Report-Model-SubDecision.html"><abbr title="\Report\Model\SubDecision">SubDecision</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
             -private
                                                         "
 >
@@ -759,7 +884,7 @@ built, so there may be nothing to revert yet.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/SubDecision.php"><a href="files/module-report-src-service-subdecision.html"><abbr title="module/Report/src/Service/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">202</span>
+    <span class="phpdocumentor-element-found-in__line">296</span>
 
     </aside>
 
@@ -799,6 +924,55 @@ built, so there may be nothing to revert yet.</p>
             -private
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_findFoundedOrgan">
+        findFoundedOrgan()
+        <a href="classes/Report-Service-SubDecision.html#method_findFoundedOrgan" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/SubDecision.php"><a href="files/module-report-src-service-subdecision.html"><abbr title="module/Report/src/Service/SubDecision.php">SubDecision.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">243</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Find the organ that the subdecision&#039;s foundation brought into being, if it still has one.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">findFoundedOrgan</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Report-Model-SubDecision-FoundationReference.html"><abbr title="\Report\Model\SubDecision\FoundationReference">FoundationReference</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$subDecision</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Report-Model-Organ.html"><abbr title="\Report\Model\Organ">Organ</abbr></a>|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$subDecision</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Report-Model-SubDecision-FoundationReference.html"><abbr title="\Report\Model\SubDecision\FoundationReference">FoundationReference</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Report-Model-Organ.html"><abbr title="\Report\Model\Organ">Organ</abbr></a>|null</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_findKeyholder">
         findKeyholder()
         <a href="classes/Report-Service-SubDecision.html#method_findKeyholder" class="headerlink"><i class="fas fa-link"></i></a>
@@ -807,7 +981,7 @@ built, so there may be nothing to revert yet.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/SubDecision.php"><a href="files/module-report-src-service-subdecision.html"><abbr title="module/Report/src/Service/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">208</span>
+    <span class="phpdocumentor-element-found-in__line">302</span>
 
     </aside>
 
@@ -855,7 +1029,7 @@ built, so there may be nothing to revert yet.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/SubDecision.php"><a href="files/module-report-src-service-subdecision.html"><abbr title="module/Report/src/Service/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">190</span>
+    <span class="phpdocumentor-element-found-in__line">284</span>
 
     </aside>
 
@@ -903,7 +1077,7 @@ built, so there may be nothing to revert yet.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/SubDecision.php"><a href="files/module-report-src-service-subdecision.html"><abbr title="module/Report/src/Service/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">196</span>
+    <span class="phpdocumentor-element-found-in__line">290</span>
 
     </aside>
 
@@ -970,9 +1144,12 @@ built, so there may be nothing to revert yet.</p>
             <li>
                 <ul class="phpdocumentor-list -clean">
                                             <li class=""><a href="classes/Report-Service-SubDecision.html#method___construct">__construct()</a></li>
+                                            <li class=""><a href="classes/Report-Service-SubDecision.html#method_detachFromOrgans">detachFromOrgans()</a></li>
                                             <li class=""><a href="classes/Report-Service-SubDecision.html#method_generateRelated">generateRelated()</a></li>
                                             <li class=""><a href="classes/Report-Service-SubDecision.html#method_revertRelated">revertRelated()</a></li>
+                                            <li class=""><a href="classes/Report-Service-SubDecision.html#method_stillReferences">stillReferences()</a></li>
                                             <li class=""><a href="classes/Report-Service-SubDecision.html#method_findBoardMember">findBoardMember()</a></li>
+                                            <li class=""><a href="classes/Report-Service-SubDecision.html#method_findFoundedOrgan">findFoundedOrgan()</a></li>
                                             <li class=""><a href="classes/Report-Service-SubDecision.html#method_findKeyholder">findKeyholder()</a></li>
                                             <li class=""><a href="classes/Report-Service-SubDecision.html#method_findOrgan">findOrgan()</a></li>
                                             <li class=""><a href="classes/Report-Service-SubDecision.html#method_findOrganMember">findOrganMember()</a></li>

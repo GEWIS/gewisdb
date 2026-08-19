@@ -307,7 +307,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Meeting.php"><a href="files/module-database-src-model-meeting.html"><abbr title="module/Database/src/Model/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">25</span>
 
     </aside>
 
@@ -512,7 +512,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Meeting.php"><a href="files/module-database-src-model-meeting.html"><abbr title="module/Database/src/Model/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">53</span>
+    <span class="phpdocumentor-element-found-in__line">54</span>
 
     </aside>
 
@@ -564,7 +564,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Meeting.php"><a href="files/module-database-src-model-meeting.html"><abbr title="module/Database/src/Model/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">61</span>
+    <span class="phpdocumentor-element-found-in__line">66</span>
 
     </aside>
 
@@ -577,7 +577,11 @@
     <span class="phpdocumentor-signature__name">$decisions</span>
     </code>
 
-    
+        <section class="phpdocumentor-description"><p>A meeting works through its agenda from top to bottom, and a decision may build on one taken earlier in the same
+meeting. Anything replaying the meeting has to see them in that order, so it is fixed here instead of being left
+to whatever order the database happens to return the rows in.</p>
+</section>
+
     
     
 
@@ -601,6 +605,14 @@
         $cascade: [&#039;persist&#039;]
     </dd>
     </dl>
+                            <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\OrderBy">OrderBy</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $value: [&#039;point&#039; =&gt; &#039;ASC&#039;, &#039;number&#039; =&gt; &#039;ASC&#039;]
+    </dd>
+    </dl>
                     </section>
         
 
@@ -622,7 +634,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Meeting.php"><a href="files/module-database-src-model-meeting.html"><abbr title="module/Database/src/Model/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">68</span>
+    <span class="phpdocumentor-element-found-in__line">77</span>
 
     </aside>
 
@@ -676,7 +688,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Meeting.php"><a href="files/module-database-src-model-meeting.html"><abbr title="module/Database/src/Model/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">41</span>
+    <span class="phpdocumentor-element-found-in__line">42</span>
 
     </aside>
 
@@ -738,7 +750,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Meeting.php"><a href="files/module-database-src-model-meeting.html"><abbr title="module/Database/src/Model/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">30</span>
+    <span class="phpdocumentor-element-found-in__line">31</span>
 
     </aside>
 
@@ -800,7 +812,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Meeting.php"><a href="files/module-database-src-model-meeting.html"><abbr title="module/Database/src/Model/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">74</span>
+    <span class="phpdocumentor-element-found-in__line">83</span>
 
     </aside>
 
@@ -834,7 +846,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Meeting.php"><a href="files/module-database-src-model-meeting.html"><abbr title="module/Database/src/Model/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">157</span>
+    <span class="phpdocumentor-element-found-in__line">166</span>
 
     </aside>
 
@@ -879,7 +891,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Meeting.php"><a href="files/module-database-src-model-meeting.html"><abbr title="module/Database/src/Model/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">178</span>
+    <span class="phpdocumentor-element-found-in__line">187</span>
 
     </aside>
 
@@ -924,7 +936,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Meeting.php"><a href="files/module-database-src-model-meeting.html"><abbr title="module/Database/src/Model/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">131</span>
+    <span class="phpdocumentor-element-found-in__line">140</span>
 
     </aside>
 
@@ -963,7 +975,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Meeting.php"><a href="files/module-database-src-model-meeting.html"><abbr title="module/Database/src/Model/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">149</span>
+    <span class="phpdocumentor-element-found-in__line">158</span>
 
     </aside>
 
@@ -1002,7 +1014,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Meeting.php"><a href="files/module-database-src-model-meeting.html"><abbr title="module/Database/src/Model/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">105</span>
+    <span class="phpdocumentor-element-found-in__line">114</span>
 
     </aside>
 
@@ -1045,7 +1057,7 @@ https://www.doctrine-project.org/projects/doctrine-dbal/en/stable/reference/type
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Meeting.php"><a href="files/module-database-src-model-meeting.html"><abbr title="module/Database/src/Model/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">206</span>
+    <span class="phpdocumentor-element-found-in__line">215</span>
 
     </aside>
 
@@ -1096,7 +1108,7 @@ https://www.doctrine-project.org/projects/doctrine-dbal/en/stable/reference/type
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Meeting.php"><a href="files/module-database-src-model-meeting.html"><abbr title="module/Database/src/Model/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">82</span>
+    <span class="phpdocumentor-element-found-in__line">91</span>
 
     </aside>
 
@@ -1135,7 +1147,7 @@ https://www.doctrine-project.org/projects/doctrine-dbal/en/stable/reference/type
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Meeting.php"><a href="files/module-database-src-model-meeting.html"><abbr title="module/Database/src/Model/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">168</span>
+    <span class="phpdocumentor-element-found-in__line">177</span>
 
     </aside>
 
@@ -1183,7 +1195,7 @@ persists, so a decision that is turned down has to be taken back out or the next
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Meeting.php"><a href="files/module-database-src-model-meeting.html"><abbr title="module/Database/src/Model/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">139</span>
+    <span class="phpdocumentor-element-found-in__line">148</span>
 
     </aside>
 
@@ -1228,7 +1240,7 @@ persists, so a decision that is turned down has to be taken back out or the next
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Meeting.php"><a href="files/module-database-src-model-meeting.html"><abbr title="module/Database/src/Model/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">119</span>
+    <span class="phpdocumentor-element-found-in__line">128</span>
 
     </aside>
 
@@ -1273,7 +1285,7 @@ persists, so a decision that is turned down has to be taken back out or the next
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Meeting.php"><a href="files/module-database-src-model-meeting.html"><abbr title="module/Database/src/Model/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">90</span>
+    <span class="phpdocumentor-element-found-in__line">99</span>
 
     </aside>
 
@@ -1318,7 +1330,7 @@ persists, so a decision that is turned down has to be taken back out or the next
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Meeting.php"><a href="files/module-database-src-model-meeting.html"><abbr title="module/Database/src/Model/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">193</span>
+    <span class="phpdocumentor-element-found-in__line">202</span>
 
     </aside>
 

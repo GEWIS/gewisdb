@@ -15216,6 +15216,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Report-Service-Board.html#method_generateRelease"
         },                {
+            "fqsen": "\\Report\\Service\\Board\u003A\u003AfindBoardMember\u0028\u0029",
+            "name": "findBoardMember",
+            "summary": "Find\u0020the\u0020board\u0020member\u0020an\u0020installation\u0020brought\u0020into\u0020being,\u0020if\u0020it\u0020has\u0020one.",
+            "url": "classes/Report-Service-Board.html#method_findBoardMember"
+        },                {
             "fqsen": "\\Report\\Service\\Board\u003A\u003A\u0024emReport",
             "name": "emReport",
             "summary": "",
@@ -15311,6 +15316,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Report-Service-Keyholder.html#method_generateWithdrawal"
         },                {
+            "fqsen": "\\Report\\Service\\Keyholder\u003A\u003AfindKeyholder\u0028\u0029",
+            "name": "findKeyholder",
+            "summary": "Find\u0020the\u0020keyholder\u0020a\u0020granting\u0020brought\u0020into\u0020being,\u0020if\u0020it\u0020has\u0020one.",
+            "url": "classes/Report-Service-Keyholder.html#method_findKeyholder"
+        },                {
             "fqsen": "\\Report\\Service\\Keyholder\u003A\u003A\u0024emReport",
             "name": "emReport",
             "summary": "",
@@ -15365,6 +15375,11 @@ Search.appendIndex(
             "name": "deleteSubDecision",
             "summary": "",
             "url": "classes/Report-Service-Meeting.html#method_deleteSubDecision"
+        },                {
+            "fqsen": "\\Report\\Service\\Meeting\u003A\u003ArealClass\u0028\u0029",
+            "name": "realClass",
+            "summary": "The\u0020class\u0020an\u0020entity\u0020actually\u0020is,\u0020rather\u0020than\u0020the\u0020one\u0020it\u0020presents\u0020itself\u0020as.",
+            "url": "classes/Report-Service-Meeting.html#method_realClass"
         },                {
             "fqsen": "\\Report\\Service\\Meeting\u003A\u003AfindMember\u0028\u0029",
             "name": "findMember",
@@ -15560,6 +15575,21 @@ Search.appendIndex(
             "name": "revertRelated",
             "summary": "Reverts\u0020the\u0020related\u0020entities\u0020of\u0020a\u0020subdecision\u0020in\u0020ReportDB,\u0020i.e.\u0020undoes\u0020\u007B\u0040see\u0020self\u003A\u003AgenerateRelated\u0028\u0029\u007D.",
             "url": "classes/Report-Service-SubDecision.html#method_revertRelated"
+        },                {
+            "fqsen": "\\Report\\Service\\SubDecision\u003A\u003AstillReferences\u0028\u0029",
+            "name": "stillReferences",
+            "summary": "Whether\u0020the\u0020subdecision\u0020still\u0020has\u0020the\u0020subdecision,\u0020or\u0020decision,\u0020that\u0020it\u0020points\u0020at.",
+            "url": "classes/Report-Service-SubDecision.html#method_stillReferences"
+        },                {
+            "fqsen": "\\Report\\Service\\SubDecision\u003A\u003AfindFoundedOrgan\u0028\u0029",
+            "name": "findFoundedOrgan",
+            "summary": "Find\u0020the\u0020organ\u0020that\u0020the\u0020subdecision\u0027s\u0020foundation\u0020brought\u0020into\u0020being,\u0020if\u0020it\u0020still\u0020has\u0020one.",
+            "url": "classes/Report-Service-SubDecision.html#method_findFoundedOrgan"
+        },                {
+            "fqsen": "\\Report\\Service\\SubDecision\u003A\u003AdetachFromOrgans\u0028\u0029",
+            "name": "detachFromOrgans",
+            "summary": "Take\u0020the\u0020subdecision\u0020out\u0020of\u0020every\u0020organ\u0020that\u0020lists\u0020it\u0020among\u0020the\u0020decisions\u0020it\u0020was\u0020shaped\u0020by.",
+            "url": "classes/Report-Service-SubDecision.html#method_detachFromOrgans"
         },                {
             "fqsen": "\\Report\\Service\\SubDecision\u003A\u003AfindOrgan\u0028\u0029",
             "name": "findOrgan",
