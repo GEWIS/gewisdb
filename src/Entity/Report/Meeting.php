@@ -15,6 +15,7 @@ use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\OneToOne;
+use Doctrine\ORM\Mapping\OrderBy;
 
 /**
  * Meeting model.
@@ -57,6 +58,10 @@ class Meeting
         mappedBy: 'meeting',
         cascade: ['persist', 'remove'],
     )]
+    #[OrderBy(value: [
+        'point' => 'ASC',
+        'number' => 'ASC',
+    ])]
     private Collection $decisions;
 
     #[OneToOne(

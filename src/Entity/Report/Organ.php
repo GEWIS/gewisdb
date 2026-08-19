@@ -114,11 +114,17 @@ class Organ
     /**
      * Reference to members.
      *
+     * Membership of a body is derived from the decisions about that body, so it cannot outlast the body itself: a
+     * body whose foundation was annulled never existed, and neither did anyone's membership of it. Deleting the body
+     * therefore deletes the memberships derived from it, which the database is deliberately not told to do — what
+     * goes and what stays is the projection's to decide rather than a cascade's to settle behind its back.
+     *
      * @var Collection<array-key, OrganMember>
      */
     #[OneToMany(
         mappedBy: 'organ',
         targetEntity: OrganMember::class,
+        cascade: ['remove'],
     )]
     private Collection $members;
 

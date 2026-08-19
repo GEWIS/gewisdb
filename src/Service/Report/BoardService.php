@@ -9,7 +9,6 @@ use App\Entity\Report\SubDecision\Board\Discharge as ReportBoardDischarge;
 use App\Entity\Report\SubDecision\Board\Installation as ReportBoardInstallation;
 use App\Entity\Report\SubDecision\Board\Release as ReportBoardRelease;
 use Doctrine\ORM\EntityManagerInterface;
-use LogicException;
 use ReflectionProperty;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
@@ -23,12 +22,7 @@ class BoardService
 
     public function generateInstallation(ReportBoardInstallation $installation): BoardMember
     {
-        $rp = new ReflectionProperty(ReportBoardInstallation::class, 'boardMember');
-        if ($rp->isInitialized($installation)) {
-            $boardMember = $installation->getBoardMember();
-        } else {
-            $boardMember = null;
-        }
+        $boardMember = $this->findBoardMember($installation);
 
         if (null === $boardMember) {
             $boardMember = new BoardMember();
@@ -45,43 +39,52 @@ class BoardService
         return $boardMember;
     }
 
-    public function generateDischarge(ReportBoardDischarge $discharge): BoardMember
+    public function generateDischarge(ReportBoardDischarge $discharge): void
     {
-        $rp = new ReflectionProperty(ReportBoardInstallation::class, 'boardMember');
-        if ($rp->isInitialized($discharge->getInstallation())) {
-            $boardMember = $discharge->getInstallation()->getBoardMember();
-        } else {
-            $boardMember = null;
-        }
+        $boardMember = $this->findBoardMember($discharge->getInstallation());
 
         if (null === $boardMember) {
-            throw new LogicException('Board discharge without a BoardMember');
+            // The installation this discharge undoes never took effect, so there is nobody on the board to discharge.
+            // That is what the ledger says whenever the installation was annulled before this point, and it is also
+            // what the older meetings say, from before board membership was recorded the way it is now.
+            return;
         }
 
         $boardMember->setDischargeDate($discharge->getDecision()->getMeeting()->getDate());
 
         $this->emReport->persist($boardMember);
-
-        return $boardMember;
     }
 
-    public function generateRelease(ReportBoardRelease $release): BoardMember
+    public function generateRelease(ReportBoardRelease $release): void
     {
-        $rp = new ReflectionProperty(ReportBoardInstallation::class, 'boardMember');
-        if ($rp->isInitialized($release->getInstallation())) {
-            $boardMember = $release->getInstallation()->getBoardMember();
-        } else {
-            $boardMember = null;
-        }
+        $boardMember = $this->findBoardMember($release->getInstallation());
 
         if (null === $boardMember) {
-            throw new LogicException('Board release without a BoardMember');
+            // See generateDischarge(): there is nothing to release somebody from.
+            return;
         }
 
         $boardMember->setReleaseDate($release->getDate());
 
         $this->emReport->persist($boardMember);
+    }
 
-        return $boardMember;
+    /**
+     * Find the board member an installation brought into being, if it has one.
+     *
+     * The installation's board member is the inverse side of the relation; it is only hydrated when the installation
+     * is (re)loaded in a fresh session. Within a single session it is kept in step by hand, but an installation that
+     * was never installed here has neither, so fall back to looking the board member up by its installation.
+     */
+    private function findBoardMember(ReportBoardInstallation $installation): ?BoardMember
+    {
+        $rp = new ReflectionProperty(ReportBoardInstallation::class, 'boardMember');
+
+        if ($rp->isInitialized($installation)) {
+            return $installation->getBoardMember();
+        }
+
+        return $this->emReport->getRepository(BoardMember::class)
+            ->findOneBy(['installationDec' => $installation]);
     }
 }

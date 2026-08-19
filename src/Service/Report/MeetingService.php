@@ -16,6 +16,7 @@ use App\Entity\Report\SubDecision as ReportSubDecision;
 use App\Repository\Database\MeetingRepository;
 use Closure;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\Proxy;
 use LogicException;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Mailer\MailerInterface;
@@ -27,6 +28,7 @@ use Throwable;
 use function array_reverse;
 use function assert;
 use function count;
+use function get_parent_class;
 use function implode;
 use function is_a;
 use function preg_replace;
@@ -203,6 +205,20 @@ class MeetingService
             }
         }
 
+        // The projection's subdecision is the same class one namespace over, so the class to build is the ledger's
+        // with `Database` swapped for `Report`. A subdecision whose name does not rewrite would silently build a
+        // ledger entity here, which is a bug rather than a case to handle.
+        /** @var class-string<ReportSubDecision> $class */
+        $class = preg_replace(
+            '/^App\\\\Entity\\\\Database\\\\/',
+            'App\\\\Entity\\\\Report\\\\',
+            $this->realClass($subdecision),
+        );
+
+        if (!is_a($class, ReportSubDecision::class, true)) {
+            throw new LogicException(sprintf('No projection exists for %s', $subdecision::class));
+        }
+
         $reportSubDecision = $subdecRepo->find([
             'meeting_type' => $subdecision->getMeetingType(),
             'meeting_number' => $subdecision->getMeetingNumber(),
@@ -211,21 +227,23 @@ class MeetingService
             'sequence' => $subdecision->getSequence(),
         ]);
 
+        if (
+            null !== $reportSubDecision
+            && $this->realClass($reportSubDecision) !== $class
+        ) {
+            // A subdecision that turned out to be wrong is put right by replacing it with one of another kind, and
+            // then this position no longer holds what ReportDB has at it. Nothing about the old one is still true, so
+            // it goes, along with everything derived from it, rather than being dressed up as the new one; keeping it
+            // would leave the body member it discharged, or the body it founded, standing on a decision that was
+            // never taken. Its removal has to reach the database before the replacement takes its place, because they
+            // share an identity and a single flush would insert before it deletes.
+            $this->deleteSubDecision($reportSubDecision);
+            $this->emReport->flush();
+
+            $reportSubDecision = null;
+        }
+
         if (null === $reportSubDecision) {
-            // The projection's subdecision is the same class one namespace over, so the class to build is the
-            // ledger's with `Database` swapped for `Report`. A subdecision whose name does not rewrite would
-            // silently build a ledger entity here, which is a bug rather than a case to handle.
-            /** @var class-string<ReportSubDecision> $class */
-            $class = preg_replace(
-                '/^App\\\\Entity\\\\Database\\\\/',
-                'App\\\\Entity\\\\Report\\\\',
-                $subdecision::class,
-            );
-
-            if (!is_a($class, ReportSubDecision::class, true)) {
-                throw new LogicException(sprintf('No projection exists for %s', $subdecision::class));
-            }
-
             $reportSubDecision = new $class();
             $reportSubDecision->setDecision($reportDecision);
             $reportSubDecision->setSequence($subdecision->getSequence());
@@ -474,32 +492,62 @@ class MeetingService
     public function deleteSubDecision(ReportSubDecision $subDecision): void
     {
         if ($subDecision instanceof ReportSubDecision\Annulment) {
-            $this->unannulDecision($subDecision->getTarget());
+            if ($this->subDecisionService->stillReferences($subDecision)) {
+                $this->unannulDecision($subDecision->getTarget());
+            }
         } else {
             // Deleting a subdecision undoes its effects in exactly the same way that annulling it does.
             $this->subDecisionService->revertRelated($subDecision);
 
             // On top of that, the subdecision is about to disappear, so the references to it must be dropped as well.
-            switch (true) {
-                case $subDecision instanceof ReportSubDecision\Discharge:
-                    $subDecision->getInstallation()->clearDischarge();
-                    break;
+            // One that no longer has the subdecision it points at has nothing to drop; being reverted above is what
+            // it came here for.
+            if ($this->subDecisionService->stillReferences($subDecision)) {
+                switch (true) {
+                    case $subDecision instanceof ReportSubDecision\Discharge:
+                        $subDecision->getInstallation()->clearDischarge();
+                        break;
 
-                case $subDecision instanceof ReportSubDecision\Board\Release:
-                    $subDecision->getInstallation()->clearRelease();
-                    break;
+                    case $subDecision instanceof ReportSubDecision\Board\Release:
+                        $subDecision->getInstallation()->clearRelease();
+                        break;
 
-                case $subDecision instanceof ReportSubDecision\Board\Discharge:
-                    $subDecision->getInstallation()->clearDischarge();
-                    break;
+                    case $subDecision instanceof ReportSubDecision\Board\Discharge:
+                        $subDecision->getInstallation()->clearDischarge();
+                        break;
 
-                case $subDecision instanceof ReportSubDecision\Key\Withdrawal:
-                    $subDecision->getGranting()->clearWithdrawal();
-                    break;
+                    case $subDecision instanceof ReportSubDecision\Key\Withdrawal:
+                        $subDecision->getGranting()->clearWithdrawal();
+                        break;
+                }
             }
+
+            // A body keeps a list of the decisions it was shaped by, and that list stands in the way of the row going
+            // anywhere until the body lets go of it.
+            $this->subDecisionService->detachFromOrgans($subDecision);
         }
 
         $this->emReport->remove($subDecision);
+    }
+
+    /**
+     * The class an entity actually is, rather than the one it presents itself as.
+     *
+     * Doctrine hands out proxies for entities it has not loaded yet, and those are subclasses in a namespace of their
+     * own. Anything reasoning about which kind of subdecision it is holding has to look past that.
+     *
+     * @return class-string
+     */
+    private function realClass(object $entity): string
+    {
+        if ($entity instanceof Proxy) {
+            /** @var class-string $parent */
+            $parent = get_parent_class($entity);
+
+            return $parent;
+        }
+
+        return $entity::class;
     }
 
     /**

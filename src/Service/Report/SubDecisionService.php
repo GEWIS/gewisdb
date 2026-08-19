@@ -10,16 +10,19 @@ use App\Entity\Report\Organ;
 use App\Entity\Report\OrganMember;
 use App\Entity\Report\SubDecision;
 use App\Entity\Report\SubDecision\Abrogation;
+use App\Entity\Report\SubDecision\Annulment;
 use App\Entity\Report\SubDecision\Board\Discharge as BoardDischarge;
 use App\Entity\Report\SubDecision\Board\Installation as BoardInstallation;
 use App\Entity\Report\SubDecision\Board\Release as BoardRelease;
 use App\Entity\Report\SubDecision\Discharge;
 use App\Entity\Report\SubDecision\Foundation;
+use App\Entity\Report\SubDecision\FoundationReference;
 use App\Entity\Report\SubDecision\Installation;
 use App\Entity\Report\SubDecision\Key\Granting as KeyGranting;
 use App\Entity\Report\SubDecision\Key\Withdrawal as KeyWithdrawal;
 use App\Entity\Report\SubDecision\Reappointment;
 use Doctrine\ORM\EntityManagerInterface;
+use ReflectionProperty;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 class SubDecisionService
@@ -108,11 +111,17 @@ class SubDecisionService
                 break;
 
             case $subDecision instanceof BoardRelease:
-                $this->findBoardMember($subDecision->getInstallation())?->setReleaseDate(null);
+                if ($this->stillReferences($subDecision)) {
+                    $this->findBoardMember($subDecision->getInstallation())?->setReleaseDate(null);
+                }
+
                 break;
 
             case $subDecision instanceof BoardDischarge:
-                $this->findBoardMember($subDecision->getInstallation())?->setDischargeDate(null);
+                if ($this->stillReferences($subDecision)) {
+                    $this->findBoardMember($subDecision->getInstallation())?->setDischargeDate(null);
+                }
+
                 break;
 
             // Keyholder-related
@@ -127,7 +136,10 @@ class SubDecisionService
                 break;
 
             case $subDecision instanceof KeyWithdrawal:
-                $this->findKeyholder($subDecision->getGranting())?->setWithdrawnDate(null);
+                if ($this->stillReferences($subDecision)) {
+                    $this->findKeyholder($subDecision->getGranting())?->setWithdrawnDate(null);
+                }
+
                 break;
 
             // Organ-related
@@ -142,7 +154,7 @@ class SubDecisionService
                 break;
 
             case $subDecision instanceof Abrogation:
-                $organ = $this->findOrgan($subDecision->getFoundation());
+                $organ = $this->findFoundedOrgan($subDecision);
                 $organ?->removeSubdecision($subDecision);
 
                 if (null !== $organ) {
@@ -159,7 +171,7 @@ class SubDecisionService
 
             case $subDecision instanceof Installation:
                 $organMember = $this->findOrganMember($subDecision);
-                $organ = $this->findOrgan($subDecision->getFoundation());
+                $organ = $this->findFoundedOrgan($subDecision);
                 $organ?->removeSubdecision($subDecision);
                 $subDecision->clearOrganMember();
 
@@ -171,8 +183,12 @@ class SubDecisionService
                 break;
 
             case $subDecision instanceof Discharge:
+                if (!$this->stillReferences($subDecision)) {
+                    break;
+                }
+
                 $installation = $subDecision->getInstallation();
-                $organ = $this->findOrgan($installation->getFoundation());
+                $organ = $this->findFoundedOrgan($installation);
                 $organ?->removeSubdecision($subDecision);
 
                 // An abolished organ discharges whoever is left in it, so that date must survive the revert.
@@ -181,9 +197,85 @@ class SubDecisionService
 
             case $subDecision instanceof Reappointment:
                 // Reappointments do not produce related entities, they only extend an installation.
-                $subDecision->getInstallation()->removeReappointment($subDecision);
+                if ($this->stillReferences($subDecision)) {
+                    $subDecision->getInstallation()->removeReappointment($subDecision);
+                }
+
                 break;
         }
+    }
+
+    /**
+     * Whether the subdecision still has the subdecision, or decision, that it points at.
+     *
+     * A subdecision that turned out to be wrong is put right by replacing it with one of another kind, and ReportDB
+     * can be left holding the old one without what it pointed at. Doctrine leaves a typed property without a default
+     * uninitialised when the columns behind it are empty, so such a subdecision cannot simply be asked for it. A
+     * subdecision that points at nothing to begin with has nothing to be missing, and so always says yes.
+     */
+    public function stillReferences(SubDecision $subDecision): bool
+    {
+        [$declaringClass, $property] = match (true) {
+            $subDecision instanceof BoardRelease => [BoardRelease::class, 'installation'],
+            $subDecision instanceof BoardDischarge => [BoardDischarge::class, 'installation'],
+            $subDecision instanceof KeyWithdrawal => [KeyWithdrawal::class, 'granting'],
+            $subDecision instanceof Discharge => [Discharge::class, 'installation'],
+            $subDecision instanceof Reappointment => [Reappointment::class, 'installation'],
+            $subDecision instanceof Annulment => [Annulment::class, 'target'],
+            // Both installations and abrogations point back at the foundation of the body they are about.
+            $subDecision instanceof FoundationReference => [FoundationReference::class, 'foundation'],
+            default => [null, null],
+        };
+
+        if (null === $declaringClass) {
+            return true;
+        }
+
+        return (new ReflectionProperty($declaringClass, $property))->isInitialized($subDecision);
+    }
+
+    /**
+     * Take the subdecision out of every body that lists it among the decisions it was shaped by.
+     *
+     * Reverting already does that for the body a subdecision was about, but a subdecision that is about to be deleted
+     * has to be let go of by any body at all, including one it can no longer point back to.
+     */
+    public function detachFromOrgans(SubDecision $subDecision): void
+    {
+        // A subdecision is identified by the decision it belongs to and its place in it, and a composite identity
+        // like that cannot be handed to a query as one value, so it goes in field by field.
+        $organs = $this->emReport->getRepository(Organ::class)
+            ->createQueryBuilder('o')
+            ->innerJoin('o.subdecisions', 's')
+            ->where('s.meeting_type = :meetingType')
+            ->andWhere('s.meeting_number = :meetingNumber')
+            ->andWhere('s.decision_point = :decisionPoint')
+            ->andWhere('s.decision_number = :decisionNumber')
+            ->andWhere('s.sequence = :sequence')
+            ->setParameter('meetingType', $subDecision->getMeetingType())
+            ->setParameter('meetingNumber', $subDecision->getMeetingNumber())
+            ->setParameter('decisionPoint', $subDecision->getDecisionPoint())
+            ->setParameter('decisionNumber', $subDecision->getDecisionNumber())
+            ->setParameter('sequence', $subDecision->getSequence())
+            ->getQuery()
+            ->getResult();
+
+        /** @var Organ $organ */
+        foreach ($organs as $organ) {
+            $organ->removeSubdecision($subDecision);
+        }
+    }
+
+    /**
+     * Find the body that the subdecision's foundation brought into being, if it still has one.
+     */
+    private function findFoundedOrgan(FoundationReference $subDecision): ?Organ
+    {
+        if (!$this->stillReferences($subDecision)) {
+            return null;
+        }
+
+        return $this->findOrgan($subDecision->getFoundation());
     }
 
     private function findOrgan(Foundation $foundation): ?Organ
