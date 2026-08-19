@@ -58,10 +58,10 @@ final class OrganController extends AbstractController
         name: 'decision_organ_view',
         requirements: [
             'type' => 'ALV|BV|VV|Virt',
-            'number' => '\\d+',
-            'point' => '\\d+',
-            'decision' => '\\d+',
-            'sequence' => '\\d+',
+            'number' => '-?\d+',
+            'point' => '\d+',
+            'decision' => '\d+',
+            'sequence' => '\d+',
         ],
         methods: ['GET'],
     )]
@@ -95,7 +95,7 @@ final class OrganController extends AbstractController
         name: 'decision_organ_info',
         requirements: [
             'type' => 'ALV|BV|VV|Virt',
-            'number' => '\d+',
+            'number' => '-?\d+',
             'point' => '\d+',
             'decision' => '\d+',
             'sequence' => '\d+',

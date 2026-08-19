@@ -95,7 +95,7 @@ final class DecisionController extends AbstractController
         name: 'decision_decision_create',
         requirements: [
             'type' => 'ALV|BV|VV|Virt',
-            'number' => '\d+',
+            'number' => '-?\d+',
             'point' => '\d+',
             'decision' => '\d+',
         ],
@@ -207,7 +207,7 @@ final class DecisionController extends AbstractController
         name: 'decision_decision_delete',
         requirements: [
             'type' => 'ALV|BV|VV|Virt',
-            'number' => '\d+',
+            'number' => '-?\d+',
             'point' => '\d+',
             'decision' => '\d+',
         ],
@@ -237,7 +237,7 @@ final class DecisionController extends AbstractController
             // Both answers submit the form, so the decision is only deleted when the confirming button was clicked.
             if (SubmitButtons::clicked($form, 'submit_yes')) {
                 try {
-                    $this->meetingService->deleteDecision($type, $number, $point, $decision);
+                    $deleted = $this->meetingService->deleteDecision($type, $number, $point, $decision);
                 } catch (DecisionStillReferenced) {
                     return $this->render('decision/decision/delete.html.twig', $parameters + ['error' => true]);
                 } catch (AnnulmentNotPossible) {
@@ -247,7 +247,13 @@ final class DecisionController extends AbstractController
                     ]);
                 }
 
-                $this->addFlash('success', 'The decision has been deleted.');
+                // Two secretaries can hold this confirmation open at once, and the second one to answer it deletes
+                // nothing. Reporting success either way would have them believe they removed something they did not.
+                if ($deleted) {
+                    $this->addFlash('success', 'The decision has been deleted.');
+                } else {
+                    $this->addFlash('warning', 'This decision no longer exists.');
+                }
             }
 
             return $this->redirectToRoute('decision_meeting_view', [

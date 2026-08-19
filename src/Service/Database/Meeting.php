@@ -191,6 +191,8 @@ class Meeting
     /**
      * Delete a decision.
      *
+     * @return bool whether there was a decision left to delete; false when another secretary got there first.
+     *
      * @throws AnnulmentNotPossible    when deleting an annulment would restore a decision that has since been
      *                                 overtaken.
      * @throws DecisionStillReferenced when later decisions still refer to what this one brought about.
@@ -200,11 +202,11 @@ class Meeting
         int $number,
         int $point,
         int $decision,
-    ): void {
+    ): bool {
         $model = $this->meetingRepository->findDecision($type, $number, $point, $decision);
 
         if (null === $model) {
-            return;
+            return false;
         }
 
         // Deleting an annulment restores everything it annulled, so the ledger has to allow that. Checking before the
@@ -227,6 +229,8 @@ class Meeting
         }
 
         $this->apiService->pauseSync(self::SYNC_PAUSE_AFTER_DELETION);
+
+        return true;
     }
 
     /**
