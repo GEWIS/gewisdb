@@ -51,8 +51,10 @@ class GenerateFullCommand extends Command
 
         try {
             $output->writeln('generating mailing list tables');
-            $this->miscService->generate();
+            $this->miscService->generateLists();
 
+            // Generating a member generates their mailing list memberships along with them, which is why the lists
+            // themselves have to exist by now.
             $output->writeln('generating members table');
             $this->withProgressBar($output, $this->memberService->generate(...));
 

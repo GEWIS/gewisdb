@@ -9,7 +9,6 @@ use App\Entity\Database\MailingListMember as DatabaseMailingListMember;
 use App\Entity\Report\MailingList as ReportMailingList;
 use App\Entity\Report\MailingListMember as ReportMailingListMember;
 use App\Entity\Report\Member as ReportMember;
-use App\Repository\Database\MailingListMemberRepository;
 use App\Repository\Database\MailingListRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use LogicException;
@@ -19,7 +18,6 @@ class MiscService
 {
     public function __construct(
         private readonly MailingListRepository $mailingListRepository,
-        private readonly MailingListMemberRepository $mailingListMemberRepository,
         #[Autowire(service: 'doctrine.orm.report_entity_manager')]
         private readonly EntityManagerInterface $emReport,
     ) {
@@ -28,14 +26,18 @@ class MiscService
     /**
      * Export misc info.
      */
-    public function generate(): void
+
+    /**
+     * Generate the mailing lists themselves.
+     *
+     * The memberships of those lists are not generated here. A membership needs both its list and its member to be
+     * in ReportDB already, and generating the members is what puts each of their memberships there -- so a pass over
+     * the memberships either runs before the members it needs, or after they have already been written.
+     */
+    public function generateLists(): void
     {
         foreach ($this->mailingListRepository->findAll() as $list) {
             $this->generateList($list);
-        }
-
-        foreach ($this->mailingListMemberRepository->findAfterSync() as $listMember) {
-            $this->generateListMembership($listMember);
         }
 
         $this->emReport->flush();

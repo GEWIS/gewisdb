@@ -29,6 +29,17 @@ use Symfony\Component\DependencyInjection\Attribute\Autowire;
 #[AsDoctrineListener(event: Events::preRemove, connection: 'default')]
 final class DatabaseDeletionListener
 {
+    /**
+     * Whether the projection follows the ledger at all. {@see BulkLoadListener} turns it off for a bulk load, after
+     * which the projection is rebuilt in one pass instead.
+     */
+    private static bool $enabled = true;
+
+    public static function disable(): void
+    {
+        self::$enabled = false;
+    }
+
     public function __construct(
         private readonly MeetingService $meetingService,
         private readonly MemberService $memberService,
@@ -40,6 +51,10 @@ final class DatabaseDeletionListener
 
     public function preRemove(PreRemoveEventArgs $args): void
     {
+        if (!self::$enabled) {
+            return;
+        }
+
         $entity = $args->getObject();
 
         switch (true) {

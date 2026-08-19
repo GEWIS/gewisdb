@@ -39,6 +39,17 @@ final class DatabaseUpdateListener
      */
     private static bool $flushing = false;
 
+    /**
+     * Whether the projection follows the ledger at all. {@see BulkLoadListener} turns it off for a bulk load, after
+     * which the projection is rebuilt in one pass instead.
+     */
+    private static bool $enabled = true;
+
+    public static function disable(): void
+    {
+        self::$enabled = false;
+    }
+
     public function __construct(
         private readonly MeetingService $meetingService,
         private readonly MemberService $memberService,
@@ -61,6 +72,10 @@ final class DatabaseUpdateListener
 
     private function project(object $entity): void
     {
+        if (!self::$enabled) {
+            return;
+        }
+
         switch (true) {
             case $entity instanceof Address:
                 $this->memberService->generateAddress($entity);
