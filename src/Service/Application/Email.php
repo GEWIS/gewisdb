@@ -4,15 +4,21 @@ declare(strict_types=1);
 
 namespace App\Service\Application;
 
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
-use Symfony\Component\Mime\Email as MimeEmail;
-use Twig\Environment;
 
+/**
+ * Sending one of the application's e-mails.
+ *
+ * Every template extends `email/_base.html.twig` and fills its blocks, the way GEWISWEB's do, so the branding lives
+ * in one file and a message cannot go out without it. The template is named here and rendered by the mailer, rather
+ * than rendered to a string first and handed to a wrapper — that arrangement let a caller send a body on its own,
+ * which is how five of these went out unbranded.
+ */
 class Email
 {
     public function __construct(
-        private readonly Environment $twig,
         private readonly MailerInterface $mailer,
         private readonly string $mailFromAddress,
         private readonly string $mailFromName,
@@ -21,70 +27,36 @@ class Email
     ) {
     }
 
-    public function sendEmailTemplate(
+    /**
+     * @param array<string, mixed> $context
+     */
+    public function send(
         Address $recipient,
-        string $titleHeader,
-        string $titleBlock,
-        string $bodyMain,
-        ?string $titleAccessible = null,
-        ?string $titleMoreInformation = null,
-        ?string $bodyMoreInformation = null,
-        ?string $footerReason = null,
-        ?string $emailSubject = null,
-    ): void {
-        $replyTo = new Address($this->mailFromSecretaryAddress, $this->mailFromSecretaryName);
-
-        $body = $this->render(
-            'email/basic.html.twig',
-            [
-                'title_header' => $titleHeader,
-                'title_block' => $titleBlock,
-                'body_main' => $bodyMain,
-                'title_accessible' => $titleAccessible ?? $titleBlock,
-                'title_moreinformation' => $titleMoreInformation,
-                'body_moreinformation' => $bodyMoreInformation,
-                'footer_reason' => $footerReason,
-                'footer_sender_email' => $replyTo->getAddress(),
-            ],
-        );
-
-        $this->sendEmail(
-            $body,
-            $emailSubject ?? $titleHeader,
-            $recipient,
-            $replyTo,
-        );
-    }
-
-    private function sendEmail(
-        string $body,
         string $subject,
-        Address $recipient,
+        string $template,
+        array $context = [],
         ?Address $replyTo = null,
+        bool $bccReplyTo = false,
     ): void {
-        $message = (new MimeEmail())
+        $replyTo ??= new Address($this->mailFromSecretaryAddress, $this->mailFromSecretaryName);
+
+        $message = (new TemplatedEmail())
             ->from(new Address($this->mailFromAddress, $this->mailFromName))
             ->to($recipient)
+            ->replyTo($replyTo)
             ->subject($subject)
-            ->html($body);
+            ->htmlTemplate($template)
+            ->context($context + ['secretary_email' => $replyTo->getAddress()]);
 
-        if (null !== $replyTo) {
-            $message->replyTo($replyTo);
+        if ($bccReplyTo) {
             $message->bcc($replyTo);
         }
 
         $this->mailer->send($message);
     }
 
-    /**
-     * Render a template with given variables.
-     *
-     * @param array<array-key,mixed> $vars
-     */
-    private function render(
-        string $template,
-        array $vars,
-    ): string {
-        return $this->twig->render($template, $vars);
+    public function secretary(): Address
+    {
+        return new Address($this->mailFromSecretaryAddress, $this->mailFromSecretaryName);
     }
 }

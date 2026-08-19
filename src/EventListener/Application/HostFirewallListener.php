@@ -13,7 +13,6 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 use function preg_match;
-use function str_starts_with;
 
 /**
  * What each public host is allowed to serve.
@@ -93,9 +92,11 @@ final readonly class HostFirewallListener
             return;
         }
 
-        if ($this->memberHost === $host) {
-            $this->refuseUnless($path, self::MEMBER_PATHS);
+        if ($this->memberHost !== $host) {
+            return;
         }
+
+        $this->refuseUnless($path, self::MEMBER_PATHS);
     }
 
     /**

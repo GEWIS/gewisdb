@@ -32,6 +32,7 @@ use App\Repository\Database\MailingListRepository;
 use App\Repository\Database\MemberRepository;
 use App\Repository\Database\MemberUpdateRepository;
 use App\Repository\Database\ProspectiveMemberRepository;
+use App\Service\Application\Email as EmailService;
 use App\Service\Checker\Renewal as RenewalService;
 use DateTime;
 use InvalidArgumentException;
@@ -40,11 +41,8 @@ use RuntimeException;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
-use Symfony\Component\Mime\Email;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Twig\Environment;
 
 use function array_diff;
 use function array_intersect;
@@ -74,11 +72,9 @@ class Member
         private readonly MailingListService $mailingListService,
         private readonly RenewalService $renewalService,
         private readonly Security $security,
-        private readonly Environment $twig,
-        private readonly MailerInterface $mailer,
+        private readonly EmailService $emailService,
+        private readonly string $joinUrl,
         private readonly Audit $auditService,
-        private readonly string $mailFromAddress,
-        private readonly string $mailFromName,
         private readonly string $mailToSubscriptionAddress,
         private readonly string $mailToSubscriptionName,
     ) {
@@ -188,28 +184,36 @@ class Member
                 break;
         }
 
-        $body = $this->twig->render($template, ['member' => $member]);
+        // What the templates say, rather than the record they say it about: the name to greet, the number that has
+        // just been assigned, and the link back into a checkout that did not finish.
+        $paymentLink = $member instanceof ProspectiveMemberModel ? $member->getPaymentLink() : null;
+        $context = [
+            'member' => $member,
+            'firstName' => $member->getFirstName(),
+            'lidnr' => $member->getLidnr(),
+            'restartUrl' => null === $paymentLink
+                ? null
+                : $this->joinUrl . '/checkout/restart/' . $paymentLink->getToken(),
+        ];
 
-        $from = new Address($this->mailFromAddress, $this->mailFromName);
         $secretary = new Address($this->mailToSubscriptionAddress, $this->mailToSubscriptionName);
 
         // Always try to send the e-mail to the prospective member before sending to the secretary. The secretary can
         // look in the database, the prospective member cannot.
-        $this->mailer->send(
-            (new Email())
-                ->from($from)
-                ->to(new Address($member->getEmail(), $member->getFullName()))
-                ->replyTo($secretary)
-                ->subject($subjectProspectiveMember)
-                ->html($body),
+        $this->emailService->send(
+            new Address($member->getEmail(), $member->getFullName()),
+            $subjectProspectiveMember,
+            $template,
+            $context,
+            $secretary,
         );
 
-        $this->mailer->send(
-            (new Email())
-                ->from($from)
-                ->to($secretary)
-                ->subject($subjectSecretary)
-                ->html($body),
+        $this->emailService->send(
+            $secretary,
+            $subjectSecretary,
+            $template,
+            $context,
+            $secretary,
         );
     }
 
@@ -217,20 +221,14 @@ class Member
         string $refundId,
         string $refundStatus,
     ): void {
-        $body = $this->twig->render(
+        $this->emailService->send(
+            new Address($this->mailToSubscriptionAddress, $this->mailToSubscriptionName),
+            'Problem while processing membership refund',
             'email/refund-problem.html.twig',
             [
                 'refundId' => $refundId,
                 'refundStatus' => $refundStatus,
             ],
-        );
-
-        $this->mailer->send(
-            (new Email())
-                ->from(new Address($this->mailFromAddress, $this->mailFromName))
-                ->to(new Address($this->mailToSubscriptionAddress, $this->mailToSubscriptionName))
-                ->subject('Problem while processing membership refund')
-                ->html($body),
         );
     }
 

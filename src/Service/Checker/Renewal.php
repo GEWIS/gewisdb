@@ -13,7 +13,6 @@ use App\Service\Application\Email as EmailService;
 use DateInterval;
 use DateTime;
 use Throwable;
-use Twig\Environment;
 
 /**
  * Renewal class that takes care of renewing graduates
@@ -26,7 +25,6 @@ class Renewal
         private readonly MemberRepository $memberRepository,
         private readonly ReportMemberRepository $reportMemberRepository,
         private readonly EmailService $emailService,
-        private readonly Environment $twig,
         private readonly string $publicUrl,
     ) {
     }
@@ -64,7 +62,9 @@ class Renewal
             ->filter(static fn (OrganMemberModel $member) => $member->isCurrent())
             ->isEmpty();
 
-        $body = $this->render(
+        $this->emailService->send(
+            $link->getMember()->getEmailRecipient(),
+            'Graduate Renewal (' . $link->getMember()->getLidnr() . ')',
             'email/graduate-renewal.html.twig',
             [
                 'firstName' => $link->getMember()->getFirstName(),
@@ -72,68 +72,21 @@ class Renewal
                 'currentExpiration' => $link->getCurrentExpiration(),
                 'newExpiration' => $link->getNewExpiration(),
                 'url' => $this->publicUrl . '/renew/' . $link->getToken(),
-                //TODO: If global config exists, we should make the secretary a global config option
             ],
-        );
-
-        $this->emailService->sendEmailTemplate(
-            $link->getMember()->getEmailRecipient(),
-            'Membership notification',
-            'Expiring graduate status',
-            $body,
-            'GEWIS Graduate Renewal',
-            'More information',
-            '<p>You are currently registered as a graduate of GEWIS. This is a status
-                assigned to members who are no longer active within GEWIS and also are no longer studying.
-                <br><br>
-                Graduates do not pay contribution and as a graduate,
-                you can still join GEWIS activities or visit the social drink like you used to.
-                However, sometimes you have to pay an extra fee to join an (expensive) activity.
-                You can also no longer serve on the board of GEWIS or vote during the GMM.
-                <br><br>
-                Article 3.1 of the Internal Regulations allows you to request renewal of your status as graduate.
-                Therefore, you are receiving this email.</p>',
-            'You receive this message because your registration as a graduate of GEWIS is almost ending.
-                You can not opt-out of these emails.',
-            'Graduate Renewal (' . $link->getMember()->getLidnr() . ')',
         );
     }
 
     public function sendRenewalSuccessEmail(RenewalLinkModel $link): void
     {
-        $body = $this->render(
+        $this->emailService->send(
+            $link->getMember()->getEmailRecipient(),
+            'Graduate Renewal (' . $link->getMember()->getLidnr() . ')',
             'email/graduate-renewal-success.html.twig',
             [
                 'firstName' => $link->getMember()->getFirstName(),
                 'oldExpiration' => $link->getCurrentExpiration(),
                 'newExpiration' => $link->getNewExpiration(),
-                //TODO: If global config exists, we should make the secretary a global config option
             ],
         );
-
-        $this->emailService->sendEmailTemplate(
-            $link->getMember()->getEmailRecipient(),
-            'Membership notification',
-            'Renewed graduate status',
-            $body,
-            'GEWIS Graduate Renewal',
-            null,
-            null,
-            'You receive this message because you have requested renewal of your registration as a graduate of GEWIS.
-                You can not opt-out of these emails.',
-            'Graduate Renewal (' . $link->getMember()->getLidnr() . ')',
-        );
-    }
-
-    /**
-     * Render a template with given variables.
-     *
-     * @param array<array-key, mixed> $vars
-     */
-    private function render(
-        string $template,
-        array $vars,
-    ): string {
-        return $this->twig->render($template, $vars);
     }
 }

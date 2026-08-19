@@ -12,10 +12,11 @@ SHELL := /bin/bash
 # The image runs as `nonroot`, whose uid matches the host user's, which is what owns the bind-mounted source. Running
 # the console as `www-data` instead cannot write to it, which is what used to break `make seed` and `make translations`
 # on a permission error. GEWISWEB does not override the user either.
-# Compose reads `.env` by itself. It does NOT merge several --env-file flags (v5 takes the first and ignores the
-# rest), so `.env.local` is layered by Symfony inside the container rather than by compose. A name listed under the
-# web service's `environment:` is injected by compose and therefore cannot be overridden from `.env.local`.
-COMPOSE := docker compose
+# Both files are named so compose substitutes from either: later --env-file wins, which is how a value in
+# `.env.local` overrides the committed default. Services that are not the application — the Stripe CLI, postgres,
+# pgadmin — get their values this way, since they do not read Symfony's dotenv chain. GEWISWEB passes them the same
+# way. `setuplocalenv` guarantees the second file exists.
+COMPOSE := docker compose --env-file=.env --env-file=.env.local
 CONSOLE := $(COMPOSE) exec -T web bin/console
 
 start: builddev up ## Build and start the development stack

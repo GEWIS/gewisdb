@@ -18,6 +18,7 @@ services:
             string $mailToSubscriptionAddress: '%env(MAIL_TO_SUBSCRIPTION_ADDRESS)%'
             string $mailToSubscriptionName: '%env(MAIL_TO_SUBSCRIPTION_NAME)%'
             string $publicUrl: '%env(APP_URL)%'
+            string $joinUrl: 'https://%env(JOIN_HOSTNAME)%'
             string $stripeApiVersion: '%env(STRIPE_API_VERSION)%'
             string $stripeSecretKey: '%env(STRIPE_SECRET_KEY)%'
             string $stripeWebhookSigningKey: '%env(STRIPE_WEBHOOK_SIGNING_KEY)%'
