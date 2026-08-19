@@ -16,3 +16,7 @@ framework:
 when@test:
     framework:
         test: true
+        # PHP's own session handler cannot start a session in a process that has already produced output, which is
+        # every console-run test. The mock storage keeps the session in a file of its own instead.
+        session:
+            storage_factory_id: session.storage.factory.mock_file
