@@ -93,7 +93,7 @@
                     <form method="post" action="{{ path('member_update_approve', {lidnr: member.lidnr}) }}">
                         <input type="hidden" name="_csrf_token"
                                value="{{ csrf_token('member_update-' ~ member.lidnr) }}">
-                        <button type="submit" class="btn btn-success" name="approve" value="1">
+                        <button type="submit" class="btn btn-gewis-primary" name="approve" value="1">
                             {{ 'Apply Update'|trans }}
                         </button>
                     </form>

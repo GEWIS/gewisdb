@@ -53,7 +53,7 @@
                     <p>{{ 'This removes the account. Nothing it recorded is removed with it.'|trans }}</p>
                     <form method="post" action="{{ path('user_delete', {'id': user.id}) }}">
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('user_delete-' ~ user.id) }}">
-                        <button type="submit" class="btn btn-danger">
+                        <button type="submit" class="btn btn-outline-danger">
                             {{ 'Delete User'|trans }}
                         </button>
                     </form>

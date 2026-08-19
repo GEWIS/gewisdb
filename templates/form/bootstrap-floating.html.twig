@@ -62,3 +62,14 @@
         {{ form_errors(form) }}
     </div>
 {% endblock %}
+
+{#
+    A submit button is the theme's, not Bootstrap's. `bootstrap_5_layout` defaults it to `btn-primary`, which is the
+    framework blue, so every form that did not name a class by hand rendered a button from a different palette --
+    the login page among them. Naming the class in each template is what was being done instead, and it only holds
+    for as long as nobody forgets. A template that wants something else still passes it; this is only the default.
+#}
+{% block submit_widget %}
+    {% set attr = attr|merge({class: attr.class|default('btn-gewis-primary')|trim}) %}
+    {{ parent() }}
+{% endblock %}

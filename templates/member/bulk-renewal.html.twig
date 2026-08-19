@@ -127,7 +127,7 @@
     {% endif %}
 
     {% if null is same as(result) and null is not same as(preview) and preview.valid_count > 0 %}
-        {{ form_widget(form.intent, {attr: {class: 'btn btn-success'}}) }}
+        {{ form_widget(form.intent, {attr: {class: 'btn btn-gewis-primary'}}) }}
     {% else %}
         {# There is nothing to confirm yet, so the button is withheld rather than shown as a dead control. #}
         {% do form.intent.setRendered %}

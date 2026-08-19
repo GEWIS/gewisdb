@@ -178,7 +178,7 @@
                                       action="{{ path('join_prospective_member_delete', {'id': member.lidnr}) }}">
                                     <input type="hidden" name="_csrf_token"
                                            value="{{ csrf_token('prospective_member_delete-' ~ member.lidnr) }}">
-                                    <button type="submit" class="btn btn-danger">
+                                    <button type="submit" class="btn btn-outline-danger">
                                         {{ 'Delete Prospective Member'|trans }}
                                     </button>
                                 </form>
