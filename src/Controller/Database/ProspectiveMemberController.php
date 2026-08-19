@@ -225,7 +225,7 @@ final class ProspectiveMemberController extends AbstractController
             if (null !== $member) {
                 $this->addFlash('success', 'The membership has been confirmed.');
 
-                return $this->redirectToRoute('member_show', ['id' => $member->getLidnr()]);
+                return $this->redirectToRoute('member_show', ['lidnr' => $member->getLidnr()]);
             }
         }
 
