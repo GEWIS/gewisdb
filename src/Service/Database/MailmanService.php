@@ -254,7 +254,6 @@ class MailmanService
                     mailingListMember: $mailingListMember,
                     output: $output,
                     dryRun: $dryRun,
-                    sendWelcomeEmail: true,
                 );
             } elseif ($mailingListMember->getLastSyncOn() < $verifyTime) {
                 $this->verifyMemberOnMailingList(
@@ -424,7 +423,6 @@ class MailmanService
         MailingListMember $mailingListMember,
         OutputInterface $output,
         bool $dryRun,
-        bool $sendWelcomeEmail,
     ): void {
         $member = $mailingListMember->getMember();
         $listId = $mailingListMember->getMailingList()->getMailmanList()->getMailmanId();
@@ -438,17 +436,19 @@ class MailmanService
             'pre_verified' => true,
             'pre_confirmed' => true,
             'pre_approved' => true,
-            'send_welcome_message' => $sendWelcomeEmail,
+            // Mailman's own welcome message is never wanted: a subscription here follows from something the
+            // association already told the member about -- a registration, a renewal, a change they asked for -- and
+            // the mail Mailman would send says none of that. This asked for one on every subscription.
+            'send_welcome_message' => false,
             'delivery_mode' => self::MM_DELIVERYMODE_REGULAR,
             'delivery_status' => self::MM_DELIVERYSTATUS_ENABLED,
         ];
 
         $output->writeln(
             sprintf(
-                '--> Subscribing %s to %s (send_welcome_message=%s)',
+                '--> Subscribing %s to %s',
                 $data['subscriber'],
                 $data['list_id'],
-                (int) $data['send_welcome_message'],
             ),
             OutputInterface::VERBOSITY_VERY_VERBOSE,
         );
