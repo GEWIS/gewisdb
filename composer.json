@@ -23,6 +23,7 @@
         "doctrine/doctrine-bundle": "^3.3.1",
         "doctrine/doctrine-migrations-bundle": "^4.0.0",
         "doctrine/orm": "^3.6.7",
+        "dragonmantank/cron-expression": "^3.6",
         "fortawesome/font-awesome": "^7.3.1",
         "nelmio/cors-bundle": "^2.6.1",
         "nelmio/security-bundle": "*",

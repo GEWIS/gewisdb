@@ -1,3 +1,21 @@
+# The scheduler worker, as in docker-compose.yml, but on the development image and the mounted source so a change to
+# a command or a schedule takes effect on restart rather than on rebuild. `depends_on` is restated in full because a
+# merge replaces it, and here it also has to wait for the database it talks to directly.
+x-worker-dev: &worker_dev
+    image: abc.docker-registry.gewis.nl/db/gewisdb/web:development
+    build:
+        dockerfile: Dockerfile
+        context: .
+        target: gewisdb_web_development
+    volumes:
+        - ./:/app:rw
+        - /app/var/
+    depends_on:
+        postgresql:
+            condition: service_started
+        web:
+            condition: service_healthy
+
 services:
     postgresql:
         build: docker/postgresql
@@ -126,6 +144,8 @@ services:
             - web
         networks:
             - network
+    scheduler:
+        <<: *worker_dev
     web:
         image: abc.docker-registry.gewis.nl/db/gewisdb/web:development
         build:
