@@ -3,6 +3,9 @@ services:
         build: docker/postgresql
         env_file:
             - .env
+            # Not committed, and not every checkout has one, so compose is told it may be missing.
+            - path: .env.local
+              required: false
         volumes:
             - postgresql:/var/lib/postgresql/data:rw
         networks:
@@ -16,6 +19,9 @@ services:
             context: .
         env_file:
             - .env
+            # Not committed, and not every checkout has one, so compose is told it may be missing.
+            - path: .env.local
+              required: false
         depends_on:
             - postgresql
         networks:
@@ -23,8 +29,13 @@ services:
         ports:
             - "8080:80"
         restart: unless-stopped
+    # Mailpit, as GEWISWEB uses: it catches everything the application sends and shows it on :8025. It stands in for
+    # the postfix relay of the production stack, which is why it answers to the same name the web service depends on.
     postfix:
-        image: mailhog/mailhog
+        image: axllent/mailpit
+        hostname: mailpit
+        environment:
+            - MP_SMTP_BIND_ADDR=0.0.0.0:1025
         ports:
             - "8025:8025"
     mailman-core:
@@ -108,7 +119,7 @@ services:
         image: stripe/stripe-cli:latest
         command: listen --forward-to web:9725/member/subscribe/checkout/webhook --skip-update -e charge.refund.updated,checkout.session.expired,checkout.session.completed,checkout.session.async_payment_succeeded,checkout.session.async_payment_failed
         environment:
-            - STRIPE_API_KEY=${STRIPE_SECRET_KEY}
+            - STRIPE_API_KEY=${STRIPE_SECRET_KEY:-}
             - STRIPE_DEVICE_NAME="GEWISDB on ${HOST:-}${NAME:-}"
             - STRIPE_CLI_TELEMETRY_OPTOUT=1
         depends_on:
