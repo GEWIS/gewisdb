@@ -9,7 +9,8 @@ use Symfony\Component\Validator\Constraint;
 
 /**
  * Checks that the host of an e-mail address can actually receive mail. Symfony's Email constraint only checks the
- * syntax, while the registration form relies on the MX lookup that laminas-validator performed.
+ * syntax, which is not enough for the registration form: an address nobody can reach means a registration that
+ * cannot be completed.
  */
 #[Attribute(Attribute::TARGET_PROPERTY | Attribute::TARGET_METHOD | Attribute::IS_REPEATABLE)]
 class DeliverableEmailAddress extends Constraint
@@ -31,7 +32,11 @@ class DeliverableEmailAddress extends Constraint
         mixed $payload = null,
         array $options = [],
     ) {
-        parent::__construct($options, $groups, $payload);
+        parent::__construct(
+            $options,
+            $groups,
+            $payload,
+        );
 
         $this->message = $message ?? $this->message;
     }

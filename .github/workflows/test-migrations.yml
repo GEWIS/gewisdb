@@ -22,22 +22,26 @@ concurrency:
 
 env:
   # Shared compose file set for the docker compose invocations below.
-  COMPOSE_FILES: --file docker-compose.github.yml --file docker-compose.override.yml --file docker-compose.yml
+  COMPOSE_FILES: --file compose.github.yaml --file compose.override.yaml --file compose.yaml
   # ReportDB's migrations are a second set and the bundle only holds one; without --configuration the ledger's
   # migrations are applied to the report connection. Mirrors REPORT_MIGRATIONS in the Makefile.
   REPORT_MIGRATIONS: --em=report --configuration=migrations/report.yaml
+
+permissions: {}
 
 jobs:
   migration_seed:
     name: Check migrations and seed
     runs-on: ubuntu-latest
+    permissions:
+        contents: read
 
     steps:
       - name: Echo
         run: echo "This job should only run if entities, migrations, or fixtures are updated"
 
       - name: Checkout base branch
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ github.event.pull_request.base.ref }}
 
@@ -46,7 +50,7 @@ jobs:
         run: make setuplocalenv
 
       - name: setup docker buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@bb05f3f5519dd87d3ba754cc423b652a5edd6d2c # v4.2.0
 
       # --no-deps keeps this lightweight: only web + the database start, not the
       # sync-based mail/list services that web otherwise depends on.
@@ -89,7 +93,9 @@ jobs:
         run: docker compose $COMPOSE_FILES down
 
       - name: Checkout head branch
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+            persist-credentials: false
 
       - name: Prepare the local environment file
         run: make setuplocalenv

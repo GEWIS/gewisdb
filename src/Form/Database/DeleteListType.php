@@ -29,24 +29,35 @@ class DeleteListType extends AbstractType
         FormBuilderInterface $builder,
         array $options,
     ): void {
-        $builder->add('submit_yes', SubmitType::class, ['label' => t('Yes')]);
-        $builder->add('submit_no', SubmitType::class, ['label' => t('No')]);
+        $builder->add(
+            'submit_yes',
+            SubmitType::class,
+            ['label' => t('Yes')],
+        );
+        $builder->add(
+            'submit_no',
+            SubmitType::class,
+            ['label' => t('No')],
+        );
 
         // Only the "Yes" button confirms the deletion. Any other submission leaves the form invalid, so that a caller
         // that merely checks `isValid()` cannot delete a list on a "No".
-        $builder->addEventListener(FormEvents::POST_SUBMIT, static function (FormEvent $event): void {
-            $form = $event->getForm();
-            $confirmation = $form->get('submit_yes');
+        $builder->addEventListener(
+            FormEvents::POST_SUBMIT,
+            static function (FormEvent $event): void {
+                $form = $event->getForm();
+                $confirmation = $form->get('submit_yes');
 
-            if (
-                $confirmation instanceof ClickableInterface
-                && $confirmation->isClicked()
-            ) {
-                return;
-            }
+                if (
+                    $confirmation instanceof ClickableInterface
+                    && $confirmation->isClicked()
+                ) {
+                    return;
+                }
 
-            $form->addError(new FormError('Confirmation is required.'));
-        });
+                $form->addError(new FormError('Confirmation is required.'));
+            },
+        );
     }
 
     #[Override]

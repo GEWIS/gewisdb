@@ -43,7 +43,10 @@ class Annulment
      */
     public function annulsALaterDecision(AnnulmentModel $annulment): bool
     {
-        return !$this->annulmentService->isBefore($annulment->getTarget(), $annulment->getDecision());
+        return !$this->annulmentService->isBefore(
+            $annulment->getTarget(),
+            $annulment->getDecision(),
+        );
     }
 
     /**
@@ -59,7 +62,10 @@ class Annulment
         return array_values(array_filter(
             $this->annulmentRepository->getAnnulmentsForDecision($annulment->getTarget()),
             fn (AnnulmentModel $other): bool => $other !== $annulment
-                && $this->annulmentService->isBefore($other->getDecision(), $annulment->getDecision()),
+                && $this->annulmentService->isBefore(
+                    $other->getDecision(),
+                    $annulment->getDecision(),
+                ),
         ));
     }
 }

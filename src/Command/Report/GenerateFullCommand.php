@@ -56,12 +56,18 @@ class GenerateFullCommand extends Command
             // Generating a member generates their mailing list memberships along with them, which is why the lists
             // themselves have to exist by now.
             $output->writeln('generating members table');
-            $this->withProgressBar($output, $this->memberService->generate(...));
+            $this->withProgressBar(
+                $output,
+                $this->memberService->generate(...),
+            );
 
             // Replaying the meetings builds the decision tables and, along with them, everything derived from those
             // decisions: organs and their members, board members, and keyholders.
             $output->writeln('replaying meetings and decisions');
-            $this->withProgressBar($output, $this->meetingService->generate(...));
+            $this->withProgressBar(
+                $output,
+                $this->meetingService->generate(...),
+            );
         } finally {
             if (!$syncWasPaused) {
                 $this->apiService->resumeSyncNow();

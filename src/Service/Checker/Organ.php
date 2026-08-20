@@ -50,7 +50,10 @@ class Organ
     {
         $key = $meeting->getType()->value . '-' . $meeting->getNumber();
 
-        if (null !== $this->foundations && $key === $this->foundationsFor) {
+        if (
+            null !== $this->foundations
+            && $key === $this->foundationsFor
+        ) {
             return $this->foundations;
         }
 
@@ -66,7 +69,13 @@ class Organ
         foreach ($this->organRepository->getAllOrganFoundations($meeting) as $foundation) {
             $hash = $foundation->getHash();
 
-            if (in_array($hash, $abrogated, true)) {
+            if (
+                in_array(
+                    $hash,
+                    $abrogated,
+                    true,
+                )
+            ) {
                 continue;
             }
 

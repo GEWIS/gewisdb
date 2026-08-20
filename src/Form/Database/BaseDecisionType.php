@@ -53,9 +53,21 @@ class BaseDecisionType extends AbstractType
         }
 
         $builder
-            ->add('meeting', MeetingType::class, $meetingOptions)
-            ->add('point', HiddenType::class, $pointOptions)
-            ->add('decision', HiddenType::class, $numberOptions);
+            ->add(
+                'meeting',
+                MeetingType::class,
+                $meetingOptions,
+            )
+            ->add(
+                'point',
+                HiddenType::class,
+                $pointOptions,
+            )
+            ->add(
+                'decision',
+                HiddenType::class,
+                $numberOptions,
+            );
     }
 
     #[Override]
@@ -68,8 +80,26 @@ class BaseDecisionType extends AbstractType
             'number' => null,
         ]);
 
-        $resolver->setAllowedTypes('meeting', ['null', Meeting::class]);
-        $resolver->setAllowedTypes('point', ['null', 'int']);
-        $resolver->setAllowedTypes('number', ['null', 'int']);
+        $resolver->setAllowedTypes(
+            'meeting',
+            [
+                'null',
+                Meeting::class,
+            ],
+        );
+        $resolver->setAllowedTypes(
+            'point',
+            [
+                'null',
+                'int',
+            ],
+        );
+        $resolver->setAllowedTypes(
+            'number',
+            [
+                'null',
+                'int',
+            ],
+        );
     }
 }

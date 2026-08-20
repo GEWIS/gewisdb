@@ -38,9 +38,12 @@ class Email
         ?Address $replyTo = null,
         bool $bccReplyTo = false,
     ): void {
-        $replyTo ??= new Address($this->mailFromSecretaryAddress, $this->mailFromSecretaryName);
+        $replyTo ??= new Address(
+            $this->mailFromSecretaryAddress,
+            $this->mailFromSecretaryName,
+        );
 
-        $message = (new TemplatedEmail())
+        $message = new TemplatedEmail()
             ->from(new Address($this->mailFromAddress, $this->mailFromName))
             ->to($recipient)
             ->replyTo($replyTo)
@@ -57,6 +60,9 @@ class Email
 
     public function secretary(): Address
     {
-        return new Address($this->mailFromSecretaryAddress, $this->mailFromSecretaryName);
+        return new Address(
+            $this->mailFromSecretaryAddress,
+            $this->mailFromSecretaryName,
+        );
     }
 }

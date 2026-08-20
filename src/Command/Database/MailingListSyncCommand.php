@@ -40,7 +40,12 @@ class MailingListSyncCommand extends Command
             InputArgument::OPTIONAL,
             'Target backend: all|local|mailman|listmonk',
             'all',
-            ['all', 'local', 'mailman', 'listmonk'],
+            [
+                'all',
+                'local',
+                'mailman',
+                'listmonk',
+            ],
         );
 
         $this->addOption(
@@ -71,25 +76,43 @@ class MailingListSyncCommand extends Command
         switch ($backend) {
             case 'local':
                 $output->writeln('Syncing local mailing list membership:');
-                $this->mailingListService->syncLocalOnlyMembership($output, $dryRun);
+                $this->mailingListService->syncLocalOnlyMembership(
+                    $output,
+                    $dryRun,
+                );
                 break;
 
             case 'mailman':
                 $output->writeln('Syncing mailman mailing list membership:');
-                $this->mailmanService->syncMembership($output, $dryRun);
+                $this->mailmanService->syncMembership(
+                    $output,
+                    $dryRun,
+                );
                 break;
 
             case 'listmonk':
                 $output->writeln('Syncing listmonk mailing list membership:');
-                $this->listmonkService->syncMembership($output, $dryRun);
+                $this->listmonkService->syncMembership(
+                    $output,
+                    $dryRun,
+                );
                 break;
 
             case 'all':
             default:
                 $output->writeln('Syncing all mailing list backends:');
-                $this->mailingListService->syncLocalOnlyMembership($output, $dryRun);
-                $this->mailmanService->syncMembership($output, $dryRun);
-                $this->listmonkService->syncMembership($output, $dryRun);
+                $this->mailingListService->syncLocalOnlyMembership(
+                    $output,
+                    $dryRun,
+                );
+                $this->mailmanService->syncMembership(
+                    $output,
+                    $dryRun,
+                );
+                $this->listmonkService->syncMembership(
+                    $output,
+                    $dryRun,
+                );
                 break;
         }
 

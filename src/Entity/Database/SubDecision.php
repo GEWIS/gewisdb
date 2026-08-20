@@ -253,7 +253,11 @@ abstract class SubDecision
         string $template,
         array $replacements,
     ): string {
-        return str_replace(array_keys($replacements), $replacements, $template);
+        return str_replace(
+            array_keys($replacements),
+            $replacements,
+            $template,
+        );
     }
 
     /**
@@ -263,7 +267,10 @@ abstract class SubDecision
     {
         $language = AppLanguages::fromLangParam($translator->getLocale());
 
-        return $this->getTranslatedContent($translator, $language);
+        return $this->getTranslatedContent(
+            $translator,
+            $language,
+        );
     }
 
     /**

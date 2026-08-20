@@ -17,6 +17,10 @@ class VersionExpected extends ApiException
     ) {
         $message = 'API version expected, but none was given';
 
-        parent::__construct($message, $code, $previousThrowable);
+        parent::__construct(
+            $message,
+            $code,
+            $previousThrowable,
+        );
     }
 }

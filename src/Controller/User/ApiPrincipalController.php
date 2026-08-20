@@ -31,20 +31,29 @@ final class ApiPrincipalController extends AbstractController
     )]
     public function index(): Response
     {
-        return $this->render('user/api-principal/index.html.twig', [
-            'principals' => $this->apiPrincipalService->findAll(),
-        ]);
+        return $this->render(
+            'user/api-principal/index.html.twig',
+            [
+                'principals' => $this->apiPrincipalService->findAll(),
+            ],
+        );
     }
 
     #[Route(
         path: '/create',
         name: 'user_api_principal_create',
-        methods: ['GET', 'POST'],
+        methods: [
+            'GET',
+            'POST',
+        ],
     )]
     public function create(Request $request): Response
     {
         $principal = new ApiPrincipal();
-        $form = $this->createForm(ApiPrincipalType::class, $principal);
+        $form = $this->createForm(
+            ApiPrincipalType::class,
+            $principal,
+        );
         $form->handleRequest($request);
 
         if (
@@ -55,7 +64,10 @@ final class ApiPrincipalController extends AbstractController
 
             $this->addFlash(
                 'success',
-                t('Succesfully created %entity%!', ['%entity%' => t('API principal')]),
+                t(
+                    'Succesfully created %entity%!',
+                    ['%entity%' => t('API principal')],
+                ),
             );
             // The only moment the token is readable in full; from here on the principal only hands out a mask.
             $this->addFlash(
@@ -69,14 +81,20 @@ final class ApiPrincipalController extends AbstractController
             return $this->redirectToRoute('user_api_principal_index');
         }
 
-        return $this->render('user/api-principal/create.html.twig', ['form' => $form]);
+        return $this->render(
+            'user/api-principal/create.html.twig',
+            ['form' => $form],
+        );
     }
 
     #[Route(
         path: '/{id}',
         name: 'user_api_principal_edit',
         requirements: ['id' => '\d+'],
-        methods: ['GET', 'POST'],
+        methods: [
+            'GET',
+            'POST',
+        ],
     )]
     public function edit(
         Request $request,
@@ -88,7 +106,10 @@ final class ApiPrincipalController extends AbstractController
             return $this->redirectToIndexAsUnknown();
         }
 
-        $form = $this->createForm(ApiPrincipalType::class, $principal);
+        $form = $this->createForm(
+            ApiPrincipalType::class,
+            $principal,
+        );
         $form->handleRequest($request);
 
         if (
@@ -99,13 +120,19 @@ final class ApiPrincipalController extends AbstractController
 
             $this->addFlash(
                 'success',
-                t('Change(s) of %entity% have been saved!', ['%entity%' => t('API principal')]),
+                t(
+                    'Change(s) of %entity% have been saved!',
+                    ['%entity%' => t('API principal')],
+                ),
             );
 
             return $this->redirectToRoute('user_api_principal_index');
         }
 
-        return $this->render('user/api-principal/edit.html.twig', ['form' => $form]);
+        return $this->render(
+            'user/api-principal/edit.html.twig',
+            ['form' => $form],
+        );
     }
 
     #[Route(
@@ -130,7 +157,10 @@ final class ApiPrincipalController extends AbstractController
 
         $this->addFlash(
             'success',
-            t('Succesfully deleted %entity%!', ['%entity%' => t('API principal')]),
+            t(
+                'Succesfully deleted %entity%!',
+                ['%entity%' => t('API principal')],
+            ),
         );
 
         return $this->redirectToRoute('user_api_principal_index');
@@ -143,7 +173,10 @@ final class ApiPrincipalController extends AbstractController
     {
         $this->addFlash(
             'warning',
-            t('Could not find %entity%!', ['%entity%' => t('API principal')]),
+            t(
+                'Could not find %entity%!',
+                ['%entity%' => t('API principal')],
+            ),
         );
 
         return $this->redirectToRoute('user_api_principal_index');

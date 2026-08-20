@@ -32,11 +32,20 @@ class MeetingType extends AbstractType
         FormBuilderInterface $builder,
         array $options,
     ): void {
-        $builder->add('type', HiddenType::class);
-        $builder->add('number', HiddenType::class);
+        $builder->add(
+            'type',
+            HiddenType::class,
+        );
+        $builder->add(
+            'number',
+            HiddenType::class,
+        );
         // Rendered so the templates and the key code date checks have the meeting date at hand without another
         // lookup. It is not part of the meeting's identity and is never written back.
-        $builder->add('date', HiddenType::class);
+        $builder->add(
+            'date',
+            HiddenType::class,
+        );
 
         $builder->get('type')->addModelTransformer(new StringToEnumTransformer(MeetingTypes::class));
 

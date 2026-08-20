@@ -40,7 +40,11 @@ class StudentNumber extends Constraint
         mixed $payload = null,
         array $options = [],
     ) {
-        parent::__construct($options, $groups, $payload);
+        parent::__construct(
+            $options,
+            $groups,
+            $payload,
+        );
 
         $this->invalidFormatMessage = $invalidFormatMessage ?? $this->invalidFormatMessage;
         $this->failsElfproefMessage = $failsElfproefMessage ?? $this->failsElfproefMessage;

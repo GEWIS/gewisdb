@@ -15,6 +15,9 @@ class BoardMemberRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, BoardMember::class);
+        parent::__construct(
+            $registry,
+            BoardMember::class,
+        );
     }
 }

@@ -63,7 +63,10 @@ abstract class AbstractDecisionMapper implements DataMapperInterface
         $viewData->setPoint((int) $children['point']->getData());
         $viewData->setNumber((int) $children['decision']->getData());
 
-        $this->mapSubDecisions($children, $viewData);
+        $this->mapSubDecisions(
+            $children,
+            $viewData,
+        );
     }
 
     /**

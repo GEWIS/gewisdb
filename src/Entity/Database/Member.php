@@ -100,7 +100,10 @@ class Member
     #[OneToMany(
         targetEntity: Membership::class,
         mappedBy: 'member',
-        cascade: ['persist', 'remove'],
+        cascade: [
+            'persist',
+            'remove',
+        ],
     )]
     #[OrderBy(['startDate' => 'ASC'])]
     private Collection $memberships;
@@ -149,7 +152,10 @@ class Member
     #[OneToMany(
         targetEntity: Address::class,
         mappedBy: 'member',
-        cascade: ['persist', 'remove'],
+        cascade: [
+            'persist',
+            'remove',
+        ],
     )]
     private Collection $addresses;
 
@@ -184,7 +190,10 @@ class Member
     #[OneToMany(
         targetEntity: RenewalLink::class,
         mappedBy: 'member',
-        cascade: ['persist', 'remove'],
+        cascade: [
+            'persist',
+            'remove',
+        ],
     )]
     private Collection $renewalLinks;
 
@@ -196,7 +205,10 @@ class Member
     #[OneToMany(
         targetEntity: AuditEntry::class,
         mappedBy: 'member',
-        cascade: ['persist', 'remove'],
+        cascade: [
+            'persist',
+            'remove',
+        ],
     )]
     private Collection $auditEntries;
 
@@ -518,11 +530,17 @@ class Member
         $expiration = null;
 
         foreach ($this->getMemberships() as $membership) {
-            if (!$membership->getType()->isFormalMember() && $formalMemberOnly) {
+            if (
+                !$membership->getType()->isFormalMember()
+                && $formalMemberOnly
+            ) {
                 continue;
             }
 
-            if (null !== $expiration && $membership->getEndDate() <= $expiration) {
+            if (
+                null !== $expiration
+                && $membership->getEndDate() <= $expiration
+            ) {
                 continue;
             }
 
@@ -599,7 +617,9 @@ class Member
     {
         $lastMembership = $this->memberships->last();
 
-        return false === $lastMembership ? null : $lastMembership;
+        return false === $lastMembership
+            ? null
+            : $lastMembership;
     }
 
     /**

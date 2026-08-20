@@ -95,7 +95,10 @@ class Decision
     #[OneToMany(
         targetEntity: SubDecision::class,
         mappedBy: 'decision',
-        cascade: ['persist', 'remove'],
+        cascade: [
+            'persist',
+            'remove',
+        ],
     )]
     #[OrderBy(value: ['sequence' => 'ASC'])]
     private Collection $subdecisions;
@@ -298,7 +301,11 @@ class Decision
         TranslatorInterface $translator,
         bool $escapeCharacters = false,
     ): string {
-        return $this->getTranslatedContent($translator, AppLanguages::Dutch, $escapeCharacters);
+        return $this->getTranslatedContent(
+            $translator,
+            AppLanguages::Dutch,
+            $escapeCharacters,
+        );
     }
 
     /**
@@ -311,12 +318,20 @@ class Decision
     ): string {
         $content = [];
         foreach ($this->getSubdecisions() as $subdecision) {
-            $content[] = $subdecision->getTranslatedContent($translator, $language);
+            $content[] = $subdecision->getTranslatedContent(
+                $translator,
+                $language,
+            );
         }
 
-        $contents = implode(' ', $content);
+        $contents = implode(
+            ' ',
+            $content,
+        );
 
-        return $escapeCharacters ? $this->escapeLaTeXCharacters($contents) : $contents;
+        return $escapeCharacters
+            ? $this->escapeLaTeXCharacters($contents)
+            : $contents;
     }
 
     /**

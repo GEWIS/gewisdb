@@ -15,6 +15,9 @@ class MinutesRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Minutes::class);
+        parent::__construct(
+            $registry,
+            Minutes::class,
+        );
     }
 }

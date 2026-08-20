@@ -7,6 +7,8 @@ namespace App\Security\Api;
 use App\Entity\User\ApiPrincipal;
 use Symfony\Component\Security\Http\Authenticator\Token\PostAuthenticationToken;
 
+use function assert;
+
 /**
  * Security token of a request that authenticated with an API bearer token.
  *
@@ -19,13 +21,17 @@ final class ApiToken extends PostAuthenticationToken
         ApiPrincipalUser $user,
         string $firewallName,
     ) {
-        parent::__construct($user, $firewallName, $user->getRoles());
+        parent::__construct(
+            $user,
+            $firewallName,
+            $user->getRoles(),
+        );
     }
 
     public function getApiPrincipal(): ApiPrincipal
     {
-        /** @var ApiPrincipalUser $user */
         $user = $this->getUser();
+        assert($user instanceof ApiPrincipalUser);
 
         return $user->getApiPrincipal();
     }

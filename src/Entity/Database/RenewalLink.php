@@ -82,7 +82,7 @@ class RenewalLink extends ActionLink
      */
     public function linkExpired(): bool
     {
-        $diff = (new DateTime())->diff($this->currentExpiration);
+        $diff = new DateTime()->diff($this->currentExpiration);
 
         return 1 === $diff->invert && ($diff->days > 30);
     }

@@ -32,10 +32,22 @@ class DecisionType extends AbstractType
         FormBuilderInterface $builder,
         array $options,
     ): void {
-        $builder->add('meeting_type', HiddenType::class);
-        $builder->add('meeting_number', HiddenType::class);
-        $builder->add('point', HiddenType::class);
-        $builder->add('number', HiddenType::class);
+        $builder->add(
+            'meeting_type',
+            HiddenType::class,
+        );
+        $builder->add(
+            'meeting_number',
+            HiddenType::class,
+        );
+        $builder->add(
+            'point',
+            HiddenType::class,
+        );
+        $builder->add(
+            'number',
+            HiddenType::class,
+        );
 
         $builder->get('meeting_type')->addModelTransformer(new StringToEnumTransformer(MeetingTypes::class));
 

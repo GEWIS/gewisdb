@@ -38,11 +38,26 @@ class SubDecisionType extends AbstractType
         FormBuilderInterface $builder,
         array $options,
     ): void {
-        $builder->add('meeting_type', HiddenType::class);
-        $builder->add('meeting_number', HiddenType::class);
-        $builder->add('decision_point', HiddenType::class);
-        $builder->add('decision_number', HiddenType::class);
-        $builder->add('sequence', HiddenType::class);
+        $builder->add(
+            'meeting_type',
+            HiddenType::class,
+        );
+        $builder->add(
+            'meeting_number',
+            HiddenType::class,
+        );
+        $builder->add(
+            'decision_point',
+            HiddenType::class,
+        );
+        $builder->add(
+            'decision_number',
+            HiddenType::class,
+        );
+        $builder->add(
+            'sequence',
+            HiddenType::class,
+        );
 
         $builder->get('meeting_type')->addModelTransformer(new StringToEnumTransformer(MeetingTypes::class));
 
@@ -61,12 +76,18 @@ class SubDecisionType extends AbstractType
             'invalid_message' => 'Select an existing subdecision.',
         ]);
 
-        $resolver->setAllowedTypes('subdecision_class', 'string');
+        $resolver->setAllowedTypes(
+            'subdecision_class',
+            'string',
+        );
         $resolver->setAllowedValues(
             'subdecision_class',
             static function (string $subDecisionClass): bool {
                 return SubDecision::class === $subDecisionClass
-                    || is_subclass_of($subDecisionClass, SubDecision::class);
+                    || is_subclass_of(
+                        $subDecisionClass,
+                        SubDecision::class,
+                    );
             },
         );
     }

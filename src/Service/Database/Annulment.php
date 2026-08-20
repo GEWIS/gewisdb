@@ -62,10 +62,16 @@ class Annulment
         $warnings = [];
 
         foreach ($decision->getSubdecisions() as $subDecision) {
-            $warnings = [...$warnings, ...$this->assertNoDependents($subDecision)];
+            $warnings = [
+                ...$warnings,
+                ...$this->assertNoDependents($subDecision),
+            ];
         }
 
-        $this->assertOrgansRemainValid($decision, true);
+        $this->assertOrgansRemainValid(
+            $decision,
+            true,
+        );
 
         return array_values(array_unique($warnings));
     }
@@ -89,16 +95,30 @@ class Annulment
         foreach ($target->getSubdecisions() as $subDecision) {
             foreach ($this->findRelated($subDecision) as $related) {
                 if (
-                    $this->isSameDecision($related, $subDecision)
-                    || $this->isSameDecision($related, $annulment)
+                    $this->isSameDecision(
+                        $related,
+                        $subDecision,
+                    )
+                    || $this->isSameDecision(
+                        $related,
+                        $annulment,
+                    )
                 ) {
                     continue;
                 }
 
-                if ($this->isAfter($related, $annulment)) {
-                    throw $this->cannot($subDecision, $this->translator->trans(
-                        'it was decided about again after this annulment was made',
-                    ));
+                if (
+                    $this->isAfter(
+                        $related,
+                        $annulment,
+                    )
+                ) {
+                    throw $this->cannot(
+                        $subDecision,
+                        $this->translator->trans(
+                            'it was decided about again after this annulment was made',
+                        ),
+                    );
                 }
 
                 // Looked up rather than read off the inverse side, so that an annulment made earlier in this same
@@ -110,18 +130,29 @@ class Annulment
                 );
 
                 foreach ($laterAnnulments as $laterAnnulment) {
-                    if (!$this->isAfter($laterAnnulment, $annulment)) {
+                    if (
+                        !$this->isAfter(
+                            $laterAnnulment,
+                            $annulment,
+                        )
+                    ) {
                         continue;
                     }
 
-                    throw $this->cannot($subDecision, $this->translator->trans(
-                        'a related decision was annulled after this annulment was made',
-                    ));
+                    throw $this->cannot(
+                        $subDecision,
+                        $this->translator->trans(
+                            'a related decision was annulled after this annulment was made',
+                        ),
+                    );
                 }
             }
         }
 
-        $this->assertOrgansRemainValid($target, false);
+        $this->assertOrgansRemainValid(
+            $target,
+            false,
+        );
     }
 
     /**
@@ -142,8 +173,16 @@ class Annulment
         bool $annulled,
     ): void {
         foreach ($this->findAffectedFoundations($decision) as $foundation) {
-            $before = $this->findActiveInstallations($foundation, $decision, !$annulled);
-            $after = $this->findActiveInstallations($foundation, $decision, $annulled);
+            $before = $this->findActiveInstallations(
+                $foundation,
+                $decision,
+                !$annulled,
+            );
+            $after = $this->findActiveInstallations(
+                $foundation,
+                $decision,
+                $annulled,
+            );
 
             if (
                 null === $before
@@ -154,20 +193,34 @@ class Annulment
                 continue;
             }
 
-            $violations = $this->findOrganViolations($foundation, $after);
+            $violations = $this->findOrganViolations(
+                $foundation,
+                $after,
+            );
 
             if ([] === $violations) {
                 continue;
             }
 
-            $existing = $this->findOrganViolations($foundation, $before);
+            $existing = $this->findOrganViolations(
+                $foundation,
+                $before,
+            );
 
             foreach ($violations as $rule => $reason) {
-                if (array_key_exists($rule, $existing)) {
+                if (
+                    array_key_exists(
+                        $rule,
+                        $existing,
+                    )
+                ) {
                     continue;
                 }
 
-                throw $this->cannot($decision, $reason);
+                throw $this->cannot(
+                    $decision,
+                    $reason,
+                );
             }
         }
     }
@@ -213,7 +266,13 @@ class Annulment
         DecisionModel $toggled,
         bool $annulled,
     ): ?array {
-        if ($this->countsAsAnnulled($foundation->getDecision(), $toggled, $annulled)) {
+        if (
+            $this->countsAsAnnulled(
+                $foundation->getDecision(),
+                $toggled,
+                $annulled,
+            )
+        ) {
             return null;
         }
 
@@ -225,7 +284,13 @@ class Annulment
         );
 
         foreach ($references as $reference) {
-            if ($this->countsAsAnnulled($reference->getDecision(), $toggled, $annulled)) {
+            if (
+                $this->countsAsAnnulled(
+                    $reference->getDecision(),
+                    $toggled,
+                    $annulled,
+                )
+            ) {
                 continue;
             }
 
@@ -244,7 +309,13 @@ class Annulment
                     $reference,
                 ) as $discharge
             ) {
-                if ($this->countsAsAnnulled($discharge->getDecision(), $toggled, $annulled)) {
+                if (
+                    $this->countsAsAnnulled(
+                        $discharge->getDecision(),
+                        $toggled,
+                        $annulled,
+                    )
+                ) {
                     continue;
                 }
 
@@ -344,7 +415,10 @@ class Annulment
             $type->requiresChair()
             && 0 === $chairs
         ) {
-            $violations['chair'] = sprintf($this->translator->trans('it would leave %s without a chair'), $abbr);
+            $violations['chair'] = sprintf(
+                $this->translator->trans('it would leave %s without a chair'),
+                $abbr,
+            );
         }
 
         $minimum = $type->getMinimumMembers();
@@ -388,7 +462,12 @@ class Annulment
             case $subDecision instanceof FoundationModel:
                 // Every surviving reference (installation, discharge, abrogation) keeps the organ alive.
                 $this->assertNone(
-                    $this->findDependents(FoundationReferenceModel::class, 'foundation', $subDecision, $subDecision),
+                    $this->findDependents(
+                        FoundationReferenceModel::class,
+                        'foundation',
+                        $subDecision,
+                        $subDecision,
+                    ),
                     $subDecision,
                     $this->translator->trans('the organ is still referenced by other decisions'),
                 );
@@ -397,14 +476,27 @@ class Annulment
             case $subDecision instanceof AbrogationModel:
                 $foundation = $subDecision->getFoundation();
                 $this->assertNone(
-                    $this->findDependents(AbrogationModel::class, 'foundation', $foundation, $subDecision),
+                    $this->findDependents(
+                        AbrogationModel::class,
+                        'foundation',
+                        $foundation,
+                        $subDecision,
+                    ),
                     $subDecision,
                     $this->translator->trans('the organ was also abolished by another decision'),
                 );
                 $this->assertNone(
                     array_filter(
-                        $this->findDependents(InstallationModel::class, 'foundation', $foundation, $subDecision),
-                        fn (InstallationModel $installation): bool => $this->isAfter($installation, $subDecision),
+                        $this->findDependents(
+                            InstallationModel::class,
+                            'foundation',
+                            $foundation,
+                            $subDecision,
+                        ),
+                        fn (InstallationModel $installation): bool => $this->isAfter(
+                            $installation,
+                            $subDecision,
+                        ),
                     ),
                     $subDecision,
                     $this->translator->trans('members were installed in the organ after it was abolished'),
@@ -413,12 +505,22 @@ class Annulment
 
             case $subDecision instanceof InstallationModel:
                 $this->assertNone(
-                    $this->findDependents(DischargeModel::class, 'installation', $subDecision, $subDecision),
+                    $this->findDependents(
+                        DischargeModel::class,
+                        'installation',
+                        $subDecision,
+                        $subDecision,
+                    ),
                     $subDecision,
                     $this->translator->trans('the member was discharged after being installed'),
                 );
                 $this->assertNone(
-                    $this->findDependents(ReappointmentModel::class, 'installation', $subDecision, $subDecision),
+                    $this->findDependents(
+                        ReappointmentModel::class,
+                        'installation',
+                        $subDecision,
+                        $subDecision,
+                    ),
                     $subDecision,
                     $this->translator->trans('the installation was prolonged after it was made'),
                 );
@@ -432,7 +534,12 @@ class Annulment
                 $warnings = [
                     ...$warnings,
                     ...$this->warnAbout(
-                        $this->findDependents(DischargeModel::class, 'installation', $installation, $subDecision),
+                        $this->findDependents(
+                            DischargeModel::class,
+                            'installation',
+                            $installation,
+                            $subDecision,
+                        ),
                         $subDecision,
                         $this->translator->trans('the member was discharged after being reappointed'),
                     ),
@@ -444,7 +551,10 @@ class Annulment
                                 $installation,
                                 $subDecision,
                             ),
-                            fn (ReappointmentModel $other): bool => $this->isAfter($other, $subDecision),
+                            fn (ReappointmentModel $other): bool => $this->isAfter(
+                                $other,
+                                $subDecision,
+                            ),
                         ),
                         $subDecision,
                         $this->translator->trans('the installation was prolonged again afterwards'),
@@ -467,12 +577,22 @@ class Annulment
 
             case $subDecision instanceof BoardInstallationModel:
                 $this->assertNone(
-                    $this->findDependents(BoardReleaseModel::class, 'installation', $subDecision, $subDecision),
+                    $this->findDependents(
+                        BoardReleaseModel::class,
+                        'installation',
+                        $subDecision,
+                        $subDecision,
+                    ),
                     $subDecision,
                     $this->translator->trans('the board member was released after being installed'),
                 );
                 $this->assertNone(
-                    $this->findDependents(BoardDischargeModel::class, 'installation', $subDecision, $subDecision),
+                    $this->findDependents(
+                        BoardDischargeModel::class,
+                        'installation',
+                        $subDecision,
+                        $subDecision,
+                    ),
                     $subDecision,
                     $this->translator->trans('the board member was discharged after being installed'),
                 );
@@ -481,12 +601,22 @@ class Annulment
             case $subDecision instanceof BoardReleaseModel:
                 $installation = $subDecision->getInstallation();
                 $this->assertNone(
-                    $this->findDependents(BoardReleaseModel::class, 'installation', $installation, $subDecision),
+                    $this->findDependents(
+                        BoardReleaseModel::class,
+                        'installation',
+                        $installation,
+                        $subDecision,
+                    ),
                     $subDecision,
                     $this->translator->trans('the board member was also released by another decision'),
                 );
                 $this->assertNone(
-                    $this->findDependents(BoardDischargeModel::class, 'installation', $installation, $subDecision),
+                    $this->findDependents(
+                        BoardDischargeModel::class,
+                        'installation',
+                        $installation,
+                        $subDecision,
+                    ),
                     $subDecision,
                     $this->translator->trans('the board member was discharged after being released'),
                 );
@@ -507,7 +637,12 @@ class Annulment
 
             case $subDecision instanceof KeyGrantingModel:
                 $this->assertNone(
-                    $this->findDependents(KeyWithdrawalModel::class, 'granting', $subDecision, $subDecision),
+                    $this->findDependents(
+                        KeyWithdrawalModel::class,
+                        'granting',
+                        $subDecision,
+                        $subDecision,
+                    ),
                     $subDecision,
                     $this->translator->trans('the key code was withdrawn after it was granted'),
                 );
@@ -575,14 +710,19 @@ class Annulment
             return;
         }
 
-        throw $this->cannot($subDecision, $reason);
+        throw $this->cannot(
+            $subDecision,
+            $reason,
+        );
     }
 
     private function cannot(
         DecisionModel|SubDecisionModel $decision,
         string $reason,
     ): AnnulmentNotPossible {
-        $decision = $decision instanceof SubDecisionModel ? $decision->getDecision() : $decision;
+        $decision = $decision instanceof SubDecisionModel
+            ? $decision->getDecision()
+            : $decision;
 
         return new AnnulmentNotPossible(sprintf(
             $this->translator->trans('Decision %s %d.%d.%d cannot be annulled, because %s.'),
@@ -624,20 +764,30 @@ class Annulment
                         continue;
                     }
 
-                    $related = [...$related, ...$this->findInstallationReferences($reference)];
+                    $related = [
+                        ...$related,
+                        ...$this->findInstallationReferences($reference),
+                    ];
                 }
 
                 break;
 
             case $anchor instanceof InstallationModel:
-                $related = [...$related, ...$this->findInstallationReferences($anchor)];
+                $related = [
+                    ...$related,
+                    ...$this->findInstallationReferences($anchor),
+                ];
                 break;
 
             case $anchor instanceof BoardInstallationModel:
                 foreach ([BoardReleaseModel::class, BoardDischargeModel::class] as $type) {
                     $related = [
                         ...$related,
-                        ...$this->meetingRepository->findReferencingSubDecisions($type, 'installation', $anchor),
+                        ...$this->meetingRepository->findReferencingSubDecisions(
+                            $type,
+                            'installation',
+                            $anchor,
+                        ),
                     ];
                 }
 
@@ -668,7 +818,11 @@ class Annulment
         foreach ([DischargeModel::class, ReappointmentModel::class] as $type) {
             $references = [
                 ...$references,
-                ...$this->meetingRepository->findReferencingSubDecisions($type, 'installation', $installation),
+                ...$this->meetingRepository->findReferencingSubDecisions(
+                    $type,
+                    'installation',
+                    $installation,
+                ),
             ];
         }
 
@@ -711,9 +865,18 @@ class Annulment
         SubDecisionModel $subDecision,
     ): array {
         return array_values(array_filter(
-            $this->meetingRepository->findReferencingSubDecisions($type, $property, $referenced),
+            $this->meetingRepository->findReferencingSubDecisions(
+                $type,
+                $property,
+                $referenced,
+            ),
             function (SubDecisionModel $reference) use ($subDecision): bool {
-                if ($this->isSameDecision($reference, $subDecision)) {
+                if (
+                    $this->isSameDecision(
+                        $reference,
+                        $subDecision,
+                    )
+                ) {
                     return false;
                 }
 

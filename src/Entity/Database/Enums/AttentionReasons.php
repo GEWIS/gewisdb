@@ -38,11 +38,26 @@ enum AttentionReasons: string implements TranslatableInterface
         return match ($this) {
             self::MissingEmail => new TranslatableMessage('No email address'),
             self::MissingStudentNumberOrdinary => new TranslatableMessage('Ordinary member without student number'),
-            self::ExpiringExternalActive => self::expiring(MembershipTypes::External, 'active'),
-            self::ExpiringExternalNonActive => self::expiring(MembershipTypes::External, 'non-active'),
-            self::ExpiringOrdinaryActive => self::expiring(MembershipTypes::Ordinary, 'active'),
-            self::ExpiringOrdinaryNonActive => self::expiring(MembershipTypes::Ordinary, 'non-active'),
-            self::ExpiringGraduateActiveInactive => self::expiring(MembershipTypes::Graduate, 'active/inactive'),
+            self::ExpiringExternalActive => self::expiring(
+                MembershipTypes::External,
+                'active',
+            ),
+            self::ExpiringExternalNonActive => self::expiring(
+                MembershipTypes::External,
+                'non-active',
+            ),
+            self::ExpiringOrdinaryActive => self::expiring(
+                MembershipTypes::Ordinary,
+                'active',
+            ),
+            self::ExpiringOrdinaryNonActive => self::expiring(
+                MembershipTypes::Ordinary,
+                'non-active',
+            ),
+            self::ExpiringGraduateActiveInactive => self::expiring(
+                MembershipTypes::Graduate,
+                'active/inactive',
+            ),
             default => new TranslatableMessage('Unknown reason'),
         };
     }
@@ -52,7 +67,10 @@ enum AttentionReasons: string implements TranslatableInterface
         TranslatorInterface $translator,
         ?string $locale = null,
     ): string {
-        return $this->getLabel()->trans($translator, $locale);
+        return $this->getLabel()->trans(
+            $translator,
+            $locale,
+        );
     }
 
     /**
@@ -126,9 +144,12 @@ enum AttentionReasons: string implements TranslatableInterface
         MembershipTypes $type,
         string $membership,
     ): TranslatableMessage {
-        return new TranslatableMessage('%type% %membership% member expiring soon', [
-            '%type%' => $type,
-            '%membership%' => new TranslatableMessage($membership),
-        ]);
+        return new TranslatableMessage(
+            '%type% %membership% member expiring soon',
+            [
+                '%type%' => $type,
+                '%membership%' => new TranslatableMessage($membership),
+            ],
+        );
     }
 }

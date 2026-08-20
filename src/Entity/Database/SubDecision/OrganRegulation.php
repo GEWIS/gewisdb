@@ -191,9 +191,15 @@ class OrganRegulation extends SubDecision
             OrganTypes::Committee === $this->getOrganType()
             || OrganTypes::KCC === $this->getOrganType()
         ) {
-            $documentType = $translator->trans('commissiereglement', locale: $language->getLangParam());
+            $documentType = $translator->trans(
+                'commissiereglement',
+                locale: $language->getLangParam(),
+            );
         } elseif (OrganTypes::Fraternity === $this->getOrganType()) {
-            $documentType = $translator->trans('dispuutsreglement', locale: $language->getLangParam());
+            $documentType = $translator->trans(
+                'dispuutsreglement',
+                locale: $language->getLangParam(),
+            );
         } else {
             throw new ValueError();
         }
@@ -203,15 +209,33 @@ class OrganRegulation extends SubDecision
             '%AUTHOR%' => $this->getMember()->getFullName(),
             '%DOCUMENTTYPE%' => $documentType,
             '%VERSION%' => $this->getVersion(),
-            '%DATE%' => $this->formatDate($this->getDate(), $language),
+            '%DATE%' => $this->formatDate(
+                $this->getDate(),
+                $language,
+            ),
             '%APPROVAL%' => $this->getApproval()
-                ? $translator->trans('goedgekeurd', locale: $language->getLangParam())
-                : $translator->trans('afgekeurd', locale: $language->getLangParam()),
+                ? $translator->trans(
+                    'goedgekeurd',
+                    locale: $language->getLangParam(),
+                )
+                : $translator->trans(
+                    'afgekeurd',
+                    locale: $language->getLangParam(),
+                ),
             '%CHANGES%' => $this->getApproval() && $this->getChanges()
-                ? $translator->trans(' met genoemde wijzigingen', locale: $language->getLangParam())
+                ? $translator->trans(
+                    ' met genoemde wijzigingen',
+                    locale: $language->getLangParam(),
+                )
                 : '',
         ];
 
-        return $this->replaceContentPlaceholders($this->getTranslatedTemplate($translator, $language), $replacements);
+        return $this->replaceContentPlaceholders(
+            $this->getTranslatedTemplate(
+                $translator,
+                $language,
+            ),
+            $replacements,
+        );
     }
 }

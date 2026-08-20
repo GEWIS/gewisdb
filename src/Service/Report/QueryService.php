@@ -29,7 +29,10 @@ class QueryService
      * it pointed at. Saved queries are stored verbatim and are years old, so both keep working: they are expanded to
      * the entities' current namespace before the query is handed to the ORM.
      */
-    private const array ENTITY_PREFIXES = ['db:', 'Report\\Model\\'];
+    private const array ENTITY_PREFIXES = [
+        'db:',
+        'Report\\Model\\',
+    ];
 
     private const string ENTITY_NAMESPACE = 'App\\Entity\\Report\\';
 
@@ -95,16 +98,28 @@ class QueryService
          * TODO: make an InputFilter for this
          */
         $q = '';
-        $arr = explode("\n", $query);
+        $arr = explode(
+            "\n",
+            $query,
+        );
         foreach ($arr as $line) {
-            if (preg_match('/^-- /i', $line)) {
+            if (
+                preg_match(
+                    '/^-- /i',
+                    $line,
+                )
+            ) {
                 continue;
             }
 
             $q .= $line . "\n";
         }
 
-        $dql = str_replace(self::ENTITY_PREFIXES, self::ENTITY_NAMESPACE, $q);
+        $dql = str_replace(
+            self::ENTITY_PREFIXES,
+            self::ENTITY_NAMESPACE,
+            $q,
+        );
 
         /** @var array<array-key, array<string, mixed>> $rows */
         $rows = $this->emReport->createQuery($dql)->getResult(AbstractQuery::HYDRATE_SCALAR);
@@ -134,12 +149,19 @@ class QueryService
         $metas = $this->emReport->getMetadataFactory()->getAllMetadata();
 
         foreach ($metas as $meta) {
-            $class = preg_replace('/^App\\\\Entity\\\\Report\\\\/', 'db:', $meta->getName());
+            $class = preg_replace(
+                '/^App\\\\Entity\\\\Report\\\\/',
+                'db:',
+                $meta->getName(),
+            );
 
             if (null === $class) {
                 // preg_replace can only return null on error, so this should never happen.
                 throw new RuntimeException(
-                    sprintf('An error occurred while processing entity class "%s"', $meta->getName()),
+                    sprintf(
+                        'An error occurred while processing entity class "%s"',
+                        $meta->getName(),
+                    ),
                 );
             }
 

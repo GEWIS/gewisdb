@@ -34,7 +34,10 @@ class MeetingFixture extends Fixture implements DependentFixtureInterface
         $meeting->setNumber(1);
         $meeting->setType(MeetingTypes::BV);
         $manager->persist($meeting);
-        $this->addReference(self::REF_MEETING_BV1, $meeting);
+        $this->addReference(
+            self::REF_MEETING_BV1,
+            $meeting,
+        );
 
         $decision = new Decision();
         $decision->setMeeting($meeting);
@@ -53,7 +56,10 @@ class MeetingFixture extends Fixture implements DependentFixtureInterface
         $manager->persist($installation);
         $manager->flush();
 
-        $this->addReference(self::REF_SUBDEC_BOARDINSTALL, $installation);
+        $this->addReference(
+            self::REF_SUBDEC_BOARDINSTALL,
+            $installation,
+        );
     }
 
     /**

@@ -35,7 +35,10 @@ class MeetingRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Meeting::class);
+        parent::__construct(
+            $registry,
+            Meeting::class,
+        );
     }
 
     /**
@@ -58,14 +61,27 @@ class MeetingRepository extends ServiceEntityRepository
         $fields = [];
         $fields[] = 'LOWER(m.type)';
         $fields[] = 'm.number';
-        $fields = implode(', ', $fields);
+        $fields = implode(
+            ', ',
+            $fields,
+        );
         $fields = 'CONCAT(' . $fields . ')';
 
         $qb->where($fields . ' LIKE :search')
             ->orWhere('CONCAT(m.number, \'\') LIKE :search')
-            ->orderBy('m.date', 'DESC');
+            ->orderBy(
+                'm.date',
+                'DESC',
+            );
 
-        $qb->setParameter(':search', str_replace(' ', '', strtolower($query)) . '%');
+        $qb->setParameter(
+            ':search',
+            str_replace(
+                ' ',
+                '',
+                strtolower($query),
+            ) . '%',
+        );
 
         return $qb->getQuery()->getResult();
     }
@@ -85,23 +101,44 @@ class MeetingRepository extends ServiceEntityRepository
     ): Paginator {
         $qb = $this->createQueryBuilder('m')
             ->addSelect('(CASE WHEN m.type = :virtual_meeting THEN 1 ELSE 0 END) AS HIDDEN virtSort')
-            ->setParameter('virtual_meeting', MeetingTypes::VIRT)
-            ->addOrderBy('m.date', 'DESC')
-            ->addOrderBy('virtSort', 'ASC')
+            ->setParameter(
+                'virtual_meeting',
+                MeetingTypes::VIRT,
+            )
+            ->addOrderBy(
+                'm.date',
+                'DESC',
+            )
+            ->addOrderBy(
+                'virtSort',
+                'ASC',
+            )
             // Type and number are the identity of a meeting, and they are ordered on so that two meetings sharing a
             // date and a virtSort cannot swap places between the count query and the page query, which would show one
             // of them twice and leave the other out of the register entirely.
-            ->addOrderBy('m.type', 'ASC')
-            ->addOrderBy('m.number', 'ASC')
+            ->addOrderBy(
+                'm.type',
+                'ASC',
+            )
+            ->addOrderBy(
+                'm.number',
+                'ASC',
+            )
             ->setFirstResult(($page - 1) * $pageSize)
             ->setMaxResults($pageSize);
 
         if (null !== $type) {
             $qb->andWhere('m.type = :type')
-                ->setParameter('type', $type);
+                ->setParameter(
+                    'type',
+                    $type,
+                );
         }
 
-        return new Paginator($qb->getQuery(), false);
+        return new Paginator(
+            $qb->getQuery(),
+            false,
+        );
     }
 
     /**
@@ -112,7 +149,10 @@ class MeetingRepository extends ServiceEntityRepository
     public function countsByType(): array
     {
         $rows = $this->createQueryBuilder('m')
-            ->select('m.type AS type', 'COUNT(m.number) AS total')
+            ->select(
+                'm.type AS type',
+                'COUNT(m.number) AS total',
+            )
             ->groupBy('m.type')
             ->getQuery()
             ->getResult();
@@ -149,8 +189,15 @@ class MeetingRepository extends ServiceEntityRepository
         }
 
         $qb = $this->createQueryBuilder('m')
-            ->select('m.type AS type', 'm.number AS number', 'COUNT(d) AS total')
-            ->leftJoin('m.decisions', 'd')
+            ->select(
+                'm.type AS type',
+                'm.number AS number',
+                'COUNT(d) AS total',
+            )
+            ->leftJoin(
+                'm.decisions',
+                'd',
+            )
             ->groupBy('m.type')
             ->addGroupBy('m.number');
 
@@ -160,9 +207,18 @@ class MeetingRepository extends ServiceEntityRepository
         $pairs = [];
 
         foreach (array_values($meetings) as $index => $meeting) {
-            $pairs[] = $qb->expr()->andX('m.type = :type' . $index, 'm.number = :number' . $index);
-            $qb->setParameter('type' . $index, $meeting->getType())
-                ->setParameter('number' . $index, $meeting->getNumber());
+            $pairs[] = $qb->expr()->andX(
+                'm.type = :type' . $index,
+                'm.number = :number' . $index,
+            );
+            $qb->setParameter(
+                'type' . $index,
+                $meeting->getType(),
+            )
+                ->setParameter(
+                    'number' . $index,
+                    $meeting->getNumber(),
+                );
         }
 
         $rows = $qb->andWhere($qb->expr()->orX(...$pairs))->getQuery()->getResult();
@@ -190,22 +246,43 @@ class MeetingRepository extends ServiceEntityRepository
 
         $qb->addSelect('COUNT(d)')
                 ->addSelect('(CASE WHEN m.type = :virtual_meeting THEN 1 ELSE 0 END) AS HIDDEN virtSort')
-                ->leftJoin('m.decisions', 'd')
+                ->leftJoin(
+                    'm.decisions',
+                    'd',
+                )
                 ->groupBy('m')
-            ->setParameter(':virtual_meeting', MeetingTypes::VIRT);
+            ->setParameter(
+                ':virtual_meeting',
+                MeetingTypes::VIRT,
+            );
 
         if ($asc) {
-            $qb->addOrderBy('m.date', 'ASC');
+            $qb->addOrderBy(
+                'm.date',
+                'ASC',
+            );
         } else {
-            $qb->addOrderBy('m.date', 'DESC');
+            $qb->addOrderBy(
+                'm.date',
+                'DESC',
+            );
         }
 
         // A meeting held to put right what an earlier one got wrong is a virtual one on that same date, so it goes
         // last of that date. Beyond that the date says nothing about which of two meetings came first, and a replay
         // has to make the same choice every time, so type and number settle the rest.
-        $qb->addOrderBy('virtSort', 'ASC')
-            ->addOrderBy('m.type', 'ASC')
-            ->addOrderBy('m.number', 'ASC');
+        $qb->addOrderBy(
+            'virtSort',
+            'ASC',
+        )
+            ->addOrderBy(
+                'm.type',
+                'ASC',
+            )
+            ->addOrderBy(
+                'm.number',
+                'ASC',
+            );
 
         return $qb->getQuery()->getResult();
     }
@@ -216,8 +293,14 @@ class MeetingRepository extends ServiceEntityRepository
     public function findLast(): ?Meeting
     {
         $qb = $this->createQueryBuilder('m');
-        $qb->leftJoin('m.decisions', 'd')
-            ->orderBy('m.date', 'DESC')
+        $qb->leftJoin(
+            'm.decisions',
+            'd',
+        )
+            ->orderBy(
+                'm.date',
+                'DESC',
+            )
             ->setMaxResults(1);
 
         return $qb->getQuery()->getOneOrNullResult();
@@ -235,23 +318,59 @@ class MeetingRepository extends ServiceEntityRepository
         $qb = $this->getEntityManager()->createQueryBuilder();
 
         $qb->select('d, s')
-            ->from(Decision::class, 'd')
-            ->join('d.meeting', 'm')
-            ->leftJoin('d.subdecisions', 's')
-            ->orderBy('m.type', 'ASC')
-            ->addOrderBy('m.number', 'ASC')
-            ->addOrderBy('d.point', 'ASC')
-            ->addOrderBy('d.number', 'ASC')
-            ->addOrderBy('s.sequence', 'ASC');
+            ->from(
+                Decision::class,
+                'd',
+            )
+            ->join(
+                'd.meeting',
+                'm',
+            )
+            ->leftJoin(
+                'd.subdecisions',
+                's',
+            )
+            ->orderBy(
+                'm.type',
+                'ASC',
+            )
+            ->addOrderBy(
+                'm.number',
+                'ASC',
+            )
+            ->addOrderBy(
+                'd.point',
+                'ASC',
+            )
+            ->addOrderBy(
+                'd.number',
+                'ASC',
+            )
+            ->addOrderBy(
+                's.sequence',
+                'ASC',
+            );
 
         $num = 0;
         foreach ($meetings as $meeting) {
             $qb->orWhere($qb->expr()->andX(
-                $qb->expr()->eq('m.type', ':type' . $num),
-                $qb->expr()->eq('m.number', ':number' . $num),
+                $qb->expr()->eq(
+                    'm.type',
+                    ':type' . $num,
+                ),
+                $qb->expr()->eq(
+                    'm.number',
+                    ':number' . $num,
+                ),
             ));
-            $qb->setParameter(':type' . $num, $meeting['type']);
-            $qb->setParameter(':number' . $num, $meeting['number']);
+            $qb->setParameter(
+                ':type' . $num,
+                $meeting['type'],
+            );
+            $qb->setParameter(
+                ':number' . $num,
+                $meeting['number'],
+            );
             $num++;
         }
 
@@ -269,22 +388,43 @@ class MeetingRepository extends ServiceEntityRepository
     ): ?Meeting {
         $qb = $this->createQueryBuilder('m');
 
-        $qb->addSelect('d', 's', 'db')
+        $qb->addSelect(
+            'd',
+            's',
+            'db',
+        )
             ->where('m.type = :type')
             ->andWhere('m.number = :number')
-            ->leftJoin('m.decisions', 'd')
-            ->leftJoin('d.subdecisions', 's')
-            ->leftJoin('d.annulledBy', 'db')
+            ->leftJoin(
+                'm.decisions',
+                'd',
+            )
+            ->leftJoin(
+                'd.subdecisions',
+                's',
+            )
+            ->leftJoin(
+                'd.annulledBy',
+                'db',
+            )
             ->orderBy('d.point')
             ->addOrderBy('d.number')
             ->addOrderBy('s.sequence');
 
-        $qb->setParameter(':type', $type);
-        $qb->setParameter(':number', $number);
+        $qb->setParameter(
+            ':type',
+            $type,
+        );
+        $qb->setParameter(
+            ':number',
+            $number,
+        );
 
         $res = $qb->getQuery()->getResult();
 
-        return empty($res) ? null : $res[0];
+        return empty($res)
+            ? null
+            : $res[0];
     }
 
     /**
@@ -299,18 +439,36 @@ class MeetingRepository extends ServiceEntityRepository
         $qb = $this->getEntityManager()->createQueryBuilder();
 
         $qb->select('d, s')
-            ->from(Decision::class, 'd')
+            ->from(
+                Decision::class,
+                'd',
+            )
             ->where('d.meeting_type = :meeting_type')
             ->andWhere('d.meeting_number = :meeting_number')
             ->andWhere('d.point = :decision_point')
             ->andWhere('d.number = :decision_number')
-            ->leftJoin('d.subdecisions', 's')
+            ->leftJoin(
+                'd.subdecisions',
+                's',
+            )
             ->orderBy('s.sequence');
 
-        $qb->setParameter(':meeting_type', $meetingType);
-        $qb->setParameter(':meeting_number', $meetingNumber);
-        $qb->setParameter(':decision_point', $decisionPoint);
-        $qb->setParameter(':decision_number', $decisionNumber);
+        $qb->setParameter(
+            ':meeting_type',
+            $meetingType,
+        );
+        $qb->setParameter(
+            ':meeting_number',
+            $meetingNumber,
+        );
+        $qb->setParameter(
+            ':decision_point',
+            $decisionPoint,
+        );
+        $qb->setParameter(
+            ':decision_number',
+            $decisionNumber,
+        );
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -344,22 +502,40 @@ class MeetingRepository extends ServiceEntityRepository
         $fields[] = "'.'";
         $fields[] = 'd.number';
         $fields[] = "' '";
-        $fields = implode(', ', $fields);
+        $fields = implode(
+            ', ',
+            $fields,
+        );
         $fields = 'CONCAT(' . $fields . ')';
 
         $qb->select('d, s, m')
-            ->from(Decision::class, 'd')
+            ->from(
+                Decision::class,
+                'd',
+            )
             ->where($fields . ' LIKE :search')
-            ->leftJoin('d.subdecisions', 's')
-            ->innerJoin('d.meeting', 'm')
+            ->leftJoin(
+                'd.subdecisions',
+                's',
+            )
+            ->innerJoin(
+                'd.meeting',
+                'm',
+            )
             ->orderBy('s.sequence');
 
         if (!$includeAnnulled) {
             // we want to leave out decisions that have been annulled
             $qbn = $this->getEntityManager()->createQueryBuilder();
             $qbn->select('a')
-                ->from(Annulment::class, 'a')
-                ->join('a.target', 'x')
+                ->from(
+                    Annulment::class,
+                    'a',
+                )
+                ->join(
+                    'a.target',
+                    'x',
+                )
                 ->where('x.meeting_type = d.meeting_type')
                 ->andWhere('x.meeting_number = d.meeting_number')
                 ->andWhere('x.point = d.point')
@@ -374,7 +550,10 @@ class MeetingRepository extends ServiceEntityRepository
         // and we want to leave out the decisions that do the annulling
         $qba = $this->getEntityManager()->createQueryBuilder();
         $qba->select('b')
-            ->from(Annulment::class, 'b')
+            ->from(
+                Annulment::class,
+                'b',
+            )
             ->where('b.meeting_type = d.meeting_type')
             ->andWhere('b.meeting_number = d.meeting_number')
             ->andWhere('b.decision_point = d.point')
@@ -388,28 +567,64 @@ class MeetingRepository extends ServiceEntityRepository
         if (null !== $before) {
             // A decision can only be annulled by a later one; the ledger cannot be rewritten from the past.
             $qb->andWhere($qb->expr()->orX(
-                $qb->expr()->lt('m.date', ':before_date'),
+                $qb->expr()->lt(
+                    'm.date',
+                    ':before_date',
+                ),
                 $qb->expr()->andX(
-                    $qb->expr()->eq('m.type', ':before_type'),
-                    $qb->expr()->eq('m.number', ':before_number'),
+                    $qb->expr()->eq(
+                        'm.type',
+                        ':before_type',
+                    ),
+                    $qb->expr()->eq(
+                        'm.number',
+                        ':before_number',
+                    ),
                     $qb->expr()->orX(
-                        $qb->expr()->lt('d.point', ':before_point'),
+                        $qb->expr()->lt(
+                            'd.point',
+                            ':before_point',
+                        ),
                         $qb->expr()->andX(
-                            $qb->expr()->eq('d.point', ':before_point'),
-                            $qb->expr()->lt('d.number', ':before_decision'),
+                            $qb->expr()->eq(
+                                'd.point',
+                                ':before_point',
+                            ),
+                            $qb->expr()->lt(
+                                'd.number',
+                                ':before_decision',
+                            ),
                         ),
                     ),
                 ),
             ));
 
-            $qb->setParameter(':before_date', $before->getDate());
-            $qb->setParameter(':before_type', $before->getType());
-            $qb->setParameter(':before_number', $before->getNumber());
-            $qb->setParameter(':before_point', $beforePoint);
-            $qb->setParameter(':before_decision', $beforeNumber);
+            $qb->setParameter(
+                ':before_date',
+                $before->getDate(),
+            );
+            $qb->setParameter(
+                ':before_type',
+                $before->getType(),
+            );
+            $qb->setParameter(
+                ':before_number',
+                $before->getNumber(),
+            );
+            $qb->setParameter(
+                ':before_point',
+                $beforePoint,
+            );
+            $qb->setParameter(
+                ':before_decision',
+                $beforeNumber,
+            );
         }
 
-        $qb->setParameter(':search', '%' . strtolower($query) . '%');
+        $qb->setParameter(
+            ':search',
+            '%' . strtolower($query) . '%',
+        );
 
         return $qb->getQuery()->getResult();
     }
@@ -432,8 +647,14 @@ class MeetingRepository extends ServiceEntityRepository
 
         $qba = $this->getEntityManager()->createQueryBuilder();
         $qba->select($annulment)
-            ->from(Annulment::class, $annulment)
-            ->join($annulment . '.target', $target)
+            ->from(
+                Annulment::class,
+                $annulment,
+            )
+            ->join(
+                $annulment . '.target',
+                $target,
+            )
             ->where($target . '.meeting_type = ' . $alias . '.meeting_type')
             ->andWhere($target . '.meeting_number = ' . $alias . '.meeting_number')
             ->andWhere($target . '.point = ' . $alias . '.decision_point')
@@ -454,22 +675,40 @@ class MeetingRepository extends ServiceEntityRepository
         $qb = $this->getEntityManager()->createQueryBuilder();
 
         $qb->select('i, m')
-            ->from(BoardInstallation::class, 'i')
-            ->join('i.member', 'm');
+            ->from(
+                BoardInstallation::class,
+                'i',
+            )
+            ->join(
+                'i.member',
+                'm',
+            );
 
         $qbn = $this->getEntityManager()->createQueryBuilder();
         // remove discharges
         $qbn->select('d')
-            ->from(BoardDischarge::class, 'd')
-            ->join('d.installation', 'x')
+            ->from(
+                BoardDischarge::class,
+                'd',
+            )
+            ->join(
+                'd.installation',
+                'x',
+            )
             ->where('x.meeting_type = i.meeting_type')
             ->andWhere('x.meeting_number = i.meeting_number')
             ->andWhere('x.decision_point = i.decision_point')
             ->andWhere('x.decision_number = i.decision_number')
             ->andWhere('x.sequence = i.sequence');
 
-        $this->whereNotAnnulled($qbn, 'd');
-        $this->whereNotAnnulled($qb, 'i');
+        $this->whereNotAnnulled(
+            $qbn,
+            'd',
+        );
+        $this->whereNotAnnulled(
+            $qb,
+            'i',
+        );
 
         $qb->andWhere($qb->expr()->not(
             $qb->expr()->exists($qbn->getDQL()),
@@ -485,14 +724,26 @@ class MeetingRepository extends ServiceEntityRepository
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select('i, m')
-            ->from(BoardInstallation::class, 'i')
-            ->join('i.member', 'm');
+            ->from(
+                BoardInstallation::class,
+                'i',
+            )
+            ->join(
+                'i.member',
+                'm',
+            );
 
         // remove discharges
         $qbd = $this->getEntityManager()->createQueryBuilder();
         $qbd->select('d')
-            ->from(BoardDischarge::class, 'd')
-            ->join('d.installation', 'x')
+            ->from(
+                BoardDischarge::class,
+                'd',
+            )
+            ->join(
+                'd.installation',
+                'x',
+            )
             ->where('x.meeting_type = i.meeting_type')
             ->andWhere('x.meeting_number = i.meeting_number')
             ->andWhere('x.decision_point = i.decision_point')
@@ -502,17 +753,32 @@ class MeetingRepository extends ServiceEntityRepository
         // remove releases
         $qbr = $this->getEntityManager()->createQueryBuilder();
         $qbr->select('r')
-            ->from(BoardRelease::class, 'r')
-            ->join('r.installation', 'y')
+            ->from(
+                BoardRelease::class,
+                'r',
+            )
+            ->join(
+                'r.installation',
+                'y',
+            )
             ->where('y.meeting_type = i.meeting_type')
             ->andWhere('y.meeting_number = i.meeting_number')
             ->andWhere('y.decision_point = i.decision_point')
             ->andWhere('y.decision_number = i.decision_number')
             ->andWhere('y.sequence = i.sequence');
 
-        $this->whereNotAnnulled($qbd, 'd');
-        $this->whereNotAnnulled($qbr, 'r');
-        $this->whereNotAnnulled($qb, 'i');
+        $this->whereNotAnnulled(
+            $qbd,
+            'd',
+        );
+        $this->whereNotAnnulled(
+            $qbr,
+            'r',
+        );
+        $this->whereNotAnnulled(
+            $qb,
+            'i',
+        );
 
         $qb->andWhere($qb->expr()->not(
             $qb->expr()->exists($qbd->getDQL()),
@@ -534,29 +800,50 @@ class MeetingRepository extends ServiceEntityRepository
         $qb = $this->getEntityManager()->createQueryBuilder();
 
         $qb->select('g, m')
-            ->from(KeyGranting::class, 'g')
-            ->join('g.member', 'm')
+            ->from(
+                KeyGranting::class,
+                'g',
+            )
+            ->join(
+                'g.member',
+                'm',
+            )
             ->where('g.until >= :now');
 
         // remove withdrawals
         $qbn = $this->getEntityManager()->createQueryBuilder();
         $qbn->select('d')
-            ->from(KeyWithdrawal::class, 'd')
-            ->join('d.granting', 'x')
+            ->from(
+                KeyWithdrawal::class,
+                'd',
+            )
+            ->join(
+                'd.granting',
+                'x',
+            )
             ->where('x.meeting_type = g.meeting_type')
             ->andWhere('x.meeting_number = g.meeting_number')
             ->andWhere('x.decision_point = g.decision_point')
             ->andWhere('x.decision_number = g.decision_number')
             ->andWhere('x.sequence = g.sequence');
 
-        $this->whereNotAnnulled($qbn, 'd');
-        $this->whereNotAnnulled($qb, 'g');
+        $this->whereNotAnnulled(
+            $qbn,
+            'd',
+        );
+        $this->whereNotAnnulled(
+            $qb,
+            'g',
+        );
 
         $qb->andWhere($qb->expr()->not(
             $qb->expr()->exists($qbn->getDQL()),
         ));
 
-        $qb->setParameter('now', new DateTime('now'));
+        $qb->setParameter(
+            'now',
+            new DateTime('now'),
+        );
 
         return $qb->getQuery()->getResult();
     }
@@ -592,7 +879,12 @@ class MeetingRepository extends ServiceEntityRepository
         int $point,
         int $decision,
     ): void {
-        $decision = $this->findDecision($type, $number, $point, $decision);
+        $decision = $this->findDecision(
+            $type,
+            $number,
+            $point,
+            $decision,
+        );
 
         $this->getEntityManager()->remove($decision);
         $this->getEntityManager()->flush();

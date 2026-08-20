@@ -32,13 +32,25 @@ class ReleaseType extends AbstractType
         array $options,
     ): void {
         $builder
-            ->add('subdecision', SubDecisionType::class, ['subdecision_class' => Installation::class])
-            ->add('date', DateType::class, [
-                'label' => t('Effective From'),
-                'widget' => 'single_text',
-                'constraints' => [new NotNull()],
-            ])
-            ->add('submit', SubmitType::class, ['label' => t('Relieve Board Member')])
+            ->add(
+                'subdecision',
+                SubDecisionType::class,
+                ['subdecision_class' => Installation::class],
+            )
+            ->add(
+                'date',
+                DateType::class,
+                [
+                    'label' => t('Effective From'),
+                    'widget' => 'single_text',
+                    'constraints' => [new NotNull()],
+                ],
+            )
+            ->add(
+                'submit',
+                SubmitType::class,
+                ['label' => t('Relieve Board Member')],
+            )
             ->setDataMapper($this->dataMapper);
     }
 

@@ -53,30 +53,43 @@ class MemberListsType extends AbstractType
             $this->mailingListRepository->findAll(),
         );
 
-        $builder->add('lists', ChoiceType::class, [
-            'label' => t('Lists'),
-            'expanded' => true,
-            'multiple' => true,
-            'required' => false,
-            'choices' => array_combine($listNames, $listNames),
-            'data' => array_keys($subscriptions),
-            // Resolved while the view is built rather than at build time, so the state follows the request locale.
-            'choice_label' => function (string $name) use ($subscriptions): string {
-                if (!isset($subscriptions[$name])) {
-                    return $name;
-                }
+        $builder->add(
+            'lists',
+            ChoiceType::class,
+            [
+                'label' => t('Lists'),
+                'expanded' => true,
+                'multiple' => true,
+                'required' => false,
+                'choices' => array_combine(
+                    $listNames,
+                    $listNames,
+                ),
+                'data' => array_keys($subscriptions),
+                // Resolved while the view is built rather than at build time, so the state follows the request locale.
+                'choice_label' => function (string $name) use ($subscriptions): string {
+                    if (!isset($subscriptions[$name])) {
+                        return $name;
+                    }
 
-                return $name . ' (' . $this->stateLabel(...$subscriptions[$name]) . ')';
-            },
-            'choice_attr' => static function (string $name) use ($locked): array {
-                if (!in_array($name, $locked, true)) {
-                    return [];
-                }
+                    return $name . ' (' . $this->stateLabel(...$subscriptions[$name]) . ')';
+                },
+                'choice_attr' => static function (string $name) use ($locked): array {
+                    if (
+                        !in_array(
+                            $name,
+                            $locked,
+                            true,
+                        )
+                    ) {
+                        return [];
+                    }
 
-                return ['disabled' => true];
-            },
-            'choice_translation_domain' => false,
-        ]);
+                    return ['disabled' => true];
+                },
+                'choice_translation_domain' => false,
+            ],
+        );
 
         // A disabled checkbox is not submitted at all, which arrives here as indistinguishable from one that was
         // unticked. Left alone, saving any change to this form reads every locked list as an unsubscribe and queues it
@@ -98,7 +111,11 @@ class MemberListsType extends AbstractType
             priority: 1,
         );
 
-        $builder->add('submit', SubmitType::class, ['label' => t('Change Subscriptions')]);
+        $builder->add(
+            'submit',
+            SubmitType::class,
+            ['label' => t('Change Subscriptions')],
+        );
     }
 
     #[Override]
@@ -107,7 +124,10 @@ class MemberListsType extends AbstractType
         $resolver->setDefaults(['data_class' => null]);
 
         $resolver->setRequired('member');
-        $resolver->setAllowedTypes('member', Member::class);
+        $resolver->setAllowedTypes(
+            'member',
+            Member::class,
+        );
     }
 
     /**
@@ -157,7 +177,10 @@ class MemberListsType extends AbstractType
         bool $toBeCreated,
         bool $toBeDeleted,
     ): string {
-        if ($toBeCreated && $toBeDeleted) {
+        if (
+            $toBeCreated
+            && $toBeDeleted
+        ) {
             return $this->translator->trans('email address change pending');
         }
 

@@ -16,7 +16,10 @@ class MailingListRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, MailingList::class);
+        parent::__construct(
+            $registry,
+            MailingList::class,
+        );
     }
 
     /**
@@ -45,7 +48,10 @@ class MailingListRepository extends ServiceEntityRepository
     #[Override]
     public function findAll(): array
     {
-        return $this->findBy([], ['name' => 'ASC']);
+        return $this->findBy(
+            [],
+            ['name' => 'ASC'],
+        );
     }
 
     /**
@@ -55,7 +61,10 @@ class MailingListRepository extends ServiceEntityRepository
      */
     public function findAllOnForm(): array
     {
-        return $this->findBy(['onForm' => true], ['name' => 'ASC']);
+        return $this->findBy(
+            ['onForm' => true],
+            ['name' => 'ASC'],
+        );
     }
 
     /**
@@ -65,11 +74,14 @@ class MailingListRepository extends ServiceEntityRepository
      */
     public function findDefault(): array
     {
-        return $this->findBy([
-            'defaultSub' => true,
-            'onForm' => false,
-        ], [
-            'name' => 'ASC',
-        ]);
+        return $this->findBy(
+            [
+                'defaultSub' => true,
+                'onForm' => false,
+            ],
+            [
+                'name' => 'ASC',
+            ],
+        );
     }
 }

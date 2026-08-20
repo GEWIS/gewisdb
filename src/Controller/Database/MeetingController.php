@@ -35,13 +35,19 @@ final class MeetingController extends AbstractController
     #[Route(
         path: '/create',
         name: 'decision_meeting_create',
-        methods: ['GET', 'POST'],
+        methods: [
+            'GET',
+            'POST',
+        ],
     )]
     public function create(Request $request): Response
     {
         $meeting = new Meeting();
 
-        $form = $this->createForm(CreateMeetingType::class, $meeting);
+        $form = $this->createForm(
+            CreateMeetingType::class,
+            $meeting,
+        );
         $form->handleRequest($request);
 
         if (
@@ -49,17 +55,23 @@ final class MeetingController extends AbstractController
             && $form->isValid()
         ) {
             if ($this->meetingService->createMeeting($meeting)) {
-                return $this->redirectToRoute('decision_meeting_view', [
-                    'type' => $meeting->getType()->value,
-                    'number' => $meeting->getNumber(),
-                ]);
+                return $this->redirectToRoute(
+                    'decision_meeting_view',
+                    [
+                        'type' => $meeting->getType()->value,
+                        'number' => $meeting->getNumber(),
+                    ],
+                );
             }
 
             // The number is the only part of the meeting that can be corrected: its type and date are what they are.
             $form->get('number')->addError(new FormError('This meeting already exists.'));
         }
 
-        return $this->render('decision/meeting/create.html.twig', ['form' => $form]);
+        return $this->render(
+            'decision/meeting/create.html.twig',
+            ['form' => $form],
+        );
     }
 
     /**
@@ -88,16 +100,22 @@ final class MeetingController extends AbstractController
         MeetingTypes $type,
         int $number,
     ): Response {
-        $view = $this->meetingService->getMeetingView($type, $number);
+        $view = $this->meetingService->getMeetingView(
+            $type,
+            $number,
+        );
 
         if (null === $view) {
             throw $this->createNotFoundException();
         }
 
-        return $this->render('decision/meeting/view.html.twig', [
-            'meeting' => $view->meeting,
-            'decisions' => $view->decisions,
-            'next_decision_numbers' => $view->nextDecisionNumbers,
-        ]);
+        return $this->render(
+            'decision/meeting/view.html.twig',
+            [
+                'meeting' => $view->meeting,
+                'decisions' => $view->decisions,
+                'next_decision_numbers' => $view->nextDecisionNumbers,
+            ],
+        );
     }
 }

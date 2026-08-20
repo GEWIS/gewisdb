@@ -82,7 +82,9 @@ class AuditRenewal extends AuditEntry
 
     private function getStringRenewalType(): string
     {
-        return $this->isSelfRenewal() ? 'Self-renewal' : 'Renewal';
+        return $this->isSelfRenewal()
+            ? 'Self-renewal'
+            : 'Renewal';
     }
 
     /**

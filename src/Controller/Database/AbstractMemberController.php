@@ -39,7 +39,10 @@ abstract class AbstractMemberController extends AbstractController
     protected function guardDeleted(Member $member): Member|Response
     {
         if ($member->getDeleted()) {
-            return $this->render('member/deleted.html.twig', ['member' => $member]);
+            return $this->render(
+                'member/deleted.html.twig',
+                ['member' => $member],
+            );
         }
 
         return $member;

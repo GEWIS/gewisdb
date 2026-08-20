@@ -49,7 +49,10 @@ class ApiPrincipal
         type: 'string',
         nullable: true,
     )]
-    #[Assert\Length(min: 8, max: 255)]
+    #[Assert\Length(
+        min: 8,
+        max: 255,
+    )]
     protected ?string $description = null;
 
     /**
@@ -78,7 +81,13 @@ class ApiPrincipal
      */
     public function getToken(): string
     {
-        return str_repeat('*', strlen($this->token) - 5) . substr($this->token, -5);
+        return str_repeat(
+            '*',
+            strlen($this->token) - 5,
+        ) . substr(
+            $this->token,
+            -5,
+        );
     }
 
     /**
@@ -127,7 +136,9 @@ class ApiPrincipal
     {
         $this->permissions = array_map(
             static function ($p): ApiPermissions {
-                return $p instanceof ApiPermissions ? $p : ApiPermissions::from($p);
+                return $p instanceof ApiPermissions
+                    ? $p
+                    : ApiPermissions::from($p);
             },
             $permissions,
         );
@@ -135,10 +146,20 @@ class ApiPrincipal
 
     public function can(ApiPermissions $permission): bool
     {
-        if (in_array(ApiPermissions::All, $this->getPermissions(), true)) {
+        if (
+            in_array(
+                ApiPermissions::All,
+                $this->getPermissions(),
+                true,
+            )
+        ) {
             return true;
         }
 
-        return in_array($permission, $this->getPermissions(), true);
+        return in_array(
+            $permission,
+            $this->getPermissions(),
+            true,
+        );
     }
 }

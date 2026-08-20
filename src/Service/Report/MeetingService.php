@@ -162,10 +162,16 @@ class MeetingService
 
         foreach ($meeting->getDecisions() as $decision) {
             try {
-                $this->generateDecision($decision, $reportMeeting);
+                $this->generateDecision(
+                    $decision,
+                    $reportMeeting,
+                );
             } catch (Throwable $e) {
                 // send email, something went wrong
-                $this->sendDecisionExceptionMail($e, $decision);
+                $this->sendDecisionExceptionMail(
+                    $e,
+                    $decision,
+                );
                 continue;
             }
         }
@@ -199,11 +205,20 @@ class MeetingService
         $contentEN = [];
 
         foreach ($decision->getSubdecisions() as $subdecision) {
-            $reportSubDecision = $this->generateSubDecision($subdecision, $reportDecision);
+            $reportSubDecision = $this->generateSubDecision(
+                $subdecision,
+                $reportDecision,
+            );
             // Applied right here, so that what a subdecision brings about is in place before the next one is read.
             $this->subDecisionService->generateRelated($reportSubDecision);
-            $contentNL[] = $subdecision->getTranslatedContent($this->translator, AppLanguages::Dutch);
-            $contentEN[] = $subdecision->getTranslatedContent($this->translator, AppLanguages::English);
+            $contentNL[] = $subdecision->getTranslatedContent(
+                $this->translator,
+                AppLanguages::Dutch,
+            );
+            $contentEN[] = $subdecision->getTranslatedContent(
+                $this->translator,
+                AppLanguages::English,
+            );
         }
 
         if (empty($contentNL)) {
@@ -245,7 +260,13 @@ class MeetingService
             $this->realClass($subdecision),
         );
 
-        if (!is_a($class, ReportSubDecision::class, true)) {
+        if (
+            !is_a(
+                $class,
+                ReportSubDecision::class,
+                true,
+            )
+        ) {
             throw new LogicException(sprintf('No projection exists for %s', $subdecision::class));
         }
 
@@ -279,8 +300,8 @@ class MeetingService
             assert($reportSubDecision instanceof ReportSubDecision\FoundationReference);
 
             $ref = $subdecision->getFoundation();
-            /** @var ReportSubDecision\Foundation $foundation */
             $foundation = $this->findReportSubDecision($ref);
+            assert($foundation instanceof ReportSubDecision\Foundation);
 
             $reportSubDecision->setFoundation($foundation);
         }
@@ -301,8 +322,8 @@ class MeetingService
             );
 
             $ref = $subdecision->getInstallation();
-            /** @var ReportSubDecision\Installation $installation */
             $installation = $this->findReportSubDecision($ref);
+            assert($installation instanceof ReportSubDecision\Installation);
 
             $reportSubDecision->setInstallation($installation);
         } elseif ($subdecision instanceof DatabaseSubDecision\Foundation) {
@@ -348,8 +369,8 @@ class MeetingService
         } elseif ($subdecision instanceof DatabaseSubDecision\Minutes) {
             assert($reportSubDecision instanceof ReportSubDecision\Minutes);
 
-            /** @var ReportMeeting $meeting */
             $meeting = $this->findReportMeeting($subdecision->getTarget());
+            assert($meeting instanceof ReportMeeting);
 
             $reportSubDecision->setMeeting($meeting);
             $reportSubDecision->setMember($this->findMember($subdecision->getMember()));
@@ -365,8 +386,8 @@ class MeetingService
             assert($reportSubDecision instanceof ReportSubDecision\Board\Release);
 
             $ref = $subdecision->getInstallation();
-            /** @var ReportSubDecision\Board\Installation $installation */
             $installation = $this->findReportSubDecision($ref);
+            assert($installation instanceof ReportSubDecision\Board\Installation);
 
             $reportSubDecision->setInstallation($installation);
             $reportSubDecision->setDate($subdecision->getDate());
@@ -374,8 +395,8 @@ class MeetingService
             assert($reportSubDecision instanceof ReportSubDecision\Board\Discharge);
 
             $ref = $subdecision->getInstallation();
-            /** @var ReportSubDecision\Board\Installation $installation */
             $installation = $this->findReportSubDecision($ref);
+            assert($installation instanceof ReportSubDecision\Board\Installation);
 
             $reportSubDecision->setInstallation($installation);
         } elseif ($subdecision instanceof DatabaseSubDecision\Key\Granting) {
@@ -387,16 +408,16 @@ class MeetingService
             assert($reportSubDecision instanceof ReportSubDecision\Key\Withdrawal);
 
             $ref = $subdecision->getGranting();
-            /** @var ReportSubDecision\Key\Granting $granting */
             $granting = $this->findReportSubDecision($ref);
+            assert($granting instanceof ReportSubDecision\Key\Granting);
 
             $reportSubDecision->setGranting($granting);
             $reportSubDecision->setWithdrawnOn($subdecision->getWithdrawnOn());
         } elseif ($subdecision instanceof DatabaseSubDecision\Annulment) {
             assert($reportSubDecision instanceof ReportSubDecision\Annulment);
 
-            /** @var ReportDecision $target */
             $target = $this->findReportDecision($subdecision->getTarget());
+            assert($target instanceof ReportDecision);
 
             $reportSubDecision->setTarget($target);
 
@@ -533,7 +554,10 @@ class MeetingService
 
         if (null === $reportMember) {
             throw new LogicException(
-                sprintf('Member %d does not exist in ReportDB', $member->getLidnr()),
+                sprintf(
+                    'Member %d does not exist in ReportDB',
+                    $member->getLidnr(),
+                ),
             );
         }
 
@@ -567,7 +591,7 @@ class MeetingService
             {$e->getTraceAsString()}
             BODYTEXT;
 
-        $email = (new Email())
+        $email = new Email()
             ->from(new Address($this->mailFromAddress, $this->mailFromName))
             ->to(new Address($this->mailToReportErrorAddress, $this->mailToReportErrorName))
             ->subject('Database fout')

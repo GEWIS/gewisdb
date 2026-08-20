@@ -89,9 +89,18 @@ class Annulment extends SubDecision
     ): string {
         $replacements = [
             '%DECISION_HASH%' => $this->getTarget()->getHash(), // We do not provide an alternative to the hash.
-            '%DECISION_CONTENT%' => $this->getTarget()->getTranslatedContent($translator, $language),
+            '%DECISION_CONTENT%' => $this->getTarget()->getTranslatedContent(
+                $translator,
+                $language,
+            ),
         ];
 
-        return $this->replaceContentPlaceholders($this->getTranslatedTemplate($translator, $language), $replacements);
+        return $this->replaceContentPlaceholders(
+            $this->getTranslatedTemplate(
+                $translator,
+                $language,
+            ),
+            $replacements,
+        );
     }
 }

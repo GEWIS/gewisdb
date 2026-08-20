@@ -25,6 +25,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use ReflectionProperty;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
+use function assert;
+
 class SubDecisionService
 {
     public function __construct(
@@ -215,23 +217,49 @@ class SubDecisionService
      */
     public function stillReferences(SubDecision $subDecision): bool
     {
-        [$declaringClass, $property] = match (true) {
-            $subDecision instanceof BoardRelease => [BoardRelease::class, 'installation'],
-            $subDecision instanceof BoardDischarge => [BoardDischarge::class, 'installation'],
-            $subDecision instanceof KeyWithdrawal => [KeyWithdrawal::class, 'granting'],
-            $subDecision instanceof Discharge => [Discharge::class, 'installation'],
-            $subDecision instanceof Reappointment => [Reappointment::class, 'installation'],
-            $subDecision instanceof Annulment => [Annulment::class, 'target'],
+        [
+            $declaringClass, $property
+        ] = match (true) {
+            $subDecision instanceof BoardRelease => [
+                BoardRelease::class,
+                'installation',
+            ],
+            $subDecision instanceof BoardDischarge => [
+                BoardDischarge::class,
+                'installation',
+            ],
+            $subDecision instanceof KeyWithdrawal => [
+                KeyWithdrawal::class,
+                'granting',
+            ],
+            $subDecision instanceof Discharge => [
+                Discharge::class,
+                'installation',
+            ],
+            $subDecision instanceof Reappointment => [
+                Reappointment::class,
+                'installation',
+            ],
+            $subDecision instanceof Annulment => [
+                Annulment::class,
+                'target',
+            ],
             // Both installations and abrogations point back at the foundation of the body they are about.
-            $subDecision instanceof FoundationReference => [FoundationReference::class, 'foundation'],
-            default => [null, null],
+            $subDecision instanceof FoundationReference => [
+                FoundationReference::class,
+                'foundation',
+            ],
+            default => [
+                null,
+                null,
+            ],
         };
 
         if (null === $declaringClass) {
             return true;
         }
 
-        return (new ReflectionProperty($declaringClass, $property))->isInitialized($subDecision);
+        return new ReflectionProperty($declaringClass, $property)->isInitialized($subDecision);
     }
 
     /**
@@ -246,22 +274,40 @@ class SubDecisionService
         // like that cannot be handed to a query as one value, so it goes in field by field.
         $organs = $this->emReport->getRepository(Organ::class)
             ->createQueryBuilder('o')
-            ->innerJoin('o.subdecisions', 's')
+            ->innerJoin(
+                'o.subdecisions',
+                's',
+            )
             ->where('s.meeting_type = :meetingType')
             ->andWhere('s.meeting_number = :meetingNumber')
             ->andWhere('s.decision_point = :decisionPoint')
             ->andWhere('s.decision_number = :decisionNumber')
             ->andWhere('s.sequence = :sequence')
-            ->setParameter('meetingType', $subDecision->getMeetingType())
-            ->setParameter('meetingNumber', $subDecision->getMeetingNumber())
-            ->setParameter('decisionPoint', $subDecision->getDecisionPoint())
-            ->setParameter('decisionNumber', $subDecision->getDecisionNumber())
-            ->setParameter('sequence', $subDecision->getSequence())
+            ->setParameter(
+                'meetingType',
+                $subDecision->getMeetingType(),
+            )
+            ->setParameter(
+                'meetingNumber',
+                $subDecision->getMeetingNumber(),
+            )
+            ->setParameter(
+                'decisionPoint',
+                $subDecision->getDecisionPoint(),
+            )
+            ->setParameter(
+                'decisionNumber',
+                $subDecision->getDecisionNumber(),
+            )
+            ->setParameter(
+                'sequence',
+                $subDecision->getSequence(),
+            )
             ->getQuery()
             ->getResult();
 
-        /** @var Organ $organ */
         foreach ($organs as $organ) {
+            assert($organ instanceof Organ);
             $organ->removeSubdecision($subDecision);
         }
     }

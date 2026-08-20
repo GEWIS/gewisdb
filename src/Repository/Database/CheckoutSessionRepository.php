@@ -16,7 +16,10 @@ class CheckoutSessionRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, CheckoutSession::class);
+        parent::__construct(
+            $registry,
+            CheckoutSession::class,
+        );
     }
 
     public function findById(string $id): ?CheckoutSession
@@ -24,7 +27,10 @@ class CheckoutSessionRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('cs');
         $qb->where('cs.checkoutId = :id');
 
-        $qb->setParameter('id', $id);
+        $qb->setParameter(
+            'id',
+            $id,
+        );
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -34,9 +40,15 @@ class CheckoutSessionRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('cs');
         $qb->where('cs.prospectiveMember = :prospectiveMember')
             ->setMaxResults(1)
-            ->orderBy('cs.id', 'DESC');
+            ->orderBy(
+                'cs.id',
+                'DESC',
+            );
 
-        $qb->setParameter('prospectiveMember', $prospectiveMember);
+        $qb->setParameter(
+            'prospectiveMember',
+            $prospectiveMember,
+        );
 
         return $qb->getQuery()->getOneOrNullResult();
     }

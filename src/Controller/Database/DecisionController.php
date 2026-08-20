@@ -35,6 +35,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 use function array_key_exists;
+use function assert;
 
 // Deliberately without a class-level prefix: the decision list has always been served from `/export`, which cannot
 // sit under the prefix the other actions share.
@@ -79,7 +80,10 @@ final class DecisionController extends AbstractController
         $meetingNumber = $request->query->get('meeting_number');
 
         return $this->json($this->meetingService->searchDecisions(
-            (string) $request->query->get('q', ''),
+            (string) $request->query->get(
+                'q',
+                '',
+            ),
             null === $meetingType ? null : MeetingTypes::tryFrom((string) $meetingType),
             null === $meetingNumber ? null : (int) $meetingNumber,
             $request->query->getInt('point'),
@@ -107,43 +111,63 @@ final class DecisionController extends AbstractController
         int $point,
         int $decision,
     ): Response {
-        $meeting = $this->meetingService->getMeeting($type, $number);
+        $meeting = $this->meetingService->getMeeting(
+            $type,
+            $number,
+        );
 
         if (null === $meeting) {
             throw $this->createNotFoundException();
         }
 
-        if ($this->meetingService->decisionExists($type, $number, $point, $decision)) {
-            return $this->render('decision/decision/create.html.twig', [
-                'meeting' => $meeting,
-                'point' => $point,
-                'decision' => $decision,
-                'error' => true,
-            ]);
+        if (
+            $this->meetingService->decisionExists(
+                $type,
+                $number,
+                $point,
+                $decision,
+            )
+        ) {
+            return $this->render(
+                'decision/decision/create.html.twig',
+                [
+                    'meeting' => $meeting,
+                    'point' => $point,
+                    'decision' => $decision,
+                    'error' => true,
+                ],
+            );
         }
 
         $forms = [];
 
         foreach (self::FORM_TYPES as $name => $formType) {
-            $forms[$name] = $this->createForm($formType, new Decision(), [
-                'meeting' => $meeting,
-                'point' => $point,
-                'number' => $decision,
-            ])->createView();
+            $forms[$name] = $this->createForm(
+                $formType,
+                new Decision(),
+                [
+                    'meeting' => $meeting,
+                    'point' => $point,
+                    'number' => $decision,
+                ],
+            )->createView();
         }
 
         $options = $this->meetingService->getDecisionOptions();
 
-        return $this->render('decision/decision/create.html.twig', [
-            'meeting' => $meeting,
-            'point' => $point,
-            'decision' => $decision,
-            'forms' => $forms,
-            'installs' => $options->boardInstallations,
-            'releasable_installs' => $options->releasableBoardInstallations,
-            'grants' => $options->keyGrants,
-            'member_function_form' => $this->memberFunctionForm(),
-        ]);
+        return $this->render(
+            'decision/decision/create.html.twig',
+            [
+                'meeting' => $meeting,
+                'point' => $point,
+                'decision' => $decision,
+                'forms' => $forms,
+                'installs' => $options->boardInstallations,
+                'releasable_installs' => $options->releasableBoardInstallations,
+                'grants' => $options->keyGrants,
+                'member_function_form' => $this->memberFunctionForm(),
+            ],
+        );
     }
 
     /**
@@ -159,28 +183,39 @@ final class DecisionController extends AbstractController
         Request $request,
         string $form,
     ): Response {
-        if (!array_key_exists($form, self::FORM_TYPES)) {
+        if (
+            !array_key_exists(
+                $form,
+                self::FORM_TYPES,
+            )
+        ) {
             throw $this->createNotFoundException();
         }
 
-        $decisionForm = $this->createForm(self::FORM_TYPES[$form], new Decision());
+        $decisionForm = $this->createForm(
+            self::FORM_TYPES[$form],
+            new Decision(),
+        );
         $decisionForm->handleRequest($request);
 
         if (
             $decisionForm->isSubmitted()
             && $decisionForm->isValid()
         ) {
-            /** @var Decision $decision */
             $decision = $decisionForm->getData();
+            assert($decision instanceof Decision);
 
             try {
                 $recorded = $this->meetingService->recordDecision($decision);
 
-                return $this->render('decision/decision/created.html.twig', [
-                    'decision' => $recorded,
-                    'contents' => $recorded->contents,
-                    'warnings' => $recorded->warnings,
-                ]);
+                return $this->render(
+                    'decision/decision/created.html.twig',
+                    [
+                        'decision' => $recorded,
+                        'contents' => $recorded->contents,
+                        'warnings' => $recorded->warnings,
+                    ],
+                );
             } catch (AnnulmentNotPossible $e) {
                 // The decision that is annulled is picked through the lookup on the `name` field, so that is where
                 // the reason it cannot be annulled belongs.
@@ -190,16 +225,19 @@ final class DecisionController extends AbstractController
 
         $options = $this->meetingService->getDecisionOptions();
 
-        return $this->render('decision/decision/form.html.twig', [
-            'type' => $form,
-            'form' => $decisionForm,
-            // Relieving a board member is the only decision that leaves out those who have been relieved already.
-            'installs' => 'board_release' === $form
-                ? $options->releasableBoardInstallations
-                : $options->boardInstallations,
-            'grants' => $options->keyGrants,
-            'member_function_form' => $this->memberFunctionForm(),
-        ]);
+        return $this->render(
+            'decision/decision/form.html.twig',
+            [
+                'type' => $form,
+                'form' => $decisionForm,
+                // Relieving a board member is the only decision that leaves out those who have been relieved already.
+                'installs' => 'board_release' === $form
+                    ? $options->releasableBoardInstallations
+                    : $options->boardInstallations,
+                'grants' => $options->keyGrants,
+                'member_function_form' => $this->memberFunctionForm(),
+            ],
+        );
     }
 
     #[Route(
@@ -211,7 +249,10 @@ final class DecisionController extends AbstractController
             'point' => '\d+',
             'decision' => '\d+',
         ],
-        methods: ['GET', 'POST'],
+        methods: [
+            'GET',
+            'POST',
+        ],
     )]
     public function delete(
         Request $request,
@@ -235,34 +276,62 @@ final class DecisionController extends AbstractController
             && $form->isValid()
         ) {
             // Both answers submit the form, so the decision is only deleted when the confirming button was clicked.
-            if (SubmitButtons::clicked($form, 'submit_yes')) {
+            if (
+                SubmitButtons::clicked(
+                    $form,
+                    'submit_yes',
+                )
+            ) {
                 try {
-                    $deleted = $this->meetingService->deleteDecision($type, $number, $point, $decision);
+                    $deleted = $this->meetingService->deleteDecision(
+                        $type,
+                        $number,
+                        $point,
+                        $decision,
+                    );
                 } catch (DecisionStillReferenced) {
-                    return $this->render('decision/decision/delete.html.twig', $parameters + ['error' => true]);
+                    return $this->render(
+                        'decision/decision/delete.html.twig',
+                        $parameters + ['error' => true],
+                    );
                 } catch (AnnulmentNotPossible) {
-                    return $this->render('decision/decision/delete.html.twig', $parameters + [
-                        'error' => true,
-                        'annulment' => true,
-                    ]);
+                    return $this->render(
+                        'decision/decision/delete.html.twig',
+                        $parameters + [
+                            'error' => true,
+                            'annulment' => true,
+                        ],
+                    );
                 }
 
                 // Two secretaries can hold this confirmation open at once, and the second one to answer it deletes
                 // nothing. Reporting success either way would have them believe they removed something they did not.
                 if ($deleted) {
-                    $this->addFlash('success', 'The decision has been deleted.');
+                    $this->addFlash(
+                        'success',
+                        'The decision has been deleted.',
+                    );
                 } else {
-                    $this->addFlash('warning', 'This decision no longer exists.');
+                    $this->addFlash(
+                        'warning',
+                        'This decision no longer exists.',
+                    );
                 }
             }
 
-            return $this->redirectToRoute('decision_meeting_view', [
-                'type' => $type->value,
-                'number' => $number,
-            ]);
+            return $this->redirectToRoute(
+                'decision_meeting_view',
+                [
+                    'type' => $type->value,
+                    'number' => $number,
+                ],
+            );
         }
 
-        return $this->render('decision/decision/delete.html.twig', $parameters + ['form' => $form]);
+        return $this->render(
+            'decision/decision/delete.html.twig',
+            $parameters + ['form' => $form],
+        );
     }
 
     /**
@@ -271,7 +340,10 @@ final class DecisionController extends AbstractController
     #[Route(
         path: '/export',
         name: 'decision_export_index',
-        methods: ['GET', 'POST'],
+        methods: [
+            'GET',
+            'POST',
+        ],
     )]
     public function export(Request $request): Response
     {
@@ -289,15 +361,21 @@ final class DecisionController extends AbstractController
 
             // The decision list is a LaTeX document, which is shown as text to be pasted into a LaTeX editor rather
             // than as the page itself.
-            $latex = $this->renderView('decision/export/decisions.tex.twig', [
-                'categories' => $this->meetingService->exportDecisions($data['meetings']),
-            ]);
+            $latex = $this->renderView(
+                'decision/export/decisions.tex.twig',
+                [
+                    'categories' => $this->meetingService->exportDecisions($data['meetings']),
+                ],
+            );
         }
 
-        return $this->render('decision/export/index.html.twig', [
-            'form' => $form,
-            'latex' => $latex,
-        ]);
+        return $this->render(
+            'decision/export/index.html.twig',
+            [
+                'form' => $form,
+                'latex' => $latex,
+            ],
+        );
     }
 
     /**
@@ -308,6 +386,10 @@ final class DecisionController extends AbstractController
      */
     private function memberFunctionForm(): FormInterface
     {
-        return $this->createForm(MemberFunctionType::class, null, ['include_administrative' => false]);
+        return $this->createForm(
+            MemberFunctionType::class,
+            null,
+            ['include_administrative' => false],
+        );
     }
 }

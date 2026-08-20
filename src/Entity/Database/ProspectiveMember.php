@@ -20,6 +20,7 @@ use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\OneToOne;
 use Doctrine\ORM\Mapping\OrderBy;
 
+use function assert;
 use function in_array;
 
 /**
@@ -500,7 +501,12 @@ class ProspectiveMember
      */
     public function addList(string $list): void
     {
-        if (in_array($list, $this->lists)) {
+        if (
+            in_array(
+                $list,
+                $this->lists,
+            )
+        ) {
             return;
         }
 
@@ -551,8 +557,8 @@ class ProspectiveMember
      */
     public function canBeDeleted(): bool
     {
-        /** @var CheckoutSession|false $lastCheckoutSession */
         $lastCheckoutSession = $this->checkoutSessions->last();
+        assert($lastCheckoutSession instanceof CheckoutSession || false === $lastCheckoutSession);
 
         if (false === $lastCheckoutSession) {
             // No Checkout Session can be found, we are in a state of many unknowns, do not allow removal.
@@ -590,8 +596,8 @@ class ProspectiveMember
      */
     public function getLastCheckoutSessionState(): ?CheckoutSessionStates
     {
-        /** @var CheckoutSession|false $lastCheckoutSession */
         $lastCheckoutSession = $this->checkoutSessions->last();
+        assert($lastCheckoutSession instanceof CheckoutSession || false === $lastCheckoutSession);
 
         if (false === $lastCheckoutSession) {
             // No Checkout Session can be found, we are in a state of many unknowns, return `null` to signal error.

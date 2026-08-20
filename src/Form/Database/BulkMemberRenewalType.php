@@ -33,32 +33,48 @@ class BulkMemberRenewalType extends AbstractType
         FormBuilderInterface $builder,
         array $options,
     ): void {
-        $builder->add('memberIds', TextareaType::class, [
-            'label' => t('Membership numbers'),
-            'constraints' => [
-                new Assert\NotBlank(),
-                new BulkMemberIds(),
+        $builder->add(
+            'memberIds',
+            TextareaType::class,
+            [
+                'label' => t('Membership numbers'),
+                'constraints' => [
+                    new Assert\NotBlank(),
+                    new BulkMemberIds(),
+                ],
             ],
-        ]);
+        );
 
-        $builder->add('membershipType', EnumType::class, [
-            'label' => t('Membership Type'),
-            'class' => MembershipTypes::class,
-            'expanded' => true,
-            // The radios say who each type applies to, which is more than the enum labels itself with.
-            'choice_label' => static fn (MembershipTypes $type): TranslatableMessage => MembershipTypeChoices::label(
-                $type,
-            ),
-            'invalid_message' => 'Select an existing membership type.',
-            // Without this an unanswered form validates, and the renewal then previews and applies nothing at all with
-            // no indication of why.
-            'constraints' => [new Assert\NotNull()],
-        ]);
+        $builder->add(
+            'membershipType',
+            EnumType::class,
+            [
+                'label' => t('Membership Type'),
+                'class' => MembershipTypes::class,
+                'expanded' => true,
+                // The radios say who each type applies to, which is more than the enum labels itself with.
+                'choice_label' => static function (MembershipTypes $type): TranslatableMessage {
+                    return MembershipTypeChoices::label($type);
+                },
+                'invalid_message' => 'Select an existing membership type.',
+                // Without this an unanswered form validates, and the renewal then previews and applies nothing
+                // at all, with no indication of why.
+                'constraints' => [new Assert\NotNull()],
+            ],
+        );
 
-        $builder->add('submit', SubmitType::class, ['label' => t('Preview changes')]);
+        $builder->add(
+            'submit',
+            SubmitType::class,
+            ['label' => t('Preview changes')],
+        );
 
         // The second step of the flow submits through this button instead, which is how the preview is confirmed.
-        $builder->add('intent', SubmitType::class, ['label' => t('Confirm changes')]);
+        $builder->add(
+            'intent',
+            SubmitType::class,
+            ['label' => t('Confirm changes')],
+        );
     }
 
     #[Override]
@@ -75,7 +91,10 @@ class BulkMemberRenewalType extends AbstractType
      */
     public static function parseMemberIds(string $memberIds): array
     {
-        $tokens = preg_split('/[\s,;]+/', trim($memberIds)) ?: [];
+        $tokens = preg_split(
+            '/[\s,;]+/',
+            trim($memberIds),
+        ) ?: [];
         $parsed = [];
 
         foreach ($tokens as $token) {

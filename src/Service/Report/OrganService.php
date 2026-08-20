@@ -26,7 +26,10 @@ class OrganService
     public function generateFoundation(ReportFoundation $foundation): ReportOrgan
     {
         // see if there already is an organ (with a slight hack)
-        $rp = new ReflectionProperty(ReportFoundation::class, 'organ');
+        $rp = new ReflectionProperty(
+            ReportFoundation::class,
+            'organ',
+        );
         if ($rp->isInitialized($foundation)) {
             $repOrgan = $foundation->getOrgan();
         } else {
@@ -54,7 +57,10 @@ class OrganService
 
     public function generateAbrogation(ReportAbrogation $ref): void
     {
-        $rp = new ReflectionProperty(ReportFoundation::class, 'organ');
+        $rp = new ReflectionProperty(
+            ReportFoundation::class,
+            'organ',
+        );
         if ($rp->isInitialized($ref->getFoundation())) {
             $repOrgan = $ref->getFoundation()->getOrgan();
         } else {
@@ -96,14 +102,20 @@ class OrganService
     {
         $repo = $this->emReport->getRepository(ReportOrgan::class);
         // get full reference
-        $rp = new ReflectionProperty(ReportInstallation::class, 'organMember');
+        $rp = new ReflectionProperty(
+            ReportInstallation::class,
+            'organMember',
+        );
         if ($rp->isInitialized($ref)) {
             $organMember = $ref->getOrganMember();
         } else {
             $organMember = null;
         }
 
-        $rp = new ReflectionProperty(ReportFoundation::class, 'organ');
+        $rp = new ReflectionProperty(
+            ReportFoundation::class,
+            'organ',
+        );
         if ($rp->isInitialized($ref->getFoundation())) {
             $repOrgan = $ref->getFoundation()->getOrgan();
         } else {
@@ -162,7 +174,10 @@ class OrganService
         // The installation's organMember is the inverse side of the relation; it is only hydrated when the installation
         // is (re)loaded in a fresh session. Within a single session (e.g. seeding, where the install and discharge are
         // processed back-to-back) it is not, so look the OrganMember up by its installation instead.
-        $rp = new ReflectionProperty(ReportInstallation::class, 'organMember');
+        $rp = new ReflectionProperty(
+            ReportInstallation::class,
+            'organMember',
+        );
         if ($rp->isInitialized($ref->getInstallation())) {
             $organMember = $ref->getInstallation()->getOrganMember();
         } else {
@@ -176,7 +191,10 @@ class OrganService
             return;
         }
 
-        $rp = new ReflectionProperty(ReportFoundation::class, 'organ');
+        $rp = new ReflectionProperty(
+            ReportFoundation::class,
+            'organ',
+        );
         if ($rp->isInitialized($organMember->getInstallation()->getFoundation())) {
             $repOrgan = $organMember->getInstallation()->getFoundation()->getOrgan();
         } else {

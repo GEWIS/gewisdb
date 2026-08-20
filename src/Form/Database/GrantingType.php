@@ -29,16 +29,24 @@ class GrantingType extends AbstractType
         FormBuilderInterface $builder,
         array $options,
     ): void {
-        $builder->add('member', MemberLookupType::class, [
-            'include_name' => false,
-        ]);
-
-        $builder->add('until', HiddenType::class, [
-            'constraints' => [
-                new NotBlank(),
-                new Date(),
+        $builder->add(
+            'member',
+            MemberLookupType::class,
+            [
+                'include_name' => false,
             ],
-        ]);
+        );
+
+        $builder->add(
+            'until',
+            HiddenType::class,
+            [
+                'constraints' => [
+                    new NotBlank(),
+                    new Date(),
+                ],
+            ],
+        );
     }
 
     #[Override]

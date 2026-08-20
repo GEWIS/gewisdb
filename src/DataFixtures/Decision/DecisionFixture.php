@@ -43,13 +43,13 @@ class DecisionFixture extends Fixture implements DependentFixtureInterface
         $founding = new Meeting();
         $founding->setType(MeetingTypes::BV);
         $founding->setNumber(2);
-        $founding->setDate((new DateTime())->modify('-3 years'));
+        $founding->setDate(new DateTime()->modify('-3 years'));
         $manager->persist($founding);
 
         $discharge = new Meeting();
         $discharge->setType(MeetingTypes::BV);
         $discharge->setNumber(3);
-        $discharge->setDate((new DateTime())->modify('-10 days'));
+        $discharge->setDate(new DateTime()->modify('-10 days'));
         $manager->persist($discharge);
 
         // A fraternity may only be founded at a general members' meeting, and has been able to only there since the
@@ -58,11 +58,18 @@ class DecisionFixture extends Fixture implements DependentFixtureInterface
         $gmm = new Meeting();
         $gmm->setType(MeetingTypes::ALV);
         $gmm->setNumber(1);
-        $gmm->setDate((new DateTime())->modify('-3 years')->modify('+1 week'));
+        $gmm->setDate(new DateTime()->modify('-3 years')->modify('+1 week'));
         $manager->persist($gmm);
 
-        $this->loadCommittee($manager, $founding, $discharge);
-        $this->loadFraternity($manager, $gmm);
+        $this->loadCommittee(
+            $manager,
+            $founding,
+            $discharge,
+        );
+        $this->loadFraternity(
+            $manager,
+            $gmm,
+        );
 
         $manager->flush();
     }
@@ -76,11 +83,30 @@ class DecisionFixture extends Fixture implements DependentFixtureInterface
         Meeting $founding,
         Meeting $discharge,
     ): void {
-        $organ = $this->foundOrgan($manager, $founding, 1, 'ATT', 'Attention Test Committee', OrganTypes::Committee);
-        $this->addReference(self::REF_ORGAN_COMMITTEE, $organ);
+        $organ = $this->foundOrgan(
+            $manager,
+            $founding,
+            1,
+            'ATT',
+            'Attention Test Committee',
+            OrganTypes::Committee,
+        );
+        $this->addReference(
+            self::REF_ORGAN_COMMITTEE,
+            $organ,
+        );
 
-        $chair = $this->getReference(MemberFixture::REF_MEMBER_ATTN_ORDINARY_ACTIVE, MemberModel::class);
-        $this->regulateOrgan($manager, $founding, 2, $organ, $chair);
+        $chair = $this->getReference(
+            MemberFixture::REF_MEMBER_ATTN_ORDINARY_ACTIVE,
+            MemberModel::class,
+        );
+        $this->regulateOrgan(
+            $manager,
+            $founding,
+            2,
+            $organ,
+            $chair,
+        );
 
         // Whoever holds a function in an organ is one of its members as well, and is installed as a member first.
         $this->installInOrgan(
@@ -98,7 +124,10 @@ class DecisionFixture extends Fixture implements DependentFixtureInterface
             $founding,
             4,
             $organ,
-            $this->getReference(MemberFixture::REF_MEMBER_ATTN_EXTERNAL_ACTIVE, MemberModel::class),
+            $this->getReference(
+                MemberFixture::REF_MEMBER_ATTN_EXTERNAL_ACTIVE,
+                MemberModel::class,
+            ),
             InstallationFunctions::Member,
         );
 
@@ -109,10 +138,18 @@ class DecisionFixture extends Fixture implements DependentFixtureInterface
             $founding,
             5,
             $organ,
-            $this->getReference(MemberFixture::REF_MEMBER_ATTN_MISCLASSIFIED, MemberModel::class),
+            $this->getReference(
+                MemberFixture::REF_MEMBER_ATTN_MISCLASSIFIED,
+                MemberModel::class,
+            ),
             InstallationFunctions::Member,
         );
-        $this->dischargeFromOrgan($manager, $discharge, 1, $misclassified);
+        $this->dischargeFromOrgan(
+            $manager,
+            $discharge,
+            1,
+            $misclassified,
+        );
     }
 
     /**
@@ -124,11 +161,30 @@ class DecisionFixture extends Fixture implements DependentFixtureInterface
         ObjectManager $manager,
         Meeting $founding,
     ): void {
-        $organ = $this->foundOrgan($manager, $founding, 1, 'DIS', 'Dispuut Testgezelschap', OrganTypes::Fraternity);
-        $this->addReference(self::REF_ORGAN_FRATERNITY, $organ);
+        $organ = $this->foundOrgan(
+            $manager,
+            $founding,
+            1,
+            'DIS',
+            'Dispuut Testgezelschap',
+            OrganTypes::Fraternity,
+        );
+        $this->addReference(
+            self::REF_ORGAN_FRATERNITY,
+            $organ,
+        );
 
-        $chair = $this->getReference(MemberFixture::REF_MEMBER_ATTN_ORDINARY_ACTIVE, MemberModel::class);
-        $this->regulateOrgan($manager, $founding, 2, $organ, $chair);
+        $chair = $this->getReference(
+            MemberFixture::REF_MEMBER_ATTN_ORDINARY_ACTIVE,
+            MemberModel::class,
+        );
+        $this->regulateOrgan(
+            $manager,
+            $founding,
+            2,
+            $organ,
+            $chair,
+        );
 
         $this->installInOrgan(
             $manager,
@@ -145,7 +201,10 @@ class DecisionFixture extends Fixture implements DependentFixtureInterface
             $founding,
             4,
             $organ,
-            $this->getReference(MemberFixture::REF_MEMBER_ATTN_EXTERNAL_ACTIVE, MemberModel::class),
+            $this->getReference(
+                MemberFixture::REF_MEMBER_ATTN_EXTERNAL_ACTIVE,
+                MemberModel::class,
+            ),
             InstallationFunctions::Member,
         );
 
@@ -156,7 +215,10 @@ class DecisionFixture extends Fixture implements DependentFixtureInterface
             $founding,
             5,
             $organ,
-            $this->getReference(MemberFixture::REF_MEMBER_STUDENT, MemberModel::class),
+            $this->getReference(
+                MemberFixture::REF_MEMBER_STUDENT,
+                MemberModel::class,
+            ),
             InstallationFunctions::Member,
         );
 
@@ -168,7 +230,10 @@ class DecisionFixture extends Fixture implements DependentFixtureInterface
             $founding,
             6,
             $organ,
-            $this->getReference(MemberFixture::REF_MEMBER_ATTN_GRADUATE_ACTIVE, MemberModel::class),
+            $this->getReference(
+                MemberFixture::REF_MEMBER_ATTN_GRADUATE_ACTIVE,
+                MemberModel::class,
+            ),
             InstallationFunctions::InactiveMember,
         );
     }
@@ -300,6 +365,9 @@ class DecisionFixture extends Fixture implements DependentFixtureInterface
     #[Override]
     public function getDependencies(): array
     {
-        return [MemberFixture::class, MeetingFixture::class];
+        return [
+            MemberFixture::class,
+            MeetingFixture::class,
+        ];
     }
 }

@@ -46,11 +46,17 @@ final readonly class Notification
             $notifications[] = new self(
                 'fa-user-check',
                 'warning',
-                t('%number% prospective members have paid', ['%number%' => $data['prospectives']['paid']]),
+                t(
+                    '%number% prospective members have paid',
+                    ['%number%' => $data['prospectives']['paid']],
+                ),
                 $approval,
-                t('%number% prospective members have paid and are waiting for approval.', [
-                    '%number%' => $data['prospectives']['paid'],
-                ]),
+                t(
+                    '%number% prospective members have paid and are waiting for approval.',
+                    [
+                        '%number%' => $data['prospectives']['paid'],
+                    ],
+                ),
                 $review,
                 'join_prospective_member_index',
             );
@@ -60,9 +66,15 @@ final readonly class Notification
             $notifications[] = new self(
                 'fa-user-pen',
                 'info',
-                t('%number% member updates pending', ['%number%' => $data['updates']]),
+                t(
+                    '%number% member updates pending',
+                    ['%number%' => $data['updates']],
+                ),
                 $approval,
-                t('%number% members have requested a change to their data.', ['%number%' => $data['updates']]),
+                t(
+                    '%number% members have requested a change to their data.',
+                    ['%number%' => $data['updates']],
+                ),
                 $review,
                 'member_update_index',
             );
@@ -89,7 +101,10 @@ final readonly class Notification
             $notifications[] = new self(
                 'fa-envelope',
                 'danger',
-                t('%service% lists are not being fetched', ['%service%' => $label]),
+                t(
+                    '%service% lists are not being fetched',
+                    ['%service%' => $label],
+                ),
                 $integration,
                 t(
                     '%service% lists have not been fetched recently. The mailing list server may be down, '

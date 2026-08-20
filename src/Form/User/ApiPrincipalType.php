@@ -29,22 +29,38 @@ class ApiPrincipalType extends AbstractType
         FormBuilderInterface $builder,
         array $options,
     ): void {
-        $builder->add('description', TextType::class, [
-            'label' => t('Description'),
-            'constraints' => [new Assert\NotBlank()],
-        ]);
+        $builder->add(
+            'description',
+            TextType::class,
+            [
+                'label' => t('Description'),
+                'constraints' => [new Assert\NotBlank()],
+            ],
+        );
 
-        $builder->add('token', TextType::class, self::tokenOptions());
+        $builder->add(
+            'token',
+            TextType::class,
+            self::tokenOptions(),
+        );
 
-        $builder->add('permissions', EnumType::class, [
-            'class' => ApiPermissions::class,
-            'label' => t('Select API permissions'),
-            'expanded' => true,
-            'multiple' => true,
-            'constraints' => [new Assert\NotBlank()],
-        ]);
+        $builder->add(
+            'permissions',
+            EnumType::class,
+            [
+                'class' => ApiPermissions::class,
+                'label' => t('Select API permissions'),
+                'expanded' => true,
+                'multiple' => true,
+                'constraints' => [new Assert\NotBlank()],
+            ],
+        );
 
-        $builder->add('submit', SubmitType::class, ['label' => t('Create API principal')]);
+        $builder->add(
+            'submit',
+            SubmitType::class,
+            ['label' => t('Create API principal')],
+        );
 
         // ApiPrincipal only ever exposes a masked token, and only once it has one.
         $builder->addEventListener(
@@ -59,7 +75,11 @@ class ApiPrincipalType extends AbstractType
                     return;
                 }
 
-                $event->getForm()->add('token', TextType::class, self::tokenOptions($principal->getToken()));
+                $event->getForm()->add(
+                    'token',
+                    TextType::class,
+                    self::tokenOptions($principal->getToken()),
+                );
             },
         );
     }

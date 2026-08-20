@@ -37,21 +37,30 @@ final class UserController extends AbstractController
     )]
     public function index(): Response
     {
-        return $this->render('user/index.html.twig', [
-            'users' => $this->userService->findAll(),
-            'uses_ldap' => $this->userService->usesLdap(),
-        ]);
+        return $this->render(
+            'user/index.html.twig',
+            [
+                'users' => $this->userService->findAll(),
+                'uses_ldap' => $this->userService->usesLdap(),
+            ],
+        );
     }
 
     #[Route(
         path: '/settings/user/create',
         name: 'user_create',
-        methods: ['GET', 'POST'],
+        methods: [
+            'GET',
+            'POST',
+        ],
     )]
     public function create(Request $request): Response
     {
         $user = new User();
-        $form = $this->createForm(UserCreateType::class, $user);
+        $form = $this->createForm(
+            UserCreateType::class,
+            $user,
+        );
         $form->handleRequest($request);
 
         if (
@@ -59,19 +68,28 @@ final class UserController extends AbstractController
             && $form->isValid()
         ) {
             // The password is not mapped onto the entity: what is stored is a hash of it.
-            $this->userService->create($user, $form->get('password')->getData());
+            $this->userService->create(
+                $user,
+                $form->get('password')->getData(),
+            );
 
             return $this->redirectToRoute('user_index');
         }
 
-        return $this->render('user/create.html.twig', ['form' => $form]);
+        return $this->render(
+            'user/create.html.twig',
+            ['form' => $form],
+        );
     }
 
     #[Route(
         path: '/settings/user/edit/{id}',
         name: 'user_edit',
         requirements: ['id' => '\d+'],
-        methods: ['GET', 'POST'],
+        methods: [
+            'GET',
+            'POST',
+        ],
     )]
     public function edit(
         Request $request,
@@ -83,22 +101,31 @@ final class UserController extends AbstractController
             throw $this->createNotFoundException();
         }
 
-        $form = $this->createForm(UserEditType::class, $user);
+        $form = $this->createForm(
+            UserEditType::class,
+            $user,
+        );
         $form->handleRequest($request);
 
         if (
             $form->isSubmitted()
             && $form->isValid()
         ) {
-            $this->userService->changePassword($user, $form->get('password')->getData());
+            $this->userService->changePassword(
+                $user,
+                $form->get('password')->getData(),
+            );
 
             return $this->redirectToRoute('user_index');
         }
 
-        return $this->render('user/edit.html.twig', [
-            'form' => $form,
-            'user' => $user,
-        ]);
+        return $this->render(
+            'user/edit.html.twig',
+            [
+                'form' => $form,
+                'user' => $user,
+            ],
+        );
     }
 
     #[Route(
@@ -131,7 +158,10 @@ final class UserController extends AbstractController
     #[Route(
         path: '/login',
         name: 'user_login',
-        methods: ['GET', 'POST'],
+        methods: [
+            'GET',
+            'POST',
+        ],
     )]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -148,10 +178,13 @@ final class UserController extends AbstractController
             $form->addError(new FormError($error->getMessageKey(), null, $error->getMessageData()));
         }
 
-        return $this->render('user/login.html.twig', [
-            'form' => $form,
-            'uses_ldap' => $this->userService->usesLdap(),
-        ]);
+        return $this->render(
+            'user/login.html.twig',
+            [
+                'form' => $form,
+                'uses_ldap' => $this->userService->usesLdap(),
+            ],
+        );
     }
 
     /**

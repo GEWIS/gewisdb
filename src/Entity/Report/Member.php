@@ -528,7 +528,10 @@ class Member
      */
     public function hasReached16(DateTime $onDate = new DateTime()): bool
     {
-        return $this->isOlderThan($onDate, 16);
+        return $this->isOlderThan(
+            $onDate,
+            16,
+        );
     }
 
     /**
@@ -536,7 +539,10 @@ class Member
      */
     public function hasReached18(DateTime $onDate = new DateTime()): bool
     {
-        return $this->isOlderThan($onDate, 18);
+        return $this->isOlderThan(
+            $onDate,
+            18,
+        );
     }
 
     /**
@@ -544,7 +550,10 @@ class Member
      */
     public function hasReached21(DateTime $onDate = new DateTime()): bool
     {
-        return $this->isOlderThan($onDate, 21);
+        return $this->isOlderThan(
+            $onDate,
+            21,
+        );
     }
 
     private function isOlderThan(
@@ -667,7 +676,12 @@ class Member
             'expiration' => $this->getExpiration()->format(DateTimeInterface::ATOM),
         ];
 
-        if (in_array('organs', $include)) {
+        if (
+            in_array(
+                'organs',
+                $include,
+            )
+        ) {
             $result['organs'] = array_values(
                 array_map(
                     static function (OrganMember $i) {
@@ -683,31 +697,66 @@ class Member
             );
         }
 
-        if (in_array('email', $include)) {
+        if (
+            in_array(
+                'email',
+                $include,
+            )
+        ) {
             $result['email'] = $this->getEmail();
         }
 
-        if (in_array('birthdate', $include)) {
+        if (
+            in_array(
+                'birthdate',
+                $include,
+            )
+        ) {
             $result['birthdate'] = $this->getBirth()->format(DateTimeInterface::ATOM);
         }
 
-        if (in_array('is_16_plus', $include)) {
+        if (
+            in_array(
+                'is_16_plus',
+                $include,
+            )
+        ) {
             $result['is_16_plus'] = $this->hasReached16();
         }
 
-        if (in_array('is_18_plus', $include)) {
+        if (
+            in_array(
+                'is_18_plus',
+                $include,
+            )
+        ) {
             $result['is_18_plus'] = $this->hasReached18();
         }
 
-        if (in_array('is_21_plus', $include)) {
+        if (
+            in_array(
+                'is_21_plus',
+                $include,
+            )
+        ) {
             $result['is_21_plus'] = $this->hasReached21();
         }
 
-        if (in_array('keyholder', $include)) {
+        if (
+            in_array(
+                'keyholder',
+                $include,
+            )
+        ) {
             $result['keyholder'] = $this->isKeyholder();
         }
 
-        if (in_array('type', $include)) {
+        if (
+            in_array(
+                'type',
+                $include,
+            )
+        ) {
             $result['membership_type'] = $this->getType()->value;
         }
 

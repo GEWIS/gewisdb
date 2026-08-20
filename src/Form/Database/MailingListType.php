@@ -41,87 +41,130 @@ class MailingListType extends AbstractType
         FormBuilderInterface $builder,
         array $options,
     ): void {
-        $builder->add('name', TextType::class, [
-            'label' => t('Name'),
-            'required' => true,
-            'empty_data' => '',
-            'constraints' => [
-                new Assert\NotBlank(),
-                new Assert\Length(
-                    min: 2,
-                    max: 64,
-                ),
+        $builder->add(
+            'name',
+            TextType::class,
+            [
+                'label' => t('Name'),
+                'required' => true,
+                'empty_data' => '',
+                'constraints' => [
+                    new Assert\NotBlank(),
+                    new Assert\Length(
+                        min: 2,
+                        max: 64,
+                    ),
+                ],
             ],
-        ]);
+        );
 
-        $builder->add('nl_description', TextareaType::class, [
-            'label' => t('Dutch Description'),
-            'required' => true,
-            'empty_data' => '',
-            'constraints' => [
-                new Assert\NotBlank(),
-                new Assert\Length(min: 10),
+        $builder->add(
+            'nl_description',
+            TextareaType::class,
+            [
+                'label' => t('Dutch Description'),
+                'required' => true,
+                'empty_data' => '',
+                'constraints' => [
+                    new Assert\NotBlank(),
+                    new Assert\Length(min: 10),
+                ],
             ],
-        ]);
+        );
 
-        $builder->add('en_description', TextareaType::class, [
-            'label' => t('English Description'),
-            'required' => true,
-            'empty_data' => '',
-            'constraints' => [
-                new Assert\NotBlank(),
-                new Assert\Length(min: 10),
+        $builder->add(
+            'en_description',
+            TextareaType::class,
+            [
+                'label' => t('English Description'),
+                'required' => true,
+                'empty_data' => '',
+                'constraints' => [
+                    new Assert\NotBlank(),
+                    new Assert\Length(min: 10),
+                ],
             ],
-        ]);
+        );
 
-        $builder->add('onForm', CheckboxType::class, [
-            'label' => t('On Form'),
-            'required' => false,
-        ]);
+        $builder->add(
+            'onForm',
+            CheckboxType::class,
+            [
+                'label' => t('On Form'),
+                'required' => false,
+            ],
+        );
 
-        $builder->add('defaultSub', CheckboxType::class, [
-            'label' => t('Auto-subscription'),
-            'required' => false,
-        ]);
+        $builder->add(
+            'defaultSub',
+            CheckboxType::class,
+            [
+                'label' => t('Auto-subscription'),
+                'required' => false,
+            ],
+        );
 
-        $builder->add('mailmanList', EntityType::class, [
-            'label' => t('Mailman Mailing List'),
-            'class' => MailmanMailingList::class,
-            'choices' => $options['mailman_lists'],
-            'choice_label' => static function (MailmanMailingList $mailmanList): string {
-                return sprintf('%s (%s)', $mailmanList->getName(), $mailmanList->getMailmanId());
-            },
-            'placeholder' => t('Choose a mailing list'),
-            'required' => false,
-        ]);
+        $builder->add(
+            'mailmanList',
+            EntityType::class,
+            [
+                'label' => t('Mailman Mailing List'),
+                'class' => MailmanMailingList::class,
+                'choices' => $options['mailman_lists'],
+                'choice_label' => static function (MailmanMailingList $mailmanList): string {
+                    return sprintf(
+                        '%s (%s)',
+                        $mailmanList->getName(),
+                        $mailmanList->getMailmanId(),
+                    );
+                },
+                'placeholder' => t('Choose a mailing list'),
+                'required' => false,
+            ],
+        );
 
-        $builder->add('listmonkList', EntityType::class, [
-            'label' => t('Listmonk Mailing List'),
-            'class' => ListmonkMailingList::class,
-            'choices' => $options['listmonk_lists'],
-            'choice_label' => static function (ListmonkMailingList $listmonkList): string {
-                return sprintf('%s (%s)', $listmonkList->getName(), $listmonkList->getListmonkId());
-            },
-            'placeholder' => t('Choose a mailing list'),
-            'required' => false,
-        ]);
+        $builder->add(
+            'listmonkList',
+            EntityType::class,
+            [
+                'label' => t('Listmonk Mailing List'),
+                'class' => ListmonkMailingList::class,
+                'choices' => $options['listmonk_lists'],
+                'choice_label' => static function (ListmonkMailingList $listmonkList): string {
+                    return sprintf(
+                        '%s (%s)',
+                        $listmonkList->getName(),
+                        $listmonkList->getListmonkId(),
+                    );
+                },
+                'placeholder' => t('Choose a mailing list'),
+                'required' => false,
+            ],
+        );
 
-        $builder->add('submit', SubmitType::class, ['label' => t('Add Mailing List')]);
+        $builder->add(
+            'submit',
+            SubmitType::class,
+            ['label' => t('Add Mailing List')],
+        );
 
         // A list that does not exist yet is shown on the join form unless that is unchecked. The entity carries no
         // default for this, so it is applied here before the checkbox reads its value.
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, static function (FormEvent $event): void {
-            $list = $event->getData();
+        $builder->addEventListener(
+            FormEvents::PRE_SET_DATA,
+            static function (FormEvent $event): void {
+                $list = $event->getData();
 
-            if (
-                !$list instanceof MailingList
-                || (new ReflectionProperty(MailingList::class, 'onForm'))->isInitialized($list)
-            ) {
-                return;
-            }
+                if (
+                    !$list instanceof MailingList
+                    || new ReflectionProperty(MailingList::class, 'onForm')->isInitialized($list)
+                ) {
+                    return;
+                }
 
-            $list->setOnForm(true);
-        });
+                $list->setOnForm(true);
+            },
+        );
     }
 
     #[Override]
@@ -134,8 +177,14 @@ class MailingListType extends AbstractType
             'constraints' => [new Assert\Callback(self::validateSingleExternalList(...))],
         ]);
 
-        $resolver->setAllowedTypes('mailman_lists', MailmanMailingList::class . '[]');
-        $resolver->setAllowedTypes('listmonk_lists', ListmonkMailingList::class . '[]');
+        $resolver->setAllowedTypes(
+            'mailman_lists',
+            MailmanMailingList::class . '[]',
+        );
+        $resolver->setAllowedTypes(
+            'listmonk_lists',
+            ListmonkMailingList::class . '[]',
+        );
     }
 
     /**

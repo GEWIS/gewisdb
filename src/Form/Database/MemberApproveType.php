@@ -25,11 +25,18 @@ class MemberApproveType extends MembershipTypeType
         FormBuilderInterface $builder,
         array $options,
     ): void {
-        parent::buildForm($builder, $options);
+        parent::buildForm(
+            $builder,
+            $options,
+        );
 
         // A membership that is only now beginning has no period a change could fall in, so the inherited date is not
         // asked for. It is required where it does apply, and would reject the form here.
         $builder->remove('changeDate');
-        $builder->add('submit', SubmitType::class, ['label' => t('Approve Membership')]);
+        $builder->add(
+            'submit',
+            SubmitType::class,
+            ['label' => t('Approve Membership')],
+        );
     }
 }

@@ -46,7 +46,10 @@ final class ProspectiveMemberController extends AbstractController
     #[Route(
         path: '/member/subscribe',
         name: 'join_subscribe_index',
-        methods: ['GET', 'POST'],
+        methods: [
+            'GET',
+            'POST',
+        ],
     )]
     public function subscribe(Request $request): Response
     {
@@ -54,21 +57,31 @@ final class ProspectiveMemberController extends AbstractController
             return $this->render('join/subscribe-disabled.html.twig');
         }
 
-        $form = $this->createForm(RegistrationType::class, null, [
-            'mailing_lists' => $this->registrationService->getMailingListsOnForm(),
-        ]);
+        $form = $this->createForm(
+            RegistrationType::class,
+            null,
+            [
+                'mailing_lists' => $this->registrationService->getMailingListsOnForm(),
+            ],
+        );
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if (
+            $form->isSubmitted()
+            && $form->isValid()
+        ) {
             $checkoutUrl = $this->registrationService->register($form);
 
             if (null !== $checkoutUrl) {
                 // Rendered rather than answered with a 303, because the Chromium CSP enforcer does not allow a
                 // redirect after a POST.
-                return $this->render('application/redirect.html.twig', [
-                    'destination' => $this->translator->trans('our payment provider'),
-                    'url' => $checkoutUrl,
-                ]);
+                return $this->render(
+                    'application/redirect.html.twig',
+                    [
+                        'destination' => $this->translator->trans('our payment provider'),
+                        'url' => $checkoutUrl,
+                    ],
+                );
             }
 
             // A registration that is rejected leaves its reason on the form; one that is still valid was stored and
@@ -78,7 +91,10 @@ final class ProspectiveMemberController extends AbstractController
             }
         }
 
-        return $this->render('join/subscribe.html.twig', ['form' => $form]);
+        return $this->render(
+            'join/subscribe.html.twig',
+            ['form' => $form],
+        );
     }
 
     /**
@@ -92,13 +108,19 @@ final class ProspectiveMemberController extends AbstractController
         path: '/renew/{token}',
         name: 'join_renew_short',
         requirements: ['token' => '[a-zA-Z0-9_\-\+]+'],
-        methods: ['GET', 'POST'],
+        methods: [
+            'GET',
+            'POST',
+        ],
     )]
     #[Route(
         path: '/member/renew/{token}',
         name: 'join_renew',
         requirements: ['token' => '[a-zA-Z0-9_\-\+]+'],
-        methods: ['GET', 'POST'],
+        methods: [
+            'GET',
+            'POST',
+        ],
     )]
     public function renew(
         Request $request,
@@ -111,24 +133,43 @@ final class ProspectiveMemberController extends AbstractController
         }
 
         $member = $renewalLink->getMember();
-        $form = $this->createForm(MemberRenewalType::class, $member, ['renewal_link' => $renewalLink]);
+        $form = $this->createForm(
+            MemberRenewalType::class,
+            $member,
+            ['renewal_link' => $renewalLink],
+        );
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
             $email = (string) $form->get('email')->getData();
 
-            if ($this->memberService->emailBelongsToSomeoneElse($email, $member)) {
+            if (
+                $this->memberService->emailBelongsToSomeoneElse(
+                    $email,
+                    $member,
+                )
+            ) {
                 $form->get('email')->addError(new FormError(
                     $this->translator->trans('There already is a member with this e-mail address.'),
                 ));
             } elseif ($form->isValid()) {
-                $this->memberService->renewMember($member, $renewalLink, $renewalLink->getNewExpiration());
+                $this->memberService->renewMember(
+                    $member,
+                    $renewalLink,
+                    $renewalLink->getNewExpiration(),
+                );
 
-                return $this->render('join/renew-done.html.twig', ['member' => $member]);
+                return $this->render(
+                    'join/renew-done.html.twig',
+                    ['member' => $member],
+                );
             }
         }
 
-        return $this->render('join/renew.html.twig', ['form' => $form]);
+        return $this->render(
+            'join/renew.html.twig',
+            ['form' => $form],
+        );
     }
 
     #[Route(
@@ -152,8 +193,14 @@ final class ProspectiveMemberController extends AbstractController
     public function search(Request $request): JsonResponse
     {
         $prospectiveMembers = $this->memberService->searchProspective(
-            (string) $request->query->get('q', ''),
-            (string) $request->query->get('type', ''),
+            (string) $request->query->get(
+                'q',
+                '',
+            ),
+            (string) $request->query->get(
+                'type',
+                '',
+            ),
         );
 
         return $this->json(array_map(
@@ -184,15 +231,18 @@ final class ProspectiveMemberController extends AbstractController
             throw $this->createNotFoundException();
         }
 
-        return $this->render('join/prospective-member/show.html.twig', [
-            'member' => $prospectiveMember['member'],
-            'canDelete' => $prospectiveMember['canDelete'],
-            'approveMessages' => $prospectiveMember['approveMessages'],
-            // Only a prospective member whose payment is settled can be approved, so the rest do not get a form.
-            'form' => true === $prospectiveMember['canBeApproved']
-                ? $this->createForm(MemberApproveType::class)
-                : null,
-        ]);
+        return $this->render(
+            'join/prospective-member/show.html.twig',
+            [
+                'member' => $prospectiveMember['member'],
+                'canDelete' => $prospectiveMember['canDelete'],
+                'approveMessages' => $prospectiveMember['approveMessages'],
+                // Only a prospective member whose payment is settled can be approved, so the rest do not get a form.
+                'form' => true === $prospectiveMember['canBeApproved']
+                    ? $this->createForm(MemberApproveType::class)
+                    : null,
+            ],
+        );
     }
 
     #[Route(
@@ -220,18 +270,33 @@ final class ProspectiveMemberController extends AbstractController
             && $form->isValid()
             && $membershipType instanceof MembershipTypes
         ) {
-            $member = $this->memberService->finalizeSubscription($membershipType, $prospectiveMember);
+            $member = $this->memberService->finalizeSubscription(
+                $membershipType,
+                $prospectiveMember,
+            );
 
             if (null !== $member) {
-                $this->addFlash('success', 'The membership has been confirmed.');
+                $this->addFlash(
+                    'success',
+                    'The membership has been confirmed.',
+                );
 
-                return $this->redirectToRoute('member_show', ['lidnr' => $member->getLidnr()]);
+                return $this->redirectToRoute(
+                    'member_show',
+                    ['lidnr' => $member->getLidnr()],
+                );
             }
         }
 
-        $this->addFlash('error', 'This prospective member cannot be approved.');
+        $this->addFlash(
+            'error',
+            'This prospective member cannot be approved.',
+        );
 
-        return $this->redirectToRoute('join_prospective_member_show', ['id' => $id]);
+        return $this->redirectToRoute(
+            'join_prospective_member_show',
+            ['id' => $id],
+        );
     }
 
     #[Route(
@@ -255,16 +320,25 @@ final class ProspectiveMemberController extends AbstractController
         $removal = $this->registrationService->removeProspectiveMember($prospectiveMember);
 
         if (ProspectiveMemberRemoval::Removed === $removal) {
-            $this->addFlash('success', 'The prospective member has been removed.');
+            $this->addFlash(
+                'success',
+                'The prospective member has been removed.',
+            );
 
             return $this->redirectToRoute('join_prospective_member_index');
         }
 
         if (ProspectiveMemberRemoval::NotRemovable === $removal) {
-            return $this->redirectToRoute('join_prospective_member_show', ['id' => $id]);
+            return $this->redirectToRoute(
+                'join_prospective_member_show',
+                ['id' => $id],
+            );
         }
 
         // The membership fee is still with us, so the prospective member stays on file until the refund is settled.
-        return $this->render('join/prospective-member/delete.html.twig', ['reason' => $removal]);
+        return $this->render(
+            'join/prospective-member/delete.html.twig',
+            ['reason' => $removal],
+        );
     }
 }

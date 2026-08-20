@@ -27,25 +27,46 @@ class MailingListMembershipFixture extends Fixture implements DependentFixtureIn
     #[Override]
     public function load(ObjectManager $manager): void
     {
-        $announcements = $this->getReference(MailingListFixture::REF_LIST_ANNOUNCEMENTS, MailingList::class);
-        $activities = $this->getReference(MailingListFixture::REF_LIST_ACTIVITIES, MailingList::class);
+        $announcements = $this->getReference(
+            MailingListFixture::REF_LIST_ANNOUNCEMENTS,
+            MailingList::class,
+        );
+        $activities = $this->getReference(
+            MailingListFixture::REF_LIST_ACTIVITIES,
+            MailingList::class,
+        );
 
-        $student = $this->getReference(MemberFixture::REF_MEMBER_STUDENT, MemberModel::class);
-        $external = $this->getReference(MemberFixture::REF_MEMBER_EXTERNAL, MemberModel::class);
-        $graduate = $this->getReference(MemberFixture::REF_MEMBER_GRADUATE, MemberModel::class);
+        $student = $this->getReference(
+            MemberFixture::REF_MEMBER_STUDENT,
+            MemberModel::class,
+        );
+        $external = $this->getReference(
+            MemberFixture::REF_MEMBER_EXTERNAL,
+            MemberModel::class,
+        );
+        $graduate = $this->getReference(
+            MemberFixture::REF_MEMBER_GRADUATE,
+            MemberModel::class,
+        );
 
         // Everyone is on the announcements list, which is what makes it the one the registration form does not
         // offer. The first of these is still to be carried across, so a sync has something to do.
         $manager->persist($this->subscribe($announcements, $student));
 
-        $carried = $this->subscribe($announcements, $external);
+        $carried = $this->subscribe(
+            $announcements,
+            $external,
+        );
         $carried->setToBeCreated(false);
         $carried->setLastSyncOn();
         $carried->setLastSyncSuccess(true);
         $manager->persist($carried);
 
         // A membership on its way out: the record stays until the servers have been told.
-        $leaving = $this->subscribe($activities, $graduate);
+        $leaving = $this->subscribe(
+            $activities,
+            $graduate,
+        );
         $leaving->setToBeCreated(false);
         $leaving->setToBeDeleted(true);
         $leaving->setLastSyncOn();

@@ -33,54 +33,101 @@ class BudgetType extends AbstractType
         array $options,
     ): void {
         $builder
-            ->add('type', ChoiceType::class, [
-                'label' => t('Budget/Statement'),
-                'choices' => ['budget', 'statement'],
-                'choice_label' => static fn (string $choice) => 'budget' === $choice ? t('Budget') : t('Statement'),
-                'placeholder' => false,
-                'constraints' => [new NotBlank()],
-            ])
-            ->add('name', TextType::class, [
-                'label' => t('Name'),
-                'constraints' => [
-                    new NotBlank(),
-                    new Length(min: 3, max: 255),
+            ->add(
+                'type',
+                ChoiceType::class,
+                [
+                    'label' => t('Budget/Statement'),
+                    'choices' => [
+                        'budget',
+                        'statement',
+                    ],
+                    'choice_label' => static fn (string $choice) => 'budget' === $choice ? t('Budget') : t('Statement'),
+                    'placeholder' => false,
+                    'constraints' => [new NotBlank()],
                 ],
-            ])
-            ->add('date', DateType::class, [
-                'label' => t('Date of Budget/Statement'),
-                'widget' => 'single_text',
-                'constraints' => [new NotNull()],
-            ])
-            ->add('author', MemberLookupType::class, ['label' => t('Author')])
-            ->add('version', TextType::class, [
-                'label' => t('Version'),
-                'constraints' => [
-                    new NotBlank(),
-                    new Length(min: 1, max: 32),
+            )
+            ->add(
+                'name',
+                TextType::class,
+                [
+                    'label' => t('Name'),
+                    'constraints' => [
+                        new NotBlank(),
+                        new Length(
+                            min: 3,
+                            max: 255,
+                        ),
+                    ],
                 ],
-            ])
+            )
+            ->add(
+                'date',
+                DateType::class,
+                [
+                    'label' => t('Date of Budget/Statement'),
+                    'widget' => 'single_text',
+                    'constraints' => [new NotNull()],
+                ],
+            )
+            ->add(
+                'author',
+                MemberLookupType::class,
+                ['label' => t('Author')],
+            )
+            ->add(
+                'version',
+                TextType::class,
+                [
+                    'label' => t('Version'),
+                    'constraints' => [
+                        new NotBlank(),
+                        new Length(
+                            min: 1,
+                            max: 32,
+                        ),
+                    ],
+                ],
+            )
             // Approval and modifications carry no constraints: anything that is not an explicit yes counts as a no,
             // which is what the original form falls back to as well.
-            ->add('approve', ChoiceType::class, [
-                'label' => t('Approval'),
-                'choices' => ['1', '0'],
-                'choice_label' => static fn (string $choice) => '1' === $choice ? t('Approve') : t('Disapprove'),
-                'expanded' => true,
-                'placeholder' => false,
-                'required' => false,
-            ])
-            ->add('changes', ChoiceType::class, [
-                'label' => t('Modifications'),
-                'choices' => ['1', '0'],
-                'choice_label' => static fn (string $choice) => '1' === $choice
-                    ? t('With Modifications')
-                    : t('Without Modifications'),
-                'expanded' => true,
-                'placeholder' => false,
-                'required' => false,
-            ])
-            ->add('submit', SubmitType::class, ['label' => t('Add Budget/Statement')])
+            ->add(
+                'approve',
+                ChoiceType::class,
+                [
+                    'label' => t('Approval'),
+                    'choices' => [
+                        '1',
+                        '0',
+                    ],
+                    'choice_label' => static fn (string $choice) => '1' === $choice ? t('Approve') : t('Disapprove'),
+                    'expanded' => true,
+                    'placeholder' => false,
+                    'required' => false,
+                ],
+            )
+            ->add(
+                'changes',
+                ChoiceType::class,
+                [
+                    'label' => t('Modifications'),
+                    'choices' => [
+                        '1',
+                        '0',
+                    ],
+                    'choice_label' => static fn (string $choice) => '1' === $choice
+                        ? t('With Modifications')
+                        : t('Without Modifications'),
+                    'expanded' => true,
+                    'placeholder' => false,
+                    'required' => false,
+                ],
+            )
+            ->add(
+                'submit',
+                SubmitType::class,
+                ['label' => t('Add Budget/Statement')],
+            )
             ->setDataMapper($this->dataMapper);
     }
 

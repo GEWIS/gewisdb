@@ -17,7 +17,10 @@ use function is_string;
  * Symfony does not read the session for this, so without a listener the stored value is written and never used.
  * Priority 20 runs before Symfony's own LocaleListener, so a route that carries an explicit `_locale` still wins.
  */
-#[AsEventListener(event: KernelEvents::REQUEST, priority: 20)]
+#[AsEventListener(
+    event: KernelEvents::REQUEST,
+    priority: 20,
+)]
 final readonly class LocaleListener
 {
     /**
@@ -40,7 +43,11 @@ final readonly class LocaleListener
         $locale = $request->getSession()->get('_locale');
 
         $request->setLocale(
-            is_string($locale) && in_array($locale, $this->enabledLocales, true)
+            is_string($locale) && in_array(
+                $locale,
+                $this->enabledLocales,
+                true,
+            )
                 ? $locale
                 : $this->defaultLocale,
         );

@@ -106,9 +106,18 @@ class Withdrawal extends SubDecision
     ): string {
         $replacements = [
             '%GRANTEE%' => $this->getGranting()->getMember()->getFullName(),
-            '%WITHDRAWAL%' => $this->formatDate($this->getWithdrawnOn(), $language),
+            '%WITHDRAWAL%' => $this->formatDate(
+                $this->getWithdrawnOn(),
+                $language,
+            ),
         ];
 
-        return $this->replaceContentPlaceholders($this->getTranslatedTemplate($translator, $language), $replacements);
+        return $this->replaceContentPlaceholders(
+            $this->getTranslatedTemplate(
+                $translator,
+                $language,
+            ),
+            $replacements,
+        );
     }
 }

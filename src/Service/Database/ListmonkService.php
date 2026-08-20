@@ -70,7 +70,10 @@ class ListmonkService
         $url = $this->endpoint . $uri;
 
         $options = [
-            'auth_basic' => [$this->username, $this->password],
+            'auth_basic' => [
+                $this->username,
+                $this->password,
+            ],
             'timeout' => 600,
         ];
 
@@ -92,7 +95,11 @@ class ListmonkService
         // The client is lazy, so both the status code and the body have to be pulled before we know whether the
         // request actually made it to Listmonk.
         try {
-            $response = $this->httpClient->request($method, $url, $options);
+            $response = $this->httpClient->request(
+                $method,
+                $url,
+                $options,
+            );
 
             $statusCode = $response->getStatusCode();
             // We want to try to parse everything that returned a 2xx status code, so suppress the client's own
@@ -102,7 +109,10 @@ class ListmonkService
             throw new RuntimeException('Failed to send request: ' . $e->getMessage());
         }
 
-        if (200 > $statusCode || 300 <= $statusCode) {
+        if (
+            200 > $statusCode
+            || 300 <= $statusCode
+        ) {
             throw new RuntimeException('Request failed with status code: ' . $statusCode);
         }
 
@@ -115,14 +125,24 @@ class ListmonkService
             throw new RuntimeException('Failed to parse JSON response: ' . json_last_error_msg());
         }
 
-        return json_decode($body, true);
+        return json_decode(
+            $body,
+            true,
+        );
     }
 
     private function buildListmonkEmailQuery(string $email): string
     {
         // '' works because Listmonk’s query parameter uses an SQL-like expression language,
         // and in SQL a single quote inside a single-quoted string is escaped by doubling it.
-        return sprintf("email='%s'", str_replace("'", "''", $email));
+        return sprintf(
+            "email='%s'",
+            str_replace(
+                "'",
+                "''",
+                $email,
+            ),
+        );
     }
 
     /**
@@ -139,18 +159,24 @@ class ListmonkService
             throw new RuntimeException('Unable to acquire sync lock for Listmonk sync: timeout.');
         }
 
-        if ($this->isSyncLocked() && !$renew) {
+        if (
+            $this->isSyncLocked()
+            && !$renew
+        ) {
             throw new RuntimeException('Unable to acquire sync lock for Listmonk sync: locked by other process.');
         }
 
-        if (!$this->isSyncLocked() && $renew) {
+        if (
+            !$this->isSyncLocked()
+            && $renew
+        ) {
             throw new RuntimeException('Unable to renew sync lock for Listmonk sync: currently unlocked.');
         }
 
         $this->configService->setConfig(
             ConfigNamespaces::DatabaseListmonk,
             'locked',
-            (new DateTime())->modify('+23 hours'),
+            new DateTime()->modify('+23 hours'),
         );
 
         if ($this->isSyncLocked()) {
@@ -167,7 +193,11 @@ class ListmonkService
      */
     private function releaseSyncLock(): void
     {
-        $this->configService->setConfig(ConfigNamespaces::DatabaseListmonk, 'locked', new DateTime());
+        $this->configService->setConfig(
+            ConfigNamespaces::DatabaseListmonk,
+            'locked',
+            new DateTime(),
+        );
     }
 
     /**
@@ -175,7 +205,10 @@ class ListmonkService
      */
     public function isSyncLocked(): bool
     {
-        return $this->configService->getConfig(ConfigNamespaces::DatabaseListmonk, 'locked') > new DateTime();
+        return $this->configService->getConfig(
+            ConfigNamespaces::DatabaseListmonk,
+            'locked',
+        ) > new DateTime();
     }
 
     /**
@@ -200,10 +233,18 @@ class ListmonkService
             }
 
             $this->acquireSyncLock(renew: true);
-            $this->syncMembershipSingle($list, $output, $dryRun);
+            $this->syncMembershipSingle(
+                $list,
+                $output,
+                $dryRun,
+            );
         }
 
-        $this->configService->setConfig(ConfigNamespaces::DatabaseListmonk, 'lastSync', new DateTime());
+        $this->configService->setConfig(
+            ConfigNamespaces::DatabaseListmonk,
+            'lastSync',
+            new DateTime(),
+        );
 
         $this->releaseSyncLock();
     }
@@ -227,7 +268,7 @@ class ListmonkService
             OutputInterface::VERBOSITY_VERBOSE,
         );
 
-        $verifyTime = (new DateTime())->sub(new DateInterval('P1D'));
+        $verifyTime = new DateTime()->sub(new DateInterval('P1D'));
 
         $listId = $dbList->getListmonkList()->getListmonkId();
         $knownMembers = $this->getListmonkListSubscriberEmails($listId);
@@ -236,7 +277,10 @@ class ListmonkService
         // The order matters; we first process deletions, because we can have both be true
         // (e.g. when changing email addresses twice)
         foreach ($dbMemberships as $mailingListMember) {
-            if ($mailingListMember->isToBeDeleted() || null === $mailingListMember->getMember()) {
+            if (
+                $mailingListMember->isToBeDeleted()
+                || null === $mailingListMember->getMember()
+            ) {
                 $this->unsubscribeMemberFromMailingList(
                     mailingListMember: $mailingListMember,
                     output: $output,
@@ -398,7 +442,7 @@ class ListmonkService
             return true;
         }
 
-        return $lastFetch < (new DateTime())->sub(new DateInterval('PT1H5M'));
+        return $lastFetch < new DateTime()->sub(new DateInterval('PT1H5M'));
     }
 
     /**
@@ -514,7 +558,10 @@ class ListmonkService
 
         $member = $mailingListMember->getMember();
 
-        if (null !== $member && false === $mailingListMember->isToBeDeleted()) {
+        if (
+            null !== $member
+            && false === $mailingListMember->isToBeDeleted()
+        ) {
             $this->auditService->persist(
                 AuditMailingListMembership::create(
                     MailingListMemberAction::Remove,
@@ -527,9 +574,13 @@ class ListmonkService
         }
 
         // Find the subscriber by email
-        $subscribers = $this->performListmonkRequest('subscribers', Request::METHOD_GET, [
-            'query' => $this->buildListmonkEmailQuery($email),
-        ]);
+        $subscribers = $this->performListmonkRequest(
+            'subscribers',
+            Request::METHOD_GET,
+            [
+                'query' => $this->buildListmonkEmailQuery($email),
+            ],
+        );
 
         if (isset($subscribers['data']['results'][0]['id'])) {
             $subscriberId = $subscribers['data']['results'][0]['id'];
@@ -548,9 +599,15 @@ class ListmonkService
             // If the subscriber no longer belongs to any lists, delete them from Listmonk entirely.
             $subscriber = $this->performListmonkRequest(sprintf('subscribers/%s', $subscriberId));
 
-            if (isset($subscriber['data']['lists']) && [] === $subscriber['data']['lists']) {
+            if (
+                isset($subscriber['data']['lists'])
+                && [] === $subscriber['data']['lists']
+            ) {
                 $this->performListmonkRequest(
-                    uri: sprintf('subscribers/%s', $subscriberId),
+                    uri: sprintf(
+                        'subscribers/%s',
+                        $subscriberId,
+                    ),
                     method: Request::METHOD_DELETE,
                 );
             }
@@ -581,7 +638,12 @@ class ListmonkService
         $listId = $mailingListMember->getMailingList()->getListmonkList()->getListmonkId();
         $listName = $mailingListMember->getMailingList()->getListmonkList()->getName();
 
-        if (in_array($mailingListMember->getEmail(), $knownMembers)) {
+        if (
+            in_array(
+                $mailingListMember->getEmail(),
+                $knownMembers,
+            )
+        ) {
             $mailingListMember->setLastSyncOn();
             $this->mailingListMemberRepository->persist($mailingListMember);
 
@@ -628,7 +690,10 @@ class ListmonkService
 
         $member = $mailingListMember->getMember();
 
-        if (null !== $member && false === $mailingListMember->isToBeDeleted()) {
+        if (
+            null !== $member
+            && false === $mailingListMember->isToBeDeleted()
+        ) {
             $this->auditService->persist(
                 AuditMailingListMembership::create(
                     MailingListMemberAction::Remove,
@@ -662,10 +727,14 @@ class ListmonkService
         ));
 
         // Get all subscribers for this list
-        $subscribers = $this->performListmonkRequest('subscribers', Request::METHOD_GET, [
-            'list_id' => $listId,
-            'per_page' => 'all',
-        ]);
+        $subscribers = $this->performListmonkRequest(
+            'subscribers',
+            Request::METHOD_GET,
+            [
+                'list_id' => $listId,
+                'per_page' => 'all',
+            ],
+        );
 
         if (isset($subscribers['data']['results'])) {
             foreach ($subscribers['data']['results'] as $subscriber) {

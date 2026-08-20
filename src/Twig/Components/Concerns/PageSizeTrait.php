@@ -14,7 +14,12 @@ use function in_array;
  */
 trait PageSizeTrait
 {
-    public const array PAGE_SIZES = [10, 25, 50, 100];
+    public const array PAGE_SIZES = [
+        10,
+        25,
+        50,
+        100,
+    ];
 
     #[LiveProp(
         writable: true,
@@ -41,6 +46,12 @@ trait PageSizeTrait
 
     protected function pageSize(): int
     {
-        return in_array($this->pageSize, self::PAGE_SIZES, true) ? $this->pageSize : self::PAGE_SIZES[0];
+        return in_array(
+            $this->pageSize,
+            self::PAGE_SIZES,
+            true,
+        )
+            ? $this->pageSize
+            : self::PAGE_SIZES[0];
     }
 }

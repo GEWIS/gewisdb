@@ -29,13 +29,24 @@ class AnnulmentType extends AbstractType
     ): void {
         $builder
             // Only the source for the decision autocomplete, which fills in the reference below.
-            ->add('name', TextType::class, [
-                'label' => t('Decision'),
-                'mapped' => false,
-                'required' => false,
-            ])
-            ->add('fdecision', DecisionType::class)
-            ->add('submit', SubmitType::class, ['label' => t('Annul Decision')])
+            ->add(
+                'name',
+                TextType::class,
+                [
+                    'label' => t('Decision'),
+                    'mapped' => false,
+                    'required' => false,
+                ],
+            )
+            ->add(
+                'fdecision',
+                DecisionType::class,
+            )
+            ->add(
+                'submit',
+                SubmitType::class,
+                ['label' => t('Annul Decision')],
+            )
             ->setDataMapper($this->dataMapper);
     }
 

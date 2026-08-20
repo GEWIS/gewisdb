@@ -23,7 +23,11 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
 #[Entity(repositoryClass: MailingListMemberRepository::class)]
 #[UniqueConstraint(
     name: 'mailinglistmember_unique_idx',
-    columns: ['mailingList', 'member', 'email'],
+    columns: [
+        'mailingList',
+        'member',
+        'email',
+    ],
 )]
 class MailingListMember
 {

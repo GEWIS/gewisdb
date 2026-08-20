@@ -90,7 +90,11 @@ class FoundationMapper extends AbstractDecisionMapper
             if (
                 InstallationFunctions::Member !== $function
                 && InstallationFunctions::InactiveMember !== $function
-                && !in_array($member->getLidnr(), $installedMembers, true)
+                && !in_array(
+                    $member->getLidnr(),
+                    $installedMembers,
+                    true,
+                )
             ) {
                 $installation = new Installation();
                 $installation->setSequence($sequence++);

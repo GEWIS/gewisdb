@@ -29,8 +29,16 @@ class DeleteDecisionType extends AbstractType
         array $options,
     ): void {
         $builder
-            ->add('submit_yes', SubmitType::class, ['label' => t('Yes')])
-            ->add('submit_no', SubmitType::class, ['label' => t('No')]);
+            ->add(
+                'submit_yes',
+                SubmitType::class,
+                ['label' => t('Yes')],
+            )
+            ->add(
+                'submit_no',
+                SubmitType::class,
+                ['label' => t('No')],
+            );
     }
 
     #[Override]

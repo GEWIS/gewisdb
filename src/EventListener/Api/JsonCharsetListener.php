@@ -25,7 +25,12 @@ final readonly class JsonCharsetListener
 
     public function __invoke(ResponseEvent $event): void
     {
-        if (!str_starts_with($event->getRequest()->getPathInfo(), self::API_PREFIX)) {
+        if (
+            !str_starts_with(
+                $event->getRequest()->getPathInfo(),
+                self::API_PREFIX,
+            )
+        ) {
             return;
         }
 
@@ -35,6 +40,9 @@ final readonly class JsonCharsetListener
             return;
         }
 
-        $response->headers->set('Content-Type', self::JSON . '; charset=utf-8');
+        $response->headers->set(
+            'Content-Type',
+            self::JSON . '; charset=utf-8',
+        );
     }
 }

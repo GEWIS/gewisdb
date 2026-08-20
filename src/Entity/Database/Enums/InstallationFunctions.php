@@ -40,12 +40,24 @@ enum InstallationFunctions: string implements TranslatableInterface
 
     public function isLegacy(): bool
     {
-        return in_array($this, [self::FoosballCoordinator, self::ProcurementOfficer]);
+        return in_array(
+            $this,
+            [
+                self::FoosballCoordinator,
+                self::ProcurementOfficer,
+            ],
+        );
     }
 
     public function isAdministrative(): bool
     {
-        return in_array($this, [self::Member, self::InactiveMember]);
+        return in_array(
+            $this,
+            [
+                self::Member,
+                self::InactiveMember,
+            ],
+        );
     }
 
     /**
@@ -111,7 +123,10 @@ enum InstallationFunctions: string implements TranslatableInterface
         TranslatorInterface $translator,
         ?string $locale = null,
     ): string {
-        return $this->getName()->trans($translator, $locale);
+        return $this->getName()->trans(
+            $translator,
+            $locale,
+        );
     }
 
     /**
@@ -139,25 +154,31 @@ enum InstallationFunctions: string implements TranslatableInterface
         );
 
         return array_combine(
-            array_map(static function ($func) {
-                return $func->value;
-            }, $cases),
-            array_map(static function ($func) use ($translator) {
-                return [
-                    'translations' => [
-                        AppLanguages::English->getLangParam() => $func->trans(
-                            $translator,
-                            AppLanguages::English->getLangParam(),
-                        ),
-                        AppLanguages::Dutch->getLangParam() => $func->trans(
-                            $translator,
-                            AppLanguages::Dutch->getLangParam(),
-                        ),
-                    ],
-                    'isAdministrative' => $func->isAdministrative(),
-                    'isLegacy' => $func->isLegacy(),
-                ];
-            }, $cases),
+            array_map(
+                static function ($func) {
+                    return $func->value;
+                },
+                $cases,
+            ),
+            array_map(
+                static function ($func) use ($translator) {
+                    return [
+                        'translations' => [
+                            AppLanguages::English->getLangParam() => $func->trans(
+                                $translator,
+                                AppLanguages::English->getLangParam(),
+                            ),
+                            AppLanguages::Dutch->getLangParam() => $func->trans(
+                                $translator,
+                                AppLanguages::Dutch->getLangParam(),
+                            ),
+                        ],
+                        'isAdministrative' => $func->isAdministrative(),
+                        'isLegacy' => $func->isLegacy(),
+                    ];
+                },
+                $cases,
+            ),
         );
     }
 }

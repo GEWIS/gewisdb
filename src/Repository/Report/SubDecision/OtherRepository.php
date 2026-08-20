@@ -15,6 +15,9 @@ class OtherRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Other::class);
+        parent::__construct(
+            $registry,
+            Other::class,
+        );
     }
 }

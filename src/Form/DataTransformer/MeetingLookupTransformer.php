@@ -70,7 +70,10 @@ final readonly class MeetingLookupTransformer implements DataTransformerInterfac
             throw new TransformationFailedException('No meeting was given.');
         }
 
-        $meeting = $this->meetingRepository->findMeeting($type, (int) $number);
+        $meeting = $this->meetingRepository->findMeeting(
+            $type,
+            (int) $number,
+        );
 
         if (null === $meeting) {
             throw new TransformationFailedException(sprintf(

@@ -24,9 +24,12 @@ final class MemberUpdateController extends AbstractMemberController
     )]
     public function index(): Response
     {
-        return $this->render('member/updates.html.twig', [
-            'updates' => $this->memberService->getPendingMemberUpdates(),
-        ]);
+        return $this->render(
+            'member/updates.html.twig',
+            [
+                'updates' => $this->memberService->getPendingMemberUpdates(),
+            ],
+        );
     }
 
     #[Route(
@@ -49,10 +52,13 @@ final class MemberUpdateController extends AbstractMemberController
             return $member;
         }
 
-        return $this->render('member/show-update.html.twig', [
-            'member' => $member,
-            'member_update' => $memberUpdate,
-        ]);
+        return $this->render(
+            'member/show-update.html.twig',
+            [
+                'member' => $member,
+                'member_update' => $memberUpdate,
+            ],
+        );
     }
 
     #[Route(
@@ -61,7 +67,10 @@ final class MemberUpdateController extends AbstractMemberController
         requirements: ['lidnr' => '\d+'],
         methods: ['POST'],
     )]
-    #[IsCsrfTokenValid(new Expression("'member_update-' ~ args['lidnr']"), tokenKey: '_csrf_token')]
+    #[IsCsrfTokenValid(
+        new Expression("'member_update-' ~ args['lidnr']"),
+        tokenKey: '_csrf_token',
+    )]
     public function approve(int $lidnr): Response
     {
         $memberUpdate = $this->memberService->getPendingMemberUpdate($lidnr);
@@ -76,11 +85,17 @@ final class MemberUpdateController extends AbstractMemberController
             return $member;
         }
 
-        $this->memberService->approveMemberUpdate($member, $memberUpdate);
+        $this->memberService->approveMemberUpdate(
+            $member,
+            $memberUpdate,
+        );
 
         $this->addFlash(
             'success',
-            t('Change(s) of %entity% have been approved and saved!', ['%entity%' => t('member')]),
+            t(
+                'Change(s) of %entity% have been approved and saved!',
+                ['%entity%' => t('member')],
+            ),
         );
 
         return $this->redirectToRoute('member_update_index');
@@ -92,7 +107,10 @@ final class MemberUpdateController extends AbstractMemberController
         requirements: ['lidnr' => '\d+'],
         methods: ['POST'],
     )]
-    #[IsCsrfTokenValid(new Expression("'member_update-' ~ args['lidnr']"), tokenKey: '_csrf_token')]
+    #[IsCsrfTokenValid(
+        new Expression("'member_update-' ~ args['lidnr']"),
+        tokenKey: '_csrf_token',
+    )]
     public function reject(int $lidnr): Response
     {
         $memberUpdate = $this->memberService->getPendingMemberUpdate($lidnr);
@@ -105,7 +123,10 @@ final class MemberUpdateController extends AbstractMemberController
 
         $this->addFlash(
             'info',
-            t('Change(s) of %entity% have been rejected!', ['%entity%' => t('member')]),
+            t(
+                'Change(s) of %entity% have been rejected!',
+                ['%entity%' => t('member')],
+            ),
         );
 
         return $this->redirectToRoute('member_update_index');

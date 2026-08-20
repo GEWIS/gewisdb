@@ -29,7 +29,10 @@ class StringableDateTimeType extends DateTimeType
         mixed $value,
         AbstractPlatform $platform,
     ): ?StringableDateTime {
-        $dateTime = parent::convertToPHPValue($value, $platform);
+        $dateTime = parent::convertToPHPValue(
+            $value,
+            $platform,
+        );
 
         if (null === $dateTime) {
             return null;

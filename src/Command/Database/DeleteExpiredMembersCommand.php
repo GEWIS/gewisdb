@@ -67,7 +67,11 @@ class DeleteExpiredMembersCommand extends Command
 
         $input->setOption(
             self::OPTION_EXPIRATION,
-            $helper->ask($input, $output, $question),
+            $helper->ask(
+                $input,
+                $output,
+                $question,
+            ),
         );
     }
 
@@ -81,9 +85,18 @@ class DeleteExpiredMembersCommand extends Command
         $helper = $this->getHelper('question');
         assert($helper instanceof QuestionHelper);
 
-        $question = new ConfirmationQuestion('<error>Are you sure that ' . $expiration . ' is correct?</error>', false);
+        $question = new ConfirmationQuestion(
+            '<error>Are you sure that ' . $expiration . ' is correct?</error>',
+            false,
+        );
 
-        if (!$helper->ask($input, $output, $question)) {
+        if (
+            !$helper->ask(
+                $input,
+                $output,
+                $question,
+            )
+        ) {
             $output->writeln('Not deleting expired members.');
 
             return Command::SUCCESS;
@@ -99,7 +112,10 @@ class DeleteExpiredMembersCommand extends Command
     {
         if (
             !is_string($expiration)
-            || 1 !== preg_match(self::EXPIRATION_PATTERN, $expiration)
+            || 1 !== preg_match(
+                self::EXPIRATION_PATTERN,
+                $expiration,
+            )
         ) {
             throw new InvalidArgumentException('The expiration date must be of the form YYYY-MM-DD.');
         }

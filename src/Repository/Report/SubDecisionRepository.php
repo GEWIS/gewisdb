@@ -15,6 +15,9 @@ class SubDecisionRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, SubDecision::class);
+        parent::__construct(
+            $registry,
+            SubDecision::class,
+        );
     }
 }

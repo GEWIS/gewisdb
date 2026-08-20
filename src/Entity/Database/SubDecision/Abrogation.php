@@ -33,10 +33,19 @@ class Abrogation extends FoundationReference
         AppLanguages $language,
     ): string {
         $replacements = [
-            '%ORGAN_TYPE%' => $this->getFoundation()->getOrganType()->trans($translator, $language->getLangParam()),
+            '%ORGAN_TYPE%' => $this->getFoundation()->getOrganType()->trans(
+                $translator,
+                $language->getLangParam(),
+            ),
             '%ORGAN_ABBR%' => $this->getFoundation()->getAbbr(),
         ];
 
-        return $this->replaceContentPlaceholders($this->getTranslatedTemplate($translator, $language), $replacements);
+        return $this->replaceContentPlaceholders(
+            $this->getTranslatedTemplate(
+                $translator,
+                $language,
+            ),
+            $replacements,
+        );
     }
 }

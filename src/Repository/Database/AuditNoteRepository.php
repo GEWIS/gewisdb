@@ -15,6 +15,9 @@ class AuditNoteRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, AuditNote::class);
+        parent::__construct(
+            $registry,
+            AuditNote::class,
+        );
     }
 }

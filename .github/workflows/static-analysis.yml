@@ -8,31 +8,37 @@ concurrency:
     group: ${{ github.workflow }}-${{ github.ref }}
     cancel-in-progress: true
 
+permissions: {}
+
 jobs:
     phpstan:
         name: PHPStan
         runs-on: ubuntu-latest
+        permissions:
+            contents: read
 
         steps:
             -   name: Checkout
-                uses: actions/checkout@v4
+                uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+                with:
+                    persist-credentials: false
 
             -   name: Install PHP
-                uses: shivammathur/setup-php@v2
+                uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # 2.37.2
                 with:
                     php-version: '8.5'
                     extensions: calendar, curl, intl, ldap, opcache, pgsql, pdo_pgsql, zip
                     tools: cs2pr
 
             -   name: Install dependencies with Composer
-                uses: ramsey/composer-install@v3
+                uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
 
             -   name: Warm the development container
-                # phpstan.neon points `symfony.containerXmlPath` at the compiled dev container and
+                # phpstan.dist.neon points `symfony.containerXmlPath` at the compiled dev container and
                 # `doctrine.objectManagerLoader` boots the dev kernel. Without this the Symfony and Doctrine
                 # extensions fall back to knowing nothing about the services and the mapping, and the analysis
                 # silently stops catching what they are there to catch. Neither step opens a database connection.
                 run: bin/console cache:warmup --env=dev
 
             -   name: Run PHPStan
-                run: vendor/bin/phpstan analyse --memory-limit 1G --no-progress --error-format=checkstyle | cs2pr
+                run: vendor/bin/phpstan analyse -c phpstan.dist.neon --memory-limit 1G --no-progress --error-format=checkstyle | cs2pr

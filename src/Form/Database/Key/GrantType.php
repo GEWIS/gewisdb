@@ -37,17 +37,29 @@ class GrantType extends AbstractType
         array $options,
     ): void {
         $builder
-            ->add('grantee', MemberLookupType::class, ['label' => t('Grantee')])
-            ->add('until', DateType::class, [
-                'label' => t('Date of Expiration'),
-                'widget' => 'single_text',
-                'constraints' => [
-                    new NotNull(),
-                    new Callback([self::class, 'validateNotInThePast']),
-                    new Callback([self::class, 'validateNotTooFar']),
+            ->add(
+                'grantee',
+                MemberLookupType::class,
+                ['label' => t('Grantee')],
+            )
+            ->add(
+                'until',
+                DateType::class,
+                [
+                    'label' => t('Date of Expiration'),
+                    'widget' => 'single_text',
+                    'constraints' => [
+                        new NotNull(),
+                        new Callback([self::class, 'validateNotInThePast']),
+                        new Callback([self::class, 'validateNotTooFar']),
+                    ],
                 ],
-            ])
-            ->add('submit', SubmitType::class, ['label' => t('Grant Key Code')])
+            )
+            ->add(
+                'submit',
+                SubmitType::class,
+                ['label' => t('Grant Key Code')],
+            )
             ->setDataMapper($this->dataMapper);
     }
 
@@ -114,6 +126,8 @@ class GrantType extends AbstractType
 
         $meeting = $root->get('meeting')->getData();
 
-        return $meeting instanceof Meeting ? $meeting : null;
+        return $meeting instanceof Meeting
+            ? $meeting
+            : null;
     }
 }

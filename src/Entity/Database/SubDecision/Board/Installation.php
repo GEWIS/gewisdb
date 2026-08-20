@@ -119,10 +119,22 @@ class Installation extends SubDecision
     ): string {
         $replacements = [
             '%MEMBER%' => $this->getMember()->getFullName(),
-            '%DATE%' => $this->formatDate($this->getDate(), $language),
-            '%FUNCTION%' => $this->getFunction()->trans($translator, $language->getLangParam()),
+            '%DATE%' => $this->formatDate(
+                $this->getDate(),
+                $language,
+            ),
+            '%FUNCTION%' => $this->getFunction()->trans(
+                $translator,
+                $language->getLangParam(),
+            ),
         ];
 
-        return $this->replaceContentPlaceholders($this->getTranslatedTemplate($translator, $language), $replacements);
+        return $this->replaceContentPlaceholders(
+            $this->getTranslatedTemplate(
+                $translator,
+                $language,
+            ),
+            $replacements,
+        );
     }
 }

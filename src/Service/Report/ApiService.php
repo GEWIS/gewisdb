@@ -73,7 +73,10 @@ class ApiService
         return array_reduce(
             $this->reportMemberRepository->findActive($includeInactiveFraternity),
             static function ($array, $member) use ($additionalProperties, $allowDeleted) {
-                if (!$member->getDeleted() || $allowDeleted) {
+                if (
+                    !$member->getDeleted()
+                    || $allowDeleted
+                ) {
                     $array[] = $member->toArrayApi($additionalProperties);
                 }
 
@@ -95,7 +98,10 @@ class ApiService
         return array_reduce(
             $this->reportMemberRepository->findNormal(),
             static function ($array, $member) use ($additionalProperties, $allowDeleted) {
-                if (!$member->getDeleted() || $allowDeleted) {
+                if (
+                    !$member->getDeleted()
+                    || $allowDeleted
+                ) {
                     $array[] = $member->toArrayApi($additionalProperties);
                 }
 
@@ -138,7 +144,11 @@ class ApiService
      */
     public function getOrganFunctions(?string $acceptHeader): array
     {
-        $this->assertVersion(new SemanticVersion(self::FUNCTIONS_MINIMUM_VERSION), null, $acceptHeader);
+        $this->assertVersion(
+            new SemanticVersion(self::FUNCTIONS_MINIMUM_VERSION),
+            null,
+            $acceptHeader,
+        );
 
         return InstallationFunctions::getMultilangArray($this->translator);
     }
@@ -153,7 +163,11 @@ class ApiService
      */
     public function getBoardFunctions(?string $acceptHeader): array
     {
-        $this->assertVersion(new SemanticVersion(self::FUNCTIONS_MINIMUM_VERSION), null, $acceptHeader);
+        $this->assertVersion(
+            new SemanticVersion(self::FUNCTIONS_MINIMUM_VERSION),
+            null,
+            $acceptHeader,
+        );
 
         return BoardFunctions::getMultilangArray($this->translator);
     }
@@ -217,15 +231,22 @@ class ApiService
     {
         $syncPausedUntil = max(
             $this->getSyncPausedUntil(),
-            (new DateTime())->modify('+' . $minutes . ' minutes'),
+            new DateTime()->modify('+' . $minutes . ' minutes'),
         );
 
-        $this->configService->setConfig(ConfigNamespaces::DatabaseApi, 'sync_paused', $syncPausedUntil);
+        $this->configService->setConfig(
+            ConfigNamespaces::DatabaseApi,
+            'sync_paused',
+            $syncPausedUntil,
+        );
     }
 
     public function resumeSyncNow(): void
     {
-        $this->configService->unsetConfig(ConfigNamespaces::DatabaseApi, 'sync_paused');
+        $this->configService->unsetConfig(
+            ConfigNamespaces::DatabaseApi,
+            'sync_paused',
+        );
     }
 
     public function isSyncPaused(): bool
@@ -235,7 +256,10 @@ class ApiService
 
     private function getSyncPausedUntil(): ?DateTime
     {
-        $pausedUntil = $this->configService->getConfig(ConfigNamespaces::DatabaseApi, 'sync_paused');
+        $pausedUntil = $this->configService->getConfig(
+            ConfigNamespaces::DatabaseApi,
+            'sync_paused',
+        );
 
         if (is_string($pausedUntil)) {
             return null;
@@ -282,15 +306,31 @@ class ApiService
             throw new VersionExpectedException();
         }
 
-        if ($given->lt($lower, SemanticCompare::PATCH)) {
-            throw new VersionIncompatibleException($lower, $upper, $given);
+        if (
+            $given->lt(
+                $lower,
+                SemanticCompare::PATCH,
+            )
+        ) {
+            throw new VersionIncompatibleException(
+                $lower,
+                $upper,
+                $given,
+            );
         }
 
         if (
             null !== $upper
-            && $given->gt($upper, SemanticCompare::PATCH)
+            && $given->gt(
+                $upper,
+                SemanticCompare::PATCH,
+            )
         ) {
-            throw new VersionIncompatibleException($lower, $upper, $given);
+            throw new VersionIncompatibleException(
+                $lower,
+                $upper,
+                $given,
+            );
         }
     }
 }

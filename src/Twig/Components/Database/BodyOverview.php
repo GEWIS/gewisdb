@@ -57,6 +57,10 @@ final class BodyOverview extends AbstractPaginatedOverview
         int $page,
         int $pageSize,
     ): Paginator {
-        return $this->foundationRepository->paginateForOverview($this->search, $page, $pageSize);
+        return $this->foundationRepository->paginateForOverview(
+            $this->search,
+            $page,
+            $pageSize,
+        );
     }
 }

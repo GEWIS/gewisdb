@@ -28,8 +28,16 @@ class UserEditType extends AbstractType
         FormBuilderInterface $builder,
         array $options,
     ): void {
-        $builder->add('password', RepeatedType::class, self::passwordOptions(true));
-        $builder->add('submit', SubmitType::class, ['label' => t('Wijzig gebruiker')]);
+        $builder->add(
+            'password',
+            RepeatedType::class,
+            self::passwordOptions(true),
+        );
+        $builder->add(
+            'submit',
+            SubmitType::class,
+            ['label' => t('Wijzig gebruiker')],
+        );
 
         // A non-local user authenticates externally and has no password to change here, so the fields are still
         // rendered but neither required nor submittable.
@@ -45,7 +53,11 @@ class UserEditType extends AbstractType
                     return;
                 }
 
-                $event->getForm()->add('password', RepeatedType::class, self::passwordOptions(false));
+                $event->getForm()->add(
+                    'password',
+                    RepeatedType::class,
+                    self::passwordOptions(false),
+                );
             },
         );
     }

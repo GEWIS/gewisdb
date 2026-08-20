@@ -82,9 +82,18 @@ class Granting extends SubDecision
     ): string {
         $replacements = [
             '%GRANTEE%' => $this->getMember()->getFullName(),
-            '%UNTIL%' => $this->formatDate($this->getUntil(), $language),
+            '%UNTIL%' => $this->formatDate(
+                $this->getUntil(),
+                $language,
+            ),
         ];
 
-        return $this->replaceContentPlaceholders($this->getTranslatedTemplate($translator, $language), $replacements);
+        return $this->replaceContentPlaceholders(
+            $this->getTranslatedTemplate(
+                $translator,
+                $language,
+            ),
+            $replacements,
+        );
     }
 }

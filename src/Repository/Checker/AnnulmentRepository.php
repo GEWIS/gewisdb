@@ -17,7 +17,10 @@ class AnnulmentRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Annulment::class);
+        parent::__construct(
+            $registry,
+            Annulment::class,
+        );
     }
 
     /**
@@ -31,11 +34,26 @@ class AnnulmentRepository extends ServiceEntityRepository
 
         $qb->where('a.meeting_type = :meeting_type')
             ->andWhere('a.meeting_number = :meeting_number')
-            ->orderBy('a.decision_point', 'ASC')
-            ->addOrderBy('a.decision_number', 'ASC')
-            ->addOrderBy('a.sequence', 'ASC')
-            ->setParameter('meeting_type', $meeting->getType())
-            ->setParameter('meeting_number', $meeting->getNumber());
+            ->orderBy(
+                'a.decision_point',
+                'ASC',
+            )
+            ->addOrderBy(
+                'a.decision_number',
+                'ASC',
+            )
+            ->addOrderBy(
+                'a.sequence',
+                'ASC',
+            )
+            ->setParameter(
+                'meeting_type',
+                $meeting->getType(),
+            )
+            ->setParameter(
+                'meeting_number',
+                $meeting->getNumber(),
+            );
 
         return $qb->getQuery()->getResult();
     }

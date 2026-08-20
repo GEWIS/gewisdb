@@ -113,7 +113,10 @@ class MailingListFixture extends Fixture
                 continue;
             }
 
-            $this->addReference($definition['reference'], $list);
+            $this->addReference(
+                $definition['reference'],
+                $list,
+            );
         }
 
         $manager->flush();

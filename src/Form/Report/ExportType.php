@@ -33,17 +33,25 @@ class ExportType extends AbstractType
         FormBuilderInterface $builder,
         array $options,
     ): void {
-        $builder->add('meetings', ChoiceType::class, [
-            'label' => t('Meetings'),
-            // A meeting is identified by its type and number, which is how the export service takes it apart again.
-            'choices' => $this->getChoices(),
-            'choice_translation_domain' => false,
-            'multiple' => true,
-            'required' => true,
-            'constraints' => [new Assert\NotBlank()],
-        ]);
+        $builder->add(
+            'meetings',
+            ChoiceType::class,
+            [
+                'label' => t('Meetings'),
+                // A meeting is identified by its type and number, which is how the export service takes it apart again.
+                'choices' => $this->getChoices(),
+                'choice_translation_domain' => false,
+                'multiple' => true,
+                'required' => true,
+                'constraints' => [new Assert\NotBlank()],
+            ],
+        );
 
-        $builder->add('submit', SubmitType::class, ['label' => t('Export Decisions')]);
+        $builder->add(
+            'submit',
+            SubmitType::class,
+            ['label' => t('Export Decisions')],
+        );
     }
 
     #[Override]

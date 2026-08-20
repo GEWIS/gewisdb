@@ -28,13 +28,21 @@ class InstallationType extends AbstractType
         FormBuilderInterface $builder,
         array $options,
     ): void {
-        $builder->add('member', MemberLookupType::class, [
-            'include_name' => false,
-        ]);
+        $builder->add(
+            'member',
+            MemberLookupType::class,
+            [
+                'include_name' => false,
+            ],
+        );
 
-        $builder->add('function', HiddenType::class, [
-            'invalid_message' => 'Select an existing function.',
-        ]);
+        $builder->add(
+            'function',
+            HiddenType::class,
+            [
+                'invalid_message' => 'Select an existing function.',
+            ],
+        );
 
         $builder->get('function')->addModelTransformer(
             new StringToEnumTransformer(InstallationFunctions::class),

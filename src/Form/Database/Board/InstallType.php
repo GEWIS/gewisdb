@@ -41,20 +41,35 @@ class InstallType extends AbstractType
         ));
 
         $builder
-            ->add('member', MemberLookupType::class)
-            ->add('function', EnumType::class, [
-                'label' => t('Function'),
-                'class' => BoardFunctions::class,
-                'choices' => $current,
-                'placeholder' => t('Please select a function'),
-                'constraints' => [new NotNull()],
-            ])
-            ->add('date', DateType::class, [
-                'label' => t('Effective From'),
-                'widget' => 'single_text',
-                'constraints' => [new NotNull()],
-            ])
-            ->add('submit', SubmitType::class, ['label' => t('Install Board Member')])
+            ->add(
+                'member',
+                MemberLookupType::class,
+            )
+            ->add(
+                'function',
+                EnumType::class,
+                [
+                    'label' => t('Function'),
+                    'class' => BoardFunctions::class,
+                    'choices' => $current,
+                    'placeholder' => t('Please select a function'),
+                    'constraints' => [new NotNull()],
+                ],
+            )
+            ->add(
+                'date',
+                DateType::class,
+                [
+                    'label' => t('Effective From'),
+                    'widget' => 'single_text',
+                    'constraints' => [new NotNull()],
+                ],
+            )
+            ->add(
+                'submit',
+                SubmitType::class,
+                ['label' => t('Install Board Member')],
+            )
             ->setDataMapper($this->dataMapper);
     }
 

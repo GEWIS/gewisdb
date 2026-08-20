@@ -66,8 +66,14 @@ class MailingListService
         $original = $this->entityManager->getUnitOfWork()->getOriginalEntityData($list);
 
         if (
-            ($list->hasMailmanList() && $list->getMailmanList() !== ($original['mailmanList'] ?? null))
-            || ($list->hasListmonkList() && $list->getListmonkList() !== ($original['listmonkList'] ?? null))
+            (
+                $list->hasMailmanList()
+                && $list->getMailmanList() !== ($original['mailmanList'] ?? null)
+            )
+            || (
+                $list->hasListmonkList()
+                && $list->getListmonkList() !== ($original['listmonkList'] ?? null)
+            )
         ) {
             $this->markAllMembersForCreation($list);
         }
@@ -149,7 +155,10 @@ class MailingListService
             $member = $expiredMembership->getMember();
 
             // If the member still is able to renew, do not delete memberships yet
-            if (!$member->getHidden() && $member->hasActiveRenewalLink()) {
+            if (
+                !$member->getHidden()
+                && $member->hasActiveRenewalLink()
+            ) {
                 continue;
             }
 

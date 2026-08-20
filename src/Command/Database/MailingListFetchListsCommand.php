@@ -36,7 +36,11 @@ class MailingListFetchListsCommand extends Command
             InputArgument::OPTIONAL,
             'Target backend: all|mailman|listmonk',
             'all',
-            ['all', 'mailman', 'listmonk'],
+            [
+                'all',
+                'mailman',
+                'listmonk',
+            ],
         );
     }
 

@@ -129,10 +129,19 @@ class Installation extends FoundationReference
     ): string {
         $replacements = [
             '%MEMBER%' => $this->getMember()->getFullName(),
-            '%FUNCTION%' => $this->getFunction()->trans($translator, $language->getLangParam()),
+            '%FUNCTION%' => $this->getFunction()->trans(
+                $translator,
+                $language->getLangParam(),
+            ),
             '%ORGAN_ABBR%' => $this->getFoundation()->getAbbr(),
         ];
 
-        return $this->replaceContentPlaceholders($this->getTranslatedTemplate($translator, $language), $replacements);
+        return $this->replaceContentPlaceholders(
+            $this->getTranslatedTemplate(
+                $translator,
+                $language,
+            ),
+            $replacements,
+        );
     }
 }

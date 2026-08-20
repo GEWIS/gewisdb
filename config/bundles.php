@@ -6,6 +6,7 @@ use ApiPlatform\Symfony\Bundle\ApiPlatformBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle;
 use Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle;
+use IgorPhp\IgorBundle\IgorPhpBundle;
 use Nelmio\CorsBundle\NelmioCorsBundle;
 use Nelmio\SecurityBundle\NelmioSecurityBundle;
 use Sensiolabs\TypeScriptBundle\SensiolabsTypeScriptBundle;
@@ -31,7 +32,10 @@ return [
     LiveComponentBundle::class => ['all' => true],
     ApiPlatformBundle::class => ['all' => true],
     DoctrineBundle::class => ['all' => true],
-    DoctrineFixturesBundle::class => ['dev' => true, 'test' => true],
+    DoctrineFixturesBundle::class => [
+        'dev' => true,
+        'test' => true,
+    ],
     DoctrineMigrationsBundle::class => ['all' => true],
     NelmioCorsBundle::class => ['all' => true],
     SensiolabsTypeScriptBundle::class => ['all' => true],
@@ -39,7 +43,14 @@ return [
     MakerBundle::class => ['dev' => true],
     MonologBundle::class => ['all' => true],
     SecurityBundle::class => ['all' => true],
-    WebProfilerBundle::class => ['dev' => true, 'test' => true],
+    WebProfilerBundle::class => [
+        'dev' => true,
+        'test' => true,
+    ],
     SymfonycastsSassBundle::class => ['all' => true],
+    IgorPhpBundle::class => [
+        'dev' => true,
+        'test' => true,
+    ],
     NelmioSecurityBundle::class => ['all' => true],
 ];

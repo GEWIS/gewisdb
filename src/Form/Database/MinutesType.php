@@ -30,33 +30,62 @@ class MinutesType extends AbstractType
     ): void {
         $builder
             // Only the source for the meeting autocomplete, which fills in the meeting reference below.
-            ->add('name', TextType::class, [
-                'label' => t('Meeting'),
-                'mapped' => false,
-                'required' => false,
-            ])
-            ->add('author', MemberLookupType::class, ['label' => t('Author')])
-            ->add('submit', SubmitType::class, ['label' => t('Submit')])
-            ->add('approve', ChoiceType::class, [
-                'label' => t('Approval'),
-                'choices' => ['1', '0'],
-                'choice_label' => static fn (string $choice) => '1' === $choice ? t('Approve') : t('Disapprove'),
-                'expanded' => true,
-                'placeholder' => false,
-                'required' => false,
-            ])
-            ->add('changes', ChoiceType::class, [
-                'label' => t('Modifications'),
-                'choices' => ['1', '0'],
-                'choice_label' => static fn (string $choice) => '1' === $choice
-                    ? t('With Modifications')
-                    : t('Without Modifications'),
-                'expanded' => true,
-                'placeholder' => false,
-                'required' => false,
-            ])
+            ->add(
+                'name',
+                TextType::class,
+                [
+                    'label' => t('Meeting'),
+                    'mapped' => false,
+                    'required' => false,
+                ],
+            )
+            ->add(
+                'author',
+                MemberLookupType::class,
+                ['label' => t('Author')],
+            )
+            ->add(
+                'submit',
+                SubmitType::class,
+                ['label' => t('Submit')],
+            )
+            ->add(
+                'approve',
+                ChoiceType::class,
+                [
+                    'label' => t('Approval'),
+                    'choices' => [
+                        '1',
+                        '0',
+                    ],
+                    'choice_label' => static fn (string $choice) => '1' === $choice ? t('Approve') : t('Disapprove'),
+                    'expanded' => true,
+                    'placeholder' => false,
+                    'required' => false,
+                ],
+            )
+            ->add(
+                'changes',
+                ChoiceType::class,
+                [
+                    'label' => t('Modifications'),
+                    'choices' => [
+                        '1',
+                        '0',
+                    ],
+                    'choice_label' => static fn (string $choice) => '1' === $choice
+                        ? t('With Modifications')
+                        : t('Without Modifications'),
+                    'expanded' => true,
+                    'placeholder' => false,
+                    'required' => false,
+                ],
+            )
             // The meeting the minutes are of, which is not the meeting the decision is taken in.
-            ->add('fmeeting', MeetingType::class)
+            ->add(
+                'fmeeting',
+                MeetingType::class,
+            )
             ->setDataMapper($this->dataMapper);
     }
 

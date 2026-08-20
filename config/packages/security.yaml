@@ -1,5 +1,5 @@
 security:
-    # The stored hashes are bcrypt with cost 12 (what Laminas\Crypt\Password\Bcrypt produced). `auto` lets PHP pick
+    # The stored hashes are bcrypt with cost 12. `auto` lets PHP pick
     # the strongest algorithm it has, while `migrate_from` keeps every existing bcrypt hash verifying;
     # DatabaseUserProvider rehashes a password on the first successful login after the algorithm changes.
     password_hashers:
@@ -59,7 +59,7 @@ security:
                 enable_csrf: true
                 csrf_parameter: 'login[_token]'
 
-            # Brute-force protection the Laminas application did not have. The defaults also throttle per username.
+            # Brute-force protection. The defaults also throttle per username.
             login_throttling:
                 max_attempts: 5
                 interval: '15 minutes'
@@ -69,8 +69,8 @@ security:
                 path: user_logout
                 target: user_login
 
-    # Everything is behind the login except the routes the Laminas listener marked as needing no authentication, plus
-    # the short paths the join and member vhosts rewrite onto them.
+    # Everything is behind the login except the routes that have always been reachable without it, plus the short
+    # paths the join and member vhosts rewrite onto them.
     #
     # These public flows belong to join.gewis.nl and member.gewis.nl; scoping them per host is still done at the edge.
     # Moving that into the application means adding `host:` to the rules in this block (access_control matches a host

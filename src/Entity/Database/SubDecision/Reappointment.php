@@ -86,10 +86,19 @@ class Reappointment extends SubDecision
 
         $replacements = [
             '%MEMBER%' => $installation->getMember()->getFullName(),
-            '%FUNCTION%' => $installation->getFunction()->trans($translator, $language->getLangParam()),
+            '%FUNCTION%' => $installation->getFunction()->trans(
+                $translator,
+                $language->getLangParam(),
+            ),
             '%ORGAN_ABBR%' => $installation->getFoundation()->getAbbr(),
         ];
 
-        return $this->replaceContentPlaceholders($this->getTranslatedTemplate($translator, $language), $replacements);
+        return $this->replaceContentPlaceholders(
+            $this->getTranslatedTemplate(
+                $translator,
+                $language,
+            ),
+            $replacements,
+        );
     }
 }

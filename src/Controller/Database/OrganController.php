@@ -72,7 +72,13 @@ final class OrganController extends AbstractController
         int $decision,
         int $sequence,
     ): Response {
-        $foundation = $this->meetingService->findFoundation($type, $number, $point, $decision, $sequence);
+        $foundation = $this->meetingService->findFoundation(
+            $type,
+            $number,
+            $point,
+            $decision,
+            $sequence,
+        );
 
         if (null === $foundation) {
             throw $this->createNotFoundException();
@@ -84,10 +90,13 @@ final class OrganController extends AbstractController
             static fn (SubDecision $reference): bool => $reference instanceof Installation,
         );
 
-        return $this->render('decision/organ/view.html.twig', [
-            'foundation' => $foundation,
-            'installations' => $installations,
-        ]);
+        return $this->render(
+            'decision/organ/view.html.twig',
+            [
+                'foundation' => $foundation,
+                'installations' => $installations,
+            ],
+        );
     }
 
     #[Route(
@@ -109,7 +118,13 @@ final class OrganController extends AbstractController
         int $decision,
         int $sequence,
     ): JsonResponse {
-        $organ = $this->meetingService->getOrganInfo($type, $number, $point, $decision, $sequence);
+        $organ = $this->meetingService->getOrganInfo(
+            $type,
+            $number,
+            $point,
+            $decision,
+            $sequence,
+        );
 
         if (null === $organ) {
             throw $this->createNotFoundException();

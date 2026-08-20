@@ -25,7 +25,7 @@
             <div class="panel">
                 <div class="panel-body">
                     {# One sub-decision form on its own, after it came back with errors. The form keys are the partial
-                       names, so the thirteen-way switch the Laminas view carried is just the path. #}
+                       names, so the type is the path and no switch on it is needed. #}
                     {% include 'partials/decision/form/' ~ type|replace({'_': '-'}) ~ '.html.twig' with {
                         'form': form,
                         'installs': installs|default([]),

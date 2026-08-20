@@ -28,7 +28,10 @@ class MemberHasRoleButNotInOrgan extends Error
         InstallationModel $installation,
         private readonly string $role,
     ) {
-        parent::__construct($meeting, $installation);
+        parent::__construct(
+            $meeting,
+            $installation,
+        );
     }
 
     public function getRole(): string

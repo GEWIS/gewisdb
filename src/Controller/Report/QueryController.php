@@ -29,11 +29,17 @@ final class QueryController extends AbstractController
     #[Route(
         path: '',
         name: 'query_index',
-        methods: ['GET', 'POST'],
+        methods: [
+            'GET',
+            'POST',
+        ],
     )]
     public function index(Request $request): Response
     {
-        return $this->page($request, null);
+        return $this->page(
+            $request,
+            null,
+        );
     }
 
     /**
@@ -43,7 +49,10 @@ final class QueryController extends AbstractController
         path: '/show/{query}',
         name: 'query_show',
         requirements: ['query' => '[0-9]+'],
-        methods: ['GET', 'POST'],
+        methods: [
+            'GET',
+            'POST',
+        ],
     )]
     public function show(
         Request $request,
@@ -55,7 +64,10 @@ final class QueryController extends AbstractController
             throw $this->createNotFoundException();
         }
 
-        return $this->page($request, $savedQuery);
+        return $this->page(
+            $request,
+            $savedQuery,
+        );
     }
 
     /**
@@ -99,10 +111,22 @@ final class QueryController extends AbstractController
                 /** @var array{query: string, category: string, name: string} $data */
                 $data = $form->getData();
 
-                if (SubmitButtons::clicked($form, 'submit_save')) {
-                    $stored = $this->queryService->save($data['name'], $data['category'], $data['query']);
+                if (
+                    SubmitButtons::clicked(
+                        $form,
+                        'submit_save',
+                    )
+                ) {
+                    $stored = $this->queryService->save(
+                        $data['name'],
+                        $data['category'],
+                        $data['query'],
+                    );
 
-                    return $this->redirectToRoute('query_show', ['query' => $stored->getId()]);
+                    return $this->redirectToRoute(
+                        'query_show',
+                        ['query' => $stored->getId()],
+                    );
                 }
 
                 $query = $data['query'];
@@ -122,19 +146,25 @@ final class QueryController extends AbstractController
             }
         }
 
-        return $this->render('query/index.html.twig', [
-            'form' => $form,
-            'export_form' => $this->createForm(QueryExportType::class, [
-                'query' => $query,
-                'name' => null === $savedQuery
-                    ? null
-                    : $savedQuery->getCategory() . ' - ' . $savedQuery->getName(),
-            ]),
-            'entities' => $this->queryService->getEntities(),
-            'saved_queries' => $this->queryService->getSavedQueries(),
-            'current_query_id' => $savedQuery?->getId(),
-            'result' => $result,
-        ]);
+        return $this->render(
+            'query/index.html.twig',
+            [
+                'form' => $form,
+                'export_form' => $this->createForm(
+                    QueryExportType::class,
+                    [
+                        'query' => $query,
+                        'name' => null === $savedQuery
+                            ? null
+                            : $savedQuery->getCategory() . ' - ' . $savedQuery->getName(),
+                    ],
+                ),
+                'entities' => $this->queryService->getEntities(),
+                'saved_queries' => $this->queryService->getSavedQueries(),
+                'current_query_id' => $savedQuery?->getId(),
+                'result' => $result,
+            ],
+        );
     }
 
     /**
@@ -147,16 +177,32 @@ final class QueryController extends AbstractController
         try {
             $result = $this->queryService->execute($data['query']);
         } catch (ORMException $e) {
-            $this->addFlash('error', $e->getMessage());
+            $this->addFlash(
+                'error',
+                $e->getMessage(),
+            );
 
             return $this->redirectToRoute('query_index');
         }
 
         // A stored query's name is free text and ends up in a filename, where a path separator is not allowed.
-        $name = str_replace(['/', '\\'], '-', $data['name'] ?: 'query');
+        $name = str_replace(
+            [
+                '/',
+                '\\',
+            ],
+            '-',
+            $data['name'] ?: 'query',
+        );
 
-        $response = $this->render('query/export.csv.twig', ['result' => $result]);
-        $response->headers->set('Content-Type', 'text/csv; charset=UTF-8');
+        $response = $this->render(
+            'query/export.csv.twig',
+            ['result' => $result],
+        );
+        $response->headers->set(
+            'Content-Type',
+            'text/csv; charset=UTF-8',
+        );
         $response->headers->set(
             'Content-Disposition',
             HeaderUtils::makeDisposition(

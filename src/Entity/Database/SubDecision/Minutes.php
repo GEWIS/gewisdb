@@ -135,20 +135,41 @@ class Minutes extends SubDecision
             '%TYPE%' => $this->getTarget()->getType()->value,
             '%NUMBERORDINAL%' => strval($this->getTarget()->getNumberAsOrdinal($language->getLocale())),
             '%APPROVAL%' => $this->getApproval()
-                ? $translator->trans('goedgekeurd', locale: $language->getLangParam())
-                : $translator->trans('afgekeurd', locale: $language->getLangParam()),
+                ? $translator->trans(
+                    'goedgekeurd',
+                    locale: $language->getLangParam(),
+                )
+                : $translator->trans(
+                    'afgekeurd',
+                    locale: $language->getLangParam(),
+                ),
             '%AUTHOR%' => MeetingTypes::BV === $this->getTarget()->getType()
                 ? ''
-                : $translator->trans(' door ', locale: $language->getLangParam())
+                : $translator->trans(
+                    ' door ',
+                    locale: $language->getLangParam(),
+                )
                     . $this->getMember()->getFullName(),
             '%CHANGES%' => $this->getApproval() && $this->getChanges()
-                ? $translator->trans(' met genoemde wijzigingen', locale: $language->getLangParam())
+                ? $translator->trans(
+                    ' met genoemde wijzigingen',
+                    locale: $language->getLangParam(),
+                )
                 : '',
             '%THANK%' => MeetingTypes::BV === $this->getTarget()->getType()
-                ? $translator->trans(' met dank aan de notulist', locale: $language->getLangParam())
+                ? $translator->trans(
+                    ' met dank aan de notulist',
+                    locale: $language->getLangParam(),
+                )
                 : '',
         ];
 
-        return $this->replaceContentPlaceholders($this->getTranslatedTemplate($translator, $language), $replacements);
+        return $this->replaceContentPlaceholders(
+            $this->getTranslatedTemplate(
+                $translator,
+                $language,
+            ),
+            $replacements,
+        );
     }
 }

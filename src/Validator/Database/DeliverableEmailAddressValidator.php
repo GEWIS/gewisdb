@@ -25,7 +25,10 @@ class DeliverableEmailAddressValidator extends ConstraintValidator
         Constraint $constraint,
     ): void {
         if (!$constraint instanceof DeliverableEmailAddress) {
-            throw new UnexpectedTypeException($constraint, DeliverableEmailAddress::class);
+            throw new UnexpectedTypeException(
+                $constraint,
+                DeliverableEmailAddress::class,
+            );
         }
 
         if (
@@ -36,26 +39,41 @@ class DeliverableEmailAddressValidator extends ConstraintValidator
         }
 
         if (!is_scalar($value)) {
-            throw new UnexpectedValueException($value, 'string');
+            throw new UnexpectedValueException(
+                $value,
+                'string',
+            );
         }
 
         $address = (string) $value;
 
         // Anything that is not shaped like an address is reported by the syntax constraint instead.
-        $separator = strrpos($address, '@');
+        $separator = strrpos(
+            $address,
+            '@',
+        );
 
         if (false === $separator) {
             return;
         }
 
-        $hostname = substr($address, $separator + 1);
+        $hostname = substr(
+            $address,
+            $separator + 1,
+        );
 
-        if ('' === $hostname || $this->canReceiveMail($hostname)) {
+        if (
+            '' === $hostname
+            || $this->canReceiveMail($hostname)
+        ) {
             return;
         }
 
         $this->context->buildViolation($constraint->message)
-            ->setParameter('{{ hostname }}', $hostname)
+            ->setParameter(
+                '{{ hostname }}',
+                $hostname,
+            )
             ->setCode(DeliverableEmailAddress::NO_MX_RECORD_ERROR)
             ->addViolation();
     }
@@ -67,7 +85,12 @@ class DeliverableEmailAddressValidator extends ConstraintValidator
     {
         $mxHosts = [];
 
-        if (getmxrr($hostname, $mxHosts)) {
+        if (
+            getmxrr(
+                $hostname,
+                $mxHosts,
+            )
+        ) {
             return true;
         }
 

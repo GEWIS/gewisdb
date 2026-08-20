@@ -65,7 +65,11 @@ abstract class ActionLink
     private function generateToken(): void
     {
         $token = base64_encode(random_bytes(96));
-        $this->token = str_replace('/', '-', $token);
+        $this->token = str_replace(
+            '/',
+            '-',
+            $token,
+        );
     }
 
     public function getToken(): string

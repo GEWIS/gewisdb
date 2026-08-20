@@ -29,7 +29,10 @@ use function preg_match;
 // Above RouterListener's 32 rather than equal to it. At the same priority the two are ordered by whichever was
 // registered first, which nothing here declares and an added bundle or a Symfony upgrade can reverse; running after the
 // router would mean the request already carries the `_controller` of the page the host is not allowed to reach.
-#[AsEventListener(event: KernelEvents::REQUEST, priority: 33)]
+#[AsEventListener(
+    event: KernelEvents::REQUEST,
+    priority: 33,
+)]
 final readonly class HostFirewallListener
 {
     /**
@@ -90,7 +93,10 @@ final readonly class HostFirewallListener
                 return;
             }
 
-            $this->refuseUnless($path, self::JOIN_PATHS);
+            $this->refuseUnless(
+                $path,
+                self::JOIN_PATHS,
+            );
 
             return;
         }
@@ -99,7 +105,10 @@ final readonly class HostFirewallListener
             return;
         }
 
-        $this->refuseUnless($path, self::MEMBER_PATHS);
+        $this->refuseUnless(
+            $path,
+            self::MEMBER_PATHS,
+        );
     }
 
     /**
@@ -110,7 +119,12 @@ final readonly class HostFirewallListener
         array $allowed,
     ): void {
         foreach ([...$allowed, ...self::SHARED_PATHS] as $pattern) {
-            if (1 === preg_match($pattern, $path)) {
+            if (
+                1 === preg_match(
+                    $pattern,
+                    $path,
+                )
+            ) {
                 return;
             }
         }
@@ -129,7 +143,14 @@ final readonly class HostFirewallListener
         // has a `_controller` is one the router refuses to touch, so it would serve the parent's route instead of the
         // path asked for here.
         return $this->kernel->handle(
-            $request->duplicate(null, null, [], null, null, $server),
+            $request->duplicate(
+                null,
+                null,
+                [],
+                null,
+                null,
+                $server,
+            ),
             HttpKernelInterface::SUB_REQUEST,
         );
     }

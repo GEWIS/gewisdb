@@ -10,7 +10,7 @@ use Symfony\Component\Form\DataTransformerInterface;
 use function mb_strtolower;
 
 /**
- * Replaces the laminas-filter `StringToLower` that was applied to submitted e-mail addresses.
+ * Lower-cases a submitted e-mail address, so an address is stored and compared in one form however it was typed.
  *
  * @implements DataTransformerInterface<?string, ?string>
  */

@@ -37,34 +37,50 @@ class CreateMeetingType extends AbstractType
         array $options,
     ): void {
         $builder
-            ->add('type', EnumType::class, [
-                'label' => t('Meeting Type'),
-                'class' => MeetingTypes::class,
-                // The abbreviation the enum carries is not enough to pick a meeting type from, so this one form
+            ->add(
+                'type',
+                EnumType::class,
+                [
+                    'label' => t('Meeting Type'),
+                    'class' => MeetingTypes::class,
+                    // The abbreviation the enum carries is not enough to pick a meeting type from, so this one form
                 // spells the types out instead of letting the enum label itself.
-                'choice_label' => static fn (MeetingTypes $type) => match ($type) {
-                    MeetingTypes::BV => t('BM (Board Meeting)'),
-                    MeetingTypes::ALV => t('GMM (General Members Meeting)'),
-                    MeetingTypes::VV => t('CM (Chair\'s Meeting)'),
-                    MeetingTypes::VIRT => t('Virt (Virtual Meeting)'),
-                },
-                'placeholder' => false,
-                'constraints' => [new NotNull()],
-            ])
-            ->add('number', IntegerType::class, [
-                'label' => t('Meeting Number'),
-                'constraints' => [
-                    new NotNull(),
-                    new PositiveOrZero(),
-                    new LessThan(100000),
+                    'choice_label' => static fn (MeetingTypes $type) => match ($type) {
+                        MeetingTypes::BV => t('BM (Board Meeting)'),
+                        MeetingTypes::ALV => t('GMM (General Members Meeting)'),
+                        MeetingTypes::VV => t('CM (Chair\'s Meeting)'),
+                        MeetingTypes::VIRT => t('Virt (Virtual Meeting)'),
+                    },
+                    'placeholder' => false,
+                    'constraints' => [new NotNull()],
                 ],
-            ])
-            ->add('date', DateType::class, [
-                'label' => t('Meeting Date'),
-                'widget' => 'single_text',
-                'constraints' => [new NotNull()],
-            ])
-            ->add('submit', SubmitType::class, ['label' => t('Add Meeting')]);
+            )
+            ->add(
+                'number',
+                IntegerType::class,
+                [
+                    'label' => t('Meeting Number'),
+                    'constraints' => [
+                        new NotNull(),
+                        new PositiveOrZero(),
+                        new LessThan(100000),
+                    ],
+                ],
+            )
+            ->add(
+                'date',
+                DateType::class,
+                [
+                    'label' => t('Meeting Date'),
+                    'widget' => 'single_text',
+                    'constraints' => [new NotNull()],
+                ],
+            )
+            ->add(
+                'submit',
+                SubmitType::class,
+                ['label' => t('Add Meeting')],
+            );
     }
 
     #[Override]

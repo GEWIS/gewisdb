@@ -61,7 +61,10 @@ class KeyholderService
      */
     private function findKeyholder(ReportKeyGranting $granting): ?Keyholder
     {
-        $rp = new ReflectionProperty(ReportKeyGranting::class, 'keyholder');
+        $rp = new ReflectionProperty(
+            ReportKeyGranting::class,
+            'keyholder',
+        );
 
         if ($rp->isInitialized($granting)) {
             return $granting->getKeyholder();

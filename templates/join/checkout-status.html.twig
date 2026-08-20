@@ -5,8 +5,7 @@
 {% block page_title %}{{ 'GEWIS Registration - Checkout'|trans }} - {{ parent() }}{% endblock %}
 
 {#
-    `status` is one of `completed`, `cancelled` or `failed`; the Laminas version derived it from two optional
-    booleans, which left a fourth, meaningless combination. `first_name` and `restart_url` are only known when the
+    `status` is one of `completed`, `cancelled` or `failed`. `first_name` and `restart_url` are only known when the
     payment link could be resolved.
 #}
 {% block contents %}

@@ -86,7 +86,10 @@ final class DatabaseUserProvider implements UserProviderInterface, PasswordUpgra
     #[Override]
     public function supportsClass(string $class): bool
     {
-        return User::class === $class || is_subclass_of($class, User::class);
+        return User::class === $class || is_subclass_of(
+            $class,
+            User::class,
+        );
     }
 
     #[Override]
@@ -119,7 +122,11 @@ final class DatabaseUserProvider implements UserProviderInterface, PasswordUpgra
             return $identifier;
         }
 
-        $account = strstr($identifier, '@', true);
+        $account = strstr(
+            $identifier,
+            '@',
+            true,
+        );
 
         return mb_strtolower(false === $account ? $identifier : $account) . '@' . $this->ldapDomain;
     }

@@ -29,7 +29,10 @@ class FoundationRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Foundation::class);
+        parent::__construct(
+            $registry,
+            Foundation::class,
+        );
     }
 
     /**
@@ -52,14 +55,23 @@ class FoundationRepository extends ServiceEntityRepository
             ->andWhere('o.decision_point = :decision_point')
             ->andWhere('o.decision_number = :decision_number')
             ->andWhere('o.sequence = :sequence')
-            ->leftJoin('o.references', 'r')
+            ->leftJoin(
+                'o.references',
+                'r',
+            )
             ->andWhere('r INSTANCE OF ' . Installation::class);
 
         // discharges
         $qbn = $this->getEntityManager()->createQueryBuilder();
         $qbn->select('d')
-            ->from(Discharge::class, 'd')
-            ->join('d.installation', 'x')
+            ->from(
+                Discharge::class,
+                'd',
+            )
+            ->join(
+                'd.installation',
+                'x',
+            )
             ->where('x.meeting_type = r.meeting_type')
             ->andWhere('x.meeting_number = r.meeting_number')
             ->andWhere('x.decision_point = r.decision_point')
@@ -69,8 +81,14 @@ class FoundationRepository extends ServiceEntityRepository
         // annulled discharge decisions
         $qbnd = $this->getEntityManager()->createQueryBuilder();
         $qbnd->select('b')
-            ->from(Annulment::class, 'b')
-            ->join('b.target', 'z')
+            ->from(
+                Annulment::class,
+                'b',
+            )
+            ->join(
+                'b.target',
+                'z',
+            )
             ->where('z.meeting_type = d.meeting_type')
             ->andWhere('z.meeting_number = d.meeting_number')
             ->andWhere('z.point = d.decision_point')
@@ -87,8 +105,14 @@ class FoundationRepository extends ServiceEntityRepository
         // annulled installation decisions
         $qbd = $this->getEntityManager()->createQueryBuilder();
         $qbd->select('a')
-            ->from(Annulment::class, 'a')
-            ->join('a.target', 'y')
+            ->from(
+                Annulment::class,
+                'a',
+            )
+            ->join(
+                'a.target',
+                'y',
+            )
             ->where('y.meeting_type = r.meeting_type')
             ->andWhere('y.meeting_number = r.meeting_number')
             ->andWhere('y.point = r.decision_point')
@@ -98,11 +122,26 @@ class FoundationRepository extends ServiceEntityRepository
             $qb->expr()->exists($qbd->getDQL()),
         ));
 
-        $qb->setParameter(':type', $meetingType);
-        $qb->setParameter(':meeting_number', $meetingNumber);
-        $qb->setParameter(':decision_point', $decisionPoint);
-        $qb->setParameter(':decision_number', $decisionNumber);
-        $qb->setParameter(':sequence', $sequence);
+        $qb->setParameter(
+            ':type',
+            $meetingType,
+        );
+        $qb->setParameter(
+            ':meeting_number',
+            $meetingNumber,
+        );
+        $qb->setParameter(
+            ':decision_point',
+            $decisionPoint,
+        );
+        $qb->setParameter(
+            ':decision_number',
+            $decisionNumber,
+        );
+        $qb->setParameter(
+            ':sequence',
+            $sequence,
+        );
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -122,11 +161,26 @@ class FoundationRepository extends ServiceEntityRepository
             ->andWhere('f.decision_number = :decision_number')
             ->andWhere('f.sequence = :sequence');
 
-        $qb->setParameter(':meeting_type', $meetingType);
-        $qb->setParameter(':meeting_number', $meetingNumber);
-        $qb->setParameter(':decision_point', $decisionPoint);
-        $qb->setParameter(':decision_number', $decisionNumber);
-        $qb->setParameter(':sequence', $sequence);
+        $qb->setParameter(
+            ':meeting_type',
+            $meetingType,
+        );
+        $qb->setParameter(
+            ':meeting_number',
+            $meetingNumber,
+        );
+        $qb->setParameter(
+            ':decision_point',
+            $decisionPoint,
+        );
+        $qb->setParameter(
+            ':decision_number',
+            $decisionNumber,
+        );
+        $qb->setParameter(
+            ':sequence',
+            $sequence,
+        );
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -141,18 +195,36 @@ class FoundationRepository extends ServiceEntityRepository
         $qb = $this->getEntityManager()->createQueryBuilder();
 
         $qb->select('i')
-            ->from(Installation::class, 'i')
+            ->from(
+                Installation::class,
+                'i',
+            )
             ->where('i.meeting_type = :meeting_type')
             ->andWhere('i.meeting_number = :meeting_number')
             ->andWhere('i.decision_point = :decision_point')
             ->andWhere('i.decision_number = :decision_number')
             ->andWhere('i.sequence = :sequence');
 
-        $qb->setParameter(':meeting_type', $meetingType);
-        $qb->setParameter(':meeting_number', $meetingNumber);
-        $qb->setParameter(':decision_point', $decisionPoint);
-        $qb->setParameter(':decision_number', $decisionNumber);
-        $qb->setParameter(':sequence', $sequence);
+        $qb->setParameter(
+            ':meeting_type',
+            $meetingType,
+        );
+        $qb->setParameter(
+            ':meeting_number',
+            $meetingNumber,
+        );
+        $qb->setParameter(
+            ':decision_point',
+            $decisionPoint,
+        );
+        $qb->setParameter(
+            ':decision_number',
+            $decisionNumber,
+        );
+        $qb->setParameter(
+            ':sequence',
+            $sequence,
+        );
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -172,7 +244,10 @@ class FoundationRepository extends ServiceEntityRepository
         string $query,
         bool $includeAbrogated = false,
     ): array {
-        return $this->overviewQuery($query, $includeAbrogated)->getQuery()->getResult();
+        return $this->overviewQuery(
+            $query,
+            $includeAbrogated,
+        )->getQuery()->getResult();
     }
 
     /**
@@ -186,19 +261,40 @@ class FoundationRepository extends ServiceEntityRepository
         int $pageSize,
     ): Paginator {
         $qb = $this->overviewQuery($search)
-            ->orderBy('o.abbr', 'ASC')
+            ->orderBy(
+                'o.abbr',
+                'ASC',
+            )
             // Abbreviations repeat, so on their own they leave the order of a page up to the database. The identity of
             // the founding decision settles the rest, so that paging through the list cannot show one body twice and
             // skip another.
-            ->addOrderBy('o.meeting_type', 'ASC')
-            ->addOrderBy('o.meeting_number', 'ASC')
-            ->addOrderBy('o.decision_point', 'ASC')
-            ->addOrderBy('o.decision_number', 'ASC')
-            ->addOrderBy('o.sequence', 'ASC')
+            ->addOrderBy(
+                'o.meeting_type',
+                'ASC',
+            )
+            ->addOrderBy(
+                'o.meeting_number',
+                'ASC',
+            )
+            ->addOrderBy(
+                'o.decision_point',
+                'ASC',
+            )
+            ->addOrderBy(
+                'o.decision_number',
+                'ASC',
+            )
+            ->addOrderBy(
+                'o.sequence',
+                'ASC',
+            )
             ->setFirstResult(($page - 1) * $pageSize)
             ->setMaxResults($pageSize);
 
-        return new Paginator($qb->getQuery(), false);
+        return new Paginator(
+            $qb->getQuery(),
+            false,
+        );
     }
 
     /**
@@ -214,19 +310,34 @@ class FoundationRepository extends ServiceEntityRepository
 
         // The two ways of matching are grouped: `A OR B AND C` binds the AND tighter, so without the grouping a
         // body whose name matched came back even when the conditions below excluded it.
-        $qb->addSelect('d', 'm')
+        $qb->addSelect(
+            'd',
+            'm',
+        )
             ->andWhere($qb->expr()->orX(
                 'LOWER(o.name) LIKE :name',
                 'LOWER(o.abbr) LIKE :name',
             ))
-            ->join('o.decision', 'd')
-            ->join('d.meeting', 'm');
+            ->join(
+                'o.decision',
+                'd',
+            )
+            ->join(
+                'd.meeting',
+                'm',
+            );
 
         // annulled foundation decisions
         $qbd = $this->getEntityManager()->createQueryBuilder();
         $qbd->select('b')
-            ->from(Annulment::class, 'b')
-            ->join('b.target', 'y')
+            ->from(
+                Annulment::class,
+                'b',
+            )
+            ->join(
+                'b.target',
+                'y',
+            )
             ->where('y.meeting_type = o.meeting_type')
             ->andWhere('y.meeting_number = o.meeting_number')
             ->andWhere('y.point = o.decision_point')
@@ -240,8 +351,14 @@ class FoundationRepository extends ServiceEntityRepository
             // we want to leave out bodies that have been abrogated
             $qbn = $this->getEntityManager()->createQueryBuilder();
             $qbn->select('a')
-                ->from(Abrogation::class, 'a')
-                ->join('a.foundation', 'x')
+                ->from(
+                    Abrogation::class,
+                    'a',
+                )
+                ->join(
+                    'a.foundation',
+                    'x',
+                )
                 ->where('x.meeting_type = o.meeting_type')
                 ->andWhere('x.meeting_number = o.meeting_number')
                 ->andWhere('x.decision_point = o.decision_point')
@@ -251,8 +368,14 @@ class FoundationRepository extends ServiceEntityRepository
             // leave out annulled abrogation decisions
             $qbnd = $this->getEntityManager()->createQueryBuilder();
             $qbnd->select('c')
-                ->from(Annulment::class, 'c')
-                ->join('c.target', 'z')
+                ->from(
+                    Annulment::class,
+                    'c',
+                )
+                ->join(
+                    'c.target',
+                    'z',
+                )
                 ->where('z.meeting_type = a.meeting_type')
                 ->andWhere('z.meeting_number = a.meeting_number')
                 ->andWhere('z.point = a.decision_point')
@@ -270,7 +393,10 @@ class FoundationRepository extends ServiceEntityRepository
             ));
         }
 
-        $qb->setParameter(':name', '%' . strtolower($search) . '%');
+        $qb->setParameter(
+            ':name',
+            '%' . strtolower($search) . '%',
+        );
 
         return $qb;
     }
@@ -299,7 +425,10 @@ class FoundationRepository extends ServiceEntityRepository
         // We take all unique members with installations
         $sq->select('IDENTITY(' . $installAlias . '.member)')
             ->distinct()
-            ->from(Installation::class, $installAlias)
+            ->from(
+                Installation::class,
+                $installAlias,
+            )
             ->join(
                 $installAlias . '.decision',
                 $installAlias . 'Decision',
@@ -313,7 +442,10 @@ class FoundationRepository extends ServiceEntityRepository
 
         // Where the installation is before the activeBefore date
         $sq->andWhere($sq->expr()->lte($installAlias . 'Meeting.date', ':' . $parameterPrefix . 'ActiveBefore'));
-        $qb->setParameter($parameterPrefix . 'ActiveBefore', $activeBefore);
+        $qb->setParameter(
+            $parameterPrefix . 'ActiveBefore',
+            $activeBefore,
+        );
 
         // And the installation was never annulled
         $sq->andWhere($sq->expr()->isNull($installAlias . 'Annulment.sequence'));
@@ -321,7 +453,10 @@ class FoundationRepository extends ServiceEntityRepository
         // And the installation is not for an Inactief Lid
         if (!$inActiveIsActive) {
             $sq->andWhere($sq->expr()->neq($installAlias . '.function', ':' . $parameterPrefix . 'InactiveMember'));
-            $qb->setParameter($parameterPrefix . 'InactiveMember', InstallationFunctions::InactiveMember->value);
+            $qb->setParameter(
+                $parameterPrefix . 'InactiveMember',
+                InstallationFunctions::InactiveMember->value,
+            );
         }
 
         // Where there is no discharge (or only an annulled discharge), or the discharge is after the activeAfter date
@@ -340,10 +475,16 @@ class FoundationRepository extends ServiceEntityRepository
             $dischargeAlias . 'Annulment',
         )->andWhere($sq->expr()->orX(
             $sq->expr()->isNull($dischargeAlias . 'Meeting.date'),
-            $sq->expr()->gt($dischargeAlias . 'Meeting.date', ':' . $parameterPrefix . 'ActiveAfter'),
+            $sq->expr()->gt(
+                $dischargeAlias . 'Meeting.date',
+                ':' . $parameterPrefix . 'ActiveAfter',
+            ),
             $sq->expr()->isNotNull($dischargeAlias . 'Annulment.sequence'),
         ));
-        $qb->setParameter($parameterPrefix . 'ActiveAfter', $activeAfter);
+        $qb->setParameter(
+            $parameterPrefix . 'ActiveAfter',
+            $activeAfter,
+        );
 
         return $sq;
     }

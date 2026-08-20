@@ -17,7 +17,10 @@ class MemberRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Member::class);
+        parent::__construct(
+            $registry,
+            Member::class,
+        );
     }
 
     /**
@@ -29,9 +32,15 @@ class MemberRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('m');
         $qb->where('m.lidnr = :lidnr')
-            ->orderBy('m.lidnr', 'DESC');
+            ->orderBy(
+                'm.lidnr',
+                'DESC',
+            );
 
-        $qb->setParameter(':lidnr', $lidnr);
+        $qb->setParameter(
+            ':lidnr',
+            $lidnr,
+        );
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -52,7 +61,10 @@ class MemberRepository extends ServiceEntityRepository
         $qb->where('m.expiration >= CURRENT_TIMESTAMP()')
             ->andWhere('m.hidden = false')
             ->andWhere('m.deleted = false')
-            ->orderBy('m.lidnr', 'ASC')
+            ->orderBy(
+                'm.lidnr',
+                'ASC',
+            )
             ->setMaxResults(32)
             ->setFirstResult(0);
 
@@ -67,7 +79,12 @@ class MemberRepository extends ServiceEntityRepository
     public function findActive(bool $includeInactiveFraternity = false): array
     {
         $qb = $this->createQueryBuilder('m');
-        $qb->leftJoin(OrganMember::class, 'om', Join::WITH, 'm.lidnr = om.member')
+        $qb->leftJoin(
+            OrganMember::class,
+            'om',
+            Join::WITH,
+            'm.lidnr = om.member',
+        )
             ->where('om.dischargeDate IS NULL OR om.dischargeDate > CURRENT_DATE()')
             ->andWhere('om.installDate <= CURRENT_DATE()')
             ->andWhere('om.function <> \'\'');
@@ -78,7 +95,10 @@ class MemberRepository extends ServiceEntityRepository
 
         // Unlike findNormal() this is not row-limited, so an unordered query returns the whole set either way — but it
         // returns it in whatever order the rows happen to sit in, which changes after any ReportDB regeneration.
-        $qb->orderBy('m.lidnr', 'ASC');
+        $qb->orderBy(
+            'm.lidnr',
+            'ASC',
+        );
 
         return $qb->getQuery()->getResult();
     }

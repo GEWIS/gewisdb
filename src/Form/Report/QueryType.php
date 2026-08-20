@@ -27,16 +27,24 @@ class QueryType extends AbstractType
         FormBuilderInterface $builder,
         array $options,
     ): void {
-        $builder->add('query', TextareaType::class, [
-            'label' => t('Query'),
-            'required' => true,
-            // The submitted value is executed as DQL, so it must reach the service byte for byte as it was typed.
-            'trim' => false,
-            'empty_data' => '',
-            'constraints' => [new Assert\NotBlank()],
-        ]);
+        $builder->add(
+            'query',
+            TextareaType::class,
+            [
+                'label' => t('Query'),
+                'required' => true,
+                // The submitted value is executed as DQL, so it must reach the service byte for byte as it was typed.
+                'trim' => false,
+                'empty_data' => '',
+                'constraints' => [new Assert\NotBlank()],
+            ],
+        );
 
-        $builder->add('submit', SubmitType::class, ['label' => t('Execute')]);
+        $builder->add(
+            'submit',
+            SubmitType::class,
+            ['label' => t('Execute')],
+        );
     }
 
     #[Override]

@@ -1,6 +1,5 @@
-{# Stored queries, grouped under their category. The Laminas view opened and closed the nested lists as the category
-   changed while walking a list it assumed to be sorted; grouping first says the same thing and does not depend on
-   the order the queries come back in. #}
+{# Stored queries, grouped under their category. Grouping first rather than opening and closing a list as the
+   category changes does not depend on the order the queries come back in. #}
 {% set grouped = {} %}
 {% for saved_query in saved_queries %}
     {% set category = saved_query.category|default('') is empty ? 'No category'|trans : saved_query.category %}

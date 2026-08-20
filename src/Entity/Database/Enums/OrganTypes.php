@@ -45,12 +45,22 @@ enum OrganTypes: string implements TranslatableInterface
         TranslatorInterface $translator,
         ?string $locale = null,
     ): string {
-        return $this->getName()->trans($translator, $locale);
+        return $this->getName()->trans(
+            $translator,
+            $locale,
+        );
     }
 
     public function hasOrganRegulations(): bool
     {
-        return in_array($this, [self::Committee, self::Fraternity, self::KCC]);
+        return in_array(
+            $this,
+            [
+                self::Committee,
+                self::Fraternity,
+                self::KCC,
+            ],
+        );
     }
 
     /**

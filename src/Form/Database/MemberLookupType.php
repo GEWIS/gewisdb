@@ -36,13 +36,20 @@ class MemberLookupType extends AbstractType
     ): void {
         if ($options['include_name']) {
             // Not part of the member's identity; it is only the source for the autocomplete that fills in `lidnr`.
-            $builder->add('name', TextType::class, [
-                'label' => t('Lid'),
-                'required' => false,
-            ]);
+            $builder->add(
+                'name',
+                TextType::class,
+                [
+                    'label' => t('Lid'),
+                    'required' => false,
+                ],
+            );
         }
 
-        $builder->add('lidnr', HiddenType::class);
+        $builder->add(
+            'lidnr',
+            HiddenType::class,
+        );
 
         $builder->addModelTransformer($this->memberLookupTransformer);
     }
@@ -56,6 +63,9 @@ class MemberLookupType extends AbstractType
             'invalid_message' => 'Select an existing member.',
         ]);
 
-        $resolver->setAllowedTypes('include_name', 'bool');
+        $resolver->setAllowedTypes(
+            'include_name',
+            'bool',
+        );
     }
 }

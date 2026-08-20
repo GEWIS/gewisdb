@@ -26,6 +26,8 @@ class OptInTransformer implements DataTransformerInterface
     #[Override]
     public function reverseTransform(mixed $value): string
     {
-        return true === $value ? self::OPT_IN : self::OPT_OUT;
+        return true === $value
+            ? self::OPT_IN
+            : self::OPT_OUT;
     }
 }

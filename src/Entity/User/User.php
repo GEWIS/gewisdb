@@ -62,7 +62,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function isLocal(): bool
     {
-        return !str_contains($this->login, '@');
+        return !str_contains(
+            $this->login,
+            '@',
+        );
     }
 
     /**
@@ -71,7 +74,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getName(): string
     {
-        if (1 === preg_match('/^((?:a|m)(?:[0-9]{4,5}))@GEWISWG\.GEWIS\.NL$/', $this->login, $matches)) {
+        if (
+            1 === preg_match(
+                '/^((?:a|m)(?:[0-9]{4,5}))@GEWISWG\.GEWIS\.NL$/',
+                $this->login,
+                $matches,
+            )
+        ) {
             return $matches[1];
         }
 

@@ -15,7 +15,10 @@ class AuditEntryRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, AuditEntry::class);
+        parent::__construct(
+            $registry,
+            AuditEntry::class,
+        );
     }
 
     public function persist(AuditEntry $entry): void

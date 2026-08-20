@@ -27,9 +27,15 @@ class Config
         string $key,
         bool|string|DateTime|null $default = null,
     ): bool|string|DateTime|null {
-        $configItem = $this->configItemRepository->findByKey($namespace, $key);
+        $configItem = $this->configItemRepository->findByKey(
+            $namespace,
+            $key,
+        );
 
-        if (null === $configItem || null === $configItem->getValue()) {
+        if (
+            null === $configItem
+            || null === $configItem->getValue()
+        ) {
             return $default;
         }
 
@@ -41,11 +47,17 @@ class Config
         string $key,
         bool|string|DateTime $value,
     ): void {
-        $configItem = $this->configItemRepository->findByKey($namespace, $key);
+        $configItem = $this->configItemRepository->findByKey(
+            $namespace,
+            $key,
+        );
 
         if (null === $configItem) {
             $configItem = new ConfigItem();
-            $configItem->setKey($namespace, $key);
+            $configItem->setKey(
+                $namespace,
+                $key,
+            );
         }
 
         $configItem->setValue($value);
@@ -56,7 +68,10 @@ class Config
         ConfigNamespaces $namespace,
         string $key,
     ): void {
-        $configItem = $this->configItemRepository->findByKey($namespace, $key);
+        $configItem = $this->configItemRepository->findByKey(
+            $namespace,
+            $key,
+        );
 
         if (null === $configItem) {
             return;

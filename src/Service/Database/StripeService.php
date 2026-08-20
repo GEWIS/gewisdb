@@ -303,7 +303,10 @@ class StripeService
             return false;
         }
 
-        $event = $this->verifyEvent($payload, $signature);
+        $event = $this->verifyEvent(
+            $payload,
+            $signature,
+        );
 
         if (null === $event) {
             return false;
@@ -319,7 +322,11 @@ class StripeService
         string $signature,
     ): ?Event {
         try {
-            return Webhook::constructEvent($content, $signature, $this->stripeWebhookSigningKey);
+            return Webhook::constructEvent(
+                $content,
+                $signature,
+                $this->stripeWebhookSigningKey,
+            );
         } catch (UnexpectedValueException) {
             // Malformed JSON payload.
             return null;
@@ -336,7 +343,10 @@ class StripeService
     public function handleEvent(Event $event): void
     {
         if (Event::CHARGE_REFUND_UPDATED === $event->type) {
-            $refund = $this->getObjectFromEvent($event, Refund::class);
+            $refund = $this->getObjectFromEvent(
+                $event,
+                Refund::class,
+            );
             $status = $refund->status;
 
             if (
@@ -347,13 +357,19 @@ class StripeService
                 // Send e-mail to secretary that there was an issue while processing the refund. They will have to ask
                 // the ApplicatieBeheerCommissie and/or treasurer to determine the cause/what needs to happen to get it
                 // resolved.
-                $this->memberService->sendRefundProblemEmail($refund->id, $status);
+                $this->memberService->sendRefundProblemEmail(
+                    $refund->id,
+                    $status,
+                );
             }
 
             return;
         }
 
-        $session = $this->getObjectFromEvent($event, CheckoutSession::class);
+        $session = $this->getObjectFromEvent(
+            $event,
+            CheckoutSession::class,
+        );
         $storedCheckoutSession = $this->checkoutSessionRepository->findById($session->id);
 
         if (null === $storedCheckoutSession) {

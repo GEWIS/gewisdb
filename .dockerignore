@@ -22,7 +22,7 @@ Makefile
 composer.phar
 coverage/
 Dockerfile
-docker-compose.*
+compose*.yaml
 nbproject
 node_modules/
 tests/

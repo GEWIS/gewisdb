@@ -15,6 +15,9 @@ class AbrogationRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Abrogation::class);
+        parent::__construct(
+            $registry,
+            Abrogation::class,
+        );
     }
 }

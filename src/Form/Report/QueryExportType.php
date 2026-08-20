@@ -29,22 +29,38 @@ class QueryExportType extends AbstractType
     ): void {
         // This form sits next to the result table and carries the executed query along, so the query is not typed
         // here but replayed from a hidden field.
-        $builder->add('query', HiddenType::class, [
-            'required' => true,
-            'trim' => false,
-            'empty_data' => '',
-            'constraints' => [new Assert\NotBlank()],
-        ]);
+        $builder->add(
+            'query',
+            HiddenType::class,
+            [
+                'required' => true,
+                'trim' => false,
+                'empty_data' => '',
+                'constraints' => [new Assert\NotBlank()],
+            ],
+        );
 
-        $builder->add('name', HiddenType::class, ['required' => false]);
+        $builder->add(
+            'name',
+            HiddenType::class,
+            ['required' => false],
+        );
 
-        $builder->add('type', ChoiceType::class, [
-            'choices' => ['CSV' => 'csv'],
-            'required' => true,
-            'constraints' => [new Assert\NotBlank()],
-        ]);
+        $builder->add(
+            'type',
+            ChoiceType::class,
+            [
+                'choices' => ['CSV' => 'csv'],
+                'required' => true,
+                'constraints' => [new Assert\NotBlank()],
+            ],
+        );
 
-        $builder->add('submit', SubmitType::class, ['label' => t('Export')]);
+        $builder->add(
+            'submit',
+            SubmitType::class,
+            ['label' => t('Export')],
+        );
     }
 
     #[Override]

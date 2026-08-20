@@ -32,41 +32,65 @@ class InstallType extends AbstractType
     ): void {
         $builder
             // Only the source for the organ autocomplete, which fills in the foundation reference below.
-            ->add('name', TextType::class, [
-                'label' => t('Body'),
-                'mapped' => false,
-                'required' => false,
-            ])
-            ->add('subdecision', SubDecisionType::class, ['subdecision_class' => Foundation::class])
+            ->add(
+                'name',
+                TextType::class,
+                [
+                    'label' => t('Body'),
+                    'mapped' => false,
+                    'required' => false,
+                ],
+            )
+            ->add(
+                'subdecision',
+                SubDecisionType::class,
+                ['subdecision_class' => Foundation::class],
+            )
             // All three collections start out empty: the page builds their rows from the prototype as the user works
             // through the organ's current membership.
-            ->add('installations', CollectionType::class, [
-                'label' => t('Installations'),
-                'entry_type' => InstallationType::class,
-                'allow_add' => true,
-                'allow_delete' => true,
-                'prototype' => true,
-                'prototype_name' => '__index__',
-            ])
-            ->add('reappointments', CollectionType::class, [
-                'label' => t('Reappointments'),
-                'entry_type' => SubDecisionType::class,
-                'entry_options' => ['subdecision_class' => Installation::class],
-                'allow_add' => true,
-                'allow_delete' => true,
-                'prototype' => true,
-                'prototype_name' => '__index__',
-            ])
-            ->add('discharges', CollectionType::class, [
-                'label' => t('Discharges'),
-                'entry_type' => SubDecisionType::class,
-                'entry_options' => ['subdecision_class' => Installation::class],
-                'allow_add' => true,
-                'allow_delete' => true,
-                'prototype' => true,
-                'prototype_name' => '__index__',
-            ])
-            ->add('submit', SubmitType::class, ['label' => t('Confirm Changes')])
+            ->add(
+                'installations',
+                CollectionType::class,
+                [
+                    'label' => t('Installations'),
+                    'entry_type' => InstallationType::class,
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'prototype' => true,
+                    'prototype_name' => '__index__',
+                ],
+            )
+            ->add(
+                'reappointments',
+                CollectionType::class,
+                [
+                    'label' => t('Reappointments'),
+                    'entry_type' => SubDecisionType::class,
+                    'entry_options' => ['subdecision_class' => Installation::class],
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'prototype' => true,
+                    'prototype_name' => '__index__',
+                ],
+            )
+            ->add(
+                'discharges',
+                CollectionType::class,
+                [
+                    'label' => t('Discharges'),
+                    'entry_type' => SubDecisionType::class,
+                    'entry_options' => ['subdecision_class' => Installation::class],
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'prototype' => true,
+                    'prototype_name' => '__index__',
+                ],
+            )
+            ->add(
+                'submit',
+                SubmitType::class,
+                ['label' => t('Confirm Changes')],
+            )
             ->setDataMapper($this->dataMapper);
     }
 

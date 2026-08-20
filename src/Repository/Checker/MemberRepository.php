@@ -21,7 +21,10 @@ class MemberRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Member::class);
+        parent::__construct(
+            $registry,
+            Member::class,
+        );
     }
 
     /**
@@ -33,7 +36,10 @@ class MemberRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('m');
 
-        $qb->leftJoin('m.memberships', 'mem')
+        $qb->leftJoin(
+            'm.memberships',
+            'mem',
+        )
             ->where('m.authenticationKey IS NOT NULL')
             ->andWhere($qb->expr()->eq('mem.startDate', '(' . $this->lastMembershipQuery()->getDQL() . ')'))
             ->andWhere('mem.endDate <= CURRENT_TIMESTAMP() OR m.hidden = True');
@@ -56,22 +62,34 @@ class MemberRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('m');
 
         $qb->select('m, mem')
-            ->leftJoin('m.memberships', 'mem')
+            ->leftJoin(
+                'm.memberships',
+                'mem',
+            )
             ->where('mem.type = :graduate')
             ->andWhere('m.email IS NOT NULL')
             ->andWhere('m.hidden = false')
             ->andWhere('m.deleted = false')
             ->andWhere($qb->expr()->eq('mem.startDate', '(' . $this->lastMembershipQuery()->getDQL() . ')'))
             ->andWhere('mem.endDate <= :expiresBefore')
-            ->setParameter('graduate', MembershipTypes::Graduate);
+            ->setParameter(
+                'graduate',
+                MembershipTypes::Graduate,
+            );
 
         $qbal = $this->getEntityManager()->createQueryBuilder();
         $qbal->select('rl')
-            ->from(RenewalLink::class, 'rl')
+            ->from(
+                RenewalLink::class,
+                'rl',
+            )
             ->andWhere('rl.member = m')
             ->andWhere('rl.currentExpiration = mem.endDate');
 
-        $qb->setParameter('expiresBefore', $expiresBefore ?? AssociationYear::of(new DateTime())->endsOn());
+        $qb->setParameter(
+            'expiresBefore',
+            $expiresBefore ?? AssociationYear::of(new DateTime())->endsOn(),
+        );
 
         $qb->andWhere($qb->expr()->not(
             $qb->expr()->exists($qbal->getDQL()),
@@ -93,7 +111,10 @@ class MemberRepository extends ServiceEntityRepository
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select('MAX(lastMem.startDate)')
-            ->from(Membership::class, 'lastMem')
+            ->from(
+                Membership::class,
+                'lastMem',
+            )
             ->where('lastMem.member = ' . $memberAlias);
 
         return $qb;

@@ -59,7 +59,7 @@
 		"noXdebug": "sudo rm -f /usr/local/etc/php/conf.d/xdebug.ini"
 	},
 	"postStartCommand": {
-		"runGewisDb": "(make builddev && docker compose build && make rundev && make getvendordir); true"
+		"runGewisDb": "(make builddev && docker compose build && make start && make getvendordir); true"
 	},
 	"waitFor": "postCreateCommand",
 	//"postAttachCommand": "",

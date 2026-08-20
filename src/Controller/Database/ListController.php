@@ -27,16 +27,22 @@ final class ListController extends AbstractController
     )]
     public function index(): Response
     {
-        return $this->render('mailing/list/index.html.twig', [
-            'lists' => $this->mailingListService->getAllLists(),
-            'listmonk_last_fetch' => $this->mailingListService->getListmonkLastFetch(),
-        ]);
+        return $this->render(
+            'mailing/list/index.html.twig',
+            [
+                'lists' => $this->mailingListService->getAllLists(),
+                'listmonk_last_fetch' => $this->mailingListService->getListmonkLastFetch(),
+            ],
+        );
     }
 
     #[Route(
         path: '/add',
         name: 'mailing_list_create',
-        methods: ['GET', 'POST'],
+        methods: [
+            'GET',
+            'POST',
+        ],
     )]
     public function create(Request $request): Response
     {
@@ -44,10 +50,14 @@ final class ListController extends AbstractController
         // do on an instance it is given.
         $list = new MailingList();
 
-        $form = $this->createForm(MailingListType::class, $list, [
-            'mailman_lists' => $this->mailingListService->getSelectableMailmanLists(),
-            'listmonk_lists' => $this->mailingListService->getSelectableListmonkLists(),
-        ]);
+        $form = $this->createForm(
+            MailingListType::class,
+            $list,
+            [
+                'mailman_lists' => $this->mailingListService->getSelectableMailmanLists(),
+                'listmonk_lists' => $this->mailingListService->getSelectableListmonkLists(),
+            ],
+        );
         $form->handleRequest($request);
 
         if (
@@ -55,22 +65,34 @@ final class ListController extends AbstractController
             && $form->isValid()
         ) {
             $this->mailingListService->addList($list);
-            $this->addFlash('success', 'The mailing list has been created.');
+            $this->addFlash(
+                'success',
+                'The mailing list has been created.',
+            );
 
-            return $this->redirectToRoute('mailing_list_edit', ['name' => $list->getName()]);
+            return $this->redirectToRoute(
+                'mailing_list_edit',
+                ['name' => $list->getName()],
+            );
         }
 
-        return $this->render('mailing/list/form.html.twig', [
-            'form' => $form,
-            'list' => null,
-        ]);
+        return $this->render(
+            'mailing/list/form.html.twig',
+            [
+                'form' => $form,
+                'list' => null,
+            ],
+        );
     }
 
     #[Route(
         path: '/edit/{name}',
         name: 'mailing_list_edit',
         requirements: ['name' => '[a-zA-Z0-9_-]+'],
-        methods: ['GET', 'POST'],
+        methods: [
+            'GET',
+            'POST',
+        ],
     )]
     public function edit(
         Request $request,
@@ -82,10 +104,14 @@ final class ListController extends AbstractController
             throw $this->createNotFoundException();
         }
 
-        $form = $this->createForm(MailingListType::class, $list, [
-            'mailman_lists' => $this->mailingListService->getSelectableMailmanLists($list),
-            'listmonk_lists' => $this->mailingListService->getSelectableListmonkLists($list),
-        ]);
+        $form = $this->createForm(
+            MailingListType::class,
+            $list,
+            [
+                'mailman_lists' => $this->mailingListService->getSelectableMailmanLists($list),
+                'listmonk_lists' => $this->mailingListService->getSelectableListmonkLists($list),
+            ],
+        );
         $form->handleRequest($request);
 
         if (
@@ -93,22 +119,34 @@ final class ListController extends AbstractController
             && $form->isValid()
         ) {
             $this->mailingListService->editList($list);
-            $this->addFlash('success', 'The mailing list has been updated.');
+            $this->addFlash(
+                'success',
+                'The mailing list has been updated.',
+            );
 
-            return $this->redirectToRoute('mailing_list_edit', ['name' => $list->getName()]);
+            return $this->redirectToRoute(
+                'mailing_list_edit',
+                ['name' => $list->getName()],
+            );
         }
 
-        return $this->render('mailing/list/form.html.twig', [
-            'form' => $form,
-            'list' => $list,
-        ]);
+        return $this->render(
+            'mailing/list/form.html.twig',
+            [
+                'form' => $form,
+                'list' => $list,
+            ],
+        );
     }
 
     #[Route(
         path: '/delete/{name}',
         name: 'mailing_list_delete',
         requirements: ['name' => '[a-zA-Z0-9_-]+'],
-        methods: ['GET', 'POST'],
+        methods: [
+            'GET',
+            'POST',
+        ],
     )]
     public function delete(
         Request $request,
@@ -128,15 +166,21 @@ final class ListController extends AbstractController
             // simply returns to the overview.
             if ($form->isValid()) {
                 $this->mailingListService->delete($list);
-                $this->addFlash('success', 'The mailing list has been deleted.');
+                $this->addFlash(
+                    'success',
+                    'The mailing list has been deleted.',
+                );
             }
 
             return $this->redirectToRoute('mailing_list_index');
         }
 
-        return $this->render('mailing/list/delete.html.twig', [
-            'form' => $form,
-            'name' => $name,
-        ]);
+        return $this->render(
+            'mailing/list/delete.html.twig',
+            [
+                'form' => $form,
+                'name' => $name,
+            ],
+        );
     }
 }

@@ -39,8 +39,16 @@ use function str_starts_with;
  *  - everything else is shaped after the framework has logged the exception (priority 0) and before the default
  *    error renderer (priority -128) would produce an HTML page.
  */
-#[AsEventListener(event: KernelEvents::EXCEPTION, method: 'onAccessDenied', priority: 2)]
-#[AsEventListener(event: KernelEvents::EXCEPTION, method: 'onApiException', priority: -100)]
+#[AsEventListener(
+    event: KernelEvents::EXCEPTION,
+    method: 'onAccessDenied',
+    priority: 2,
+)]
+#[AsEventListener(
+    event: KernelEvents::EXCEPTION,
+    method: 'onApiException',
+    priority: -100,
+)]
 final class ApiExceptionListener
 {
     private const string API_PREFIX = '/api';
@@ -51,10 +59,10 @@ final class ApiExceptionListener
     /**
      * How the API names each failure it can report.
      *
-     * The Laminas application put the exception's class name in the response body, so consumers key on strings that
-     * name classes under the old namespaces. Those strings are part of the contract and outlived the classes, which
-     * is why they are stated here rather than derived from `::class` — and why they live at the wire boundary rather
-     * than on the exceptions, which have no business knowing their JSON name.
+     * The body has always carried the exception's class name, so consumers key on strings naming classes that no
+     * longer exist. Those strings are part of the contract and outlived the classes, which is why they are stated
+     * here rather than derived from `::class` — and why they live at the wire boundary rather than on the
+     * exceptions, which have no business knowing their JSON name.
      */
     private const array TYPES = [
         NotAllowed::class => 'User\\Model\\Exception\\NotAllowed',
@@ -88,9 +96,14 @@ final class ApiExceptionListener
         $permission = $this->deniedPermission($accessDenied);
         $message = null === $permission
             ? $accessDenied->getMessage()
-            : (new NotAllowed($permission))->getMessage();
+            : new NotAllowed($permission)->getMessage();
 
-        $this->respond($event, Response::HTTP_FORBIDDEN, self::TYPES[NotAllowed::class], $message);
+        $this->respond(
+            $event,
+            Response::HTTP_FORBIDDEN,
+            self::TYPES[NotAllowed::class],
+            $message,
+        );
     }
 
     public function onApiException(ExceptionEvent $event): void
@@ -117,7 +130,10 @@ final class ApiExceptionListener
         $path = $request->getPathInfo();
 
         return self::API_PREFIX === $path
-            || str_starts_with($path, self::API_PREFIX . '/');
+            || str_starts_with(
+                $path,
+                self::API_PREFIX . '/',
+            );
     }
 
     private function findAccessDenied(Throwable $throwable): ?AccessDeniedException

@@ -16,7 +16,10 @@ class ConfigItemRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ConfigItem::class);
+        parent::__construct(
+            $registry,
+            ConfigItem::class,
+        );
     }
 
     public function findByKey(
@@ -27,8 +30,14 @@ class ConfigItemRepository extends ServiceEntityRepository
         $qb->where('ci.namespace = :namespace')
             ->andWhere('ci.key = :key');
 
-        $qb->setParameter('namespace', $namespace);
-        $qb->setParameter('key', $key);
+        $qb->setParameter(
+            'namespace',
+            $namespace,
+        );
+        $qb->setParameter(
+            'key',
+            $key,
+        );
 
         return $qb->getQuery()->getOneOrNullResult();
     }

@@ -59,16 +59,31 @@ class MembershipTypeType extends AbstractType
 
         if (null !== $membership) {
             $typeOptions['data'] = $membership->getType();
-            $changeDateOptions['data'] = min($membership->getStartDate(), new DateTime());
+            $changeDateOptions['data'] = min(
+                $membership->getStartDate(),
+                new DateTime(),
+            );
             $changeDateOptions['attr'] = [
                 'min' => $membership->getStartDate()->format('Y-m-d'),
                 'max' => $membership->getEndDate()->format('Y-m-d'),
             ];
         }
 
-        $builder->add('type', EnumType::class, $typeOptions);
-        $builder->add('changeDate', DateType::class, $changeDateOptions);
-        $builder->add('submit', SubmitType::class, ['label' => t('Change Membership Type')]);
+        $builder->add(
+            'type',
+            EnumType::class,
+            $typeOptions,
+        );
+        $builder->add(
+            'changeDate',
+            DateType::class,
+            $changeDateOptions,
+        );
+        $builder->add(
+            'submit',
+            SubmitType::class,
+            ['label' => t('Change Membership Type')],
+        );
     }
 
     #[Override]
@@ -79,6 +94,12 @@ class MembershipTypeType extends AbstractType
             'membership' => null,
         ]);
 
-        $resolver->setAllowedTypes('membership', [Membership::class, 'null']);
+        $resolver->setAllowedTypes(
+            'membership',
+            [
+                Membership::class,
+                'null',
+            ],
+        );
     }
 }

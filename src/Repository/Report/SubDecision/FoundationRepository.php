@@ -15,6 +15,9 @@ class FoundationRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Foundation::class);
+        parent::__construct(
+            $registry,
+            Foundation::class,
+        );
     }
 }

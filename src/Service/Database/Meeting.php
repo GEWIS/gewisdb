@@ -73,7 +73,10 @@ class Meeting
         MeetingTypes $type,
         int $number,
     ): ?MeetingModel {
-        return $this->meetingRepository->findMeeting($type, $number);
+        return $this->meetingRepository->findMeeting(
+            $type,
+            $number,
+        );
     }
 
     /**
@@ -83,7 +86,10 @@ class Meeting
         MeetingTypes $type,
         int $number,
     ): ?MeetingView {
-        $meeting = $this->getMeeting($type, $number);
+        $meeting = $this->getMeeting(
+            $type,
+            $number,
+        );
 
         if (null === $meeting) {
             return null;
@@ -98,10 +104,13 @@ class Meeting
                 $decision->getNumber(),
                 // The same join `Decision::getTranslatedContent()` does, in the language being read rather than
                 // always in Dutch.
-                implode(' ', array_map(
-                    fn (SubDecision $subdecision): string => $subdecision->getContent($this->translator),
-                    $decision->getSubdecisions()->toArray(),
-                )),
+                implode(
+                    ' ',
+                    array_map(
+                        fn (SubDecision $subdecision): string => $subdecision->getContent($this->translator),
+                        $decision->getSubdecisions()->toArray(),
+                    ),
+                ),
                 $this->getCopyContent($decision),
                 null === $decision->getAnnulledBy()
                     ? null
@@ -118,7 +127,11 @@ class Meeting
             $nextDecisionNumbers[$point] = $next;
         }
 
-        return new MeetingView($meeting, $decisions, $nextDecisionNumbers);
+        return new MeetingView(
+            $meeting,
+            $decisions,
+            $nextDecisionNumbers,
+        );
     }
 
     /**
@@ -130,7 +143,12 @@ class Meeting
     {
         // A meeting is identified by its type and number together, so this is what "already exists" means; the form
         // builds a fresh entity either way and cannot tell.
-        if (null !== $this->getMeeting($meeting->getType(), $meeting->getNumber())) {
+        if (
+            null !== $this->getMeeting(
+                $meeting->getType(),
+                $meeting->getNumber(),
+            )
+        ) {
             return false;
         }
 
@@ -148,7 +166,12 @@ class Meeting
         int $point,
         int $decision,
     ): bool {
-        return null !== $this->meetingRepository->findDecision($type, $number, $point, $decision);
+        return null !== $this->meetingRepository->findDecision(
+            $type,
+            $number,
+            $point,
+            $decision,
+        );
     }
 
     /**
@@ -181,7 +204,10 @@ class Meeting
             $decision->getMeetingNumber(),
             $this->getCopyContent($decision),
             array_map(
-                fn (AppLanguages $language): string => $decision->getTranslatedContent($this->translator, $language),
+                fn (AppLanguages $language): string => $decision->getTranslatedContent(
+                    $this->translator,
+                    $language,
+                ),
                 AppLanguages::cases(),
             ),
             $warnings,
@@ -203,7 +229,12 @@ class Meeting
         int $point,
         int $decision,
     ): bool {
-        $model = $this->meetingRepository->findDecision($type, $number, $point, $decision);
+        $model = $this->meetingRepository->findDecision(
+            $type,
+            $number,
+            $point,
+            $decision,
+        );
 
         if (null === $model) {
             return false;
@@ -220,7 +251,12 @@ class Meeting
         }
 
         try {
-            $this->meetingRepository->deleteDecision($type, $number, $point, $decision);
+            $this->meetingRepository->deleteDecision(
+                $type,
+                $number,
+                $point,
+                $decision,
+            );
         } catch (ForeignKeyConstraintViolationException $e) {
             throw new DecisionStillReferenced(
                 'This decision is still referred to by another decision.',
@@ -242,7 +278,10 @@ class Meeting
     {
         $identifiers = array_map(
             static function (string $meeting): array {
-                $meeting = explode('-', $meeting);
+                $meeting = explode(
+                    '-',
+                    $meeting,
+                );
 
                 return [
                     'type' => $meeting[0],
@@ -268,11 +307,18 @@ class Meeting
             $categories[$this->getCategory($first)][] = new ExportedDecision(
                 $decision->getHash(),
                 $decision->getMeeting()->getDate(),
-                $decision->getContent($this->translator, true),
+                $decision->getContent(
+                    $this->translator,
+                    true,
+                ),
             );
         }
 
-        return new ExportCategories($categories['financial'], $categories['install'], $categories['other']);
+        return new ExportCategories(
+            $categories['financial'],
+            $categories['install'],
+            $categories['other'],
+        );
     }
 
     /**
@@ -319,12 +365,21 @@ class Meeting
             && null !== $meetingNumber
         ) {
             // Only decisions taken before the one being entered can be annulled by it.
-            $before = $this->meetingRepository->findMeeting($meetingType, $meetingNumber);
+            $before = $this->meetingRepository->findMeeting(
+                $meetingType,
+                $meetingNumber,
+            );
         }
 
         return array_map(
             fn (DecisionModel $decision): array => $decision->toArray($this->translator),
-            $this->meetingRepository->searchDecision($query, false, $before, $point, $number),
+            $this->meetingRepository->searchDecision(
+                $query,
+                false,
+                $before,
+                $point,
+                $number,
+            ),
         );
     }
 
@@ -394,7 +449,12 @@ class Meeting
             $member = $reference->getMember();
             $lidnr = $member->getLidnr();
 
-            if (!array_key_exists($lidnr, $members)) {
+            if (
+                !array_key_exists(
+                    $lidnr,
+                    $members,
+                )
+            ) {
                 // Only what it takes to say who this is: the page shows a name and hangs mutations off a membership
                 // number.
                 $members[$lidnr] = [
@@ -465,7 +525,12 @@ class Meeting
                 throw new AnnulmentNotPossible($this->translator->trans('This decision has already been annulled.'));
             }
 
-            if (!$this->annulmentService->isBefore($target, $decision)) {
+            if (
+                !$this->annulmentService->isBefore(
+                    $target,
+                    $decision,
+                )
+            ) {
                 // The ledger cannot be rewritten from the past: whatever is annulled must already have happened.
                 throw new AnnulmentNotPossible(
                     $this->translator->trans('A decision can only annul a decision taken before it.'),
@@ -518,8 +583,16 @@ class Meeting
     {
         return sprintf(
             '\decision[%s]{%s}',
-            $decision->getTranslatedContent($this->translator, AppLanguages::English, true),
-            $decision->getTranslatedContent($this->translator, AppLanguages::Dutch, true),
+            $decision->getTranslatedContent(
+                $this->translator,
+                AppLanguages::English,
+                true,
+            ),
+            $decision->getTranslatedContent(
+                $this->translator,
+                AppLanguages::Dutch,
+                true,
+            ),
         );
     }
 }

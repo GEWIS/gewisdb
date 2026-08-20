@@ -85,7 +85,10 @@ class MemberFixture extends Fixture
         $prospective->setAddress($address);
 
         $manager->persist($prospective);
-        $this->addReference(self::REF_MEMBER_PROSPECTIVE, $prospective);
+        $this->addReference(
+            self::REF_MEMBER_PROSPECTIVE,
+            $prospective,
+        );
 
         $checkout = new CheckoutSession();
         $checkout->setCheckoutId('123');
@@ -108,9 +111,15 @@ class MemberFixture extends Fixture
         $student->setChangedOn(new DateTime());
         $student->setStudentNumber('1000020');
         $student->setStudy(Studies::BAM);
-        $this->chainMemberships($student, new DateTime('2018-08-14 midnight'));
+        $this->chainMemberships(
+            $student,
+            new DateTime('2018-08-14 midnight'),
+        );
         $manager->persist($student);
-        $this->addReference(self::REF_MEMBER_STUDENT, $student);
+        $this->addReference(
+            self::REF_MEMBER_STUDENT,
+            $student,
+        );
 
         $external = new MemberModel();
         $external->setInitials('J.');
@@ -128,7 +137,10 @@ class MemberFixture extends Fixture
             MembershipTypes::External,
         );
         $manager->persist($external);
-        $this->addReference(self::REF_MEMBER_EXTERNAL, $external);
+        $this->addReference(
+            self::REF_MEMBER_EXTERNAL,
+            $external,
+        );
 
         $graduate = new MemberModel();
         $graduate->setInitials('J.H.');
@@ -146,7 +158,10 @@ class MemberFixture extends Fixture
             MembershipTypes::Graduate,
         );
         $manager->persist($graduate);
-        $this->addReference(self::REF_MEMBER_GRADUATE, $graduate);
+        $this->addReference(
+            self::REF_MEMBER_GRADUATE,
+            $graduate,
+        );
 
         $deleted = new MemberModel();
         $deleted->setInitials('R.');
@@ -159,9 +174,15 @@ class MemberFixture extends Fixture
         $deleted->setStudentNumber('1000030');
         $deleted->setStudy(Studies::BAM);
         $deleted->setDeleted(true);
-        $this->chainMemberships($deleted, new DateTime('2019-08-13 midnight'));
+        $this->chainMemberships(
+            $deleted,
+            new DateTime('2019-08-13 midnight'),
+        );
         $manager->persist($deleted);
-        $this->addReference(self::REF_MEMBER_DELETED, $deleted);
+        $this->addReference(
+            self::REF_MEMBER_DELETED,
+            $deleted,
+        );
     }
 
     /**
@@ -218,12 +239,15 @@ class MemberFixture extends Fixture
             null,
             $this->studentNumber(2),
             Studies::BAM,
-            $this->associationYearChain(4, $nextJul1),
+            $this->associationYearChain(
+                4,
+                $nextJul1,
+            ),
             hidden: true,
         );
 
         // A2: a same-day membership (start equals end) is dropped silently, despite the missing address.
-        $sameDay = (new DateTime())->modify('-10 days');
+        $sameDay = new DateTime()->modify('-10 days');
         $this->makeAttentionMember(
             $manager,
             'S.',
@@ -233,7 +257,13 @@ class MemberFixture extends Fixture
             null,
             $this->studentNumber(3),
             Studies::BAM,
-            [[MembershipTypes::Ordinary, $sameDay, clone $sameDay]],
+            [
+                [
+                    MembershipTypes::Ordinary,
+                    $sameDay,
+                    clone $sameDay,
+                ],
+            ],
         );
 
         // A3: visible and missing an address — the control that stays once A1 is fixed.
@@ -246,7 +276,10 @@ class MemberFixture extends Fixture
             null,
             $this->studentNumber(4),
             Studies::BAM,
-            $this->associationYearChain(3, $nextJul1),
+            $this->associationYearChain(
+                3,
+                $nextJul1,
+            ),
         );
 
         // A4: an ordinary member without a student number.
@@ -259,21 +292,30 @@ class MemberFixture extends Fixture
             'nostudentid@example.com',
             null,
             Studies::BAM,
-            $this->associationYearChain(3, $nextJul1),
+            $this->associationYearChain(
+                3,
+                $nextJul1,
+            ),
         );
 
         // B1: ordinary, active in an organ, expiring — the one with a renewal button.
-        $this->addReference(self::REF_MEMBER_ATTN_ORDINARY_ACTIVE, $this->makeAttentionMember(
-            $manager,
-            'O.',
-            'Olaf',
-            'OrdinaryActive',
-            22,
-            'ordinaryactive@example.com',
-            $this->studentNumber(5),
-            Studies::BAM,
-            $this->associationYearChain(4, $nextJul1),
-        ));
+        $this->addReference(
+            self::REF_MEMBER_ATTN_ORDINARY_ACTIVE,
+            $this->makeAttentionMember(
+                $manager,
+                'O.',
+                'Olaf',
+                'OrdinaryActive',
+                22,
+                'ordinaryactive@example.com',
+                $this->studentNumber(5),
+                Studies::BAM,
+                $this->associationYearChain(
+                    4,
+                    $nextJul1,
+                ),
+            ),
+        );
 
         // B2: ordinary, not active, expiring.
         $this->makeAttentionMember(
@@ -285,22 +327,33 @@ class MemberFixture extends Fixture
             'ordinarynonactive@example.com',
             $this->studentNumber(6),
             Studies::BAM,
-            $this->associationYearChain(4, $nextJul1),
+            $this->associationYearChain(
+                4,
+                $nextJul1,
+            ),
         );
 
         // B3: external, active, expiring. Ordinary to external, because the board kept an active member on after
         // their studies ended.
-        $this->addReference(self::REF_MEMBER_ATTN_EXTERNAL_ACTIVE, $this->makeAttentionMember(
-            $manager,
-            'E.',
-            'Ellen',
-            'ExternalActive',
-            24,
-            'externalactive@example.com',
-            $this->studentNumber(7),
-            Studies::Other,
-            $this->associationYearChain(6, $nextJul1, MembershipTypes::External, 3),
-        ));
+        $this->addReference(
+            self::REF_MEMBER_ATTN_EXTERNAL_ACTIVE,
+            $this->makeAttentionMember(
+                $manager,
+                'E.',
+                'Ellen',
+                'ExternalActive',
+                24,
+                'externalactive@example.com',
+                $this->studentNumber(7),
+                Studies::Other,
+                $this->associationYearChain(
+                    6,
+                    $nextJul1,
+                    MembershipTypes::External,
+                    3,
+                ),
+            ),
+        );
 
         // B4: external, not active, expiring. Joined as an external — a PhD or a student from another department —
         // so external from the start rather than by conversion.
@@ -313,22 +366,35 @@ class MemberFixture extends Fixture
             'externalnonactive@example.com',
             $this->studentNumber(8),
             Studies::Other,
-            $this->associationYearChain(4, $nextJul1, MembershipTypes::External, 4),
+            $this->associationYearChain(
+                4,
+                $nextJul1,
+                MembershipTypes::External,
+                4,
+            ),
         );
 
         // B5: a graduate who is an inactive member of a fraternity. The graduate finder counts inactive organ members
         // as active, which is the whole point of this one.
-        $this->addReference(self::REF_MEMBER_ATTN_GRADUATE_ACTIVE, $this->makeAttentionMember(
-            $manager,
-            'G.',
-            'Gerda',
-            'GraduateActive',
-            31,
-            'graduateactive@example.com',
-            $this->studentNumber(9),
-            Studies::None,
-            $this->associationYearChain(7, $nextJul1, MembershipTypes::Graduate, 2),
-        ));
+        $this->addReference(
+            self::REF_MEMBER_ATTN_GRADUATE_ACTIVE,
+            $this->makeAttentionMember(
+                $manager,
+                'G.',
+                'Gerda',
+                'GraduateActive',
+                31,
+                'graduateactive@example.com',
+                $this->studentNumber(9),
+                Studies::None,
+                $this->associationYearChain(
+                    7,
+                    $nextJul1,
+                    MembershipTypes::Graduate,
+                    2,
+                ),
+            ),
+        );
 
         // B6: a graduate who is not active — never surfaces, because the graduate finder only includes active ones.
         // Reached graduate status the common way, as an external who stopped studying.
@@ -342,7 +408,16 @@ class MemberFixture extends Fixture
             $this->studentNumber(10),
             Studies::None,
             $this->associationYearPhases(
-                [[MembershipTypes::External, 4], [MembershipTypes::Graduate, 2]],
+                [
+                    [
+                        MembershipTypes::External,
+                        4,
+                    ],
+                    [
+                        MembershipTypes::Graduate,
+                        2,
+                    ],
+                ],
                 $nextJul1,
             ),
         );
@@ -357,7 +432,10 @@ class MemberFixture extends Fixture
             'ordinaryexpired30@example.com',
             $this->studentNumber(11),
             Studies::BAM,
-            $this->associationYearChain(4, (new DateTime())->modify('-30 days')),
+            $this->associationYearChain(
+                4,
+                new DateTime()->modify('-30 days'),
+            ),
         );
 
         // C2: ended exactly 90 days ago at midnight — the off-by-a-few-hours boundary.
@@ -370,7 +448,10 @@ class MemberFixture extends Fixture
             'ordinaryboundary90@example.com',
             $this->studentNumber(12),
             Studies::BAM,
-            $this->associationYearChain(4, (new DateTime())->modify('-90 days')),
+            $this->associationYearChain(
+                4,
+                new DateTime()->modify('-90 days'),
+            ),
         );
 
         // C3: expired 180 days ago — the control beyond the window, which must not appear.
@@ -383,7 +464,10 @@ class MemberFixture extends Fixture
             'ordinaryexpired180@example.com',
             $this->studentNumber(13),
             Studies::BAM,
-            $this->associationYearChain(4, (new DateTime())->modify('-180 days')),
+            $this->associationYearChain(
+                4,
+                new DateTime()->modify('-180 days'),
+            ),
         );
 
         // C4: expiring in 180 days — the control beyond the other end of the window.
@@ -396,7 +480,10 @@ class MemberFixture extends Fixture
             'ordinaryfuture180@example.com',
             $this->studentNumber(14),
             Studies::BAM,
-            $this->associationYearChain(4, (new DateTime())->modify('+180 days')),
+            $this->associationYearChain(
+                4,
+                new DateTime()->modify('+180 days'),
+            ),
         );
 
         // C5: an external who expired 30 days ago, so the past-expiry case is covered for externals too.
@@ -409,22 +496,33 @@ class MemberFixture extends Fixture
             'externalexpired30@example.com',
             $this->studentNumber(15),
             Studies::Other,
-            $this->associationYearChain(4, (new DateTime())->modify('-30 days'), MembershipTypes::External, 4),
+            $this->associationYearChain(
+                4,
+                new DateTime()->modify('-30 days'),
+                MembershipTypes::External,
+                4,
+            ),
         );
 
         // D1: expired 30 days ago, active in an organ at that point, discharged 10 days ago. The finder reads
         // activity as of today and therefore files them as non-active.
-        $this->addReference(self::REF_MEMBER_ATTN_MISCLASSIFIED, $this->makeAttentionMember(
-            $manager,
-            'M.',
-            'Marit',
-            'Misclassified',
-            26,
-            'misclassified@example.com',
-            $this->studentNumber(16),
-            Studies::BAM,
-            $this->associationYearChain(4, (new DateTime())->modify('-30 days')),
-        ));
+        $this->addReference(
+            self::REF_MEMBER_ATTN_MISCLASSIFIED,
+            $this->makeAttentionMember(
+                $manager,
+                'M.',
+                'Marit',
+                'Misclassified',
+                26,
+                'misclassified@example.com',
+                $this->studentNumber(16),
+                Studies::BAM,
+                $this->associationYearChain(
+                    4,
+                    new DateTime()->modify('-30 days'),
+                ),
+            ),
+        );
 
         // E1: a master who joined in February rather than at the introduction week, so their first membership runs
         // from February to the next July.
@@ -437,7 +535,12 @@ class MemberFixture extends Fixture
             'springmaster@example.com',
             $this->studentNumber(17),
             Studies::MCSE,
-            $this->associationYearChain(2, $nextJul1, joinMonth: 2, joinDay: 10),
+            $this->associationYearChain(
+                2,
+                $nextJul1,
+                joinMonth: 2,
+                joinDay: 10,
+            ),
         );
 
         // E2: a PhD who joined in November.
@@ -450,7 +553,14 @@ class MemberFixture extends Fixture
             'autumnexternal@example.com',
             $this->studentNumber(18),
             Studies::PhDCS,
-            $this->associationYearChain(3, $nextJul1, MembershipTypes::External, 3, joinMonth: 11, joinDay: 1),
+            $this->associationYearChain(
+                3,
+                $nextJul1,
+                MembershipTypes::External,
+                3,
+                joinMonth: 11,
+                joinDay: 1,
+            ),
         );
     }
 
@@ -474,7 +584,7 @@ class MemberFixture extends Fixture
         $member->setFirstName($firstName);
         $member->setMiddleName('');
         $member->setLastName($lastName);
-        $member->setBirth((new DateTime())->modify('-' . $ageInYears . ' years'));
+        $member->setBirth(new DateTime()->modify('-' . $ageInYears . ' years'));
         $member->setChangedOn(new DateTime());
         $member->setStudy($study);
 
@@ -518,18 +628,32 @@ class MemberFixture extends Fixture
         int $joinMonth = 8,
         int $joinDay = 20,
     ): array {
-        $finalTypeYears = min($finalTypeYears, $years);
+        $finalTypeYears = min(
+            $finalTypeYears,
+            $years,
+        );
         $ordinaryYears = $years - $finalTypeYears;
 
         $phases = [];
 
         if ($ordinaryYears > 0) {
-            $phases[] = [MembershipTypes::Ordinary, $ordinaryYears];
+            $phases[] = [
+                MembershipTypes::Ordinary,
+                $ordinaryYears,
+            ];
         }
 
-        $phases[] = [$finalType, $finalTypeYears];
+        $phases[] = [
+            $finalType,
+            $finalTypeYears,
+        ];
 
-        return $this->associationYearPhases($phases, $finalEnd, $joinMonth, $joinDay);
+        return $this->associationYearPhases(
+            $phases,
+            $finalEnd,
+            $joinMonth,
+            $joinDay,
+        );
     }
 
     /**
@@ -558,7 +682,9 @@ class MemberFixture extends Fixture
         $finalStartYear = (int) $this->julyFirstBefore($finalEnd)->format('Y');
         $joinYear = $finalStartYear - ($count - 1);
         // An August join falls in the first calendar year of the association year; anything earlier in the next.
-        $firstYear = $joinMonth >= 7 ? $joinYear : $joinYear + 1;
+        $firstYear = $joinMonth >= 7
+            ? $joinYear
+            : $joinYear + 1;
 
         $segments = [];
 
@@ -570,7 +696,11 @@ class MemberFixture extends Fixture
                 ? clone $finalEnd
                 : new DateTime(($joinYear + $i + 1) . '-07-01 midnight');
 
-            $segments[] = [$types[$i], $start, $end];
+            $segments[] = [
+                $types[$i],
+                $start,
+                $end,
+            ];
         }
 
         return $segments;
@@ -599,7 +729,10 @@ class MemberFixture extends Fixture
         $prefix = 100000 + $sequence * 10;
 
         do {
-            $digits = sprintf('%06d', $prefix);
+            $digits = sprintf(
+                '%06d',
+                $prefix,
+            );
             $sum = 0;
 
             for ($position = 0; $position < 6; $position++) {

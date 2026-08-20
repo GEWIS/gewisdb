@@ -40,7 +40,10 @@ class Renewal
         $expiresWithin = new DateTime();
         $expiresWithin->add(new DateInterval('P45D'));
         $limit = 10;
-        $graduates = $this->memberRepository->getExpiringGraduates($expiresWithin, $limit);
+        $graduates = $this->memberRepository->getExpiringGraduates(
+            $expiresWithin,
+            $limit,
+        );
 
         foreach ($graduates as $graduate) {
             $renewalLink = $this->actionLinkRepository->createRenewalByMember($graduate);

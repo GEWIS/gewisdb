@@ -46,7 +46,11 @@ class BulkMemberIds extends Constraint
         mixed $payload = null,
         array $options = [],
     ) {
-        parent::__construct($options, $groups, $payload);
+        parent::__construct(
+            $options,
+            $groups,
+            $payload,
+        );
 
         $this->emptyMessage = $emptyMessage ?? $this->emptyMessage;
         $this->nonNumericMessage = $nonNumericMessage ?? $this->nonNumericMessage;
@@ -63,8 +67,15 @@ class BulkMemberIds extends Constraint
      */
     public static function tokenize(string $rawMemberIds): array
     {
-        $tokens = preg_split('/[\s,;]+/', trim($rawMemberIds), -1, PREG_SPLIT_NO_EMPTY);
+        $tokens = preg_split(
+            '/[\s,;]+/',
+            trim($rawMemberIds),
+            -1,
+            PREG_SPLIT_NO_EMPTY,
+        );
 
-        return false === $tokens ? [] : $tokens;
+        return false === $tokens
+            ? []
+            : $tokens;
     }
 }

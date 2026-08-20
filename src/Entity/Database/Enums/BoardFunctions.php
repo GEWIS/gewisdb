@@ -45,15 +45,18 @@ enum BoardFunctions: string implements TranslatableInterface
 
     public function isLegacy(): bool
     {
-        return !in_array($this, [
-            self::Chair,
-            self::Secretary,
-            self::Treasurer,
-            self::Education,
-            self::ExternalAffairs,
-            self::InternalAffairs,
-            self::DigitalInnovation,
-        ]);
+        return !in_array(
+            $this,
+            [
+                self::Chair,
+                self::Secretary,
+                self::Treasurer,
+                self::Education,
+                self::ExternalAffairs,
+                self::InternalAffairs,
+                self::DigitalInnovation,
+            ],
+        );
     }
 
     /**
@@ -88,7 +91,10 @@ enum BoardFunctions: string implements TranslatableInterface
         TranslatorInterface $translator,
         ?string $locale = null,
     ): string {
-        return $this->getName()->trans($translator, $locale);
+        return $this->getName()->trans(
+            $translator,
+            $locale,
+        );
     }
 
     /**
@@ -113,24 +119,30 @@ enum BoardFunctions: string implements TranslatableInterface
         );
 
         return array_combine(
-            array_map(static function ($func) {
-                return $func->value;
-            }, $cases),
-            array_map(static function ($func) use ($translator) {
-                return [
-                    'translations' => [
-                        AppLanguages::English->getLangParam() => $func->trans(
-                            $translator,
-                            AppLanguages::English->getLangParam(),
-                        ),
-                        AppLanguages::Dutch->getLangParam() => $func->trans(
-                            $translator,
-                            AppLanguages::Dutch->getLangParam(),
-                        ),
-                    ],
-                    'isLegacy' => $func->isLegacy(),
-                ];
-            }, $cases),
+            array_map(
+                static function ($func) {
+                    return $func->value;
+                },
+                $cases,
+            ),
+            array_map(
+                static function ($func) use ($translator) {
+                    return [
+                        'translations' => [
+                            AppLanguages::English->getLangParam() => $func->trans(
+                                $translator,
+                                AppLanguages::English->getLangParam(),
+                            ),
+                            AppLanguages::Dutch->getLangParam() => $func->trans(
+                                $translator,
+                                AppLanguages::Dutch->getLangParam(),
+                            ),
+                        ],
+                        'isLegacy' => $func->isLegacy(),
+                    ];
+                },
+                $cases,
+            ),
         );
     }
 }

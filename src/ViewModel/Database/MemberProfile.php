@@ -61,7 +61,10 @@ final readonly class MemberProfile
                 && $member->getExpiration() < new DateTime('+1 year')
                 && in_array(
                     $lastMembership->getType(),
-                    [MembershipTypes::External, MembershipTypes::Graduate],
+                    [
+                        MembershipTypes::External,
+                        MembershipTypes::Graduate,
+                    ],
                     true,
                 ),
             // Without the installations that hold up, the ones on the member are whatever happens to be on file,
@@ -76,7 +79,10 @@ final readonly class MemberProfile
                 )
                 : [],
             array_map(
-                static fn (AuditEntry $entry): AuditEntryRow => AuditEntryRow::fromEntry($entry, $translator),
+                static fn (AuditEntry $entry): AuditEntryRow => AuditEntryRow::fromEntry(
+                    $entry,
+                    $translator,
+                ),
                 $member->getAuditEntries()->toArray(),
             ),
         );

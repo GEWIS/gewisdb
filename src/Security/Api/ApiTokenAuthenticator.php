@@ -85,7 +85,10 @@ final class ApiTokenAuthenticator extends AbstractAuthenticator implements Authe
             throw new LogicException('The API firewall can only authenticate API principals.');
         }
 
-        return new ApiToken($user, $firewallName);
+        return new ApiToken(
+            $user,
+            $firewallName,
+        );
     }
 
     #[Override]
@@ -102,7 +105,10 @@ final class ApiTokenAuthenticator extends AbstractAuthenticator implements Authe
         Request $request,
         AuthenticationException $exception,
     ): ?Response {
-        return $this->start($request, $exception);
+        return $this->start(
+            $request,
+            $exception,
+        );
     }
 
     /**
@@ -124,12 +130,22 @@ final class ApiTokenAuthenticator extends AbstractAuthenticator implements Authe
         $header = $request->headers->get(self::HEADER) ?? '';
 
         // RFC 6750 makes the scheme case-insensitive.
-        if (0 !== stripos($header, self::SCHEME)) {
+        if (
+            0 !== stripos(
+                $header,
+                self::SCHEME,
+            )
+        ) {
             return null;
         }
 
-        $token = substr($header, strlen(self::SCHEME));
+        $token = substr(
+            $header,
+            strlen(self::SCHEME),
+        );
 
-        return '' === $token ? null : $token;
+        return '' === $token
+            ? null
+            : $token;
     }
 }

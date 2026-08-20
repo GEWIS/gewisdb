@@ -92,11 +92,17 @@ class MemberService
 
         // go through addresses
         foreach ($member->getAddresses() as $address) {
-            $this->generateAddress($address, $reportMember);
+            $this->generateAddress(
+                $address,
+                $reportMember,
+            );
         }
 
         // process mailing lists
-        $this->generateLists($member, $reportMember);
+        $this->generateLists(
+            $member,
+            $reportMember,
+        );
         $this->emReport->persist($reportMember);
     }
 
@@ -106,9 +112,12 @@ class MemberService
     ): void {
         $reportListRepo = $this->emReport->getRepository(ReportMailingList::class);
 
-        $reportLists = array_map(static function ($list) {
-            return $list->getMailingList()->getName();
-        }, $reportMember->getMailingListMemberships()->toArray());
+        $reportLists = array_map(
+            static function ($list) {
+                return $list->getMailingList()->getName();
+            },
+            $reportMember->getMailingListMemberships()->toArray(),
+        );
         $lists = array_map(
             static function ($list) {
                 return $list->getMailingList()->getName();
@@ -121,7 +130,12 @@ class MemberService
             ),
         );
 
-        foreach (array_diff($lists, $reportLists) as $list) {
+        foreach (
+            array_diff(
+                $lists,
+                $reportLists,
+            ) as $list
+        ) {
             $reportList = $reportListRepo->find($list);
 
             if (null === $reportList) {
@@ -136,7 +150,12 @@ class MemberService
             $this->emReport->persist($reportList);
         }
 
-        foreach (array_diff($reportLists, $lists) as $list) {
+        foreach (
+            array_diff(
+                $reportLists,
+                $lists,
+            ) as $list
+        ) {
             $reportList = $reportListRepo->find($list);
 
             if (null === $reportList) {

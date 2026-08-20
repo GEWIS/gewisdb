@@ -30,8 +30,14 @@ use Symfony\Component\DependencyInjection\Attribute\Autowire;
  * corresponding row there in the same request. `report:generate:full` rebuilds the whole projection from scratch and
  * is for a first fill or a repair, not for keeping it current.
  */
-#[AsDoctrineListener(event: Events::postPersist, connection: 'default')]
-#[AsDoctrineListener(event: Events::postUpdate, connection: 'default')]
+#[AsDoctrineListener(
+    event: Events::postPersist,
+    connection: 'default',
+)]
+#[AsDoctrineListener(
+    event: Events::postUpdate,
+    connection: 'default',
+)]
 final class DatabaseUpdateListener
 {
     public function __construct(

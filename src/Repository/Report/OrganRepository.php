@@ -15,6 +15,9 @@ class OrganRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Organ::class);
+        parent::__construct(
+            $registry,
+            Organ::class,
+        );
     }
 }

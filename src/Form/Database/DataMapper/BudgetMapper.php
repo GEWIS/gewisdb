@@ -38,7 +38,9 @@ class BudgetMapper extends AbstractDecisionMapper
             return;
         }
 
-        $subdecision = 'budget' === $forms['type']->getData() ? new Budget() : new Statement();
+        $subdecision = 'budget' === $forms['type']->getData()
+            ? new Budget()
+            : new Statement();
 
         $subdecision->setSequence(1);
         $subdecision->setDate($date);

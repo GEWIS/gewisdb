@@ -29,7 +29,10 @@ class SavedQueryFixture extends Fixture
             ORDER BY m.birth
             DQL);
         $manager->persist($underage);
-        $this->addReference(self::REF_QUERY_UNDERAGE, $underage);
+        $this->addReference(
+            self::REF_QUERY_UNDERAGE,
+            $underage,
+        );
 
         // Used for attendance lists at a GMM, among other things.
         $details = new SavedQuery();
@@ -68,7 +71,10 @@ class SavedQueryFixture extends Fixture
             ORDER BY m.lidnr ASC
             DQL);
         $manager->persist($details);
-        $this->addReference(self::REF_QUERY_MEMBER_DETAILS, $details);
+        $this->addReference(
+            self::REF_QUERY_MEMBER_DETAILS,
+            $details,
+        );
 
         $manager->flush();
     }

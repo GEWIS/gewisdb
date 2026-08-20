@@ -20,7 +20,10 @@ class AuditMailingListMembership extends AuditEntry
     private const string BODY_FORMAT = '<strong>%s mailinglist subscription</strong> for '
         . '<emph>%s</emph> on <emph>%s</emph> (%s)';
 
-    #[Column(type: 'string', enumType: MailingListMemberAction::class)]
+    #[Column(
+        type: 'string',
+        enumType: MailingListMemberAction::class,
+    )]
     private MailingListMemberAction $action;
 
     #[ManyToOne(
@@ -38,7 +41,10 @@ class AuditMailingListMembership extends AuditEntry
     #[Column(type: 'string')]
     private string $email;
 
-    #[Column(type: 'string', enumType: MailingListMemberOrigin::class)]
+    #[Column(
+        type: 'string',
+        enumType: MailingListMemberOrigin::class,
+    )]
     private MailingListMemberOrigin $origin;
 
     public static function create(

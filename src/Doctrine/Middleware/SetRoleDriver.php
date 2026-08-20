@@ -15,7 +15,7 @@ use function implode;
 use function sprintf;
 
 /**
- * Renamed from the Laminas-era `Driver`, which under one `App\` namespace read as a generic base class.
+ * Opens every connection under the least-privileged PostgreSQL role configured for the database it points at.
  */
 class SetRoleDriver extends AbstractDriverMiddleware
 {
@@ -46,7 +46,14 @@ class SetRoleDriver extends AbstractDriverMiddleware
             return $connection;
         }
 
-        $target = implode(':', [$params['host'], $params['port'], $params['dbname']]);
+        $target = implode(
+            ':',
+            [
+                $params['host'],
+                $params['port'],
+                $params['dbname'],
+            ],
+        );
 
         // Both connections are always in the map, because SetRoleMiddleware refuses to build one otherwise. So a
         // connection that is not in it points at a database the `DOCTRINE_*` variables do not describe, which happens

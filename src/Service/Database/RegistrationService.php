@@ -43,7 +43,10 @@ class RegistrationService
         }
 
         return null !== $clientIp
-            && IpUtils::checkIp($clientIp, self::MCS_NETWORK);
+            && IpUtils::checkIp(
+                $clientIp,
+                self::MCS_NETWORK,
+            );
     }
 
     /**
@@ -72,7 +75,10 @@ class RegistrationService
 
         // Always sent, and sent before the checkout is created: it contains a payment link of its own, which is the
         // only way back into the flow if the checkout does not come up.
-        $this->memberService->sendRegistrationUpdateEmail($prospectiveMember, 'registration');
+        $this->memberService->sendRegistrationUpdateEmail(
+            $prospectiveMember,
+            'registration',
+        );
 
         return $this->stripeService->getCheckoutLink($prospectiveMember);
     }

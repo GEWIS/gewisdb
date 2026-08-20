@@ -19,7 +19,10 @@ class InstallationRepository extends ServiceEntityRepository
         ManagerRegistry $registry,
         private readonly AnnulledSubDecisionFilter $filter,
     ) {
-        parent::__construct($registry, Installation::class);
+        parent::__construct(
+            $registry,
+            Installation::class,
+        );
     }
 
     /**
@@ -32,9 +35,18 @@ class InstallationRepository extends ServiceEntityRepository
         $qb = $this->getEntityManager()->getRepository(Discharge::class)->createQueryBuilder('d');
 
         $qb->where('m.date <= :meeting_date')
-            ->innerJoin('d.decision', 'dec')
-            ->innerJoin('dec.meeting', 'm')
-            ->setParameter('meeting_date', $meeting->getDate()->format('Y-m-d'));
+            ->innerJoin(
+                'd.decision',
+                'dec',
+            )
+            ->innerJoin(
+                'dec.meeting',
+                'm',
+            )
+            ->setParameter(
+                'meeting_date',
+                $meeting->getDate()->format('Y-m-d'),
+            );
 
         /** @var Discharge[] $result */
         $result = $qb->getQuery()->getResult();
@@ -52,9 +64,18 @@ class InstallationRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('i');
 
         $qb->where('m.date <= :meeting_date')
-            ->innerJoin('i.decision', 'd')
-            ->innerJoin('d.meeting', 'm')
-            ->setParameter('meeting_date', $meeting->getDate()->format('Y-m-d'));
+            ->innerJoin(
+                'i.decision',
+                'd',
+            )
+            ->innerJoin(
+                'd.meeting',
+                'm',
+            )
+            ->setParameter(
+                'meeting_date',
+                $meeting->getDate()->format('Y-m-d'),
+            );
 
         /** @var Installation[] $result */
         $result = $qb->getQuery()->getResult();

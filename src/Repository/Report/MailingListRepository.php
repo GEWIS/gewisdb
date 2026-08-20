@@ -15,6 +15,9 @@ class MailingListRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, MailingList::class);
+        parent::__construct(
+            $registry,
+            MailingList::class,
+        );
     }
 }

@@ -28,18 +28,26 @@ class AuditNoteType extends AbstractType
         FormBuilderInterface $builder,
         array $options,
     ): void {
-        $builder->add('note', TextType::class, [
-            'label' => t('Note'),
-            'constraints' => [
-                new Assert\NotBlank(),
-                new Assert\Length(
-                    min: 2,
-                    max: 255,
-                ),
+        $builder->add(
+            'note',
+            TextType::class,
+            [
+                'label' => t('Note'),
+                'constraints' => [
+                    new Assert\NotBlank(),
+                    new Assert\Length(
+                        min: 2,
+                        max: 255,
+                    ),
+                ],
             ],
-        ]);
+        );
 
-        $builder->add('submit', SubmitType::class, ['label' => t('Leave note')]);
+        $builder->add(
+            'submit',
+            SubmitType::class,
+            ['label' => t('Leave note')],
+        );
     }
 
     #[Override]

@@ -167,17 +167,38 @@ class Budget extends SubDecision
         $replacements = [
             '%NAME%' => $this->getName(),
             '%AUTHOR%' => $this->getMember()?->getFullName()
-                ?? $translator->trans('onbekend', locale: $language->getLangParam()),
+                ?? $translator->trans(
+                    'onbekend',
+                    locale: $language->getLangParam(),
+                ),
             '%VERSION%' => $this->getVersion(),
-            '%DATE%' => $this->formatDate($this->getDate(), $language),
+            '%DATE%' => $this->formatDate(
+                $this->getDate(),
+                $language,
+            ),
             '%APPROVAL%' => $this->getApproval()
-                ? $translator->trans('goedgekeurd', locale: $language->getLangParam())
-                : $translator->trans('afgekeurd', locale: $language->getLangParam()),
+                ? $translator->trans(
+                    'goedgekeurd',
+                    locale: $language->getLangParam(),
+                )
+                : $translator->trans(
+                    'afgekeurd',
+                    locale: $language->getLangParam(),
+                ),
             '%CHANGES%' => $this->getApproval() && $this->getChanges()
-                ? $translator->trans(' met genoemde wijzigingen', locale: $language->getLangParam())
+                ? $translator->trans(
+                    ' met genoemde wijzigingen',
+                    locale: $language->getLangParam(),
+                )
                 : '',
         ];
 
-        return $this->replaceContentPlaceholders($this->getTranslatedTemplate($translator, $language), $replacements);
+        return $this->replaceContentPlaceholders(
+            $this->getTranslatedTemplate(
+                $translator,
+                $language,
+            ),
+            $replacements,
+        );
     }
 }

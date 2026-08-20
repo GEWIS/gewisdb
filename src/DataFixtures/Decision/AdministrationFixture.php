@@ -40,17 +40,33 @@ class AdministrationFixture extends Fixture implements DependentFixtureInterface
         $meeting->setNumber(4);
         // Later than the board meeting DecisionFixture holds, because meetings of a type are numbered in the
         // order they are held.
-        $meeting->setDate((new DateTime())->modify('-3 days'));
+        $meeting->setDate(new DateTime()->modify('-3 days'));
         $manager->persist($meeting);
-        $this->addReference(self::REF_MEETING_BV4, $meeting);
+        $this->addReference(
+            self::REF_MEETING_BV4,
+            $meeting,
+        );
 
-        $treasurer = $this->getReference(MemberFixture::REF_MEMBER_ATTN_ORDINARY_ACTIVE, MemberModel::class);
-        $keyholder = $this->getReference(MemberFixture::REF_MEMBER_STUDENT, MemberModel::class);
-        $formerKeyholder = $this->getReference(MemberFixture::REF_MEMBER_EXTERNAL, MemberModel::class);
+        $treasurer = $this->getReference(
+            MemberFixture::REF_MEMBER_ATTN_ORDINARY_ACTIVE,
+            MemberModel::class,
+        );
+        $keyholder = $this->getReference(
+            MemberFixture::REF_MEMBER_STUDENT,
+            MemberModel::class,
+        );
+        $formerKeyholder = $this->getReference(
+            MemberFixture::REF_MEMBER_EXTERNAL,
+            MemberModel::class,
+        );
 
         // Approving the minutes of the first board meeting. The member is the secretary who wrote them, and the
         // content names them, so it is not optional.
-        $decision = $this->decision($manager, $meeting, 1);
+        $decision = $this->decision(
+            $manager,
+            $meeting,
+            1,
+        );
         $minutes = new Minutes();
         $minutes->setMember($treasurer);
         $minutes->setTarget($this->getReference(MeetingFixture::REF_MEETING_BV1, Meeting::class));
@@ -62,11 +78,15 @@ class AdministrationFixture extends Fixture implements DependentFixtureInterface
         $manager->persist($minutes);
 
         // A budget, approved as submitted.
-        $decision = $this->decision($manager, $meeting, 2);
+        $decision = $this->decision(
+            $manager,
+            $meeting,
+            2,
+        );
         $budget = new Budget();
         $budget->setName('Begroting Attention Test Committee');
         $budget->setVersion('1.0');
-        $budget->setDate((new DateTime())->modify('-2 months'));
+        $budget->setDate(new DateTime()->modify('-2 months'));
         $budget->setApproval(true);
         $budget->setChanges(false);
         $budget->setMember($treasurer);
@@ -76,11 +96,15 @@ class AdministrationFixture extends Fixture implements DependentFixtureInterface
         $manager->persist($budget);
 
         // A statement, approved with changes — the other half of the pair, and the case where `changes` is true.
-        $decision = $this->decision($manager, $meeting, 3);
+        $decision = $this->decision(
+            $manager,
+            $meeting,
+            3,
+        );
         $statement = new Statement();
         $statement->setName('Afrekening Attention Test Committee');
         $statement->setVersion('1.1');
-        $statement->setDate((new DateTime())->modify('-2 months'));
+        $statement->setDate(new DateTime()->modify('-2 months'));
         $statement->setApproval(true);
         $statement->setChanges(true);
         $statement->setMember($treasurer);
@@ -90,21 +114,32 @@ class AdministrationFixture extends Fixture implements DependentFixtureInterface
         $manager->persist($statement);
 
         // A key code that is still held.
-        $decision = $this->decision($manager, $meeting, 4);
+        $decision = $this->decision(
+            $manager,
+            $meeting,
+            4,
+        );
         $granting = new Granting();
         $granting->setMember($keyholder);
-        $granting->setUntil((new DateTime())->modify('+6 months'));
+        $granting->setUntil(new DateTime()->modify('+6 months'));
         $granting->setSequence(1);
         $granting->setDecision($decision);
         $decision->addSubdecision($granting);
         $manager->persist($granting);
-        $this->addReference(self::REF_KEY_GRANTING, $granting);
+        $this->addReference(
+            self::REF_KEY_GRANTING,
+            $granting,
+        );
 
         // And one that was granted and then withdrawn, so the withdrawal has something to point at.
-        $decision = $this->decision($manager, $meeting, 5);
+        $decision = $this->decision(
+            $manager,
+            $meeting,
+            5,
+        );
         $earlier = new Granting();
         $earlier->setMember($formerKeyholder);
-        $earlier->setUntil((new DateTime())->modify('+1 year'));
+        $earlier->setUntil(new DateTime()->modify('+1 year'));
         $earlier->setSequence(1);
         $earlier->setDecision($decision);
         $decision->addSubdecision($earlier);
@@ -141,6 +176,10 @@ class AdministrationFixture extends Fixture implements DependentFixtureInterface
     #[Override]
     public function getDependencies(): array
     {
-        return [MemberFixture::class, MeetingFixture::class, DecisionFixture::class];
+        return [
+            MemberFixture::class,
+            MeetingFixture::class,
+            DecisionFixture::class,
+        ];
     }
 }

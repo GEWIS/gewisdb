@@ -49,7 +49,10 @@ final readonly class AuditEntryRow
 
         return new self(
             $entry->getUpdatedAt(),
-            vsprintf($translator->trans($string['bodyFormatted']), $arguments),
+            vsprintf(
+                $translator->trans($string['bodyFormatted']),
+                $arguments,
+            ),
             $entry->getUserName(),
         );
     }

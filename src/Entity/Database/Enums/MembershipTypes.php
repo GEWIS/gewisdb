@@ -39,7 +39,10 @@ enum MembershipTypes: string implements TranslatableInterface
         TranslatorInterface $translator,
         ?string $locale = null,
     ): string {
-        return $this->getName()->trans($translator, $locale);
+        return $this->getName()->trans(
+            $translator,
+            $locale,
+        );
     }
 
     /**

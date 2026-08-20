@@ -27,7 +27,10 @@ use Symfony\Component\DependencyInjection\Attribute\Autowire;
  * Before the removal rather than after it, because what has to go from the projection is worked out from the entity
  * while its relations are still readable.
  */
-#[AsDoctrineListener(event: Events::preRemove, connection: 'default')]
+#[AsDoctrineListener(
+    event: Events::preRemove,
+    connection: 'default',
+)]
 final class DatabaseDeletionListener
 {
     public function __construct(

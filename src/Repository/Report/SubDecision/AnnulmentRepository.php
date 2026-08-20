@@ -15,6 +15,9 @@ class AnnulmentRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Annulment::class);
+        parent::__construct(
+            $registry,
+            Annulment::class,
+        );
     }
 }

@@ -30,7 +30,10 @@ final class MemberAddressController extends AbstractMemberController
     #[Route(
         path: '/add/address/{type}',
         name: 'member_address_add',
-        methods: ['GET', 'POST'],
+        methods: [
+            'GET',
+            'POST',
+        ],
     )]
     public function add(
         Request $request,
@@ -43,8 +46,15 @@ final class MemberAddressController extends AbstractMemberController
             return $member;
         }
 
-        $address = $this->memberService->getAddress($member, $type, true);
-        $form = $this->createForm(AddressEditType::class, $address);
+        $address = $this->memberService->getAddress(
+            $member,
+            $type,
+            true,
+        );
+        $form = $this->createForm(
+            AddressEditType::class,
+            $address,
+        );
         $form->handleRequest($request);
 
         if (
@@ -55,26 +65,38 @@ final class MemberAddressController extends AbstractMemberController
 
             $this->addFlash(
                 'success',
-                t('%entity% has been added to %target%', [
-                    '%entity%' => t('Address'),
-                    '%target%' => t('member'),
-                ]),
+                t(
+                    '%entity% has been added to %target%',
+                    [
+                        '%entity%' => t('Address'),
+                        '%target%' => t('member'),
+                    ],
+                ),
             );
 
-            return $this->redirectToRoute('member_show', ['lidnr' => $lidnr]);
+            return $this->redirectToRoute(
+                'member_show',
+                ['lidnr' => $lidnr],
+            );
         }
 
-        return $this->render('member/edit-address.html.twig', [
-            'add' => true,
-            'address' => $address,
-            'form' => $form,
-        ]);
+        return $this->render(
+            'member/edit-address.html.twig',
+            [
+                'add' => true,
+                'address' => $address,
+                'form' => $form,
+            ],
+        );
     }
 
     #[Route(
         path: '/edit/address/{type}',
         name: 'member_address_edit',
-        methods: ['GET', 'POST'],
+        methods: [
+            'GET',
+            'POST',
+        ],
     )]
     public function edit(
         Request $request,
@@ -87,13 +109,19 @@ final class MemberAddressController extends AbstractMemberController
             return $member;
         }
 
-        $address = $this->memberService->getAddress($member, $type);
+        $address = $this->memberService->getAddress(
+            $member,
+            $type,
+        );
 
         if (null === $address) {
             throw $this->createNotFoundException();
         }
 
-        $form = $this->createForm(AddressEditType::class, $address);
+        $form = $this->createForm(
+            AddressEditType::class,
+            $address,
+        );
         $form->handleRequest($request);
 
         if (
@@ -104,23 +132,35 @@ final class MemberAddressController extends AbstractMemberController
 
             $this->addFlash(
                 'success',
-                t('Change(s) of %entity% have been saved!', ['%entity%' => t('member address')]),
+                t(
+                    'Change(s) of %entity% have been saved!',
+                    ['%entity%' => t('member address')],
+                ),
             );
 
-            return $this->redirectToRoute('member_show', ['lidnr' => $lidnr]);
+            return $this->redirectToRoute(
+                'member_show',
+                ['lidnr' => $lidnr],
+            );
         }
 
-        return $this->render('member/edit-address.html.twig', [
-            'add' => false,
-            'address' => $address,
-            'form' => $form,
-        ]);
+        return $this->render(
+            'member/edit-address.html.twig',
+            [
+                'add' => false,
+                'address' => $address,
+                'form' => $form,
+            ],
+        );
     }
 
     #[Route(
         path: '/remove/address/{type}',
         name: 'member_address_remove',
-        methods: ['GET', 'POST'],
+        methods: [
+            'GET',
+            'POST',
+        ],
     )]
     public function remove(
         Request $request,
@@ -133,7 +173,12 @@ final class MemberAddressController extends AbstractMemberController
             return $member;
         }
 
-        if (null === $this->memberService->getAddress($member, $type)) {
+        if (
+            null === $this->memberService->getAddress(
+                $member,
+                $type,
+            )
+        ) {
             throw $this->createNotFoundException();
         }
 
@@ -145,22 +190,38 @@ final class MemberAddressController extends AbstractMemberController
         if (
             $form->isSubmitted()
             && $form->isValid()
-            && SubmitButtons::clicked($form, 'submit_yes')
+            && SubmitButtons::clicked(
+                $form,
+                'submit_yes',
+            )
         ) {
-            $this->memberService->removeAddress($member, $type, $form);
+            $this->memberService->removeAddress(
+                $member,
+                $type,
+                $form,
+            );
 
             $this->addFlash(
                 'success',
-                t('Succesfully deleted %entity%!', ['%entity%' => t('member address')]),
+                t(
+                    'Succesfully deleted %entity%!',
+                    ['%entity%' => t('member address')],
+                ),
             );
 
-            return $this->redirectToRoute('member_show', ['lidnr' => $lidnr]);
+            return $this->redirectToRoute(
+                'member_show',
+                ['lidnr' => $lidnr],
+            );
         }
 
-        return $this->render('member/remove-address.html.twig', [
-            'address_type' => $type,
-            'form' => $form,
-            'member' => $member,
-        ]);
+        return $this->render(
+            'member/remove-address.html.twig',
+            [
+                'address_type' => $type,
+                'form' => $form,
+                'member' => $member,
+            ],
+        );
     }
 }

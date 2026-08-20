@@ -16,6 +16,10 @@ class NotAllowed extends ApiException
     ) {
         $message = 'Permission `' . $permission->getString() . '` is needed but is not currently held.';
 
-        parent::__construct($message, $code, $previousThrowable);
+        parent::__construct(
+            $message,
+            $code,
+            $previousThrowable,
+        );
     }
 }

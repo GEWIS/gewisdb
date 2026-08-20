@@ -32,12 +32,24 @@ class KeyRepository
     {
         $qb = $this->em->getRepository(Granting::class)->createQueryBuilder('k');
 
-        $qb->innerJoin('k.decision', 'd')
-            ->innerJoin('d.meeting', 'm')
+        $qb->innerJoin(
+            'k.decision',
+            'd',
+        )
+            ->innerJoin(
+                'd.meeting',
+                'm',
+            )
             ->where('m.number = :meeting_number')
             ->andWhere('m.type = :meeting_type')
-            ->setParameter('meeting_number', $meeting->getNumber())
-            ->setParameter('meeting_type', $meeting->getType());
+            ->setParameter(
+                'meeting_number',
+                $meeting->getNumber(),
+            )
+            ->setParameter(
+                'meeting_type',
+                $meeting->getType(),
+            );
 
         /** @var Granting[] $result */
         $result = $qb->getQuery()->getResult();
@@ -54,12 +66,24 @@ class KeyRepository
     {
         $qb = $this->em->getRepository(Withdrawal::class)->createQueryBuilder('k');
 
-        $qb->innerJoin('k.decision', 'd')
-            ->innerJoin('d.meeting', 'm')
+        $qb->innerJoin(
+            'k.decision',
+            'd',
+        )
+            ->innerJoin(
+                'd.meeting',
+                'm',
+            )
             ->where('m.number = :meeting_number')
             ->andWhere('m.type = :meeting_type')
-            ->setParameter('meeting_number', $meeting->getNumber())
-            ->setParameter('meeting_type', $meeting->getType());
+            ->setParameter(
+                'meeting_number',
+                $meeting->getNumber(),
+            )
+            ->setParameter(
+                'meeting_type',
+                $meeting->getType(),
+            );
 
         /** @var Withdrawal[] $result */
         $result = $qb->getQuery()->getResult();

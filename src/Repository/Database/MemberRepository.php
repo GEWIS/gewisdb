@@ -42,7 +42,10 @@ class MemberRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Member::class);
+        parent::__construct(
+            $registry,
+            Member::class,
+        );
     }
 
     /**
@@ -62,7 +65,10 @@ class MemberRepository extends ServiceEntityRepository
         $qb->where('LOWER(m.email) = LOWER(:email)')
             ->setMaxResults(1);
 
-        $qb->setParameter(':email', $email);
+        $qb->setParameter(
+            ':email',
+            $email,
+        );
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -82,19 +88,33 @@ class MemberRepository extends ServiceEntityRepository
             ->orWhere("CONCAT(LOWER(m.firstName), ' ', LOWER(m.middleName), ' ', LOWER(m.lastName)) LIKE :name")
             ->orWhere('m.studentNumber = :name')
             ->setMaxResults(32)
-            ->orderBy('m.lidnr', 'DESC')
+            ->orderBy(
+                'm.lidnr',
+                'DESC',
+            )
             ->setFirstResult(0);
 
-        if (filter_var($query, FILTER_VALIDATE_EMAIL)) {
+        if (
+            filter_var(
+                $query,
+                FILTER_VALIDATE_EMAIL,
+            )
+        ) {
             $qb->orWhere('m.email LIKE :name');
         }
 
-        $qb->setParameter(':name', '%' . strtolower($query) . '%');
+        $qb->setParameter(
+            ':name',
+            '%' . strtolower($query) . '%',
+        );
 
         // also allow searching for membership number
         if (is_numeric($query)) {
             $qb->orWhere('m.lidnr = :nr');
-            $qb->setParameter(':nr', $query);
+            $qb->setParameter(
+                ':nr',
+                $query,
+            );
         }
 
         if ($filtered) {
@@ -124,14 +144,29 @@ class MemberRepository extends ServiceEntityRepository
         $qb = $this->getEntityManager()->createQueryBuilder();
 
         $qb->select('a, m')
-            ->from(Address::class, 'a')
-            ->innerJoin('a.member', 'm')
+            ->from(
+                Address::class,
+                'a',
+            )
+            ->innerJoin(
+                'a.member',
+                'm',
+            )
             ->where('m.lidnr = :lidnr')
             ->andWhere('a.type = :type')
-            ->orderBy('m.lidnr', 'DESC');
+            ->orderBy(
+                'm.lidnr',
+                'DESC',
+            );
 
-        $qb->setParameter(':lidnr', $member);
-        $qb->setParameter(':type', $type);
+        $qb->setParameter(
+            ':lidnr',
+            $member,
+        );
+        $qb->setParameter(
+            ':type',
+            $type,
+        );
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -177,15 +212,27 @@ class MemberRepository extends ServiceEntityRepository
 
         $qb->select('m, r, l')
             ->where('m.lidnr = :lidnr')
-            ->leftJoin('m.installations', 'r')
-            ->leftJoin('m.mailingListMemberships', 'l')
+            ->leftJoin(
+                'm.installations',
+                'r',
+            )
+            ->leftJoin(
+                'm.mailingListMemberships',
+                'l',
+            )
             ->andWhere('(r.function = \'Lid\' OR r.function = \'Inactief Lid\' OR r.function IS NULL)');
 
         // discharges
         $qbn = $this->getEntityManager()->createQueryBuilder();
         $qbn->select('d')
-            ->from(Discharge::class, 'd')
-            ->join('d.installation', 'x')
+            ->from(
+                Discharge::class,
+                'd',
+            )
+            ->join(
+                'd.installation',
+                'x',
+            )
             ->where('x.meeting_type = r.meeting_type')
             ->andWhere('x.meeting_number = r.meeting_number')
             ->andWhere('x.decision_point = r.decision_point')
@@ -195,8 +242,14 @@ class MemberRepository extends ServiceEntityRepository
         // annulled discharge decisions
         $qbnd = $this->getEntityManager()->createQueryBuilder();
         $qbnd->select('b')
-            ->from(Annulment::class, 'b')
-            ->join('b.target', 'z')
+            ->from(
+                Annulment::class,
+                'b',
+            )
+            ->join(
+                'b.target',
+                'z',
+            )
             ->where('z.meeting_type = d.meeting_type')
             ->andWhere('z.meeting_number = d.meeting_number')
             ->andWhere('z.point = d.decision_point')
@@ -213,8 +266,14 @@ class MemberRepository extends ServiceEntityRepository
         // annulled installation decisions
         $qbd = $this->getEntityManager()->createQueryBuilder();
         $qbd->select('a')
-            ->from(Annulment::class, 'a')
-            ->join('a.target', 'y')
+            ->from(
+                Annulment::class,
+                'a',
+            )
+            ->join(
+                'a.target',
+                'y',
+            )
             ->where('y.meeting_type = r.meeting_type')
             ->andWhere('y.meeting_number = r.meeting_number')
             ->andWhere('y.point = r.decision_point')
@@ -224,7 +283,10 @@ class MemberRepository extends ServiceEntityRepository
             $qb->expr()->exists($qbd->getDQL()),
         ));
 
-        $qb->setParameter(':lidnr', $lidnr);
+        $qb->setParameter(
+            ':lidnr',
+            $lidnr,
+        );
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -240,10 +302,19 @@ class MemberRepository extends ServiceEntityRepository
 
         $qb->select('m, l')
             ->where('m.lidnr = :lidnr')
-            ->leftJoin('m.mailingListMemberships', 'l')
-            ->orderBy('m.lidnr', 'DESC');
+            ->leftJoin(
+                'm.mailingListMemberships',
+                'l',
+            )
+            ->orderBy(
+                'm.lidnr',
+                'DESC',
+            );
 
-        $qb->setParameter(':lidnr', $lidnr);
+        $qb->setParameter(
+            ':lidnr',
+            $lidnr,
+        );
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -262,7 +333,10 @@ class MemberRepository extends ServiceEntityRepository
         $nemqb = $this->getEntityManager()->createQueryBuilder();
         $nemqb->select('IDENTITY(nem.member)')
             ->distinct()
-            ->from(Membership::class, 'nem')
+            ->from(
+                Membership::class,
+                'nem',
+            )
             ->where('nem.endDate > :expiration');
 
         // Exclude those members from the result
@@ -273,7 +347,10 @@ class MemberRepository extends ServiceEntityRepository
             ),
         );
 
-        $qb->setParameter('expiration', $expiration);
+        $qb->setParameter(
+            'expiration',
+            $expiration,
+        );
 
         return $qb->getQuery()->getResult();
     }
@@ -389,11 +466,17 @@ class MemberRepository extends ServiceEntityRepository
             ),
         );
 
-        if (!$includeActive && !$includeNonActive) {
+        if (
+            !$includeActive
+            && !$includeNonActive
+        ) {
             return [];
         }
 
-        if (!$includeActive || !$includeNonActive) {
+        if (
+            !$includeActive
+            || !$includeNonActive
+        ) {
             // We use todays date to check if the member is active
             // It would be more accurate to check on the membership end date, but that would require more complex
             // queries and we don't expect any future decisions to be in the database.
@@ -433,9 +516,15 @@ class MemberRepository extends ServiceEntityRepository
         $qb = $this->getEntityManager()->createQueryBuilder();
 
         $qb->select('b')
-            ->from(Budget::class, 'b')
+            ->from(
+                Budget::class,
+                'b',
+            )
             ->where('b.member = :member');
-        $qb->setParameter('member', $member);
+        $qb->setParameter(
+            'member',
+            $member,
+        );
 
         $results = $qb->getQuery()->getResult();
         if (!empty($results)) {
@@ -446,9 +535,15 @@ class MemberRepository extends ServiceEntityRepository
         $qb = $this->getEntityManager()->createQueryBuilder();
 
         $qb->select('b')
-            ->from(Statement::class, 'b')
+            ->from(
+                Statement::class,
+                'b',
+            )
             ->where('b.member = :member');
-        $qb->setParameter('member', $member);
+        $qb->setParameter(
+            'member',
+            $member,
+        );
 
         $results = $qb->getQuery()->getResult();
 
@@ -460,9 +555,15 @@ class MemberRepository extends ServiceEntityRepository
         $qb = $this->getEntityManager()->createQueryBuilder();
 
         $qb->select('i')
-            ->from(Installation::class, 'i')
+            ->from(
+                Installation::class,
+                'i',
+            )
             ->where('i.member = :member');
-        $qb->setParameter('member', $member);
+        $qb->setParameter(
+            'member',
+            $member,
+        );
 
         $results = $qb->getQuery()->getResult();
 
@@ -474,9 +575,15 @@ class MemberRepository extends ServiceEntityRepository
         $qb = $this->getEntityManager()->createQueryBuilder();
 
         $qb->select('i')
-            ->from(BoardInstallation::class, 'i')
+            ->from(
+                BoardInstallation::class,
+                'i',
+            )
             ->where('i.member = :member');
-        $qb->setParameter('member', $member);
+        $qb->setParameter(
+            'member',
+            $member,
+        );
 
         $results = $qb->getQuery()->getResult();
 
@@ -553,9 +660,20 @@ class MemberRepository extends ServiceEntityRepository
     public function countByMembershipType(): array
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
-        $qb->select('ms.type AS type', 'COUNT(DISTINCT ms.member) AS total')
-            ->from(Membership::class, 'ms')
-            ->innerJoin(Member::class, 'm', Join::WITH, 'm = ms.member')
+        $qb->select(
+            'ms.type AS type',
+            'COUNT(DISTINCT ms.member) AS total',
+        )
+            ->from(
+                Membership::class,
+                'ms',
+            )
+            ->innerJoin(
+                Member::class,
+                'm',
+                Join::WITH,
+                'm = ms.member',
+            )
             ->where('m.deleted = False')
             ->andWhere('ms.startDate <= CURRENT_TIMESTAMP()')
             ->andWhere('ms.endDate >= CURRENT_TIMESTAMP()')
@@ -600,11 +718,17 @@ class MemberRepository extends ServiceEntityRepository
 
         $sq->select('IDENTITY(' . $membershipAlias . '.member)')
             ->distinct()
-            ->from(Membership::class, $membershipAlias);
+            ->from(
+                Membership::class,
+                $membershipAlias,
+            );
 
         if (!$includeGraduates) {
             $sq->andWhere($membershipAlias . '.type != :' . $parameterPrefix . 'graduate');
-            $qb->setParameter($parameterPrefix . 'graduate', MembershipTypes::Graduate);
+            $qb->setParameter(
+                $parameterPrefix . 'graduate',
+                MembershipTypes::Graduate,
+            );
         }
 
         if (!$includeFutureMembers) {
@@ -615,13 +739,19 @@ class MemberRepository extends ServiceEntityRepository
             $sq->andWhere($membershipAlias . '.endDate >= CURRENT_TIMESTAMP()');
         }
 
-        if (MembershipTypes::Graduate === $specificType && !$includeGraduates) {
+        if (
+            MembershipTypes::Graduate === $specificType
+            && !$includeGraduates
+        ) {
             throw new InvalidArgumentException('Cannot specify graduate type if graduates are not included');
         }
 
         if (null !== $specificType) {
             $sq->andWhere($membershipAlias . '.type = :' . $parameterPrefix . 'specificType');
-            $qb->setParameter($parameterPrefix . 'specificType', $specificType);
+            $qb->setParameter(
+                $parameterPrefix . 'specificType',
+                $specificType,
+            );
         }
 
         return $sq;
@@ -649,31 +779,46 @@ class MemberRepository extends ServiceEntityRepository
         // We take all unique memberships
         $sq->select('IDENTITY(' . $membershipAlias . '.member)')
             ->distinct()
-            ->from(Membership::class, $membershipAlias);
+            ->from(
+                Membership::class,
+                $membershipAlias,
+            );
 
         // Of a given type, if specified
         if (null !== $specificType) {
             $sq->andWhere($membershipAlias . '.type = :' . $parameterPrefix . 'SpecificType');
-            $qb->setParameter($parameterPrefix . 'SpecificType', $specificType);
+            $qb->setParameter(
+                $parameterPrefix . 'SpecificType',
+                $specificType,
+            );
         }
 
         // Which expire before a specific date, if specified
         if (null !== $endsBefore) {
             $sq->andWhere($membershipAlias . '.endDate <= :' . $parameterPrefix . 'EndsBefore');
-            $qb->setParameter($parameterPrefix . 'EndsBefore', $endsBefore);
+            $qb->setParameter(
+                $parameterPrefix . 'EndsBefore',
+                $endsBefore,
+            );
         }
 
         // Which expire after a specific date, if specified
         if (null !== $endsAfter) {
             $sq->andWhere($membershipAlias . '.endDate > :' . $parameterPrefix . 'EndsAfter');
-            $qb->setParameter($parameterPrefix . 'EndsAfter', $endsAfter);
+            $qb->setParameter(
+                $parameterPrefix . 'EndsAfter',
+                $endsAfter,
+            );
         }
 
         // And for which there does not exist a later membership (of any type, as long as it is after the current one)
         if ($onlyLastMembership) {
             $ssq = $qb->getEntityManager()->createQueryBuilder();
             $ssq->select('1') // we don't actually need to select any data, just check for existence
-                ->from(Membership::class, $membershipAlias . 'Later')
+                ->from(
+                    Membership::class,
+                    $membershipAlias . 'Later',
+                )
                 ->where($membershipAlias . 'Later.member = ' . $membershipAlias . '.member')
                 ->andWhere($membershipAlias . 'Later.startDate >= ' . $membershipAlias . '.endDate');
 
@@ -687,7 +832,11 @@ class MemberRepository extends ServiceEntityRepository
 
     private function getToday(): DateTimeImmutable
     {
-        return (new DateTimeImmutable())->setTime(0, 0, 0);
+        return new DateTimeImmutable()->setTime(
+            0,
+            0,
+            0,
+        );
     }
 
     /**
@@ -706,13 +855,25 @@ class MemberRepository extends ServiceEntityRepository
         // so the join does not cut the page short.
         $qb = $this->createQueryBuilder('m')
             ->addSelect('memberships')
-            ->leftJoin('m.memberships', 'memberships')
-            ->orderBy('m.lidnr', 'DESC')
+            ->leftJoin(
+                'm.memberships',
+                'memberships',
+            )
+            ->orderBy(
+                'm.lidnr',
+                'DESC',
+            )
             ->setFirstResult(($page - 1) * $pageSize)
             ->setMaxResults($pageSize);
 
-        $this->applyOverviewFilter($qb, $filter);
-        $this->applyOverviewSearch($qb, $search);
+        $this->applyOverviewFilter(
+            $qb,
+            $filter,
+        );
+        $this->applyOverviewSearch(
+            $qb,
+            $search,
+        );
 
         return new Paginator($qb->getQuery());
     }
@@ -729,8 +890,14 @@ class MemberRepository extends ServiceEntityRepository
         foreach (MemberFilter::cases() as $filter) {
             $qb = $this->createQueryBuilder('m')->select('COUNT(m.lidnr)');
 
-            $this->applyOverviewFilter($qb, $filter);
-            $this->applyOverviewSearch($qb, $search);
+            $this->applyOverviewFilter(
+                $qb,
+                $filter,
+            );
+            $this->applyOverviewSearch(
+                $qb,
+                $search,
+            );
 
             $counts[$filter->value] = (int) $qb->getQuery()->getSingleScalarResult();
         }
@@ -826,11 +993,17 @@ class MemberRepository extends ServiceEntityRepository
 
         if (is_numeric($search)) {
             $matches->add('m.lidnr = :lidnr');
-            $qb->setParameter('lidnr', (int) $search);
+            $qb->setParameter(
+                'lidnr',
+                (int) $search,
+            );
         }
 
         $qb->andWhere($matches)
-            ->setParameter('needle', '%' . mb_strtolower(addcslashes($search, '%_')) . '%');
+            ->setParameter(
+                'needle',
+                '%' . mb_strtolower(addcslashes($search, '%_')) . '%',
+            );
     }
 
     public function persist(Member $member): void

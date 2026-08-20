@@ -38,20 +38,36 @@ class WithdrawType extends AbstractType
         array $options,
     ): void {
         $builder
-            ->add('subdecision', SubDecisionType::class, ['subdecision_class' => Granting::class])
+            ->add(
+                'subdecision',
+                SubDecisionType::class,
+                ['subdecision_class' => Granting::class],
+            )
             // The granting's member and expiry, shown alongside the date being picked. The withdrawal itself is
             // built from the granting the reference above resolves to, so nothing is read back off these.
-            ->add('granting', GrantingType::class, ['mapped' => false])
-            ->add('withdrawOn', DateType::class, [
-                'label' => t('Effective From'),
-                'widget' => 'single_text',
-                'constraints' => [
-                    new NotNull(),
-                    new Callback([self::class, 'validateNotInThePast']),
-                    new Callback([self::class, 'validateNotAfterGranting']),
+            ->add(
+                'granting',
+                GrantingType::class,
+                ['mapped' => false],
+            )
+            ->add(
+                'withdrawOn',
+                DateType::class,
+                [
+                    'label' => t('Effective From'),
+                    'widget' => 'single_text',
+                    'constraints' => [
+                        new NotNull(),
+                        new Callback([self::class, 'validateNotInThePast']),
+                        new Callback([self::class, 'validateNotAfterGranting']),
+                    ],
                 ],
-            ])
-            ->add('submit', SubmitType::class, ['label' => t('Withdraw Key Code')])
+            )
+            ->add(
+                'submit',
+                SubmitType::class,
+                ['label' => t('Withdraw Key Code')],
+            )
             ->setDataMapper($this->dataMapper);
     }
 
@@ -107,6 +123,8 @@ class WithdrawType extends AbstractType
     {
         $root = $context->getRoot();
 
-        return $root instanceof FormInterface ? $root : null;
+        return $root instanceof FormInterface
+            ? $root
+            : null;
     }
 }

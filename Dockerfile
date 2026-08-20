@@ -10,7 +10,6 @@ FROM frankenphp_upstream AS gewisdb_web_base
 SHELL ["/bin/bash", "-euxo", "pipefail", "-c"]
 
 WORKDIR /app
-VOLUME /app/data/
 VOLUME /app/var/
 
 # `pcntl` is required for Messenger to shut down gracefully.

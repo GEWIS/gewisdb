@@ -36,6 +36,10 @@ class VersionIncompatible extends ApiException
             );
         }
 
-        parent::__construct($message, $code, $previousThrowable);
+        parent::__construct(
+            $message,
+            $code,
+            $previousThrowable,
+        );
     }
 }

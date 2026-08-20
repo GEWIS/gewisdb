@@ -18,7 +18,10 @@ class ListmonkMailingListRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ListmonkMailingList::class);
+        parent::__construct(
+            $registry,
+            ListmonkMailingList::class,
+        );
     }
 
     /**
@@ -44,7 +47,10 @@ class ListmonkMailingListRepository extends ServiceEntityRepository
      */
     public function getLastFetchTime(): ?DateTime
     {
-        $list = $this->findOneBy([], ['lastSeen' => 'DESC']);
+        $list = $this->findOneBy(
+            [],
+            ['lastSeen' => 'DESC'],
+        );
 
         return $list?->getLastSeen();
     }
@@ -62,7 +68,10 @@ class ListmonkMailingListRepository extends ServiceEntityRepository
 
         $qb->where('l.lastSeen >= :lastSeen');
 
-        $qb->setParameter('lastSeen', null !== $lastFetch ? (clone $lastFetch)->sub(new DateInterval('PT1H5M')) : null);
+        $qb->setParameter(
+            'lastSeen',
+            null !== $lastFetch ? (clone $lastFetch)->sub(new DateInterval('PT1H5M')) : null,
+        );
 
         return $qb->getQuery()->getResult();
     }
@@ -75,6 +84,9 @@ class ListmonkMailingListRepository extends ServiceEntityRepository
     #[Override]
     public function findAll(): array
     {
-        return $this->findBy([], ['id' => 'ASC']);
+        return $this->findBy(
+            [],
+            ['id' => 'ASC'],
+        );
     }
 }

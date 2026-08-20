@@ -223,7 +223,7 @@ class Meeting
         }
 
         if (AppLanguages::English->getLocale() === $locale) {
-            return (new NumberFormatter($locale, NumberFormatter::ORDINAL))->format($this->getNumber());
+            return new NumberFormatter($locale, NumberFormatter::ORDINAL)->format($this->getNumber());
         }
 
         return $this->getNumber() . 'e';

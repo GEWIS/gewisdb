@@ -16,7 +16,10 @@ class SavedQueryRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, SavedQuery::class);
+        parent::__construct(
+            $registry,
+            SavedQuery::class,
+        );
     }
 
     /**
@@ -36,7 +39,10 @@ class SavedQueryRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('q');
         $qb->where('LOWER(q.name) LIKE LOWER(:name)')
            ->setMaxResults(1)
-           ->setParameter('name', $name);
+           ->setParameter(
+               'name',
+               $name,
+           );
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -53,7 +59,10 @@ class SavedQueryRepository extends ServiceEntityRepository
         // ORM 3 dropped QueryBuilder::add(). Passing both expressions as a single sort argument keeps the
         // emitted `ORDER BY lower(q.category), lower(q.name) ASC` byte-for-byte identical; splitting them over
         // orderBy()/addOrderBy() would add an explicit ASC to the first term.
-        $qb->orderBy('lower(q.category), lower(q.name)', 'ASC');
+        $qb->orderBy(
+            'lower(q.category), lower(q.name)',
+            'ASC',
+        );
 
         return $qb->getQuery()->getResult();
     }

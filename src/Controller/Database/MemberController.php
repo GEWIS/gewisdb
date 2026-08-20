@@ -111,34 +111,51 @@ final class MemberController extends AbstractMemberController
     #[Route(
         path: '/bulk-renewal',
         name: 'member_bulk_renewal_index',
-        methods: ['GET', 'POST'],
+        methods: [
+            'GET',
+            'POST',
+        ],
     )]
     public function bulkRenewal(Request $request): Response
     {
-        $form = $this->createForm(BulkMemberRenewalType::class, [
-            'memberIds' => $request->query->getString('memberIds'),
-            'membershipType' => MembershipTypes::tryFrom($request->query->getString('membershipType')),
-        ]);
+        $form = $this->createForm(
+            BulkMemberRenewalType::class,
+            [
+                'memberIds' => $request->query->getString('memberIds'),
+                'membershipType' => MembershipTypes::tryFrom($request->query->getString('membershipType')),
+            ],
+        );
         $form->handleRequest($request);
 
         // Numbers that did not survive the form are not worth previewing; the errors on the fields say why.
-        $data = $form->isSubmitted() && !$form->isValid() ? null : $form->getData();
+        $data = $form->isSubmitted() && !$form->isValid()
+            ? null
+            : $form->getData();
 
-        return $this->render('member/bulk-renewal.html.twig', [
-            'form' => $form,
-            ...$this->memberService->bulkRenewal(
-                $data['memberIds'] ?? '',
-                $data['membershipType'] ?? null,
-                SubmitButtons::clicked($form, 'intent'),
-            ),
-        ]);
+        return $this->render(
+            'member/bulk-renewal.html.twig',
+            [
+                'form' => $form,
+                ...$this->memberService->bulkRenewal(
+                    $data['memberIds'] ?? '',
+                    $data['membershipType'] ?? null,
+                    SubmitButtons::clicked(
+                        $form,
+                        'intent',
+                    ),
+                ),
+            ],
+        );
     }
 
     #[Route(
         path: '/{lidnr}',
         name: 'member_show',
         requirements: ['lidnr' => '\d+'],
-        methods: ['GET', 'POST'],
+        methods: [
+            'GET',
+            'POST',
+        ],
     )]
     public function show(
         Request $request,
@@ -170,17 +187,26 @@ final class MemberController extends AbstractMemberController
             $noteForm->isSubmitted()
             && $noteForm->isValid()
         ) {
-            $this->memberService->addAuditNote($member, $noteForm);
+            $this->memberService->addAuditNote(
+                $member,
+                $noteForm,
+            );
 
             $this->addFlash(
                 'success',
-                t('%entity% has been added to %target%', [
-                    '%entity%' => t('Note'),
-                    '%target%' => t('member'),
-                ]),
+                t(
+                    '%entity% has been added to %target%',
+                    [
+                        '%entity%' => t('Note'),
+                        '%target%' => t('member'),
+                    ],
+                ),
             );
 
-            return $this->redirectToRoute('member_show', ['lidnr' => $lidnr]);
+            return $this->redirectToRoute(
+                'member_show',
+                ['lidnr' => $lidnr],
+            );
         }
 
         $profile = MemberProfile::fromMember(
@@ -190,23 +216,29 @@ final class MemberController extends AbstractMemberController
             $this->urlGenerator,
         );
 
-        return $this->render('member/show.html.twig', [
-            'member' => $profile->member,
-            'has_correct_installations' => $profile->hasCorrectInstallations,
-            'membership_ends_on' => $profile->membershipEndsOn,
-            'can_change_membership_type' => $profile->canChangeMembershipType,
-            'can_extend' => $profile->canExtend,
-            'organs' => $profile->organs,
-            'notes' => $profile->notes,
-            'note_form' => $noteForm,
-        ]);
+        return $this->render(
+            'member/show.html.twig',
+            [
+                'member' => $profile->member,
+                'has_correct_installations' => $profile->hasCorrectInstallations,
+                'membership_ends_on' => $profile->membershipEndsOn,
+                'can_change_membership_type' => $profile->canChangeMembershipType,
+                'can_extend' => $profile->canExtend,
+                'organs' => $profile->organs,
+                'notes' => $profile->notes,
+                'note_form' => $noteForm,
+            ],
+        );
     }
 
     #[Route(
         path: '/{lidnr}/edit',
         name: 'member_edit',
         requirements: ['lidnr' => '\d+'],
-        methods: ['GET', 'POST'],
+        methods: [
+            'GET',
+            'POST',
+        ],
     )]
     public function edit(
         Request $request,
@@ -218,27 +250,42 @@ final class MemberController extends AbstractMemberController
             return $member;
         }
 
-        $form = $this->createForm(MemberEditType::class, $member);
+        $form = $this->createForm(
+            MemberEditType::class,
+            $member,
+        );
         $form->handleRequest($request);
 
         if (
             $form->isSubmitted()
             && $form->isValid()
         ) {
-            $this->memberService->edit($member, $form);
+            $this->memberService->edit(
+                $member,
+                $form,
+            );
 
             $this->addFlash(
                 'success',
-                t('Change(s) of %entity% have been saved!', ['%entity%' => t('member')]),
+                t(
+                    'Change(s) of %entity% have been saved!',
+                    ['%entity%' => t('member')],
+                ),
             );
 
-            return $this->redirectToRoute('member_show', ['lidnr' => $lidnr]);
+            return $this->redirectToRoute(
+                'member_show',
+                ['lidnr' => $lidnr],
+            );
         }
 
-        return $this->render('member/edit.html.twig', [
-            'form' => $form,
-            'member' => $member,
-        ]);
+        return $this->render(
+            'member/edit.html.twig',
+            [
+                'form' => $form,
+                'member' => $member,
+            ],
+        );
     }
 
     /**
@@ -249,7 +296,10 @@ final class MemberController extends AbstractMemberController
         path: '/{lidnr}/delete',
         name: 'member_delete',
         requirements: ['lidnr' => '\d+'],
-        methods: ['GET', 'POST'],
+        methods: [
+            'GET',
+            'POST',
+        ],
     )]
     public function delete(
         Request $request,
@@ -268,26 +318,41 @@ final class MemberController extends AbstractMemberController
             $form->isSubmitted()
             && $form->isValid()
         ) {
-            if (!SubmitButtons::clicked($form, 'submit_yes')) {
-                return $this->redirectToRoute('member_show', ['lidnr' => $lidnr]);
+            if (
+                !SubmitButtons::clicked(
+                    $form,
+                    'submit_yes',
+                )
+            ) {
+                return $this->redirectToRoute(
+                    'member_show',
+                    ['lidnr' => $lidnr],
+                );
             }
 
             $this->memberService->remove($member);
 
             $this->addFlash(
                 'success',
-                t('Succesfully deleted %entity%!', ['%entity%' => t('member')]),
+                t(
+                    'Succesfully deleted %entity%!',
+                    ['%entity%' => t('member')],
+                ),
             );
 
             return $this->redirectToRoute('member_index');
         }
 
-        return $this->render('member/delete.html.twig', [
-            'form' => $form,
-            'member' => $member,
-            // A member who is named in a decision, budget or statement cannot go entirely; the confirmation says so.
-            'can_remove' => $this->memberService->canRemove($member),
-        ]);
+        return $this->render(
+            'member/delete.html.twig',
+            [
+                'form' => $form,
+                'member' => $member,
+                // A member who is named in a decision, budget or statement cannot go entirely; the confirmation
+                // says so.
+                'can_remove' => $this->memberService->canRemove($member),
+            ],
+        );
     }
 
     /**
@@ -315,7 +380,10 @@ final class MemberController extends AbstractMemberController
         defaults: ['value' => 'optout'],
         methods: ['POST'],
     )]
-    #[IsCsrfTokenValid(new Expression("'member_supremum-' ~ args['lidnr']"), tokenKey: '_csrf_token')]
+    #[IsCsrfTokenValid(
+        new Expression("'member_supremum-' ~ args['lidnr']"),
+        tokenKey: '_csrf_token',
+    )]
     public function supremum(
         int $lidnr,
         string $value,
@@ -326,9 +394,15 @@ final class MemberController extends AbstractMemberController
             return $member;
         }
 
-        $this->memberService->setSupremum($member, $value);
+        $this->memberService->setSupremum(
+            $member,
+            $value,
+        );
 
-        return $this->redirectToRoute('member_show', ['lidnr' => $lidnr]);
+        return $this->redirectToRoute(
+            'member_show',
+            ['lidnr' => $lidnr],
+        );
     }
 
     /**
@@ -338,7 +412,10 @@ final class MemberController extends AbstractMemberController
         path: '/{lidnr}/edit/lists',
         name: 'member_lists_edit',
         requirements: ['lidnr' => '\d+'],
-        methods: ['GET', 'POST'],
+        methods: [
+            'GET',
+            'POST',
+        ],
     )]
     public function lists(
         Request $request,
@@ -351,10 +428,17 @@ final class MemberController extends AbstractMemberController
         }
 
         if ($this->memberService->isMailingListSyncLocked()) {
-            return $this->render('member/mailinglist-sync-status.html.twig', ['member' => $member]);
+            return $this->render(
+                'member/mailinglist-sync-status.html.twig',
+                ['member' => $member],
+            );
         }
 
-        $form = $this->createForm(MemberListsType::class, null, ['member' => $member]);
+        $form = $this->createForm(
+            MemberListsType::class,
+            null,
+            ['member' => $member],
+        );
         $form->handleRequest($request);
 
         if (
@@ -362,25 +446,42 @@ final class MemberController extends AbstractMemberController
             && $form->isValid()
         ) {
             // A sync that started while the page was open takes precedence, and the subscriptions are left alone.
-            if (null !== $this->memberService->subscribeLists($member, $form)) {
+            if (
+                null !== $this->memberService->subscribeLists(
+                    $member,
+                    $form,
+                )
+            ) {
                 $this->addFlash(
                     'success',
-                    t('Change(s) of %entity% have been saved!', ['%entity%' => t('mailing list subscriptions')]),
+                    t(
+                        'Change(s) of %entity% have been saved!',
+                        ['%entity%' => t('mailing list subscriptions')],
+                    ),
                 );
 
-                return $this->redirectToRoute('member_show', ['lidnr' => $lidnr]);
+                return $this->redirectToRoute(
+                    'member_show',
+                    ['lidnr' => $lidnr],
+                );
             }
 
             $this->addFlash(
                 'error',
-                t('Could not save change(s) of %entity%!', ['%entity%' => t('mailing list subscriptions')]),
+                t(
+                    'Could not save change(s) of %entity%!',
+                    ['%entity%' => t('mailing list subscriptions')],
+                ),
             );
         }
 
-        return $this->render('member/lists.html.twig', [
-            'form' => $form,
-            'member' => $member,
-        ]);
+        return $this->render(
+            'member/lists.html.twig',
+            [
+                'form' => $form,
+                'member' => $member,
+            ],
+        );
     }
 
     /**
@@ -393,7 +494,10 @@ final class MemberController extends AbstractMemberController
         return array_map(
             fn (Member $member): MemberSearchResult => MemberSearchResult::fromMember(
                 $member,
-                $this->generateUrl('member_show', ['lidnr' => $member->getLidnr()]),
+                $this->generateUrl(
+                    'member_show',
+                    ['lidnr' => $member->getLidnr()],
+                ),
             ),
             $members,
         );

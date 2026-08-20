@@ -15,6 +15,9 @@ class AuditMailingListMembershipRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, AuditMailingListMembership::class);
+        parent::__construct(
+            $registry,
+            AuditMailingListMembership::class,
+        );
     }
 }

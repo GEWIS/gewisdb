@@ -52,7 +52,10 @@ final class ApplicationController extends AbstractController
         // The build a deployment runs is not part of the dashboard's data, it comes from the image it was built as.
         $data['git_commit'] = $this->gitCommit;
 
-        return $this->render('application/index.html.twig', $data);
+        return $this->render(
+            'application/index.html.twig',
+            $data,
+        );
     }
 
     /**
@@ -70,13 +73,21 @@ final class ApplicationController extends AbstractController
     ): Response {
         $request->getSession()->set(
             '_locale',
-            in_array($lang, $this->enabledLocales, true) ? $lang : $this->defaultLocale,
+            in_array(
+                $lang,
+                $this->enabledLocales,
+                true,
+            ) ? $lang : $this->defaultLocale,
         );
 
         // Return to the page the switch was made on, reduced to its path so that the referer cannot send the
         // visitor to another site. A leading slash of its own would make the result protocol-relative, which is
         // such an address again, so it is dropped.
-        $referer = explode('/', (string) $request->headers->get('referer'), 4);
+        $referer = explode(
+            '/',
+            (string) $request->headers->get('referer'),
+            4,
+        );
         if (isset($referer[3])) {
             return $this->redirect('/' . ltrim($referer[3], '/'));
         }
@@ -107,10 +118,13 @@ final class ApplicationController extends AbstractController
     )]
     public function functions(): Response
     {
-        return $this->render('application/settings/functions.html.twig', [
-            'current_functions' => InstallationFunctions::currentCases(),
-            'legacy_functions' => InstallationFunctions::legacyCases(),
-            'administrative_functions' => InstallationFunctions::administrativeCases(),
-        ]);
+        return $this->render(
+            'application/settings/functions.html.twig',
+            [
+                'current_functions' => InstallationFunctions::currentCases(),
+                'legacy_functions' => InstallationFunctions::legacyCases(),
+                'administrative_functions' => InstallationFunctions::administrativeCases(),
+            ],
+        );
     }
 }

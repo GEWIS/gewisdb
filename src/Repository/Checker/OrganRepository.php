@@ -19,7 +19,10 @@ class OrganRepository extends ServiceEntityRepository
         ManagerRegistry $registry,
         private readonly AnnulledSubDecisionFilter $filter,
     ) {
-        parent::__construct($registry, Foundation::class);
+        parent::__construct(
+            $registry,
+            Foundation::class,
+        );
     }
 
     /**
@@ -34,9 +37,18 @@ class OrganRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('f');
 
         $qb->where('m.date <= :meeting_date')
-            ->innerJoin('f.decision', 'd')
-            ->innerJoin('d.meeting', 'm')
-            ->setParameter('meeting_date', $meeting->getDate()->format('Y-m-d'));
+            ->innerJoin(
+                'f.decision',
+                'd',
+            )
+            ->innerJoin(
+                'd.meeting',
+                'm',
+            )
+            ->setParameter(
+                'meeting_date',
+                $meeting->getDate()->format('Y-m-d'),
+            );
 
         /** @var Foundation[] $result */
         $result = $qb->getQuery()->getResult();
@@ -56,10 +68,22 @@ class OrganRepository extends ServiceEntityRepository
         $qb = $this->getEntityManager()->getRepository(Abrogation::class)->createQueryBuilder('a');
 
         $qb->where('m.date <= :meeting_date')
-            ->innerJoin('a.foundation', 'f')
-            ->innerJoin('a.decision', 'd')
-            ->innerJoin('d.meeting', 'm')
-            ->setParameter('meeting_date', $meeting->getDate()->format('Y-m-d'));
+            ->innerJoin(
+                'a.foundation',
+                'f',
+            )
+            ->innerJoin(
+                'a.decision',
+                'd',
+            )
+            ->innerJoin(
+                'd.meeting',
+                'm',
+            )
+            ->setParameter(
+                'meeting_date',
+                $meeting->getDate()->format('Y-m-d'),
+            );
 
         /** @var Abrogation[] $result */
         $result = $qb->getQuery()->getResult();
@@ -80,10 +104,22 @@ class OrganRepository extends ServiceEntityRepository
 
         $qb->where('m.number = :meeting_number')
             ->andWhere('m.type = :meeting_type')
-            ->innerJoin('f.decision', 'd')
-            ->innerJoin('d.meeting', 'm')
-            ->setParameter('meeting_number', $meeting->getNumber())
-            ->setParameter('meeting_type', $meeting->getType());
+            ->innerJoin(
+                'f.decision',
+                'd',
+            )
+            ->innerJoin(
+                'd.meeting',
+                'm',
+            )
+            ->setParameter(
+                'meeting_number',
+                $meeting->getNumber(),
+            )
+            ->setParameter(
+                'meeting_type',
+                $meeting->getType(),
+            );
 
         /** @var Foundation[] $result */
         $result = $qb->getQuery()->getResult();

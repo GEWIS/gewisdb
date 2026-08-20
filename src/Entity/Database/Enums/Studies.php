@@ -70,51 +70,63 @@ enum Studies: string implements TranslatableInterface
 
     public function isBachelor(): bool
     {
-        return in_array($this, [
-            self::BAM,
-            self::BCS,
-            self::BDS,
-        ]);
+        return in_array(
+            $this,
+            [
+                self::BAM,
+                self::BCS,
+                self::BDS,
+            ],
+        );
     }
 
     public function isPreMaster(): bool
     {
-        return in_array($this, [
-            self::PMCSE,
-            self::PMDSAI,
-            self::PMES,
-            self::PMIAM,
-            self::PMIST,
-            self::SkSEInf,
-            self::SkSEWisk,
-        ]);
+        return in_array(
+            $this,
+            [
+                self::PMCSE,
+                self::PMDSAI,
+                self::PMES,
+                self::PMIAM,
+                self::PMIST,
+                self::SkSEInf,
+                self::SkSEWisk,
+            ],
+        );
     }
 
     public function isGraduate(): bool
     {
-        return in_array($this, [
-            self::MAIES,
-            self::MCSE,
-            self::MDSAI,
-            self::MDSBE,
-            self::MES,
-            self::MIAM,
-            self::MIST,
-            self::MSEC,
-        ]);
+        return in_array(
+            $this,
+            [
+                self::MAIES,
+                self::MCSE,
+                self::MDSAI,
+                self::MDSBE,
+                self::MES,
+                self::MIAM,
+                self::MIST,
+                self::MSEC,
+            ],
+        );
     }
 
     public function isEngDPhD(): bool
     {
-        return in_array($this, [
-            self::EngDASD,
-            self::EngDDS,
-            self::EngDMSD,
-            self::EngDST,
-            self::PhDCS,
-            self::PhDDS,
-            self::PhDM,
-        ]);
+        return in_array(
+            $this,
+            [
+                self::EngDASD,
+                self::EngDDS,
+                self::EngDMSD,
+                self::EngDST,
+                self::PhDCS,
+                self::PhDDS,
+                self::PhDM,
+            ],
+        );
     }
 
     public function isMcsStudy(): bool
@@ -124,22 +136,28 @@ enum Studies: string implements TranslatableInterface
 
     public function isDataScience(): bool
     {
-        return in_array($this, [
-            self::BDS,
-            self::PMDSAI,
-            self::MDSAI,
-            self::EngDDS,
-            self::PhDDS,
-        ]);
+        return in_array(
+            $this,
+            [
+                self::BDS,
+                self::PMDSAI,
+                self::MDSAI,
+                self::EngDDS,
+                self::PhDDS,
+            ],
+        );
     }
 
     public function isSpecial(): bool
     {
-        return in_array($this, [
-            self::Other,
-            self::None,
-            self::Unknown,
-        ]);
+        return in_array(
+            $this,
+            [
+                self::Other,
+                self::None,
+                self::Unknown,
+            ],
+        );
     }
 
     /**
@@ -185,6 +203,9 @@ enum Studies: string implements TranslatableInterface
         TranslatorInterface $translator,
         ?string $locale = null,
     ): string {
-        return $this->getName()->trans($translator, $locale);
+        return $this->getName()->trans(
+            $translator,
+            $locale,
+        );
     }
 }

@@ -35,7 +35,13 @@ final class BulkLoadListener
 
     public function __invoke(ConsoleCommandEvent $event): void
     {
-        if (!in_array($event->getCommand()?->getName(), self::BULK_COMMANDS, true)) {
+        if (
+            !in_array(
+                $event->getCommand()?->getName(),
+                self::BULK_COMMANDS,
+                true,
+            )
+        ) {
             return;
         }
 

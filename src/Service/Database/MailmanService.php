@@ -85,7 +85,10 @@ class MailmanService
         ?array $data = null,
     ): array {
         $options = [
-            'auth_basic' => [$this->username, $this->password],
+            'auth_basic' => [
+                $this->username,
+                $this->password,
+            ],
             'timeout' => 600,
         ];
 
@@ -107,7 +110,11 @@ class MailmanService
         // The client is lazy, so both the status code and the body have to be pulled before we know whether the
         // request actually made it to Mailman.
         try {
-            $response = $this->httpClient->request($method, $this->endpoint . $uri, $options);
+            $response = $this->httpClient->request(
+                $method,
+                $this->endpoint . $uri,
+                $options,
+            );
 
             $statusCode = $response->getStatusCode();
             // We want to try to parse everything that returned a 2xx status code, so suppress the client's own
@@ -117,7 +124,10 @@ class MailmanService
             throw new RuntimeException('Failed to send request: ' . $e->getMessage());
         }
 
-        if (200 > $statusCode || 300 <= $statusCode) {
+        if (
+            200 > $statusCode
+            || 300 <= $statusCode
+        ) {
             throw new RuntimeException('Request failed with status code: ' . $statusCode);
         }
 
@@ -130,7 +140,10 @@ class MailmanService
             throw new RuntimeException('Failed to parse JSON response: ' . json_last_error_msg());
         }
 
-        return json_decode($body, true);
+        return json_decode(
+            $body,
+            true,
+        );
     }
 
     /**
@@ -147,18 +160,24 @@ class MailmanService
             throw new RuntimeException('Unable to acquire sync lock for Mailman sync: timeout.');
         }
 
-        if ($this->isSyncLocked() && !$renew) {
+        if (
+            $this->isSyncLocked()
+            && !$renew
+        ) {
             throw new RuntimeException('Unable to acquire sync lock for Mailman sync: locked by other process.');
         }
 
-        if (!$this->isSyncLocked() && $renew) {
+        if (
+            !$this->isSyncLocked()
+            && $renew
+        ) {
             throw new RuntimeException('Unable to renew sync lock for Mailman sync: currently unlocked.');
         }
 
         $this->configService->setConfig(
             ConfigNamespaces::DatabaseMailman,
             'locked',
-            (new DateTime())->modify('+23 hours'),
+            new DateTime()->modify('+23 hours'),
         );
 
         if ($this->isSyncLocked()) {
@@ -175,7 +194,11 @@ class MailmanService
      */
     private function releaseSyncLock(): void
     {
-        $this->configService->setConfig(ConfigNamespaces::DatabaseMailman, 'locked', new DateTime());
+        $this->configService->setConfig(
+            ConfigNamespaces::DatabaseMailman,
+            'locked',
+            new DateTime(),
+        );
     }
 
     /**
@@ -183,7 +206,10 @@ class MailmanService
      */
     public function isSyncLocked(): bool
     {
-        return $this->configService->getConfig(ConfigNamespaces::DatabaseMailman, 'locked') > new DateTime();
+        return $this->configService->getConfig(
+            ConfigNamespaces::DatabaseMailman,
+            'locked',
+        ) > new DateTime();
     }
 
     /**
@@ -208,10 +234,18 @@ class MailmanService
             }
 
             $this->acquireSyncLock(renew: true);
-            $this->syncMembershipSingle($list, $output, $dryRun);
+            $this->syncMembershipSingle(
+                $list,
+                $output,
+                $dryRun,
+            );
         }
 
-        $this->configService->setConfig(ConfigNamespaces::DatabaseMailman, 'lastSync', new DateTime());
+        $this->configService->setConfig(
+            ConfigNamespaces::DatabaseMailman,
+            'lastSync',
+            new DateTime(),
+        );
 
         $this->releaseSyncLock();
     }
@@ -235,7 +269,7 @@ class MailmanService
             OutputInterface::VERBOSITY_VERBOSE,
         );
 
-        $verifyTime = (new DateTime())->sub(new DateInterval('P1D'));
+        $verifyTime = new DateTime()->sub(new DateInterval('P1D'));
 
         $listId = $dbList->getMailmanList()->getMailmanId();
         $knownMembers = $this->getMailmanListSubscriberEmails($listId);
@@ -244,7 +278,10 @@ class MailmanService
         // The order matters; we first process deletions, because we can have both be true
         // (e.g. when changing email addresses twice)
         foreach ($dbMemberships as $mailingListMember) {
-            if ($mailingListMember->isToBeDeleted() || null === $mailingListMember->getMember()) {
+            if (
+                $mailingListMember->isToBeDeleted()
+                || null === $mailingListMember->getMember()
+            ) {
                 $this->unsubscribeMemberFromMailingList(
                     mailingListMember: $mailingListMember,
                     output: $output,
@@ -406,7 +443,7 @@ class MailmanService
             return true;
         }
 
-        return $lastFetch < (new DateTime())->sub(new DateInterval('PT1H5M'));
+        return $lastFetch < new DateTime()->sub(new DateInterval('PT1H5M'));
     }
 
     /**
@@ -486,7 +523,10 @@ class MailmanService
             'role' => self::MM_ROLE_MEMBER,
         ];
 
-        $response = $this->performMailmanRequest('members/find', data: $data);
+        $response = $this->performMailmanRequest(
+            'members/find',
+            data: $data,
+        );
 
         // There should be at most one entry
         if (1 < $response['total_size']) {
@@ -515,7 +555,10 @@ class MailmanService
 
         $member = $mailingListMember->getMember();
 
-        if (null !== $member && false === $mailingListMember->isToBeDeleted()) {
+        if (
+            null !== $member
+            && false === $mailingListMember->isToBeDeleted()
+        ) {
             $this->auditService->persist(
                 AuditMailingListMembership::create(
                     MailingListMemberAction::Remove,
@@ -530,7 +573,10 @@ class MailmanService
         if (1 === $response['total_size']) {
             $memberId = $response['entries'][0]['member_id'];
 
-            $this->performMailmanRequest('members/' . rawurlencode($memberId), method: Request::METHOD_DELETE);
+            $this->performMailmanRequest(
+                'members/' . rawurlencode($memberId),
+                method: Request::METHOD_DELETE,
+            );
         }
 
         $this->mailingListMemberRepository->remove($mailingListMember);
@@ -557,7 +603,12 @@ class MailmanService
 
         $listId = $mailingListMember->getMailingList()->getMailmanList()->getMailmanId();
 
-        if (in_array($mailingListMember->getEmail(), $knownMembers)) {
+        if (
+            in_array(
+                $mailingListMember->getEmail(),
+                $knownMembers,
+            )
+        ) {
             $mailingListMember->setLastSyncOn();
             $this->mailingListMemberRepository->persist($mailingListMember);
 
@@ -579,7 +630,10 @@ class MailmanService
             'role' => self::MM_ROLE_MEMBER,
         ];
 
-        $response = $this->performMailmanRequest('members/find', data: $data);
+        $response = $this->performMailmanRequest(
+            'members/find',
+            data: $data,
+        );
 
         // There should be at most one entry
         if (1 < $response['total_size']) {
@@ -615,7 +669,10 @@ class MailmanService
 
         $member = $mailingListMember->getMember();
 
-        if (null !== $member && false === $mailingListMember->isToBeDeleted()) {
+        if (
+            null !== $member
+            && false === $mailingListMember->isToBeDeleted()
+        ) {
             $this->auditService->persist(
                 AuditMailingListMembership::create(
                     MailingListMemberAction::Remove,
@@ -730,7 +787,10 @@ class MailmanService
         ];
 
         // By default this response is not paginated, which is what we want here
-        $response = $this->performMailmanRequest('members/find', data: $data);
+        $response = $this->performMailmanRequest(
+            'members/find',
+            data: $data,
+        );
 
         if ($response['total_size'] > 0) {
             return $response['entries'];

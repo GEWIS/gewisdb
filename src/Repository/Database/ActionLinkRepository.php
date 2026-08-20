@@ -20,18 +20,30 @@ class ActionLinkRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ActionLink::class);
+        parent::__construct(
+            $registry,
+            ActionLink::class,
+        );
     }
 
     public function findPaymentByToken(string $token): ?PaymentLink
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select('pl, m')
-            ->from(PaymentLink::class, 'pl')
-            ->leftJoin('pl.prospectiveMember', 'm')
+            ->from(
+                PaymentLink::class,
+                'pl',
+            )
+            ->leftJoin(
+                'pl.prospectiveMember',
+                'm',
+            )
             ->where('pl.token = :token');
 
-        $qb->setParameter(':token', $token);
+        $qb->setParameter(
+            ':token',
+            $token,
+        );
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -40,10 +52,16 @@ class ActionLinkRepository extends ServiceEntityRepository
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select('pl')
-            ->from(PaymentLink::class, 'pl')
+            ->from(
+                PaymentLink::class,
+                'pl',
+            )
             ->where('pl.prospectiveMember = :lidnr');
 
-        $qb->setParameter(':lidnr', $lidnr);
+        $qb->setParameter(
+            ':lidnr',
+            $lidnr,
+        );
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -52,11 +70,20 @@ class ActionLinkRepository extends ServiceEntityRepository
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select('rl, m')
-            ->from(RenewalLink::class, 'rl')
-            ->leftJoin('rl.member', 'm')
+            ->from(
+                RenewalLink::class,
+                'rl',
+            )
+            ->leftJoin(
+                'rl.member',
+                'm',
+            )
             ->where('rl.token = :token');
 
-        $qb->setParameter(':token', $token);
+        $qb->setParameter(
+            ':token',
+            $token,
+        );
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -84,15 +111,25 @@ class ActionLinkRepository extends ServiceEntityRepository
         if (null === $newExpiration) {
             $newExpiration = new DateTime();
             // Expire at midnight on July 1st, renewing at most 366 + 31 days
-            $newExpiration->setTime(0, 0);
-            $newExpiration->setDate(((int) $member->getExpiration()->format('Y')) + 1, 7, 1);
+            $newExpiration->setTime(
+                0,
+                0,
+            );
+            $newExpiration->setDate(
+                ((int) $member->getExpiration()->format('Y')) + 1,
+                7,
+                1,
+            );
 
             while ($newExpiration->diff($member->getExpiration())->days > 397) {
                 $newExpiration->sub(new DateInterval('P1Y'));
             }
         }
 
-        $actionLink = new RenewalLink($member, $newExpiration);
+        $actionLink = new RenewalLink(
+            $member,
+            $newExpiration,
+        );
         $this->persist($actionLink);
 
         return $actionLink;

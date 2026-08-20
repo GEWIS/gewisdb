@@ -22,7 +22,10 @@ class StudentNumberValidator extends ConstraintValidator
         Constraint $constraint,
     ): void {
         if (!$constraint instanceof StudentNumber) {
-            throw new UnexpectedTypeException($constraint, StudentNumber::class);
+            throw new UnexpectedTypeException(
+                $constraint,
+                StudentNumber::class,
+            );
         }
 
         if (
@@ -33,12 +36,20 @@ class StudentNumberValidator extends ConstraintValidator
         }
 
         if (!is_scalar($value)) {
-            throw new UnexpectedValueException($value, 'string');
+            throw new UnexpectedValueException(
+                $value,
+                'string',
+            );
         }
 
         $studentNumber = (string) $value;
 
-        if (1 !== preg_match('/^\d{' . StudentNumber::LENGTH . '}$/', $studentNumber)) {
+        if (
+            1 !== preg_match(
+                '/^\d{' . StudentNumber::LENGTH . '}$/',
+                $studentNumber,
+            )
+        ) {
             $this->context->buildViolation($constraint->invalidFormatMessage)
                 ->setCode(StudentNumber::INVALID_FORMAT_ERROR)
                 ->addViolation();

@@ -16,13 +16,19 @@ use function Symfony\Component\Translation\t;
 /**
  * The membership of one member: which type they hold, and how long it still runs.
  */
-#[Route(path: '/member/{lidnr}/edit', requirements: ['lidnr' => '\d+'])]
+#[Route(
+    path: '/member/{lidnr}/edit',
+    requirements: ['lidnr' => '\d+'],
+)]
 final class MembershipController extends AbstractMemberController
 {
     #[Route(
         path: '/membership',
         name: 'member_membership_edit',
-        methods: ['GET', 'POST'],
+        methods: [
+            'GET',
+            'POST',
+        ],
     )]
     public function membership(
         Request $request,
@@ -37,34 +43,53 @@ final class MembershipController extends AbstractMemberController
         // The last membership rather than the current one: a change is entered against the period that runs latest,
         // and it is that period the change date has to fall inside.
         $membership = $member->getLastMembership();
-        $form = $this->createForm(MembershipTypeType::class, null, ['membership' => $membership]);
+        $form = $this->createForm(
+            MembershipTypeType::class,
+            null,
+            ['membership' => $membership],
+        );
         $form->handleRequest($request);
 
         if (
             $form->isSubmitted()
             && $form->isValid()
         ) {
-            $this->memberService->membership($member, $form);
+            $this->memberService->membership(
+                $member,
+                $form,
+            );
 
             $this->addFlash(
                 'success',
-                t('Change(s) of %entity% have been saved!', ['%entity%' => t('membership type')]),
+                t(
+                    'Change(s) of %entity% have been saved!',
+                    ['%entity%' => t('membership type')],
+                ),
             );
 
-            return $this->redirectToRoute('member_show', ['lidnr' => $lidnr]);
+            return $this->redirectToRoute(
+                'member_show',
+                ['lidnr' => $lidnr],
+            );
         }
 
-        return $this->render('member/membership.html.twig', [
-            'form' => $form,
-            'member' => $member,
-            'membership' => $membership,
-        ]);
+        return $this->render(
+            'member/membership.html.twig',
+            [
+                'form' => $form,
+                'member' => $member,
+                'membership' => $membership,
+            ],
+        );
     }
 
     #[Route(
         path: '/expiration',
         name: 'member_expiration_edit',
-        methods: ['GET', 'POST'],
+        methods: [
+            'GET',
+            'POST',
+        ],
     )]
     public function expiration(
         Request $request,
@@ -84,22 +109,37 @@ final class MembershipController extends AbstractMemberController
         if (
             $form->isSubmitted()
             && $form->isValid()
-            && SubmitButtons::clicked($form, 'submit_yes')
+            && SubmitButtons::clicked(
+                $form,
+                'submit_yes',
+            )
         ) {
-            $this->memberService->expiration($member, $form);
+            $this->memberService->expiration(
+                $member,
+                $form,
+            );
 
             $this->addFlash(
                 'success',
-                t('Change(s) of %entity% have been saved!', ['%entity%' => t('membership expiration date')]),
+                t(
+                    'Change(s) of %entity% have been saved!',
+                    ['%entity%' => t('membership expiration date')],
+                ),
             );
 
-            return $this->redirectToRoute('member_show', ['lidnr' => $lidnr]);
+            return $this->redirectToRoute(
+                'member_show',
+                ['lidnr' => $lidnr],
+            );
         }
 
-        return $this->render('member/expiration.html.twig', [
-            'form' => $form,
-            'member' => $member,
-            'new_expiration' => $this->memberService->getExtendedExpiration($member),
-        ]);
+        return $this->render(
+            'member/expiration.html.twig',
+            [
+                'form' => $form,
+                'member' => $member,
+                'new_expiration' => $this->memberService->getExtendedExpiration($member),
+            ],
+        );
     }
 }

@@ -27,32 +27,47 @@ class UserCreateType extends AbstractType
         FormBuilderInterface $builder,
         array $options,
     ): void {
-        $builder->add('login', TextType::class, [
-            'label' => t('Login'),
-            'constraints' => [
-                new Assert\NotBlank(),
-                new Assert\Length(min: 3, max: 32),
-                new Assert\Regex(pattern: '/^[a-zA-Z0-9]*$/'),
+        $builder->add(
+            'login',
+            TextType::class,
+            [
+                'label' => t('Login'),
+                'constraints' => [
+                    new Assert\NotBlank(),
+                    new Assert\Length(
+                        min: 3,
+                        max: 32,
+                    ),
+                    new Assert\Regex(pattern: '/^[a-zA-Z0-9]*$/'),
+                ],
             ],
-        ]);
+        );
 
         // User::$password holds a hash, so the plaintext is deliberately not mapped; the caller hashes the submitted
         // value and sets it on the entity.
-        $builder->add('password', RepeatedType::class, [
-            'type' => PasswordType::class,
-            'mapped' => false,
-            'first_name' => 'password',
-            'second_name' => 'password_verify',
-            'first_options' => ['label' => t('Wachtwoord')],
-            'second_options' => ['label' => t('Controleer wachtwoord')],
-            'invalid_message' => 'The two given tokens do not match',
-            'constraints' => [
-                new Assert\NotBlank(),
-                new Assert\Length(min: 10),
+        $builder->add(
+            'password',
+            RepeatedType::class,
+            [
+                'type' => PasswordType::class,
+                'mapped' => false,
+                'first_name' => 'password',
+                'second_name' => 'password_verify',
+                'first_options' => ['label' => t('Wachtwoord')],
+                'second_options' => ['label' => t('Controleer wachtwoord')],
+                'invalid_message' => 'The two given tokens do not match',
+                'constraints' => [
+                    new Assert\NotBlank(),
+                    new Assert\Length(min: 10),
+                ],
             ],
-        ]);
+        );
 
-        $builder->add('submit', SubmitType::class, ['label' => t('Maak gebruiker aan')]);
+        $builder->add(
+            'submit',
+            SubmitType::class,
+            ['label' => t('Maak gebruiker aan')],
+        );
     }
 
     #[Override]

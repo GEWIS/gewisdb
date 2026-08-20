@@ -38,7 +38,10 @@ final class CheckoutController extends AbstractController
     )]
     public function completed(Request $request): Response
     {
-        return $this->renderStatus('completed', $request);
+        return $this->renderStatus(
+            'completed',
+            $request,
+        );
     }
 
     #[Route(
@@ -53,7 +56,10 @@ final class CheckoutController extends AbstractController
     )]
     public function cancelled(Request $request): Response
     {
-        return $this->renderStatus('cancelled', $request);
+        return $this->renderStatus(
+            'cancelled',
+            $request,
+        );
     }
 
     #[Route(
@@ -68,7 +74,10 @@ final class CheckoutController extends AbstractController
     )]
     public function error(Request $request): Response
     {
-        return $this->renderStatus('failed', $request);
+        return $this->renderStatus(
+            'failed',
+            $request,
+        );
     }
 
     #[Route(
@@ -88,12 +97,18 @@ final class CheckoutController extends AbstractController
         $restart = $this->registrationService->restartCheckout($token);
 
         if (is_string($restart)) {
-            return $this->redirect($restart, Response::HTTP_SEE_OTHER);
+            return $this->redirect(
+                $restart,
+                Response::HTTP_SEE_OTHER,
+            );
         }
 
-        return $this->render('join/checkout-restart.html.twig', [
-            'error' => CheckoutRestartFailure::CheckoutUnavailable === $restart,
-        ]);
+        return $this->render(
+            'join/checkout-restart.html.twig',
+            [
+                'error' => CheckoutRestartFailure::CheckoutUnavailable === $restart,
+            ],
+        );
     }
 
     /**
@@ -129,16 +144,25 @@ final class CheckoutController extends AbstractController
         Request $request,
     ): Response {
         $prospectiveMember = $this->registrationService->getProspectiveMemberByCheckoutSession(
-            (string) $request->query->get('stripe_session_id', ''),
+            (string) $request->query->get(
+                'stripe_session_id',
+                '',
+            ),
         );
         $token = $prospectiveMember?->getPaymentLink()?->getToken();
 
-        return $this->render('join/checkout-status.html.twig', [
-            'status' => $status,
-            'first_name' => $prospectiveMember?->getFirstName(),
-            'restart_url' => null === $token
-                ? null
-                : $this->generateUrl('join_checkout_restart', ['token' => $token]),
-        ]);
+        return $this->render(
+            'join/checkout-status.html.twig',
+            [
+                'status' => $status,
+                'first_name' => $prospectiveMember?->getFirstName(),
+                'restart_url' => null === $token
+                    ? null
+                    : $this->generateUrl(
+                        'join_checkout_restart',
+                        ['token' => $token],
+                    ),
+            ],
+        );
     }
 }

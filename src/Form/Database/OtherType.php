@@ -30,14 +30,22 @@ class OtherType extends AbstractType
         array $options,
     ): void {
         $builder
-            ->add('content', TextType::class, [
-                'label' => t('Decision'),
-                'constraints' => [
-                    new NotBlank(),
-                    new Length(min: 3),
+            ->add(
+                'content',
+                TextType::class,
+                [
+                    'label' => t('Decision'),
+                    'constraints' => [
+                        new NotBlank(),
+                        new Length(min: 3),
+                    ],
                 ],
-            ])
-            ->add('submit', SubmitType::class, ['label' => t('Add Decision')])
+            )
+            ->add(
+                'submit',
+                SubmitType::class,
+                ['label' => t('Add Decision')],
+            )
             ->setDataMapper($this->dataMapper);
     }
 

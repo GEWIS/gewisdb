@@ -42,7 +42,7 @@ final readonly class MaintenanceSchedule implements ScheduleProviderInterface
     #[Override]
     public function getSchedule(): Schedule
     {
-        return (new Schedule())
+        return new Schedule()
             ->add(
                 RecurringMessage::cron(
                     '0 1 * * *',

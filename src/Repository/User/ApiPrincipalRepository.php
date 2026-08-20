@@ -18,7 +18,10 @@ class ApiPrincipalRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ApiPrincipal::class);
+        parent::__construct(
+            $registry,
+            ApiPrincipal::class,
+        );
     }
 
     public function findByToken(
@@ -26,9 +29,14 @@ class ApiPrincipalRepository extends ServiceEntityRepository
         string $token,
     ): ?ApiPrincipal {
         /** @var ApiPrincipal[] $results */
-        $results = $this->findBy(['token' => $token], limit: 1);
+        $results = $this->findBy(
+            ['token' => $token],
+            limit: 1,
+        );
 
-        return count($results) > 0 ? $results[0] : null;
+        return count($results) > 0
+            ? $results[0]
+            : null;
     }
 
     public function persist(ApiPrincipal $principal): void

@@ -7,9 +7,8 @@ Guidance for AI coding agents working in this repository. Humans should read `RE
 GEWISDB is the GEWIS decision and membership database. It records meetings, decisions (the immutable history of what
 the association decided), members, bodies and mailing lists, and exposes them to other GEWIS systems through an API.
 
-It has been ported from Laminas MVC to Symfony. Nothing of the Laminas tree is left; for the behaviour of the old
-application, read its history on the `main` branch — it is a reference for behaviour, never a place to copy
-patterns from.
+The pre-migration application lives on in the `main` branch's history. It is a reference for *behaviour* when a
+question about intent comes up, and never a place to copy patterns from.
 
 ## Stack
 
@@ -77,14 +76,14 @@ is a delivery mechanism, and its parts belong to what they serve.
 
 ## Dependency injection
 
-Autowiring and autoconfiguration, with scalar bindings in `config/services.yaml`. No factory classes — that was the
-Laminas arrangement. Constructor property promotion, `readonly` where it holds.
+Autowiring and autoconfiguration, with scalar bindings in `config/services.yaml`. No factory classes. Constructor
+property promotion, `readonly` where it holds.
 
 ## Coding style
 
 - `declare(strict_types=1);` immediately after `<?php`.
 - Native types everywhere the parent signature allows.
-- `GEWISPHPCodingStandards` (`phpcs.xml.dist`); `make phpcs` is authoritative, `make phpcbf` fixes a subset.
+- `GEWISPHPCodingStandards` (`phpcs.xml.dist`); `make lint` is authoritative, `make lint-fix` fixes a subset.
 - Doctrine entities use attribute mapping.
 - Comments explain decisions and non-obvious mechanics, not what the code already says.
 
@@ -92,9 +91,12 @@ Laminas arrangement. Constructor property promotion, `readonly` where it holds.
 
 | Command | What it does |
 |---|---|
-| `make phpcs` | Coding standard. |
-| `make phpcbf` | Auto-fix what it can. |
-| `make phpstan` | PHPStan, baseline in `phpstan/`. |
+| `make lint` | Coding standard. |
+| `make lint-fix` | Auto-fix what it can. |
+| `make lint-twig` | Validate the Twig templates. |
+| `make phpstan` | PHPStan at level 8, baseline in `phpstan-baseline.neon`. |
+| `make igor` | Check what the FrankenPHP worker's persistent memory model forbids. |
+| `make test` | PHPUnit; `c=` passes options through. |
 | `make smoke` | Request every GET route and report what does not answer. |
 | `bin/console check:database` | The consistency checks from the Articles of Association and Internal Regulations. |
 
@@ -111,11 +113,15 @@ data the regulations forbid.
   `<target/>` is used *as* the translation, so the interface renders blank rather than falling back.
 - `make cc` — clear the cache and restart the worker. Rarely needed in development: the file watcher restarts it
   on a change.
-- `make exec cmd="..."` — run something in the `web` container.
+- `make exec cmd="..."` — run something in the `web` container; `make bash` opens a shell, `make logs` follows the logs.
+- `make sf c="..."` and `make composer c="..."` — the console and Composer inside the container.
+
+The checks above all run *inside* the `web` container, as GEWISWEB's do, so the stack has to be up. `vendor/` lives
+in the image rather than the bind mount; `make getvendordir` copies it out for the IDE to index.
 
 `.env` is committed and holds development defaults; `.env.local` is yours and is not. Seven names are deliberately
 absent from `.env` (`APP_SECRET`, the `STRIPE_*` keys, `SMTP_PASSWORD`, `LDAP_BINDUSER_PASS`) and are written in
-docker-compose without a value, so they are injected only when set where compose runs: nothing in development, the
+the compose files without a value, so they are injected only when set where compose runs: nothing in development, the
 orchestrator in production. Giving them a value in `.env` would shadow `.env.local`.
 
 Hot reload is on: `FRANKENPHP_WORKER_CONFIG=watch` restarts the workers on a file change and

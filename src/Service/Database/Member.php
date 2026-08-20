@@ -90,9 +90,8 @@ class Member
             return null;
         }
 
-        // set some extra data
-        /** @var ProspectiveMemberModel $prospectiveMember */
         $prospectiveMember = $form->getData();
+        assert($prospectiveMember instanceof ProspectiveMemberModel);
 
         // find if there is an earlier member with the same email or name
         if (
@@ -106,7 +105,10 @@ class Member
 
         // changed on date
         $date = new DateTime();
-        $date->setTime(0, 0);
+        $date->setTime(
+            0,
+            0,
+        );
         $prospectiveMember->setChangedOn($date);
 
         // store the address
@@ -146,7 +148,18 @@ class Member
         MemberModel|ProspectiveMemberModel $member,
         string $type,
     ): void {
-        if (!in_array($type, ['registration', 'welcome', 'checkout-expired', 'checkout-failed', 'refund-created'])) {
+        if (
+            !in_array(
+                $type,
+                [
+                    'registration',
+                    'welcome',
+                    'checkout-expired',
+                    'checkout-failed',
+                    'refund-created',
+                ],
+            )
+        ) {
             throw new InvalidArgumentException('Unknown email type for prospective member.');
         }
 
@@ -185,7 +198,9 @@ class Member
 
         // What the templates say, rather than the record they say it about: the name to greet, the number that has
         // just been assigned, and the link back into a checkout that did not finish.
-        $paymentLink = $member instanceof ProspectiveMemberModel ? $member->getPaymentLink() : null;
+        $paymentLink = $member instanceof ProspectiveMemberModel
+            ? $member->getPaymentLink()
+            : null;
         $context = [
             'member' => $member,
             'firstName' => $member->getFirstName(),
@@ -195,12 +210,18 @@ class Member
                 : $this->joinUrl . '/checkout/restart/' . $paymentLink->getToken(),
         ];
 
-        $secretary = new Address($this->mailToSubscriptionAddress, $this->mailToSubscriptionName);
+        $secretary = new Address(
+            $this->mailToSubscriptionAddress,
+            $this->mailToSubscriptionName,
+        );
 
         // Always try to send the e-mail to the prospective member before sending to the secretary. The secretary can
         // look in the database, the prospective member cannot.
         $this->emailService->send(
-            new Address($member->getEmail(), $member->getFullName()),
+            new Address(
+                $member->getEmail(),
+                $member->getFullName(),
+            ),
             $subjectProspectiveMember,
             $template,
             $context,
@@ -221,7 +242,10 @@ class Member
         string $refundStatus,
     ): void {
         $this->emailService->send(
-            new Address($this->mailToSubscriptionAddress, $this->mailToSubscriptionName),
+            new Address(
+                $this->mailToSubscriptionAddress,
+                $this->mailToSubscriptionName,
+            ),
             'Problem while processing membership refund',
             'email/refund-problem.html.twig',
             [
@@ -262,7 +286,10 @@ class Member
 
         // changed on date
         $date = new DateTime();
-        $date->setTime(0, 0);
+        $date->setTime(
+            0,
+            0,
+        );
         $member->setChangedOn($date);
 
         // creating the first membership for the member
@@ -282,7 +309,13 @@ class Member
         // subscribed to by default is only added once.
         $lists = [];
         foreach ($this->mailingListRepository->findAllOnForm() as $list) {
-            if (!in_array($list->getName(), $prospectiveMember->getLists(), true)) {
+            if (
+                !in_array(
+                    $list->getName(),
+                    $prospectiveMember->getLists(),
+                    true,
+                )
+            ) {
                 continue;
             }
 
@@ -315,7 +348,10 @@ class Member
 
         $this->removeProspective($prospectiveMember);
 
-        $this->sendRegistrationUpdateEmail($member, 'welcome');
+        $this->sendRegistrationUpdateEmail(
+            $member,
+            'welcome',
+        );
 
         return $member;
     }
@@ -428,7 +464,10 @@ class Member
      */
     public function searchFiltered(string $query): array
     {
-        return $this->memberRepository->search($query, true);
+        return $this->memberRepository->search(
+            $query,
+            true,
+        );
     }
 
     /**
@@ -440,7 +479,10 @@ class Member
         string $query,
         string $type,
     ): array {
-        return $this->prospectiveMemberRepository->search($query, $type);
+        return $this->prospectiveMemberRepository->search(
+            $query,
+            $type,
+        );
     }
 
     /**
@@ -530,7 +572,10 @@ class Member
         $member->setHidden(true);
         $member->setDeleted(true);
         $member->unsetMemberships();
-        $this->unsubscribeLists($member, false);
+        $this->unsubscribeLists(
+            $member,
+            false,
+        );
 
         $this->memberRepository->persist($member);
     }
@@ -550,7 +595,10 @@ class Member
 
         // update changed on date
         $date = new DateTime();
-        $date->setTime(0, 0);
+        $date->setTime(
+            0,
+            0,
+        );
         $member->setChangedOn($date);
 
         $this->memberRepository->persist($member);
@@ -628,7 +676,10 @@ class Member
             ];
         }
 
-        $preview = $this->buildBulkRenewalPreview($this->parseMemberIds($memberIds), $membershipType);
+        $preview = $this->buildBulkRenewalPreview(
+            $this->parseMemberIds($memberIds),
+            $membershipType,
+        );
 
         if (!$confirm) {
             return [
@@ -800,11 +851,11 @@ class Member
     {
         $membership = $member->getCurrentOrLastMembership();
 
-        return (new MembershipModel(
+        return new MembershipModel(
             member: $member,
             type: $membership->getType(),
             startDate: clone $membership->getEndDate(),
-        ))->getEndDate();
+        )->getEndDate();
     }
 
     /**
@@ -863,7 +914,10 @@ class Member
             return null;
         }
 
-        $address = $this->memberRepository->findMemberAddress($member, $type);
+        $address = $this->memberRepository->findMemberAddress(
+            $member,
+            $type,
+        );
         $this->memberRepository->removeAddress($address);
 
         return $member;
@@ -903,9 +957,18 @@ class Member
         )->toArray();
 
         // Determine which mailing lists the member should be (un)subscribed from/to.
-        $intersection = array_intersect($selectedLists, $currentLists);
-        $toRemove = array_diff($currentLists, $selectedLists);
-        $toAdd = array_diff($selectedLists, $intersection);
+        $intersection = array_intersect(
+            $selectedLists,
+            $currentLists,
+        );
+        $toRemove = array_diff(
+            $currentLists,
+            $selectedLists,
+        );
+        $toAdd = array_diff(
+            $selectedLists,
+            $intersection,
+        );
 
         // If a member unsubscribes, we set the to be deleted status of that entry
         // This will later be processed and then this entry will be deleted
@@ -916,7 +979,10 @@ class Member
                 continue;
             }
 
-            $membership = $this->mailingListMemberRepository->findByListAndMember($list, $member);
+            $membership = $this->mailingListMemberRepository->findByListAndMember(
+                $list,
+                $member,
+            );
             $membership->setToBeDeleted(true);
 
             $this->auditService->persist(
@@ -1002,11 +1068,14 @@ class Member
             return null;
         }
 
-        /** @var AuditNoteModel $auditNote */
         $auditNote = $form->getData();
+        assert($auditNote instanceof AuditNoteModel);
         $auditNote->setUser($this->auditUser());
 
-        $this->addAuditEntry($member, $auditNote);
+        $this->addAuditEntry(
+            $member,
+            $auditNote,
+        );
 
         return $auditNote;
     }
@@ -1035,9 +1104,21 @@ class Member
      */
     public function getFrontpageData(): array
     {
-        $totalInclExpired = $this->memberRepository->countMembers(true, false, true);
-        $totalExclExpired = $this->memberRepository->countMembers(true, false, false);
-        $nongraduatesExclExpired = $this->memberRepository->countMembers(false, false, false);
+        $totalInclExpired = $this->memberRepository->countMembers(
+            true,
+            false,
+            true,
+        );
+        $totalExclExpired = $this->memberRepository->countMembers(
+            true,
+            false,
+            false,
+        );
+        $nongraduatesExclExpired = $this->memberRepository->countMembers(
+            false,
+            false,
+            false,
+        );
 
         return [
             'members' => $nongraduatesExclExpired,
@@ -1113,7 +1194,10 @@ class Member
             }
 
             $reflectionProperty = $reflectionClass->getProperty($property);
-            $reflectionProperty->setValue($member, $value);
+            $reflectionProperty->setValue(
+                $member,
+                $value,
+            );
         }
 
         $member->setAuthenticationKey($this->generateAuthenticationKey());
@@ -1198,8 +1282,13 @@ class Member
         $lastMembership = $member->getLastMembership();
         assert($lastMembership instanceof MembershipModel);
 
-        $effectiveChangeDate = null === $changeDate ? new DateTime() : clone $changeDate;
-        $effectiveChangeDate->setTime(0, 0);
+        $effectiveChangeDate = null === $changeDate
+            ? new DateTime()
+            : clone $changeDate;
+        $effectiveChangeDate->setTime(
+            0,
+            0,
+        );
 
         if ($effectiveChangeDate < $lastMembership->getStartDate()) {
             $effectiveChangeDate = clone $lastMembership->getStartDate();
@@ -1211,7 +1300,11 @@ class Member
 
         $newExpiration = $effectiveChangeDate->getTimestamp() === $lastMembership->getStartDate()->getTimestamp()
             ? clone $lastMembership->getEndDate()
-            : (new MembershipModel($member, $newType, clone $effectiveChangeDate))->getEndDate();
+            : new MembershipModel(
+                $member,
+                $newType,
+                clone $effectiveChangeDate,
+            )->getEndDate();
 
         return [
             'currentType' => $lastMembership->getType(),
@@ -1227,10 +1320,17 @@ class Member
         MembershipTypes $newType,
         ?DateTime $changeDate = null,
     ): MemberModel {
-        $resolvedChange = $this->resolveMembershipChange($member, $newType, $changeDate);
+        $resolvedChange = $this->resolveMembershipChange(
+            $member,
+            $newType,
+            $changeDate,
+        );
 
         $date = new DateTime();
-        $date->setTime(0, 0);
+        $date->setTime(
+            0,
+            0,
+        );
         $member->setChangedOn($date);
 
         $renewalAudit = new AuditRenewalModel();
@@ -1253,7 +1353,10 @@ class Member
 
         $renewalAudit->setNewExpiration($resolvedChange['newExpiration']);
         $renewalAudit->setUser($this->auditUser());
-        $this->addAuditEntry($member, $renewalAudit);
+        $this->addAuditEntry(
+            $member,
+            $renewalAudit,
+        );
         $this->memberRepository->persist($member);
 
         return $member;
@@ -1265,8 +1368,8 @@ class Member
             return null;
         }
 
-        /** @var AddressModel $address */
         $address = $form->getData();
+        assert($address instanceof AddressModel);
 
         $this->memberRepository->persistAddress($address);
 
@@ -1292,7 +1395,10 @@ class Member
             return $address;
         }
 
-        return $this->memberRepository->findMemberAddress($member, $type);
+        return $this->memberRepository->findMemberAddress(
+            $member,
+            $type,
+        );
     }
 
     /**
@@ -1379,11 +1485,14 @@ class Member
             }
         }
 
-        uasort($members, static function (MemberModel $a, MemberModel $b) {
-            return ($a->getExpiration() <=> $b->getExpiration()) * 10
-                + ($a->getLastName() <=> $b->getLastName()) * 2
-                + ($a->getFirstName() <=> $b->getFirstName());
-        });
+        uasort(
+            $members,
+            static function (MemberModel $a, MemberModel $b) {
+                return ($a->getExpiration() <=> $b->getExpiration()) * 10
+                    + ($a->getLastName() <=> $b->getLastName()) * 2
+                    + ($a->getFirstName() <=> $b->getFirstName());
+            },
+        );
 
         $rows = [];
         foreach ($members as $lidnr => $member) {
@@ -1461,7 +1570,10 @@ class Member
         // Record a renewal audit entry
         $renewalAudit = AuditRenewalModel::fromRenewalLink($renewalLink);
         $renewalAudit->setNewExpiration($newExpiration);
-        $this->addAuditEntry($member, $renewalAudit);
+        $this->addAuditEntry(
+            $member,
+            $renewalAudit,
+        );
 
         $newMembership = new MembershipModel(
             member: $member,
@@ -1486,6 +1598,8 @@ class Member
     {
         $user = $this->security->getUser();
 
-        return $user instanceof User ? $user : null;
+        return $user instanceof User
+            ? $user
+            : null;
     }
 }

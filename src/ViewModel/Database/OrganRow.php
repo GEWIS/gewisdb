@@ -29,13 +29,16 @@ final readonly class OrganRow
 
         return new self(
             $foundation->getAbbr(),
-            $urlGenerator->generate('decision_organ_view', [
-                'type' => $foundation->getMeetingType()->value,
-                'number' => $foundation->getMeetingNumber(),
-                'point' => $foundation->getDecisionPoint(),
-                'decision' => $foundation->getDecisionNumber(),
-                'sequence' => $foundation->getSequence(),
-            ]),
+            $urlGenerator->generate(
+                'decision_organ_view',
+                [
+                    'type' => $foundation->getMeetingType()->value,
+                    'number' => $foundation->getMeetingNumber(),
+                    'point' => $foundation->getDecisionPoint(),
+                    'decision' => $foundation->getDecisionNumber(),
+                    'sequence' => $foundation->getSequence(),
+                ],
+            ),
         );
     }
 }

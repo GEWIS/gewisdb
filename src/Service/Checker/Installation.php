@@ -36,7 +36,10 @@ class Installation
     {
         $key = $meeting->getType()->value . '-' . $meeting->getNumber();
 
-        if (null !== $this->installations && $key === $this->installationsFor) {
+        if (
+            null !== $this->installations
+            && $key === $this->installationsFor
+        ) {
             return $this->installations;
         }
 

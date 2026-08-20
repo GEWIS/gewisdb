@@ -26,8 +26,16 @@ class DeleteMemberType extends AbstractType
         FormBuilderInterface $builder,
         array $options,
     ): void {
-        $builder->add('submit_yes', SubmitType::class, ['label' => t('Yes')]);
-        $builder->add('submit_no', SubmitType::class, ['label' => t('No')]);
+        $builder->add(
+            'submit_yes',
+            SubmitType::class,
+            ['label' => t('Yes')],
+        );
+        $builder->add(
+            'submit_no',
+            SubmitType::class,
+            ['label' => t('No')],
+        );
     }
 
     #[Override]

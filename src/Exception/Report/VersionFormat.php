@@ -24,6 +24,10 @@ class VersionFormat extends ApiException
             rawurlencode($given),
         );
 
-        parent::__construct($message, $code, $previousThrowable);
+        parent::__construct(
+            $message,
+            $code,
+            $previousThrowable,
+        );
     }
 }

@@ -101,11 +101,21 @@ class Membership
                 $expirationYear += 100;
             }
 
-            $endDate->setDate($expirationYear, 7, 1);
+            $endDate->setDate(
+                $expirationYear,
+                7,
+                1,
+            );
         }
 
-        $startDate->setTime(0, 0);
-        $endDate->setTime(0, 0);
+        $startDate->setTime(
+            0,
+            0,
+        );
+        $endDate->setTime(
+            0,
+            0,
+        );
         $this->member = $member;
         $this->type = $type;
         $this->startDate = StringableDateTime::fromDateTime($startDate);
@@ -150,7 +160,10 @@ class Membership
             throw new LogicException('End date cannot be after current end date, create a new membership instead.');
         }
 
-        $endDate->setTime(0, 0);
+        $endDate->setTime(
+            0,
+            0,
+        );
         $this->endDate = $endDate;
     }
 

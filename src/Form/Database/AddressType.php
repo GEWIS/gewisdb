@@ -39,68 +39,96 @@ class AddressType extends AbstractType
     ): void {
         if ($options['include_type']) {
             // Which of the three addresses this is follows from the page, not from the person filling it in.
-            $builder->add('type', HiddenType::class, [
-                'invalid_message' => 'Select an existing address type.',
-            ]);
+            $builder->add(
+                'type',
+                HiddenType::class,
+                [
+                    'invalid_message' => 'Select an existing address type.',
+                ],
+            );
 
             $builder->get('type')->addModelTransformer(new StringToEnumTransformer(AddressTypes::class));
         }
 
-        $builder->add('country', EnumType::class, [
-            'label' => t('Postal Region'),
-            'class' => PostalRegions::class,
-            'placeholder' => t('Select Postal Region'),
-            'invalid_message' => 'Select an existing postal region.',
-            'constraints' => [new NotNull()],
-        ]);
-
-        $builder->add('street', TextType::class, [
-            'label' => t('Street'),
-            'constraints' => [
-                new NotBlank(),
-                new Length(
-                    min: 1,
-                    max: 32,
-                ),
+        $builder->add(
+            'country',
+            EnumType::class,
+            [
+                'label' => t('Postal Region'),
+                'class' => PostalRegions::class,
+                'placeholder' => t('Select Postal Region'),
+                'invalid_message' => 'Select an existing postal region.',
+                'constraints' => [new NotNull()],
             ],
-        ]);
+        );
 
-        $builder->add('number', TextType::class, [
-            'label' => t('House Number'),
-            'constraints' => [
-                new NotBlank(),
-                new Regex(pattern: '/^[1-9]\d*(?:[ \/\-\#\.]?[a-zA-Z0-9]+)?$/'),
+        $builder->add(
+            'street',
+            TextType::class,
+            [
+                'label' => t('Street'),
+                'constraints' => [
+                    new NotBlank(),
+                    new Length(
+                        min: 1,
+                        max: 32,
+                    ),
+                ],
             ],
-        ]);
+        );
 
-        $builder->add('postalCode', TextType::class, [
-            'label' => t('Postal Code'),
-            'constraints' => [
-                new NotBlank(),
-                new Length(
-                    min: 2,
-                    max: 16,
-                ),
+        $builder->add(
+            'number',
+            TextType::class,
+            [
+                'label' => t('House Number'),
+                'constraints' => [
+                    new NotBlank(),
+                    new Regex(pattern: '/^[1-9]\d*(?:[ \/\-\#\.]?[a-zA-Z0-9]+)?$/'),
+                ],
             ],
-        ]);
+        );
 
-        $builder->add('city', TextType::class, [
-            'label' => t('City'),
-            'constraints' => [
-                new NotBlank(),
-                new Length(
-                    min: 1,
-                    max: 32,
-                ),
+        $builder->add(
+            'postalCode',
+            TextType::class,
+            [
+                'label' => t('Postal Code'),
+                'constraints' => [
+                    new NotBlank(),
+                    new Length(
+                        min: 2,
+                        max: 16,
+                    ),
+                ],
             ],
-        ]);
+        );
 
-        $builder->add('phone', TextType::class, [
-            'label' => t('Phone Number'),
-            'required' => false,
-            // The column is NOT NULL: an untouched optional field is an empty string, not a missing one.
-            'empty_data' => '',
-        ]);
+        $builder->add(
+            'city',
+            TextType::class,
+            [
+                'label' => t('City'),
+                'constraints' => [
+                    new NotBlank(),
+                    new Length(
+                        min: 1,
+                        max: 32,
+                    ),
+                ],
+            ],
+        );
+
+        $builder->add(
+            'phone',
+            TextType::class,
+            [
+                'label' => t('Phone Number'),
+                'required' => false,
+                // The column is NOT NULL: an untouched optional field is an empty string, not a missing one.
+                'empty_data' => '',
+            ],
+        );
 
         // A new address starts out in the Netherlands; one that already exists keeps the region it has.
         $builder->get('country')->addEventListener(
@@ -125,6 +153,9 @@ class AddressType extends AbstractType
             'include_type' => true,
         ]);
 
-        $resolver->setAllowedTypes('include_type', 'bool');
+        $resolver->setAllowedTypes(
+            'include_type',
+            'bool',
+        );
     }
 }

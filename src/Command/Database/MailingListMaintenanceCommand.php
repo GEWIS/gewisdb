@@ -52,7 +52,10 @@ class MailingListMaintenanceCommand extends Command
             );
         }
 
-        $this->mailingListService->performMaintenance($output, $dryRun);
+        $this->mailingListService->performMaintenance(
+            $output,
+            $dryRun,
+        );
 
         return Command::SUCCESS;
     }

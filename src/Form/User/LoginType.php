@@ -45,31 +45,51 @@ class LoginType extends AbstractType
         // In demo mode the credentials come from the environment: the login is shown but fixed, and the password is
         // carried along in a hidden field instead of being asked for.
         if ('' !== $demoPassword) {
-            $builder->add('login', TextType::class, [
-                'label' => t('Login'),
-                'data' => $demoUsername,
-                'attr' => ['readonly' => true],
-                'constraints' => self::loginConstraints(),
-            ]);
+            $builder->add(
+                'login',
+                TextType::class,
+                [
+                    'label' => t('Login'),
+                    'data' => $demoUsername,
+                    'attr' => ['readonly' => true],
+                    'constraints' => self::loginConstraints(),
+                ],
+            );
 
-            $builder->add('password', HiddenType::class, [
-                'label' => t('Password'),
-                'data' => $demoPassword,
-                'constraints' => [new Assert\NotBlank()],
-            ]);
+            $builder->add(
+                'password',
+                HiddenType::class,
+                [
+                    'label' => t('Password'),
+                    'data' => $demoPassword,
+                    'constraints' => [new Assert\NotBlank()],
+                ],
+            );
         } else {
-            $builder->add('login', TextType::class, [
-                'label' => t('Login'),
-                'constraints' => self::loginConstraints(),
-            ]);
+            $builder->add(
+                'login',
+                TextType::class,
+                [
+                    'label' => t('Login'),
+                    'constraints' => self::loginConstraints(),
+                ],
+            );
 
-            $builder->add('password', PasswordType::class, [
-                'label' => t('Password'),
-                'constraints' => [new Assert\NotBlank()],
-            ]);
+            $builder->add(
+                'password',
+                PasswordType::class,
+                [
+                    'label' => t('Password'),
+                    'constraints' => [new Assert\NotBlank()],
+                ],
+            );
         }
 
-        $builder->add('submit', SubmitType::class, ['label' => t('Login')]);
+        $builder->add(
+            'submit',
+            SubmitType::class,
+            ['label' => t('Login')],
+        );
     }
 
     #[Override]
@@ -90,7 +110,10 @@ class LoginType extends AbstractType
     {
         return [
             new Assert\NotBlank(),
-            new Assert\Length(min: 3, max: 32),
+            new Assert\Length(
+                min: 3,
+                max: 32,
+            ),
             new Assert\Regex(pattern: '/^[a-zA-Z0-9]*$/'),
         ];
     }

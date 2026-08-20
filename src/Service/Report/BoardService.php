@@ -78,7 +78,10 @@ class BoardService
      */
     private function findBoardMember(ReportBoardInstallation $installation): ?BoardMember
     {
-        $rp = new ReflectionProperty(ReportBoardInstallation::class, 'boardMember');
+        $rp = new ReflectionProperty(
+            ReportBoardInstallation::class,
+            'boardMember',
+        );
 
         if ($rp->isInitialized($installation)) {
             return $installation->getBoardMember();

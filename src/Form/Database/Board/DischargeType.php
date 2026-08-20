@@ -30,8 +30,16 @@ class DischargeType extends AbstractType
         array $options,
     ): void {
         $builder
-            ->add('subdecision', SubDecisionType::class, ['subdecision_class' => Installation::class])
-            ->add('submit', SubmitType::class, ['label' => t('Discharge Board Member')])
+            ->add(
+                'subdecision',
+                SubDecisionType::class,
+                ['subdecision_class' => Installation::class],
+            )
+            ->add(
+                'submit',
+                SubmitType::class,
+                ['label' => t('Discharge Board Member')],
+            )
             ->setDataMapper($this->dataMapper);
     }
 

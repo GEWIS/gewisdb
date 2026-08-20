@@ -96,7 +96,7 @@ class Checker
      */
     private function sendMail(array $reports): void
     {
-        $message = (new TemplatedEmail())
+        $message = new TemplatedEmail()
             ->to(new Address($this->mailToCheckerResultAddress, $this->mailToCheckerResultName))
             ->from(new Address($this->mailFromAddress, $this->mailFromName))
             ->subject('Database Checker Report')
@@ -125,11 +125,20 @@ class Checker
         foreach ($installations as $installation) {
             $installationToOrganFoundation = $installation->getFoundation()->getHash();
 
-            if (in_array($installationToOrganFoundation, $organs, true)) {
+            if (
+                in_array(
+                    $installationToOrganFoundation,
+                    $organs,
+                    true,
+                )
+            ) {
                 continue;
             }
 
-            $errors[] = new ErrorModel\MemberInNonExistingOrgan($meeting, $installation);
+            $errors[] = new ErrorModel\MemberInNonExistingOrgan(
+                $meeting,
+                $installation,
+            );
         }
 
         return $errors;
@@ -158,7 +167,10 @@ class Checker
                 continue;
             }
 
-            $errors[] = new ErrorModel\MemberExpiredButStillInOrgan($meeting, $installation);
+            $errors[] = new ErrorModel\MemberExpiredButStillInOrgan(
+                $meeting,
+                $installation,
+            );
         }
 
         return $errors;
@@ -409,18 +421,28 @@ class Checker
                     continue;
                 }
 
-                $errors[] = new ErrorModel\MemberInactiveInOrganWithoutInactiveMembers($meeting, $installation);
+                $errors[] = new ErrorModel\MemberInactiveInOrganWithoutInactiveMembers(
+                    $meeting,
+                    $installation,
+                );
             }
 
             if (count($members) < $type->getMinimumMembers()) {
-                $errors[] = new ErrorModel\OrganTooSmall($meeting, $organ, count($members));
+                $errors[] = new ErrorModel\OrganTooSmall(
+                    $meeting,
+                    $organ,
+                    count($members),
+                );
             } elseif (
                 $type->requiresChair()
                 && [] === $chairs
             ) {
                 // Only worth saying once an organ actually has people in it; an empty one is already reported as
                 // being too small.
-                $errors[] = new ErrorModel\OrganWithoutChair($meeting, $organ);
+                $errors[] = new ErrorModel\OrganWithoutChair(
+                    $meeting,
+                    $organ,
+                );
             }
         }
 
@@ -442,18 +464,27 @@ class Checker
 
         foreach ($this->annulmentService->getAnnulmentsAtMeeting($meeting) as $annulment) {
             if ($this->annulmentService->annulsAnAnnulment($annulment)) {
-                $errors[] = new ErrorModel\AnnulmentOfAnnulment($meeting, $annulment);
+                $errors[] = new ErrorModel\AnnulmentOfAnnulment(
+                    $meeting,
+                    $annulment,
+                );
             }
 
             if ($this->annulmentService->annulsALaterDecision($annulment)) {
-                $errors[] = new ErrorModel\AnnulmentOfLaterDecision($meeting, $annulment);
+                $errors[] = new ErrorModel\AnnulmentOfLaterDecision(
+                    $meeting,
+                    $annulment,
+                );
             }
 
             if ([] === $this->annulmentService->getEarlierAnnulments($annulment)) {
                 continue;
             }
 
-            $errors[] = new ErrorModel\DecisionAnnulledMoreThanOnce($meeting, $annulment);
+            $errors[] = new ErrorModel\DecisionAnnulledMoreThanOnce(
+                $meeting,
+                $annulment,
+            );
         }
 
         return $errors;

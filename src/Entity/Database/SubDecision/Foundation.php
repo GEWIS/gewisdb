@@ -171,19 +171,31 @@ class Foundation extends SubDecision
 
         if (OrganTypes::SC !== $this->getOrganType()) {
             $replacements += [
-                '%ORGAN_TYPE%' => $this->getOrganType()->trans($translator, $language->getLangParam()),
+                '%ORGAN_TYPE%' => $this->getOrganType()->trans(
+                    $translator,
+                    $language->getLangParam(),
+                ),
                 '%ORGAN_NAME%' => $this->getName(),
             ];
         } else {
             $replacements += [
-                '%MEETING_TYPE%' => $this->getMeetingType()->trans($translator, $language->getLangParam()),
+                '%MEETING_TYPE%' => $this->getMeetingType()->trans(
+                    $translator,
+                    $language->getLangParam(),
+                ),
                 '%MEETING_NUMBER%' => $this->getMeetingNumber(),
                 '%ORGAN_PURPOSE%' => $this->getPurpose(),
             ];
         }
 
         /** @psalm-suppress InvalidArgument */
-        return $this->replaceContentPlaceholders($this->getTranslatedTemplate($translator, $language), $replacements);
+        return $this->replaceContentPlaceholders(
+            $this->getTranslatedTemplate(
+                $translator,
+                $language,
+            ),
+            $replacements,
+        );
     }
 
     /**

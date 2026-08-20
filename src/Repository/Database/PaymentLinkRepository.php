@@ -15,6 +15,9 @@ class PaymentLinkRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, PaymentLink::class);
+        parent::__construct(
+            $registry,
+            PaymentLink::class,
+        );
     }
 }

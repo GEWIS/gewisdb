@@ -34,7 +34,10 @@ abstract class AbstractPaginatedOverview
     use DefaultActionTrait;
     use PageSizeTrait;
 
-    #[LiveProp(writable: true, url: true)]
+    #[LiveProp(
+        writable: true,
+        url: true,
+    )]
     public int $page = 1;
 
     /** @var Paginator<T>|null */
@@ -56,7 +59,10 @@ abstract class AbstractPaginatedOverview
      */
     public function getRows(): array
     {
-        return iterator_to_array($this->paginator()->getIterator(), false);
+        return iterator_to_array(
+            $this->paginator()->getIterator(),
+            false,
+        );
     }
 
     public function getTotalCount(): int
@@ -66,7 +72,10 @@ abstract class AbstractPaginatedOverview
 
     public function getTotalPages(): int
     {
-        return max(1, (int) ceil($this->getTotalCount() / $this->pageSize()));
+        return max(
+            1,
+            (int) ceil($this->getTotalCount() / $this->pageSize()),
+        );
     }
 
     #[LiveAction]
@@ -75,8 +84,14 @@ abstract class AbstractPaginatedOverview
     {
         // Assign before clamping: working out the last page runs the query, and it has to run for the page that was
         // asked for rather than the one being left behind.
-        $this->page = max(1, $page);
-        $this->page = min($this->page, $this->getTotalPages());
+        $this->page = max(
+            1,
+            $page,
+        );
+        $this->page = min(
+            $this->page,
+            $this->getTotalPages(),
+        );
     }
 
     /**
@@ -92,13 +107,19 @@ abstract class AbstractPaginatedOverview
      */
     private function paginator(): Paginator
     {
-        $page = max(1, $this->page);
+        $page = max(
+            1,
+            $this->page,
+        );
 
         if (
             null === $this->paginator
             || $this->paginatorPage !== $page
         ) {
-            $this->paginator = $this->createPaginator($page, $this->pageSize());
+            $this->paginator = $this->createPaginator(
+                $page,
+                $this->pageSize(),
+            );
             $this->paginatorPage = $page;
         }
 

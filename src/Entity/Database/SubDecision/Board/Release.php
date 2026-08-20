@@ -112,10 +112,22 @@ class Release extends SubDecision
     ): string {
         $replacements = [
             '%MEMBER%' => $this->getInstallation()->getMember()->getFullName(),
-            '%DATE%' => $this->formatDate($this->date, $language),
-            '%FUNCTION%' => $this->getInstallation()->getFunction()->trans($translator, $language->getLangParam()),
+            '%DATE%' => $this->formatDate(
+                $this->date,
+                $language,
+            ),
+            '%FUNCTION%' => $this->getInstallation()->getFunction()->trans(
+                $translator,
+                $language->getLangParam(),
+            ),
         ];
 
-        return $this->replaceContentPlaceholders($this->getTranslatedTemplate($translator, $language), $replacements);
+        return $this->replaceContentPlaceholders(
+            $this->getTranslatedTemplate(
+                $translator,
+                $language,
+            ),
+            $replacements,
+        );
     }
 }

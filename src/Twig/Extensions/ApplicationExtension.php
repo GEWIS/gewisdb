@@ -22,8 +22,14 @@ final class ApplicationExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('notification_count', $this->notificationCount(...)),
-            new TwigFunction('prospective_awaiting_approval', $this->prospectiveAwaitingApproval(...)),
+            new TwigFunction(
+                'notification_count',
+                $this->notificationCount(...),
+            ),
+            new TwigFunction(
+                'prospective_awaiting_approval',
+                $this->prospectiveAwaitingApproval(...),
+            ),
         ];
     }
 

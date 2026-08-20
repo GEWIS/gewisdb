@@ -28,7 +28,13 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
  */
 #[UniqueConstraint(
     name: 'installationDec_uniq',
-    columns: ['r_meeting_type', 'r_meeting_number', 'r_decision_point', 'r_decision_number', 'r_sequence'],
+    columns: [
+        'r_meeting_type',
+        'r_meeting_number',
+        'r_decision_point',
+        'r_decision_number',
+        'r_sequence',
+    ],
 )]
 #[Entity(repositoryClass: BoardMemberRepository::class)]
 class BoardMember

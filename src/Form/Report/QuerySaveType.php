@@ -37,22 +37,34 @@ class QuerySaveType extends AbstractType
         FormBuilderInterface $builder,
         array $options,
     ): void {
-        $builder->add('category', TextType::class, [
-            'label' => t('Category'),
-            'required' => false,
-            'empty_data' => '',
-        ]);
+        $builder->add(
+            'category',
+            TextType::class,
+            [
+                'label' => t('Category'),
+                'required' => false,
+                'empty_data' => '',
+            ],
+        );
 
         // Not `required`: the browser would refuse to submit the form until it was filled in, and the other button
         // on this form runs the query without saving it. Naming is demanded when saving, by the constraint below.
-        $builder->add('name', TextType::class, [
-            'label' => t('Name'),
-            'required' => false,
-            'empty_data' => '',
-            'constraints' => [new Assert\NotBlank(groups: [self::SAVE_GROUP])],
-        ]);
+        $builder->add(
+            'name',
+            TextType::class,
+            [
+                'label' => t('Name'),
+                'required' => false,
+                'empty_data' => '',
+                'constraints' => [new Assert\NotBlank(groups: [self::SAVE_GROUP])],
+            ],
+        );
 
-        $builder->add('submit_save', SubmitType::class, ['label' => t('Save')]);
+        $builder->add(
+            'submit_save',
+            SubmitType::class,
+            ['label' => t('Save')],
+        );
     }
 
     #[Override]
@@ -65,7 +77,10 @@ class QuerySaveType extends AbstractType
                 $save = $form->get('submit_save');
 
                 return $save instanceof ClickableInterface && $save->isClicked()
-                    ? ['Default', self::SAVE_GROUP]
+                    ? [
+                        'Default',
+                        self::SAVE_GROUP,
+                    ]
                     : ['Default'];
             },
         ]);

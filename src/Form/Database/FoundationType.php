@@ -35,39 +35,68 @@ class FoundationType extends AbstractType
         array $options,
     ): void {
         $builder
-            ->add('type', EnumType::class, [
-                'label' => t('Type'),
-                'class' => OrganTypes::class,
-                'expanded' => true,
-                'placeholder' => false,
-                'constraints' => [new NotNull()],
-            ])
-            ->add('name', TextType::class, [
-                'label' => t('Name'),
-                'constraints' => [
-                    new NotBlank(),
-                    new Length(min: 2, max: 128),
+            ->add(
+                'type',
+                EnumType::class,
+                [
+                    'label' => t('Type'),
+                    'class' => OrganTypes::class,
+                    'expanded' => true,
+                    'placeholder' => false,
+                    'constraints' => [new NotNull()],
                 ],
-            ])
-            ->add('abbr', TextType::class, [
-                'label' => t('Abbreviation'),
-                'constraints' => [
-                    new NotBlank(),
-                    new Length(min: 2, max: 32),
+            )
+            ->add(
+                'name',
+                TextType::class,
+                [
+                    'label' => t('Name'),
+                    'constraints' => [
+                        new NotBlank(),
+                        new Length(
+                            min: 2,
+                            max: 128,
+                        ),
+                    ],
                 ],
-            ])
-            ->add('members', CollectionType::class, [
-                'label' => t('Members'),
-                'entry_type' => MemberFunctionType::class,
-                'allow_add' => true,
-                'allow_delete' => true,
-                'prototype' => true,
-                'prototype_name' => '__index__',
-                // The page opens with two blank rows to fill in; further ones are added from the prototype.
-                'data' => [[], []],
-                'constraints' => [new Count(min: 1)],
-            ])
-            ->add('submit', SubmitType::class, ['label' => t('Found Body')])
+            )
+            ->add(
+                'abbr',
+                TextType::class,
+                [
+                    'label' => t('Abbreviation'),
+                    'constraints' => [
+                        new NotBlank(),
+                        new Length(
+                            min: 2,
+                            max: 32,
+                        ),
+                    ],
+                ],
+            )
+            ->add(
+                'members',
+                CollectionType::class,
+                [
+                    'label' => t('Members'),
+                    'entry_type' => MemberFunctionType::class,
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'prototype' => true,
+                    'prototype_name' => '__index__',
+                    // The page opens with two blank rows to fill in; further ones are added from the prototype.
+                    'data' => [
+                        [],
+                        [],
+                    ],
+                    'constraints' => [new Count(min: 1)],
+                ],
+            )
+            ->add(
+                'submit',
+                SubmitType::class,
+                ['label' => t('Found Body')],
+            )
             ->setDataMapper($this->dataMapper);
     }
 

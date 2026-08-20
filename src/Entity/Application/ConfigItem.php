@@ -31,7 +31,10 @@ use function sprintf;
 #[HasLifecycleCallbacks]
 #[UniqueConstraint(
     name: 'configitem_unique_idx',
-    columns: ['namespace', 'key'],
+    columns: [
+        'namespace',
+        'key',
+    ],
 )]
 class ConfigItem
 {

@@ -104,7 +104,10 @@ class Decision
     #[OneToMany(
         targetEntity: SubDecision::class,
         mappedBy: 'decision',
-        cascade: ['persist', 'remove'],
+        cascade: [
+            'persist',
+            'remove',
+        ],
     )]
     #[OrderBy(value: ['sequence' => 'ASC'])]
     private Collection $subdecisions;

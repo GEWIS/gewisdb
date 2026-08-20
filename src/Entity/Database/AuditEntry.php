@@ -122,7 +122,10 @@ abstract class AuditEntry
 
     public function setMember(Member $member): void
     {
-        if (null !== $this->member && $this->member !== $member) {
+        if (
+            null !== $this->member
+            && $this->member !== $member
+        ) {
             throw new LogicException('Must not link an audit entry to another object after creation');
         }
 

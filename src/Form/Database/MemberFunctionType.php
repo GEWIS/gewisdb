@@ -33,7 +33,10 @@ class MemberFunctionType extends AbstractType
         FormBuilderInterface $builder,
         array $options,
     ): void {
-        $builder->add('member', MemberLookupType::class);
+        $builder->add(
+            'member',
+            MemberLookupType::class,
+        );
 
         $functionOptions = [
             'label' => t('Functie'),
@@ -47,7 +50,11 @@ class MemberFunctionType extends AbstractType
             $functionOptions['data'] = InstallationFunctions::Member;
         }
 
-        $builder->add('function', EnumType::class, $functionOptions);
+        $builder->add(
+            'function',
+            EnumType::class,
+            $functionOptions,
+        );
     }
 
     #[Override]
@@ -58,7 +65,10 @@ class MemberFunctionType extends AbstractType
             'include_administrative' => true,
         ]);
 
-        $resolver->setAllowedTypes('include_administrative', 'bool');
+        $resolver->setAllowedTypes(
+            'include_administrative',
+            'bool',
+        );
     }
 
     /**

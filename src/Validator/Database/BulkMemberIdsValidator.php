@@ -23,7 +23,10 @@ class BulkMemberIdsValidator extends ConstraintValidator
         Constraint $constraint,
     ): void {
         if (!$constraint instanceof BulkMemberIds) {
-            throw new UnexpectedTypeException($constraint, BulkMemberIds::class);
+            throw new UnexpectedTypeException(
+                $constraint,
+                BulkMemberIds::class,
+            );
         }
 
         if (null === $value) {
@@ -31,7 +34,10 @@ class BulkMemberIdsValidator extends ConstraintValidator
         }
 
         if (!is_scalar($value)) {
-            throw new UnexpectedValueException($value, 'string');
+            throw new UnexpectedValueException(
+                $value,
+                'string',
+            );
         }
 
         $rawMemberIds = trim((string) $value);
@@ -49,7 +55,10 @@ class BulkMemberIdsValidator extends ConstraintValidator
         foreach (BulkMemberIds::tokenize($rawMemberIds) as $token) {
             if (!ctype_digit($token)) {
                 $this->context->buildViolation($constraint->nonNumericMessage)
-                    ->setParameter('{{ value }}', $token)
+                    ->setParameter(
+                        '{{ value }}',
+                        $token,
+                    )
                     ->setCode(BulkMemberIds::NON_NUMERIC_ERROR)
                     ->addViolation();
 
@@ -58,9 +67,17 @@ class BulkMemberIdsValidator extends ConstraintValidator
 
             $memberId = (int) $token;
 
-            if (array_key_exists($memberId, $seenIds)) {
+            if (
+                array_key_exists(
+                    $memberId,
+                    $seenIds,
+                )
+            ) {
                 $this->context->buildViolation($constraint->duplicateMessage)
-                    ->setParameter('{{ value }}', (string) $memberId)
+                    ->setParameter(
+                        '{{ value }}',
+                        (string) $memberId,
+                    )
                     ->setCode(BulkMemberIds::DUPLICATE_ERROR)
                     ->addViolation();
 

@@ -53,10 +53,27 @@ class SetRoleMiddleware implements MiddlewareInterface
         }
 
         $roles = [
-            implode(':', [$roleDefaultHost, $roleDefaultPort, $roleDefaultDB]) => $roleDefaultRole,
-            implode(':', [$roleReportHost, $roleReportPort, $roleReportDB]) => $roleReportRole,
+            implode(
+                ':',
+                [
+                    $roleDefaultHost,
+                    $roleDefaultPort,
+                    $roleDefaultDB,
+                ],
+            ) => $roleDefaultRole,
+            implode(
+                ':',
+                [
+                    $roleReportHost,
+                    $roleReportPort,
+                    $roleReportDB,
+                ],
+            ) => $roleReportRole,
         ];
 
-        return new SetRoleDriver($driver, $roles);
+        return new SetRoleDriver(
+            $driver,
+            $roles,
+        );
     }
 }

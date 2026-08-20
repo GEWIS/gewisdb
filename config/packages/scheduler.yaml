@@ -1,5 +1,5 @@
 # Symfony Scheduler takes over from the container crontab. The schedule declared in src/Scheduler/ is dispatched by a
-# long-running worker instead of by crond, declared as the `scheduler` service in docker-compose.yml:
+# long-running worker instead of by crond, declared as the `scheduler` service in compose.yaml:
 #
 #     bin/console messenger:consume scheduler_maintenance
 #

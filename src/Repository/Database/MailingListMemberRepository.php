@@ -17,7 +17,10 @@ class MailingListMemberRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, MailingListMember::class);
+        parent::__construct(
+            $registry,
+            MailingListMember::class,
+        );
     }
 
     /**
@@ -46,8 +49,14 @@ class MailingListMemberRepository extends ServiceEntityRepository
         $qb->where('m.mailingList = :list')
             ->andWhere('m.member = :member');
 
-        $qb->setParameter('list', $list)
-            ->setParameter('member', $member);
+        $qb->setParameter(
+            'list',
+            $list,
+        )
+            ->setParameter(
+                'member',
+                $member,
+            );
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -92,11 +101,20 @@ class MailingListMemberRepository extends ServiceEntityRepository
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
 
-        $qb->update(MailingListMember::class, 'mlm')
-            ->set('mlm.toBeCreated', 'true')
+        $qb->update(
+            MailingListMember::class,
+            'mlm',
+        )
+            ->set(
+                'mlm.toBeCreated',
+                'true',
+            )
             ->where('mlm.mailingList = :list')
             ->andWhere('mlm.toBeDeleted != true')
-            ->setParameter('list', $mailingList);
+            ->setParameter(
+                'list',
+                $mailingList,
+            );
 
         $qb->getQuery()->execute();
     }
@@ -114,7 +132,10 @@ class MailingListMemberRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('mlm');
 
-        $qb->leftJoin('mlm.member', 'm')
+        $qb->leftJoin(
+            'mlm.member',
+            'm',
+        )
             ->where( //X
                 $qb->expr()->notIn(
                     'mlm.member',
@@ -144,7 +165,10 @@ class MailingListMemberRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('mlm');
 
-        $qb->innerJoin('mlm.mailingList', 'ml')
+        $qb->innerJoin(
+            'mlm.mailingList',
+            'ml',
+        )
             ->where('ml.mailmanList IS NULL')
             ->andWhere('ml.listmonkList IS NULL')
             ->andWhere('mlm.toBeCreated = True OR mlm.toBeDeleted = True');

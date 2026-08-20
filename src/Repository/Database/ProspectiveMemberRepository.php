@@ -30,7 +30,10 @@ class ProspectiveMemberRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ProspectiveMember::class);
+        parent::__construct(
+            $registry,
+            ProspectiveMember::class,
+        );
     }
 
     /**
@@ -43,7 +46,10 @@ class ProspectiveMemberRepository extends ServiceEntityRepository
         $qb->where('LOWER(m.email) = LOWER(:email)')
             ->setMaxResults(1);
 
-        $qb->setParameter(':email', $email);
+        $qb->setParameter(
+            ':email',
+            $email,
+        );
 
         $ret = $qb->getQuery()->getResult();
 
@@ -65,40 +71,75 @@ class ProspectiveMemberRepository extends ServiceEntityRepository
             ->orWhere("CONCAT(LOWER(m.firstName), ' ', LOWER(m.middleName), ' ', LOWER(m.lastName)) LIKE :name")
             ->orWhere('m.email LIKE :name')
             ->setMaxResults(128)
-            ->orderBy('m.lidnr', 'DESC')
+            ->orderBy(
+                'm.lidnr',
+                'DESC',
+            )
             ->setFirstResult(0);
 
-        $qb->setParameter(':name', '%' . strtolower($query) . '%');
+        $qb->setParameter(
+            ':name',
+            '%' . strtolower($query) . '%',
+        );
 
         // also allow searching for membership number
         if (is_numeric($query)) {
             $qb->orWhere('m.lidnr = :nr');
             $qb->orWhere('m.studentNumber = :nr');
-            $qb->setParameter(':nr', $query);
+            $qb->setParameter(
+                ':nr',
+                $query,
+            );
         }
 
         // Get Checkout Session status.
-        $qb->leftJoin(CheckoutSession::class, 'cs', JoinExpr::WITH, 'cs.prospectiveMember = m.lidnr');
+        $qb->leftJoin(
+            CheckoutSession::class,
+            'cs',
+            JoinExpr::WITH,
+            'cs.prospectiveMember = m.lidnr',
+        );
         $qbc = $this->getEntityManager()->createQueryBuilder();
         $qbc->select('MAX(css.id)')
-            ->from(CheckoutSession::class, 'css')
+            ->from(
+                CheckoutSession::class,
+                'css',
+            )
             ->where('css.prospectiveMember = m.lidnr');
         $qb->andWhere($qb->expr()->orX(
-            $qb->expr()->eq('cs.id', '(' . $qbc->getDQL() . ')'),
+            $qb->expr()->eq(
+                'cs.id',
+                '(' . $qbc->getDQL() . ')',
+            ),
             $qb->expr()->isNull('cs.id'),
         ));
 
         if ('paid' === $type) {
             $qb->andWhere('cs.state = :paid')
-                ->setParameter('paid', CheckoutSessionStates::Paid);
+                ->setParameter(
+                    'paid',
+                    CheckoutSessionStates::Paid,
+                );
         } elseif ('failed' === $type) {
             $qb->andWhere('cs.state = :expired OR cs.state = :failed OR cs.state IS NULL')
-                ->setParameter('expired', CheckoutSessionStates::Expired)
-                ->setParameter('failed', CheckoutSessionStates::Failed);
+                ->setParameter(
+                    'expired',
+                    CheckoutSessionStates::Expired,
+                )
+                ->setParameter(
+                    'failed',
+                    CheckoutSessionStates::Failed,
+                );
         } else {
             $qb->andWhere('cs.state = :created OR cs.state = :pending')
-                ->setParameter('created', CheckoutSessionStates::Created)
-                ->setParameter('pending', CheckoutSessionStates::Pending);
+                ->setParameter(
+                    'created',
+                    CheckoutSessionStates::Created,
+                )
+                ->setParameter(
+                    'pending',
+                    CheckoutSessionStates::Pending,
+                );
         }
 
         return $qb->getQuery()->getResult();
@@ -114,18 +155,29 @@ class ProspectiveMemberRepository extends ServiceEntityRepository
     {
         // Get all prospective members and their checkout sessions
         $qb = $this->createQueryBuilder('m');
-        $qb->leftJoin(CheckoutSession::class, 'cs', JoinExpr::WITH, 'cs.prospectiveMember = m.lidnr');
+        $qb->leftJoin(
+            CheckoutSession::class,
+            'cs',
+            JoinExpr::WITH,
+            'cs.prospectiveMember = m.lidnr',
+        );
 
         // Subquery to get maximum checkout session for a member
         $qbc = $this->getEntityManager()->createQueryBuilder();
         $qbc->select('MAX(csm.id)')
-            ->from(CheckoutSession::class, 'csm')
+            ->from(
+                CheckoutSession::class,
+                'csm',
+            )
             ->where('csm.prospectiveMember = m.lidnr');
 
         // Subquery to get the original (expired) checkout session (the one that could be recovered)
         $qbd = $this->getEntityManager()->createQueryBuilder();
         $qbd->select('(CASE WHEN css.recoveredFrom IS NOT NULL THEN IDENTITY(css.recoveredFrom) ELSE css.id END)')
-            ->from(CheckoutSession::class, 'css')
+            ->from(
+                CheckoutSession::class,
+                'css',
+            )
             ->where('css.prospectiveMember = m.lidnr')
             ->andWhere($qb->expr()->eq('css.id', '(' . str_replace('csm', 'csm2', $qbc->getDQL()) . ')'))
             ->andWhere('css.state = :expired');
@@ -133,23 +185,53 @@ class ProspectiveMemberRepository extends ServiceEntityRepository
         $qb->where($qb->expr()->orX(
             // Get the last checkout session, if it has failed more than 31 days ago
             $qb->expr()->andX(
-                $qb->expr()->eq('cs.id', '(' . $qbc->getDQL() . ')'),
-                $qb->expr()->eq('cs.state', ':failed'),
-                $qb->expr()->lt('cs.expiration', ':fullyFailed'),
+                $qb->expr()->eq(
+                    'cs.id',
+                    '(' . $qbc->getDQL() . ')',
+                ),
+                $qb->expr()->eq(
+                    'cs.state',
+                    ':failed',
+                ),
+                $qb->expr()->lt(
+                    'cs.expiration',
+                    ':fullyFailed',
+                ),
             ),
             // OR get the original session if it has expired more than a day ago using that
             // if x.state == Expired, the expiration date is the last date the checkout session can be recoverd
             $qb->expr()->andX(
-                $qb->expr()->eq('cs.id', '(' . $qbd->getDQL() . ')'),
-                $qb->expr()->eq('cs.state', ':expired'),
-                $qb->expr()->lt('cs.expiration', ':fullyExpired'),
+                $qb->expr()->eq(
+                    'cs.id',
+                    '(' . $qbd->getDQL() . ')',
+                ),
+                $qb->expr()->eq(
+                    'cs.state',
+                    ':expired',
+                ),
+                $qb->expr()->lt(
+                    'cs.expiration',
+                    ':fullyExpired',
+                ),
             ),
         ));
 
-        $qb->setParameter('expired', CheckoutSessionStates::Expired)
-            ->setParameter('failed', CheckoutSessionStates::Failed)
-            ->setParameter('fullyExpired', (new DateTime())->sub(new DateInterval('P1D')))
-            ->setParameter('fullyFailed', (new DateTime())->sub(new DateInterval('P31D')));
+        $qb->setParameter(
+            'expired',
+            CheckoutSessionStates::Expired,
+        )
+            ->setParameter(
+                'failed',
+                CheckoutSessionStates::Failed,
+            )
+            ->setParameter(
+                'fullyExpired',
+                new DateTime()->sub(new DateInterval('P1D')),
+            )
+            ->setParameter(
+                'fullyFailed',
+                new DateTime()->sub(new DateInterval('P31D')),
+            );
 
         return $qb->getQuery()->getResult();
     }
@@ -164,15 +246,24 @@ class ProspectiveMemberRepository extends ServiceEntityRepository
         // Get all checkout sessions
         $checkoutSessions = $this->getEntityManager()->createQueryBuilder();
         $checkoutSessions->select('pmwithcs.lidnr')
-            ->from(CheckoutSession::class, 'cs')
-            ->innerJoin('cs.prospectiveMember', 'pmwithcs');
+            ->from(
+                CheckoutSession::class,
+                'cs',
+            )
+            ->innerJoin(
+                'cs.prospectiveMember',
+                'pmwithcs',
+            );
 
         // Get all prospective members without a checkout session that are there for more than 30 days
         $qb = $this->createQueryBuilder('m');
         $qb->where($qb->expr()->notIn('m.lidnr', $checkoutSessions->getDQL()))
             ->andWhere('m.changedOn <= :fullyExpired');
 
-        $qb->setParameter('fullyExpired', (new DateTime())->sub(new DateInterval('P31D')));
+        $qb->setParameter(
+            'fullyExpired',
+            new DateTime()->sub(new DateInterval('P31D')),
+        );
 
         return $qb->getQuery()->getResult();
     }
@@ -189,15 +280,27 @@ class ProspectiveMemberRepository extends ServiceEntityRepository
         int $pageSize,
     ): Paginator {
         $qb = $this->createQueryBuilder('m')
-            ->orderBy('m.lidnr', 'DESC')
+            ->orderBy(
+                'm.lidnr',
+                'DESC',
+            )
             ->setFirstResult(($page - 1) * $pageSize)
             ->setMaxResults($pageSize);
 
         $this->applyLatestCheckout($qb);
-        $this->applyOverviewFilter($qb, $filter);
-        $this->applyOverviewSearch($qb, $search);
+        $this->applyOverviewFilter(
+            $qb,
+            $filter,
+        );
+        $this->applyOverviewSearch(
+            $qb,
+            $search,
+        );
 
-        return new Paginator($qb->getQuery(), false);
+        return new Paginator(
+            $qb->getQuery(),
+            false,
+        );
     }
 
     /**
@@ -213,8 +316,14 @@ class ProspectiveMemberRepository extends ServiceEntityRepository
             $qb = $this->createQueryBuilder('m')->select('COUNT(DISTINCT m.lidnr)');
 
             $this->applyLatestCheckout($qb);
-            $this->applyOverviewFilter($qb, $filter);
-            $this->applyOverviewSearch($qb, $search);
+            $this->applyOverviewFilter(
+                $qb,
+                $filter,
+            );
+            $this->applyOverviewSearch(
+                $qb,
+                $search,
+            );
 
             $counts[$filter->value] = (int) $qb->getQuery()->getSingleScalarResult();
         }
@@ -233,7 +342,10 @@ class ProspectiveMemberRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('m')->select('COUNT(DISTINCT m.lidnr)');
 
         $this->applyLatestCheckout($qb);
-        $this->applyOverviewFilter($qb, $filter);
+        $this->applyOverviewFilter(
+            $qb,
+            $filter,
+        );
 
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
@@ -246,12 +358,23 @@ class ProspectiveMemberRepository extends ServiceEntityRepository
     {
         $latest = $this->getEntityManager()->createQueryBuilder()
             ->select('MAX(css.id)')
-            ->from(CheckoutSession::class, 'css')
+            ->from(
+                CheckoutSession::class,
+                'css',
+            )
             ->where('css.prospectiveMember = m.lidnr');
 
-        $qb->leftJoin(CheckoutSession::class, 'cs', JoinExpr::WITH, 'cs.prospectiveMember = m.lidnr')
+        $qb->leftJoin(
+            CheckoutSession::class,
+            'cs',
+            JoinExpr::WITH,
+            'cs.prospectiveMember = m.lidnr',
+        )
             ->andWhere($qb->expr()->orX(
-                $qb->expr()->eq('cs.id', '(' . $latest->getDQL() . ')'),
+                $qb->expr()->eq(
+                    'cs.id',
+                    '(' . $latest->getDQL() . ')',
+                ),
                 $qb->expr()->isNull('cs.id'),
             ));
     }
@@ -263,13 +386,31 @@ class ProspectiveMemberRepository extends ServiceEntityRepository
         match ($filter) {
             ProspectiveMemberFilter::All => null,
             ProspectiveMemberFilter::Paid => $qb->andWhere('cs.state = :paid')
-                ->setParameter('paid', CheckoutSessionStates::Paid),
+                ->setParameter(
+                    'paid',
+                    CheckoutSessionStates::Paid,
+                ),
             ProspectiveMemberFilter::AwaitingPayment => $qb->andWhere('cs.state IN (:awaiting)')
-                ->setParameter('awaiting', [CheckoutSessionStates::Created, CheckoutSessionStates::Pending]),
+                ->setParameter(
+                    'awaiting',
+                    [
+                        CheckoutSessionStates::Created,
+                        CheckoutSessionStates::Pending,
+                    ],
+                ),
             // No session at all counts as failed: the applicant exists and there is nothing to pay against.
             ProspectiveMemberFilter::ExpiredOrFailed => $qb->andWhere(
-                $qb->expr()->orX('cs.state IN (:over)', 'cs.state IS NULL'),
-            )->setParameter('over', [CheckoutSessionStates::Expired, CheckoutSessionStates::Failed]),
+                $qb->expr()->orX(
+                    'cs.state IN (:over)',
+                    'cs.state IS NULL',
+                ),
+            )->setParameter(
+                'over',
+                [
+                    CheckoutSessionStates::Expired,
+                    CheckoutSessionStates::Failed,
+                ],
+            ),
         };
     }
 
@@ -292,11 +433,17 @@ class ProspectiveMemberRepository extends ServiceEntityRepository
 
         if (is_numeric($search)) {
             $matches->add('m.lidnr = :lidnr');
-            $qb->setParameter('lidnr', (int) $search);
+            $qb->setParameter(
+                'lidnr',
+                (int) $search,
+            );
         }
 
         $qb->andWhere($matches)
-            ->setParameter('needle', '%' . mb_strtolower(addcslashes($search, '%_')) . '%');
+            ->setParameter(
+                'needle',
+                '%' . mb_strtolower(addcslashes($search, '%_')) . '%',
+            );
     }
 
     public function persist(ProspectiveMember $member): void

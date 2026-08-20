@@ -50,7 +50,14 @@ final readonly class AssociationYear
      */
     public function endsOn(): DateTime
     {
-        return (new DateTime())->setDate($this->endYear, self::ROLLOVER_MONTH, 1)->setTime(0, 0);
+        return new DateTime()->setDate(
+            $this->endYear,
+            self::ROLLOVER_MONTH,
+            1,
+        )->setTime(
+            0,
+            0,
+        );
     }
 
     /**
@@ -60,6 +67,13 @@ final readonly class AssociationYear
      */
     public function septemberFirst(): DateTime
     {
-        return (new DateTime())->setDate($this->endYear, 9, 1)->setTime(0, 0);
+        return new DateTime()->setDate(
+            $this->endYear,
+            9,
+            1,
+        )->setTime(
+            0,
+            0,
+        );
     }
 }
