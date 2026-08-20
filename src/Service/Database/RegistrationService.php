@@ -9,7 +9,7 @@ use App\Entity\Database\ProspectiveMember as ProspectiveMemberModel;
 use App\Repository\Database\MailingListRepository;
 use App\Repository\Database\ProspectiveMemberRepository;
 use App\Service\Database\Member as MemberService;
-use DateTime;
+use Psr\Clock\ClockInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\IpUtils;
 
@@ -29,6 +29,7 @@ class RegistrationService
         private readonly ProspectiveMemberRepository $prospectiveMemberRepository,
         private readonly MemberService $memberService,
         private readonly StripeService $stripeService,
+        private readonly ClockInterface $clock,
     ) {
     }
 
@@ -38,7 +39,7 @@ class RegistrationService
      */
     public function isOpen(?string $clientIp): bool
     {
-        if (7 !== (int) (new DateTime())->format('n')) {
+        if (7 !== (int) $this->clock->now()->format('n')) {
             return true;
         }
 
