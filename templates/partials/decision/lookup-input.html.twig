@@ -1,0 +1,21 @@
+{# A type-ahead text field. The field itself is never what the form reads back: picking a match fills in the hidden
+   identifiers next to it, which is why the lookup controller owns both the input and the dropdown below it.
+
+   The label floats, as it does on every other row, so a lookup does not read as a different kind of field from the
+   ones around it. `.form-floating` wants the label directly after the control, so the dropdown hangs off the
+   positioned wrapper outside it.
+
+   Parameters: `controller` (the Stimulus identifier of the lookup), `field` (the text FormView), `placeholder`, and
+   optionally `label` where the field's own label is not what should be shown. #}
+<div class="position-relative">
+    <div class="form-floating">
+        {{ form_widget(field, {'attr': {
+            'autocomplete': 'off',
+            'placeholder': placeholder,
+            ('data-' ~ controller ~ '-target'): 'input',
+            'data-action': 'input->' ~ controller ~ '#search keydown->' ~ controller ~ '#navigate',
+        }}) }}
+        {{ form_label(field, label|default(null)) }}
+    </div>
+    <div class="dropdown-menu w-100" role="listbox" {{ 'data-' ~ controller ~ '-target' }}="results"></div>
+</div>

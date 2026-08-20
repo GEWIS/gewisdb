@@ -1,0 +1,32 @@
+{# `result` is a list of rows keyed by the column aliases the DQL asked for, with every value already rendered as a
+   scalar (the same normalisation the CSV export does), so the table does not have to know about column types. #}
+{% if result is not empty %}
+    <div class="table-responsive">
+        <table class="table table-hover table-sm">
+            <thead>
+                <tr>
+                    {% for column in result|first|keys %}
+                        <th scope="col">{{ column }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in result %}
+                    <tr>
+                        {% for value in row %}
+                            <td>{{ value }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <div class="panel-body">
+        {% include 'partials/application/empty-state.html.twig' with {
+            icon: 'fa-table',
+            title: 'No rows'|trans,
+            body: 'The query ran and matched nothing.'|trans,
+        } only %}
+    </div>
+{% endif %}

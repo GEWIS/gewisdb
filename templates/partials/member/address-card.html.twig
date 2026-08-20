@@ -1,0 +1,36 @@
+{# One of the three addresses of a member, with the actions that apply to it. #}
+{% import 'partials/member/labels.html.twig' as labels %}
+
+<div class="mb-4">
+    <div class="d-flex flex-wrap gap-2 align-items-center mb-2">
+        <h3 class="h5 mb-0">{{ labels.address_type(address.type) }}</h3>
+        <a href="{{ path('member_address_edit', {lidnr: member.lidnr, type: address.type.value}) }}"
+           class="btn btn-sm btn-gewis-primary">
+            {{ 'Change'|trans }}
+        </a>
+        <a href="{{ path('member_address_remove', {lidnr: member.lidnr, type: address.type.value}) }}"
+           class="btn btn-sm btn-outline-danger">
+            {{ 'Delete'|trans }}
+        </a>
+    </div>
+    <table class="table table-bordered mb-0">
+        <tbody>
+            <tr>
+                <th scope="row">{{ 'Postal Region'|trans }}</th>
+                <td>{{ address.country.value }}</td>
+            </tr>
+            <tr>
+                <th scope="row">{{ 'Street and House Number'|trans }}</th>
+                <td>{{ address.street }} {{ address.number }}</td>
+            </tr>
+            <tr>
+                <th scope="row">{{ 'City and Postal Code'|trans }}</th>
+                <td>{{ address.city }} {{ address.postalCode }}</td>
+            </tr>
+            <tr>
+                <th scope="row">{{ 'Phone Number'|trans }}</th>
+                <td>{{ address.phone }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

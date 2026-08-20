@@ -1,0 +1,29 @@
+{# The registration confirmation repeats the same two-column summary for the personal and the address details.
+   Rows are hashes of `label` and `value`, with an optional `href` for the one value that is a link; keeping the
+   link out of the value means no fragment of member input is ever printed raw. #}
+
+{% macro summary(title, rows) %}
+    <h3>{{ title }}</h3>
+    <table width="100%">
+        <thead>
+            <tr>
+                <th scope="col"><strong>Property</strong></th>
+                <th scope="col"><strong>Value</strong></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+                <tr>
+                    <th scope="row">{{ row.label }}</th>
+                    <td>
+                        {% if row.href is defined %}
+                            <a href="{{ row.href }}">{{ row.value }}</a>
+                        {% else %}
+                            {{ row.value }}
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endmacro %}

@@ -1,0 +1,29 @@
+{% extends 'layout-sidebar.html.twig' %}
+
+{% block page_title %}{{ 'Meetings'|trans }} - {{ parent() }}{% endblock %}
+
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_title %}{{ 'Meetings and Decisions'|trans }}{% endblock %}
+        {% block header_subtitle %}
+            <p class="page-header-meta mb-0">
+                {{ 'Every meeting that has been minuted, and the numbered decisions taken in it.'|trans }}
+            </p>
+        {% endblock %}
+        {% block header_actions %}
+            <a class="btn btn-outline-gewis-primary" href="{{ path('decision_export_index') }}">
+                <span class="fas fa-file-arrow-down" aria-hidden="true"></span>
+                {{ 'Export a decision list'|trans }}
+            </a>
+            <a class="btn btn-gewis-primary" href="{{ path('decision_meeting_create') }}">
+                <span class="fas fa-plus" aria-hidden="true"></span>
+                {{ 'Add New Meeting'|trans }}
+            </a>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block contents %}
+    {{ component('Decision:MeetingOverview') }}
+{% endblock %}

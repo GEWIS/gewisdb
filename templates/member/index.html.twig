@@ -1,0 +1,29 @@
+{% extends 'layout-sidebar.html.twig' %}
+
+{% block page_title %}{{ 'Members'|trans }} - {{ parent() }}{% endblock %}
+
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_title %}{{ 'Members'|trans }}{% endblock %}
+        {% block header_subtitle %}
+            <p class="page-header-meta mb-0">
+                {{ 'Everyone on the register, and what needs doing about them.'|trans }}
+            </p>
+        {% endblock %}
+        {% block header_actions %}
+            <a class="btn btn-outline-gewis-primary" href="{{ path('member_bulk_renewal_index') }}">
+                <span class="fas fa-rotate" aria-hidden="true"></span>
+                {{ 'Bulk renew memberships'|trans }}
+            </a>
+            <a class="btn btn-gewis-primary" href="{{ path('join_subscribe_index') }}">
+                <span class="fas fa-plus" aria-hidden="true"></span>
+                {{ 'Register member'|trans }}
+            </a>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block contents %}
+    {{ component('Member:MemberOverview') }}
+{% endblock %}

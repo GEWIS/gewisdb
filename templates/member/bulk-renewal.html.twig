@@ -1,0 +1,136 @@
+{% extends 'layout-sidebar.html.twig' %}
+
+{% import 'partials/member/labels.html.twig' as labels %}
+
+{% block page_title %}{{ 'Bulk renew memberships'|trans }} - {{ parent() }}{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href="{{ path('member_index') }}">{{ 'Members'|trans }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ 'Bulk renewal'|trans }}</li>
+{% endblock %}
+
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_title %}{{ 'Bulk renew memberships'|trans }}{% endblock %}
+        {% block header_subtitle %}
+            <p class="page-header-meta mb-0">
+                {{ 'Nothing is renewed until the preview has been confirmed.'|trans }}
+            </p>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{#
+    The preview sits inside the form: confirming it resubmits the very numbers and type that produced it, so
+    `BulkMemberRenewalType` carries a second submit button (`intent`) instead of a hidden field and a second form.
+
+    `preview` is null until the numbers have been checked; `result` stays null until the preview has been confirmed.
+#}
+{% block contents %}
+    {{ form_start(form) }}
+    <div class="row g-3">
+        <div class="col-12 col-xl-7">
+            <div class="panel">
+                <div class="panel-heading"><h3>{{ 'Who to renew'|trans }}</h3></div>
+                <div class="panel-body">
+                    {{ form_row(form.memberIds, {attr: {
+                        rows: 8,
+                        placeholder: 'One membership number per line, or separated by spaces or commas'|trans,
+                    }}) }}
+                    {{ form_row(form.membershipType) }}
+
+                    <div class="d-flex flex-wrap gap-2">
+                        {{ form_widget(form.submit, {attr: {class: 'btn-gewis-primary'}}) }}
+                        <a href="{{ path('member_index') }}" class="btn btn-secondary">{{ 'Cancel'|trans }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-xl-5">
+            <div class="panel">
+                <div class="panel-heading"><h3>{{ 'When to use which type'|trans }}</h3></div>
+                <div class="panel-body">
+                    <ul>
+                        <li>{{ 'Members who are still studying become ordinary.'|trans }}</li>
+                        <li>{{ 'Active members who no longer study become external.'|trans }}</li>
+                        <li>{{ 'Members who are neither become graduate.'|trans }}</li>
+                    </ul>
+                    <p class="mb-0 text-secondary">
+                        {{ 'Do these in that order, before the first of July. A membership cannot be renewed twice, and every change takes effect at the end of the membership it renews — to change one now or in the past, go to the member.'|trans }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if null is not same as(preview) %}
+        {% if null is not same as(result) %}
+            <div class="alert alert-success" role="alert">
+                {{ 'Confirmed %count% membership renewal(s).'|trans({'%count%': result.executed_count}) }}
+            </div>
+        {% endif %}
+
+        {% if preview.rows is not empty %}
+            <div class="panel">
+                <div class="panel-heading d-flex flex-wrap align-items-baseline gap-2">
+                    <h3>{{ 'Preview'|trans }}</h3>
+                    <span class="panel-heading-meta">
+                        {{ '%valid% changes, %issues% issues'|trans({
+                            '%valid%': preview.valid_count,
+                            '%issues%': preview.invalid_count,
+                        }) }}
+                    </span>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th scope="col">{{ 'Membership number'|trans }}</th>
+                            <th scope="col">{{ 'Name'|trans }}</th>
+                            <th scope="col">{{ 'Last type'|trans }}</th>
+                            <th scope="col">{{ 'New type'|trans }}</th>
+                            <th scope="col">{{ 'Current expiration'|trans }}</th>
+                            <th scope="col">{{ 'New expiration'|trans }}</th>
+                            <th scope="col">{{ 'Status'|trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in preview.rows %}
+                            {# A number that could not be resolved, or that is already renewed, has no member. #}
+                            <tr class="{{ row.executed ? 'table-success' : (row.valid ? '' : 'table-danger') }}">
+                                <td>{{ row.member_id ?? 'n/a'|trans }}</td>
+                                <td>{{ null is same as(row.member) ? 'n/a'|trans : row.member.fullName }}</td>
+                                <td>
+                                    {%- if null is same as(row.member) or null is same as(row.member.lastMembership) -%}
+                                        {{ 'n/a'|trans }}
+                                    {%- else -%}
+                                        {{ labels.membership_type(row.member.lastMembership.type) }}
+                                    {%- endif -%}
+                                </td>
+                                <td>
+                                    {{- null is same as(row.member)
+                                        ? 'n/a'|trans
+                                        : labels.membership_type(preview.membership_type) -}}
+                                </td>
+                                <td>{{ row.current_expiration ?? 'n/a'|trans }}</td>
+                                <td>{{ row.new_expiration ?? 'n/a'|trans }}</td>
+                                <td>{{ row.message }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+
+    {% if null is same as(result) and null is not same as(preview) and preview.valid_count > 0 %}
+        {{ form_widget(form.intent, {attr: {class: 'btn btn-gewis-primary'}}) }}
+    {% else %}
+        {# There is nothing to confirm yet, so the button is withheld rather than shown as a dead control. #}
+        {% do form.intent.setRendered %}
+    {% endif %}
+    {{ form_end(form) }}
+{% endblock %}

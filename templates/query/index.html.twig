@@ -1,0 +1,156 @@
+{% extends 'layout-sidebar.html.twig' %}
+
+{% block page_title %}{{ 'Query'|trans }} - {{ parent() }}{% endblock %}
+
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_title %}{{ 'Query'|trans }}{% endblock %}
+        {% block header_subtitle %}
+            <p class="page-header-meta mb-0">
+                {{ 'Run Doctrine Query Language against the report database and save what you will need again.'|trans }}
+            </p>
+        {% endblock %}
+        {% block header_actions %}
+            <a class="btn btn-outline-gewis-primary" target="_blank" rel="noopener"
+               href="https://www.doctrine-project.org/projects/doctrine-orm/en/current/reference/dql-doctrine-query-language.html">
+                <span class="fas fa-book" aria-hidden="true"></span>
+                {{ 'DQL documentation'|trans }}
+            </a>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block contents %}
+    {# The editor and the entity list are under one controller because clicking an entity types it into the editor,
+       and the two sit in different columns. #}
+    <div class="row g-3" data-controller="query-editor">
+        <div class="col-12 col-xl-8">
+            {# One form holds both buttons: `QuerySaveType` extends `QueryType`, so executing and saving submit the
+               same query field and the controller decides on the button that was clicked. That is also why the editor
+               behaviour hangs off a wrapper rather than off the textarea: Ctrl/Cmd+Enter has to submit through
+               "Execute" specifically, so the controller needs to reach that button. #}
+            {{ form_start(form) }}
+                <div class="panel">
+                    <div class="panel-heading d-flex flex-wrap align-items-baseline gap-2">
+                        <h3>{{ 'Editor'|trans }}</h3>
+                        {# The line count is written by the controller; the label is translated here so it does not have to be. #}
+                        <span class="panel-heading-meta" data-query-editor-target="meta"
+                              data-label="{{ '%number% lines · DQL'|trans({'%number%': '%number%'}) }}"></span>
+                        <span class="ms-auto d-flex gap-2">
+                            <button type="button" class="btn btn-sm btn-outline-secondary"
+                                    data-action="query-editor#clear">
+                                {{ 'Clear'|trans }}
+                            </button>
+                            {{ form_widget(form.submit, {attr: {
+                                'class': 'btn-sm btn-gewis-primary',
+                                'data-query-editor-target': 'submit',
+                            }}) }}
+                        </span>
+                    </div>
+                    <div class="panel-body query-editor">
+                        {# The gutter counts lines, so the box must not soft-wrap them: `wrap="off"` scrolls
+                           sideways instead, which keeps one line in the box on one line in the gutter. #}
+                        <span class="query-editor-gutter" aria-hidden="true"
+                              data-query-editor-target="gutter"></span>
+                        {{ form_widget(form.query, {attr: {
+                            'class': 'font-monospace query-editor-input',
+                            'rows': 12,
+                            'wrap': 'off',
+                            'spellcheck': 'false',
+                            'placeholder': 'SELECT m FROM db:Member m WHERE m.expiration < CURRENT_DATE()',
+                            'data-query-editor-target': 'editor',
+                            'data-action': 'keydown->query-editor#keydown input->query-editor#renumber scroll->query-editor#sync',
+                        }}) }}
+                    </div>
+                    {{ form_errors(form.query) }}
+                    <div class="panel-body border-top">
+                        <div class="d-flex flex-wrap gap-2 align-items-start">
+                            {{ form_widget(form.category, {attr: {
+                                'class': 'form-control query-category',
+                                'placeholder': 'Category'|trans ~ ' (' ~ 'optional'|trans ~ ')',
+                            }}) }}
+                            {{ form_widget(form.name, {attr: {
+                                'class': 'form-control flex-grow-1',
+                                'placeholder': 'Name this query'|trans,
+                            }}) }}
+                            {{ form_widget(form.submit_save, {attr: {'class': 'btn btn-gewis-primary'}}) }}
+                        </div>
+                        <p class="form-text mb-0">
+                            {{ 'Saving with a name that is already in use overwrites that query and updates its category.'|trans }}
+                        </p>
+                    </div>
+                </div>
+            {{ form_end(form) }}
+
+            <div class="panel">
+                <div class="panel-heading d-flex flex-wrap align-items-baseline gap-2">
+                    <h3>{{ 'Results'|trans }}</h3>
+                    {% if result is defined and null is not same as(result) %}
+                        <span class="badge badge-success">
+                            {{ '%number% rows'|trans({'%number%': result|length}) }}
+                        </span>
+                        {{ form_start(export_form, {attr: {'class': 'ms-auto d-flex flex-wrap gap-2'}}) }}
+                            {{ form_widget(export_form.query) }}
+                            {{ form_widget(export_form.name) }}
+                            {# One export format exists, so the picker would be a list of one; it is still submitted
+                               because the form requires it. #}
+                            {{ form_widget(export_form.type, {attr: {
+                                'class': export_form.type.vars.choices|length > 1 ? 'form-select' : 'd-none',
+                            }}) }}
+                            {{ form_widget(export_form.submit, {
+                                label: 'Download CSV'|trans,
+                                attr: {'class': 'btn-sm btn-outline-gewis-primary'},
+                            }) }}
+                        {{ form_end(export_form) }}
+                    {% else %}
+                        <span class="badge badge-secondary">{{ 'Not run'|trans }}</span>
+                    {% endif %}
+                </div>
+                {% if result is defined and null is not same as(result) %}
+                    {% include 'partials/query/result-table.html.twig' %}
+                {% else %}
+                    <div class="panel-body">
+                        {% include 'partials/application/empty-state.html.twig' with {
+                            icon: 'fa-terminal',
+                            title: 'Nothing run yet'|trans,
+                            body: 'Write a query or open a stored one, then execute it.'|trans,
+                        } only %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="col-12 col-xl-4">
+            <div class="panel">
+                <div class="panel-heading"><h3>{{ 'Stored queries'|trans }}</h3></div>
+                <div class="panel-body">
+                    {% include 'partials/query/saved-queries.html.twig' %}
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading"><h3>{{ 'Entities'|trans }}</h3></div>
+                <div class="panel-body">
+                    <label class="visually-hidden" for="entity-filter">{{ 'Filter entities'|trans }}</label>
+                    <input type="search" class="form-control" id="entity-filter"
+                           placeholder="{{ 'Filter entities'|trans }}"
+                           data-action="input->query-editor#filter">
+                </div>
+                <div class="entity-list">
+                    {% for entity in entities|sort %}
+                        <button type="button" class="entity" data-query-editor-target="entity"
+                                data-action="query-editor#insert"
+                                data-query-editor-entity-param="{{ entity }}">
+                            <span class="font-monospace">{{ entity }}</span>
+                            <span class="fas fa-arrow-turn-down entity-insert" aria-hidden="true"></span>
+                        </button>
+                    {% endfor %}
+                    <p class="entity-empty" hidden data-query-editor-target="entityEmpty">
+                        {{ 'No entity matches.'|trans }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

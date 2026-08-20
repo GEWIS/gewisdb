@@ -1,0 +1,67 @@
+{% extends 'layout-sidebar.html.twig' %}
+
+{% block page_title %}{{ 'Decision'|trans }} {{ decision.hash }} - {{ parent() }}{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href="{{ path('decision_meeting_index') }}">{{ 'Meetings'|trans }}</a></li>
+    <li class="breadcrumb-item">
+        <a href="{{ path('decision_meeting_view', {
+            type: decision.meetingType,
+            number: decision.meetingNumber,
+        }) }}">{{ decision.meetingType }} {{ decision.meetingNumber }}</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">{{ decision.hash }}</li>
+{% endblock %}
+
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_top %}
+            <span class="page-header-eyebrow">{{ 'Recorded'|trans }}</span>
+        {% endblock %}
+        {% block header_title %}{{ 'Decision %hash%'|trans({'%hash%': decision.hash}) }}{% endblock %}
+        {% block header_actions %}
+            <a class="btn btn-gewis-primary" href="{{ path('decision_meeting_view', {
+                   'type': decision.meetingType,
+                   'number': decision.meetingNumber,
+               }) }}">
+                {{ 'Back to %type% %number%'|trans({
+                    '%type%': decision.meetingType,
+                    '%number%': decision.meetingNumber,
+                }) }}
+            </a>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block contents %}
+    <div class="row g-3">
+        <div class="col-12 col-xl-8">
+            {% for warning in warnings|default([]) %}
+                <div class="alert alert-warning" role="alert">{{ warning }}</div>
+            {% endfor %}
+
+            <div class="panel">
+                <div class="panel-heading d-flex flex-wrap align-items-baseline gap-2">
+                    <h3>{{ 'It reads as follows'|trans }}</h3>
+                    <span class="ms-auto" data-controller="copy"
+                          data-copy-text-value="{{ decision.copyContent }}">
+                        <button type="button" class="btn btn-sm btn-outline-gewis-primary" data-action="copy#copy"
+                                data-copy-copied-label="{{ 'Copied'|trans }}">
+                            <span class="fas fa-copy" aria-hidden="true"></span>
+                            <span data-copy-target="label">{{ 'Copy Decision'|trans }}</span>
+                        </button>
+                    </span>
+                </div>
+                <div class="panel-body">
+                    {# `contents` is the decision as it reads in each of the application's languages, already
+                       assembled from its sub-decisions; a template cannot hand the entity the translator that
+                       needs. #}
+                    {% for content in contents %}
+                        <p{{ loop.last ? ' class="mb-0"' : '' }}>{{ content }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

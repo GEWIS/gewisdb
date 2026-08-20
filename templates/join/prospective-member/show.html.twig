@@ -1,0 +1,271 @@
+{% extends 'layout-sidebar.html.twig' %}
+
+{% block page_title %}{{ member.fullName }} - {{ parent() }}{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item">
+        <a href="{{ path('join_prospective_member_index') }}">{{ 'Prospective Members'|trans }}</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">{{ member.fullName }}</li>
+{% endblock %}
+
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_status %}
+            {% set state = member.lastCheckoutSessionState %}
+            {% if state is null %}
+                <span class="badge badge-danger">{{ 'No Checkout Sessions on record.'|trans }}</span>
+            {% else %}
+                {% include 'partials/join/checkout-badge.html.twig' with {state: state} only %}
+            {% endif %}
+        {% endblock %}
+        {% block header_title %}{{ member.fullName }}{% endblock %}
+        {% block header_subtitle %}
+            <p class="page-header-meta mb-0">
+                {{ 'Registered %date%'|trans({
+                    '%date%': member.changedOn|format_date(pattern: 'd MMMM y'),
+                }) }}
+                {% if member.studentNumber is not empty %}
+                    · {{ 'TU/e student number'|trans }} {{ member.studentNumber }}
+                {% endif %}
+            </p>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block contents %}
+    <div class="row g-3">
+        <div class="col-12 col-xl-8">
+
+            <div class="panel">
+                <div class="panel-heading d-flex align-items-center gap-2">
+                    <h3>{{ 'Provided Data'|trans }}</h3>
+                    <span class="ms-auto small text-secondary">{{ 'Entered by the applicant'|trans }}</span>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table align-middle mb-0">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">{{ 'Initial(s)'|trans }}</th>
+                                    <td>{{ member.initials }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">{{ 'First Name'|trans }}</th>
+                                    <td>{{ member.firstName }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">{{ 'Last Name Prepositional Particle'|trans }}</th>
+                                    <td>{{ member.middleName }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">{{ 'Last Name'|trans }}</th>
+                                    <td>{{ member.lastName }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">{{ 'TU/e student number'|trans }}</th>
+                                    <td>{{ member.studentNumber ?? 'Unknown'|trans }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">{{ 'E-mail Address'|trans }}</th>
+                                    <td><a href="mailto:{{ member.email }}">{{ member.email }}</a></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">{{ 'Birthdate'|trans }}</th>
+                                    <td>{{ member.birth|format_date(pattern: 'EEEE d MMMM y') }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">{{ 'Study'|trans }}</th>
+                                    {# `getName()` spelled out: `study.name` resolves to the enum case name. #}
+                                    <td>{{ member.study.getName|trans }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">{{ 'Last Update to Membership'|trans }}</th>
+                                    <td>{{ member.changedOn|format_date(pattern: 'EEEE d MMMM y') }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading"><h3>{{ 'Approval'|trans }}</h3></div>
+                <div class="panel-body">
+                    <p class="text-secondary">
+                        {{ 'Choosing a membership type turns this application into a member record.'|trans }}
+                    </p>
+
+                    {% for alert in approveMessages %}
+                        {# Safe to print unescaped: these are fixed strings in the service, not applicant input. #}
+                        <div class="alert alert-{{ alert[0] }}" role="alert">{{ alert[1]|trans|raw }}</div>
+                    {% endfor %}
+
+                    {% if form is null %}
+                        <p class="mb-0">{{ 'This prospective member cannot be approved.'|trans }}</p>
+                    {% elseif member.hasPaid %}
+                        {{ _self.approval(form, member) }}
+                    {% else %}
+                        {# Approving someone who has not paid through the checkout means the fee was settled in cash,
+                           which is rare enough that the form stays folded away. #}
+                        <div class="accordion" id="not-paid-accordion">
+                            <div class="accordion-item">
+                                <h4 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#not-paid-collapse"
+                                            aria-expanded="false" aria-controls="not-paid-collapse">
+                                        {{ 'Click here for approval if membership fee paid with cash.'|trans }}
+                                    </button>
+                                </h4>
+                                <div id="not-paid-collapse" class="accordion-collapse collapse"
+                                     data-bs-parent="#not-paid-accordion">
+                                    <div class="accordion-body">
+                                        {{ _self.approval(form, member) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if canDelete %}
+                <div class="panel border-danger">
+                    <div class="panel-body d-flex flex-wrap align-items-center gap-3">
+                        <span class="flex-grow-1">
+                            <span class="d-block fw-semibold">{{ 'Destructive actions'|trans }}</span>
+                            <span class="text-secondary small">
+                                {% if member.hasPaid %}
+                                    {{ 'Because they have already paid, a refund is requested first. If the refund fails, the application is not removed.'|trans }}
+                                {% else %}
+                                    {{ 'Removes the application and everything the applicant entered.'|trans }}
+                                {% endif %}
+                            </span>
+                        </span>
+                        <button type="button" class="btn btn-outline-danger"
+                                data-bs-toggle="modal" data-bs-target="#prospective-removal">
+                            {{ 'Delete Prospective Member'|trans }}
+                        </button>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="prospective-removal" tabindex="-1"
+                     aria-labelledby="prospective-removal-label" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="prospective-removal-label">
+                                    {{ 'Remove Prospective Member'|trans }}
+                                </h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="{{ 'Close'|trans }}"></button>
+                            </div>
+                            <div class="modal-body">
+                                {% if member.hasPaid %}
+                                    {{ 'Are you sure that you want to remove %name%? Because they have already paid a refund will be requested. If this fails, the prospective member will NOT be removed.'|trans({
+                                        '%name%': member.fullName,
+                                    }) }}
+                                {% else %}
+                                    {{ 'Are you sure that you want to remove %name%?'|trans({'%name%': member.fullName}) }}
+                                {% endif %}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                    {{ 'No'|trans }}
+                                </button>
+                                <form method="post"
+                                      action="{{ path('join_prospective_member_delete', {'id': member.lidnr}) }}">
+                                    <input type="hidden" name="_csrf_token"
+                                           value="{{ csrf_token('prospective_member_delete-' ~ member.lidnr) }}">
+                                    <button type="submit" class="btn btn-outline-danger">
+                                        {{ 'Delete Prospective Member'|trans }}
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="col-12 col-xl-4">
+
+            <div class="panel">
+                <div class="panel-heading"><h3>{{ 'Checkout Status'|trans }}</h3></div>
+                <div class="panel-body">
+                    {% if member.checkoutSessions is empty %}
+                        <p class="text-secondary mb-0">{{ 'No Checkout Sessions on record.'|trans }}</p>
+                    {% else %}
+                        <div class="table-responsive">
+                            <table class="table align-middle mb-0">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">{{ 'Created'|trans }}</th>
+                                        <th scope="col">{{ 'Status'|trans }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for checkoutSession in member.checkoutSessions %}
+                                        <tr>
+                                            <td>{{ checkoutSession.created|format_datetime(pattern: 'd MMM y, HH:mm') }}</td>
+                                            <td>
+                                                {% include 'partials/join/checkout-badge.html.twig' with {
+                                                    state: checkoutSession.state,
+                                                } only %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading"><h3>{{ 'Addresses'|trans }}</h3></div>
+                <div class="panel-body">
+                    {% for address in member.addresses %}
+                        <p class="fw-semibold mb-1">{{ address.type.getName|trans }}</p>
+                        <p class="mb-1">{{ address.street }} {{ address.number }}</p>
+                        <p class="mb-1">{{ address.postalCode }} {{ address.city }} · {{ address.country.value }}</p>
+                        <p class="text-secondary mb-0">{{ address.phone }}</p>
+                    {% else %}
+                        <p class="text-secondary mb-0">{{ 'No addresses on record.'|trans }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading"><h3>{{ 'Mailing List Subscriptions'|trans }}</h3></div>
+                <div class="panel-body">
+                    {% if member.lists is empty %}
+                        <p class="text-secondary mb-0">
+                            {{ 'No subscriptions chosen. The defaults are applied on approval.'|trans }}
+                        </p>
+                    {% else %}
+                        <ul class="list-unstyled mb-0">
+                            {% for list in member.lists %}
+                                <li class="d-flex align-items-center gap-2">
+                                    <span class="fas fa-circle-check text-success" aria-hidden="true"></span>
+                                    {{ list }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% macro approval(form, member) %}
+    {{ form_start(form, {
+        'action': path('join_prospective_member_finalize', {'id': member.lidnr}),
+        'attr': {'role': 'form'},
+    }) }}
+        {{ form_row(form.type) }}
+        {{ form_widget(form.submit, {'attr': {'class': 'btn-gewis-primary'}}) }}
+    {{ form_end(form) }}
+{% endmacro %}

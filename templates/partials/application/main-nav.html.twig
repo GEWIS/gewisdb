@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-lg navbar-gewis" aria-label="{{ 'Main navigation'|trans }}">
+    <div class="container">
+        <a class="navbar-brand" href="{{ path('application_home') }}">
+            <span class="gi gewis-base" aria-hidden="true"></span>
+            <span class="visually-hidden">GEWIS</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-navbar"
+                aria-controls="main-navbar" aria-expanded="false" aria-label="{{ 'Toggle Navigation'|trans }}">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="main-navbar">
+            {# The sections live in the section sidebar; what stays up here is who you are and what applies to
+               every page, all of it grouped on the right the way GEWISWEB groups it: the bell, then who you are,
+               then a rule and the language. The bell belongs with them because it is about you, not about the page. #}
+            <ul class="navbar-nav ms-auto">
+                {% if null !== app.user %}
+                    {{ component('Application:NotificationBell') }}
+                    <li class="nav-item dropdown">
+                        <button class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                            <span class="fas fa-user" aria-hidden="true"></span>
+                            {{ app.user.getName }}
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <a class="dropdown-item" href="{{ path('user_logout') }}">
+                                    <span class="fas fa-arrow-right-from-bracket" aria-hidden="true"></span>
+                                    {{ 'Log out'|trans }}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('user_login') }}">
+                            <span class="fas fa-arrow-right-to-bracket" aria-hidden="true"></span>
+                            {{ 'Log in'|trans }}
+                        </a>
+                    </li>
+                {% endif %}
+                <li class="nav-item py-4">
+                    <div class="vr d-flex h-100 mx-2 text-white"></div>
+                </li>
+                {% include 'partials/application/language-switcher.html.twig' %}
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,22 @@
+framework:
+    secret: '%env(APP_SECRET)%'
+
+    # Trusted proxy addresses come from SYMFONY_TRUSTED_PROXIES. PROXY_HEADER has no equivalent — Symfony accepts
+    # only its own enum, so a non-standard header has to be normalised at the edge.
+    trusted_headers: ['x-forwarded-for', 'x-forwarded-proto', 'x-forwarded-host', 'x-forwarded-port']
+
+    php_errors:
+        log: true
+
+    # The login firewall is stateful, so the session has to exist. Its name (GEWISDBSESSID) and cookie flags stay
+    # where they are, in php.ini; the domain stays unset so every host scopes its own session.
+    session:
+        enabled: true
+
+when@test:
+    framework:
+        test: true
+        # PHP's own session handler cannot start a session in a process that has already produced output, which is
+        # every console-run test. The mock storage keeps the session in a file of its own instead.
+        session:
+            storage_factory_id: session.storage.factory.mock_file

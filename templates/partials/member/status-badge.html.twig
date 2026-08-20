@@ -1,0 +1,13 @@
+{#
+    What state a member's record is in, as one badge. Derived rather than stored: a member is removed if they were
+    deleted, expired if they hold no membership now, and otherwise active.
+#}
+{% if member.deleted %}
+    <span class="badge badge-danger">{{ 'Removed'|trans }}</span>
+{% elseif member.currentMembership is null %}
+    <span class="badge badge-warning">{{ 'Expired'|trans }}</span>
+{% elseif member.email is empty %}
+    <span class="badge badge-info">{{ 'Missing data'|trans }}</span>
+{% else %}
+    <span class="badge badge-success">{{ 'Active'|trans }}</span>
+{% endif %}

@@ -1,0 +1,111 @@
+{% extends 'layout-sidebar.html.twig' %}
+
+{% block page_title %}{{ member.fullName }} - {{ 'Data Update Requests'|trans }} - {{ parent() }}{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href="{{ path('member_index') }}">{{ 'Members'|trans }}</a></li>
+    <li class="breadcrumb-item">
+        <a href="{{ path('member_update_index') }}">{{ 'Data Update Requests'|trans }}</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">{{ member.fullName }}</li>
+{% endblock %}
+
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_top %}
+            <span class="page-header-eyebrow">{{ 'Data update request'|trans }}</span>
+        {% endblock %}
+        {% block header_title %}{{ member.fullName }}{% endblock %}
+        {% block header_subtitle %}
+            <p class="page-header-meta mb-0">
+                {{ 'Applying this writes the proposed values over what is on record.'|trans }}
+            </p>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{# Every field is the same comparison of what is on record against what the member proposes, so the rows are driven
+   off a list rather than written out one by one. #}
+{% macro value(text, mailto) %}
+    {%- if mailto -%}
+        <a href="mailto:{{ text }}">{{ text }}</a>
+    {%- else -%}
+        {{ text }}
+    {%- endif -%}
+{% endmacro %}
+
+{% import _self as field %}
+
+{% block contents %}
+    {% set comparisons = [
+        {label: 'Initial(s)'|trans, current: member.initials, proposed: member_update.initials},
+        {label: 'First Name'|trans, current: member.firstName, proposed: member_update.firstName},
+        {
+            label: 'Last Name Prepositional Particle'|trans,
+            current: member.middleName,
+            proposed: member_update.middleName,
+        },
+        {label: 'Last Name'|trans, current: member.lastName, proposed: member_update.lastName},
+        {label: 'E-mail Address'|trans, current: member.email, proposed: member_update.email, mailto: true},
+    ] %}
+
+    <div class="row g-3">
+        <div class="col-12 col-xl-8">
+            <div class="panel">
+                <div class="panel-heading"><h3>{{ 'What changes'|trans }}</h3></div>
+                <div class="table-responsive">
+                    <table class="table align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">{{ 'Current Data'|trans }}</th>
+                                <th scope="col">{{ 'Proposed Data'|trans }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for comparison in comparisons %}
+                                <tr>
+                                    <th scope="row">{{ comparison.label }}</th>
+                                    <td>{{ field.value(comparison.current, comparison.mailto|default(false)) }}</td>
+                                    {# The proposed value is highlighted only where it actually differs. #}
+                                    <td class="{{ comparison.current != comparison.proposed ? 'table-warning' }}">
+                                        {{ field.value(comparison.proposed, comparison.mailto|default(false)) }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-xl-4">
+            {% if member.email != member_update.email %}
+                <div class="alert alert-warning" role="alert">
+                    {{ 'The e-mail address changes. Any mailing list the member is on has to be updated as well.'|trans }}
+                </div>
+            {% endif %}
+
+            <div class="panel">
+                <div class="panel-heading"><h3>{{ 'Decide'|trans }}</h3></div>
+                <div class="panel-body d-flex flex-wrap gap-2">
+                    <form method="post" action="{{ path('member_update_approve', {lidnr: member.lidnr}) }}">
+                        <input type="hidden" name="_csrf_token"
+                               value="{{ csrf_token('member_update-' ~ member.lidnr) }}">
+                        <button type="submit" class="btn btn-gewis-primary" name="approve" value="1">
+                            {{ 'Apply Update'|trans }}
+                        </button>
+                    </form>
+                    <form method="post" action="{{ path('member_update_reject', {lidnr: member.lidnr}) }}">
+                        <input type="hidden" name="_csrf_token"
+                               value="{{ csrf_token('member_update-' ~ member.lidnr) }}">
+                        <button type="submit" class="btn btn-outline-danger" name="reject" value="1">
+                            {{ 'Reject Update'|trans }}
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

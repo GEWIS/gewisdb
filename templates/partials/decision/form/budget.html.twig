@@ -1,0 +1,15 @@
+{{ form_start(form, {'action': path('decision_decision_form', {'form': 'budget'})}) }}
+    {{ form_row(form.type) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.date) }}
+    {% include 'partials/decision/member-lookup.html.twig' with {
+        'field': form.author,
+        'label': 'Author'|trans,
+    } only %}
+    {{ form_row(form.version) }}
+    {{ form_row(form.approve) }}
+    {{ form_row(form.changes) }}
+    <div class="decision-form-actions">
+        {{ form_widget(form.submit, {'attr': {'class': 'btn-gewis-primary'}}) }}
+    </div>
+{{ form_end(form) }}

@@ -1,0 +1,17 @@
+{# A member is chosen by name but stored by membership number: the text field only feeds the autocomplete, and the
+   hidden `lidnr` beside it is what the form reads back.
+
+   Parameters: `field` (a `MemberLookupType` FormView) and `label`. #}
+<div class="mb-2" data-controller="member-lookup"
+     data-member-lookup-url-value="{{ path('member_search_filtered') }}">
+    {% include 'partials/decision/lookup-input.html.twig' with {
+        'controller': 'member-lookup',
+        'field': field.name,
+        'placeholder': label,
+        'label': label,
+    } only %}
+    {{ form_widget(field.lidnr, {'attr': {'data-member-lookup-target': 'lidnr'}}) }}
+    {{ form_errors(field.name) }}
+    {{ form_errors(field.lidnr) }}
+    {{ form_errors(field) }}
+</div>

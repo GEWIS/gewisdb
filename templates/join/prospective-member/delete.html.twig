@@ -1,0 +1,30 @@
+{% extends 'layout-sidebar.html.twig' %}
+
+{% block page_title %}{{ 'Cannot Delete Prospective Member'|trans }} - {{ parent() }}{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item">
+        <a href="{{ path('join_prospective_member_index') }}">{{ 'Prospective Members'|trans }}</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">{{ 'Delete'|trans }}</li>
+{% endblock %}
+
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_title %}{{ 'Cannot Delete Prospective Member'|trans }}{% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block contents %}
+    <div class="panel">
+        <div class="panel-body">
+            {# `getName()` spelled out: `reason.name` would resolve to the enum case name. #}
+            {% include 'partials/application/empty-state.html.twig' with {
+                icon: 'fa-ban',
+                title: reason.getName|trans,
+                body: reason.getDescription|trans,
+            } only %}
+        </div>
+    </div>
+{% endblock %}

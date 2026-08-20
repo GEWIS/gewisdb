@@ -1,0 +1,53 @@
+{% extends 'layout-sidebar.html.twig' %}
+
+{% block page_title %}{{ 'Extend Membership'|trans }} - {{ parent() }}{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href="{{ path('member_index') }}">{{ 'Members'|trans }}</a></li>
+    <li class="breadcrumb-item">
+        <a href="{{ path('member_show', {lidnr: member.lidnr}) }}">{{ member.fullName }}</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">{{ 'Extend Membership'|trans }}</li>
+{% endblock %}
+
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_top %}
+            <span class="page-header-eyebrow">{{ 'Member'|trans }}</span>
+        {% endblock %}
+        {% block header_title %}{{ 'Extend Membership'|trans }}{% endblock %}
+        {% block header_subtitle %}
+            <p class="page-header-meta mb-0">
+                {{ member.fullName }}
+            </p>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block contents %}
+    {# `new_expiration` is the first of July after the current expiration; the controller works it out so that this
+       page and the action that carries it out cannot drift apart. #}
+    <div class="row g-3">
+        <div class="col-12 col-xl-6">
+            <div class="panel">
+                <div class="panel-body">
+                    <p>
+                        {{ 'This extends the membership of %name% to %to%. It currently runs to %from%.'|trans({
+                            '%name%': member.fullName,
+                            '%to%': new_expiration|date('l j F Y'),
+                            '%from%': member.expiration|date('l j F Y'),
+                        }) }}
+                    </p>
+
+                    {{ form_start(form) }}
+                    <div class="d-flex flex-wrap gap-2">
+                        {{ form_widget(form.submit_yes, {attr: {class: 'btn-gewis-primary'}}) }}
+                        {{ form_widget(form.submit_no, {attr: {class: 'btn btn-secondary'}}) }}
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

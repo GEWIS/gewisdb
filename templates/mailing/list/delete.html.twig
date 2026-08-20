@@ -1,0 +1,38 @@
+{% extends 'layout-sidebar.html.twig' %}
+
+{% block page_title %}{{ 'Delete Mailing List'|trans }} - {{ parent() }}{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item">
+        <a href="{{ path('application_settings_index') }}">{{ 'Settings'|trans }}</a>
+    </li>
+    <li class="breadcrumb-item"><a href="{{ path('mailing_list_index') }}">{{ 'Mailing Lists'|trans }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ name }}</li>
+{% endblock %}
+
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_title %}{{ 'Delete Mailing List'|trans }}{% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block contents %}
+    <div class="row g-3">
+        <div class="col-12 col-xl-6">
+            <div class="panel">
+                <div class="panel-body">
+                    <p>{{ 'This deletes the %name% mailing list and every subscription to it.'|trans({
+                        '%name%': name,
+                    }) }}</p>
+                    {{ form_start(form) }}
+                        <div class="d-flex gap-2">
+                            {{ form_widget(form.submit_yes, {'attr': {'class': 'btn btn-danger'}}) }}
+                            {{ form_widget(form.submit_no, {'attr': {'class': 'btn btn-secondary'}}) }}
+                        </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

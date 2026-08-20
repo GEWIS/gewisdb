@@ -1,0 +1,8 @@
+{# One installation the decision will make, as the install editor adds it. The `%…%` tokens are filled in when the row
+   is created: the ones in the sentence with what the member and the function are called, the ones in the hidden
+   fields with the identifiers the form reads back. #}
+<div class="mb-1">
+    {{ 'Install %name% as %function%'|trans }}
+    {{ form_widget(entry.member.lidnr, {'value': '%lidnr%'}) }}
+    {{ form_widget(entry.function, {'value': '%function%'}) }}
+</div>

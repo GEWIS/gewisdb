@@ -1,0 +1,96 @@
+<div {{ attributes }}>
+    <div class="panel">
+        <div class="panel-body">
+            {# Counts are of the whole register rather than of what is on screen, so a chip says how many meetings of
+               that type there are, not how many are on this page. #}
+            <ul class="nav nav-pills" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button type="button" role="tab"
+                            class="nav-link{{ '' == this.filter ? ' active' : '' }}"
+                            {% if '' == this.filter %}aria-selected="true"{% endif %}
+                            data-action="live#action"
+                            data-live-action-param="filterBy"
+                            data-live-filter-param="">
+                        {{ 'All'|trans }}
+                        <span class="badge">{{ this.counts|reduce((total, count) => total + count, 0) }}</span>
+                    </button>
+                </li>
+                {% for option in this.filters %}
+                    <li class="nav-item" role="presentation">
+                        <button type="button" role="tab"
+                                class="nav-link{{ this.filter == option.value ? ' active' : '' }}"
+                                {% if this.filter == option.value %}aria-selected="true"{% endif %}
+                                data-action="live#action"
+                                data-live-action-param="filterBy"
+                                data-live-filter-param="{{ option.value }}">
+                            {{ option.getName|trans }}
+                            <span class="badge">{{ this.counts[option.value] ?? 0 }}</span>
+                        </button>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-body">
+            {% if this.totalCount == 0 %}
+                {% include 'partials/application/empty-state.html.twig' with {
+                    icon: 'fa-gavel',
+                    title: '' == this.filter ? 'There are no meetings yet.'|trans : 'No meetings of this type'|trans,
+                    body: '' == this.filter
+                        ? 'Minute a meeting to start recording its decisions.'|trans
+                        : 'Pick another type, or All.'|trans,
+                } only %}
+            {% else %}
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">{{ 'Type'|trans }}</th>
+                                <th scope="col">{{ 'Meeting Number'|trans }}</th>
+                                <th scope="col">{{ 'Meeting Date'|trans }}</th>
+                                <th scope="col" class="text-end">{{ '# Decisions'|trans }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for meeting in this.meetings %}
+                                {% set url = path('decision_meeting_view', {
+                                    type: meeting.type.value,
+                                    number: meeting.number,
+                                }) %}
+                                <tr>
+                                    <td>
+                                        <a class="badge badge-secondary text-decoration-none" href="{{ url }}">
+                                            {{ meeting.type.value }}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a class="fw-semibold text-body text-decoration-none font-monospace"
+                                           href="{{ url }}">{{ meeting.number }}</a>
+                                    </td>
+                                    <td>
+                                        <a class="text-body text-decoration-none" href="{{ url }}">
+                                            {{ meeting.date|format_date('full') }}
+                                        </a>
+                                    </td>
+                                    <td class="text-end font-monospace">
+                                        {{ this.decisionCounts[meeting.type.value ~ '-' ~ meeting.number] ?? 0 }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                {% include 'partials/application/pagination.html.twig' with {
+                    page: this.page,
+                    pageSize: this.pageSize,
+                    pageSizes: this.pageSizes,
+                    totalPages: this.totalPages,
+                    totalCount: this.totalCount,
+                } only %}
+            {% endif %}
+        </div>
+    </div>
+</div>

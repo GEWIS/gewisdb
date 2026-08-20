@@ -1,0 +1,95 @@
+<div {{ attributes }}>
+    <div class="panel">
+        <div class="panel-body d-flex flex-column gap-3">
+            <div>
+                <label class="form-label" for="prospective-overview-search">{{ 'Search'|trans }}</label>
+                <input type="search" class="form-control" id="prospective-overview-search"
+                       placeholder="{{ 'Name, e-mail address or student number'|trans }}"
+                       data-model="debounce(300)|search"
+                       value="{{ this.search }}">
+            </div>
+
+            <ul class="nav nav-pills" role="tablist">
+                {% for option in this.filters %}
+                    <li class="nav-item" role="presentation">
+                        <button type="button" role="tab"
+                                class="nav-link{{ this.filter == option.value ? ' active' : '' }}"
+                                {% if this.filter == option.value %}aria-selected="true"{% endif %}
+                                data-action="live#action"
+                                data-live-action-param="filterBy"
+                                data-live-filter-param="{{ option.value }}">
+                            {{ option.getName|trans }}
+                            <span class="badge">{{ this.counts[option.value] ?? 0 }}</span>
+                        </button>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-body">
+            {% if this.totalCount == 0 %}
+                {% include 'partials/application/empty-state.html.twig' with {
+                    icon: 'fa-user-plus',
+                    title: 'Nothing here'|trans,
+                    body: 'No registrations are in this state.'|trans,
+                } only %}
+            {% else %}
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">{{ 'Name'|trans }}</th>
+                                <th scope="col">{{ 'E-mail Address'|trans }}</th>
+                                <th scope="col">{{ 'Registered'|trans }}</th>
+                                <th scope="col">{{ 'Checkout Status'|trans }}</th>
+                                <th scope="col" class="text-end">{{ 'Action'|trans }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for prospective in this.prospectiveMembers %}
+                                {% set state = prospective.lastCheckoutSessionState %}
+                                <tr>
+                                    <td>
+                                        <a href="{{ path('join_prospective_member_show', {id: prospective.lidnr}) }}"
+                                           class="fw-semibold text-body text-decoration-none">
+                                            {{ prospective.fullName }}
+                                        </a>
+                                        <div class="small text-secondary">
+                                            {# `getName()` spelled out: `study.name` resolves to the enum case name. #}
+                                            {{ prospective.study.getName|trans }}
+                                        </div>
+                                    </td>
+                                    <td><a href="mailto:{{ prospective.email }}">{{ prospective.email }}</a></td>
+                                    <td>{{ prospective.changedOn|format_date(pattern: 'd MMM y') }}</td>
+                                    <td>
+                                        {% if state is null %}
+                                            <span class="badge badge-danger">{{ 'No Checkout Sessions on record.'|trans }}</span>
+                                        {% else %}
+                                            {% include 'partials/join/checkout-badge.html.twig' with {state: state} only %}
+                                        {% endif %}
+                                    </td>
+                                    <td class="text-end">
+                                        <a class="btn btn-sm {{ prospective.hasPaid ? 'btn-gewis-primary' : 'btn-outline-gewis-primary' }}"
+                                           href="{{ path('join_prospective_member_show', {id: prospective.lidnr}) }}">
+                                            {{ prospective.hasPaid ? 'Review'|trans : 'Open'|trans }}
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                {% include 'partials/application/pagination.html.twig' with {
+                    page: this.page,
+                    pageSize: this.pageSize,
+                    pageSizes: this.pageSizes,
+                    totalPages: this.totalPages,
+                    totalCount: this.totalCount,
+                } only %}
+            {% endif %}
+        </div>
+    </div>
+</div>

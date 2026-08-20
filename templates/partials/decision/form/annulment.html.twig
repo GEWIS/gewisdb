@@ -1,0 +1,44 @@
+{# Searching for the decision to annul is narrowed to decisions this one can still take back, so the lookup carries
+   the coordinates of the decision being recorded along with the query. #}
+{{ form_start(form, {
+    'action': path('decision_decision_form', {'form': 'annulment'}),
+    'attr': {
+        'data-controller': 'decision-lookup',
+        'data-decision-lookup-url-value': path('decision_decision_search'),
+        'data-decision-lookup-context-value': {
+            'meeting_type': form.meeting.type.vars.value,
+            'meeting_number': form.meeting.number.vars.value,
+            'point': form.point.vars.value,
+            'decision': form.decision.vars.value,
+        }|json_encode,
+    },
+}) }}
+    <div class="mb-2">
+        {% include 'partials/decision/lookup-input.html.twig' with {
+            'controller': 'decision-lookup',
+            'field': form.name,
+            'placeholder': 'Decision'|trans,
+        } only %}
+        {{ form_errors(form.name) }}
+        {{ form_errors(form.fdecision) }}
+    </div>
+
+    {{ form_widget(form.fdecision.meeting_type, {'attr': {'data-decision-lookup-target': 'meetingType'}}) }}
+    {{ form_widget(form.fdecision.meeting_number, {'attr': {'data-decision-lookup-target': 'meetingNumber'}}) }}
+    {{ form_widget(form.fdecision.point, {'attr': {'data-decision-lookup-target': 'point'}}) }}
+    {{ form_widget(form.fdecision.number, {'attr': {'data-decision-lookup-target': 'number'}}) }}
+
+    <p class="d-none" data-decision-lookup-target="preview">
+        <strong>{{ 'Decision'|trans }}</strong>
+        <strong data-decision-lookup-target="previewNumber"></strong>:
+        <span data-decision-lookup-target="previewContent"></span>
+    </p>
+
+    <div class="decision-form-actions">
+        {{ form_widget(form.submit, {'attr': {
+            'class': 'btn-gewis-primary',
+            'disabled': 'disabled',
+            'data-decision-lookup-target': 'submit',
+        }}) }}
+    </div>
+{{ form_end(form) }}

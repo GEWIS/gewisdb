@@ -1,0 +1,165 @@
+// Decision kinds
+//
+// The list of kinds of decision on the create page. Each row says what the kind does, because "Other" and
+// "Abolition" mean nothing on their own to someone minuting their first meeting. Bootstrap drives the panes; these
+// are its tab buttons with the rows shaped the way the sidebar's are.
+
+.decision-kinds {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+}
+
+// The group heading is the control that folds the group away, so it is a button that still reads as a heading.
+.decision-kinds-group {
+    display: flex;
+    align-items: center;
+    gap: map-get($spacers, 2);
+    inline-size: 100%;
+    padding: 0.5rem $nav-row-padding-x 0.3125rem;
+    border: 0;
+    background-color: transparent;
+    color: var(--#{$prefix}secondary-color);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-align: start;
+    text-transform: uppercase;
+
+    &:not(:first-child) {
+        margin-block-start: map-get($spacers, 2);
+    }
+
+    &:hover {
+        color: var(--#{$prefix}body-color);
+    }
+}
+
+.decision-kinds-group-label {
+    min-inline-size: 0;
+}
+
+.decision-kinds-group-count {
+    margin-inline-start: auto;
+    font-variant-numeric: tabular-nums;
+    opacity: 0.75;
+}
+
+.decision-kinds-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+}
+
+// Bootstrap toggles `.collapse` with inline display, so the flex column above only applies while it is open.
+.decision-kinds-items.collapsing {
+    display: block;
+}
+
+.decision-kind {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.625rem;
+    padding: $nav-row-padding-y $nav-row-padding-x;
+    border: 0;
+    border-radius: 0.5625rem;
+    background-color: transparent;
+    color: var(--#{$prefix}body-color);
+    text-align: start;
+
+    &:hover {
+        background-color: $nav-menu-hover-bg;
+    }
+
+    &.active {
+        background-color: $nav-menu-active-bg;
+        color: $nav-menu-active-color;
+    }
+}
+
+.decision-kind-icon {
+    flex: none;
+    inline-size: 1rem;
+    margin-block-start: 0.1875rem;
+    text-align: center;
+    font-size: $font-size-sm;
+    opacity: 0.85;
+}
+
+.decision-kind-text {
+    display: flex;
+    flex-direction: column;
+    min-inline-size: 0;
+}
+
+.decision-kind-label {
+    font-weight: 600;
+}
+
+.decision-kind-hint {
+    color: var(--#{$prefix}secondary-color);
+    font-size: $font-size-sm;
+    line-height: 1.4;
+    text-wrap: pretty;
+}
+
+.decision-kind.active .decision-kind-hint {
+    color: var(--#{$prefix}body-color);
+}
+
+@include color-mode(gewis-night) {
+    .decision-kind {
+        &:hover {
+            background-color: $nav-menu-hover-bg-dark;
+        }
+
+        &.active {
+            background-color: $nav-menu-active-bg-dark;
+        }
+    }
+}
+
+// The chevron follows the fold, the way the panel headings do.
+.decision-kinds-group.collapsed .panel-collapse-chevron {
+    transform: rotate(-90deg);
+}
+
+// The form beside the list
+//
+// Nothing is chosen when the page opens, so the panel starts on the placeholder and gives way to a form as soon as a
+// pane goes active. Hiding it that way keeps the two in step without a controller to switch between them.
+.decision-form-placeholder {
+    display: block;
+}
+
+.tab-content:has(> .tab-pane.active) ~ .decision-form-placeholder {
+    display: none;
+}
+
+// Each form says which kind it records, because with nothing chosen by default the panel is the first thing that
+// answers "what am I filling in".
+.decision-form-header {
+    margin-block-end: map-get($spacers, 3);
+    padding-block-end: map-get($spacers, 2);
+    border-block-end: $border-width solid var(--#{$prefix}border-color);
+
+    h3 {
+        margin-block-end: 0.125rem;
+        font-size: $font-size-base * 1.125;
+    }
+
+    p {
+        margin-block-end: 0;
+        color: var(--#{$prefix}secondary-color);
+        font-size: $font-size-sm;
+    }
+}
+
+// The button that records the decision is set off from the fields above it, so it does not read as one more row.
+.decision-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-block-start: map-get($spacers, 3);
+    padding-block-start: map-get($spacers, 3);
+    border-block-start: $border-width solid var(--#{$prefix}border-color);
+}

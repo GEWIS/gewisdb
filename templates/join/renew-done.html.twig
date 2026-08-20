@@ -1,0 +1,17 @@
+{% extends 'join/base.html.twig' %}
+
+{% set nav_title = 'GEWIS Renew Membership'|trans %}
+
+{% block page_title %}{{ 'Graduate renewal'|trans }} - {{ parent() }}{% endblock %}
+
+{% block contents %}
+    {% embed 'partials/join/registration-header.html.twig' with {header_title: 'Graduate renewal'|trans} %}
+        {% block registration_intro %}
+            <p>
+                {{ 'Thank you %name%! Your graduate status has been renewed and we have sent you a confirmation by e-mail.'|trans({
+                    '%name%': member.firstName,
+                }) }}
+            </p>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

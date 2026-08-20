@@ -1,0 +1,11 @@
+# Symfony Scheduler takes over from the container crontab. The schedule declared in src/Scheduler/ is dispatched by a
+# long-running worker instead of by crond, declared as the `scheduler` service in compose.yaml:
+#
+#     bin/console messenger:consume scheduler_maintenance
+#
+# Command output no longer goes to a per-job file under /data/logs; it is captured by the worker and reaches the
+# monolog handlers along with everything else.
+#
+# The schedule holds its own lock (see src/Scheduler/), which is what keeps a rolling deploy from dispatching the same
+# run twice while the outgoing and incoming container overlap. That only works across containers if the lock store is
+# shared, so the store is left to `LOCK_DSN` (config/packages/lock.yaml) rather than pinned to a per-container `flock`.

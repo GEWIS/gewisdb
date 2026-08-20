@@ -1,0 +1,66 @@
+{% extends 'layout-sidebar.html.twig' %}
+
+{% block page_title %}{{ 'Address'|trans }} - {{ parent() }}{% endblock %}
+
+{# The layout renders the breadcrumbs and the header band from its own scope, so the labels are imported inside each
+   block that names an address type rather than once at the top. #}
+{% block breadcrumbs %}
+    {% import 'partials/member/labels.html.twig' as labels %}
+    <li class="breadcrumb-item"><a href="{{ path('member_index') }}">{{ 'Members'|trans }}</a></li>
+    <li class="breadcrumb-item">
+        <a href="{{ path('member_show', {lidnr: address.member.lidnr}) }}">{{ address.member.fullName }}</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">{{ labels.address_type(address.type) }}</li>
+{% endblock %}
+
+{# Adding and updating an address are the same form on the same fields; `add` only decides how the page introduces
+   itself, and the form posts back to whichever of the two routes rendered it. #}
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_top %}
+            <span class="page-header-eyebrow">{{ 'Member'|trans }}</span>
+        {% endblock %}
+        {% block header_title %}
+            {% import 'partials/member/labels.html.twig' as labels %}
+            {{ add
+                ? 'Add %type%'|trans({'%type%': labels.address_type(address.type)})
+                : 'Update %type%'|trans({'%type%': labels.address_type(address.type)}) }}
+        {% endblock %}
+        {% block header_subtitle %}
+            <p class="page-header-meta mb-0">{{ address.member.fullName }}</p>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block contents %}
+    <div class="row g-3">
+        <div class="col-12 col-xl-8">
+            <div class="panel">
+                <div class="panel-body">
+                    {{ form_start(form) }}
+                    {{ form_row(form.country) }}
+                    <div class="row">
+                        <div class="col-md-8">
+                            {{ form_row(form.street) }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form_row(form.number) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            {{ form_row(form.postalCode) }}
+                        </div>
+                        <div class="col-md-8">
+                            {{ form_row(form.city) }}
+                        </div>
+                    </div>
+                    {{ form_row(form.phone) }}
+                    {{ form_widget(form.submit, {attr: {class: 'btn-gewis-primary'}}) }}
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

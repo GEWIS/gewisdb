@@ -1,0 +1,64 @@
+{% extends 'layout-sidebar.html.twig' %}
+
+{% block page_title %}{{ 'Export Decisions'|trans }} - {{ parent() }}{% endblock %}
+
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_title %}{{ 'Export Decisions'|trans }}{% endblock %}
+        {% block header_subtitle %}
+            <p class="page-header-meta mb-0">
+                {{ 'Pick the meetings to include and build one decision list from them.'|trans }}
+            </p>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block contents %}
+    {% if latex is defined and null is not same as(latex) %}
+        <div class="panel">
+            <div class="panel-heading d-flex align-items-center gap-2">
+                <h3>{{ 'Decision list'|trans }}</h3>
+                <span class="ms-auto" data-controller="copy" data-copy-text-value="{{ latex }}">
+                    <button type="button" class="btn btn-sm btn-outline-gewis-primary"
+                            data-action="copy#copy" data-copy-copied-label="{{ 'Copied'|trans }}">
+                        <span class="fas fa-copy" aria-hidden="true"></span>
+                        <span data-copy-target="label">{{ 'Copy'|trans }}</span>
+                    </button>
+                </span>
+            </div>
+            <div class="panel-body">
+                <p class="text-secondary">
+                    {{ 'Paste this into a LaTeX editor to produce the document.'|trans }}
+                </p>
+                {# Shown as text to be copied rather than rendered: it is a LaTeX source document, so it is escaped
+                   like any other string. #}
+                <pre class="export-source"><code>{{ latex }}</code></pre>
+            </div>
+        </div>
+    {% else %}
+        <div class="row g-3">
+            <div class="col-12 col-xl-8">
+                <div class="panel">
+                    <div class="panel-heading"><h3>{{ 'Meetings'|trans }}</h3></div>
+                    <div class="panel-body">
+                        {{ form_start(form) }}
+                            {{ form_row(form.meetings, {'attr': {'size': 24}}) }}
+                            {{ form_widget(form.submit, {'attr': {'class': 'btn-gewis-primary'}}) }}
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-xl-4">
+                <div class="panel">
+                    <div class="panel-heading"><h3>{{ 'What you get'|trans }}</h3></div>
+                    <div class="panel-body">
+                        <p class="text-secondary mb-0">
+                            {{ 'Every decision of the selected meetings, ordered by meeting, point and decision number, as a LaTeX document ready to be typeset.'|trans }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

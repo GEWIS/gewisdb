@@ -1,0 +1,35 @@
+{% extends 'layout-sidebar.html.twig' %}
+
+{% block page_title %}{{ 'Update API principal'|trans }} - {{ parent() }}{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item">
+        <a href="{{ path('application_settings_index') }}">{{ 'Settings'|trans }}</a>
+    </li>
+    <li class="breadcrumb-item">
+        <a href="{{ path('user_api_principal_index') }}">{{ 'API Tokens'|trans }}</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">{{ 'Edit'|trans }}</li>
+{% endblock %}
+
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_title %}{{ 'Update API principal'|trans }}{% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block contents %}
+    <div class="row g-3">
+        <div class="col-12 col-xl-8">
+            <div class="panel">
+                <div class="panel-body">
+                    {% include 'partials/user/api-principal-form.html.twig' with {
+                        'form': form,
+                'submit_label': 'Save'|trans,
+                    } only %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

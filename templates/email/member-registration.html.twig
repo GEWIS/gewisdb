@@ -1,0 +1,52 @@
+{% extends 'email/_base.html.twig' %}
+
+{% block emailTitle %}Registration Confirmation GEWIS{% endblock %}
+{% block preheader %}{% endblock %}
+{% block heading %}Your GEWIS registration{% endblock %}
+{% block subheading %}Thank you for your interest in GEWIS!{% endblock %}
+{% block body %}
+    {% import 'partials/email/details-table.html.twig' as details %}
+    
+    <p>Dear {{ member.firstName }},</p>
+    <p>
+        We have received your registration and are awaiting your payment*. Below you will find your registration details,
+        in the event that something is wrong please let us know and we will update it.
+    </p>
+    {{ details.summary('General Information', [
+        {label: 'Initial(s)', value: member.initials},
+        {label: 'First name', value: member.firstName},
+        {label: 'Last name prepositional particle', value: member.middleName},
+        {label: 'Last name', value: member.lastName},
+        {label: 'TU/e student number', value: member.studentNumber ?? 'Unknown'},
+        {label: 'Study', value: member.study.getName|trans},
+        {label: 'E-mail address', value: member.email, href: 'mailto:' ~ member.email},
+        {label: 'Birthdate', value: member.birth|date('l j F Y')},
+    ]) }}
+    {{ details.summary('Address Information', [
+        {label: 'Street and number', value: member.street ~ ' ' ~ member.number},
+        {label: 'Postal code and city', value: member.postalCode ~ ' ' ~ member.city},
+        {label: 'Postal region', value: member.country.value},
+        {label: 'Phone number', value: member.phone},
+    ]) }}
+    {% if member.lists is not empty %}
+        <h3>Mailing Lists</h3>
+        <ul>
+            {% for list in member.lists %}
+                <li>{{ list }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <p>
+        With kind regards,
+        <br>The board of GEWIS
+    </p>
+    
+        <p>
+            Did you forget or fail to pay the membership fee? Then use the following link to start again:
+            <a href="{{ restartUrl }}" style="color: #C40000; text-decoration: none;" target="_blank" rel="noopener nofollow">{{ restartUrl }}</a>.
+            Have you already paid? Then you can ignore this link!<br/>
+            The secretary will verify your details after payment and then approve your membership. If you do not receive your
+            membership number within 3 working days, please contact the secretary.
+        </p>
+{% endblock %}
+{% block footerNote %}You received this email because you registered to become a member of GEWIS.{% endblock %}

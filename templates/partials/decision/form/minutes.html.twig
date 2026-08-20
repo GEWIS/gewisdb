@@ -1,0 +1,33 @@
+{# The minutes are of a meeting other than the one the decision is taken in; picking that meeting by name fills in the
+   hidden `fmeeting` reference, which is what the form reads back. #}
+{{ form_start(form, {
+    'action': path('decision_decision_form', {'form': 'minutes'}),
+    'attr': {
+        'data-controller': 'meeting-lookup',
+        'data-meeting-lookup-url-value': path('decision_meeting_search'),
+        'data-meeting-lookup-min-length-value': 1,
+    },
+}) }}
+    <div class="mb-2">
+        {% include 'partials/decision/lookup-input.html.twig' with {
+            'controller': 'meeting-lookup',
+            'field': form.name,
+            'placeholder': 'Meeting'|trans,
+        } only %}
+        {{ form_errors(form.name) }}
+        {{ form_errors(form.fmeeting) }}
+    </div>
+
+    {{ form_widget(form.fmeeting.type, {'attr': {'data-meeting-lookup-target': 'meetingType'}}) }}
+    {{ form_widget(form.fmeeting.number, {'attr': {'data-meeting-lookup-target': 'meetingNumber'}}) }}
+
+    {% include 'partials/decision/member-lookup.html.twig' with {
+        'field': form.author,
+        'label': 'Author'|trans,
+    } only %}
+    {{ form_row(form.approve) }}
+    {{ form_row(form.changes) }}
+    <div class="decision-form-actions">
+        {{ form_widget(form.submit, {'attr': {'class': 'btn-gewis-primary'}}) }}
+    </div>
+{{ form_end(form) }}

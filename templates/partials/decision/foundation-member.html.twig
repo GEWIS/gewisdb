@@ -1,0 +1,23 @@
+{# One row of an organ's founding membership. The same partial renders the rows that are already there and the
+   collection's prototype, so a row added in the browser is built from exactly the markup the server would emit. #}
+<div class="row g-2 align-items-start mb-2" data-form-collection-target="entry"
+     data-controller="member-lookup" data-member-lookup-url-value="{{ path('member_search_filtered') }}">
+    <div class="col-md-5">
+        {% include 'partials/decision/lookup-input.html.twig' with {
+            'controller': 'member-lookup',
+            'field': entry.member.name,
+            'placeholder': 'Lid'|trans,
+        } only %}
+        {{ form_widget(entry.member.lidnr, {'attr': {'data-member-lookup-target': 'lidnr'}}) }}
+        {{ form_errors(entry.member) }}
+    </div>
+    <div class="col-md-5">
+        {{ form_widget(entry.function) }}
+        {{ form_errors(entry.function) }}
+    </div>
+    <div class="col-md-2 d-grid">
+        <button type="button" class="btn btn-outline-danger" data-action="form-collection#remove">
+            {{ 'Remove Member'|trans }}
+        </button>
+    </div>
+</div>

@@ -1,0 +1,105 @@
+{% extends 'layout-sidebar.html.twig' %}
+
+{% block page_title %}{{ 'Mailing Lists'|trans }} - {{ parent() }}{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item">
+        <a href="{{ path('application_settings_index') }}">{{ 'Settings'|trans }}</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">{{ 'Mailing Lists'|trans }}</li>
+{% endblock %}
+
+{# A yes/no column used to be a glyphicon tick or cross; without an icon font a badge says the same thing and does
+   not need a text alternative bolted on. #}
+{% macro yes_no(value) %}
+    {% if value %}
+        <span class="badge badge-success">{{ 'Yes'|trans }}</span>
+    {% else %}
+        <span class="badge badge-secondary">{{ 'No'|trans }}</span>
+    {% endif %}
+{% endmacro %}
+
+{% import _self as flag %}
+
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_title %}{{ 'Mailing Lists'|trans }}{% endblock %}
+        {% block header_subtitle %}
+            <p class="page-header-meta mb-0">
+                {{ 'Listmonk lists last fetched %when%'|trans({
+                    '%when%': null is same as(listmonk_last_fetch)
+                        ? 'never'|trans
+                        : listmonk_last_fetch|format_datetime('short', 'short'),
+                }) }}
+            </p>
+        {% endblock %}
+        {% block header_actions %}
+            <a href="{{ path('mailing_list_create') }}" class="btn btn-gewis-primary">
+                <span class="fas fa-plus" aria-hidden="true"></span>
+                {{ 'Add Mailing List'|trans }}
+            </a>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block contents %}
+    <div class="panel">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th scope="col">{{ 'Name (Sync)'|trans }}</th>
+                        <th scope="col">{{ 'Dutch Description'|trans }}</th>
+                        <th scope="col">{{ 'English Description'|trans }}</th>
+                        <th scope="col">{{ 'On Form'|trans }}</th>
+                        <th scope="col">{{ 'Auto-subscription'|trans }}</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for list in lists %}
+                        <tr>
+                            <td>
+                                {{ list.name }}
+                                {# A list synchronises with at most one external system, so at most one of these is
+                                   set. #}
+                                ({% if list.hasListmonkList %}
+                                    {{ list.listmonkList.name }}
+                                {% elseif list.hasMailmanList %}
+                                    {{ list.mailmanList.mailmanId }}
+                                {% else %}
+                                    {{ 'n/a'|trans }}
+                                {% endif %})
+                            </td>
+                            <td>{{ list.nlDescription }}</td>
+                            <td>{{ list.enDescription }}</td>
+                            <td>{{ flag.yes_no(list.onForm) }}</td>
+                            <td>{{ flag.yes_no(list.defaultSub) }}</td>
+                            <td class="text-end text-nowrap">
+                                <a href="{{ path('mailing_list_edit', {'name': list.name}) }}"
+                                   class="btn btn-sm btn-outline-gewis-primary">
+                                    {{ 'Edit'|trans }}
+                                </a>
+                                <a href="{{ path('mailing_list_delete', {'name': list.name}) }}"
+                                   class="btn btn-sm btn-outline-danger">
+                                    {{ 'Delete'|trans }}
+                                </a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="6">
+                                {% include 'partials/application/empty-state.html.twig' with {
+                                    icon: 'fa-envelope',
+                                    title: 'No mailing lists'|trans,
+                                    body: 'Add one to offer it on the registration form.'|trans,
+                                } only %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,10 @@
+twig:
+    file_name_pattern: '*.twig'
+    form_themes:
+        - 'form/bootstrap-floating.html.twig'
+    globals:
+        supported_locales: '%kernel.enabled_locales%'
+
+when@test:
+    twig:
+        strict_variables: true

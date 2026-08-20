@@ -1,0 +1,51 @@
+{% extends 'layout-sidebar.html.twig' %}
+
+{% set title = null is same as(list) ? 'Add New Mailing List'|trans : 'Edit Mailing List'|trans %}
+
+{% block page_title %}{{ title }} - {{ parent() }}{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item">
+        <a href="{{ path('application_settings_index') }}">{{ 'Settings'|trans }}</a>
+    </li>
+    <li class="breadcrumb-item"><a href="{{ path('mailing_list_index') }}">{{ 'Mailing Lists'|trans }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">
+        {{ null is same as(list) ? 'Add'|trans : list.name }}
+    </li>
+{% endblock %}
+
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_title %}{{ title }}{% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block contents %}
+    <div class="row g-3">
+        <div class="col-12 col-xl-8">
+            <div class="panel">
+                <div class="panel-body">
+                    {{ form_start(form) }}
+                        {# The name is the mailing list's identity, both here and in Listmonk/Mailman, so an existing
+                           list only shows it. #}
+                        {{ form_row(form.name, null is same as(list) ? {} : {'attr': {'readonly': 'readonly'}}) }}
+                        {{ form_row(form.nl_description) }}
+                        {{ form_row(form.en_description) }}
+                        {{ form_row(form.onForm) }}
+                        {{ form_row(form.defaultSub) }}
+                        {# Mailman is on its way out: a list can still be shown and unbound, but a new binding is not
+                           offered. #}
+                        {% if form.mailmanList.vars.value is not empty %}
+                            {{ form_row(form.mailmanList) }}
+                        {% else %}
+                            {% do form.mailmanList.setRendered %}
+                        {% endif %}
+                        {{ form_row(form.listmonkList) }}
+                        {{ form_widget(form.submit, {'label': title, 'attr': {'class': 'btn-gewis-primary'}}) }}
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

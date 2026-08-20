@@ -1,0 +1,37 @@
+{% extends 'layout-sidebar.html.twig' %}
+
+{% block page_title %}{{ 'Add Meeting'|trans }} - {{ parent() }}{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href="{{ path('decision_meeting_index') }}">{{ 'Meetings'|trans }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ 'Add Meeting'|trans }}</li>
+{% endblock %}
+
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_title %}{{ 'Add Meeting'|trans }}{% endblock %}
+        {% block header_subtitle %}
+            <p class="page-header-meta mb-0">
+                {{ 'The type and the number together address the meeting and everything decided at it.'|trans }}
+            </p>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block contents %}
+    <div class="row g-3">
+        <div class="col-12 col-xl-6">
+            <div class="panel">
+                <div class="panel-body">
+                    {{ form_start(form) }}
+                        {{ form_row(form.type) }}
+                        {{ form_row(form.number) }}
+                        {{ form_row(form.date) }}
+                        {{ form_widget(form.submit, {'attr': {'class': 'btn-gewis-primary'}}) }}
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

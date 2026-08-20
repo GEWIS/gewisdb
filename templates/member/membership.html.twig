@@ -1,0 +1,85 @@
+{% extends 'layout-sidebar.html.twig' %}
+
+{% import 'partials/member/labels.html.twig' as labels %}
+
+{% block page_title %}{{ 'Change Membership Type'|trans }} - {{ parent() }}{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href="{{ path('member_index') }}">{{ 'Members'|trans }}</a></li>
+    <li class="breadcrumb-item">
+        <a href="{{ path('member_show', {lidnr: member.lidnr}) }}">{{ member.fullName }}</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">{{ 'Membership Type'|trans }}</li>
+{% endblock %}
+
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_top %}
+            <span class="page-header-eyebrow">{{ 'Member'|trans }}</span>
+        {% endblock %}
+        {% block header_title %}{{ 'Change Membership Type'|trans }}{% endblock %}
+        {% block header_subtitle %}
+            <p class="page-header-meta mb-0">{{ member.fullName }}</p>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{# `membership` is the period the form edits. `MembershipTypeType` takes it as an option, which a template cannot
+   read back, so the controller passes it along for the explanation beside the form. #}
+{% block contents %}
+    <div class="row g-3">
+        <div class="col-12 col-xl-7">
+            <div class="panel">
+                <div class="panel-heading"><h3>{{ 'The change'|trans }}</h3></div>
+                <div class="panel-body">
+                    {{ form_start(form) }}
+                    {{ form_row(form.type) }}
+                    {{ form_row(form.changeDate) }}
+                    {{ form_widget(form.submit, {attr: {class: 'btn-gewis-primary'}}) }}
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-xl-5">
+            <div class="panel">
+                <div class="panel-heading"><h3>{{ 'What you are editing'|trans }}</h3></div>
+                <div class="panel-body">
+                    <dl class="meeting-facts mb-0">
+                        <dt>{{ 'Starts'|trans }}</dt>
+                        <dd>{{ membership.startDate|date('l j F Y') }}</dd>
+                        <dt>{{ 'Ends'|trans }}</dt>
+                        <dd>{{ membership.endDate|date('l j F Y') }}</dd>
+                        <dt>{{ 'Type'|trans }}</dt>
+                        <dd>{{ labels.membership_type(membership.type) }}</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading"><h3>{{ 'How the change date works'|trans }}</h3></div>
+                <div class="panel-body">
+                    <ul class="mb-0">
+                        <li>
+                            {{ 'A change date other than %start% splits the membership in two on that date.'|trans({
+                                '%start%': membership.startDate|date('j F Y'),
+                            }) }}
+                        </li>
+                        <li>
+                            {{ 'Setting it to %end% also renews the membership.'|trans({
+                                '%end%': membership.endDate|date('j F Y'),
+                            }) }}
+                        </li>
+                        <li>
+                            {{ 'Enter changes in the order they happened: once a change on %later% is recorded, one on %earlier% can no longer be.'|trans({
+                                '%later%': membership.startDate|date_modify('+6 days')|date('j F Y'),
+                                '%earlier%': membership.startDate|date_modify('+3 days')|date('j F Y'),
+                            }) }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

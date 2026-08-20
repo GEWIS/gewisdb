@@ -1,0 +1,94 @@
+<div {{ attributes }}>
+    <div class="panel">
+        <div class="panel-body d-flex flex-column gap-3">
+            <div>
+                <label class="form-label" for="member-overview-search">{{ 'Search'|trans }}</label>
+                <input type="search" class="form-control" id="member-overview-search"
+                       placeholder="{{ 'Name, e-mail address, member number or student number'|trans }}"
+                       data-model="debounce(300)|search"
+                       value="{{ this.search }}">
+            </div>
+
+            {# Counts are of the current search, so narrowing says how many of these matches are expired. #}
+            <ul class="nav nav-pills" role="tablist">
+                {% for option in this.filters %}
+                    <li class="nav-item" role="presentation">
+                        <button type="button" role="tab"
+                                class="nav-link{{ this.filter == option.value ? ' active' : '' }}"
+                                {% if this.filter == option.value %}aria-selected="true"{% endif %}
+                                data-action="live#action"
+                                data-live-action-param="filterBy"
+                                data-live-filter-param="{{ option.value }}">
+                            {{ option.getName|trans }}
+                            <span class="badge">{{ this.counts[option.value] ?? 0 }}</span>
+                        </button>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-body">
+            {% if this.totalCount == 0 %}
+                {% include 'partials/application/empty-state.html.twig' with {
+                    icon: 'fa-user-group',
+                    title: 'No members match'|trans,
+                    body: 'Try a different filter, or clear the search.'|trans,
+                } only %}
+            {% else %}
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">{{ 'Name'|trans }}</th>
+                                <th scope="col">{{ 'E-mail Address'|trans }}</th>
+                                <th scope="col">{{ 'Generation'|trans }}</th>
+                                <th scope="col">{{ 'Expiration'|trans }}</th>
+                                <th scope="col" class="text-end">{{ 'Status'|trans }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for member in this.members %}
+                                {% set membership = member.currentOrLastMembership %}
+                                <tr{{ member.deleted ? ' class="table-danger"' : '' }}>
+                                    <td class="font-monospace">{{ member.lidnr }}</td>
+                                    <td>
+                                        <a href="{{ path('member_show', {lidnr: member.lidnr}) }}"
+                                           class="fw-semibold text-body text-decoration-none">{{ member.fullName }}</a>
+                                        {% if membership is not null %}
+                                            <div class="small text-secondary">
+                                                {{ membership.type.getName|trans }}
+                                            </div>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if member.email is empty %}
+                                            <span class="text-secondary">{{ 'No e-mail on record'|trans }}</span>
+                                        {% else %}
+                                            <a href="mailto:{{ member.email }}">{{ member.email }}</a>
+                                        {% endif %}
+                                    </td>
+                                    <td class="font-monospace">{{ member.generation }}</td>
+                                    <td>{{ member.expiration|format_date(pattern: 'd MMM y') }}</td>
+                                    <td class="text-end">
+                                        {% include 'partials/member/status-badge.html.twig' with {member: member} only %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                {% include 'partials/application/pagination.html.twig' with {
+                    page: this.page,
+                    pageSize: this.pageSize,
+                    pageSizes: this.pageSizes,
+                    totalPages: this.totalPages,
+                    totalCount: this.totalCount,
+                } only %}
+            {% endif %}
+        </div>
+    </div>
+</div>

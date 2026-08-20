@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="nl" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="B9r0Hn5" resname="Error">
+        <source>Error</source>
+        <target>Fout</target>
+      </trans-unit>
+      <trans-unit id="mc0AGDu" resname="Organ regulations can only be created for 'committee', 'fraternity', or 'financial audit committee'.">
+        <source>Organ regulations can only be created for 'committee', 'fraternity', or 'financial audit committee'.</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="KWcTrZE" resname="You cannot use your TU/e (student) e-mail address because if you leave or stop studying, we can no longer reach you about important announcements.">
+        <source>You cannot use your TU/e (student) e-mail address because if you leave or stop studying, we can no longer reach you about important announcements.</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="O_htvlR" resname="You have to agree to the Articles of Association and the Internal Regulations">
+        <source>You have to agree to the Articles of Association and the Internal Regulations</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="HnYDKlp" resname="You have to consent to processing your data">
+        <source>You have to consent to processing your data</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="Ja2Ld.R" resname="Select an existing function.">
+        <source>Select an existing function.</source>
+        <target state="translated">Kies een bestaande functie.</target>
+      </trans-unit>
+      <trans-unit id="FceeXEU" resname="Select an existing membership type.">
+        <source>Select an existing membership type.</source>
+        <target state="translated">Kies een bestaand lidmaatschapstype.</target>
+      </trans-unit>
+      <trans-unit id="H5QX6J4" resname="The two given tokens do not match">
+        <source>The two given tokens do not match</source>
+        <target state="translated">De twee opgegeven tokens komen niet overeen</target>
+      </trans-unit>
+      <trans-unit id="kGKHJGh" resname="Select an existing key code granting.">
+        <source>Select an existing key code granting.</source>
+        <target state="translated">Kies een bestaande sleutelcodetoekenning.</target>
+      </trans-unit>
+      <trans-unit id="Vl0WfUi" resname="Select an existing member.">
+        <source>Select an existing member.</source>
+        <target state="translated">Kies een bestaand lid.</target>
+      </trans-unit>
+      <trans-unit id="on3DnG1" resname="Select an existing decision.">
+        <source>Select an existing decision.</source>
+        <target state="translated">Kies een bestaand besluit.</target>
+      </trans-unit>
+      <trans-unit id="AFc0orS" resname="Select an existing study.">
+        <source>Select an existing study.</source>
+        <target state="translated">Kies een bestaande studie.</target>
+      </trans-unit>
+      <trans-unit id="NRml2pe" resname="Select an existing address type.">
+        <source>Select an existing address type.</source>
+        <target state="translated">Kies een bestaand adrestype.</target>
+      </trans-unit>
+      <trans-unit id=".ZyliwH" resname="Select an existing postal region.">
+        <source>Select an existing postal region.</source>
+        <target state="translated">Kies een bestaande postcoderegio.</target>
+      </trans-unit>
+      <trans-unit id="q6hbKB9" resname="Select an existing meeting.">
+        <source>Select an existing meeting.</source>
+        <target state="translated">Kies een bestaande vergadering.</target>
+      </trans-unit>
+      <trans-unit id="Z88TMEY" resname="Select an existing subdecision.">
+        <source>Select an existing subdecision.</source>
+        <target state="translated">Kies een bestaand subbesluit.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,51 @@
+{% extends 'layout-sidebar.html.twig' %}
+{% import 'partials/member/labels.html.twig' as labels %}
+
+{% block page_title %}{{ 'Delete Address'|trans }} - {{ parent() }}{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href="{{ path('member_index') }}">{{ 'Members'|trans }}</a></li>
+    <li class="breadcrumb-item">
+        <a href="{{ path('member_show', {lidnr: member.lidnr}) }}">{{ member.fullName }}</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">{{ 'Delete Address'|trans }}</li>
+{% endblock %}
+
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_top %}
+            <span class="page-header-eyebrow">{{ 'Member'|trans }}</span>
+        {% endblock %}
+        {% block header_title %}{{ 'Delete Address'|trans }}{% endblock %}
+        {% block header_subtitle %}
+            <p class="page-header-meta mb-0">
+                {{ member.fullName }}
+            </p>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block contents %}
+    <div class="row g-3">
+        <div class="col-12 col-xl-6">
+            <div class="panel">
+                <div class="panel-body">
+                    <p>
+                        {{ 'This deletes the %type% of %name%.'|trans({
+                            '%type%': labels.address_type(address_type),
+                            '%name%': member.fullName,
+                        }) }}
+                    </p>
+
+                    {{ form_start(form) }}
+                    <div class="d-flex flex-wrap gap-2">
+                        {{ form_widget(form.submit_yes, {attr: {class: 'btn-danger'}}) }}
+                        {{ form_widget(form.submit_no, {attr: {class: 'btn btn-secondary'}}) }}
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

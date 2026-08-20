@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'An error occurred'|trans }} - {{ parent() }}{% endblock %}
+
+{% block contents %}
+    {# The old template printed the exception, its file, its stack trace and every previous exception whenever
+       `display_exceptions` was on. That is the profiler's job now, and this template is only ever reached with
+       debugging off. #}
+    <div class="panel">
+        <div class="panel-body">
+            {% include 'partials/application/empty-state.html.twig' with {
+                icon: 'fa-triangle-exclamation',
+                title: 'Something went wrong'|trans,
+                body: 'The page could not be built. Try again later.'|trans,
+            } only %}
+            <div class="text-center">
+                <a class="btn btn-gewis-primary" href="{{ path('application_home') }}">{{ 'Go home'|trans }}</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

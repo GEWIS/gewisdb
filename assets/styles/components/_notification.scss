@@ -1,0 +1,29 @@
+// Notification bell
+//
+// The panel that drops out of the bell in the navbar, rendered by `components/Application/NotificationBell`. Taken
+// from GEWISWEB's notification component, minus everything about read state: GEWISDB has no notification records, so
+// there is nothing to mark read, dismiss or tint.
+
+.notification-menu {
+    min-width: 20rem;
+    max-width: 90vw;
+}
+
+.notification-list {
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.notification-icon {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.875rem;
+    height: 1.875rem;
+    margin-top: 0.125rem;
+    border-radius: 0.5625rem;
+    background-color: var(--#{$prefix}secondary-bg);
+    color: var(--#{$prefix}secondary-color);
+    font-size: 0.75rem;
+}

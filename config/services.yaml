@@ -1,0 +1,60 @@
+# Pure autowire and autoconfigure. Do not introduce factory classes.
+
+parameters:
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        bind:
+            string $mailFromAddress: '%env(MAIL_FROM_ADDRESS)%'
+            string $mailFromName: '%env(MAIL_FROM_NAME)%'
+            string $mailFromSecretaryAddress: '%env(MAIL_FROM_SECRETARY_ADDRESS)%'
+            string $mailFromSecretaryName: '%env(MAIL_FROM_SECRETARY_NAME)%'
+            string $mailToCheckerResultAddress: '%env(MAIL_TO_CHECKER_RESULT_ADDRESS)%'
+            string $mailToCheckerResultName: '%env(MAIL_TO_CHECKER_RESULT_NAME)%'
+            string $mailToReportErrorAddress: '%env(MAIL_TO_REPORT_ERROR_ADDRESS)%'
+            string $mailToReportErrorName: '%env(MAIL_TO_REPORT_ERROR_NAME)%'
+            string $mailToSubscriptionAddress: '%env(MAIL_TO_SUBSCRIPTION_ADDRESS)%'
+            string $mailToSubscriptionName: '%env(MAIL_TO_SUBSCRIPTION_NAME)%'
+            string $publicUrl: '%env(APP_URL)%'
+            string $joinUrl: 'https://%env(JOIN_HOSTNAME)%'
+            string $stripeApiVersion: '%env(STRIPE_API_VERSION)%'
+            string $stripeSecretKey: '%env(STRIPE_SECRET_KEY)%'
+            string $stripeWebhookSigningKey: '%env(STRIPE_WEBHOOK_SIGNING_KEY)%'
+            string $stripeMembershipPriceId: '%env(STRIPE_MEMBERSHIP_PRICE_ID)%'
+            string $stripeCancelUrl: '%env(STRIPE_CANCEL_URL)%'
+            string $stripeSuccessUrl: '%env(STRIPE_SUCCESS_URL)%'
+            array $enabledLocales: '%kernel.enabled_locales%'
+            string $defaultLocale: '%kernel.default_locale%'
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+            # Value objects the container has no business constructing: they are built from entities at the point of
+            # use, and their constructors are deliberately not public.
+            - '../src/ViewModel/'
+
+    # The connection the login firewall binds against. It is never opened unless a bind actually happens, so this is
+    # harmless on the deployments that have no LDAP_SERVERS at all. See LdapEnvVarProcessor for the reshaping.
+    Symfony\Component\Ldap\Ldap:
+        factory: ['Symfony\Component\Ldap\Ldap', 'create']
+        arguments:
+            - 'ext_ldap'
+            - connection_string: '%env(ldap_connection_string:default::LDAP_SERVERS)%'
+              encryption: '%env(ldap_encryption:default::LDAP_STARTTLS)%'
+              options:
+                  # Active Directory refuses anything older, and chasing referrals breaks the bind.
+                  protocol_version: 3
+                  referrals: false
+
+when@test:
+    services:
+        # The `_test` databases are not in the role map, which is keyed by the `DOCTRINE_*` names, and running as a
+        # least-privileged role is a production concern rather than something a test should carry: dropping the
+        # autoconfiguration drops the `doctrine.middleware` tag, so tests connect as the user in the DSN and may
+        # build their own schema. {@see App\Doctrine\Middleware\SetRoleMiddleware}
+        App\Doctrine\Middleware\SetRoleMiddleware:
+            autoconfigure: false

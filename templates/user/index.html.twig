@@ -1,0 +1,77 @@
+{% extends 'layout-sidebar.html.twig' %}
+
+{% block page_title %}{{ 'Users'|trans }} - {{ parent() }}{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item">
+        <a href="{{ path('application_settings_index') }}">{{ 'Settings'|trans }}</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">{{ 'Users'|trans }}</li>
+{% endblock %}
+
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_title %}{{ 'Users'|trans }}{% endblock %}
+        {% block header_subtitle %}
+            <p class="page-header-meta mb-0">{{ 'Who can sign in to this application.'|trans }}</p>
+        {% endblock %}
+        {% block header_actions %}
+            <a href="{{ path('user_create') }}" class="btn btn-gewis-primary">
+                <span class="fas fa-plus" aria-hidden="true"></span>
+                {{ 'Add new user'|trans }}
+            </a>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block contents %}
+    {% if uses_ldap %}
+        <div class="alert alert-warning" role="alert">
+            {# The link used to be spliced into the translated sentence with sprintf; keeping it as its own element
+               means no message in the catalogue carries markup. #}
+            {{ 'Signing in goes through GEWIS m-accounts, so an account created here cannot be used to sign in.'|trans }}
+            <a href="https://support.gewis.nl/kb/faq.php?id=36" target="_blank" rel="noopener">
+                {{ 'Learn more about m-accounts.'|trans }}
+            </a>
+        </div>
+    {% endif %}
+
+    <div class="panel">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">{{ 'Username'|trans }}</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td class="font-monospace">{{ user.id }}</td>
+                            <td>{{ user.login }}</td>
+                            <td class="text-end">
+                                <a class="btn btn-sm btn-outline-gewis-primary"
+                                   href="{{ path('user_edit', {'id': user.id}) }}">
+                                    {{ 'Edit / Delete'|trans }}
+                                </a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="3">
+                                {% include 'partials/application/empty-state.html.twig' with {
+                                    icon: 'fa-user-shield',
+                                    title: 'No users'|trans,
+                                    body: 'Nobody can sign in with a password yet.'|trans,
+                                } only %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

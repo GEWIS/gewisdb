@@ -1,0 +1,40 @@
+{#
+    The badge sits on the bell rather than beside it, which is what `position-relative` on the button and
+    `position-absolute translate-middle` on the badge are for.
+#}
+<li class="nav-item dropdown" {{ attributes }}>
+    <button class="nav-link dropdown-toggle position-relative" type="button" role="button"
+            data-bs-toggle="dropdown" data-bs-auto-close="outside"
+            aria-haspopup="true" aria-expanded="false" aria-label="{{ 'Notifications'|trans }}">
+        <span class="fas fa-bell" aria-hidden="true"></span>
+        {% if this.count > 0 %}
+            <span class="position-absolute translate-middle badge rounded-pill bg-light text-dark">
+                {{ this.count > 9 ? '9+' : this.count }}
+                <span class="visually-hidden">{{ 'things need attention'|trans }}</span>
+            </span>
+        {% endif %}
+    </button>
+    <div class="dropdown-menu dropdown-menu-end p-0 notification-menu">
+        <div class="px-3 py-2 border-bottom">
+            <strong>{{ 'Notifications'|trans }}</strong>
+        </div>
+        <div class="notification-list">
+            {% for notification in this.notifications %}
+                <a class="dropdown-item d-flex gap-2 py-2 text-wrap" href="{{ path(notification.route) }}">
+                    <span class="notification-icon text-{{ notification.tone }}">
+                        <span class="fas {{ notification.icon }}" aria-hidden="true"></span>
+                    </span>
+                    <span class="flex-grow-1">{{ notification.message|trans }}</span>
+                </a>
+            {% else %}
+                <div class="dropdown-item-text text-center px-4 py-4">
+                    <span class="far fa-bell-slash fa-lg text-secondary" aria-hidden="true"></span>
+                    <span class="d-block fw-semibold mt-2">{{ 'You are all caught up'|trans }}</span>
+                    <span class="d-block small text-secondary">
+                        {{ 'Anything that needs you shows up here.'|trans }}
+                    </span>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</li>

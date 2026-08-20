@@ -1,0 +1,70 @@
+{% extends 'layout-sidebar.html.twig' %}
+
+{% block page_title %}{{ foundation.abbr }} - {{ parent() }}{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href="{{ path('decision_organ_index') }}">{{ 'Bodies'|trans }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ foundation.abbr }}</li>
+{% endblock %}
+
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_top %}
+            {# `getName()` spelled out: `organType.name` would resolve to the enum case name. #}
+            <span class="page-header-eyebrow">{{ foundation.organType.getName|trans }}</span>
+        {% endblock %}
+        {% block header_title %}{{ foundation.abbr }}{% endblock %}
+        {% block header_subtitle %}
+            <p class="page-header-meta mb-0">
+                {{ foundation.name }} · {{ 'Founded by %decision%'|trans({
+                    '%decision%': foundation.decision.meetingType.value ~ ' '
+                        ~ foundation.decision.meetingNumber ~ '.'
+                        ~ foundation.decision.point ~ '.'
+                        ~ foundation.decision.number,
+                }) }}
+            </p>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block contents %}
+    <div class="panel">
+        <div class="panel-heading"><h3>{{ 'Members'|trans }}</h3></div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th scope="col">{{ 'Name'|trans }}</th>
+                            <th scope="col">{{ 'Function'|trans }}</th>
+                            <th scope="col">{{ 'Installed by'|trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for reference in installations %}
+                            <tr>
+                                <td>
+                                    <a class="fw-semibold text-body text-decoration-none"
+                                       href="{{ path('member_show', {lidnr: reference.member.lidnr}) }}">
+                                        {{ reference.member.fullName }}
+                                    </a>
+                                </td>
+                                <td>{{ reference.function.getName|trans }}</td>
+                                <td class="font-monospace">
+                                    {{ reference.meetingType.value }} {{ reference.meetingNumber }}.{{ reference.decisionPoint }}.{{ reference.decisionNumber }}
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="3">
+                                    <span class="text-secondary">{{ 'Nobody is installed in this body.'|trans }}</span>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid container-sidebar flex-grow-1 d-flex flex-row px-0">
+        <aside class="px-0">
+            <nav class="sidebar d-flex flex-column h-100">
+                <div class="d-lg-none d-flex justify-content-center py-1">
+                    <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#sidebar-offcanvas" aria-controls="sidebar-offcanvas"
+                            aria-expanded="false" aria-label="{{ 'Toggle navigation'|trans }}">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+                <div class="offcanvas-lg offcanvas-start h-100" id="sidebar-offcanvas"
+                     tabindex="-1" aria-labelledby="sidebar-offcanvas-label">
+                    <div class="offcanvas-header d-lg-none">
+                        <h5 class="offcanvas-title" id="sidebar-offcanvas-label">
+                            {% block sidebar_label %}{{ 'Navigation'|trans }}{% endblock %}
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                data-bs-target="#sidebar-offcanvas" aria-label="{{ 'Close'|trans }}"></button>
+                    </div>
+                    <div class="offcanvas-body sidebar-body h-100">
+                        <div class="sidebar-nav">
+                            {% block sidebar %}
+                                {% include 'partials/application/db-sidebar.html.twig' %}
+                            {% endblock %}
+                        </div>
+                        {% if block('sidebar_footer') is defined and block('sidebar_footer')|trim != '' %}
+                            <div class="sidebar-footer mt-auto">
+                                {{ block('sidebar_footer') }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </nav>
+        </aside>
+        <main class="container-fluid flex-grow-1 p-0 d-flex flex-column">
+            {% if block('breadcrumbs') is defined and block('breadcrumbs')|trim != '' %}
+                <nav class="navbar-breadcrumb sticky-top" aria-label="breadcrumb">
+                    <ol class="breadcrumb m-0 px-2">
+                        {% block breadcrumbs %}{% endblock %}
+                    </ol>
+                </nav>
+            {% endif %}
+            {% block page_header %}{% endblock %}
+            <section class="page-body my-0 pt-3 px-3 flex-grow-1 overflow-x-auto">
+                {% block contents %}{% endblock %}
+            </section>
+        </main>
+    </div>
+{% endblock %}

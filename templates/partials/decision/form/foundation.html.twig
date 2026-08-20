@@ -1,0 +1,64 @@
+{% set member_prototype %}
+    {%- include 'partials/decision/foundation-member.html.twig' with {
+        'entry': form.members.vars.prototype,
+    } only -%}
+{% endset %}
+
+{# A voting committee is founded for a purpose rather than under a name, and its abbreviation is only the suffix
+   after `SC<meeting>-`; the labels say so as soon as that type is picked. #}
+{{ form_start(form, {
+    'action': path('decision_decision_form', {'form': 'foundation'}),
+    'attr': {
+        'data-controller': 'foundation-form',
+        'data-action': 'submit->foundation-form#prune',
+        'data-foundation-form-purpose-type-value': constant('App\\Entity\\Database\\Enums\\OrganTypes::SC').value,
+        'data-foundation-form-name-label-value': 'Name'|trans,
+        'data-foundation-form-abbr-label-value': 'Abbreviation'|trans,
+        'data-foundation-form-purpose-label-value': 'Purpose'|trans,
+        'data-foundation-form-suffix-label-value': 'Abbreviation suffix (SC%number%-{SUFFIX})'|trans({
+            '%number%': form.meeting.number.vars.value,
+        }),
+    },
+}) }}
+    <div data-action="change->foundation-form#relabel">
+        {{ form_row(form.type) }}
+    </div>
+
+    <div class="form-floating mb-2">
+        {{ form_widget(form.name, {'attr': {
+            'data-foundation-form-target': 'name',
+            'placeholder': 'Name'|trans,
+        }}) }}
+        {{ form_label(form.name, null, {'label_attr': {'data-foundation-form-target': 'nameLabel'}}) }}
+        {{ form_errors(form.name) }}
+    </div>
+
+    <div class="form-floating mb-2">
+        {{ form_widget(form.abbr, {'attr': {
+            'data-foundation-form-target': 'abbr',
+            'placeholder': 'Abbreviation'|trans,
+        }}) }}
+        {{ form_label(form.abbr, null, {'label_attr': {'data-foundation-form-target': 'abbrLabel'}}) }}
+        {{ form_errors(form.abbr) }}
+    </div>
+
+    <div class="mb-2" data-controller="form-collection"
+         data-form-collection-prototype-value="{{ member_prototype|e('html_attr') }}"
+         data-form-collection-prototype-name-value="__index__">
+        <span class="form-label d-block">{{ 'Members'|trans }}</span>
+        <div data-form-collection-target="entries" data-foundation-form-target="members">
+            {% for entry in form.members %}
+                {% include 'partials/decision/foundation-member.html.twig' with {'entry': entry} only %}
+            {% endfor %}
+        </div>
+        {{ form_errors(form.members) }}
+        <button type="button" class="btn btn-outline-gewis-primary" data-action="form-collection#add"
+                data-form-collection-target="add">
+            {{ 'Add Member'|trans }}
+        </button>
+    </div>
+
+    <div class="decision-form-actions">
+        {{ form_widget(form.submit, {'attr': {'class': 'btn-gewis-primary'}}) }}
+    </div>
+{{ form_end(form) }}

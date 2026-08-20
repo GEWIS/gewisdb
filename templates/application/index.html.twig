@@ -1,0 +1,166 @@
+{% extends 'layout-sidebar.html.twig' %}
+
+{% block page_title %}{{ 'Overview'|trans }} - {{ parent() }}{% endblock %}
+
+{#
+    One integration per line: a dot for its state, what it last did, and the page that can do something about it. The
+    state is the same one the notification above is raised from, so a red dot here always has a row up there.
+#}
+{% macro integration(label, tone, value, route, action) %}
+    <div class="integration">
+        <span class="integration-dot bg-{{ tone }}" aria-hidden="true"></span>
+        <span class="integration-text">
+            <span class="integration-label">{{ label }}</span>
+            <span class="integration-value">{{ value }}</span>
+        </span>
+        <a class="integration-action" href="{{ path(route) }}">{{ action }}</a>
+    </div>
+{% endmacro %}
+
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_title %}{{ 'Overview'|trans }}{% endblock %}
+        {% block header_subtitle %}
+            <p class="page-header-meta mb-0">
+                {{ '%members% members, %graduates% graduates, %expired% expired and %prospectives% prospective members'|trans({
+                    '%members%': members,
+                    '%graduates%': graduates,
+                    '%expired%': expired,
+                    '%prospectives%': prospectives.total,
+                }) }}
+                {% if notifications is not empty %}
+                    · {{ '%number% need attention'|trans({'%number%': notifications|length}) }}
+                {% endif %}
+            </p>
+        {% endblock %}
+        {% block header_actions %}
+            <a class="btn btn-outline-gewis-primary" href="{{ path('query_index') }}">
+                <span class="fas fa-terminal" aria-hidden="true"></span>
+                {{ 'Run a query'|trans }}
+            </a>
+            <a class="btn btn-gewis-primary" href="{{ path('decision_meeting_create') }}">
+                <span class="fas fa-plus" aria-hidden="true"></span>
+                {{ 'New meeting'|trans }}
+            </a>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block contents %}
+    {% import _self as dashboard %}
+
+    <div class="row g-3">
+        <div class="col-12 col-xl-8">
+            <div class="panel">
+                <div class="panel-heading d-flex flex-wrap align-items-baseline gap-2">
+                    <h3>{{ 'Needs attention'|trans }}</h3>
+                    <span class="panel-heading-meta">
+                        {{ 'Approvals and system checks that someone has to clear'|trans }}
+                    </span>
+                    <span class="ms-auto badge {{ notifications is empty ? 'badge-success' : 'badge-gewis-primary' }}">
+                        {{ notifications|length }}
+                    </span>
+                </div>
+                {% for notification in notifications %}
+                    <div class="panel-body attention">
+                        <span class="attention-icon text-{{ notification.tone }}">
+                            <span class="fas {{ notification.icon }}" aria-hidden="true"></span>
+                        </span>
+                        <span class="attention-text">
+                            <span class="attention-title">
+                                {{ notification.title|trans }}
+                                <span class="badge badge-{{ notification.tone }}">{{ notification.kind|trans }}</span>
+                            </span>
+                            <span class="attention-body">{{ notification.message|trans }}</span>
+                        </span>
+                        <a class="btn btn-sm btn-outline-gewis-primary" href="{{ path(notification.route) }}">
+                            {{ notification.action|trans }}
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="panel-body">
+                        {% include 'partials/application/empty-state.html.twig' with {
+                            icon: 'fa-check',
+                            title: 'Everything is clear'|trans,
+                            body: 'Nothing is waiting for approval and every integration is reporting in.'|trans,
+                        } only %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="col-12 col-xl-4">
+            <div class="panel">
+                <div class="panel-heading"><h3>{{ 'Membership types'|trans }}</h3></div>
+                <div class="panel-body">
+                    {# The bars are drawn against the largest type rather than against a total: somebody can hold two
+                       current memberships of different types, so these are not slices of one number. #}
+                    {% set largest = max(membership_breakdown) %}
+                    {% for type, count in membership_breakdown %}
+                        <div class="breakdown">
+                            <span class="breakdown-label">{{ enum('App\\Entity\\Database\\Enums\\MembershipTypes').from(type)|trans }}</span>
+                            <span class="breakdown-count">{{ count }}</span>
+                            <span class="breakdown-bar">
+                                <span class="breakdown-fill breakdown-fill-{{ type }}"
+                                      style="inline-size: {{ largest > 0 ? (count / largest * 100)|round : 0 }}%"></span>
+                            </span>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading"><h3>{{ 'Integrations'|trans }}</h3></div>
+                <div class="panel-body">
+                    {% for service in [
+                        {'label': 'Mailman', 'fetch': mailman_last_fetch, 'overdue': mailman_last_fetch_overdue},
+                        {'label': 'Listmonk', 'fetch': listmonk_last_fetch, 'overdue': listmonk_last_fetch_overdue},
+                    ] %}
+                        {{ dashboard.integration(
+                            service.label,
+                            service.overdue ? 'danger' : 'success',
+                            null is same as(service.fetch)
+                                ? 'Never fetched'|trans
+                                : 'Fetched %when%'|trans({'%when%': service.fetch|format_datetime('short', 'short')}),
+                            'mailing_list_index',
+                            'Lists'|trans,
+                        ) }}
+                    {% endfor %}
+                    {% set pending = mailing_list_changes_pending.creations + mailing_list_changes_pending.deletions %}
+                    {{ dashboard.integration(
+                        'Mailing list synchronisation'|trans,
+                        sync_paused ? 'warning' : (pending > 0 ? 'info' : 'success'),
+                        sync_paused
+                            ? (null is same as(sync_paused_until)
+                                ? 'Paused'|trans
+                                : 'Paused until %until%'|trans({
+                                    '%until%': sync_paused_until|format_datetime('short', 'short'),
+                                }))
+                            : (pending > 0
+                                ? '%creations% subscriptions and %deletions% unsubscriptions pending'|trans({
+                                    '%creations%': mailing_list_changes_pending.creations,
+                                    '%deletions%': mailing_list_changes_pending.deletions,
+                                })
+                                : 'Up to date'|trans),
+                        'application_settings_index',
+                        'Settings'|trans,
+                    ) }}
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading"><h3>{{ 'Build'|trans }}</h3></div>
+                <div class="panel-body">
+                    <p class="font-monospace mb-1">
+                        <a href="https://github.com/GEWIS/gewisdb/commit/{{ git_commit }}"
+                           target="_blank" rel="noopener">{{ git_commit }}</a>
+                    </p>
+                    <p class="text-secondary mb-0">
+                        {{ 'Include this in every bug report.'|trans }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

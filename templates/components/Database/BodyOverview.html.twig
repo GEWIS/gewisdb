@@ -1,0 +1,68 @@
+<div {{ attributes }}>
+    <div class="panel">
+        <div class="panel-body">
+            <label class="form-label" for="body-overview-search">{{ 'Search'|trans }}</label>
+            <input type="search" class="form-control" id="body-overview-search"
+                   placeholder="{{ 'Abbreviation or name'|trans }}"
+                   data-model="debounce(300)|search"
+                   value="{{ this.search }}">
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-body">
+            {% if this.totalCount == 0 %}
+                {% include 'partials/application/empty-state.html.twig' with {
+                    icon: 'fa-sitemap',
+                    title: 'There are no bodies that match.'|trans,
+                    body: 'Try a different abbreviation or name, or clear the search.'|trans,
+                } only %}
+            {% else %}
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">{{ 'Abbreviation'|trans }}</th>
+                                <th scope="col">{{ 'Name'|trans }}</th>
+                                <th scope="col">{{ 'Founded by'|trans }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for body in this.bodies %}
+                                {% set url = path('decision_organ_view', {
+                                    type: body.meetingType.value,
+                                    number: body.meetingNumber,
+                                    point: body.decisionPoint,
+                                    decision: body.decisionNumber,
+                                    sequence: body.sequence,
+                                }) %}
+                                <tr>
+                                    <td>
+                                        <a class="fw-semibold text-body text-decoration-none" href="{{ url }}">
+                                            {{ body.abbr }}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a class="text-body text-decoration-none" href="{{ url }}">{{ body.name }}</a>
+                                    </td>
+                                    <td class="font-monospace">
+                                        {{ body.meetingType.value }}
+                                        {{ body.meetingNumber }}.{{ body.decisionPoint }}.{{ body.decisionNumber }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                {% include 'partials/application/pagination.html.twig' with {
+                    page: this.page,
+                    pageSize: this.pageSize,
+                    pageSizes: this.pageSizes,
+                    totalPages: this.totalPages,
+                    totalCount: this.totalCount,
+                } only %}
+            {% endif %}
+        </div>
+    </div>
+</div>

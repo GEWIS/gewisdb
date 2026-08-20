@@ -1,0 +1,39 @@
+{% extends 'layout-sidebar.html.twig' %}
+
+{% block page_title %}{{ 'Add Decision'|trans }} - {{ parent() }}{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href="{{ path('decision_meeting_index') }}">{{ 'Meetings'|trans }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ 'Add Decision'|trans }}</li>
+{% endblock %}
+
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_title %}{{ 'Add Decision'|trans }}{% endblock %}
+        {% block header_subtitle %}
+            <p class="page-header-meta mb-0">
+                {{ 'The decision was not recorded. Correct what is marked below and submit again.'|trans }}
+            </p>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block contents %}
+    <div class="row g-3">
+        <div class="col-12 col-xl-8">
+            <div class="panel">
+                <div class="panel-body">
+                    {# One sub-decision form on its own, after it came back with errors. The form keys are the partial
+                       names, so the type is the path and no switch on it is needed. #}
+                    {% include 'partials/decision/form/' ~ type|replace({'_': '-'}) ~ '.html.twig' with {
+                        'form': form,
+                        'installs': installs|default([]),
+                        'grants': grants|default([]),
+                        'member_function_form': member_function_form|default(null),
+                    } %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

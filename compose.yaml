@@ -1,0 +1,139 @@
+x-app-environment: &app_environment
+    - APP_ENV=${APP_ENV}
+    - APP_SECRET
+    - APP_URL=${APP_URL}
+    - CORS_ALLOW_ORIGIN=${CORS_ALLOW_ORIGIN}
+    - DATABASE_DSN=${DATABASE_DSN}
+    - DEFAULT_URI=${DEFAULT_URI}
+    - LOCK_DSN=${LOCK_DSN}
+    - MAILER_DSN=${MAILER_DSN}
+    - MESSENGER_TRANSPORT_DSN=${MESSENGER_TRANSPORT_DSN}
+    - REPORT_DATABASE_DSN=${REPORT_DATABASE_DSN}
+    # The hosts Caddy answers on; the application decides what each may reach.
+    - SERVER_NAME=${SERVER_NAME}
+    # The Caddyfile's Mercure hub always wants a key, even where nothing publishes: development uses it for
+    # hot reload, production leaves the hub closed (no `anonymous`) and idle.
+    - MERCURE_PUBLISHER_JWT_KEY=${MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
+    - MERCURE_SUBSCRIBER_JWT_KEY=${MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
+    - DEMO_CREDENTIALS_PASSWORD=${DEMO_CREDENTIALS_PASSWORD}
+    - DEMO_CREDENTIALS_USERNAME=${DEMO_CREDENTIALS_USERNAME}
+    - DOCTRINE_DEFAULT_DATABASE=${DOCTRINE_DEFAULT_DATABASE}
+    - DOCTRINE_DEFAULT_HOST=${DOCTRINE_DEFAULT_HOST}
+    - DOCTRINE_DEFAULT_PASSWORD=${DOCTRINE_DEFAULT_PASSWORD}
+    - DOCTRINE_DEFAULT_PORT=${DOCTRINE_DEFAULT_PORT}
+    - DOCTRINE_DEFAULT_ROLE=${DOCTRINE_DEFAULT_ROLE}
+    - DOCTRINE_DEFAULT_USER=${DOCTRINE_DEFAULT_USER}
+    - DOCTRINE_REPORT_DATABASE=${DOCTRINE_REPORT_DATABASE}
+    - DOCTRINE_REPORT_HOST=${DOCTRINE_REPORT_HOST}
+    - DOCTRINE_REPORT_PASSWORD=${DOCTRINE_REPORT_PASSWORD}
+    - DOCTRINE_REPORT_PORT=${DOCTRINE_REPORT_PORT}
+    - DOCTRINE_REPORT_ROLE=${DOCTRINE_REPORT_ROLE}
+    - DOCTRINE_REPORT_USER=${DOCTRINE_REPORT_USER}
+    - LDAP_BASEDN=${LDAP_BASEDN}
+    - LDAP_BINDUSER_PASS
+    - LDAP_BINDUSER_USERNAME=${LDAP_BINDUSER_USERNAME}
+    - LDAP_DOMAIN=${LDAP_DOMAIN}
+    - LDAP_FILTER=${LDAP_FILTER}
+    - LDAP_SERVERS=${LDAP_SERVERS}
+    - LDAP_STARTTLS=${LDAP_STARTTLS}
+    - MAIL_FROM_ADDRESS=${MAIL_FROM_ADDRESS}
+    - MAIL_FROM_NAME=${MAIL_FROM_NAME}
+    - MAIL_FROM_SECRETARY_ADDRESS=${MAIL_FROM_SECRETARY_ADDRESS}
+    - MAIL_FROM_SECRETARY_NAME=${MAIL_FROM_SECRETARY_NAME}
+    - MAIL_TO_CHECKER_RESULT_ADDRESS=${MAIL_TO_CHECKER_RESULT_ADDRESS}
+    - MAIL_TO_CHECKER_RESULT_NAME=${MAIL_TO_CHECKER_RESULT_NAME}
+    - MAIL_TO_REPORT_ERROR_ADDRESS=${MAIL_TO_REPORT_ERROR_ADDRESS}
+    - MAIL_TO_REPORT_ERROR_NAME=${MAIL_TO_REPORT_ERROR_NAME}
+    - MAIL_TO_SUBSCRIPTION_ADDRESS=${MAIL_TO_SUBSCRIPTION_ADDRESS}
+    - MAIL_TO_SUBSCRIPTION_NAME=${MAIL_TO_SUBSCRIPTION_NAME}
+    - MAILMAN_API_ENDPOINT=${MAILMAN_API_ENDPOINT}
+    - MAILMAN_API_VERSION=${MAILMAN_API_VERSION}
+    - MAILMAN_API_USERNAME=${MAILMAN_API_USERNAME}
+    - MAILMAN_API_PASSWORD=${MAILMAN_API_PASSWORD}
+    - LISTMONK_API_ENDPOINT=${LISTMONK_API_ENDPOINT}
+    - LISTMONK_API_USERNAME=${LISTMONK_API_USERNAME}
+    - LISTMONK_API_PASSWORD=${LISTMONK_API_PASSWORD}
+    - PHP_IDE_CONFIG=${PHP_IDE_CONFIG}
+    - STRIPE_API_VERSION=${STRIPE_API_VERSION}
+    - STRIPE_CANCEL_URL=${STRIPE_CANCEL_URL}
+    - STRIPE_MEMBERSHIP_PRICE_ID
+    - STRIPE_PUBLISHABLE_KEY
+    - STRIPE_SECRET_KEY
+    - STRIPE_SUCCESS_URL=${STRIPE_SUCCESS_URL}
+    - STRIPE_WEBHOOK_SIGNING_KEY
+
+# The scheduler worker runs the same image as the web service and shares its configuration; only what it is told to
+# run differs. `entrypoint: []` skips the entrypoint deliberately: it waits for the database and applies the
+# migrations, and that is the web service's job. A worker starting before the schema is current would run commands
+# against a half-migrated database, so it waits for `web` to report healthy instead.
+x-worker: &worker
+    image: abc.docker-registry.gewis.nl/db/gewisdb/web:production
+    entrypoint: []
+    environment: *app_environment
+    depends_on:
+        postfix:
+            condition: service_started
+        web:
+            condition: service_healthy
+    volumes:
+        - logs-web:/app/var/log:rw
+        - uploads:/app/public/data:rw
+    networks:
+        - network
+    restart: unless-stopped
+    # The image's health check asks Caddy's admin API on :2019, which only the web service runs.
+    healthcheck:
+        disable: true
+
+services:
+    web:
+        image: abc.docker-registry.gewis.nl/db/gewisdb/web:production
+        # env_file:
+        #     - .env
+        environment: *app_environment
+        depends_on:
+            - postfix
+        volumes:
+            - logs-web:/app/var/log:rw
+            - uploads:/app/public/data:rw
+            - caddy-data:/data:rw
+            - caddy-config:/config:rw
+        ports:
+            - "80:80"
+            - "443:443"
+            - "443:443/udp"
+        networks:
+            - network
+        restart: unless-stopped
+    # The one schedule the application declares, consumed by one worker. Jobs run one after another, so a nightly
+    # rebuild that overruns delays the hourly mailing list sync behind it rather than running alongside it.
+    # `--time-limit` and `--memory-limit` recycle the process before a long-lived PHP worker starts to drift.
+    scheduler:
+        <<: *worker
+        command: ["php", "bin/console", "messenger:consume", "scheduler_maintenance", "-vv", "--time-limit=3600", "--memory-limit=256M"]
+    postfix:
+        image: juanluisbaptiste/postfix
+        env_file:
+            - .env
+#        environment:
+#            - SMTP_SERVER=
+#            - SMTP_PORT=
+#            - SMTP_USERNAME=
+#            - SMTP_PASSWORD=
+#            - SERVER_HOSTNAME=
+        networks:
+            - network
+        expose:
+            - 1025
+        restart: unless-stopped
+        stop_grace_period: 60s
+
+volumes:
+    caddy-config:
+    caddy-data:
+    logs-web:
+
+    uploads:
+
+networks:
+    network:

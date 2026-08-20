@@ -8,180 +8,37 @@ concurrency:
     group: ${{ github.workflow }}-${{ github.ref }}
     cancel-in-progress: true
 
+permissions: {}
+
 jobs:
     phpstan:
         name: PHPStan
         runs-on: ubuntu-latest
-
-        # Create a Postgres service.
-        services:
-            postgres:
-                image: postgres
-                env:
-                    POSTGRES_PASSWORD: gewisdb
-                    POSTGRES_USER: gewisdb
-                ports:
-                    - 5432:5432
-                options: >-
-                    --health-cmd pg_isready
-                    --health-interval 10s
-                    --health-timeout 5s
-                    --health-retries 5
+        permissions:
+            contents: read
 
         steps:
-            -   name: Checkout head branch
-                uses: actions/checkout@v4
-
-            -   name: Install PostgreSQL client
-                run: |
-                    sudo apt-get update
-                    sudo apt-get install --yes --no-install-recommends postgresql-client
+            -   name: Checkout
+                uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+                with:
+                    persist-credentials: false
 
             -   name: Install PHP
-                uses: shivammathur/setup-php@v2
+                uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # 2.37.2
                 with:
-                    php-version: '8.4'
-                    extensions: calendar, curl, intl, opcache, pgsql, pdo_pgsql, zip, xdebug
+                    php-version: '8.5'
+                    extensions: calendar, curl, intl, ldap, opcache, pgsql, pdo_pgsql, zip
                     tools: cs2pr
 
-            -   name: Extract configuration files
-                run: |
-                    cp config/autoload/doctrine.local.development.php.dist config/autoload/doctrine.local.php
-                    cp config/autoload/laminas-developer-tools.local.php.dist config/autoload/laminas-developer-tools.local.php
-                    cp config/autoload/local.development.php.dist config/autoload/local.php
-
-            -   name: Check out main
-                run: |
-                    git config --global url."https://github.com/".insteadOf git@github.com:
-                    git config --global url."https://".insteadOf git://
-                    git fetch --all
-                    git update-ref refs/heads/temp-phpstanpr refs/remotes/origin/main
-                    git checkout --detach temp-phpstanpr
-
             -   name: Install dependencies with Composer
-                uses: ramsey/composer-install@v3
+                uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
 
-            -   name: Load environment variables
-                uses: c-py/action-dotenv-to-setenv@v3
-                with:
-                    env-file: .env.dist
-
-            -   name: Create databases
-                env:
-                    DOCTRINE_DEFAULT_HOST: 127.0.0.1
-                    DOCTRINE_REPORT_HOST: 127.0.0.1
-                    PGPASSWORD: gewisdb
-                run: |
-                    psql -h $DOCTRINE_REPORT_HOST -p 5432 -U gewisdb -c "CREATE DATABASE $DOCTRINE_REPORT_DATABASE"
-                    ./orm orm:schema-tool:update --force --no-interaction --complete
-                    EM_ALIAS=orm_report ./orm orm:schema-tool:update --force --no-interaction --complete
-
-            -   name: Generate PHPStan Baseline
-                env:
-                    DOCTRINE_DEFAULT_HOST: 127.0.0.1
-                    DOCTRINE_REPORT_HOST: 127.0.0.1
-                run: |
-                    echo "" > phpstan/phpstan-baseline.neon
-                    echo "" > phpstan/phpstan-baseline-pr.neon
-                    vendor/bin/phpstan analyse -c phpstan.neon --generate-baseline phpstan/phpstan-baseline-temp.neon --memory-limit 1G --no-progress
-
-            -   name: Check out new branch
-                run: |
-                    git checkout -- phpstan/phpstan-baseline.neon
-                    git checkout --theirs -- config/modules.config.php
-                    git checkout -
-
-            -   name: Install dependencies with Composer
-                uses: ramsey/composer-install@v3
-
-            -   name: Load environment variables
-                uses: c-py/action-dotenv-to-setenv@v3
-                with:
-                    env-file: .env.dist
-
-            -   name: Clear cache
-                env:
-                    DOCTRINE_DEFAULT_HOST: 127.0.0.1
-                    DOCTRINE_REPORT_HOST: 127.0.0.1
-                    PGPASSWORD: gewisdb
-                run: |
-                    rm -rf data/cache/module-config-cache.application.config.cache.php
-                    ./orm orm:clear-cache:metadata --quiet
-                    EM_ALIAS=orm_report ./orm orm:clear-cache:metadata --quiet
-                    ./orm orm:generate-proxies --quiet
-                    EM_ALIAS=orm_report ./orm orm:generate-proxies --quiet
-
-            -   name: Create databases
-                env:
-                    DOCTRINE_DEFAULT_HOST: 127.0.0.1
-                    DOCTRINE_REPORT_HOST: 127.0.0.1
-                    PGPASSWORD: gewisdb
-                run: |
-                    ./orm orm:schema-tool:update --force --no-interaction --complete
-                    EM_ALIAS=orm_report ./orm orm:schema-tool:update --force --no-interaction --complete
+            -   name: Warm the development container
+                # phpstan.dist.neon points `symfony.containerXmlPath` at the compiled dev container and
+                # `doctrine.objectManagerLoader` boots the dev kernel. Without this the Symfony and Doctrine
+                # extensions fall back to knowing nothing about the services and the mapping, and the analysis
+                # silently stops catching what they are there to catch. Neither step opens a database connection.
+                run: bin/console cache:warmup --env=dev
 
             -   name: Run PHPStan
-                env:
-                    DOCTRINE_DEFAULT_HOST: 127.0.0.1
-                    DOCTRINE_REPORT_HOST: 127.0.0.1
-                run: |
-                    cp phpstan/phpstan-baseline-temp.neon phpstan/phpstan-baseline-pr.neon
-                    vendor/bin/phpstan analyse -c phpstan.neon --memory-limit 1G --no-progress --error-format=checkstyle | cs2pr
-
-    psalm:
-        name: Psalm
-        runs-on: ubuntu-latest
-
-        steps:
-            -   name: Checkout head branch
-                uses: actions/checkout@v4
-
-            -   name: Install PHP
-                uses: shivammathur/setup-php@v2
-                with:
-                    php-version: '8.4'
-                    extensions: calendar, curl, intl, opcache, pgsql, pdo_pgsql, zip, xdebug
-
-            -   name: Extract configuration files
-                run: |
-                    cp config/autoload/doctrine.local.development.php.dist config/autoload/doctrine.local.php
-                    cp config/autoload/laminas-developer-tools.local.php.dist config/autoload/laminas-developer-tools.local.php
-                    cp config/autoload/local.development.php.dist config/autoload/local.php
-
-            -   name: Check out main
-                run: |
-                    git fetch --all
-                    git update-ref refs/heads/temp-psalmpr refs/remotes/origin/main
-                    git checkout --detach temp-psalmpr
-
-            -   name: Install dependencies with Composer
-                uses: ramsey/composer-install@v3
-
-            -   name: Load environment variables
-                uses: c-py/action-dotenv-to-setenv@v3
-                with:
-                    env-file: .env.dist
-            -   name: Generate Psalm Baseline
-                run: |
-                    echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?><files/>" > psalm/psalm-baseline.xml
-                    echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?><files/>" > psalm/psalm-baseline-pr.xml
-                    vendor/bin/psalm --set-baseline=psalm/psalm-baseline-pr.xml --no-diff --no-cache --no-progress || true
-
-            -   name: Check out new branch
-                run: |
-                    git checkout -- psalm/psalm-baseline.xml
-                    git checkout --theirs -- config/modules.config.php
-                    git checkout --theirs -- psalm.xml
-                    git checkout -
-
-            -   name: Install dependencies with Composer
-                uses: ramsey/composer-install@v3
-
-            -   name: Load environment variables
-                uses: c-py/action-dotenv-to-setenv@v3
-                with:
-                    env-file: .env.dist
-
-            -   name: Run Psalm
-                run: |
-                    vendor/bin/psalm  --no-diff --no-cache --no-progress --output-format=github
+                run: vendor/bin/phpstan analyse -c phpstan.dist.neon --memory-limit 1G --no-progress --error-format=checkstyle | cs2pr

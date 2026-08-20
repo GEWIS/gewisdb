@@ -1,0 +1,30 @@
+{#
+    The rows of the administrative sidebar. Rendered into `layout-sidebar.html.twig`'s `sidebar` block, which every
+    page behind the login extends.
+
+    The active row is decided by route name rather than by controller and action, which no longer exist as a concept.
+    A route is matched on its prefix so that a detail page keeps its section highlighted.
+#}
+{% import 'partials/application/sidebar.html.twig' as sidebar %}
+
+{% set route = app.current_route ?? '' %}
+{% set pending = prospective_awaiting_approval() %}
+
+{{ sidebar.context('DB', 'GEWIS', 'Database'|trans) }}
+
+<ul class="sidebar-list">
+    {{ sidebar.link(path('application_home'), 'fa-gauge', 'Overview'|trans, 'application_home' == route) }}
+    {{ sidebar.link(path('decision_meeting_index'), 'fa-gavel', 'Meetings and decisions'|trans,
+        route starts with 'decision_meeting' or route starts with 'decision_decision') }}
+    {{ sidebar.link(path('decision_organ_index'), 'fa-sitemap', 'Bodies'|trans,
+        route starts with 'decision_organ') }}
+    {{ sidebar.link(path('join_prospective_member_index'), 'fa-user-plus', 'Prospective members'|trans,
+        route starts with 'join_prospective_member', pending) }}
+    {{ sidebar.link(path('member_index'), 'fa-user-group', 'Members'|trans,
+        route starts with 'member_') }}
+    {{ sidebar.link(path('decision_export_index'), 'fa-file-arrow-down', 'Decision export'|trans,
+        route starts with 'decision_export') }}
+    {{ sidebar.link(path('query_index'), 'fa-terminal', 'Query'|trans, route starts with 'query_') }}
+    {{ sidebar.link(path('application_settings_index'), 'fa-sliders', 'Settings'|trans,
+        route starts with 'application_settings' or route starts with 'mailing_' or route starts with 'user_') }}
+</ul>

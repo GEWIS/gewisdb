@@ -12,37 +12,74 @@ concurrency:
     group: ${{ github.workflow }}-${{ github.ref }}
     cancel-in-progress: true
 
+permissions: {}
+
 jobs:
     phpunit:
         name: PHPUnit
         runs-on: ubuntu-latest
+        permissions:
+            contents: read
+
+        # The integration tests boot the kernel against a real PostgreSQL, because the ledger's rules are queries:
+        # the `when@test` doctrine configuration puts both connections on their own `_test` databases, and
+        # dama/doctrine-test-bundle rolls every test back so one schema and one seed serve the whole run.
+        services:
+            postgresql:
+                image: postgres:16
+                env:
+                    POSTGRES_USER: gewisdb
+                    POSTGRES_PASSWORD: gewisdb
+                    POSTGRES_DB: gewisdb
+                ports:
+                    - 5432:5432
+                options: >-
+                    --health-cmd="pg_isready --username=gewisdb"
+                    --health-interval=10s
+                    --health-timeout=5s
+                    --health-retries=10
 
         steps:
             -   name: Checkout
-                uses: actions/checkout@v4
+                uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+                with:
+                    persist-credentials: false
 
             -   name: Install PHP
-                uses: shivammathur/setup-php@v2
+                uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # 2.37.2
                 with:
-                    php-version: '8.4'
-                    extensions: calendar, curl, intl, opcache, pdo_sqlite, sqlite3, zip
+                    php-version: '8.5'
+                    extensions: calendar, curl, intl, ldap, opcache, pgsql, pdo_pgsql, zip
 
             -   name: Setup problem matchers for PHPUnit
                 run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
             -   name: Install dependencies with Composer
-                uses: ramsey/composer-install@v3
+                uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
 
-            -   name: Extract configuration files
+            -   name: Create the isolated test databases
+                env:
+                    PGPASSWORD: gewisdb
+                # Only the empty databases; the schemas are built from the mapping metadata in the next step. The
+                # names are the ones `.env.test` points at, with the `_test` suffix `when@test` appends.
                 run: |
-                    cp config/autoload/doctrine.local.development.php.dist config/autoload/doctrine.local.php
-                    cp config/autoload/laminas-developer-tools.local.php.dist config/autoload/laminas-developer-tools.local.php
-                    cp config/autoload/local.development.php.dist config/autoload/local.php
+                    psql --host=127.0.0.1 --port=5432 --username=gewisdb --dbname=gewisdb \
+                      --command="CREATE DATABASE gewisdb_test;"
+                    psql --host=127.0.0.1 --port=5432 --username=gewisdb --dbname=gewisdb \
+                      --command="CREATE DATABASE gewisdb_report_test;"
 
-            -   name: Load environment variables
-                uses: c-py/action-dotenv-to-setenv@v3
-                with:
-                    env-file: .env.dist
+            -   name: Prepare the test databases (schemas + seed)
+                env:
+                    APP_ENV: test
+                # What `make test-prepare` does in the development stack. ReportDB is filled by replaying the ledger,
+                # because its listeners stand down while the fixtures load.
+                run: |
+                    bin/console doctrine:schema:create
+                    bin/console doctrine:schema:create --em=report
+                    bin/console doctrine:fixtures:load --no-interaction
+                    bin/console report:generate:full
 
             -   name: Run PHPUnit
-                run: vendor/phpunit/phpunit/phpunit --bootstrap bootstrap.php --configuration phpunit.xml
+                env:
+                    APP_ENV: test
+                run: bin/phpunit

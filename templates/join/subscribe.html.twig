@@ -1,0 +1,239 @@
+{% extends 'join/base.html.twig' %}
+
+{% set nav_title = 'GEWIS Registration'|trans %}
+
+{% block page_title %}{{ 'GEWIS Registration'|trans }} - {{ parent() }}{% endblock %}
+
+{#
+    Five steps, one form, one POST. Every step stays in the document and nothing is stored before the end, so the
+    stepper is navigation rather than a series of submissions: with scripting off the whole form is simply visible at
+    once and works the way it always did, and a rejected submission opens the first step that carries an error.
+#}
+{% macro step_tab(index, label) %}
+    <li class="form-stepper__step" role="presentation">
+        <button type="button" class="form-stepper__btn" role="tab"
+                data-form-stepper-target="tab"
+                data-action="form-stepper#goto registration-review#update"
+                data-form-stepper-index-param="{{ index }}">
+            <span class="form-stepper__num">{{ index + 1 }}</span>
+            <span class="form-stepper__label">{{ label }}</span>
+        </button>
+    </li>
+{% endmacro %}
+
+{% macro review_row(label, index, attributes) %}
+    <div class="registration-review-row">
+        <dt>{{ label }}</dt>
+        <dd data-registration-review-target="value" {% for key, value in attributes %}{{ key }}="{{ value }}" {% endfor %}></dd>
+        <button type="button" class="btn btn-sm btn-link registration-review-edit"
+                data-action="form-stepper#goto registration-review#update"
+                data-form-stepper-index-param="{{ index }}">
+            {{ 'Edit'|trans }}<span class="visually-hidden"> {{ label }}</span>
+        </button>
+    </div>
+{% endmacro %}
+
+{% block contents %}
+    {% import _self as wizard %}
+
+    {% embed 'partials/join/registration-header.html.twig' %}
+        {% block registration_intro %}
+            <p>
+                {{ 'Welcome! With this form you can register for a membership of GEWIS. Becoming a member of the assocation costs a one-time fee of 20 euros and your membership is valid as long as you study.'|trans }}
+            </p>
+        {% endblock %}
+    {% endembed %}
+
+    {{ form_start(form, {attr: {id: 'form-subscribe'}}) }}
+
+    {% if form.vars.submitted and not form.vars.valid %}
+        <div class="alert alert-danger" role="alert">
+            {{ 'Some of the entered information appears to be missing or incorrect. Please check your data and submit again.'|trans }}
+        </div>
+    {% endif %}
+
+    <div data-controller="form-stepper registration-review"
+         data-action="input->registration-review#update change->registration-review#update">
+        <ol class="form-stepper" role="tablist">
+            {{ wizard.step_tab(0, 'Personal details'|trans) }}
+            {{ wizard.step_tab(1, 'Study'|trans) }}
+            {{ wizard.step_tab(2, 'Address'|trans) }}
+            {{ wizard.step_tab(3, 'Mailing lists'|trans) }}
+            {{ wizard.step_tab(4, 'Review and pay'|trans) }}
+        </ol>
+
+        <div data-form-stepper-target="step">
+            <div class="panel">
+                <div class="panel-heading"><h3>{{ 'Personal details'|trans }}</h3></div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-2">
+                            {{ form_row(form.initials, {attr: {
+                                'data-controller': 'initials',
+                                'data-action': 'focusout->initials#normalise',
+                            }}) }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form_row(form.firstName) }}
+                        </div>
+                        <div class="col-md-2">
+                            {{ form_row(form.middleName) }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form_row(form.lastName) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            {{ form_row(form.email, {help: 'We use this address for everything we send you, so use one you keep after you stop studying.'|trans}) }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form_row(form.birth) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div data-form-stepper-target="step">
+            <div class="panel">
+                <div class="panel-heading"><h3>{{ 'Study'|trans }}</h3></div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form_row(form.studentNumber, {help_html: true, help: 'Your student number is a 7-digit number, for example 1234560. You have received this in an email when you enrolled and it is printed on your campus card. Go to <a href="%url%">this page</a> if you need help finding it. Your student number will be used to verify you are studying at the department of M&CS.'|trans({
+                                '%url%': 'https://wiki.gewis.nl/link/495',
+                            })}) }}
+                        </div>
+                        <div class="col-md-6" data-controller="study-notice">
+                            {{ form_row(form.study, {attr: {'data-action': 'change->study-notice#toggle'}}) }}
+                            {# The footnote marker is put on the label by `StudyChoices`, so the notice keys off the
+                               option text rather than off a list of studies repeated here. It starts out visible, as
+                               it does for an empty selection. #}
+                            <p class="form-text" data-study-notice-target="notice">
+                                {{ '¹ DSA Pattern is the study association for students of the data science programs. The introduction week, round table discussions, and other education activities for these programs are organized by Pattern. Although you can join GEWIS, you might benefit more from joining Pattern on <a href="https://dsapattern.nl/" target="_blank">their website</a>.'|trans|raw }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div data-form-stepper-target="step">
+            <div class="panel">
+                <div class="panel-heading"><h3>{{ 'Address'|trans }}</h3></div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            {{ form_row(form.address.street) }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form_row(form.address.number) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            {{ form_row(form.address.postalCode) }}
+                        </div>
+                        <div class="col-md-8">
+                            {{ form_row(form.address.city) }}
+                        </div>
+                    </div>
+                    {{ form_row(form.address.country) }}
+                    {{ form_row(form.address.phone) }}
+                </div>
+            </div>
+        </div>
+
+        <div data-form-stepper-target="step">
+            <div class="panel">
+                <div class="panel-heading"><h3>{{ 'Mailing lists'|trans }}</h3></div>
+                <div class="panel-body">
+                    <p>
+                        {{ 'As a GEWIS member, you are automatically subscribed to the "announcements" mailing list. This list is used solely for announcements from the study association, such as invitations to General Members Meetings (GMMs). In addition, there are several other optional mailing lists. You can subscribe to the following mailing lists. These subscriptions can be changed at a later date.'|trans }}
+                    </p>
+                    {# `MailingListLabel` renders the list name in bold ahead of its description, so the choice labels
+                       carry markup. #}
+                    {{ form_row(form.lists, {label: false, label_html: true}) }}
+                    <p class="form-text mb-0">
+                        {{ 'You can change these at any time once you are a member.'|trans }}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div data-form-stepper-target="step">
+            <div class="panel">
+                <div class="panel-heading"><h3>{{ 'Review'|trans }}</h3></div>
+                <div class="panel-body">
+                    <dl class="registration-review mb-0">
+                        {# The ids are taken from the fields themselves rather than written out, because they carry
+                           the form's name and that follows the form type. #}
+                        {{ wizard.review_row('Name'|trans, 0, {
+                            'data-fields': [
+                                form.initials, form.firstName, form.middleName, form.lastName,
+                            ]|map(field => field.vars.id)|join(' '),
+                        }) }}
+                        {{ wizard.review_row('E-mail Address'|trans, 0, {'data-fields': form.email.vars.id}) }}
+                        {{ wizard.review_row('Birthdate'|trans, 0, {'data-fields': form.birth.vars.id}) }}
+                        {{ wizard.review_row('TU/e student number'|trans, 1, {
+                            'data-fields': form.studentNumber.vars.id,
+                        }) }}
+                        {{ wizard.review_row('Study'|trans, 1, {'data-fields': form.study.vars.id}) }}
+                        {{ wizard.review_row('Address'|trans, 2, {
+                            'data-fields': [
+                                form.address.street, form.address.number, form.address.postalCode,
+                                form.address.city, form.address.country,
+                            ]|map(field => field.vars.id)|join(' '),
+                            'data-separator': ', ',
+                        }) }}
+                        {{ wizard.review_row('Phone Number'|trans, 2, {
+                            'data-fields': form.address.phone.vars.id,
+                        }) }}
+                        {{ wizard.review_row('Mailing lists'|trans, 3, {
+                            'data-checked-in': form.lists.vars.id,
+                            'data-empty': 'Announcements only'|trans,
+                        }) }}
+                    </dl>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading"><h3>{{ 'Agreement'|trans }}</h3></div>
+                <div class="panel-body">
+                    <p>
+                        {{ 'Before submitting the registration form, please review the'|trans }}
+                        <a target="_blank" href="{{ 'https://gewis.nl/association/regulations'|trans }}">
+                            {{ 'Articles of Association, Internal Regulations, and Privacy Statement of GEWIS'|trans }}</a>.
+                        {{ 'Payment of the one-time membership fee is handled by Stripe, please review the'|trans }}
+                        <a target="_blank" href="https://stripe.com/privacy">{{ 'Privacy Policy of Stripe'|trans }}</a>.
+                    </p>
+                    {{ form_row(form.agreed, {attr: {'data-registration-review-target': 'agreement'}}) }}
+                    {{ form_row(form.agreedStripe, {attr: {'data-registration-review-target': 'agreement'}}) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between gap-2">
+            <button type="button" class="btn btn-outline-gewis-primary"
+                    data-form-stepper-target="back"
+                    data-action="form-stepper#previous registration-review#update">
+                {{ 'Back'|trans }}
+            </button>
+            <span class="ms-auto d-flex gap-2">
+                <button type="button" class="btn btn-gewis-primary"
+                        data-form-stepper-target="next"
+                        data-action="form-stepper#next registration-review#update">
+                    {{ 'Next'|trans }}
+                </button>
+                {{ form_widget(form.submit, {attr: {
+                    'class': 'btn-gewis-primary',
+                    'data-form-stepper-target': 'submit',
+                    'data-registration-review-target': 'checkout',
+                }}) }}
+            </span>
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'You are being redirected'|trans }} - {{ parent() }}{% endblock %}
+
+{% block head %}
+    {# A "manual" refresh rather than a 302, to bypass the Chromium CSP enforcer, which does not allow redirects
+       after a POST. #}
+    <meta http-equiv="refresh" content="0;URL={{ url }}">
+{% endblock %}
+
+{% block contents %}
+    <div class="row justify-content-center">
+        <div class="col-sm-10 col-md-7 col-lg-6">
+            <div class="panel">
+                <div class="panel-heading">
+                    <h3 class="mb-0">
+                        {{ 'You are being redirected to %destination%'|trans({'%destination%': destination}) }}
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <p class="mb-0">
+                        {{ 'If your browser does not redirect you, please <a href="%url%">click here</a> to continue.'|trans({
+                            '%url%': url|escape('html'),
+                        })|raw }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,208 @@
+{% extends 'layout-sidebar.html.twig' %}
+
+{% set decision_label = meeting.type.value ~ ' ' ~ meeting.number ~ '.' ~ point ~ '.' ~ decision %}
+
+{% block page_title %}{{ 'Add Decision'|trans }} {{ decision_label }} - {{ parent() }}{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href="{{ path('decision_meeting_index') }}">{{ 'Meetings'|trans }}</a></li>
+    <li class="breadcrumb-item">
+        <a href="{{ path('decision_meeting_view', {type: meeting.type.value, number: meeting.number}) }}">
+            {{ meeting.type.value }} {{ meeting.number }}
+        </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">{{ decision_label }}</li>
+{% endblock %}
+
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_title %}
+            {{ error|default(false) ? 'Decision Already Exists'|trans : 'Add Decision'|trans ~ ' ' ~ decision_label }}
+        {% endblock %}
+        {% block header_subtitle %}
+            {% if not error|default(false) %}
+                <p class="page-header-meta mb-0">
+                    {{ 'Takes effect the moment it is recorded — there is no draft to review first.'|trans }}
+                </p>
+            {% endif %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block contents %}
+    {% if error is defined and error %}
+        <div class="panel">
+            <div class="panel-body">
+                {% include 'partials/application/empty-state.html.twig' with {
+                    icon: 'fa-gavel',
+                    title: 'Decision Already Exists'|trans,
+                    body: 'Pick a decision number that is still free for this point.'|trans,
+                } only %}
+                <div class="text-center">
+                    <a class="btn btn-gewis-primary"
+                       href="{{ path('decision_meeting_view', {type: meeting.type.value, number: meeting.number}) }}">
+                        {{ 'Back to %type% %number%'|trans({
+                            '%type%': meeting.type.value,
+                            '%number%': meeting.number,
+                        }) }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        {#
+            One kind per decision, because that is what the server records: each of these posts its own form to
+            `decision_decision_form`, which builds one decision from it. The designs show a builder that mixes kinds
+            within a single decision; that needs a form type and a recording path this application does not have, and
+            is listed in .github/REDESIGN.md rather than mocked up here.
+
+            The kinds are one flat list instead of the two levels of tabs this page used to have. Nesting them meant
+            the kind you wanted was often two clicks away behind a label that did not name it.
+        #}
+        {% set kinds = {
+            'body': {
+                'label': 'Bodies'|trans,
+                'items': {
+                    'tab-organ-regulation': {'icon': 'fa-file-lines', 'label': 'Body Regulation'|trans,
+                        'hint': 'Approve the regulations of a body.'|trans,
+                        'template': 'organ-regulation', 'context': {'form': forms.organ_regulation}},
+                    'tab-organ-foundation': {'icon': 'fa-sitemap', 'label': 'Foundation'|trans,
+                        'hint': 'Establish a committee or fraternity.'|trans,
+                        'template': 'foundation', 'context': {'form': forms.foundation}},
+                    'tab-organ-install': {'icon': 'fa-user-plus', 'label': 'Installation / Discharge'|trans,
+                        'hint': 'Install members in a body, or end an installation.'|trans,
+                        'template': 'install', 'context': {'form': forms.install, 'member_function_form': member_function_form}},
+                    'tab-organ-abolish': {'icon': 'fa-ban', 'label': 'Abolition'|trans,
+                        'hint': 'Abolish a body and end its installations.'|trans,
+                        'template': 'abolish', 'context': {'form': forms.abolish}},
+                },
+            },
+            'board': {
+                'label': 'Board'|trans,
+                'items': {
+                    'tab-board-install': {'icon': 'fa-user-tie', 'label': 'Installation'|trans,
+                        'hint': 'Install a member in a board function.'|trans,
+                        'template': 'board-install', 'context': {'form': forms.board_install}},
+                    'tab-board-release': {'icon': 'fa-user-minus', 'label': 'Relieve'|trans,
+                        'hint': 'Relieve a board member of their function.'|trans,
+                        'template': 'board-release', 'context': {'form': forms.board_release, 'installs': releasable_installs}},
+                    'tab-board-discharge': {'icon': 'fa-user-check', 'label': 'Discharge'|trans,
+                        'hint': 'Discharge a board member.'|trans,
+                        'template': 'board-discharge', 'context': {'form': forms.board_discharge, 'installs': installs}},
+                },
+            },
+            'finances': {
+                'label': 'Finances'|trans,
+                'items': {
+                    'tab-budget': {'icon': 'fa-coins', 'label': 'Budget / Statement'|trans,
+                        'hint': 'Approve a budget or a financial statement.'|trans,
+                        'template': 'budget', 'context': {'form': forms.budget}},
+                },
+            },
+            'keys': {
+                'label': 'Key codes'|trans,
+                'items': {
+                    'tab-key-grant': {'icon': 'fa-key', 'label': 'Grant Key Code'|trans,
+                        'hint': 'Grant a member a key code.'|trans,
+                        'template': 'key-grant', 'context': {'form': forms.key_grant}},
+                    'tab-key-withdraw': {'icon': 'fa-key', 'label': 'Withdraw Key Code'|trans,
+                        'hint': 'Withdraw a key code that was granted.'|trans,
+                        'template': 'key-withdraw', 'context': {'form': forms.key_withdraw, 'grants': grants}},
+                },
+            },
+            'meeting': {
+                'label': 'Meetings'|trans,
+                'items': {
+                    'tab-minutes': {'icon': 'fa-book', 'label': 'Minutes'|trans,
+                        'hint': 'Approve the minutes of an earlier meeting.'|trans,
+                        'template': 'minutes', 'context': {'form': forms.minutes}},
+                    'tab-annulment': {'icon': 'fa-rotate-left', 'label': 'Annul Decision'|trans,
+                        'hint': 'Annul an earlier decision and revert what it did.'|trans,
+                        'template': 'annulment', 'context': {'form': forms.annulment}},
+                },
+            },
+            'other': {
+                'label': 'Everything else'|trans,
+                'items': {
+                    'tab-other': {'icon': 'fa-pen-nib', 'label': 'Other'|trans,
+                        'hint': 'Free text. Changes nothing on the register.'|trans,
+                        'template': 'other', 'context': {'form': forms.other}},
+                },
+            },
+        } %}
+
+        <div class="row g-3">
+            <div class="col-12 col-xl-4">
+                <div class="panel">
+                    <div class="panel-heading"><h3>{{ 'Kind of decision'|trans }}</h3></div>
+                    <div class="panel-body">
+                        {# Each group folds away, and they all start folded with no kind chosen. Opening one is
+                           how the form on the right is asked for: a decision is a thing you set out to record, so
+                           landing on a form you did not pick invites recording the wrong kind. #}
+                        <div class="nav decision-kinds" role="tablist" aria-orientation="vertical">
+                            {% for key, group in kinds %}
+                                <button class="decision-kinds-group collapsed" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#kinds-{{ key }}"
+                                        aria-expanded="false" aria-controls="kinds-{{ key }}">
+                                    <span class="decision-kinds-group-label">{{ group.label }}</span>
+                                    <span class="decision-kinds-group-count">{{ group.items|length }}</span>
+                                    <span class="fas fa-chevron-down panel-collapse-chevron" aria-hidden="true"></span>
+                                </button>
+                                <div class="collapse decision-kinds-items" id="kinds-{{ key }}">
+                                    {% for id, item in group.items %}
+                                        <button class="decision-kind" id="{{ id }}-tab"
+                                                type="button" role="tab" data-bs-toggle="tab"
+                                                data-bs-target="#{{ id }}" aria-controls="{{ id }}"
+                                                aria-selected="false">
+                                            <span class="decision-kind-icon fas {{ item.icon }}"
+                                                  aria-hidden="true"></span>
+                                            <span class="decision-kind-text">
+                                                <span class="decision-kind-label">{{ item.label }}</span>
+                                                <span class="decision-kind-hint">{{ item.hint }}</span>
+                                            </span>
+                                        </button>
+                                    {% endfor %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-xl-8">
+                <div class="panel">
+                    <div class="panel-body">
+                        {# One pane per kind, from the same map the list on the left is built from, so a kind cannot
+                           appear in one and not the other. Each names the partial that records it and the context
+                           that partial needs. #}
+                        <div class="tab-content">
+                            {% for group in kinds %}
+                                {% for id, item in group.items %}
+                                    <div class="tab-pane fade" id="{{ id }}" role="tabpanel"
+                                         aria-labelledby="{{ id }}-tab">
+                                        <div class="decision-form-header">
+                                            <h3>{{ item.label }}</h3>
+                                            <p>{{ item.hint }}</p>
+                                        </div>
+                                        {% include 'partials/decision/form/' ~ item.template ~ '.html.twig'
+                                            with item.context only %}
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+
+                        {# Shown until a kind is picked. It gives way to the form on its own: the stylesheet hides it
+                           as soon as the pane beside it goes active, so nothing has to switch it off. #}
+                        {% include 'partials/application/empty-state.html.twig' with {
+                            icon: 'fa-gavel',
+                            title: 'Pick a kind of decision'|trans,
+                            body: 'Open a group on the left and choose what this decision does.'|trans,
+                            class: 'decision-form-placeholder',
+                        } only %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

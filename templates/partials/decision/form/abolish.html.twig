@@ -1,0 +1,50 @@
+{# Picking the organ fills in the hidden reference to its foundation, and the members it still has are listed so the
+   consequences of abolishing it are visible before the decision is taken. #}
+{# The organ-info address is generated with a valid meeting type and zeroes; see install.html.twig for why the
+   controller substitutes its last five segments rather than named placeholders. #}
+{{ form_start(form, {
+    'action': path('decision_decision_form', {'form': 'abolish'}),
+    'attr': {
+        'data-controller': 'organ-lookup organ-members',
+        'data-organ-lookup-url-value': path('decision_organ_search'),
+        'data-organ-lookup-info-url-value': path('decision_organ_info', {
+            'type': enum('App\\Entity\\Database\\Enums\\MeetingTypes').ALV.value,
+            'number': 0,
+            'point': 0,
+            'decision': 0,
+            'sequence': 0,
+        }),
+        'data-organ-lookup-min-length-value': 1,
+        'data-organ-members-conjunction-value': 'and'|trans,
+        'data-action': 'organ-lookup:selected->organ-members#render',
+    },
+}) }}
+    <div class="mb-2">
+        {% include 'partials/decision/lookup-input.html.twig' with {
+            'controller': 'organ-lookup',
+            'field': form.name,
+            'placeholder': 'Body'|trans,
+        } only %}
+        {{ form_errors(form.name) }}
+        {{ form_errors(form.subdecision) }}
+    </div>
+
+    {{ form_widget(form.subdecision.meeting_type, {'attr': {'data-organ-lookup-target': 'meetingType'}}) }}
+    {{ form_widget(form.subdecision.meeting_number, {'attr': {'data-organ-lookup-target': 'meetingNumber'}}) }}
+    {{ form_widget(form.subdecision.decision_point, {'attr': {'data-organ-lookup-target': 'decisionPoint'}}) }}
+    {{ form_widget(form.subdecision.decision_number, {'attr': {'data-organ-lookup-target': 'decisionNumber'}}) }}
+    {{ form_widget(form.subdecision.sequence, {'attr': {'data-organ-lookup-target': 'sequence'}}) }}
+
+    <div class="mb-2 d-none" data-organ-members-target="panel">
+        <strong>{{ 'The body to be abolished includes the following members:'|trans }}</strong>
+        <ul data-organ-members-target="list"></ul>
+    </div>
+
+    <div class="decision-form-actions">
+        {{ form_widget(form.submit, {'attr': {
+            'class': 'btn-gewis-primary',
+            'disabled': 'disabled',
+            'data-organ-lookup-target': 'submit',
+        }}) }}
+    </div>
+{{ form_end(form) }}

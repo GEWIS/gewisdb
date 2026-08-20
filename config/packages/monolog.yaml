@@ -1,0 +1,33 @@
+monolog:
+    channels:
+        - deprecation
+
+when@dev:
+    monolog:
+        handlers:
+            main:
+                type: stream
+                path: '%kernel.logs_dir%/%kernel.environment%.log'
+                level: debug
+                channels: ['!event']
+
+when@prod:
+    monolog:
+        handlers:
+            main:
+                type: fingers_crossed
+                action_level: error
+                handler: rotating
+                # Replaces the hand-written listener that skipped 'error-router-no-match' to keep 404s out of the log.
+                excluded_http_codes: [404, 405]
+                buffer_size: 50
+            rotating:
+                type: rotating_file
+                path: '%kernel.logs_dir%/gewisdb.log'
+                max_files: 10
+                level: info
+            deprecation:
+                type: rotating_file
+                path: '%kernel.logs_dir%/deprecation.log'
+                max_files: 5
+                channels: [deprecation]

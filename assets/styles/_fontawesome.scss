@@ -1,0 +1,6 @@
+@use '../../vendor/fortawesome/font-awesome/scss/variables' with (
+    $font-path: '../fonts/fontawesome'
+);
+@use '../../vendor/fortawesome/font-awesome/scss/fontawesome';
+@use '../../vendor/fortawesome/font-awesome/scss/regular';
+@use '../../vendor/fortawesome/font-awesome/scss/solid';

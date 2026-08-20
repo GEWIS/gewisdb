@@ -1,0 +1,60 @@
+{% extends 'layout-sidebar.html.twig' %}
+
+{% block page_title %}{{ 'Data Update Requests'|trans }} - {{ parent() }}{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href="{{ path('member_index') }}">{{ 'Members'|trans }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ 'Data Update Requests'|trans }}</li>
+{% endblock %}
+
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_title %}{{ 'Data Update Requests'|trans }}{% endblock %}
+        {% block header_subtitle %}
+            <p class="page-header-meta mb-0">
+                {{ 'Changes members have asked for, which take effect once they are applied.'|trans }}
+            </p>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block contents %}
+    <div class="panel">
+        {% if updates is empty %}
+            <div class="panel-body">
+                {% include 'partials/application/empty-state.html.twig' with {
+                    icon: 'fa-user-pen',
+                    title: 'No requests'|trans,
+                    body: 'Nobody has asked for a change to their data.'|trans,
+                } only %}
+            </div>
+        {% else %}
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">{{ 'Name'|trans }}</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for update in updates %}
+                            <tr>
+                                <td class="font-monospace">{{ update.member.lidnr }}</td>
+                                <td>{{ update.member.fullName }}</td>
+                                <td class="text-end">
+                                    <a href="{{ path('member_update_show', {lidnr: update.member.lidnr}) }}"
+                                       class="btn btn-sm btn-outline-gewis-primary">
+                                        {{ 'Review'|trans }}
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'layout-sidebar.html.twig' %}
+
+{% block page_title %}{{ 'Settings'|trans }} - {{ parent() }}{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item active" aria-current="page">{{ 'Settings'|trans }}</li>
+{% endblock %}
+
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_title %}{{ 'Settings'|trans }}{% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{# The settings pages live in their own domains; this page is only the way in. #}
+{% macro entry(route, icon, label, description) %}
+    <div class="col-12 col-md-6 col-xxl-4">
+        <a class="panel shortcut h-100" href="{{ path(route) }}">
+            <div class="panel-body">
+                <span class="shortcut-title">
+                    <span class="shortcut-icon fas {{ icon }}" aria-hidden="true"></span>
+                    {{ label }}
+                </span>
+                <span class="shortcut-description">{{ description }}</span>
+            </div>
+        </a>
+    </div>
+{% endmacro %}
+
+{% block contents %}
+    {% import _self as settings %}
+
+    <div class="row g-3">
+        {{ settings.entry('user_api_principal_index', 'fa-key', 'API Tokens'|trans,
+            'Who may read the database over the API, and what they may read.'|trans) }}
+        {{ settings.entry('application_settings_function_index', 'fa-list-check', 'Functions'|trans,
+            'The functions someone can be installed in.'|trans) }}
+        {{ settings.entry('mailing_list_index', 'fa-envelope', 'Mailing Lists'|trans,
+            'The lists members can subscribe to, and how they are synchronised.'|trans) }}
+        {{ settings.entry('user_index', 'fa-user-shield', 'Users'|trans,
+            'Who can sign in to this application.'|trans) }}
+    </div>
+{% endblock %}

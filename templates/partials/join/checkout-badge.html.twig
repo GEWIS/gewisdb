@@ -1,0 +1,15 @@
+{#
+    Where a registration's payment has got to, as one badge. Paid is the only state that needs a secretary; the rest
+    are either waiting on the applicant or over.
+
+    Keyed on the case name rather than the value, which is an integer here and says nothing on its own.
+#}
+{% set tone = {
+    'Paid': 'success',
+    'Created': 'warning',
+    'Pending': 'warning',
+    'Expired': 'danger',
+    'Failed': 'danger',
+    'Cancelled': 'secondary',
+} %}
+<span class="badge badge-{{ tone[state.name] ?? 'secondary' }}">{{ state.getName|trans }}</span>

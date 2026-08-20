@@ -1,0 +1,25 @@
+{% extends 'layout-sidebar.html.twig' %}
+
+{% block page_title %}{{ 'Prospective Members'|trans }} - {{ parent() }}{% endblock %}
+
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_title %}{{ 'Prospective Members'|trans }}{% endblock %}
+        {% block header_subtitle %}
+            <p class="page-header-meta mb-0">
+                {{ 'Everyone who has registered but is not a member yet. A registration expires 14 days after its checkout is created.'|trans }}
+            </p>
+        {% endblock %}
+        {% block header_actions %}
+            <a class="btn btn-gewis-primary" href="{{ path('join_subscribe_index') }}">
+                <span class="fas fa-plus" aria-hidden="true"></span>
+                {{ 'Register member'|trans }}
+            </a>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block contents %}
+    {{ component('Join:ProspectiveMemberOverview') }}
+{% endblock %}

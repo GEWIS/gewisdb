@@ -1,0 +1,16 @@
+framework:
+    asset_mapper:
+        # The paths to make available to the asset mapper.
+        paths:
+            - assets/
+        missing_import_mode: strict
+        excluded_patterns:
+            # Sass partials are compiled into app.scss; mapping them as assets of their own emits a stylesheet per
+            # partial that nothing loads.
+            - '*/assets/styles/_*.scss'
+            - '*/assets/styles/**/_*.scss'
+
+when@prod:
+    framework:
+        asset_mapper:
+            missing_import_mode: warn

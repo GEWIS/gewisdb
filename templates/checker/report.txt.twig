@@ -1,0 +1,17 @@
+{# The database checker's report, sent to the secretary as the plain-text body of one mail. `reports` holds one entry
+   per checked meeting -- `{'meeting': ..., 'errors': [...]}` -- so the same template serves the full check and the
+   discharge check, which reports on a single meeting.
+
+   A meeting without errors still gets its heading: the report doubles as the record that the meeting was checked.
+   The heading names the meeting type as well as its number, because numbering restarts per type -- without it an ALV
+   and a BV both read as "meeting 1".
+
+   Every line comes from `App\ViewModel\Checker\Error::asText()`, which is where an error decides how it reads; a
+   `.txt.twig` template is not escaped, so the text arrives as it was written. #}
+{% for report in reports %}
+Errors after {{ report.meeting.type.value }} {{ report.meeting.number }} held at {{ report.meeting.date|date('Y-m-d') }}
+{% for error in report.errors %}
+{{ error.asText }}
+{% endfor %}
+
+{% endfor %}

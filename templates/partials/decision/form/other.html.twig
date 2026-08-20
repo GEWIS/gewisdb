@@ -1,0 +1,8 @@
+{# The hidden meeting reference and the decision's place in it are the same on every decision form; `form_end()`
+   emits whatever a form has not rendered itself, so they never have to be listed by hand. #}
+{{ form_start(form, {'action': path('decision_decision_form', {'form': 'other'})}) }}
+    {{ form_row(form.content, {'attr': {'placeholder': 'Decision'|trans}}) }}
+    <div class="decision-form-actions">
+        {{ form_widget(form.submit, {'attr': {'class': 'btn-gewis-primary'}}) }}
+    </div>
+{{ form_end(form) }}

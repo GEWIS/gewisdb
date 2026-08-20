@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{# Every page of the public sign-up, checkout and renewal flows runs on the join host, where none of the application
+   routes are reachable; they all swap the navigation for the visitor-facing bar. Pages name themselves in it by
+   setting `nav_title` before the parent renders. #}
+{% block main_nav %}
+    {% include 'partials/application/subscribe-nav.html.twig' with {title: nav_title|default(null)} %}
+{% endblock %}

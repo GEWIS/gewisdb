@@ -1,0 +1,64 @@
+{% extends 'layout-sidebar.html.twig' %}
+
+{% block page_title %}{{ user.login }} - {{ 'Users'|trans }} - {{ parent() }}{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item">
+        <a href="{{ path('application_settings_index') }}">{{ 'Settings'|trans }}</a>
+    </li>
+    <li class="breadcrumb-item"><a href="{{ path('user_index') }}">{{ 'Users'|trans }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ user.login }}</li>
+{% endblock %}
+
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_top %}
+            <span class="page-header-eyebrow">{{ 'User'|trans }}</span>
+        {% endblock %}
+        {% block header_title %}{{ user.login }}{% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block contents %}
+    <div class="row g-3">
+        <div class="col-12 col-xl-6">
+            <div class="panel">
+                <div class="panel-heading"><h3>{{ 'Change password'|trans }}</h3></div>
+                <div class="panel-body">
+                    {% if not user.local %}
+                        {# The form keeps the fields but disables them for such an account; without this the disabled
+                           inputs look like a bug. #}
+                        <div class="alert alert-info" role="alert">
+                            {{ 'This account signs in through an external directory, so there is no password to change here.'|trans }}
+                        </div>
+                    {% endif %}
+
+                    {{ form_start(form) }}
+                        {{ form_errors(form) }}
+                        {{ form_row(form.password.password) }}
+                        {{ form_row(form.password.password_verify) }}
+                        <div class="d-flex justify-content-end">
+                            {{ form_widget(form.submit, {attr: {class: 'btn-gewis-primary'}}) }}
+                        </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-xl-6">
+            <div class="panel">
+                <div class="panel-heading"><h3>{{ 'Delete'|trans }}</h3></div>
+                <div class="panel-body">
+                    <p>{{ 'This removes the account. Nothing it recorded is removed with it.'|trans }}</p>
+                    <form method="post" action="{{ path('user_delete', {'id': user.id}) }}">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('user_delete-' ~ user.id) }}">
+                        <button type="submit" class="btn btn-outline-danger">
+                            {{ 'Delete User'|trans }}
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

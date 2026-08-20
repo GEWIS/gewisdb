@@ -1,0 +1,198 @@
+// The GEWIS design system, shared with GEWISWEB.
+//
+// Values are the ones GEWISWEB uses, so the two sites read as one association rather than as two products. What is
+// absent here is what GEWISDB has no counterpart for — the activity pages — not a decision to look different.
+
+$brand-primary: #D40000;
+
+$transition-duration: 200ms;
+
+$transition-duration-fast: 100ms;
+
+$gewisicons-font-path: "../fonts/gewisicons";
+
+///////////
+$gewis-red: #D40000;
+$gewis-red-dark: #C40000;
+$gewis-gray-dark: #333333;
+$gewis-gray-light: #F2F2F2;
+$gewis-blue-dark: #293065;
+
+$background-gray: #18181B;
+$background-gray-dark: #131315;
+
+$title-size-small: 1.125rem;
+
+// Overrides
+// Badges: fully pill-shaped and a slightly lighter weight, site-wide.
+$badge-border-radius: $border-radius-pill;
+$badge-font-weight: 600;
+
+$body-bg-dark: #0E0E11;
+$body-color: $gewis-gray-dark;
+$body-color-dark: $gewis-gray-light;
+
+// Bootstrap derives the dark one from `$primary`, which is deliberately its own blue here, so it is set as well.
+$primary-text-emphasis: $gewis-red;
+$primary-text-emphasis-dark: $gewis-red;
+$secondary-text-emphasis: #959595;
+
+$body-secondary-color-dark: #acacac;
+$body-secondary-bg-dark: $background-gray;
+
+$border-color-translucent: rgba($gray-500, .175);
+
+$display-font-family: "Raleway", sans-serif;
+
+$headings-margin-bottom: 0;
+// Headings are heavier and higher-contrast than body text: full black in light mode, white in gewis-night.
+$headings-font-weight: 600;
+$headings-color: $black;
+$headings-color-dark: $white;
+
+$link-color: $gewis-red;
+$link-decoration: none;
+$link-hover-color: shift-color($link-color, $link-shade-percentage);
+$link-hover-decoration: underline;
+
+$paragraph-margin-bottom: 0;
+
+// Navbar
+$nav-link-color: $white;
+$nav-link-color-dark: $gewis-gray-light;
+$nav-link-hover-bg: $gewis-red-dark;
+$nav-link-hover-bg-dark: $gewis-gray-dark;
+$nav-link-hover-color: var(--#{$prefix}nav-link-color);
+$nav-link-font-size: 1.125rem;
+$nav-link-padding-y: 1.75rem;
+
+$navbar-bg: $gewis-red;
+$navbar-bg-dark: $body-bg-dark;
+
+$navbar-brand-color: $nav-link-color;
+$navbar-brand-color-dark: $gewis-red;
+$navbar-brand-font-size: 2.875rem;
+$navbar-brand-padding-y: 0.25rem;
+$navbar-light-icon-color: $nav-link-color;
+$navbar-toggler-focus-width: 0;
+$navbar-light-toggler-icon-bg: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='#{$navbar-light-icon-color}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>");
+$navbar-dark-toggler-icon-bg: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='#{$navbar-light-icon-color}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>");
+
+$dropdown-bg: $white;
+$dropdown-bg-dark: $background-gray;
+$dropdown-link-active-bg: $gray-200;
+$dropdown-link-active-bg-dark: $gray-900;
+$dropdown-link-disabled-color-dark: $gray-600;
+$dropdown-link-hover-bg: $gray-200;
+$dropdown-link-hover-bg-dark: $gray-900;
+
+$navbar-dropdown-spacer: 0;
+
+// Navigation rows
+//
+// A row in a panel dropping out of the navbar and a row in the section sidebar are the same object seen in two places,
+// so one set of measurements drives both and neither can drift. Each component hands them to its own custom
+// properties, the way Bootstrap hands a dropdown item its padding.
+$nav-row-padding-x: 0.625rem;
+$nav-row-padding-y: 0.5rem;
+$nav-row-font-size: 1rem;
+$nav-row-sub-padding-y: 0.4375rem;
+$nav-row-sub-font-size: 0.875rem;
+
+// A sub-section hangs off an accent line rather than flying out sideways, in both navigations.
+$nav-row-sublist-margin-start: 0.875rem;
+$nav-row-sublist-padding-start: 0.625rem;
+$nav-row-sublist-accent-width: 0.125rem;
+
+// Navigation menus (the panels dropping out of the main navbar)
+$nav-menu-hover-bg: $gray-100;
+$nav-menu-hover-bg-dark: rgba($white, 0.05);
+$nav-menu-active-bg: rgba($gewis-red, 0.08);
+$nav-menu-active-bg-dark: rgba($gewis-red, 0.16);
+$nav-menu-active-color: $gewis-red;
+$nav-menu-count-bg: #f4f5f7;
+$nav-menu-count-bg-dark: rgba($white, 0.08);
+$nav-menu-box-shadow: 0 1.125rem 2.75rem rgba(20, 22, 25, 0.16);
+$nav-menu-box-shadow-dark: 0 1.125rem 2.75rem rgba($black, 0.5);
+
+$navbar-nav-link-padding-x: 0.75rem;
+
+$navbar-padding-y: 0;
+
+// Sidebar
+$sidebar-width: 14.5rem;
+$sidebar-width-collapsed: 3.375rem;
+$sidebar-list-padding-x: 0.5rem;
+$sidebar-bg: $white;
+$sidebar-bg-dark: $background-gray;
+$sidebar-color: $gewis-gray-dark;
+$sidebar-color-dark: $gewis-gray-light;
+$sidebar-hover-bg: $gray-100;
+$sidebar-hover-bg-dark: rgba($white, 0.05);
+$sidebar-active-color: $gewis-red;
+$sidebar-active-bg: rgba($gewis-red, 0.08);
+$sidebar-active-bg-dark: rgba($gewis-red, 0.16);
+$sidebar-border-color: $gray-200;
+$sidebar-border-color-dark: $background-gray-dark;
+$sidebar-toggler-icon-bg: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='#{$sidebar-color}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>");
+$sidebar-toggler-icon-bg-dark: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='#{$sidebar-color-dark}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>");
+
+// Page canvas
+$page-bg: #f4f5f7;
+$page-bg-dark: $background-gray;
+
+// Nav
+$nav-padding-x: 1rem;
+$nav-padding-y: 0.625rem;
+$nav-font-size: 1rem;
+
+// Nav pills (segmented control)
+$nav-pills-track-bg: #f4f6f9;
+$nav-pills-track-bg-dark: $background-gray-dark;
+$nav-pills-link-active-bg: $white;
+$nav-pills-link-active-bg-dark: #303036;
+$nav-pills-badge-bg: $gray-200;
+$nav-pills-badge-bg-dark: $body-secondary-bg-dark;
+$nav-pills-badge-active-color: $gewis-red;
+$nav-pills-badge-active-bg: rgba($gewis-red, 0.08);
+$nav-pills-badge-active-bg-dark: rgba($gewis-red, 0.16);
+
+// Breadcrumb
+//
+// The bar is a surface laid over the page canvas, the same relationship a panel has to it, so it takes the surface
+// colour in each theme rather than a shade of the canvas it would disappear into.
+$breadcrumb-padding-y: 0.375rem;
+$breadcrumb-margin-bottom: 0.25rem;
+$breadcrumb-bg: $white;
+$breadcrumb-bg-dark: $body-bg-dark;
+$breadcrumb-active-color-dark: $body-secondary-color-dark;
+
+// Pagination
+//
+// Bootstrap marks the page you are on, and rings a focused one, with its own primary, which is still the framework
+// blue on a site that is red everywhere else. The hover shade comes off the tertiary background, which the night theme
+// leaves at its light-mode value, so that one is moved onto a background both themes do set.
+$pagination-active-bg: $gewis-red;
+$pagination-active-border-color: $gewis-red;
+$pagination-focus-box-shadow: 0 0 0 0.25rem rgba($gewis-red, 0.25);
+$pagination-hover-bg: var(--#{$prefix}secondary-bg);
+
+// Panel
+$panel-spacer-x: 1.5rem;
+$panel-spacer-y: 1.125rem;
+$panel-header-color: $gewis-red;
+$panel-header-font-size: $title-size-small;
+$panel-border-width: var(--#{$prefix}border-width);
+$panel-border-color: rgba($gray-500, 0.35);
+$panel-border-radius: var(--#{$prefix}border-radius);
+$panel-inner-border-radius: subtract($panel-border-radius, $panel-border-width);
+$panel-bg: $white;
+$panel-bg-dark: $body-bg-dark;
+$panel-footer-bg: $gray-200;
+$panel-footer-bg-dark: $background-gray-dark;
+$panel-footer-link-color: #686868;
+$panel-footer-link-color-dark: $body-secondary-color-dark;
+$panel-list-group-item-spacer-y: 0.5rem;
+
+// Toast
+$toast-spacing: 1rem;

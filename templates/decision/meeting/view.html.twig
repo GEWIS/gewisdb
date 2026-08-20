@@ -1,0 +1,153 @@
+{% extends 'layout-sidebar.html.twig' %}
+
+{% set meeting_label = meeting.type.value ~ ' ' ~ meeting.number %}
+
+{% block page_title %}{{ meeting_label }} - {{ parent() }}{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href="{{ path('decision_meeting_index') }}">{{ 'Meetings'|trans }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ meeting_label }}</li>
+{% endblock %}
+
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_top %}
+            <span class="page-header-eyebrow">{{ meeting.type.getName|trans }}</span>
+        {% endblock %}
+        {% block header_title %}{{ meeting_label }}{% endblock %}
+        {% block header_subtitle %}
+            <p class="page-header-meta mb-0">
+                {{ meeting.date|format_date('full') }}
+                · {{ '%number% decisions'|trans({'%number%': decisions|length}) }}
+            </p>
+        {% endblock %}
+        {% block header_actions %}
+            <a class="btn btn-outline-gewis-primary" href="{{ path('decision_export_index') }}">
+                <span class="fas fa-file-arrow-down" aria-hidden="true"></span>
+                {{ 'Export decisions'|trans }}
+            </a>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block contents %}
+    <div class="row g-3">
+        <div class="col-12 col-xl-8">
+            {% for decision in decisions %}
+                {% set annulled = null is not same as(decision.annulment) %}
+                <div class="panel{{ annulled ? ' decision-annulled' : '' }}">
+                    <div class="panel-body">
+                        <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+                            <span class="badge badge-gewis-primary font-monospace">
+                                {{ meeting_label }}.{{ decision.point }}.{{ decision.number }}
+                            </span>
+                            {% if annulled %}
+                                <span class="badge badge-secondary">
+                                    {{ 'Annulled by %type% %number%.%point%.%decision%'|trans({
+                                        '%type%': decision.annulment.meetingType,
+                                        '%number%': decision.annulment.meetingNumber,
+                                        '%point%': decision.annulment.point,
+                                        '%decision%': decision.annulment.number,
+                                    }) }}
+                                </span>
+                            {% endif %}
+                            <span class="ms-auto d-flex flex-wrap gap-2" data-controller="copy"
+                                  data-copy-text-value="{{ decision.copyContent }}">
+                                <button type="button" class="btn btn-sm btn-outline-gewis-primary"
+                                        data-action="copy#copy"
+                                        data-copy-copied-label="{{ 'Copied'|trans }}">
+                                    <span class="fas fa-copy" aria-hidden="true"></span>
+                                    <span data-copy-target="label">{{ 'Copy Decision'|trans }}</span>
+                                </button>
+                                <a class="btn btn-sm btn-outline-danger"
+                                   href="{{ path('decision_decision_delete', {
+                                       type: meeting.type.value,
+                                       number: meeting.number,
+                                       point: decision.point,
+                                       decision: decision.number,
+                                   }) }}">
+                                    {{ 'Delete Decision'|trans }}
+                                </a>
+                            </span>
+                        </div>
+
+                        <p class="decision-content mb-0">{{ decision.content }}</p>
+                    </div>
+                </div>
+            {% else %}
+                <div class="panel">
+                    <div class="panel-body">
+                        {% include 'partials/application/empty-state.html.twig' with {
+                            icon: 'fa-gavel',
+                            title: 'This meeting has no decisions (yet).'|trans,
+                            body: 'Add one below to start recording what was decided.'|trans,
+                        } only %}
+                    </div>
+                </div>
+            {% endfor %}
+
+            <div class="panel panel-dashed">
+                <div class="panel-heading"><h3>{{ 'Add New Decision'|trans }}</h3></div>
+                <div class="panel-body">
+                    <p class="text-secondary">
+                        {{ 'The point and the decision number are combined with the meeting to address the decision.'|trans }}
+                    </p>
+                    {# Not a form the server ever receives: filling in a point and a decision number navigates to the
+                       page that records that decision. The point also suggests the next free number, which the
+                       meeting already knows.
+
+                       The URL is generated with both numbers set to zero and the controller replaces the last two
+                       segments, because the route requires digits there and so cannot be asked to generate a
+                       template with named placeholders in them. #}
+                    <form class="row row-cols-lg-auto g-2 align-items-start" data-controller="decision-number"
+                          data-decision-number-url-value="{{ path('decision_decision_create', {
+                              type: meeting.type.value,
+                              number: meeting.number,
+                              point: 0,
+                              decision: 0,
+                          }) }}"
+                          {# Forced to an object: a meeting with no decisions yet has an empty PHP array, which
+                             encodes as `[]`, and the controller's value is declared as an object. #}
+                          data-decision-number-next-value="{{ next_decision_numbers|json_encode(constant('JSON_FORCE_OBJECT')) }}"
+                          data-action="submit->decision-number#open">
+                        <div class="col-12">
+                            <label class="visually-hidden" for="create-point">{{ 'Point'|trans }}</label>
+                            <input type="number" min="1" class="form-control" id="create-point" required
+                                   placeholder="{{ 'Point'|trans }}"
+                                   data-decision-number-target="point"
+                                   data-action="input->decision-number#suggest">
+                        </div>
+                        <div class="col-12">
+                            <label class="visually-hidden" for="create-decision">{{ 'Decision Number'|trans }}</label>
+                            <input type="number" min="1" class="form-control" id="create-decision" required
+                                   placeholder="{{ 'Decision Number'|trans }}"
+                                   data-decision-number-target="number">
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-gewis-primary">{{ 'Add Decision'|trans }}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-xl-4">
+            <div class="panel">
+                <div class="panel-heading"><h3>{{ 'This meeting'|trans }}</h3></div>
+                <div class="panel-body">
+                    <dl class="meeting-facts mb-0">
+                        <dt>{{ 'Type'|trans }}</dt>
+                        <dd>{{ meeting.type.getName|trans }}</dd>
+                        <dt>{{ 'Meeting Number'|trans }}</dt>
+                        <dd class="font-monospace">{{ meeting.number }}</dd>
+                        <dt>{{ 'Meeting Date'|trans }}</dt>
+                        <dd>{{ meeting.date|format_date('long') }}</dd>
+                        <dt>{{ '# Decisions'|trans }}</dt>
+                        <dd class="font-monospace">{{ decisions|length }}</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

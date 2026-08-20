@@ -1,0 +1,49 @@
+# These headers are set by docker/nginx/snippets/security-headers.conf today. Dropping nginx (GH-572) drops them, so
+# they move here first, ported verbatim rather than tightened.
+
+nelmio_security:
+    content_type:
+        nosniff: true
+
+    referrer_policy:
+        enabled: true
+        policies:
+            - strict-origin-when-cross-origin
+
+    csp:
+        enabled: true
+        report_logger_service: logger
+        enforce:
+            level1_fallback: false
+            browser_adaptive:
+                enabled: false
+            default-src: ["'self'"]
+            connect-src: ["'self'"]
+            # 'unsafe-eval' and 'unsafe-inline' exist for the jQuery-era inline handlers. Removing jQuery (GH-567) is
+            # what makes it possible to drop them; tightening earlier breaks pages with no server-side symptom.
+            script-src: ["'self'", "'unsafe-eval'", "'unsafe-inline'"]
+            # `data:` is what draws the checkmark in a checkbox, the dot in a radio, the thumb of a switch and
+            # the chevron of a select: Bootstrap ships each as an inline SVG background image. Without it the
+            # browser blocks them and the controls render as empty boxes, which is what the nginx policy this
+            # was ported from did to every page it served.
+            img-src: ["'self'", "data:"]
+            style-src: ["'self'", "'unsafe-inline'"]
+            font-src: ["'self'"]
+            frame-src: ["'self'"]
+            object-src: ["'none'"]
+            frame-ancestors: ["'self'"]
+            form-action: ["'self'"]
+
+# The policy has no Stripe entries at all. Verify against the real checkout flow before tightening — either it is a
+# full redirect and the policy never applies, or something is being framed and is already violating it.
+
+when@dev:
+    nelmio_security:
+        csp:
+            enforce:
+                # FrankenPHP injects the hot reload client, and idiomorph with it, as script tags pointing at
+                # jsDelivr; it has no option to serve them itself. Without this the browser refuses both, nothing
+                # subscribes to the hub, and a file change publishes a reload that no page is listening for.
+                #
+                # This adds to the list above rather than replacing it, so only the host belongs here.
+                script-src: ["https://cdn.jsdelivr.net"]

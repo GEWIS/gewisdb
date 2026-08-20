@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'Login'|trans }} - {{ parent() }}{% endblock %}
+
+{% block contents %}
+    <div class="row justify-content-center">
+        <div class="col-sm-10 col-md-8 col-lg-6">
+            <div class="panel">
+                <div class="panel-heading">
+                    <h3>{{ 'Login'|trans }}</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="alert alert-info" role="alert">
+                        {# Demo mode is decided by the environment and expressed in the form: the login is fixed and
+                           therefore read-only. Reading it back here keeps the explanation and the form from drifting
+                           apart. #}
+                        {% if form.login.vars.attr.readonly|default(false) %}
+                            {{ 'The database currently is in demo mode and uses environment credentials.'|trans }}
+                        {% elseif uses_ldap %}
+                            {{ 'The database currently only accepts logins using your GEWIS m-account.'|trans }}
+                        {% else %}
+                            {{ 'The database currently only accepts logins using your database credentials.'|trans }}
+                        {% endif %}
+                    </div>
+
+                    {{ form_start(form) }}
+                        {{ form_errors(form) }}
+                        {# Merged rather than replaced: the form type puts readonly on the login in demo mode. #}
+                        {{ form_row(form.login, {
+                            'attr': form.login.vars.attr|merge({'autocomplete': 'username', 'autofocus': true}),
+                        }) }}
+                        {# In demo mode the password is a hidden field carrying the environment credential, and the
+                           theme renders it without a label or a row of its own. #}
+                        {{ form_row(form.password, {
+                            'attr': form.password.vars.attr|merge({'autocomplete': 'current-password'}),
+                        }) }}
+                        <div class="d-grid">
+                            {{ form_widget(form.submit) }}
+                        </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

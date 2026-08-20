@@ -1,0 +1,27 @@
+{{ form_start(form, {
+    'action': path('decision_decision_form', {'form': 'board_release'}),
+    'attr': {'data-controller': 'subdecision-choice'},
+}) }}
+    {% include 'partials/decision/board-installation-choice.html.twig' with {
+        'installs': installs,
+        'group': 'board-release-slot',
+        'label': 'Board Member(s) to Relieve'|trans,
+    } only %}
+
+    {{ form_widget(form.subdecision.meeting_type, {'attr': {'data-subdecision-choice-target': 'meetingType'}}) }}
+    {{ form_widget(form.subdecision.meeting_number, {'attr': {'data-subdecision-choice-target': 'meetingNumber'}}) }}
+    {{ form_widget(form.subdecision.decision_point, {'attr': {'data-subdecision-choice-target': 'decisionPoint'}}) }}
+    {{ form_widget(form.subdecision.decision_number, {'attr': {'data-subdecision-choice-target': 'decisionNumber'}}) }}
+    {{ form_widget(form.subdecision.sequence, {'attr': {'data-subdecision-choice-target': 'sequence'}}) }}
+    {{ form_errors(form.subdecision) }}
+
+    {{ form_row(form.date) }}
+
+    <div class="decision-form-actions">
+        {{ form_widget(form.submit, {'attr': {
+            'class': 'btn-gewis-primary',
+            'disabled': 'disabled',
+            'data-subdecision-choice-target': 'submit',
+        }}) }}
+    </div>
+{{ form_end(form) }}

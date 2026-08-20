@@ -1,0 +1,309 @@
+{% set installation_prototype %}
+    {%- include 'partials/decision/install-installation.html.twig' with {
+        'entry': form.installations.vars.prototype,
+    } only -%}
+{% endset %}
+
+{% set reappointment_prototype %}
+    {%- include 'partials/decision/install-reference.html.twig' with {
+        'entry': form.reappointments.vars.prototype,
+        'label': 'Reappoint %name% as %function%'|trans,
+    } only -%}
+{% endset %}
+
+{% set discharge_prototype %}
+    {%- include 'partials/decision/install-reference.html.twig' with {
+        'entry': form.discharges.vars.prototype,
+        'label': 'Discharge %name% as %function%'|trans,
+    } only -%}
+{% endset %}
+
+{# The organ's membership is edited here and submitted as one decision: every button below only adds a row to one of
+   the three collections, and the tables show what the organ will look like once the decision is taken. The modals
+   sit outside the form but inside the editor, so opening one never submits anything. #}
+<div data-controller="organ-lookup install-editor"
+     data-action="organ-lookup:selected->install-editor#organSelected
+                  member-lookup:selected->install-editor#memberSelected"
+     data-organ-lookup-url-value="{{ path('decision_organ_search') }}"
+     {# The route constrains every one of these — the type to the meeting types, the rest to digits — so it cannot
+        generate a template with named placeholders in them. A valid address is generated instead and the controller
+        replaces the last five segments, which is what the route says they are. #}
+     data-organ-lookup-info-url-value="{{ path('decision_organ_info', {
+         'type': enum('App\\Entity\\Database\\Enums\\MeetingTypes').ALV.value,
+         'number': 0,
+         'point': 0,
+         'decision': 0,
+         'sequence': 0,
+     }) }}"
+     data-organ-lookup-min-length-value="1"
+     data-organ-lookup-lock-value="true"
+     data-install-editor-member-function-value="{{ constant('App\\Entity\\Database\\Enums\\InstallationFunctions::Member').value }}"
+     data-install-editor-inactive-function-value="{{ constant('App\\Entity\\Database\\Enums\\InstallationFunctions::InactiveMember').value }}"
+     data-install-editor-installation-prototype-value="{{ installation_prototype|e('html_attr') }}"
+     data-install-editor-reappointment-prototype-value="{{ reappointment_prototype|e('html_attr') }}"
+     data-install-editor-discharge-prototype-value="{{ discharge_prototype|e('html_attr') }}">
+
+    {{ form_start(form, {'action': path('decision_decision_form', {'form': 'install'})}) }}
+        <div class="mb-2">
+            {% include 'partials/decision/lookup-input.html.twig' with {
+                'controller': 'organ-lookup',
+                'field': form.name,
+                'placeholder': 'Body'|trans,
+            } only %}
+            {{ form_errors(form.name) }}
+            {{ form_errors(form.subdecision) }}
+        </div>
+
+        {{ form_widget(form.subdecision.meeting_type, {'attr': {'data-organ-lookup-target': 'meetingType'}}) }}
+        {{ form_widget(form.subdecision.meeting_number, {'attr': {'data-organ-lookup-target': 'meetingNumber'}}) }}
+        {{ form_widget(form.subdecision.decision_point, {'attr': {'data-organ-lookup-target': 'decisionPoint'}}) }}
+        {{ form_widget(form.subdecision.decision_number, {'attr': {'data-organ-lookup-target': 'decisionNumber'}}) }}
+        {{ form_widget(form.subdecision.sequence, {'attr': {'data-organ-lookup-target': 'sequence'}}) }}
+
+        <div class="d-none" data-install-editor-target="panel">
+            <div class="row">
+                <div class="col-md-4">
+                    <h2 class="h4">{{ 'Current Members'|trans }}</h2>
+                    <div class="table-responsive">
+                        <table class="table table-striped align-middle">
+                            <thead>
+                                <tr>
+                                    <th scope="col">{{ 'Name'|trans }}</th>
+                                    <th scope="col">{{ 'Function'|trans }}</th>
+                                </tr>
+                            </thead>
+                            <tbody data-install-editor-target="currentMembers"></tbody>
+                            {# Row shapes live here rather than in the controller so their wording stays translated
+                               and their markup stays reviewable; the parser only handles `<tr>` inside a template
+                               when the template itself sits in table context. #}
+                            <template data-install-editor-target="currentRowTemplate">
+                                <tr>
+                                    <td data-field="name"></td>
+                                    <td data-field="function"></td>
+                                </tr>
+                            </template>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <h2 class="h4">{{ 'Result'|trans }}</h2>
+                    <div class="table-responsive">
+                        <table class="table table-striped align-middle">
+                            <thead>
+                                <tr>
+                                    <th scope="col">{{ 'Name'|trans }}</th>
+                                    <th scope="col">{{ 'Function'|trans }}</th>
+                                    <th scope="col">{{ 'Discharge'|trans }}</th>
+                                    <th scope="col">{{ 'Reappoint'|trans }}</th>
+                                    <th scope="col">{{ 'Make Inactive'|trans }}</th>
+                                    <th scope="col">{{ 'Give Function'|trans }}</th>
+                                </tr>
+                            </thead>
+                            <tbody data-install-editor-target="result"></tbody>
+                            <template data-install-editor-target="resultRowTemplate">
+                                <tr>
+                                    <td data-field="name"></td>
+                                    <td data-field="function"></td>
+                                    <td>
+                                        <button type="button" class="btn btn-outline-danger btn-sm" data-action-role="discharge"
+                                                data-bs-toggle="modal" data-bs-target="#install-modal-discharge">
+                                            {{ 'Discharge'|trans }}
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-outline-secondary btn-sm" data-action-role="reappoint"
+                                                data-bs-toggle="modal" data-bs-target="#install-modal-reappoint">
+                                            {{ 'Reappoint'|trans }}
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-outline-secondary btn-sm" data-action-role="inactive"
+                                                data-bs-toggle="modal" data-bs-target="#install-modal-inactive">
+                                            {{ 'Make Inactive'|trans }}
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-outline-secondary btn-sm" data-action-role="function"
+                                                data-bs-toggle="modal" data-bs-target="#install-modal-function">
+                                            {{ 'Give Function'|trans }}
+                                        </button>
+                                    </td>
+                                </tr>
+                            </template>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 class="h4">{{ 'Mutations'|trans }}</h2>
+                    <div data-install-editor-target="reappointments"></div>
+                    <div data-install-editor-target="discharges"></div>
+                    <div data-install-editor-target="installations"></div>
+                    {{ form_errors(form.reappointments) }}
+                    {{ form_errors(form.discharges) }}
+                    {{ form_errors(form.installations) }}
+                </div>
+                <div class="col-md-6">
+                    <h2 class="h4">{{ 'Add New (Inactive) Member'|trans }}</h2>
+                    <div data-controller="member-lookup"
+                         data-member-lookup-url-value="{{ path('member_search_filtered') }}">
+                        <div class="position-relative mb-2">
+                            <input type="text" class="form-control" autocomplete="off"
+                                   placeholder="{{ 'Lid'|trans }}"
+                                   data-member-lookup-target="input"
+                                   data-install-editor-target="memberInput"
+                                   data-action="input->member-lookup#search keydown->member-lookup#navigate">
+                            <div class="dropdown-menu w-100" role="listbox"
+                                 data-member-lookup-target="results"></div>
+                        </div>
+                        <div class="d-flex flex-wrap gap-2">
+                            <button type="button" class="btn btn-outline-gewis-primary" disabled
+                                    data-install-editor-target="addMember"
+                                    data-action="install-editor#addMember">
+                                {{ 'Add Member'|trans }}
+                            </button>
+                            <button type="button" class="btn btn-outline-gewis-primary" disabled
+                                    data-install-editor-target="addInactiveMember"
+                                    data-action="install-editor#addInactiveMember">
+                                {{ 'Add Inactive Member'|trans }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3">
+                <div class="decision-form-actions">
+                    {{ form_widget(form.submit, {'attr': {
+                        'class': 'btn-gewis-primary',
+                        'disabled': 'disabled',
+                        'data-organ-lookup-target': 'submit',
+                    }}) }}
+                </div>
+            </div>
+        </div>
+    {{ form_end(form) }}
+
+    <div class="modal fade" id="install-modal-discharge" tabindex="-1" aria-hidden="true"
+         aria-labelledby="install-modal-discharge-label"
+         data-action="show.bs.modal->install-editor#prepareDischarge">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="install-modal-discharge-label">{{ 'Discharge Member'|trans }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="{{ 'Close'|trans }}"></button>
+                </div>
+                <div class="modal-body">
+                    {# The placeholders are filled with the member and function the clicked row stands for; the markup
+                       spliced in here is the template's own, not anything that came from the request. #}
+                    {{ 'Discharge %name% as %function%?'|trans({
+                        '%name%': '<span data-install-editor-target="dischargeName"></span>',
+                        '%function%': '<span data-install-editor-target="dischargeFunction"></span>',
+                    })|raw }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ 'No'|trans }}</button>
+                    <button type="button" class="btn btn-gewis-primary" data-bs-dismiss="modal"
+                            data-action="install-editor#confirmDischarge">
+                        {{ 'Yes'|trans }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="install-modal-reappoint" tabindex="-1" aria-hidden="true"
+         aria-labelledby="install-modal-reappoint-label"
+         data-action="show.bs.modal->install-editor#prepareReappoint">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="install-modal-reappoint-label">{{ 'Reappoint Member'|trans }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="{{ 'Close'|trans }}"></button>
+                </div>
+                <div class="modal-body">
+                    {{ 'Do you want to reappoint %name%? Check functions you also want reappointed, functions that are not selected will result in a discharge of that function.'|trans({
+                        '%name%': '<span data-install-editor-target="reappointName"></span>',
+                    })|raw }}
+                    <div class="mt-2" data-install-editor-target="reappointFunctions"></div>
+                    <template data-install-editor-target="reappointFunctionTemplate">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" checked>
+                            <label class="form-check-label"></label>
+                        </div>
+                    </template>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ 'No'|trans }}</button>
+                    <button type="button" class="btn btn-gewis-primary" data-bs-dismiss="modal"
+                            data-action="install-editor#confirmReappoint">
+                        {{ 'Yes'|trans }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="install-modal-inactive" tabindex="-1" aria-hidden="true"
+         aria-labelledby="install-modal-inactive-label"
+         data-action="show.bs.modal->install-editor#prepareInactive">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="install-modal-inactive-label">{{ 'Make Member Inactive'|trans }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="{{ 'Close'|trans }}"></button>
+                </div>
+                <div class="modal-body">
+                    {{ 'Make %name% inactive?'|trans({
+                        '%name%': '<span data-install-editor-target="inactiveName"></span>',
+                    })|raw }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ 'No'|trans }}</button>
+                    <button type="button" class="btn btn-gewis-primary" data-bs-dismiss="modal"
+                            data-action="install-editor#confirmInactive">
+                        {{ 'Yes'|trans }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="install-modal-function" tabindex="-1" aria-hidden="true"
+         aria-labelledby="install-modal-function-label"
+         data-action="show.bs.modal->install-editor#prepareFunction">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="install-modal-function-label">{{ 'Give Member Function'|trans }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="{{ 'Close'|trans }}"></button>
+                </div>
+                <div class="modal-body">
+                    {# A picker, not a form: nothing here is posted, the chosen function is written into a new row of
+                       the installations collection instead. #}
+                    {% if null is not same as(member_function_form) %}
+                        <label class="form-label" for="{{ member_function_form.function.vars.id }}">
+                            {{ 'Function of'|trans }} <span data-install-editor-target="functionName"></span>
+                        </label>
+                        {{ form_widget(member_function_form.function, {'attr': {
+                            'data-install-editor-target': 'functionSelect',
+                        }}) }}
+                    {% endif %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ 'No'|trans }}</button>
+                    <button type="button" class="btn btn-gewis-primary" data-bs-dismiss="modal"
+                            data-action="install-editor#confirmFunction">
+                        {{ 'Yes'|trans }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,92 @@
+// The layering is GEWISWEB's, because the theme is: Bootstrap's functions and stock variables first so the custom
+// ones can build on them, then the maps and the custom `:root`, then the components.
+
+// Core
+@import '../../vendor/twbs/bootstrap/scss/functions';
+@import '../../vendor/twbs/bootstrap/scss/mixins';
+
+// Core variables
+@import '../../vendor/twbs/bootstrap/scss/variables';
+
+// Variable overrides
+//
+// Dark mode is off because the theme is not a light/dark pair: `gewis-day` and `gewis-night` are named themes, applied
+// through `data-bs-theme`, and the maps Bootstrap would generate are declared in _maps.scss instead.
+$enable-dark-mode: false;
+$enable-negative-margins: true;
+
+// Core
+@import '../../vendor/twbs/bootstrap/scss/maps';
+
+// Custom theme variables
+@import 'variables';
+
+// Custom maps
+@import 'maps';
+
+// Custom root
+@import 'root';
+
+// Core components
+@import '../../vendor/twbs/bootstrap/scss/utilities';
+@import '../../vendor/twbs/bootstrap/scss/reboot';
+@import '../../vendor/twbs/bootstrap/scss/alert';
+@import '../../vendor/twbs/bootstrap/scss/badge';
+@import '../../vendor/twbs/bootstrap/scss/breadcrumb';
+@import '../../vendor/twbs/bootstrap/scss/buttons';
+@import '../../vendor/twbs/bootstrap/scss/button-group';
+@import '../../vendor/twbs/bootstrap/scss/card';
+@import '../../vendor/twbs/bootstrap/scss/close';
+@import '../../vendor/twbs/bootstrap/scss/containers';
+@import '../../vendor/twbs/bootstrap/scss/dropdown';
+@import '../../vendor/twbs/bootstrap/scss/forms';
+@import '../../vendor/twbs/bootstrap/scss/grid';
+@import '../../vendor/twbs/bootstrap/scss/helpers';
+@import '../../vendor/twbs/bootstrap/scss/images';
+@import '../../vendor/twbs/bootstrap/scss/list-group';
+@import '../../vendor/twbs/bootstrap/scss/modal';
+@import '../../vendor/twbs/bootstrap/scss/nav';
+@import '../../vendor/twbs/bootstrap/scss/navbar';
+@import '../../vendor/twbs/bootstrap/scss/offcanvas';
+@import '../../vendor/twbs/bootstrap/scss/pagination';
+@import '../../vendor/twbs/bootstrap/scss/progress';
+@import '../../vendor/twbs/bootstrap/scss/spinners';
+@import '../../vendor/twbs/bootstrap/scss/tables';
+@import '../../vendor/twbs/bootstrap/scss/toasts';
+@import '../../vendor/twbs/bootstrap/scss/transitions';
+@import '../../vendor/twbs/bootstrap/scss/type';
+
+// Magic
+@import '../../vendor/twbs/bootstrap/scss/utilities/api';
+
+// Custom styling
+@import 'components/badge';
+@import 'components/breadcrumb';
+@import 'components/buttons';
+@import 'components/close';
+@import 'components/decision-kinds';
+@import 'components/dashboard';
+@import 'components/empty-state';
+@import 'components/flag-icons';
+@import 'components/footer';
+@import 'components/form';
+@import 'components/form-stepper';
+@import 'components/registration-review';
+@import 'components/nav';
+@import 'components/nav-menu';
+@import 'components/navbar';
+@import 'components/page';
+@import 'components/notification';
+@import 'components/page-header';
+@import 'components/panel';
+@import 'components/query';
+@import 'components/shortcut';
+@import 'components/sidebar';
+@import 'components/table';
+@import 'components/toast';
+@import 'components/typography';
+
+// Fonts (Normal, FontAwesome, GEWIS Icons)
+@import 'fonts';
+@import 'fontawesome';
+@import 'components/gewisicons';

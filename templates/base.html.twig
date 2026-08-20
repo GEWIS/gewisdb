@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}" class="h-100">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/vnd.microsoft.icon" href="{{ asset('images/favicon.ico') }}">
+        <title>{% block page_title %}GEWIS Database{% endblock %}</title>
+        {% set fontPreloads = [
+            'fonts/raleway/raleway-v22-latin-500.woff2',
+            'fonts/raleway/raleway-v22-latin-600.woff2',
+            'fonts/raleway/raleway-v22-latin-regular.woff2',
+            'fonts/lato/lato-v22-latin-700.woff2',
+            'fonts/lato/lato-v22-latin-regular.woff2',
+            'fonts/lato/lato-v22-latin-italic.woff2',
+            'fonts/gewisicons/gewisicons.ttf',
+        ] %}
+        {% for font in fontPreloads %}
+            <link rel="preload" as="font" type="{{ font ends with '.ttf' ? 'font/ttf' : 'font/woff2' }}"
+                  href="{{ asset(font) }}" crossorigin="anonymous">
+        {% endfor %}
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('styles/app.scss') }}">
+        {% endblock %}
+        {% block javascripts %}
+            {# Ahead of the body, so the stored theme is on <html> before anything paints. #}
+            <script src="{{ asset('js/color-modes.js') }}"></script>
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
+        {% if app.request.server.has('FRANKENPHP_HOT_RELOAD') %}
+            <meta name="frankenphp-hot-reload:url" content="{{ app.request.server.get('FRANKENPHP_HOT_RELOAD') }}">
+            <script src="https://cdn.jsdelivr.net/npm/idiomorph"></script>
+            <script src="https://cdn.jsdelivr.net/npm/frankenphp-hot-reload/+esm" type="module"></script>
+            {#
+                The client swaps a stylesheet by matching the changed file against the ones the page links, on the
+                name before the first dot. That never matches here: Sass compiles to `app-<hash of its path>.output
+                .css` and the asset mapper publishes it as `app-<hash of its contents>.css`, so a stylesheet change
+                is recognised and then quietly matches nothing. Reload the page for those instead.
+
+                The event arrives after Sass has written the file, so what the reload fetches is the new stylesheet.
+            #}
+            <script>
+                (() => {
+                    const url = document.querySelector('meta[name="frankenphp-hot-reload:url"]')?.content;
+
+                    if (!url) {
+                        return;
+                    }
+
+                    new EventSource(url).onmessage = ({data}) => {
+                        if (JSON.parse(data).some(({path_name: path}) => path.endsWith('.css'))) {
+                            window.location.reload();
+                        }
+                    };
+                })();
+            </script>
+        {% endif %}
+        {% block head %}{% endblock %}
+    </head>
+    <body class="d-flex flex-column min-vh-100">
+        {# The join and member hosts run their own navigation; they swap it in through this block. #}
+        {% block main_nav %}
+            {% include 'partials/application/main-nav.html.twig' %}
+        {% endblock %}
+        {% block body %}
+            <div class="{% block container_class %}container{% endblock %} flex-grow-1 pt-3">
+                {% block contents %}{% endblock %}
+            </div>
+            {% block footer %}
+                {% include 'partials/application/footer.html.twig' %}
+            {% endblock %}
+        {% endblock %}
+        {% include 'partials/application/toasts.html.twig' %}
+        {% block body_javascripts %}
+            <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>

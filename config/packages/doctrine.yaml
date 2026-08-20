@@ -1,0 +1,69 @@
+doctrine:
+    dbal:
+        default_connection: default
+        # Registered on the DBAL rather than on a connection: both entity managers map the type, and doctrine-bundle
+        # keeps the type registry global.
+        types:
+            stringable_datetime: App\Doctrine\Types\StringableDateTimeType
+        connections:
+            default:
+                url: '%env(resolve:DATABASE_DSN)%'
+            report:
+                url: '%env(resolve:REPORT_DATABASE_DSN)%'
+
+    orm:
+        default_entity_manager: default
+        entity_managers:
+            default:
+                connection: default
+                # doctrine-bundle defaults to `underscore_number_aware`, which would rename ConfigItem to
+                # config_item and createdAt to created_at across both databases. The existing schema uses
+                # Doctrine's DefaultNamingStrategy verbatim.
+                naming_strategy: doctrine.orm.naming_strategy.default
+                # ORM 3 resolves AUTO to IDENTITY on PostgreSQL where ORM 2 resolved it to SEQUENCE. The id
+                # columns are plain INT with no DEFAULT nextval(...), so IDENTITY fails every INSERT.
+                identity_generation_preferences:
+                    Doctrine\DBAL\Platforms\PostgreSQLPlatform: sequence
+                mappings:
+                    Application:
+                        type: attribute
+                        is_bundle: false
+                        dir: '%kernel.project_dir%/src/Entity/Application'
+                        prefix: 'App\Entity\Application'
+                    Database:
+                        type: attribute
+                        is_bundle: false
+                        dir: '%kernel.project_dir%/src/Entity/Database'
+                        prefix: 'App\Entity\Database'
+                    User:
+                        type: attribute
+                        is_bundle: false
+                        dir: '%kernel.project_dir%/src/Entity/User'
+                        prefix: 'App\Entity\User'
+
+            # GEWISWEB reads these tables directly over PostgreSQL, so this DDL is a cross-system contract.
+            report:
+                connection: report
+                naming_strategy: doctrine.orm.naming_strategy.default
+                identity_generation_preferences:
+                    Doctrine\DBAL\Platforms\PostgreSQLPlatform: sequence
+                mappings:
+                    Report:
+                        type: attribute
+                        is_bundle: false
+                        dir: '%kernel.project_dir%/src/Entity/Report'
+                        prefix: 'App\Entity\Report'
+                dql:
+                    numeric_functions:
+                        YEAR: App\Doctrine\Functions\Year
+
+when@test:
+    doctrine:
+        dbal:
+            connections:
+                # Both connections move aside, or a test run would write over the development ledger and the
+                # projection of it. "TEST_TOKEN" is typically set by ParaTest.
+                default:
+                    dbname_suffix: '_test%env(default::TEST_TOKEN)%'
+                report:
+                    dbname_suffix: '_test%env(default::TEST_TOKEN)%'

@@ -1,0 +1,60 @@
+{# The decision list as a LaTeX document. Nothing here is HTML, so escaping is off: `content` arrives already escaped
+   for LaTeX (`Decision::getContent()` with character escaping on) and everything else is a hash or a date. #}
+{% autoescape false %}
+{%- macro besluiten(decisions) -%}
+{% for decision in decisions %}
+\besluit{ {{- decision.hash -}} }{ {{- decision.date|date('d-m-Y') -}} }{ {{- decision.content -}} }
+{% endfor %}
+{%- endmacro -%}
+{%- import _self as tex -%}
+\documentclass[a4paper, twoside, 11pt]{article}
+\usepackage[dutch]{babel}
+\usepackage{a4wide}
+\usepackage{lineno}
+
+\hyphenation{GEWIS}
+\setlength\parindent{0pt}
+\addtolength\topmargin{-1cm}
+\addtolength\textheight{3cm}
+
+{# LaTeX comments start with `%`, so `{%` here opens a Twig tag rather than a group. #}
+{% verbatim %}
+\newcommand\besluit[3]{%
+\textbf{#1 (#2):}\nopagebreak\\#3%
+}
+{% endverbatim %}
+
+\begin{document}
+\modulolinenumbers[5]
+\linenumbers
+\small
+
+\begin{center}
+\begin{Huge}
+\textbf{GEWIS BV-Besluitenlijst}\\[0.5cm]
+\end{Huge}
+\begin{huge}
+van \emph{10-09-2013}\\
+tot \emph{01-07-2014}\\[0.25cm]
+\end{huge}
+\begin{normalsize}
+\emph{versie 0.1}\\[0.25cm]
+\end{normalsize}
+\begin{large}
+\underline{AV-stuk 137.3.1}\\
+\end{large}
+\end{center}
+
+\section*{Legenda}
+\begin{tabular}{ll}
+x & y\\
+\end{tabular}
+
+\subsection*{Begrotingen en Afrekeningen}
+{{ tex.besluiten(categories.financial) }}
+\subsection*{Installaties en Decharges}
+{{ tex.besluiten(categories.install) }}
+\subsection*{Overige besluiten}
+{{ tex.besluiten(categories.other) }}
+\end{document}
+{% endautoescape %}

@@ -1,0 +1,19 @@
+{#
+    What a list says when it has nothing to show: what is empty, and what to do about it. Pass `icon` without its
+    `fa-solid` prefix.
+
+    {% include 'partials/application/empty-state.html.twig' with {
+        icon: 'fa-user-group',
+        title: 'No members match'|trans,
+        body: 'Try a different filter, or clear the search.'|trans,
+    } only %}
+
+    An optional `class` is added to the wrapper, for the callers that need to place or hide it.
+#}
+<div class="empty-state{{ class is defined ? ' ' ~ class : '' }}">
+    <span class="empty-state-icon fas {{ icon|default('fa-inbox') }}" aria-hidden="true"></span>
+    <p class="empty-state-title">{{ title }}</p>
+    {% if body is defined and body is not empty %}
+        <p class="empty-state-body">{{ body }}</p>
+    {% endif %}
+</div>

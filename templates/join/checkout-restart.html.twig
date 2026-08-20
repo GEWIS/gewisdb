@@ -1,0 +1,20 @@
+{% extends 'join/base.html.twig' %}
+
+{% set nav_title = 'GEWIS Registration - Checkout'|trans %}
+
+{% block page_title %}{{ 'GEWIS Registration - Checkout'|trans }} - {{ parent() }}{% endblock %}
+
+{% block contents %}
+    {% include 'partials/join/registration-header.html.twig' %}
+
+    {% if error %}
+        <div class="alert alert-danger" role="alert">
+            <strong>{{ 'Oh snap!'|trans }}</strong>
+            {{ 'An error occurred while we were trying to prepare the checkout page. Please try again later.'|trans }}
+        </div>
+    {% else %}
+        <p>
+            {{ 'This payment link could not be found. Perhaps it has been used before or has expired.'|trans }}
+        </p>
+    {% endif %}
+{% endblock %}

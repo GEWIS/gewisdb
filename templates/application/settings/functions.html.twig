@@ -1,0 +1,63 @@
+{% extends 'layout-sidebar.html.twig' %}
+
+{% block page_title %}{{ 'Functions'|trans }} - {{ parent() }}{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item">
+        <a href="{{ path('application_settings_index') }}">{{ 'Settings'|trans }}</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">{{ 'Functions'|trans }}</li>
+{% endblock %}
+
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_title %}{{ 'Functions'|trans }}{% endblock %}
+        {% block header_subtitle %}
+            <p class="page-header-meta mb-0">
+                {{ 'Since 2024 these can only be changed in the code.'|trans }}
+            </p>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{# The three sections are the same list of organ functions with a different explanation, so the list itself is a
+   macro. The cases carry their own (translatable) name, which is why they are passed as enum cases rather than as
+   a pre-translated array. #}
+{% macro functions(title, description, functions) %}
+    <div class="col-12 col-xl-4">
+        <div class="panel h-100">
+            <div class="panel-heading"><h3>{{ title }}</h3></div>
+            <div class="panel-body">
+                <p class="text-secondary">{{ description }}</p>
+                <ul class="mb-0">
+                    {% for function in functions %}
+                        <li>{{ function.getName|trans }} (<code>{{ function.value }}</code>)</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+{% import _self as list %}
+
+{% block contents %}
+    <div class="row g-3">
+        {{ list.functions(
+            'Current'|trans,
+            'Can be picked when installing someone in a committee or fraternity.'|trans,
+            current_functions,
+        ) }}
+        {{ list.functions(
+            'Historic'|trans,
+            'Were used in the past and can no longer be picked.'|trans,
+            legacy_functions,
+        ) }}
+        {{ list.functions(
+            'Administrative'|trans,
+            'Cannot be picked; the database uses them itself.'|trans,
+            administrative_functions,
+        ) }}
+    </div>
+{% endblock %}

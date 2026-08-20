@@ -1,0 +1,29 @@
+{% extends 'email/_base.html.twig' %}
+
+{% block emailTitle %}GEWIS Graduate Renewal{% endblock %}
+{% block preheader %}{% endblock %}
+{% block heading %}Membership notification{% endblock %}
+{% block subheading %}Graduate status renewed{% endblock %}
+{% block body %}
+    <p>Dear {{ firstName }},</p>
+    <p>
+        You have requested renewal of your status as a Graduate (<i>Afgestudeerde</i>) of GEWIS.
+        We are happy to inform you that your status has been renewed until
+        <b>{{ newExpiration|date('F jS, Y') }}</b>.
+    </p>
+    <p>
+        Within 24 hours this change will be visible on
+        <a href="https://gewis.nl/member/self" style="color: #C40000; text-decoration: none;" target="_blank" rel="noopener nofollow">your memberpage</a>.<br/>
+        {% if oldExpiration <= date() %}
+            If your account is currently deactivated because your membership had expired, it will be activated
+            automatically within that same timeframe.<br/>
+        {% endif %}
+        Note: if you updated your email address, you have to sign in to the GEWIS website using your new email address.<br/>
+        Feel free to let us know if you have any questions.
+    </p>
+    <p>
+        Kind regards,
+        <br>The Secretary of GEWIS
+    </p>
+{% endblock %}
+{% block footerNote %}You receive this message because you renewed your registration as a graduate of GEWIS. You can not opt-out of these emails.{% endblock %}

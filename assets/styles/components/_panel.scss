@@ -1,0 +1,236 @@
+// Panel
+//
+// A panel is a card in disguise.
+
+.panel {
+    --#{$prefix}panel-spacer-x: #{$panel-spacer-x};
+    --#{$prefix}panel-spacer-y: #{$panel-spacer-y};
+    --#{$prefix}panel-header-color: #{$panel-header-color};
+    --#{$prefix}panel-header-font-size: #{$panel-header-font-size};
+    --#{$prefix}panel-border-width: #{$panel-border-width};
+    --#{$prefix}panel-border-color: #{$panel-border-color};
+    --#{$prefix}panel-border-radius: #{$panel-border-radius};
+    --#{$prefix}panel-inner-border-radius: #{$panel-inner-border-radius};
+    --#{$prefix}panel-bg: #{$panel-bg};
+
+    background-color: var(--#{$prefix}panel-bg);
+    background-clip: border-box;
+    @include border-radius(var(--#{$prefix}panel-border-radius));
+    color: var(--#{$prefix}body-color);
+    display: flex;
+    border: var(--#{$prefix}panel-border-width) solid var(--#{$prefix}panel-border-color);
+    flex-direction: column;
+    height: var(--#{$prefix}panel-height);
+    margin-bottom: var(--#{$prefix}panel-spacer-y);
+    margin-top: var(--#{$prefix}panel-spacer-y);
+    position: relative;
+    // min-width: 0;
+    word-wrap: break-word;
+
+    .list-group {
+        --#{$prefix}list-group-bg: #{$panel-bg};
+        --#{$prefix}list-group-item-padding-x: #{$panel-spacer-x};
+        --#{$prefix}list-group-item-padding-y: #{$panel-list-group-item-spacer-y};
+        --#{$prefix}list-group-action-hover-bg: #{$panel-bg};
+
+        > .list-group-item {
+            &:first-child {
+                padding-top: 0;
+            }
+        }
+    }
+
+    // The tab you are on continues the panel underneath it, so it follows the panel's own background rather than the
+    // colour that background happens to have in the day theme.
+    .nav.nav-tabs {
+        --#{$prefix}nav-tabs-link-active-bg: var(--#{$prefix}panel-bg);
+
+        .nav-link.active {
+            border-top-width: 0;
+            border-bottom-width: 0;
+        }
+
+        .nav-link:first-child {
+            border-top-right-radius: 0;
+
+            &.active {
+                border-left-width: 0;
+            }
+        }
+
+        .nav-link:last-child {
+            border-top-left-radius: 0;
+
+            &.active {
+                border-right-width: 0;
+            }
+        }
+    }
+
+    .panel-heading {
+        padding: var(--#{$prefix}panel-spacer-y) var(--#{$prefix}panel-spacer-x);
+
+        > h3 {
+            color: var(--#{$prefix}panel-header-color);
+            font-size: var(--#{$prefix}panel-header-font-size);
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        + .panel-body {
+            padding-top: 0;
+        }
+    }
+
+    .panel-body {
+        flex: 1 1 auto;
+        padding: var(--#{$prefix}panel-spacer-y) var(--#{$prefix}panel-spacer-x);
+    }
+
+    .panel-thumb {
+        img {
+            width: 100%;
+        }
+    }
+
+    .panel-footer {
+        --#{$prefix}panel-footer-bg: #{$panel-footer-bg};
+        --#{$prefix}panel-footer-link-color: #{$panel-footer-link-color};
+
+        background-color: var(--#{$prefix}panel-footer-bg);
+        @include border-bottom-start-radius(var(--#{$prefix}panel-border-radius));
+        @include border-bottom-end-radius(var(--#{$prefix}panel-border-radius));
+        padding: var(--#{$prefix}panel-spacer-y) var(--#{$prefix}panel-spacer-x);
+
+        .panel-footer-link {
+            color: var(--#{$prefix}panel-footer-link-color);
+            font-weight: 600;
+            text-transform: uppercase;
+
+            + .panel-footer-link {
+                margin-left: 0.5rem;
+            }
+        }
+    }
+}
+
+// Collapse toggle on a `.panel-heading`: rotate the chevron when open. Bootstrap sets `.collapsed` while hidden.
+.panel-collapse-chevron {
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.panel-collapse-toggle:not(.collapsed) .panel-collapse-chevron {
+    transform: rotate(180deg);
+}
+
+@include color-mode(gewis-night) {
+    .panel {
+        --#{$prefix}panel-bg: #{$panel-bg-dark};
+        --#{$prefix}panel-border-color: #{$border-color-translucent-dark};
+
+        .panel-footer {
+            --#{$prefix}panel-footer-bg: #{$panel-footer-bg-dark};
+            --#{$prefix}panel-footer-link-color: #{$panel-footer-link-color-dark};
+        }
+
+        .list-group {
+            --#{$prefix}list-group-bg: #{$panel-bg-dark};
+            --#{$prefix}list-group-action-hover-bg: #{$panel-bg-dark};
+        }
+    }
+}
+
+// A panel that has to be read rather than scanned past: filled in the brand red on both themes, so it stands out from
+// the column of ordinary panels around it. Declared after the night block, which is no less specific.
+.panel.panel-accent {
+    --#{$prefix}panel-bg: #{$gewis-red-dark};
+    --#{$prefix}panel-border-color: #{$gewis-red-dark};
+
+    color: $white;
+
+    h1, h2, h3, h4, h5, h6 {
+        color: $white;
+    }
+
+    p {
+        color: rgba($white, 0.85);
+        font-size: $font-size-sm;
+    }
+
+    a:not(.btn) {
+        color: inherit;
+        text-decoration: underline;
+    }
+
+    .btn {
+        --#{$prefix}btn-bg: #{$white};
+        --#{$prefix}btn-border-color: #{$white};
+        --#{$prefix}btn-color: #{$gewis-red-dark};
+        --#{$prefix}btn-hover-bg: #{$gewis-gray-light};
+        --#{$prefix}btn-hover-border-color: #{$gewis-gray-light};
+        --#{$prefix}btn-hover-color: #{$gewis-red-dark};
+        --#{$prefix}btn-font-weight: 600;
+    }
+}
+
+// A note on a member's record: separated by a rule rather than boxed, so a column of them reads as one list.
+.member-note + .member-note {
+    margin-block-start: map-get($spacers, 2);
+    padding-block-start: map-get($spacers, 2);
+    border-block-start: var(--#{$prefix}border-width) solid var(--#{$prefix}border-color-translucent);
+}
+
+.member-note:last-of-type {
+    margin-block-end: map-get($spacers, 3);
+}
+
+// A panel that is an invitation rather than a record: the add-a-decision form under a meeting's decisions.
+.panel-dashed {
+    border-style: dashed;
+}
+
+// A decision reads as one text, set off by a rule so where it starts and ends is clear without breaking it into
+// pieces that each look like a decision of their own.
+.decision-content {
+    padding-inline-start: map-get($spacers, 3);
+    border-inline-start: 0.125rem solid var(--#{$prefix}border-color-translucent);
+    text-wrap: pretty;
+}
+
+// An annulled decision stays in the list — the record is what was decided, not what still holds — but it is set back
+// so it is not mistaken for one in force.
+.decision-annulled .decision-content {
+    color: var(--#{$prefix}secondary-color);
+    text-decoration: line-through;
+}
+
+// Label and value pairs in a panel's rail.
+.meeting-facts {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: map-get($spacers, 1) map-get($spacers, 3);
+
+    > dt {
+        color: var(--#{$prefix}secondary-color);
+        font-weight: 500;
+    }
+
+    > dd {
+        margin: 0;
+        justify-self: end;
+        font-weight: 600;
+    }
+}
+
+// The generated decision list, shown as source to copy rather than as a rendered document.
+.export-source {
+    max-block-size: 70vh;
+    margin: 0;
+    padding: map-get($spacers, 3);
+    overflow: auto;
+    border: var(--#{$prefix}border-width) solid var(--#{$prefix}border-color-translucent);
+    border-radius: var(--#{$prefix}border-radius);
+    background-color: var(--#{$prefix}secondary-bg);
+    font-size: $font-size-sm;
+}

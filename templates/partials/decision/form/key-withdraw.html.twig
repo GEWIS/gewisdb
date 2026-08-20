@@ -1,0 +1,49 @@
+{# Choosing a key code copies both its reference and the grantee and expiry it was handed out with; the latter two are
+   unmapped and only exist so the withdrawal date can be checked against them. #}
+{{ form_start(form, {
+    'action': path('decision_decision_form', {'form': 'key_withdraw'}),
+    'attr': {'data-controller': 'subdecision-choice'},
+}) }}
+    <div class="mb-2">
+        <span class="form-label d-block">{{ 'Key Code(s) to Withdraw'|trans }}</span>
+        {% for grant in grants %}
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="key-withdraw-slot"
+                       id="key-withdraw-slot-{{ loop.index0 }}"
+                       data-action="change->subdecision-choice#select"
+                       data-meeting-type="{{ grant.meetingType.value }}"
+                       data-meeting-number="{{ grant.meetingNumber }}"
+                       data-decision-point="{{ grant.decisionPoint }}"
+                       data-decision-number="{{ grant.decisionNumber }}"
+                       data-sequence="{{ grant.sequence }}"
+                       data-until="{{ grant.until|date('Y-m-d') }}"
+                       data-lidnr="{{ grant.member.lidnr }}">
+                <label class="form-check-label" for="key-withdraw-slot-{{ loop.index0 }}">
+                    {{ grant.member.fullName }} ({{ grant.until|date('Y-m-d') }})
+                </label>
+            </div>
+        {% else %}
+            <p class="text-secondary mb-0">{{ 'There are no key codes to withdraw.'|trans }}</p>
+        {% endfor %}
+    </div>
+
+    {{ form_widget(form.subdecision.meeting_type, {'attr': {'data-subdecision-choice-target': 'meetingType'}}) }}
+    {{ form_widget(form.subdecision.meeting_number, {'attr': {'data-subdecision-choice-target': 'meetingNumber'}}) }}
+    {{ form_widget(form.subdecision.decision_point, {'attr': {'data-subdecision-choice-target': 'decisionPoint'}}) }}
+    {{ form_widget(form.subdecision.decision_number, {'attr': {'data-subdecision-choice-target': 'decisionNumber'}}) }}
+    {{ form_widget(form.subdecision.sequence, {'attr': {'data-subdecision-choice-target': 'sequence'}}) }}
+    {{ form_widget(form.granting.until, {'attr': {'data-subdecision-choice-target': 'until'}}) }}
+    {{ form_widget(form.granting.member.lidnr, {'attr': {'data-subdecision-choice-target': 'lidnr'}}) }}
+    {{ form_errors(form.subdecision) }}
+    {{ form_errors(form.granting) }}
+
+    {{ form_row(form.withdrawOn) }}
+
+    <div class="decision-form-actions">
+        {{ form_widget(form.submit, {'attr': {
+            'class': 'btn-gewis-primary',
+            'disabled': 'disabled',
+            'data-subdecision-choice-target': 'submit',
+        }}) }}
+    </div>
+{{ form_end(form) }}

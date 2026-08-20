@@ -1,0 +1,17 @@
+# doctrine/migrations' native format, passed with --configuration since the bundle takes only one set:
+#     bin/console doctrine:migrations:migrate --em=report --configuration=migrations/report.yaml
+
+migrations_paths:
+    'Report\Migrations': 'migrations/report'
+
+table_storage:
+    table_name: doctrine_migration_versions
+    version_column_name: version
+    version_column_length: 191
+    executed_at_column_name: executed_at
+    execution_time_column_name: execution_time
+
+all_or_nothing: true
+transactional: true
+check_database_platform: true
+custom_template: 'migrations/template.tpl'

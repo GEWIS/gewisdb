@@ -1,0 +1,14 @@
+{% extends 'email/_base.html.twig' %}
+
+{% block emailTitle %}Problem with GEWIS membership fee refund{% endblock %}
+{% block preheader %}{% endblock %}
+{% block heading %}Membership Refund Status{% endblock %}
+{% block subheading %}[AUTOMATED] Problem with refund{% endblock %}
+{% block body %}
+    <p>
+        An issue was detected with the following refund: <strong>{{ refundId }}</strong>, its status is
+        <em>{{ refundStatus }}</em>.
+    </p>
+    <p>Contact the ApplicatieBeheerCommissie and/or the treasurer to determine the underlying issue.</p>
+{% endblock %}
+{% block footerNoteSection %}{% endblock %}

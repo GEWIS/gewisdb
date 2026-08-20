@@ -1,0 +1,17 @@
+{{ form_start(form, {'action': path('decision_decision_form', {'form': 'organ_regulation'})}) }}
+    {# Organ types without organ regulations are rendered disabled by the form type itself, so the radio group needs
+       no help from the template to keep them out of reach. #}
+    {{ form_row(form.type) }}
+    {{ form_row(form.abbr) }}
+    {{ form_row(form.date) }}
+    {% include 'partials/decision/member-lookup.html.twig' with {
+        'field': form.author,
+        'label': 'Author'|trans,
+    } only %}
+    {{ form_row(form.version) }}
+    {{ form_row(form.approve) }}
+    {{ form_row(form.changes) }}
+    <div class="decision-form-actions">
+        {{ form_widget(form.submit, {'attr': {'class': 'btn-gewis-primary'}}) }}
+    </div>
+{{ form_end(form) }}

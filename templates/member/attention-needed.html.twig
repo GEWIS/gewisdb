@@ -1,0 +1,137 @@
+{% extends 'layout-sidebar.html.twig' %}
+
+{% block page_title %}{{ 'Members requiring attention'|trans }} - {{ parent() }}{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href="{{ path('member_index') }}">{{ 'Members'|trans }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ 'Requiring attention'|trans }}</li>
+{% endblock %}
+
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_title %}{{ 'Members requiring attention'|trans }}{% endblock %}
+        {% block header_subtitle %}
+            <p class="page-header-meta mb-0">
+                {{ 'Memberships expiring within %days% days, and members missing information we need.'|trans({
+                    '%days%': days,
+                }) }}
+            </p>
+        {% endblock %}
+        {% block header_actions %}
+            <a class="btn btn-outline-gewis-primary" href="{{ path('member_bulk_renewal_index') }}">
+                {{ 'Bulk renewal'|trans }}
+            </a>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{#
+    `rows` pairs each member with the `AttentionReasons` they turned up under; the reason renders its own label and
+    recommended action.
+
+    `bulk_renewal_shortcuts` holds the membership numbers behind the two shortcuts, which prefill the bulk renewal
+    form; producing that preview reads nothing and changes nothing, so it is a link rather than a post.
+#}
+{% macro shortcut(member_ids, membership_type, label) %}
+    {% if member_ids is empty %}
+        <span class="btn btn-gewis-primary disabled" aria-disabled="true">{{ label }}</span>
+    {% else %}
+        <a class="btn btn-gewis-primary"
+           href="{{ path('member_bulk_renewal_index', {
+               memberIds: member_ids|join(' '),
+               membershipType: membership_type,
+           }) }}">
+            {{ label }}
+        </a>
+    {% endif %}
+{% endmacro %}
+
+{% import _self as bulk %}
+
+{% block contents %}
+    <div class="panel">
+        <div class="panel-heading"><h3>{{ 'Renew in bulk'|trans }}</h3></div>
+        <div class="panel-body">
+            <p class="text-secondary">
+                {{ 'Each shortcut opens the bulk renewal form with these members already filled in. Renew the members who are still studying <strong>first</strong>.'|trans|raw }}
+            </p>
+            <div class="d-flex flex-wrap gap-2">
+                {{ bulk.shortcut(
+                    bulk_renewal_shortcuts.expiring_active,
+                    'external',
+                    'Renew expiring active members'|trans,
+                ) }}
+                {{ bulk.shortcut(
+                    bulk_renewal_shortcuts.expiring_non_active,
+                    'graduate',
+                    'Convert expiring non-active members to graduate'|trans,
+                ) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+            <thead>
+                <tr>
+                    <th scope="col">{{ 'Membership number'|trans }}</th>
+                    <th scope="col">{{ 'Name'|trans }}</th>
+                    <th scope="col">{{ 'Expiration'|trans }}</th>
+                    <th scope="col">{{ 'Reason(s)'|trans }}</th>
+                    <th scope="col">{{ 'Typical action'|trans }}</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                    {% set member_url = path('member_show', {lidnr: row.member.lidnr}) %}
+                    {% for reason in row.reasons %}
+                        <tr>
+                            {# The member is stated once and spans all of their reasons. #}
+                            {% if loop.first %}
+                                <td rowspan="{{ row.reasons|length }}">
+                                    <a href="{{ member_url }}">{{ row.member.lidnr }}</a>
+                                </td>
+                                <td rowspan="{{ row.reasons|length }}">
+                                    <a href="{{ member_url }}">{{ row.member.fullName }}</a>
+                                </td>
+                                <td rowspan="{{ row.reasons|length }}">
+                                    {{ row.member.expiration|date('Y-m-d') }}
+                                </td>
+                            {% endif %}
+                            <td>{{ reason|trans }}</td>
+                            <td>{{ reason.recommendedAction|trans }}</td>
+                            <td class="text-nowrap">
+                                {% if reason.renewRecommended %}
+                                    <a class="btn btn-sm btn-gewis-primary" target="_blank" rel="noopener"
+                                       href="{{ path('member_membership_edit', {lidnr: row.member.lidnr}) }}">
+                                        {{ 'Renew/Type'|trans }}
+                                    </a>
+                                {% endif %}
+                                {% if reason.editRecommended %}
+                                    <a class="btn btn-sm btn-gewis-primary" target="_blank" rel="noopener"
+                                       href="{{ path('member_edit', {lidnr: row.member.lidnr}) }}">
+                                        {{ 'Edit'|trans }}
+                                    </a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="6">
+                            {% include 'partials/application/empty-state.html.twig' with {
+                                icon: 'fa-user-check',
+                                title: 'Nobody needs attention'|trans,
+                                body: 'No membership expires soon and nothing is missing.'|trans,
+                            } only %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

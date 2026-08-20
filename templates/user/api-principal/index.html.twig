@@ -1,0 +1,88 @@
+{% extends 'layout-sidebar.html.twig' %}
+
+{% block page_title %}{{ 'API principals'|trans }} - {{ parent() }}{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item">
+        <a href="{{ path('application_settings_index') }}">{{ 'Settings'|trans }}</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">{{ 'API Tokens'|trans }}</li>
+{% endblock %}
+
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_title %}{{ 'API principals'|trans }}{% endblock %}
+        {% block header_subtitle %}
+            <p class="page-header-meta mb-0">
+                {{ 'Who may read the database over the API, and what they may read.'|trans }}
+            </p>
+        {% endblock %}
+        {% block header_actions %}
+            <a href="{{ path('user_api_principal_create') }}" class="btn btn-gewis-primary">
+                <span class="fas fa-plus" aria-hidden="true"></span>
+                {{ 'Create new API principal'|trans }}
+            </a>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block contents %}
+    <div class="panel">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">{{ 'Description'|trans }}</th>
+                        <th scope="col">{{ 'Permissions'|trans }}</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for principal in principals %}
+                        <tr>
+                            <td class="font-monospace">{{ principal.id }}</td>
+                            <td>{{ principal.description }}</td>
+                            <td>
+                                <ul class="list-unstyled mb-0">
+                                    {% for permission in principal.permissions %}
+                                        <li>{{ permission|trans }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                            <td>
+                                <div class="d-flex gap-2 justify-content-end">
+                                    <a class="btn btn-sm btn-outline-gewis-primary"
+                                       href="{{ path('user_api_principal_edit', {'id': principal.id}) }}">
+                                        {{ 'Edit'|trans }}
+                                    </a>
+                                    {# An icon-only button carried no accessible name; the actions are spelled out
+                                       now that the glyphicon set is gone. #}
+                                    <form method="post"
+                                          action="{{ path('user_api_principal_delete', {'id': principal.id}) }}">
+                                        <input type="hidden" name="_csrf_token"
+                                               value="{{ csrf_token('api_principal_delete-' ~ principal.id) }}">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">
+                                            {{ 'Delete'|trans }}
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="4">
+                                {% include 'partials/application/empty-state.html.twig' with {
+                                    icon: 'fa-key',
+                                    title: 'No API principals'|trans,
+                                    body: 'Nothing can read the database over the API yet.'|trans,
+                                } only %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

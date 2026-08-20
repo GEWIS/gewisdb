@@ -1,0 +1,23 @@
+{# The board installations a relief or a discharge can point at. The radios are not form fields: choosing one copies
+   the installation's reference into the hidden `subdecision` fields, which is what the form reads back.
+
+   Parameters: `installs` (board installations), `group` (the radio group name) and `label`. #}
+<div class="mb-2">
+    <span class="form-label d-block">{{ label }}</span>
+    {% for install in installs %}
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="{{ group }}" id="{{ group }}-{{ loop.index0 }}"
+                   data-action="change->subdecision-choice#select"
+                   data-meeting-type="{{ install.meetingType.value }}"
+                   data-meeting-number="{{ install.meetingNumber }}"
+                   data-decision-point="{{ install.decisionPoint }}"
+                   data-decision-number="{{ install.decisionNumber }}"
+                   data-sequence="{{ install.sequence }}">
+            <label class="form-check-label" for="{{ group }}-{{ loop.index0 }}">
+                {{ install.member.fullName }} {{ 'as'|trans }} {{ install.function.getName|trans }}
+            </label>
+        </div>
+    {% else %}
+        <p class="text-secondary mb-0">{{ 'There are no board members to choose from.'|trans }}</p>
+    {% endfor %}
+</div>

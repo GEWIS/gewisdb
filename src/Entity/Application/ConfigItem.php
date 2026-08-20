@@ -1,0 +1,170 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Entity\Application;
+
+use App\Entity\Application\Enums\ConfigNamespaces;
+use App\Entity\Application\Traits\TimestampableTrait;
+use App\Entity\Application\Traits\VersionTrait;
+use App\Repository\Application\ConfigItemRepository;
+use DateTime;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\PrePersist;
+use Doctrine\ORM\Mapping\PreUpdate;
+use Doctrine\ORM\Mapping\UniqueConstraint;
+use LogicException;
+use TypeError;
+
+use function is_bool;
+use function is_string;
+use function sprintf;
+
+/**
+ * Runtime configuration items model.
+ */
+#[Entity(repositoryClass: ConfigItemRepository::class)]
+#[HasLifecycleCallbacks]
+#[UniqueConstraint(
+    name: 'configitem_unique_idx',
+    columns: [
+        'namespace',
+        'key',
+    ],
+)]
+class ConfigItem
+{
+    use TimestampableTrait;
+    // We implement locking by using version numbers (optimistic locking)
+    // rather than by banning other processes from locking the same row.
+    // This is more versatile and is possible because we do not care which
+    // process in the end changes the config, as long as it is only one.
+    use VersionTrait;
+
+    /**
+     * Primary key item ID (to avoid reference issues).
+     */
+    #[Id]
+    #[Column(type: 'integer')]
+    #[GeneratedValue(strategy: 'AUTO')]
+    protected ?int $id = null;
+
+    /**
+     * Namespace
+     */
+    #[Column(
+        enumType: ConfigNamespaces::class,
+    )]
+    protected ConfigNamespaces $namespace;
+
+    /**
+     * Configuration item key.
+     * Configuration item keys are in snake_case.
+     */
+    #[Column(type: 'string')]
+    protected string $key;
+
+    /**
+     * If the item is a string, its value.
+     */
+    #[Column(
+        type: 'string',
+        nullable: true,
+    )]
+    protected ?string $valueString = null;
+
+    /**
+     * If the item is a DateTime, its value.
+     */
+    #[Column(
+        type: 'datetime',
+        nullable: true,
+    )]
+    protected ?DateTime $valueDate = null;
+
+    /**
+     * If the item is a boolean, its value.
+     */
+    #[Column(
+        type: 'boolean',
+        nullable: true,
+    )]
+    protected ?bool $valueBool = null;
+
+    #[PrePersist]
+    #[PreUpdate]
+    public function assertValid(): void
+    {
+        if (
+            1 ===
+            (int) (null !== $this->valueDate) +
+            (int) (null !== $this->valueString) +
+            (int) (null !== $this->valueBool)
+        ) {
+            return;
+        }
+
+        throw new LogicException(
+            sprintf(
+                'ConfigItem must be exactly one of date (=%d), string (=%d) or bool (=%d)',
+                (int) (null !== $this->valueDate),
+                (int) (null !== $this->valueString),
+                (int) (null !== $this->valueBool),
+            ),
+        );
+    }
+
+    /**
+     * Set the namespace and key of the configuration item.
+     */
+    public function setKey(
+        ConfigNamespaces $namespace,
+        string $key,
+    ): void {
+        $this->namespace = $namespace;
+        $this->key = $key;
+    }
+
+    /**
+     * Set the value of the configuration item.
+     */
+    public function setValue(bool|string|DateTime $value): void
+    {
+        if ($value instanceof DateTime) {
+            $this->valueString = null;
+            $this->valueDate = $value;
+            $this->valueBool = null;
+        } elseif (is_string($value)) {
+            $this->valueString = $value;
+            $this->valueDate = null;
+            $this->valueBool = null;
+        } elseif (is_bool($value)) {
+            $this->valueString = null;
+            $this->valueDate = null;
+            $this->valueBool = $value;
+        } else {
+            throw new TypeError();
+        }
+    }
+
+    public function getValue(): bool|string|DateTime|null
+    {
+        if (null !== $this->valueDate) {
+            return $this->valueDate;
+        }
+
+        if (null !== $this->valueString) {
+            return $this->valueString;
+        }
+
+        if (null !== $this->valueBool) {
+            return $this->valueBool;
+        }
+
+        return null;
+    }
+}

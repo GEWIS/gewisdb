@@ -1,0 +1,5 @@
+framework:
+    mailer:
+        dsn: '%env(MAILER_DSN)%'
+        envelope:
+            sender: '%env(MAIL_FROM_NAME)% <%env(MAIL_FROM_ADDRESS)%>'

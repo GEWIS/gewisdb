@@ -1,0 +1,89 @@
+security:
+    # The stored hashes are bcrypt with cost 12. `auto` lets PHP pick
+    # the strongest algorithm it has, while `migrate_from` keeps every existing bcrypt hash verifying;
+    # DatabaseUserProvider rehashes a password on the first successful login after the algorithm changes.
+    password_hashers:
+        App\Entity\User\User:
+            algorithm: auto
+            migrate_from: ['bcrypt']
+
+    providers:
+        # Keyed on `login`, but deliberately not the declarative `entity` provider: an account authenticated against
+        # AD arrives as a bare account name and has no row in `users` until it logs in for the first time.
+        database:
+            id: App\Security\User\DatabaseUserProvider
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        # Stripe posts the checkout webhook server-to-server: no session, no cookie and no token, authenticated
+        # instead by its signature against STRIPE_WEBHOOK_SIGNING_KEY. It stays outside every secured firewall so
+        # that neither the access rules nor the login form can intercept it.
+        checkout_webhook:
+            # Both spellings: the join vhost exposes the short one and rewrites it onto the long one.
+            pattern: ^/(member/subscribe/)?checkout/webhook
+            security: false
+
+        api:
+            pattern: ^/api
+            stateless: true
+            provider: database
+            # The bearer-token authenticator resolves an ApiPrincipal itself and doubles as the entry point, so the
+            # provider above is never consulted on this firewall.
+            custom_authenticators:
+                - App\Security\Api\ApiTokenAuthenticator
+
+        main:
+            lazy: true
+            provider: database
+            # `form_login_ldap` is plain form_login with the password check delegated to an LDAP bind. Which of the
+            # two actually runs is a runtime decision, not a compile-time one: with an empty LDAP_BASEDN — how every
+            # developer and every deployment without AD logs in — LocalPasswordFallbackListener short-circuits the
+            # bind and the password is verified against the local `password` column instead.
+            form_login_ldap:
+                service: Symfony\Component\Ldap\Ldap
+                # With a query string, this is the search base rather than a bind template.
+                dn_string: '%env(string:default::LDAP_BASEDN)%'
+                # The filter also carries the group restriction that decides who may log in at all, so it must not be
+                # dropped in favour of a plain bind.
+                query_string: '%env(ldap_filter:default::LDAP_FILTER)%'
+                search_dn: '%env(string:default::LDAP_BINDUSER_USERNAME)%'
+                search_password: '%env(string:default::LDAP_BINDUSER_PASS)%'
+                login_path: user_login
+                check_path: user_login
+                # LoginType is a named form, so its fields arrive nested under the form name.
+                username_parameter: 'login[login]'
+                password_parameter: 'login[password]'
+                enable_csrf: true
+                csrf_parameter: 'login[_token]'
+
+            # Brute-force protection. The defaults also throttle per username.
+            login_throttling:
+                max_attempts: 5
+                interval: '15 minutes'
+
+            # A plain link, as it has always been, so no CSRF token is involved.
+            logout:
+                path: user_logout
+                target: user_login
+
+    # Everything is behind the login except the routes that have always been reachable without it, plus the short
+    # paths the join and member vhosts rewrite onto them.
+    #
+    # These public flows belong to join.gewis.nl and member.gewis.nl; scoping them per host is still done at the edge.
+    # Moving that into the application means adding `host:` to the rules in this block (access_control matches a host
+    # regex the same way it matches a path) — the paths themselves do not have to change.
+    access_control:
+        - { path: ^/login, roles: PUBLIC_ACCESS }
+        - { path: ^/lang, roles: PUBLIC_ACCESS }
+        # The public join flow.
+        - { path: ^/member/subscribe, roles: PUBLIC_ACCESS }
+        - { path: ^/checkout, roles: PUBLIC_ACCESS }
+        # The member renewal flow, reached by token.
+        - { path: ^/member/renew, roles: PUBLIC_ACCESS }
+        - { path: ^/renew, roles: PUBLIC_ACCESS }
+        # Anything else, the API included, needs an authenticated identity. There are no roles on the web side: a user
+        # is either logged in or is not.
+        - { path: ^/, roles: IS_AUTHENTICATED_FULLY }

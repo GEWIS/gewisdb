@@ -1,0 +1,47 @@
+{% extends 'join/base.html.twig' %}
+
+{% set nav_title = 'GEWIS Registration - Checkout'|trans %}
+
+{% block page_title %}{{ 'GEWIS Registration - Checkout'|trans }} - {{ parent() }}{% endblock %}
+
+{#
+    `status` is one of `completed`, `cancelled` or `failed`. `first_name` and `restart_url` are only known when the
+    payment link could be resolved.
+#}
+{% block contents %}
+    {% include 'partials/join/registration-header.html.twig' %}
+
+    {% if 'cancelled' == status %}
+        <div class="alert alert-info" role="alert">
+            {% if null is not same as(restart_url) %}
+                <strong>{{ 'Are you sure %name%?'|trans({'%name%': first_name}) }}</strong>
+                {{ 'Was it not your intention to close the payment page? Then do not worry, <a href="%url%">click here</a> to go back. Are you unable to finish the payment now? Then also do not worry, we have sent you an e-mail containing a link that allows you to go to the payment page again. Do you not want to become a member of GEWIS after all? Let us know and we will delete your details.'|trans({
+                    '%url%': restart_url|escape('html'),
+                })|raw }}
+            {% else %}
+                <strong>{{ 'Mistake?'|trans }}</strong>
+                {{ 'Was it not your intention to close the payment page? Then do not worry, we have sent you an e-mail containing a link that allows you to go to the payment page again. Do you not want to become a member of GEWIS after all? Let us know and we will delete your details.'|trans }}
+            {% endif %}
+        </div>
+    {% elseif 'completed' == status %}
+        <div class="alert alert-success" role="alert">
+            <strong>
+                {{ null is same as(first_name)
+                    ? 'Awesome!'|trans
+                    : 'Thank you %name%!'|trans({'%name%': first_name}) }}
+            </strong>
+            {{ 'We have received your registration, once your payment is verified the secretary will approve your membership. We will let you know via e-mail when this happens.'|trans }}
+        </div>
+    {% else %}
+        <div class="alert alert-danger" role="alert">
+            <strong>{{ 'Oh snap!'|trans }}</strong>
+            {{ 'An error occurred while we were trying to prepare the checkout page. We have received your registration and sent you an e-mail containing a link that allows you to restart the checkout process at a later time.'|trans }}
+        </div>
+    {% endif %}
+
+    <div class="d-flex justify-content-end">
+        <a class="btn btn-gewis-primary" href="{{ path('join_subscribe_index') }}">
+            {{ 'Return to registration form'|trans }}
+        </a>
+    </div>
+{% endblock %}

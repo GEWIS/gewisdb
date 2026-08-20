@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'A 404 error occurred'|trans }} - {{ parent() }}{% endblock %}
+
+{% block contents %}
+    <div class="panel">
+        <div class="panel-body">
+            {% include 'partials/application/empty-state.html.twig' with {
+                icon: 'fa-compass',
+                title: 'Page not found'|trans,
+                body: 'Nothing answers to this address.'|trans,
+            } only %}
+            <div class="text-center">
+                <a class="btn btn-gewis-primary" href="{{ path('application_home') }}">{{ 'Go home'|trans }}</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

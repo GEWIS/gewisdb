@@ -1,0 +1,20 @@
+{# The registration form and the notice that replaces it in July open with the same banner; only the body differs,
+   which the embedding page fills in through `registration_intro`. The renewal flow shows the same banner under its
+   own name: a graduate renewing their status is not registering. #}
+<div class="p-4 p-md-5 mb-4 bg-body-tertiary rounded-3">
+    <div class="row align-items-center">
+        <div class="col-md-3 mb-4 mb-md-0">
+            <img src="{{ asset('images/gewis.png') }}" class="img-fluid" alt="">
+        </div>
+        <div class="col-md-9">
+            <h1 class="mb-3">
+                <span class="text-primary-emphasis">GEWIS</span> {{ header_title|default('Registration'|trans) }}
+            </h1>
+            {% block registration_intro %}{% endblock %}
+            <p class="mb-0">
+                {{ 'If you have any questions feel free to contact'|trans }}
+                <a href="mailto:board@gewis.nl">board@gewis.nl</a>.
+            </p>
+        </div>
+    </div>
+</div>

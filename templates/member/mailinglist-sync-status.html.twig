@@ -1,0 +1,22 @@
+{% extends 'layout-sidebar.html.twig' %}
+
+{% block page_title %}{{ 'Sync in progress'|trans }} - {{ parent() }}{% endblock %}
+
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_title %}{{ 'Sync in progress'|trans }}{% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block contents %}
+    <div class="panel">
+        <div class="panel-body">
+            {% include 'partials/application/empty-state.html.twig' with {
+                icon: 'fa-rotate',
+                title: 'A mailing list sync is running'|trans,
+                body: 'Subscriptions cannot be changed safely while it runs. Try again in a few minutes.'|trans,
+            } only %}
+        </div>
+    </div>
+{% endblock %}

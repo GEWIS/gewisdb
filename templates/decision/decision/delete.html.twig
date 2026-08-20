@@ -1,0 +1,63 @@
+{% extends 'layout-sidebar.html.twig' %}
+
+{% set decision_label = type.value ~ ' ' ~ number ~ '.' ~ point ~ '.' ~ decision %}
+
+{% block page_title %}{{ 'Delete Decision'|trans }} - {{ parent() }}{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href="{{ path('decision_meeting_index') }}">{{ 'Meetings'|trans }}</a></li>
+    <li class="breadcrumb-item">
+        <a href="{{ path('decision_meeting_view', {type: type.value, number: number}) }}">
+            {{ type.value }} {{ number }}
+        </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">{{ decision_label }}</li>
+{% endblock %}
+
+{% block page_header %}
+    {% embed 'partials/application/page-header.html.twig' %}
+        {% block header_container_class %}container-fluid px-3{% endblock %}
+        {% block header_top %}
+            <span class="page-header-eyebrow">{{ decision_label }}</span>
+        {% endblock %}
+        {% block header_title %}
+            {{ error|default(false) ? 'Decision Cannot Be Removed'|trans : 'Delete Decision'|trans }}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block contents %}
+    <div class="row g-3">
+        <div class="col-12 col-xl-7">
+            <div class="panel">
+                <div class="panel-body">
+                    {% if error is defined and error %}
+                        <p>
+                            {% if annulment|default(false) %}
+                                {{ 'Removing this annulment would restore a decision that later decisions have since overtaken.'|trans }}
+                            {% else %}
+                                {{ 'Other decisions still refer to this one.'|trans }}
+                            {% endif %}
+                        </p>
+                        <a class="btn btn-secondary"
+                           href="{{ path('decision_meeting_view', {'type': type.value, 'number': number}) }}">
+                            {{ 'Back to %type% %number%'|trans({'%type%': type.value, '%number%': number}) }}
+                        </a>
+                    {% else %}
+                        <p>
+                            {{ 'This deletes decision %decision% and everything it recorded.'|trans({
+                                '%decision%': decision_label,
+                            }) }}
+                        </p>
+                        {{ form_start(form) }}
+                            <div class="d-flex gap-2">
+                                {{ form_widget(form.submit_yes, {'attr': {'class': 'btn btn-danger'}}) }}
+                                {{ form_widget(form.submit_no, {'attr': {'class': 'btn btn-secondary'}}) }}
+                            </div>
+                        {{ form_end(form) }}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

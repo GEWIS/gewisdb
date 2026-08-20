@@ -1,0 +1,16 @@
+{% extends 'join/base.html.twig' %}
+
+{% set nav_title = 'GEWIS Registration'|trans %}
+
+{% block page_title %}{{ 'GEWIS Registration'|trans }} - {{ parent() }}{% endblock %}
+
+{% block contents %}
+    {% embed 'partials/join/registration-header.html.twig' %}
+        {% block registration_intro %}
+            {# The sentence deliberately carries a line break between the two halves of the explanation. #}
+            <p>
+                {{ 'Sadly, during the month of July we are not able to verify your enrollment at TU/e. Therefore, it is not possible to register for GEWIS at this time. <br/>We would love to welcome you as a member starting on August 1st. If you were already studying at TU/e before the summer break, please reach out to the secretary on the email address below.'|trans|raw }}
+            </p>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

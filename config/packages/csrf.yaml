@@ -1,0 +1,10 @@
+framework:
+    form:
+        csrf_protection:
+            enabled: true
+    csrf_protection:
+        stateless_token_ids: [submit, authenticate, logout]
+
+# `/member/subscribe/checkout/webhook` must stay outside CSRF protection and outside any form-login firewall. It is
+# an unauthenticated server-to-server POST from Stripe carrying no session, cookie or token, authenticated instead by
+# the signature check against STRIPE_WEBHOOK_SIGNING_KEY. Protecting it stops payments being recorded, silently.

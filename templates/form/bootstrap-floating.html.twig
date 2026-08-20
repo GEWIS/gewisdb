@@ -1,0 +1,75 @@
+{% use 'bootstrap_5_layout.html.twig' %}
+
+{#
+    Floating labels on every row, the way GEWISWEB does it: the label sits in the field until you type, so a form
+    that has been filled in still says what each value is.
+
+    Two things this does that GEWISWEB's does not, both because a row that cannot float has to stay readable rather
+    than collapse:
+
+    - A compound row (a fieldset, a repeated password, an embedded type) and an expanded choice (a list of radios or
+      checkboxes) are not single controls, so `.form-floating` has nothing to float over and would fold the label on
+      top of the first option. Those rows keep a label above them.
+    - `form_help` is rendered. Dropping it loses every `help` a form type declares, which is the only place some
+      fields explain themselves — the student number, for one. Reported as GEWISWEB#2172.
+#}
+{% block form_row %}
+    {% if compound and form.children is not empty and form.children|filter(child => 'hidden' not in child.vars.block_prefixes)|length == 0 %}
+        {# A compound of nothing but hidden fields -- a reference to another record, say -- has nothing on the page to
+           label. Labelling it anyway puts a legend above an empty space; every decision form carries a hidden
+           reference to its meeting, and each one grew a stray "Meeting" heading from it.
+
+           A compound with no children at all is a different thing -- an empty collection waiting to be added to --
+           and keeps its label, which is the only thing naming what the button below it adds. #}
+        {{ form_widget(form) }}
+        {{ form_errors(form) }}
+    {% elseif compound or expanded|default(false) %}
+        <div class="mb-2">
+            {{ form_label(form) }}
+            {{ form_widget(form) }}
+            {{ form_help(form) }}
+            {{ form_errors(form) }}
+        </div>
+    {% else %}
+        <div class="form-floating mb-2">
+            {{ form_widget(form) }}
+            {{ form_label(form) }}
+            {{ form_help(form) }}
+            {{ form_errors(form) }}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{#
+    A floating label needs the control to have a placeholder, because what it floats on is `:placeholder-shown`. The
+    label is the placeholder unless the template set one of its own, which it only does where it is labelling the
+    field in place of a label.
+#}
+{% block form_widget_simple %}
+    {% set placeholder = attr.placeholder|default(label|default('')) %}
+    {% if placeholder is not empty %}
+        {% set attr = attr|merge({placeholder: placeholder}) %}
+    {% endif %}
+    {{ parent() }}
+{% endblock %}
+
+{# A checkbox is not a floating-label control: `checkbox_widget` already renders the whole `.form-check` (input +
+   label), so wrapping it in `.form-floating` breaks its layout. Render it plainly. #}
+{% block checkbox_row %}
+    <div class="mb-2">
+        {{ form_widget(form) }}
+        {{ form_help(form) }}
+        {{ form_errors(form) }}
+    </div>
+{% endblock %}
+
+{#
+    A submit button is the theme's, not Bootstrap's. `bootstrap_5_layout` defaults it to `btn-primary`, which is the
+    framework blue, so every form that did not name a class by hand rendered a button from a different palette --
+    the login page among them. Naming the class in each template is what was being done instead, and it only holds
+    for as long as nobody forgets. A template that wants something else still passes it; this is only the default.
+#}
+{% block submit_widget %}
+    {% set attr = attr|merge({class: attr.class|default('btn-gewis-primary')|trim}) %}
+    {{ parent() }}
+{% endblock %}
