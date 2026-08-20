@@ -237,10 +237,14 @@ class Member
 
     public function __construct()
     {
+        // Every mapped collection, not only the ones with an adder: Doctrine fills these on hydration, so anything
+        // left out here is initialised for a member that was loaded and uninitialised for one that was just created.
         $this->addresses = new ArrayCollection();
+        $this->auditEntries = new ArrayCollection();
         $this->installations = new ArrayCollection();
         $this->mailingListMemberships = new ArrayCollection();
         $this->memberships = new ArrayCollection();
+        $this->renewalLinks = new ArrayCollection();
     }
 
     /**

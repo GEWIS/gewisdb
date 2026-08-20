@@ -188,18 +188,6 @@ parameters:
 			path: src/Entity/Database/Member.php
 
 		-
-			message: '#^Property App\\Entity\\Database\\Member\:\:\$auditEntries is never written, only read\.$#'
-			identifier: property.onlyRead
-			count: 1
-			path: src/Entity/Database/Member.php
-
-		-
-			message: '#^Property App\\Entity\\Database\\Member\:\:\$renewalLinks is never written, only read\.$#'
-			identifier: property.onlyRead
-			count: 1
-			path: src/Entity/Database/Member.php
-
-		-
 			message: '#^Property App\\Entity\\Database\\MemberUpdate\:\:\$requestedDate is never written, only read\.$#'
 			identifier: property.onlyRead
 			count: 1
