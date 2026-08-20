@@ -4,21 +4,23 @@ declare(strict_types=1);
 
 namespace App\Validator\Database;
 
+use App\Service\Application\MailHostResolver;
 use Override;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
-use function gethostbynamel;
-use function getmxrr;
-use function is_array;
 use function is_scalar;
 use function strrpos;
 use function substr;
 
 class DeliverableEmailAddressValidator extends ConstraintValidator
 {
+    public function __construct(private readonly MailHostResolver $mailHostResolver)
+    {
+    }
+
     #[Override]
     public function validate(
         mixed $value,
@@ -64,7 +66,7 @@ class DeliverableEmailAddressValidator extends ConstraintValidator
 
         if (
             '' === $hostname
-            || $this->canReceiveMail($hostname)
+            || $this->mailHostResolver->canReceiveMail($hostname)
         ) {
             return;
         }
@@ -76,24 +78,5 @@ class DeliverableEmailAddressValidator extends ConstraintValidator
             )
             ->setCode(DeliverableEmailAddress::NO_MX_RECORD_ERROR)
             ->addViolation();
-    }
-
-    /**
-     * A host without MX records still accepts mail on its A records (RFC 5321 section 5.1).
-     */
-    private function canReceiveMail(string $hostname): bool
-    {
-        $mxHosts = [];
-
-        if (
-            getmxrr(
-                $hostname,
-                $mxHosts,
-            )
-        ) {
-            return true;
-        }
-
-        return is_array(gethostbynamel($hostname));
     }
 }
