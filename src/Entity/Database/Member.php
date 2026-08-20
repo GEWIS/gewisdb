@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity\Database;
 
+use App\Entity\Application\AssociationYear;
 use App\Entity\Database\Enums\Studies;
 use App\Entity\Database\SubDecision\Installation;
 use App\Repository\Database\MemberRepository;
@@ -411,20 +412,14 @@ class Member
      */
     public function getGeneration(): int
     {
-        $oldestMembership = null;
-
         $oldestMembership = $this->memberships->first();
+
         if (false === $oldestMembership) {
             return 0;
         }
 
-        $startDate = $oldestMembership->getStartDate();
-
-        if ($startDate->format('m') < 7) {
-            return (int) $startDate->format('Y') - 1;
-        }
-
-        return (int) $startDate->format('Y');
+        // A generation is the association year someone joined in, named after the calendar year it started in.
+        return AssociationYear::fromDate($oldestMembership->getStartDate())->getYear();
     }
 
     /**

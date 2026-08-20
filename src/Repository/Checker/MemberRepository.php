@@ -88,7 +88,7 @@ class MemberRepository extends ServiceEntityRepository
 
         $qb->setParameter(
             'expiresBefore',
-            $expiresBefore ?? AssociationYear::of(new DateTime())->endsOn(),
+            $expiresBefore ?? AssociationYear::fromDate(new DateTime())->endsOn(),
         );
 
         $qb->andWhere($qb->expr()->not(

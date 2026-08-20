@@ -105,7 +105,7 @@ class GrantType extends AbstractType
             return;
         }
 
-        $limit = AssociationYear::of($meeting->getDate())->septemberFirst();
+        $limit = AssociationYear::fromDate($meeting->getDate())->septemberFirst();
 
         if ($value <= $limit) {
             return;

@@ -336,7 +336,7 @@ class Checker
         $today = $meeting->getDate();
         $todayNextYear = (clone $today)->add(new DateInterval('P1Y'));
 
-        $septemberFirstNextAssociationYear = AssociationYear::of($today)->septemberFirst();
+        $septemberFirstNextAssociationYear = AssociationYear::fromDate($today)->septemberFirst();
 
         foreach ($grantings as $granting) {
             $until = $granting->getUntil();

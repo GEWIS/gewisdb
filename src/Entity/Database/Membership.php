@@ -92,20 +92,14 @@ class Membership
         }
 
         if (null === $endDate) {
-            $endDate = clone $startDate;
-
-            $expirationYear = AssociationYear::of($endDate)->endYear();
+            // A membership runs until the association year it started in is over, whenever in that year it was taken
+            // out.
+            $endDate = AssociationYear::fromDate($startDate)->endsOn();
 
             if (MembershipTypes::Honorary === $type) {
                 // Honorary memberships do not expire, so we set the expiration date to 100 years in the future.
-                $expirationYear += 100;
+                $endDate->modify('+100 years');
             }
-
-            $endDate->setDate(
-                $expirationYear,
-                7,
-                1,
-            );
         }
 
         $startDate->setTime(
