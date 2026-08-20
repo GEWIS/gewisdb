@@ -12,6 +12,13 @@
 <p>GEWISDB is the decision and membership database for GEWIS — <em>GEmeenschap van Wiskunde en Informatica Studenten</em>.</p>
 </div>
 
+> [!IMPORTANT]
+> **This repository is archived.** GEWISDB and [GEWISWEB](https://github.com/GEWIS/gewisweb) have been combined into
+> [`radix`](https://github.com/GEWIS/radix), a single application that carries both the decision and membership
+> database and the website. All further development, issues, and pull requests happen there.
+>
+> The code here remains available for reference, but it no longer receives updates or security fixes.
+
 ## Features
 The GEWIS decision and membership database provides the board and other GEWIS systems with lots of functionality:
 
@@ -33,7 +40,7 @@ The GEWIS decision and membership database provides the board and other GEWIS sy
     - Provides a consistent "materialised view" of the real database, enabling easy querying of decisions and membership information through an API.
     - Used by most GEWIS systems as a single, reliable source of truth, ensuring consistency and accuracy across all systems.
 
-And there is plenty more! GEWISDB continuously evolves to meet the needs of the association.
+And there is plenty more! All of this now lives on in [radix](https://github.com/GEWIS/radix).
 
 ## Getting Started
 GEWISDB is built on PHP and the [Symfony framework](https://symfony.com/). The Symfony framework provides a solid foundation for building scalable and maintainable web applications.
