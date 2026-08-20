@@ -49,3 +49,12 @@ services:
                   # Active Directory refuses anything older, and chasing referrals breaks the bind.
                   protocol_version: 3
                   referrals: false
+
+when@test:
+    services:
+        # The `_test` databases are not in the role map, which is keyed by the `DOCTRINE_*` names, and running as a
+        # least-privileged role is a production concern rather than something a test should carry: dropping the
+        # autoconfiguration drops the `doctrine.middleware` tag, so tests connect as the user in the DSN and may
+        # build their own schema. {@see App\Doctrine\Middleware\SetRoleMiddleware}
+        App\Doctrine\Middleware\SetRoleMiddleware:
+            autoconfigure: false

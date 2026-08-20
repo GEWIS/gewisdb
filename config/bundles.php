@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use ApiPlatform\Symfony\Bundle\ApiPlatformBundle;
+use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle;
 use Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle;
@@ -37,6 +38,7 @@ return [
         'test' => true,
     ],
     DoctrineMigrationsBundle::class => ['all' => true],
+    DAMADoctrineTestBundle::class => ['test' => true],
     NelmioCorsBundle::class => ['all' => true],
     SensiolabsTypeScriptBundle::class => ['all' => true],
     DebugBundle::class => ['dev' => true],

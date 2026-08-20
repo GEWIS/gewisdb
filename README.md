@@ -91,8 +91,8 @@ While developing, use these commonly used commands from the Makefile:
 - `make lint` / `make lint-fix` - Run PHP_CodeSniffer (or PHPCBF to autofix) against the project's coding standard.
 - `make phpstan` - Perform static analysis using PHPStan.
 - `make test` - Run the test suite with PHPUnit.
+- `make test-prepare` - Build the isolated test databases and load the seed into them. Run this once, and again after a schema or fixture change; the tests roll back their own writes, so the seed survives a run.
 - `make igor` - Run Igor to validate the codebase for FrankenPHP's worker mode.
-- `make smoke` - Request every GET route and report anything that does not answer.
 
 For a complete list of available commands, run `make help`.
 

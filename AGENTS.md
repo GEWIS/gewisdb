@@ -97,7 +97,7 @@ property promotion, `readonly` where it holds.
 | `make phpstan` | PHPStan at level 8, baseline in `phpstan-baseline.neon`. |
 | `make igor` | Check what the FrankenPHP worker's persistent memory model forbids. |
 | `make test` | PHPUnit; `c=` passes options through. |
-| `make smoke` | Request every GET route and report what does not answer. |
+| `make test-prepare` | Build both test schemas and load the seed. Run once, and after a schema or fixture change. |
 | `bin/console check:database` | The consistency checks from the Articles of Association and Internal Regulations. |
 
 Fix what a new error reports rather than extending the baseline. The checker is worth running after anything that

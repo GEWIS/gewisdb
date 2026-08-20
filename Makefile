@@ -18,11 +18,13 @@ PHP      = $(PHP_CONT) php
 COMPOSER = $(PHP_CONT) composer
 # -T rather than $(PHP) bin/console: the migration workflow runs these targets on a runner that has no TTY.
 SYMFONY  = $(DOCKER_COMP) exec -T web bin/console
+# The same console against the test environment, which `when@test` points at the `_test` databases.
+SYMFONY_TEST = $(DOCKER_COMP) exec -T -e APP_ENV=test web bin/console
 
 # Misc
 .DEFAULT_GOAL   = help
-.PHONY          : help seed smoke translations igor lint lint-fix lint-fix-all lint-twig phpstan phpstan-pr \
-                  test test-coverage build builddev buildprod buildweb buildwebdev buildwebprod \
+.PHONY          : help seed translations igor lint lint-fix lint-fix-all lint-twig phpstan phpstan-pr \
+                  test test-coverage test-prepare build builddev buildprod buildweb buildwebdev buildwebprod \
                   buildpgadmin setuplocalenv up start startprod startprodtest stop logs bash exec composer sf cc \
                   update updatecomposer updatedocker getvendordir migrate migrate-to migration-up migration-down \
                   migration-diff preparemailman preparelistmonk stripewebhooksecret rundev runprod runprodtest \
@@ -57,9 +59,6 @@ seed: ## Load fixtures, generate the report database, and prepare Mailman and Li
 	@$(DOCKER_COMP) exec -u mailman mailman-core bash -c 'for l in $(SEEDED_LISTS); do mailman remove $$l@$$MAILMAN_DOMAIN; mailman create $$l@$$MAILMAN_DOMAIN; done 2>/dev/null; true'
 	@$(MAKE) preparelistmonk
 	@$(SYMFONY) database:mailinglist:fetch
-
-smoke: ## Request every GET route and report anything that does not answer (parameters come from the database)
-	@$(DOCKER_COMP) exec -T web php scripts/smoke-routes.php
 
 # --no-fill leaves new entries with an empty <target/> in BOTH locales, and an empty target is used AS the
 # translation, so the interface renders blank until every one is filled. Fill them before committing.
@@ -105,6 +104,19 @@ test: ## Start tests with phpunit, pass the parameter "c=" to add options to php
 
 test-coverage: ## Run the tests and write an HTML coverage report to ./coverage
 	@$(DOCKER_COMP) exec -T -e APP_ENV=test -e XDEBUG_MODE=coverage web bin/phpunit --coverage-html ./coverage
+
+# The schemas are built from the mapping metadata rather than by the migrations: what the tests run against is what
+# the entities say, and the migrations are checked separately by the migration workflow. ReportDB is filled by
+# replaying the ledger, exactly as `seed` does, because its listeners stand down while fixtures load.
+test-prepare: ## Prepare the isolated test databases: (re)build both schemas and load the seed. Run once, and again after a schema or fixture change (the tests roll back their own writes, so the seed survives a run)
+	@$(SYMFONY_TEST) doctrine:database:create --if-not-exists
+	@$(SYMFONY_TEST) doctrine:database:create --if-not-exists --connection=report
+	@$(SYMFONY_TEST) doctrine:schema:drop --force --full-database
+	@$(SYMFONY_TEST) doctrine:schema:create
+	@$(SYMFONY_TEST) doctrine:schema:drop --force --full-database --em=report
+	@$(SYMFONY_TEST) doctrine:schema:create --em=report
+	@$(SYMFONY_TEST) doctrine:fixtures:load --no-interaction
+	@$(SYMFONY_TEST) report:generate:full
 
 ## —— Docker ———————————————————————————————————————————————————————————————————
 builddev: buildwebdev ## Builds the development Docker images
