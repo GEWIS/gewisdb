@@ -781,6 +781,10 @@
         <source>DQL documentation</source>
         <target state="translated">DQL-documentatie</target>
       </trans-unit>
+      <trans-unit id="ts0oBlQ" resname="Danger">
+        <source>Danger</source>
+        <target state="translated">Gevaar</target>
+      </trans-unit>
       <trans-unit id="jGZfEE1" resname="Dark">
         <source>Dark</source>
         <target state="translated">Donker</target>
@@ -1332,6 +1336,10 @@
       <trans-unit id="emdvqbX" resname="Include this in every bug report.">
         <source>Include this in every bug report.</source>
         <target state="translated">Vermeld dit in elke bugmelding.</target>
+      </trans-unit>
+      <trans-unit id="jHUPfeo" resname="Information">
+        <source>Information</source>
+        <target state="translated">Informatie</target>
       </trans-unit>
       <trans-unit id="mFV9.Tt" resname="Initial(s)">
         <source>Initial(s)</source>
@@ -2389,6 +2397,10 @@
         <source>Succesfully deleted %entity%!</source>
         <target state="translated">%entity% is verwijderd!</target>
       </trans-unit>
+      <trans-unit id="jLYkHhI" resname="Success">
+        <source>Success</source>
+        <target state="translated">Succes</target>
+      </trans-unit>
       <trans-unit id="R34wcDm" resname="Supremum">
         <source>Supremum</source>
         <target state="translated">Supremum</target>
@@ -2685,6 +2697,10 @@
         <source>Wants to Receive Supremum</source>
         <target state="translated">Wil Supremum ontvangen</target>
       </trans-unit>
+      <trans-unit id="V9XnrRt" resname="Warning">
+        <source>Warning</source>
+        <target state="translated">Waarschuwing</target>
+      </trans-unit>
       <trans-unit id="3B9A3Hz" resname="Was it not your intention to close the payment page? Then do not worry, &lt;a href=&quot;%url%&quot;&gt;click here&lt;/a&gt; to go back. Are you unable to finish the payment now? Then also do not worry, we have sent you an e-mail containing a link that allows you to go to the payment page again. Do you not want to become a member of GEWIS after all? Let us know and we will delete your details.">
         <source>Was it not your intention to close the payment page? Then do not worry, &lt;a href="%url%"&gt;click here&lt;/a&gt; to go back. Are you unable to finish the payment now? Then also do not worry, we have sent you an e-mail containing a link that allows you to go to the payment page again. Do you not want to become a member of GEWIS after all? Let us know and we will delete your details.</source>
         <target state="translated"><![CDATA[Was het niet je bedoeling om de betaalpagina te sluiten? Geen zorgen, <a href="%url%">klik hier</a> om terug te gaan. Lukt het je nu niet om de betaling af te ronden? Ook geen zorgen, we hebben je een e-mail gestuurd met een link waarmee je opnieuw naar de betaalpagina kunt. Wil je toch geen lid worden van GEWIS? Laat het ons weten, dan verwijderen we je gegevens.]]></target>
@@ -2864,6 +2880,10 @@
       <trans-unit id="plNnL76" resname="it would make someone an active and an inactive member of %s at once">
         <source>it would make someone an active and an inactive member of %s at once</source>
         <target state="translated">het zou iemand tegelijk actief en inactief lid van %s maken</target>
+      </trans-unit>
+      <trans-unit id="sxaP9KU" resname="just now">
+        <source>just now</source>
+        <target state="translated">zojuist</target>
       </trans-unit>
       <trans-unit id="NoLyHVo" resname="listmonk sync">
         <source>listmonk sync</source>

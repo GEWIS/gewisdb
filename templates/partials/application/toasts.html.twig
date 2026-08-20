@@ -1,0 +1,35 @@
+{# Flash messages, as GEWISWEB shows them: a stack of toasts in the bottom corner rather than a block pushing the page
+   down. The label a controller flashed is an AlertTypes value, and anything it does not match still shows its message,
+   without a level and without a coloured indicator, rather than disappearing. #}
+{% macro toast(message, label) %}
+    {% set level = enum('App\\Entity\\Application\\Enums\\AlertTypes').tryFrom(label|default('')) %}
+    <div class="toast fade" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+        <div class="toast-header">
+            {# The dot is GEWIS red unless the level is one the theme has a colour for; informational is not. #}
+            <span class="toast-indicator d-inline-block rounded me-2{{ level and level != enum('App\\Entity\\Application\\Enums\\AlertTypes').Info ? ' bg-' ~ level.value : '' }}"></span>
+            <strong class="toast-title me-auto">{{ level ? level|trans : '' }}</strong>
+            <small class="text-body-secondary">{{ 'just now'|trans }}</small>
+            <button type="button" class="btn-close ms-2" data-bs-dismiss="toast" aria-label="{{ 'Close'|trans }}"></button>
+        </div>
+        <div class="toast-body">{{ message|trans }}</div>
+    </div>
+{% endmacro %}
+
+<div aria-live="polite" aria-atomic="true" class="position-sticky bottom-0">
+    <div id="flash-toast-container" class="toast-container bottom-0 end-0 p-3">
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                {{ _self.toast(message, label) }}
+            {% endfor %}
+        {% endfor %}
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('#flash-toast-container .toast:not(.show)').forEach((toast, index) => {
+            setTimeout(() => {
+                bootstrap.Toast.getOrCreateInstance(toast).show();
+            }, index * 10);
+        });
+    });
+</script>

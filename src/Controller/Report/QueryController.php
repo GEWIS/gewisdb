@@ -178,7 +178,7 @@ final class QueryController extends AbstractController
             $result = $this->queryService->execute($data['query']);
         } catch (ORMException $e) {
             $this->addFlash(
-                'error',
+                'danger',
                 $e->getMessage(),
             );
 

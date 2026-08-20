@@ -289,7 +289,7 @@ final class ProspectiveMemberController extends AbstractController
         }
 
         $this->addFlash(
-            'error',
+            'danger',
             'This prospective member cannot be approved.',
         );
 

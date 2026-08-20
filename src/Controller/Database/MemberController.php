@@ -467,7 +467,7 @@ final class MemberController extends AbstractMemberController
             }
 
             $this->addFlash(
-                'error',
+                'danger',
                 t(
                     'Could not save change(s) of %entity%!',
                     ['%entity%' => t('mailing list subscriptions')],

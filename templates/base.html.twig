@@ -63,15 +63,13 @@
         {% endblock %}
         {% block body %}
             <div class="{% block container_class %}container{% endblock %} flex-grow-1 pt-3">
-                {% block flash_messages %}
-                    {% include 'partials/application/flash-messages.html.twig' %}
-                {% endblock %}
                 {% block contents %}{% endblock %}
             </div>
             {% block footer %}
                 {% include 'partials/application/footer.html.twig' %}
             {% endblock %}
         {% endblock %}
+        {% include 'partials/application/toasts.html.twig' %}
         {% block body_javascripts %}
             <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
         {% endblock %}
