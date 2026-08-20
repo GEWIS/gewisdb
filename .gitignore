@@ -31,7 +31,7 @@ phpstan/phpstan-baseline-pr.neon
 config/bash.env
 .vscode
 phpcs.xml
-.idea/phpspec.xml
+/.idea/
 
 # Language binaries are created during the docker build process or using 'make compilelang'
 *.mo
